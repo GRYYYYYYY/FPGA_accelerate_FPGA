@@ -1,0 +1,11 @@
+# 三路径槽完整第三条自然查询连续执行（2026-10-27）
+
+path_capacity_third_full_v1和pressure_v1使用同一完整生产层级，分别为32缓存槽/单缓存槽；路径容量均为3。真实q1/q2及故障恢复后，共同发布G3/CP19，源context5/3/5、sequence180328，781标签/393页、117字路径镜像中q1/q2有效、第三槽为空。
+
+在实际PC lease下导出并保留前两槽，只向第三槽登记CPU原有q3历史路径元数据，不改变owner引用。原生ripup实际把990179/558358/265324的本net refs从2/4/5降至1/3/4。随后完整query180329通过原生heap/search/backtrace/owner提交三节点，refs回到2/4/5；q1/q2和其他net引用持续保留。没有冷复位或工作DDR重装。
+
+两例逐项匹配独立CPU oracle：114poll、113expand、565candidate、302cost。完整12路AXI审计通过，旧G3原始事务前缀逐字节一致；新增6次owner record写（3次DEC、3次INC）逐字核对，总owner写19次。最终146284032B owner图像与G3完整图像一致，SHA256为0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595。所有781标签、393逻辑页及全部3MB物理页对照CPU最终标签；原生字段/page记录与物理标签AXI重放一致。q3没有新增baseline读取。
+
+G3源路径117字CRC为f4394572；q3完成后三槽实际导出117字CRC为437e9a9a，query10字CRC为583925e2、sequence180329。最终槽位图7、CP19、journal3；最终三路径镜像尚未共同发布为G4。结束周期2857604/3114246仅为行为仿真，不是板卡速度。
+
+两份归档各365文件均实际移走原目录再恢复，独立审计字节一致。证据与恢复凭据见同名JSON；统一源码冻结见path_capacity_sources_20261027/manifest.json。下一项为q3 owner-B故障、G3原生owner修复与保存状态恢复；本轮未验证该故障路径。

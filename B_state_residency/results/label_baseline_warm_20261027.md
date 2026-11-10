@@ -1,0 +1,20 @@
+# 零预加载777标签的原生G2 warm恢复通过（2026-10-27）
+
+详见results/label_baseline_warm_20261027.json与hardware/variants/label_baseline_warm_v1/CONTRACT.md。七层按需基线与第九路退休guard接入真实runtime目录/标签导出、owner增量copy、G2三方共同发布及完整warm恢复。全程无初始822标签imports、无中间final host标签读，也无CPU构造warm标签文件；777源记录由真实PC lease/control(1)/目录389帧/1167 DDR读产生，CRC b539040c。TB仅捕获原生流保存并原字节回送，尚不是完整硬件持久化bundle writer。
+
+真实集成反例full_v2/pressure_v2：旧恢复器用普通READ检查目标为空，新manager因此从immutable baseline填入node204279，真实present1使leaf正确返回status3/written0/verified0，尚未接收777流；不能删除这个空目标校验。两个反例已归档/独立重审，audit通过指失败原因成立，不是warm成功。
+
+修复只增加受恢复状态限定的RAW presence语义：leaf新增PS/PW期间l_probe输出，保留原l_present拒绝分支；residency仅ENABLE_BASELINE&&f_recovery_owned&&k_labels_valid&&l_probe时经engine/core/paged传baseline_raw_probe。manager在IO受理时锁存，raw read执行实际native READ，不seed、不伪造present；raw write返回status3。普通IO及CLIENT仍按需seed。组件full_v1/single_v1各106检查：空raw读不加载、普通读后raw真实present1、受理后变引脚不改变该请求、raw写拒绝且原记录保留，完整native/DDR字节模型通过。
+
+选定warm full_v3/pressure_v3：q1后实际777记录/389页，owner四行真实AXI copy到G1 clone的G2候选，原生G1/CP17/J4→G2/CP18/J0共同发布。q180328第二owner-B SLVERR产生两键journal；G2 authority两轮读与真实GET/DEC/GET将990179 refs2→1、558358 refs4→3/occ2，另一net23916/ref1保留。真实target reset5周期均baseline retired1/physical1/owned0，service/guard不随target reset清零；原生raw probe实际absent0。
+
+attempt4/query2/price4下777条实际写入/回读/CRC校验全部通过，原生path78/query10的源CRC1d36e333/79283e8e与floor180327恢复；三回执、服务退休和最终成功回复消费后才允许q2重试。无外部cold reset、working DDR重装或标签答案补写。第一query171poll/170expand/849candidate/421cost；故障前和重试第二query各114/113/564/302，逐项原CPU数值oracle通过。最终sequence180328/store4/2/4、两条路径及全部owner图像一致。
+
+第九路1562个真实R分四阶段777/4/777/4，恢复777行的第一次字段写也真实seed原始基线，然后完整五字段restore覆写，未隐藏这些读取。每次真实源回执后的五次seed写、总15809字段写及每个native命令/回复独立建模；32槽1147WB/1304RF，单槽2268WB/3638RF。最终781记录/393页/全部3MB物理页（含空页）、完整146284032B owner、13个物理owner记录写及全部11AXI重放通过。
+
+两种容量q1至LIFECYCLE的原始trace字节/周期分别精确等于前轮零预加载正常query，证明RAW限定不改变普通q1。结束2274789/2449788周期仅行为仿真；本轮不宣称新变体默认关闭的完整回归、板卡收益或任意竞态覆盖。六归档均实际移走原目录后恢复重审audit字节一致；源冻结results/label_baseline_warm_sources_20261027。
+
+初轮旧unflushed-reject调用依赖已删除的额外host读：q1原生flush后已clean，新例删除不再成立的调用但未放宽生产snapshot_clean/lease准入。随后保留真实status3反例再实现RAW修复，没有伪造探测回复或跳过空目标检查。
+
+下一优先新777路径CRC失败后的776部分写、相同attempt拒绝及更高attempt非冷恢复，再实际恢复阶段baseline在途取消的边界；随后必须推进owner snapshot epoch轮转/G3与真实overflow新增回收，避免只扩一个G2的取消点。固定price/history、全节点immutable基线与G1 clone/配置仍外部可信，历史路径仍由CPU观察；容量有界，无任意变价有效性、持久化授权/floor、完整运行时writer、综合时序或板卡结论。研究继续，goal active。
+

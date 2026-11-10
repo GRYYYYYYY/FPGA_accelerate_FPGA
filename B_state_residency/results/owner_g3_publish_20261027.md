@@ -1,0 +1,19 @@
+# 真实G3/CP19联合发布通过（2026-10-27）
+
+选定`owner_g3_retired_full_v3`和`owner_g3_retired_pressure_v3`。在前轮真实q1/q2、owner-B故障、baseline在途取消和非冷恢复后，累计owner writer实际复制四条脏行；原生导出781条标签、两槽78字路径和10字查询镜像。真实PC lease下，三组件以一次111共同发布从G2/CP18/J3切至G3/CP19/J0，保持store5/query3/price5与sequence180328。完整数据、反例、组件及归档恢复记录见同名JSON。
+
+发布前源owner回执、owner清单、bundle清单均为1；普通工作许可k_permit为0，实际publication_retired为1。新资格不再依赖准备阶段主动关闭的普通工作许可；根发布屏障仍检查自身退休与三方准备。发布完成回复消费前lease保持。发布后原生authority拒绝旧G2请求，再从G3窗口成功读取339193/net26422 ref1/occ1、990179 ref2/occ2、558358 ref4/occ2、558358/net23916 ref1/occ2、265324 ref5/occ1。重新原生导出的query镜像与发布前选定G3的镜像逐字一致，序号下限保留。
+
+保留了两个真实失效机制：旧writer在authority自身准备busy时永久撤销已完成回执；第一版只保留回执，但仍以普通工作许可判断manifest，三方prepared后继续自锁。旧版full_v3以及第一修复full_v2/pressure_v2共三个反例已独立审计和归档恢复。反例审计通过仅表示失败原因成立。
+
+最终候选`owner_g3_publish_v2`区分copy/rearm开工条件、临时busy、真实源失效及发布退休。KEEP_RECEIPT_ON_BUSY默认0；开启后临时busy保留回执，真实源AW/B、协议/覆盖错误、完整性fault或lease丢失仍使其失效。完整实例接实际物理/逻辑退休，未把健康或退休固定1。export_manifest观察实际原生数据流、CRC及回复消费，并绑定design、generation、checkpoint、上下文、序号和路径槽位图。
+
+全部12路AXI原始前缀逐字节匹配已恢复复审的前轮候选；新增标签快照1179个实际读beat逐字节核对CPU最终字段和backing。全部781标签、393逻辑页与完整3MB物理页核对；完整146284032B G3 owner等于工作owner，SHA256为`0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595`。G2仍为`82b2185a16ee91455844f6d2a5e386268e0efd078bdc5d27b48ba06a1f205a95`。path CRC为977edc59，query CRC为9493257c；full标签CRC742f5a50，pressure为2f1c12da，源记录顺序不同但节点/字段集合一致。
+
+两个成功例、三个反例、五个组件均已实际移走原目录、恢复归档并重新审计，audit字节一致。组件包括114项导出清单检查、第一修复288/default278项、最终修复288/default278项；默认组件事件逐字节匹配原基线。完整仿真结束周期2331601/2507934，仅用于行为复现。早期retired v1/v2的未限定层级信号产生X属于TB错误，已用明确层级、default_nettype none和未知值断言修正；这些开发失败不作为生产RTL反例。
+
+本轮并未完成G3 warm或第三条查询RTL。原生文件副本由TB/auditor捕获，硬件observer不等于持久化bundle writer；初始G1 clone及全图标签baseline仍外部可信，G2仍沿用旧writer。CRC不是认证；实际价格/history未改变。路径槽、dirty表有界，尚无全图baseline reseed、持久化floor/认证、实际overflow新增回收、综合时序或板卡性能结论。
+
+后续以`hardware/variants/owner_g3_publish_v2/NEXT.md`为入口。自然q180329的CPU采集和全状态转换已另行通过，见`iter2_third_20261027.json`；必须扩展路径槽及其镜像协议，生成新的独立cost/CPS1 oracle，再接连续q3和G3故障恢复。
+
+实验收尾使用`scripts/release_experiment_cache.py ROOT --apply`释放已审计、清单未改变目录的大文件干净缓存。默认只报告；不删除数据、不清主机全局缓存，不更改冻结的归档/审计脚本。

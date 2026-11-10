@@ -1,0 +1,9 @@
+# 可配置三路径槽与默认兼容验证（2026-10-27）
+
+PATH_SLOTS从固定2扩为参数，默认仍为2。保存路径槽、请求slot编码、192位route payload、三个顶层、boot及export observer同步参数化。MAX_PATH32时完整路径镜像为两槽78字或三槽117字；镜像不自描述容量，发送端与接收端必须共享参数。
+
+原生三槽controller的2494项检查通过，独立重放13次checkpoint、8次route、15次owner操作及5次标签读取；验证第三槽错误/截断/取消不发布、历史路径登记不增加引用、三条路径分别拆线及控制器重置后恢复。owner和label后端是mock，不能单独作为全系统证据。export observer三槽126检查/16场景、默认114检查/14场景；query lifecycle三槽29场景核对真实slot2 payload字段位置及无效slot3拒绝。
+
+默认两槽完整系统在32缓存槽和单缓存槽分别与原G3基线28文件逐字节匹配，共56文件，包含12路AXI、native事件及结束周期2331601/2507934。六个用例均实际归档恢复、审计字节一致。完整第三条查询另见path_capacity_third_20261027.json/.md，不将组件通过代替完整系统验证。
+
+证据与六份恢复凭据在同名JSON；源冻结统一见path_capacity_sources_20261027/manifest.json。

@@ -1,0 +1,79 @@
+{
+  "analyzer_sha256": "1769d8a9ee8e531ffdc496e7d58c8dd22856a4b8f2a6b2f59a57ea2dd97fa56e",
+  "checked_source_expressions": [
+    "selected_ready=0;selected_valid=0;selected_reply=0;",
+    "case(c_lane)",
+    "assign c_ready=search_busy&&scheduler_lane&&selected_ready;",
+    "assign h_ready=host_open?s_ready:16'd0;"
+  ],
+  "next_steps": [
+    "After current physical measurement, choose a separately versioned selector experiment if warranted",
+    "Compare all external outputs in original/default/reduced RTL, including X/Z selectors and invalid lanes",
+    "Preserve scheduler fault/cancel/backpressure and all host service tests",
+    "Full-system exact outputs/cycles and restored matched synthesis/physical measurement before selection"
+  ],
+  "original_ready_inputs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "output_values": {
+    "0": 4060,
+    "1": 4,
+    "x": 32
+  },
+  "proposed_change": "Keep the existing scheduler_lane mask and full selected_valid/reply cases. Only leave selected_ready at its zero default in the twelve non-scheduler cases. Host h_ready and all sixteen host lanes remain unchanged.",
+  "proposed_ready_inputs": [
+    6,
+    8,
+    11,
+    12
+  ],
+  "reference": "/tmp/B_state_residency_offer_20261025/route_stage_synth_v1",
+  "reference_audit_sha256": "e48f007d79f51f5cb18b90a4ff911cf551fae6f98f25dd80365081ff840f3e4a",
+  "reported_selected_ready_net": {
+    "arrival_ns": 13.463,
+    "delay_ns": 0.185,
+    "fanout": 1,
+    "name": "inner/host_fence/selected_ready",
+    "placement": "unplaced"
+  },
+  "required_mask_counterexample": {
+    "lane": 0,
+    "original": "0",
+    "search_busy": "1",
+    "selected_ready": "1",
+    "unmasked": "1"
+  },
+  "restoration_sha256": "fed0ec98a27bb194077e9d6970e76cb9d8b65af008d5461d1dda5dbd93fe94c0",
+  "same_sources_in": [
+    "checkpoint_edit_synth_v1",
+    "route_path_synth_v1"
+  ],
+  "scope": "Bounded four-value Python model tied to literal static case assignments and the sole selected_ready consumer. Not compiled RTL, formal equivalence, new full-system coverage, mapped mux-size proof or physical timing benefit. Unknown selector patterns use the original case default; X/Z data propagate through the same logical mask.",
+  "source_sha256": {
+    "search_host_fence.sv": "71e7ece610e84fa8cde6f1492608cf2d663241b4ad19008a280d66dcd6b8aae4",
+    "search_residency_system.sv": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63",
+    "search_scheduler.sv": "8e4def6d1ebda52d4dd4b1996f6910a354281c476cdff869c66da8b72fe0bbbf"
+  },
+  "status": "source_bound_selector_model_passed_not_rtl_validation",
+  "timing_path_sha256": "7c9144b833118bad14e1309358ebdf85fbddffcdae3b9ddf90fcf0f2de0f945f",
+  "valuations": {
+    "allowed_lane": 64,
+    "masked_lane": 192,
+    "unknown_lane_default": 3840
+  }
+}

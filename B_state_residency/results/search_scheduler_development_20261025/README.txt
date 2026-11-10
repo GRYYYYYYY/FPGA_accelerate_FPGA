@@ -1,0 +1,1 @@
+Preserved development failures: unit_v1 wrong runner source path; unit_v2 reserved SystemVerilog identifier design; lease_v1 declaration order/implicit-wire issue in testbench. Production RTL unchanged after passing unit_v3. Successful joined real tests are join_v1. No failed result is counted as passed.

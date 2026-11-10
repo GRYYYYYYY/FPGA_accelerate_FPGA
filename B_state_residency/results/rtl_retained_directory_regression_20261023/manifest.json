@@ -1,0 +1,431 @@
+{
+  "status": "passed",
+  "sources": {
+    "hardware/rtl/backing_frame_directory_retained.sv": "f9ec02bc9f834effaee92111971a9370799d6e9b7457fdbe1591cfbb6de3ff67",
+    "hardware/rtl/backing_frame_directory_lookup.sv": "f9eba4f006e3221059b161a5e71bfffe108d01c3b92b8e3338239e830bb15e7f",
+    "hardware/tb/tb_retained_directory.sv": "7597bc9d2c574c65360764ae4440d9a11aa719802d2b16d62d025b23641a026d",
+    "hardware/tb/tb_indexed_directory.sv": "ffa17f9c4c355c3bc94a51439e4cb569c5350a5100f9151d18763d2d682ddef8",
+    "hardware/scripts/verify_retained_directory.py": "bede9ca886ba4984d178e22aecb7307ffc02fe128910c6f273ec36e7bc610c3b"
+  },
+  "parent_sha256": "bf6ec0fbf3c7912b6fbfdcb73851a8caf69bfd9cae1c0b723422241798069981",
+  "cases": {
+    "legacy_small": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_retained.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/tb_compatibility.sv"
+          ],
+          "pid": 2120193,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_indexed_directory_small",
+            "-s",
+            "test_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2121666,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/small_legacy.txt"
+          ],
+          "pid": 2124181,
+          "exit_code": 0
+        }
+      ],
+      "counters": {
+        "differential": "1",
+        "checks": "1450",
+        "dut_cycles": "15900",
+        "ref_cycles": "15612",
+        "holds": "6523",
+        "initial_clear": "16",
+        "wraps": "3",
+        "overflow": "46",
+        "scans": "3446",
+        "empty_fallbacks": "48",
+        "hits": "459"
+      },
+      "artifacts": {
+        "simulate.log": "58543b87d9add069c3acd044a582d9c74ea21600ad310b0d03c86bae484a8de2",
+        "compile.stdout.log": "70dde19ee5cadd446c09cae07232ddd27a048a31000b7529f1dc0c505db1d64c",
+        "xvlog.log": "70dde19ee5cadd446c09cae07232ddd27a048a31000b7529f1dc0c505db1d64c",
+        "simulate.stdout.log": "b1456633674131d777fe4b257937bfade0cecf69ff43eea8981b1a1a61253e4a",
+        "xelab.log": "10e2fb56c6b0e62a02c45abd64a96f2fbdb507b2e8ce9633540e13235ed7fb68",
+        "simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+        "elaborate.stdout.log": "10e2fb56c6b0e62a02c45abd64a96f2fbdb507b2e8ce9633540e13235ed7fb68"
+      }
+    },
+    "legacy_large": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_retained.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/tb_compatibility.sv"
+          ],
+          "pid": 2125560,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_indexed_directory_large",
+            "-s",
+            "test_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2126358,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/indexed_directory_vectors_20261023/large.txt"
+          ],
+          "pid": 2127775,
+          "exit_code": 0
+        }
+      ],
+      "counters": {
+        "differential": "0",
+        "checks": "66261",
+        "dut_cycles": "946545",
+        "ref_cycles": null,
+        "holds": "298173",
+        "initial_clear": "32768",
+        "wraps": "0",
+        "overflow": "75",
+        "scans": "37412",
+        "empty_fallbacks": "42",
+        "hits": "44000"
+      },
+      "artifacts": {
+        "simulate.log": "25ddc2d7786436368038e62eac6246739af37f563fd67715e4189e22fdc0f531",
+        "compile.stdout.log": "70dde19ee5cadd446c09cae07232ddd27a048a31000b7529f1dc0c505db1d64c",
+        "xvlog.log": "70dde19ee5cadd446c09cae07232ddd27a048a31000b7529f1dc0c505db1d64c",
+        "simulate.stdout.log": "4f539f9beff441fae9d2cec279f4c08b8f75ec628230639b13731a7cdb896619",
+        "xelab.log": "be58a2ee40f9ca55e4602885077f879c79cc382514ef58e13b9d5478987a0814",
+        "simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+        "elaborate.stdout.log": "be58a2ee40f9ca55e4602885077f879c79cc382514ef58e13b9d5478987a0814"
+      }
+    },
+    "skip_id_reset": {
+      "status": "detected",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/skip_id_reset.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/tb_retained_directory.sv"
+          ],
+          "pid": 2129470,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_retained_directory",
+            "-s",
+            "test_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2131485,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 2133836,
+          "exit_code": 0
+        }
+      ],
+      "first_failure": "Fatal: status check=45 op=1 got=5 expected=0",
+      "artifacts": {
+        "simulate.log": "1dc5fa733f8e51da4761979dd46d6092be901d2e9ef7269b3f0b70c5d68b6d93",
+        "compile.stdout.log": "c56fe40834069a9251f1395bdce7ceb877fab066c7b2c6c4706b9ad4b1a8a431",
+        "xvlog.log": "c56fe40834069a9251f1395bdce7ceb877fab066c7b2c6c4706b9ad4b1a8a431",
+        "simulate.stdout.log": "fe2b2f4f47d69d0f8d8d1072c9d03a4350ecc151a9560afeb7c18a278137e7d4",
+        "xelab.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb",
+        "simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+        "elaborate.stdout.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb"
+      }
+    },
+    "drop_allocation": {
+      "status": "detected",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/drop_allocation.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/tb_retained_directory.sv"
+          ],
+          "pid": 2136454,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_retained_directory",
+            "-s",
+            "test_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2136735,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 2136781,
+          "exit_code": 0
+        }
+      ],
+      "first_failure": "Fatal: retained allocation",
+      "artifacts": {
+        "simulate.log": "b6b0cf016b9d8d3ba0eb1a9b1c2291c29c5ae0b620c35e49026e5a707c6a472e",
+        "compile.stdout.log": "fa78a5f418c4a5e49ec9a21332bc8e8fd833394a3ae6c6fd9250b6c2be47a055",
+        "xvlog.log": "fa78a5f418c4a5e49ec9a21332bc8e8fd833394a3ae6c6fd9250b6c2be47a055",
+        "simulate.stdout.log": "26ea902dc8d0894d9a611ff6d71418decaa1ffd206e053f2bf194d0c3b82e863",
+        "xelab.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb",
+        "simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+        "elaborate.stdout.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb"
+      }
+    },
+    "ignore_leases": {
+      "status": "detected",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/ignore_leases.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/tb_retained_directory.sv"
+          ],
+          "pid": 2139191,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_retained_directory",
+            "-s",
+            "test_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2141453,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 2143737,
+          "exit_code": 0
+        }
+      ],
+      "first_failure": "Fatal: status check=25 op=6 got=0 expected=2",
+      "artifacts": {
+        "simulate.log": "d19943594495b67f1f31b8170fed9dcdbace5d82e580efedd19c24e61340cf2e",
+        "compile.stdout.log": "95e51d2d90b6aea3b7a9f58277bb3a6c07401017c6d6049b0235df44f5898e6a",
+        "xvlog.log": "95e51d2d90b6aea3b7a9f58277bb3a6c07401017c6d6049b0235df44f5898e6a",
+        "simulate.stdout.log": "4fcc5d070450034c1d5de692e476c0ee5abe39e6abde6e4b76dd709cd3a0be37",
+        "xelab.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb",
+        "simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+        "elaborate.stdout.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb"
+      }
+    },
+    "ignore_fence": {
+      "status": "detected",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/ignore_fence.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_directory_regression_20261023/sources/tb_retained_directory.sv"
+          ],
+          "pid": 2144555,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_retained_directory",
+            "-s",
+            "test_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2144594,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 2145901,
+          "exit_code": 0
+        }
+      ],
+      "first_failure": "Fatal: status check=30 op=6 got=0 expected=2",
+      "artifacts": {
+        "simulate.log": "9606f194f5c5420b6ccb3bfa4fddd79566e844f1802ae562ca275dcb88cbbc50",
+        "compile.stdout.log": "688eaf3431ccd482ba07e942d2a9c8c5d966120f80a0e5059e20a0e4c2d31b58",
+        "xvlog.log": "688eaf3431ccd482ba07e942d2a9c8c5d966120f80a0e5059e20a0e4c2d31b58",
+        "simulate.stdout.log": "3055b127780e2e1b097d3ce389e5280d25b3c4aa07ce9c935f013af47af61c2e",
+        "xelab.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb",
+        "simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+        "elaborate.stdout.log": "3f183957525aacbcfa76fb5fa37ba28ab5755d3bfd693ce2ca909f7ef672fadb"
+      }
+    }
+  },
+  "rtl_checkpoint_integrated": false,
+  "vector_manifest_sha256": "0d6d14c5febafc934e0c66a3769f96465fd74f2c5c9df5ed4c34692b26f6b594",
+  "legacy_exclusion": {
+    "reason": "opcode6 now assigned RECYCLE_TX; formerly BAD. All other legacy stimuli unchanged.",
+    "removed_zero_based_rows": [
+      [
+        128,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        275,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        422,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        569,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        716,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        863,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        1010,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        1157,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        1304,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ],
+      [
+        1451,
+        "6 0 0 0 1 0 3 0 0 10 0 0\n"
+      ]
+    ],
+    "adapted_sha256": "7ee6da6506d8e67ab5b7766a55683543ec3e1adc5a76041c0642aa3ae6b10e23"
+  },
+  "artifacts": {
+    "sources/backing_frame_directory_retained.sv": "f9ec02bc9f834effaee92111971a9370799d6e9b7457fdbe1591cfbb6de3ff67",
+    "sources/ignore_fence.sv": "a6a46b4cce1138fc01eb386e0a6ed4c250d3b962cb75903912a87c8b8098aad1",
+    "sources/tb_indexed_directory.sv": "ffa17f9c4c355c3bc94a51439e4cb569c5350a5100f9151d18763d2d682ddef8",
+    "sources/drop_allocation.sv": "2b75d0e04ef99d82d9c7c2bbf35c08d065b2ea3643fe23e1d6bee53d68343c2c",
+    "sources/skip_id_reset.sv": "6a315d386b7cf55241a1373aae9b3f33991dbe1cd3a94e532015bab0f43c4dfa",
+    "sources/verify_retained_directory.py": "bede9ca886ba4984d178e22aecb7307ffc02fe128910c6f273ec36e7bc610c3b",
+    "sources/tb_compatibility.sv": "a719979b385e0c5ff6d6a6f288f479c902e96b37d748d039289e205b504984b0",
+    "sources/tb_retained_directory.sv": "7597bc9d2c574c65360764ae4440d9a11aa719802d2b16d62d025b23641a026d",
+    "sources/ignore_leases.sv": "e5ce5a2a39e5f90275fdb057b99a1aa92523aa7f2533a90e6f5dd54c40b86941",
+    "sources/backing_frame_directory_lookup.sv": "f9eba4f006e3221059b161a5e71bfffe108d01c3b92b8e3338239e830bb15e7f"
+  }
+}

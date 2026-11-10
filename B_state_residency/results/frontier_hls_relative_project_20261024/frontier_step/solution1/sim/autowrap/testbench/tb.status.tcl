@@ -1,0 +1,1 @@
+set ::AESL_AUTOSIM::gTopFileName /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/frontier_step/solution1/./sim/autowrap/testbench/kernel_hls.cpp_pre.cpp.tb.cpp

@@ -1,0 +1,925 @@
+{
+  "status": "passed",
+  "audits": {
+    "warm_axi_read_v2": {
+      "status": "passed",
+      "manifest_sha256": "0f87fe13e3f7a6139dd3ff659083857d46f8a40233d590708ec3c1485aa09f47",
+      "auditor_sha256": "7853425ca63cbfd08a600eb1eddc4b398fdea0f3278484274bc7793c2909d4b5",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "full_5": {
+          "cancel_status": 7,
+          "hold_mode": 0,
+          "held_cycles": 32,
+          "cancel_phase": "verify",
+          "labels_written_before_cancel": 328,
+          "physical_accept": [
+            "AXI_CANCEL_ACCEPT",
+            "1120204",
+            "R",
+            "000000c0",
+            "3",
+            "328"
+          ],
+          "physical_release_cycle": 1120237,
+          "physical_retired": [
+            [
+              "AXI_CANCEL_R",
+              "1120248",
+              "0"
+            ],
+            [
+              "AXI_CANCEL_R",
+              "1120260",
+              "0"
+            ],
+            [
+              "AXI_CANCEL_R",
+              "1120268",
+              "1"
+            ]
+          ],
+          "rejected_attempt": 5,
+          "retry_attempt": 6,
+          "retry_cookie": "c0020001",
+          "retry_corrected": 0,
+          "retained_journal": 6,
+          "fault_node": 263946,
+          "journal_entries": 6,
+          "repaired_nodes": [
+            1231788,
+            726313,
+            1279818,
+            1431195,
+            554512,
+            263946
+          ],
+          "wanted_refs": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "old_g1_shared_refs": [
+            0,
+            0
+          ],
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1622,
+              "read_beats": 1622,
+              "write_beats": 38,
+              "write_replies": 38,
+              "read_burst_lengths": {
+                "1": 1622
+              },
+              "write_burst_lengths": {
+                "1": 38
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 975,
+              "read_beats": 2814,
+              "write_beats": 2250,
+              "write_replies": 778,
+              "read_burst_lengths": {
+                "3": 901,
+                "1": 37,
+                "2": 37
+              },
+              "write_burst_lengths": {
+                "3": 722,
+                "1": 28,
+                "2": 28
+              },
+              "logical_192B_reads": 938,
+              "logical_192B_writes": 750,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 66,
+              "read_beats": 66,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 66
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Shared-last six-entry journal, one-net capacity-zero fixture. Other faults/overflow/arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "Deterministic partial-label R/B response-delay cancellation only. Arbitrary cancellation points, late success abort, durable floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    },
+    "warm_axi_write_v2": {
+      "status": "passed",
+      "manifest_sha256": "1b37ae4308e8c08852d5dd56102ed202430f86b6b1bd32071ac8bb7d020efcab",
+      "auditor_sha256": "7853425ca63cbfd08a600eb1eddc4b398fdea0f3278484274bc7793c2909d4b5",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "full_5": {
+          "cancel_status": 7,
+          "hold_mode": 1,
+          "held_cycles": 32,
+          "cancel_phase": "write",
+          "labels_written_before_cancel": 53,
+          "physical_accept": [
+            "AXI_CANCEL_ACCEPT",
+            "1062106",
+            "B",
+            "00000000",
+            "3",
+            "53"
+          ],
+          "physical_release_cycle": 1062139,
+          "physical_retired": [
+            [
+              "AXI_CANCEL_B",
+              "1062147",
+              "0"
+            ]
+          ],
+          "rejected_attempt": 5,
+          "retry_attempt": 6,
+          "retry_cookie": "c0020001",
+          "retry_corrected": 0,
+          "retained_journal": 6,
+          "fault_node": 263946,
+          "journal_entries": 6,
+          "repaired_nodes": [
+            1231788,
+            726313,
+            1279818,
+            1431195,
+            554512,
+            263946
+          ],
+          "wanted_refs": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "old_g1_shared_refs": [
+            0,
+            0
+          ],
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1622,
+              "read_beats": 1622,
+              "write_beats": 38,
+              "write_replies": 38,
+              "read_burst_lengths": {
+                "1": 1622
+              },
+              "write_burst_lengths": {
+                "1": 38
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 974,
+              "read_beats": 2811,
+              "write_beats": 1893,
+              "write_replies": 655,
+              "read_burst_lengths": {
+                "3": 900,
+                "1": 37,
+                "2": 37
+              },
+              "write_burst_lengths": {
+                "3": 607,
+                "1": 24,
+                "2": 24
+              },
+              "logical_192B_reads": 937,
+              "logical_192B_writes": 631,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 66,
+              "read_beats": 66,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 66
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Shared-last six-entry journal, one-net capacity-zero fixture. Other faults/overflow/arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "Deterministic partial-label R/B response-delay cancellation only. Arbitrary cancellation points, late success abort, durable floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    },
+    "warm_axi_read_pressure_v2": {
+      "status": "passed",
+      "manifest_sha256": "23f11b1450941cbe73cd0dc228c13bf5943f8c726886c2a32696d34e142166e2",
+      "auditor_sha256": "7853425ca63cbfd08a600eb1eddc4b398fdea0f3278484274bc7793c2909d4b5",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "pressure_5": {
+          "cancel_status": 7,
+          "hold_mode": 0,
+          "held_cycles": 32,
+          "cancel_phase": "verify",
+          "labels_written_before_cancel": 328,
+          "physical_accept": [
+            "AXI_CANCEL_ACCEPT",
+            "1190812",
+            "R",
+            "00000000",
+            "3",
+            "328"
+          ],
+          "physical_release_cycle": 1190845,
+          "physical_retired": [
+            [
+              "AXI_CANCEL_R",
+              "1190852",
+              "0"
+            ],
+            [
+              "AXI_CANCEL_R",
+              "1190867",
+              "0"
+            ],
+            [
+              "AXI_CANCEL_R",
+              "1190884",
+              "1"
+            ]
+          ],
+          "rejected_attempt": 5,
+          "retry_attempt": 6,
+          "retry_cookie": "c0020001",
+          "retry_corrected": 0,
+          "retained_journal": 6,
+          "fault_node": 263946,
+          "journal_entries": 6,
+          "repaired_nodes": [
+            1231788,
+            726313,
+            1279818,
+            1431195,
+            554512,
+            263946
+          ],
+          "wanted_refs": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "old_g1_shared_refs": [
+            0,
+            0
+          ],
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1622,
+              "read_beats": 1622,
+              "write_beats": 38,
+              "write_replies": 38,
+              "read_burst_lengths": {
+                "1": 1622
+              },
+              "write_burst_lengths": {
+                "1": 38
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 2701,
+              "read_beats": 7671,
+              "write_beats": 4236,
+              "write_replies": 1482,
+              "read_burst_lengths": {
+                "3": 2413,
+                "2": 144,
+                "1": 144
+              },
+              "write_burst_lengths": {
+                "3": 1342,
+                "1": 70,
+                "2": 70
+              },
+              "logical_192B_reads": 2557,
+              "logical_192B_writes": 1412,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 66,
+              "read_beats": 66,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 66
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Shared-last six-entry journal, one-net capacity-zero fixture. Other faults/overflow/arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "Deterministic partial-label R/B response-delay cancellation only. Arbitrary cancellation points, late success abort, durable floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    },
+    "warm_axi_write_pressure_v2": {
+      "status": "passed",
+      "manifest_sha256": "52b218b7606c1bafed99d29dd37552f764adf02bdf08715cf1c2b13b67af7414",
+      "auditor_sha256": "7853425ca63cbfd08a600eb1eddc4b398fdea0f3278484274bc7793c2909d4b5",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "pressure_5": {
+          "cancel_status": 7,
+          "hold_mode": 1,
+          "held_cycles": 32,
+          "cancel_phase": "write",
+          "labels_written_before_cancel": 36,
+          "physical_accept": [
+            "AXI_CANCEL_ACCEPT",
+            "1156256",
+            "B",
+            "00001440",
+            "3",
+            "36"
+          ],
+          "physical_release_cycle": 1156289,
+          "physical_retired": [
+            [
+              "AXI_CANCEL_B",
+              "1156297",
+              "0"
+            ]
+          ],
+          "rejected_attempt": 5,
+          "retry_attempt": 6,
+          "retry_cookie": "c0020001",
+          "retry_corrected": 0,
+          "retained_journal": 6,
+          "fault_node": 263946,
+          "journal_entries": 6,
+          "repaired_nodes": [
+            1231788,
+            726313,
+            1279818,
+            1431195,
+            554512,
+            263946
+          ],
+          "wanted_refs": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "old_g1_shared_refs": [
+            0,
+            0
+          ],
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1622,
+              "read_beats": 1622,
+              "write_beats": 38,
+              "write_replies": 38,
+              "read_burst_lengths": {
+                "1": 1622
+              },
+              "write_burst_lengths": {
+                "1": 38
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 2700,
+              "read_beats": 7668,
+              "write_beats": 3960,
+              "write_replies": 1387,
+              "read_burst_lengths": {
+                "3": 2412,
+                "2": 144,
+                "1": 144
+              },
+              "write_burst_lengths": {
+                "3": 1253,
+                "1": 67,
+                "2": 67
+              },
+              "logical_192B_reads": 2556,
+              "logical_192B_writes": 1320,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 66,
+              "read_beats": 66,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 66
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Shared-last six-entry journal, one-net capacity-zero fixture. Other faults/overflow/arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "Deterministic partial-label R/B response-delay cancellation only. Arbitrary cancellation points, late success abort, durable floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    }
+  },
+  "restores": {
+    "warm_axi_read_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_axi_read_v2.json",
+      "archive_sha256": "179548791c22e9951fda56cb92d57b829bd490551390b928f61eac68b7e77c25",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_axi_read_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_axi_read_v2",
+      "files": 326,
+      "audit_byte_identical": true,
+      "audit_sha256": "9338160fa928aabd4db6fc830ea5da650807771ba50d87c94d87932b21f31f41",
+      "auditor": "audit_warm_axi_cancel.py"
+    },
+    "warm_axi_write_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_axi_write_v2.json",
+      "archive_sha256": "f7c008fe51be18fb4ead16bc5c638496f39f4bc729e2678724d7c5865f77bb86",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_axi_write_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_axi_write_v2",
+      "files": 326,
+      "audit_byte_identical": true,
+      "audit_sha256": "788db544d681d2ba617c7a2235e23f08d8265d95b7e08bcacd43b09a00fb0657",
+      "auditor": "audit_warm_axi_cancel.py"
+    },
+    "warm_axi_read_pressure_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_axi_read_pressure_v2.json",
+      "archive_sha256": "f70bc2d4ccae94f12b66ba116c24d26e082680d93b61d250b5f6a72ec3700ea0",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_axi_read_pressure_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_axi_read_pressure_v2",
+      "files": 326,
+      "audit_byte_identical": true,
+      "audit_sha256": "4b50090614b4062e036ac57ed1a414ac10df5e67fd66480275ba493dd0e96961",
+      "auditor": "audit_warm_axi_cancel.py"
+    },
+    "warm_axi_write_pressure_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_axi_write_pressure_v2.json",
+      "archive_sha256": "e4ea3b828e2f7cb6357f9fd9f958bfcb2a2564127ede9691f64fb27d08f91838",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_axi_write_pressure_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_axi_write_pressure_v2",
+      "files": 326,
+      "audit_byte_identical": true,
+      "audit_sha256": "569a17896c17a99c6d1035fa4517034e6c42ba6f74e07843c27770d66c8f9422",
+      "auditor": "audit_warm_axi_cancel.py"
+    }
+  },
+  "sources": {
+    "hardware/variants/warm_axi_cancel_v1/build_tb.py": "131ffd60214d7f921ae6d1bad9978ec009f291772ec66da55bb8c57098a617ff",
+    "hardware/variants/warm_axi_cancel_v1/axi_file_memory.sv": "3b012029bf46ab3f74960352db0d17d9150ed4b0661f4094f7570f9dbaa1e90b",
+    "hardware/variants/warm_axi_cancel_v1/tb_axi_cancel.sv": "756b912920b88a956b150d8939eeaec60496e9f06869f28df040f9d1375fe744",
+    "hardware/variants/warm_axi_cancel_v1/CONTRACT.md": "dfa2d72f392ff9ca785b627d55d51d8ddea6fef1c3627fcf59261a2e3b711d01",
+    "hardware/variants/warm_axi_cancel_v1/LATE_SUCCESS_NOTES.md": "434f591a4d31c18421735334d6efeb608ef95e39be4c64052ddf12fc5a40877d",
+    "scripts/run_warm_axi_cancel.py": "73828ee531de59772e405801bdb9b39a74c1333a28c313a1669a9bd983436ea7",
+    "scripts/audit_warm_axi_cancel.py": "7853425ca63cbfd08a600eb1eddc4b398fdea0f3278484274bc7793c2909d4b5",
+    "scripts/report_warm_axi_cancel.py": "89fca8e4b651afc533ddf5771d4154da9deda571f5ebfdf9f555b730ba157f06"
+  }
+}

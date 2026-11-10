@@ -1,0 +1,222 @@
+{
+  "status": "actual_retirement_transition_overapprox_contract_inductively_proved_nonvacuous_two_mutations_checked_restored",
+  "scope": "Actual reader transitions retained, 140 state bits; other state/read outputs arbitrary. Single clock, initial reset, two-state. Not full-system AS entry or original closed-unit suite completion.",
+  "proof": "bound_generation nonzero and !busy and !fault implies active configured, outside reset",
+  "main_contract_identical_to_original": "if(bound_generation!=0 && !busy && !fault) assert(configured);",
+  "auxiliary_scope": "Local reader helpers explicitly exclude private reader reset, because local busy/fault outputs are reset-masked. This is not an environmental assumption; the original closed-unit harness is unchanged.",
+  "retained_state_cells": 10,
+  "retained_state_bits": 140,
+  "selected_cells": 637,
+  "cuts": 54,
+  "smt_constraints": {
+    "assert": 7,
+    "assume": 1,
+    "cover": 1
+  },
+  "bmc_steps": 10,
+  "temporal_induction_successful": true,
+  "abstraction_cover_tool_step": 7,
+  "abstraction_cover_vcd_steps": [
+    6
+  ],
+  "negative_controls": {
+    "busy": {
+      "mutation": {
+        "cell": "$flatten\\bank0.$logic_and$checkpoint_authority_reader.sv:28$2403",
+        "port": "B",
+        "old": [
+          3032
+        ],
+        "new": [
+          "0"
+        ],
+        "meaning": "Suppress bank0 busy report"
+      },
+      "top_contract_violation_steps": [
+        7
+      ],
+      "local_contract_violation_steps": [
+        7
+      ],
+      "log_sha256": "03b86a592dd6b0136399da70ea1e737cbdefb9e6288bbc6ce67ba7628bc0a75f",
+      "vcd_sha256": "b70c7349399c2ccb6e57cc7afabc0f081b6f1613da573171802d09a8ede3595d"
+    },
+    "fault": {
+      "mutation": {
+        "cell": "$flatten\\bank0.$logic_and$checkpoint_authority_reader.sv:29$2408",
+        "port": "B",
+        "old": [
+          3038
+        ],
+        "new": [
+          "0"
+        ],
+        "meaning": "Suppress bank0 fault report"
+      },
+      "top_contract_violation_steps": [],
+      "local_contract_violation_steps": [
+        11,
+        12,
+        13
+      ],
+      "log_sha256": "cec9e4d9504561634de7e8a61a9a2995cf0decdd8306107c799d1c0f70209bcd",
+      "vcd_sha256": "6574bb29d8902cfd930635af92ff39dd0d064efe9e5ca79e8ace656f45530c0d"
+    }
+  },
+  "negative_limit": "Busy suppression directly violates top contract. Fault suppression witness violates local helper only; top busy remains1 in that trace, so no top-contract counterexample claimed for fault control.",
+  "extraction_review": "Exact retained cells/DFF clock/output aliases, source hashes, input ports and all netnames checked; other storage outputs arbitrary, no unsupported source replacement.",
+  "source_model_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+  "manifest_sha256": "4750a84af4f8318b2010fcc6de6bba30640d9aaeec6e1b6733532aeef1951531",
+  "evidence_inventory": {
+    "ka_retirement_state_kernel_formal_v1/kernel.json": {
+      "sha256": "69c0e4419710c6c08a77ab64ab47b04a5a760596894366d8ef293260f7608f58",
+      "bytes": 4860522
+    },
+    "ka_retirement_state_kernel_formal_v1/preparation.json": {
+      "sha256": "00289da2c107faf2a9890e1ec8c1067eb1a557f37c3924d41908d8bd9aa7077a",
+      "bytes": 23801
+    },
+    "ka_retirement_state_kernel_formal_v1/harness.sv": {
+      "sha256": "e1365e71351c6deb8129975041ad7286e6ea16af61e43fcb975e4a8b19da5ef8",
+      "bytes": 4502
+    },
+    "ka_retirement_state_kernel_formal_v1/manifest.json": {
+      "sha256": "4750a84af4f8318b2010fcc6de6bba30640d9aaeec6e1b6733532aeef1951531",
+      "bytes": 3713
+    },
+    "ka_retirement_state_kernel_formal_v1/prepare.ys": {
+      "sha256": "24dbebc16bda202f47340227e7c848a7b57c54b292f6232a5c809b48a2d04236",
+      "bytes": 168
+    },
+    "ka_retirement_state_kernel_formal_v1/prepare.log": {
+      "sha256": "ca83ba2eb720eaf16b44af24f451a30c3e3b4f3281e27eb887a7698717b6327b",
+      "bytes": 17143
+    },
+    "ka_retirement_state_kernel_formal_v1/design.smt2": {
+      "sha256": "13736baa5b01d89f093b3b4654d0f1b86e59cb4168bd98df8d0499214a2c9eea",
+      "bytes": 306281
+    },
+    "ka_retirement_state_kernel_formal_v1/bmc.log": {
+      "sha256": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0",
+      "bytes": 514
+    },
+    "ka_retirement_state_kernel_formal_v1/induction.log": {
+      "sha256": "ce792594b30627c28ad6bbf735070d79648815f5681c4df9685eb3bc2c7187c2",
+      "bytes": 272
+    },
+    "ka_retirement_state_kernel_formal_v1/cover.log": {
+      "sha256": "2cd7802997d455d7631bd092289888b4705e0073e5883b2d72126c1ae37c558b",
+      "bytes": 674
+    },
+    "ka_retirement_state_kernel_formal_v1/cover.vcd": {
+      "sha256": "233373d91c40364baad3b4867e2d73a8415704ef4f066b1ed6c99d32ce63af8d",
+      "bytes": 104092
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/mutant.json": {
+      "sha256": "cc6f33914ed0e85766afdba6dfd45614267d3e03628049ffa26530247ce9472c",
+      "bytes": 4860521
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/harness.sv": {
+      "sha256": "e1365e71351c6deb8129975041ad7286e6ea16af61e43fcb975e4a8b19da5ef8",
+      "bytes": 4502
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/prepare.ys": {
+      "sha256": "127734e4a7054b113d1cd5ea79f28d1ad6447de2dbab3ec072ccc203556647f0",
+      "bytes": 168
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/manifest.json": {
+      "sha256": "8f54337b46969f969e6425a0f8b25d3f0e2bbfeed80c20b7a1da08deaad54590",
+      "bytes": 1459
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/prepare.log": {
+      "sha256": "97824f351f612ff4281a07372995390374420b888f0a1b747f8df370b6be54da",
+      "bytes": 17151
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/design.smt2": {
+      "sha256": "519f9e7e7900bbd5c27f2e6ddaca5874904c059c48b0613ebda9a036fea3f3d7",
+      "bytes": 304909
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/bmc.log": {
+      "sha256": "03b86a592dd6b0136399da70ea1e737cbdefb9e6288bbc6ce67ba7628bc0a75f",
+      "bytes": 793
+    },
+    "ka_retirement_state_kernel_hide_busy_v1/counterexample.vcd": {
+      "sha256": "b70c7349399c2ccb6e57cc7afabc0f081b6f1613da573171802d09a8ede3595d",
+      "bytes": 115272
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/mutant.json": {
+      "sha256": "d54d4a23c7bde9259dc45d5ac1735a8909e47ea979836725b77cf991b07a49c3",
+      "bytes": 4860521
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/harness.sv": {
+      "sha256": "e1365e71351c6deb8129975041ad7286e6ea16af61e43fcb975e4a8b19da5ef8",
+      "bytes": 4502
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/prepare.ys": {
+      "sha256": "127734e4a7054b113d1cd5ea79f28d1ad6447de2dbab3ec072ccc203556647f0",
+      "bytes": 168
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/manifest.json": {
+      "sha256": "fff754c3f53bee1c17c6e64ae86d1b7034c3dca99179f2b67ee2a4cd762faeba",
+      "bytes": 1461
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/prepare.log": {
+      "sha256": "1677f7a46a5e9fe961cc1b78f86b73799de08661e4a91346b27d90644e54b796",
+      "bytes": 17150
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/design.smt2": {
+      "sha256": "787bc1d19eb8dc229c2666d1236807bd695aac3c1feb1ac59d9188e693accd59",
+      "bytes": 304779
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/bmc.log": {
+      "sha256": "cec9e4d9504561634de7e8a61a9a2995cf0decdd8306107c799d1c0f70209bcd",
+      "bytes": 861
+    },
+    "ka_retirement_state_kernel_hide_fault_v1/counterexample.vcd": {
+      "sha256": "6574bb29d8902cfd930635af92ff39dd0d064efe9e5ca79e8ace656f45530c0d",
+      "bytes": 159999
+    },
+    "review/prepare_selected_state_cone_v2.py": {
+      "sha256": "81cf8ef9752535719fd4f9bd7d651066ce01ee5a6a5a82de476ef0405d190a7c",
+      "bytes": 4492
+    },
+    "review/run_retirement_state_kernel_formal_v1.py": {
+      "sha256": "603242e00e60b1dcecf195f674df7bd0dc386b8b768d44d01efa3522263c9c0c",
+      "bytes": 4120
+    },
+    "review/shadow_terminal_receipt_v1.py": {
+      "sha256": "68f0d42ad371343e18bd6ec902cba7638b8cc3cb046d072ea929b4100879e357",
+      "bytes": 1704
+    },
+    "review/selection.json": {
+      "sha256": "d3cbe5c79300cb9251ef728eefa5e45b0f45ca8ee66be6c1bdbdb5a56331000f",
+      "bytes": 2103
+    },
+    "review/harness.sv": {
+      "sha256": "e1365e71351c6deb8129975041ad7286e6ea16af61e43fcb975e4a8b19da5ef8",
+      "bytes": 4502
+    },
+    "review/original_closed_unit_harness.sv": {
+      "sha256": "abdbe1306477c86bf16d56f6b6c3764e4f7f4f6d7fbb923dce607957986c6cac",
+      "bytes": 6374
+    },
+    "review/sources/checkpoint_authority_rotator.sv": {
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+      "bytes": 13893
+    },
+    "review/sources/checkpoint_authority_reader.sv": {
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+      "bytes": 7591
+    },
+    "review/sources/owner_state_store.sv": {
+      "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+      "bytes": 12904
+    }
+  },
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_retirement_state_kernel_evidence_v1/evidence.tar",
+  "archive_sha256": "7487f1c9bf2ef3d440ced2053a80538df07412038f4adcbfe155684804e732ed",
+  "actual_restore": "/tmp/B_state_residency_offer_20261025/ka_retirement_state_kernel_evidence_v1/restored",
+  "actual_restore_files": 36,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

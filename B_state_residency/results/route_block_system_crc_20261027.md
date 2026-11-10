@@ -1,0 +1,9 @@
+# 路由空闲封锁候选的完整CRC失败重试回归通过
+
+route_block_system_crc_pressure_v1在已恢复审计的五源combined_loops_system_crc_pressure_v1上，仅改变route_commit_controller和route_commit_host_adapter：新增idle_fault接口，block_external以held||c_busy||c_idle_fault形成。完整fault、FSM、路径/checkpoint、journal与在途事务逻辑未变；累计七份生产源变化，其余RTL、TB、输入、参数均与参考相同。
+
+27文件逐字节匹配参考，包括12路AXI、native事件与实际周期、最终DDR、恢复流和数据文件；结束48288200ns一致。对应参考的CRC末记录失败、保持/消费/退休、旧attempt拒绝、更高attempt非冷恢复781标签/156path/10query、三回执与最终回复消费后放行、CPU q4 83poll/82expand/402candidate/231cost及其他net保留结论适用于这些相同观察。没有改写日志或归一化周期。
+
+实验归档实际恢复重审audit字节一致，源码及检查工具另行冻结。该项只覆盖优化开启、单槽CRC故障；其余七项矩阵尚未因此通过。匹配完整综合route_block_synth_v1的结构、资源与时序结论须单独读取，行为一致不证明无环或板卡收益。独立recovery_normal_loops_v2未接入本结果，不能把其组件回归计入此完整系统。
+
+原固定价格/history、可信初始快照、持久化floor/认证、自然overflow分配回收与物理实现/板卡等缺口继续保留。

@@ -1,0 +1,84 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Sat Oct 24 20:26:30 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_service_synthesis_20261024/utilization_hierarchical.rpt
+| Design       : cost_service
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Synthesized
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++--------------------------------------------------------+-----------------------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+|                        Instance                        |                        Module                       | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | URAM | DSP Blocks |
++--------------------------------------------------------+-----------------------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+| cost_service                                           |                                               (top) |       8038 |       8034 |       0 |    4 | 5814 |      0 |      0 |    0 |         20 |
+|   (cost_service)                                       |                                               (top) |        149 |        149 |       0 |    0 |    0 |      0 |      0 |    0 |          0 |
+|   arithmetic                                           |                                           cost_step |       7459 |       7455 |       0 |    4 | 4793 |      0 |      0 |    0 |         20 |
+|     (arithmetic)                                       |                                           cost_step |        115 |        115 |       0 |    0 |  641 |      0 |      0 |    0 |          0 |
+|     grp_add_fu_325                                     |                                       cost_step_add |       1358 |       1358 |       0 |    0 |  443 |      0 |      0 |    0 |          0 |
+|       (grp_add_fu_325)                                 |                                       cost_step_add |        722 |        722 |       0 |    0 |  339 |      0 |      0 |    0 |          0 |
+|       grp_add_Pipeline_VITIS_LOOP_30_1_fu_185          |              cost_step_add_Pipeline_VITIS_LOOP_30_1 |        636 |        636 |       0 |    0 |  104 |      0 |      0 |    0 |          0 |
+|         (grp_add_Pipeline_VITIS_LOOP_30_1_fu_185)      |              cost_step_add_Pipeline_VITIS_LOOP_30_1 |        553 |        553 |       0 |    0 |  102 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       | cost_step_flow_control_loop_pipe_sequential_init_17 |         83 |         83 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|     grp_cost_step_Pipeline_VITIS_LOOP_18_1_fu_350      |        cost_step_cost_step_Pipeline_VITIS_LOOP_18_1 |         84 |         84 |       0 |    0 |   24 |      0 |      0 |    0 |          0 |
+|       (grp_cost_step_Pipeline_VITIS_LOOP_18_1_fu_350)  |        cost_step_cost_step_Pipeline_VITIS_LOOP_18_1 |         65 |         65 |       0 |    0 |   22 |      0 |      0 |    0 |          0 |
+|       flow_control_loop_pipe_sequential_init_U         | cost_step_flow_control_loop_pipe_sequential_init_16 |         19 |         19 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|     grp_div_fu_333                                     |                                       cost_step_div |       1387 |       1385 |       0 |    2 | 1166 |      0 |      0 |    0 |          0 |
+|       (grp_div_fu_333)                                 |                                       cost_step_div |        462 |        462 |       0 |    0 |  308 |      0 |      0 |    0 |          0 |
+|       grp_div_Pipeline_VITIS_LOOP_56_1_fu_153          |           cost_step_div_Pipeline_VITIS_LOOP_56_1_10 |        287 |        287 |       0 |    0 |  200 |      0 |      0 |    0 |          0 |
+|         (grp_div_Pipeline_VITIS_LOOP_56_1_fu_153)      |           cost_step_div_Pipeline_VITIS_LOOP_56_1_10 |        171 |        171 |       0 |    0 |  198 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       | cost_step_flow_control_loop_pipe_sequential_init_15 |        116 |        116 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|       udiv_64ns_64ns_64_68_seq_1_U30                   |             cost_step_udiv_64ns_64ns_64_68_seq_1_11 |        454 |        454 |       0 |    0 |  234 |      0 |      0 |    0 |          0 |
+|         (udiv_64ns_64ns_64_68_seq_1_U30)               |             cost_step_udiv_64ns_64ns_64_68_seq_1_11 |        299 |        299 |       0 |    0 |  102 |      0 |      0 |    0 |          0 |
+|         cost_step_udiv_64ns_64ns_64_68_seq_1_divseq_u  |      cost_step_udiv_64ns_64ns_64_68_seq_1_divseq_14 |        155 |        155 |       0 |    0 |  132 |      0 |      0 |    0 |          0 |
+|       urem_64ns_64ns_64_68_seq_1_U31                   |             cost_step_urem_64ns_64ns_64_68_seq_1_12 |        185 |        183 |       0 |    2 |  424 |      0 |      0 |    0 |          0 |
+|         (urem_64ns_64ns_64_68_seq_1_U31)               |             cost_step_urem_64ns_64ns_64_68_seq_1_12 |         23 |         23 |       0 |    0 |  129 |      0 |      0 |    0 |          0 |
+|         cost_step_urem_64ns_64ns_64_68_seq_1_divseq_u  |      cost_step_urem_64ns_64ns_64_68_seq_1_divseq_13 |        162 |        160 |       0 |    2 |  295 |      0 |      0 |    0 |          0 |
+|     grp_div_fu_340                                     |                                     cost_step_div_0 |       1393 |       1391 |       0 |    2 | 1103 |      0 |      0 |    0 |          0 |
+|       (grp_div_fu_340)                                 |                                     cost_step_div_0 |        489 |        489 |       0 |    0 |  308 |      0 |      0 |    0 |          0 |
+|       grp_div_Pipeline_VITIS_LOOP_56_1_fu_153          |              cost_step_div_Pipeline_VITIS_LOOP_56_1 |        268 |        268 |       0 |    0 |  200 |      0 |      0 |    0 |          0 |
+|         (grp_div_Pipeline_VITIS_LOOP_56_1_fu_153)      |              cost_step_div_Pipeline_VITIS_LOOP_56_1 |        152 |        152 |       0 |    0 |  198 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       |  cost_step_flow_control_loop_pipe_sequential_init_9 |        116 |        116 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|       udiv_64ns_64ns_64_68_seq_1_U30                   |                cost_step_udiv_64ns_64ns_64_68_seq_1 |        451 |        451 |       0 |    0 |  234 |      0 |      0 |    0 |          0 |
+|         (udiv_64ns_64ns_64_68_seq_1_U30)               |                cost_step_udiv_64ns_64ns_64_68_seq_1 |        296 |        296 |       0 |    0 |  102 |      0 |      0 |    0 |          0 |
+|         cost_step_udiv_64ns_64ns_64_68_seq_1_divseq_u  |         cost_step_udiv_64ns_64ns_64_68_seq_1_divseq |        155 |        155 |       0 |    0 |  132 |      0 |      0 |    0 |          0 |
+|       urem_64ns_64ns_64_68_seq_1_U31                   |                cost_step_urem_64ns_64ns_64_68_seq_1 |        185 |        183 |       0 |    2 |  361 |      0 |      0 |    0 |          0 |
+|         (urem_64ns_64ns_64_68_seq_1_U31)               |                cost_step_urem_64ns_64ns_64_68_seq_1 |         23 |         23 |       0 |    0 |  129 |      0 |      0 |    0 |          0 |
+|         cost_step_urem_64ns_64ns_64_68_seq_1_divseq_u  |         cost_step_urem_64ns_64ns_64_68_seq_1_divseq |        162 |        160 |       0 |    2 |  232 |      0 |      0 |    0 |          0 |
+|     grp_from_int_fu_295                                |                                  cost_step_from_int |        546 |        546 |       0 |    0 |  221 |      0 |      0 |    0 |          0 |
+|       (grp_from_int_fu_295)                            |                                  cost_step_from_int |        154 |        154 |       0 |    0 |  175 |      0 |      0 |    0 |          0 |
+|       grp_from_int_Pipeline_VITIS_LOOP_63_1_fu_111     |       cost_step_from_int_Pipeline_VITIS_LOOP_63_1_7 |        392 |        392 |       0 |    0 |   46 |      0 |      0 |    0 |          0 |
+|         (grp_from_int_Pipeline_VITIS_LOOP_63_1_fu_111) |       cost_step_from_int_Pipeline_VITIS_LOOP_63_1_7 |        387 |        387 |       0 |    0 |   44 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       |  cost_step_flow_control_loop_pipe_sequential_init_8 |          5 |          5 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|     grp_from_int_fu_301                                |                                cost_step_from_int_1 |        563 |        563 |       0 |    0 |  221 |      0 |      0 |    0 |          0 |
+|       (grp_from_int_fu_301)                            |                                cost_step_from_int_1 |        160 |        160 |       0 |    0 |  175 |      0 |      0 |    0 |          0 |
+|       grp_from_int_Pipeline_VITIS_LOOP_63_1_fu_111     |         cost_step_from_int_Pipeline_VITIS_LOOP_63_1 |        403 |        403 |       0 |    0 |   46 |      0 |      0 |    0 |          0 |
+|         (grp_from_int_Pipeline_VITIS_LOOP_63_1_fu_111) |         cost_step_from_int_Pipeline_VITIS_LOOP_63_1 |        398 |        398 |       0 |    0 |   44 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       |  cost_step_flow_control_loop_pipe_sequential_init_6 |          5 |          5 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|     grp_mul_fu_307                                     |                                       cost_step_mul |       1114 |       1114 |       0 |    0 |  487 |      0 |      0 |    0 |         10 |
+|       (grp_mul_fu_307)                                 |                                       cost_step_mul |        731 |        731 |       0 |    0 |  287 |      0 |      0 |    0 |          0 |
+|       grp_mul_Pipeline_VITIS_LOOP_42_1_fu_165          |            cost_step_mul_Pipeline_VITIS_LOOP_42_1_3 |        272 |        272 |       0 |    0 |  200 |      0 |      0 |    0 |          0 |
+|         (grp_mul_Pipeline_VITIS_LOOP_42_1_fu_165)      |            cost_step_mul_Pipeline_VITIS_LOOP_42_1_3 |        137 |        137 |       0 |    0 |  198 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       |  cost_step_flow_control_loop_pipe_sequential_init_5 |        135 |        135 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|       mul_64s_64s_64_1_1_U12                           |                      cost_step_mul_64s_64s_64_1_1_4 |        111 |        111 |       0 |    0 |    0 |      0 |      0 |    0 |         10 |
+|     grp_mul_fu_315                                     |                                     cost_step_mul_2 |        915 |        915 |       0 |    0 |  487 |      0 |      0 |    0 |         10 |
+|       (grp_mul_fu_315)                                 |                                     cost_step_mul_2 |        529 |        529 |       0 |    0 |  287 |      0 |      0 |    0 |          0 |
+|       grp_mul_Pipeline_VITIS_LOOP_42_1_fu_165          |              cost_step_mul_Pipeline_VITIS_LOOP_42_1 |        272 |        272 |       0 |    0 |  200 |      0 |      0 |    0 |          0 |
+|         (grp_mul_Pipeline_VITIS_LOOP_42_1_fu_165)      |              cost_step_mul_Pipeline_VITIS_LOOP_42_1 |        137 |        137 |       0 |    0 |  198 |      0 |      0 |    0 |          0 |
+|         flow_control_loop_pipe_sequential_init_U       |    cost_step_flow_control_loop_pipe_sequential_init |        135 |        135 |       0 |    0 |    2 |      0 |      0 |    0 |          0 |
+|       mul_64s_64s_64_1_1_U12                           |                        cost_step_mul_64s_64s_64_1_1 |        114 |        114 |       0 |    0 |    0 |      0 |      0 |    0 |         10 |
+|   bridge                                               |                                    cost_memory_call |        430 |        430 |       0 |    0 | 1021 |      0 |      0 |    0 |          0 |
++--------------------------------------------------------+-----------------------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+
+

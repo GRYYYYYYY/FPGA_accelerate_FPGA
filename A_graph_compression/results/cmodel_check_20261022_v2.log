@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "created_utc": "2026-10-22T18:29:47.012197+00:00",
+  "checks": {
+    "csr": {
+      "known_rows": 2866,
+      "unknown_rows": 7408,
+      "edge_records": 12824,
+      "common_bfs_queries": 16,
+      "initialize_validate_ms": 1144.0055333077908,
+      "execution_kind": "native_cpu_execution_of_hls_c_model",
+      "compile_command": [
+        "g++",
+        "-std=c++14",
+        "-O3",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wno-unknown-pragmas",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/csr/graph_expand.cpp",
+        "-o",
+        "data/derived/cmodel_check_20261022_v2/csr.so"
+      ]
+    },
+    "compact": {
+      "known_rows": 2866,
+      "unknown_rows": 7408,
+      "edge_records": 12824,
+      "common_bfs_queries": 16,
+      "initialize_validate_ms": 1025.8797369897366,
+      "execution_kind": "native_cpu_execution_of_hls_c_model",
+      "compile_command": [
+        "g++",
+        "-std=c++14",
+        "-O3",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wno-unknown-pragmas",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp",
+        "-o",
+        "data/derived/cmodel_check_20261022_v2/compact.so"
+      ]
+    }
+  },
+  "artifacts": {
+    "csr": {
+      "source_sha256": "3ffd7394ae414caea9232dda993c09fcc2075de840d3d1d6d5587fe098ba25f6",
+      "image_sha256": "9d4a338f96db533d5a6d98d658829b12e6fe4b8c5d5f240a869ae3fbb069f8a0",
+      "library_sha256": "a2c969d51aec799d8b18b5781d9e589fd430c4f539d2d81d35389758d043b6bc"
+    },
+    "compact": {
+      "source_sha256": "54d1c51a212ad3e56d2361c9c0473ab7dfc1022d048c269daf88f326e160368c",
+      "image_sha256": "f4c0f2a66c93a09f76c8ecdd48cd84e64afd93d8e92667c74216efeb66c18197",
+      "library_sha256": "9be54811a53ba52e4c52dfaffb3cb2d44d143d6c7d3eafb9d0fbe21e9e17ab2e"
+    }
+  },
+  "limitations": [
+    "Native CPU C-model execution, not FPGA or XRT; initialization validates the full packed graph.",
+    "String/attribute conversion and buffers are host allocations; no board speedup or memory-traffic claim."
+  ]
+}

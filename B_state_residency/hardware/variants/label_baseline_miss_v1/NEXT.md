@@ -1,0 +1,9 @@
+# 完整自然query接入
+
+1. 保持已审计旧变体不变，以label_source_crc或label_crc_retry完整层级为底座建立新变体。将ENABLE_BASELINE和baseline请求/回复端口沿paged_exclusion、candidate query/engine、residency/search/query逐层传递，在顶层接真实label_baseline_reader/AXI。
+2. 初始化只保留空working backing；关闭所有imports预加载，不得保留source/sink隐藏种子。保留正常source/target字段写入口和原CPU完整候选/POLL/oracle，不可用更容易的路径代替自然q180327/q180328。
+3. 先完整正常查询，记录实际miss集合及seed字段写，证明先READ探测后首次WRITE且未访问节点不预填。manager的baseline_epoch已OPEN锁存，但外部OPEN身份许可必须与恢复/价格上下文规则明确对应。
+4. 同页新offset、已修改记录、驱逐重载应由组件结论支撑并在完整trace重审。物理目录帧数/导出label_count可能变化；重新评估1024恢复容量、822/403硬编码及所有循环超时，不能硬匹配旧闭包。
+5. 完整正常查询通过再连接runtime owner/label导出、G2共同发布和warm故障恢复，审核target reset后初始baseline是否可安全服务未知记录。禁止将新namespace价格号视为任意变价有效。
+
+本轮失败历史：默认关闭完整回归首例v1在elaboration因wrapper的 .* 对新增输出找不到名称而失败。独立新runner对所有新增输入显式零绑定、输出显式空接后运行v2；没有修改原始wrapper或功能RTL来绕过错误。

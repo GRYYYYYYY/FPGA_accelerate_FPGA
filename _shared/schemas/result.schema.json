@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Initial synthetic reference result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "project_id",
+    "execution_kind",
+    "backend",
+    "variant",
+    "status",
+    "checks",
+    "observations",
+    "outputs",
+    "measurements"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_id": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G"
+      ]
+    },
+    "execution_kind": {
+      "const": "synthetic_smoke"
+    },
+    "backend": {
+      "const": "python_cpu"
+    },
+    "variant": {
+      "const": "reference"
+    },
+    "status": {
+      "const": "passed"
+    },
+    "checks": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "const": true
+      }
+    },
+    "observations": {
+      "type": "object"
+    },
+    "outputs": {
+      "type": "object"
+    },
+    "measurements": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "null"
+      }
+    }
+  },
+  "description": "For current synthetic checks only. Real benchmark records need a separate schema and measurement harness."
+}

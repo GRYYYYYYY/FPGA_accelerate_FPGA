@@ -1,0 +1,832 @@
+
+****** xsim v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/iter2/xsim_script.tcl
+# xsim {iter2} -testplusarg graph0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/offsets.u32le -testplusarg graph1=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/edges.u32le -testplusarg graph2=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/nodes.rrt32 -testplusarg graphlog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/graph_axi.txt -testplusarg design0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/design.bin -testplusarg designlog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/design_axi.txt -testplusarg tables0=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/rows.bin -testplusarg tables1=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/columns.bin -testplusarg tableslog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/table_axi.txt -testplusarg labels0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/labels.bin -testplusarg labelslog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/label_axi.txt -testplusarg owners0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/owners.bin -testplusarg ownerslog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/owner_axi.txt -testplusarg cost0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/cost.bin -testplusarg costlog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/cost_axi.txt -testplusarg qstate0=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/connections.bin -testplusarg qstatelog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/qstate_axi.txt -testplusarg costvectors=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/cost_vectors.txt -testplusarg finallabels=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/finals.txt -testplusarg candidates=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/candidates.txt -testplusarg polls=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/polls.txt -testplusarg snapshot0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/snapshot.bin -testplusarg snapshot1=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/pool.bin -testplusarg snapshot2=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/g3.bin -testplusarg snapshotlog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/snapshot_axi.txt -testplusarg authority=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/transaction_fence_static_join_rtl_v1/authority.txt -testplusarg badcrc=0 -testplusarg g3negative=0 -testplusarg g3imports=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/runtime_g3_labels.txt -testplusarg g3copy0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/owners.bin -testplusarg g3copy1=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/pool.bin -testplusarg g3copy2=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/g3.bin -testplusarg g3copylog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/g3copy_axi.txt -testplusarg baseline0=/tmp/B_state_residency_offer_20261025/label_baseline_image_v1/baseline.bin -testplusarg baselinelog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/baseline_axi.txt -testplusarg copy0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/owners.bin -testplusarg copy1=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/pool.bin -testplusarg copylog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/copy_axi.txt -testplusarg warmimports=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/runtime_labels.txt -testplusarg labelsnap0=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/labels.bin -testplusarg labelsnaplog=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/labelsnap_axi.txt -testplusarg cost2=/tmp/B_state_residency_offer_20261025/followup_iter2_next_cost_v1/cost_vectors.txt -testplusarg candidates2=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/candidates2.txt -testplusarg polls2=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/polls2.txt -testplusarg finals2=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/finals2.txt -testplusarg cost3=/tmp/B_state_residency_offer_20261025/followup_iter2_third_cost_v1/cost_vectors.txt -testplusarg candidates3=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/candidates3.txt -testplusarg polls3=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/polls3.txt -testplusarg finals3=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/finals3.txt -testplusarg cost4=/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_cost_v1/cost_vectors.txt -testplusarg polls4=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/polls4.txt -testplusarg candidates4=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/candidates4.txt -testplusarg finals4=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/finals4.txt -testplusarg g4imports=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/runtime_g4_labels.txt -testplusarg cost4=/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_cost_v1/cost_vectors.txt -testplusarg polls4=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/polls4.txt -testplusarg candidates4=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/candidates4.txt -testplusarg finals4=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/finals4.txt -testplusarg g4imports=/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_runtime_probe_v1/full/runtime_g4_labels.txt -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## puts RUNTIME_PROBE_BEGIN
+RUNTIME_PROBE_BEGIN
+## set previous_time {}
+## for {set step 1} {$step<=100} {incr step} {
+##  set code [catch {run 10ns} message]
+##  if {[llength [info commands current_time]]} {set now_time [current_time]} else {set now_time unavailable}
+##  puts [list RUNTIME_PROBE_STEP $step actual_time $now_time catch_code $code message $message]
+##  puts [list RUNTIME_PROBE_CYCLES [get_value -radix hex /tb_candidate_offer/cycles]]
+##  puts [list RUNTIME_PROBE_VALUE armed [get_value -radix hex /stage_static_cp_shadow/armed]]
+##  puts [list RUNTIME_PROBE_VALUE reset_edges [get_value -radix hex /stage_static_cp_shadow/reset_edges]]
+##  puts [list RUNTIME_PROBE_VALUE checks [get_value -radix hex /stage_static_cp_shadow/checks]]
+##  puts [list RUNTIME_PROBE_VALUE cp_transfer_checks [get_value -radix hex /stage_static_cp_shadow/cp_transfer_checks]]
+##  puts [list RUNTIME_PROBE_VALUE ka_transfer_checks [get_value -radix hex /stage_static_cp_shadow/ka_transfer_checks]]
+##  puts [list RUNTIME_PROBE_VALUE pw_transfer_checks [get_value -radix hex /stage_static_cp_shadow/pw_transfer_checks]]
+##  if {$code || ($now_time ne {unavailable} && $now_time eq $previous_time)} {break}
+##  set previous_time $now_time
+## }
+RUNTIME_PROBE_STEP 1 actual_time {10 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000001
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 2 actual_time {20 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000002
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 3 actual_time {30 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000003
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 4 actual_time {40 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000004
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 5 actual_time {50 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000005
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 6 actual_time {60 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000006
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 7 actual_time {70 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000007
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 8 actual_time {80 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000008
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 9 actual_time {90 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000009
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 10 actual_time {100 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000000a
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 11 actual_time {110 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000000b
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 12 actual_time {120 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000000c
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 13 actual_time {130 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000000d
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 14 actual_time {140 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000000e
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 15 actual_time {150 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000000f
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 16 actual_time {160 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000010
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 17 actual_time {170 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000011
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 18 actual_time {180 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000012
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 19 actual_time {190 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000013
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 20 actual_time {200 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000014
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000000
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 21 actual_time {210 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000015
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000001
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 22 actual_time {220 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000016
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000002
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 23 actual_time {230 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000017
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000003
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 24 actual_time {240 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000018
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000004
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 25 actual_time {250 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000019
+RUNTIME_PROBE_VALUE armed 0
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000000
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 26 actual_time {260 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000001a
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000001
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 27 actual_time {270 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000001b
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000003
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 28 actual_time {280 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000001c
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000005
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 29 actual_time {290 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000001d
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000007
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 30 actual_time {300 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000001e
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000009
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 31 actual_time {310 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000001f
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000000b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 32 actual_time {320 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000020
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000000d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 33 actual_time {330 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000021
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000000f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 34 actual_time {340 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000022
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000011
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 35 actual_time {350 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000023
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000013
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 36 actual_time {360 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000024
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000015
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 37 actual_time {370 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000025
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000017
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 38 actual_time {380 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000026
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000019
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 39 actual_time {390 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000027
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000001b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 40 actual_time {400 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000028
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000001d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 41 actual_time {410 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000029
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000001f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 42 actual_time {420 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000002a
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000021
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 43 actual_time {430 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000002b
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000023
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 44 actual_time {440 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000002c
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000025
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 45 actual_time {450 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000002d
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000027
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 46 actual_time {460 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000002e
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000029
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 47 actual_time {470 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000002f
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000002b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 48 actual_time {480 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000030
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000002d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 49 actual_time {490 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000031
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000002f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 50 actual_time {500 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000032
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000031
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 51 actual_time {510 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000033
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000033
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 52 actual_time {520 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000034
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000035
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 53 actual_time {530 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000035
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000037
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 54 actual_time {540 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000036
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000039
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 55 actual_time {550 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000037
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000003b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 56 actual_time {560 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000038
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000003d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 57 actual_time {570 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000039
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000003f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 58 actual_time {580 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000003a
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000041
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 59 actual_time {590 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000003b
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000043
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 60 actual_time {600 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000003c
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000045
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 61 actual_time {610 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000003d
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000047
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 62 actual_time {620 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000003e
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000049
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 63 actual_time {630 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000003f
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000004b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 64 actual_time {640 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000040
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000004d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 65 actual_time {650 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000041
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000004f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 66 actual_time {660 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000042
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000051
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 67 actual_time {670 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000043
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000053
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 68 actual_time {680 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000044
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000055
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 69 actual_time {690 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000045
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000057
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 70 actual_time {700 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000046
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000059
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 71 actual_time {710 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000047
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000005b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 72 actual_time {720 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000048
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000005d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 73 actual_time {730 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000049
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000005f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 74 actual_time {740 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000004a
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000061
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 75 actual_time {750 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000004b
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000063
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 76 actual_time {760 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000004c
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000065
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 77 actual_time {770 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000004d
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000067
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 78 actual_time {780 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000004e
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000069
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 79 actual_time {790 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000004f
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000006b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 80 actual_time {800 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000050
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000006d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 81 actual_time {810 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000051
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000006f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 82 actual_time {820 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000052
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000071
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 83 actual_time {830 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000053
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000073
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 84 actual_time {840 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000054
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000075
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 85 actual_time {850 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000055
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000077
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 86 actual_time {860 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000056
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000079
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 87 actual_time {870 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000057
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000007b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 88 actual_time {880 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000058
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000007d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 89 actual_time {890 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000059
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000007f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 90 actual_time {900 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000005a
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000081
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 91 actual_time {910 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000005b
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000083
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 92 actual_time {920 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000005c
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000085
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 93 actual_time {930 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000005d
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000087
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 94 actual_time {940 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000005e
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000089
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 95 actual_time {950 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 0000005f
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000008b
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 96 actual_time {960 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000060
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000008d
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 97 actual_time {970 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000061
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 0000008f
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 98 actual_time {980 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000062
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000091
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 99 actual_time {990 ns} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000063
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000093
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+RUNTIME_PROBE_STEP 100 actual_time {1 us} catch_code 0 message {}
+RUNTIME_PROBE_CYCLES 00000064
+RUNTIME_PROBE_VALUE armed 1
+RUNTIME_PROBE_VALUE reset_edges 00000005
+RUNTIME_PROBE_VALUE checks 00000095
+RUNTIME_PROBE_VALUE cp_transfer_checks 00000000
+RUNTIME_PROBE_VALUE ka_transfer_checks 00000000
+RUNTIME_PROBE_VALUE pw_transfer_checks 00000000
+## quit
+CP_TRANSFER_MONITOR_END words=0
+PAYLOAD_TRANSFER_MONITOR_END ka=0 pw=0 aw=0
+INFO: xsimkernel Simulation Memory Usage: 1599520 KB (Peak: 1599520 KB), Simulation CPU Usage: 11340 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct 30 12:06:58 2026...

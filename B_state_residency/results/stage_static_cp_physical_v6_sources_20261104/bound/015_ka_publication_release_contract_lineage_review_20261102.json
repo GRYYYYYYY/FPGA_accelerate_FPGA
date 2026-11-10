@@ -1,0 +1,158 @@
+{
+  "time_utc": "2026-11-02T12:55:53.097926+00:00",
+  "status": "start_release_interlock_lineage_difference_source_bound",
+  "frozen_slice_lease_instance": "checkpoint_lease_guard lease(.clk(clk),.rst(rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(configured&&k_saved_design!=0&&c_saved_design!=0&&!fault&&!k_fault&&!c_fault&&retired_all),.retired(retired_all),.route_retired(1'b1),.no_offers(!cfg_valid&&!k_cfg_valid&&!c_load_valid&&!req_valid),.command_busy(tx_owned||tx_done_valid||stage_busy||(|prepared_bits)),.command_valid(tx_start_valid||tx_commit_valid||tx_cancel_valid||cfg_valid||k_cfg_valid||c_load_valid),.test_reset(1'b0),.safe(pc_safe));",
+  "full_lease_instance": "checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));",
+  "full_start_open": "wire jp_start_open=!ap_valid&&!ap_owned&&!cp_valid&&!qc_cp_valid&&!as_cfg_valid&&f_sv==0&&!k_rec_valid&&!boot_pending;",
+  "release_ready_expression": "!rst&&owned&&retired&&route_retired&&!command_busy&&!command_valid&&!test_reset",
+  "finding": "The earlier frozen slice connects transaction start to lease.command_valid. The full query connects AP/CP/QC offers but omits publication start; jp_owned blocks only after acceptance. The full initialized run actually accepted both requests and lost the lease.",
+  "boolean_consequence": "In the slice, tx_start_valid implies command_valid, which forces release_ready=0. The same interlock is absent from the full query wiring.",
+  "classification": "Observed full RTL ownership-invariant violation; source evidence supports an integration interlock omission. Six reviewed contracts do not explicitly specify simultaneous idle start/release arbitration. This is not proof that every possible external caller contract permits overlap.",
+  "reviewed_contracts": {
+    "hardware/variants/checkpoint_stage_v1/CONTRACT.md": {
+      "sha256": "698f29773c0c75efe24eedb7e95b976b68739523a2f48daf0293455117a8c63f",
+      "relevant_lines": [
+        {
+          "line": 7,
+          "text": "barrier 在真实 checkpoint_lease_guard 持有期间记录基线，验证三方准备身份、上下文、退休状态及 manifest_ready。三个 publish_valid 在同一握手沿产生，authority 切换，coordinator 更新保存 checkpoint 并清 journal，config restore 更新保存 descriptor。下一拍验证活动元数据，再保持完成回复；消费完成之前不能释放 lease。任何基线漂移或发布后验证失败进入隔离，不能静默继续。"
+        }
+      ]
+    },
+    "hardware/variants/checkpoint_system_v1/CONTRACT.md": {
+      "sha256": "a0d7046ee5083ed5fba265b9effeb721e87ad2bbaa2e4971064f13d71b596c6e",
+      "relevant_lines": [
+        {
+          "line": 5,
+          "text": "checkpoint lease 的获取条件沿用真实工作健康/退休状态；联合事务退休判断使用物理退休、route retired、authority 退休、path/query stream 退休，不能使用准备后有意关闭的 k_permit。事务拥有权保持到完成回复被消费；lease command_busy 包括事务、authority 配置与回复。事务开始不得与 path/query/authority 配置或 host/recovery offer 同拍争用。"
+        },
+        {
+          "line": 7,
+          "text": "prepare_allowed 仅控制新准备请求；publish_permit 使用持有中的 lease 与事务拥有权，不能绑定 prepare_allowed，否则 commit offer 会关闭准备许可并反过来关闭 publish_ready。完成回复保持期间不接受新准备；旧回复仍可退休。路径/查询 checkpoint 请求在元数据事务期间同时屏蔽 VALID 与 READY。"
+        },
+        {
+          "line": 11,
+          "text": "本轮全系统验证只准备 coordinator/config 两个候选并取消，不准备 authority，不执行共同发布。journal 来自真实查询工作写入、实际故障修复及重试后的六个资源；没有手工 journal stimulus。保持准备回复八周期，检查 lease 不能释放；路径/查询请求持续八周期不能受理；取消后保持完成回复八周期，检查 CP17/journal6/旧 generation 不变；消费完成后继续导出保存路径、查询、配置与 journal。"
+        },
+        {
+          "line": 13,
+          "text": "本变体尚不得视为已验证的完整运行中 checkpoint。共同发布的三方同拍行为此前只在元数据切片验证；完整层级中 authority 准备/成功提交及后续故障 warm 恢复仍待验证。target reset 后保存路径/查询/标签及序号下限的恢复联锁尚未实现。运行中工作 DDR 快照生产、通用多 net/overflow、时序和板卡收益也未完成。manifest_ready 仍为外部输入。"
+        }
+      ]
+    },
+    "hardware/variants/checkpoint_commit_v1/CONTRACT.md": {
+      "sha256": "2b9c2754d2253ac255b9f04dbee28e8dfeb07f6c33dbed3ed7d86f0514d29af6",
+      "relevant_lines": [
+        {
+          "line": 3,
+          "text": "本变体基于已审计 checkpoint_system_v4，在 query root 增加受原生 lease 约束的只读 authority 检查接口；其他生产 RTL 完全沿用。不改公共基线。run_checkpoint_commit.py 每次冻结源和测试、使用 Vivado/XSim 2022.2，分别执行 32 槽与单槽压力场景。"
+        },
+        {
+          "line": 5,
+          "text": "完整系统先完成真实 q1 工作写、owner B 错误、原生 coordinator 修复及 q1 重试，再通过原生 lease 完成已有元数据取消检查与路径/查询导出。此前各工作 AXI 流必须与已独立审计 bundle_capture_v3 的完整流前缀逐字节一致。"
+        },
+        {
+          "line": 9,
+          "text": "同一真实 lease 内准备 authority、coordinator checkpoint、当前有效配置。保持候选 authority 回复八周期时仍绑定旧身份，且不能发布或释放 lease；coordinator/config 回复同样保持八周期。共同发布必须恰好出现一次 3'b111 握手：G1/CP17/journal6 → G2/CP18/journal0。完成回复保持八周期，消费后才允许释放 lease。上下文 version4/query2/price4 不变，未改变价格，因此本轮不涉及跨价格距离标签复用。"
+        },
+        {
+          "line": 11,
+          "text": "发布后原 G1 查询镜像导入应被原生控制器拒绝；导出的 G2 40B 查询镜像须与 bundle/query.bin 一致，序号下限仍为1，新镜像完整导入后才能释放 lease。随后通过现有 CPU 独立 oracle 继续 q2：43 poll、42 expand、176 candidate、122 cost。原生保存路径参与共享引用及两次拆线，两个共享节点的 ref1→2→1→0，资源占用按不同 net 计数；42 次 owner probe 校验。完整八路 AXI 与最终 DDR 由独立字节重放校验，最终 owner 仅目标路径并集清零，原其他 net 状态保留。"
+        },
+        {
+          "line": 13,
+          "text": "候选配置仅检查布局，不读取 DDR。发布完成消费后、lease 释放前，通过新增 ap_* 公开只读接口对原生 reader 发起一个旧 generation 请求（拒绝，无 DDR 读）及七个新槽 GET（六个目标资源及 node0/net4754）。每个成功 GET 从新窗口实际读取 allocator 和 primary 行，共14 beat，回复保持八周期仍禁止释放 lease。所有新请求和回复经同一原生 reader/AXI；不使用 force 或层次写。正常 q2 仍访问工作 owner。换代后故障恢复尚待做。"
+        },
+        {
+          "line": 15,
+          "text": "ap 请求只在持有 lease、无元数据事务/恢复/配置争用且没有先前 ap 回复拥有权时受理。已受理请求保存回复拥有权，消费前阻止 lease 释放和元数据事务开始；只将回复 VALID/READY 分流，原生 payload/status 保持。错误身份回复报告活动绑定的 generation2，不回显请求中的旧 generation1。"
+        }
+      ]
+    },
+    "hardware/variants/route_checkpoint_join_v1/CONTRACT.md": {
+      "sha256": "898870c86d12b9459fd6941eeff16607325385de68d751efe61736d64dff8869",
+      "relevant_lines": [
+        {
+          "line": 3,
+          "text": "隔离变体从 `results/recovery_retry_normal_v1/sources` 派生五个现有组件，并新增 `checkpoint_lease_guard`。路径核心复用已验证的逐对扫描版（`route_checkpoint_unit_v8`）；117个继承RTL/dat保持。原基线入口不变。"
+        },
+        {
+          "line": 5,
+          "text": "新增公共端口分为lease（pc_acquire_valid/ready、pc_owned、pc_release_valid/ready）、路径命令（cp_valid/restore/ready及design/node/net/CRC描述）、32位输入/输出流和完成状态。完整路径格式仍为两个slot共78字/312字节，little-endian CRC32。输出pc_route_retired表示route adapter没有held、owner buffer或核心/回复占用，故障锁存本身不表示在途事务。"
+        },
+        {
+          "line": 7,
+          "text": "取得lease需要配置已激活、工作允许、查询/搜索/路由/恢复均已退休、fence IDLE、物理AXI全排空、内部后台空闲、没有错误及没有已暴露的普通host/query/route/recovery请求。取得前普通业务按原流程进行；调用方须停止发出新普通请求，持续供给普通回复ready，不能靠撤回已发VALID取得lease。已运行查询完成后才可接受等待的lease。"
+        },
+        {
+          "line": 9,
+          "text": "持有期间，最外层query wrapper封锁16个host lane、query命令、route命令和recovery命令；内部CPP命令和流仍可运行。硬件根据实际退休信号产生cp_safe，不再由测试台直接承诺安全。路径命令、流或完成回复尚未退休时不允许释放lease。CPP命令出错后，若物理/逻辑、route及CPP上下文全部退休，允许在普通错误锁存保留时释放lease，交还原有恢复入口；不要求先清除错误。lease单元以受控谓词验证这条错误退出路径，尚未在真实AXI checkpoint持有期注入故障验证完整接管。当前旧恢复authority仍只有q1六行，包含q2新增资源的失败不能据此保证恢复成功。"
+        },
+        {
+          "line": 11,
+          "text": "cp_test_reset是ENABLE_TEST_INJECTION=1时使用的诊断端口，只在lease持有、CPP命令和route上下文空闲时，经寄存器复位路径核心；不复位owner/标签/配置/journal/query控制器。CPP命令输入与注册reset互锁。默认综合参数0关闭诊断复位。测试用它模拟保存路径丢失，不能解释为完整系统reset恢复。"
+        },
+        {
+          "line": 13,
+          "text": "真实试验：q1和q2均由硬件完成prepare/search/commit/目标清理。q2运行期间提出lease请求并保持到取得。RTL从实际保存路径导出图像到测试台外部缓冲；复位路径核心后，先拒绝CRC损坏导入，再导入原RTL图像并重新导出核对，最后释放lease并执行两条路径的实际AXI ripup。两个共享资源refs 2→1→0，四阶段完整owner图像与CPU一致。数据流不是由CPU路径oracle填充，CPU只用于独立核验。"
+        },
+        {
+          "line": 26,
+          "text": "- `python3 scripts/run_checkpoint_lease_guard.py NEW_RESULT`"
+        },
+        {
+          "line": 27,
+          "text": "- `python3 scripts/audit_checkpoint_lease_guard.py RESULT`"
+        }
+      ]
+    },
+    "hardware/variants/query_checkpoint_join_v1/CONTRACT.md": {
+      "sha256": "40234a894e7e9f72849e20e93b7c594dc3ecf9d11611b6a907dc8503ba32de9e",
+      "relevant_lines": [
+        {
+          "line": 5,
+          "text": "qc_cp仅在pc_owned持有既有系统checkpoint lease时接受，cp_safe来自该lease真实健康/排空条件。pc_quiet允许独占的qc_cp_busy，不把checkpoint自身busy误认成外部未退休；lease release仍要求完整退休。path cp与query cp互斥，query命令优先；ready与实际valid门控一致，不能只门控valid而让外部误判握手。"
+        },
+        {
+          "line": 7,
+          "text": "生产逻辑在接受任意query restore命令时设置qc_restore_pending。CRC、generation等错误后保持；只在成功导入的完成回复被消费时清除。guard.command_busy包含pending和qc_cp_busy，所以部分导入、错误回复、成功但尚未消费的回复都不能释放lease。普通query admission也明确要求!pending。不能通过导出图像或放弃失败导入解除pending；调用方须重放完整正确图像。"
+        },
+        {
+          "line": 9,
+          "text": "ENABLE_TEST_INJECTION默认0。诊断qc_cp_test_reset仅在已有lease、健康、query/path全空闲且没有命令时注册置位，仅复位query controller，设置pending；无force。不改变path slots、owner、labels、design backing、journal、配置或authority绑定。它是局部状态丢失测试，不是冷启动。"
+        },
+        {
+          "line": 15,
+          "text": "冷启动没有被本接口自动封锁：k_cold_rst清query ledger、pending和lease。尚需外层持久化boot描述，在全部owner/path/labels/目录/design/history/price/config/journal/query ledger及恢复下限恢复前关闭业务。不得把测试的局部pending门控说成全系统启动门控。当前query上下文相等校验也不是持久化attempt_version/query下限。未知页、warm非零owner冷恢复、snapshot轮换、frontier/旧prev、实际价格/回绕/容量、耐掉电/认证和板卡仍缺。"
+        }
+      ]
+    },
+    "hardware/variants/stage_static_cp_system_sources_v1/CONTRACT.md": {
+      "sha256": "20e6b46c0b0128105bf7a4041ac6f2ee444492f914330d37318f24acaa37dc8a",
+      "relevant_lines": []
+    }
+  },
+  "next_verification": "Evaluate an isolated start-to-command_valid interlock candidate with held VALID, response backpressure, cancellation, release-only and simultaneous-start tests before choosing a production repair. Preserve original failing full probe.",
+  "production_rtl_changed": false,
+  "file_sha256": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_joint_20261026.json": "0a03681a73f2383c815c4e3063cbc0257ea649153534b2673062cd94d911f958",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_joint_sources_20261026/manifest.json": "ccfee87f268ff4ec90a21030c98a438bc4a64f54c62a19378b2dec54f33885dc",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_joint_sources_20261026/hardware/variants/checkpoint_stage_v1/tb_joint.sv": "455ab6b9694d84daa82b8d3362b212b148d6194e02d053fd24446c7af6dd0ed1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_joint_sources_20261026/hardware/variants/checkpoint_stage_v1/build_tb.py": "63397089562431fa15d7ee2490705eb49f4c68b1a198bede081bb09bfa5ab27a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_joint_sources_20261026/hardware/variants/checkpoint_stage_v1/CONTRACT.md": "698f29773c0c75efe24eedb7e95b976b68739523a2f48daf0293455117a8c63f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/checkpoint_stage_v1/CONTRACT.md": "698f29773c0c75efe24eedb7e95b976b68739523a2f48daf0293455117a8c63f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/checkpoint_system_v1/CONTRACT.md": "a0d7046ee5083ed5fba265b9effeb721e87ad2bbaa2e4971064f13d71b596c6e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/checkpoint_commit_v1/CONTRACT.md": "2b9c2754d2253ac255b9f04dbee28e8dfeb07f6c33dbed3ed7d86f0514d29af6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_checkpoint_join_v1/CONTRACT.md": "898870c86d12b9459fd6941eeff16607325385de68d751efe61736d64dff8869",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/query_checkpoint_join_v1/CONTRACT.md": "40234a894e7e9f72849e20e93b7c594dc3ecf9d11611b6a907dc8503ba32de9e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_system_sources_v1/CONTRACT.md": "20e6b46c0b0128105bf7a4041ac6f2ee444492f914330d37318f24acaa37dc8a",
+    "/tmp/B_state_residency_recovery_20261102/ka_publication_release_full_rtl_v5/sources/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "/tmp/B_state_residency_recovery_20261102/ka_publication_release_full_rtl_v5/sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "/tmp/B_state_residency_recovery_20261102/ka_publication_release_full_rtl_v5/sources/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "/tmp/B_state_residency_recovery_20261102/ka_publication_release_full_rtl_v5/preparation.json": "309ba0f11dbb1dda223d751638b1ac35b69f23e38084ca3b5e1d9cee88375b58",
+    "/tmp/B_state_residency_recovery_20261102/ka_publication_release_full_rtl_v5/manifest.json": "c4a2e8ba2f04ad58f226e371bdf29e699b6906fcb6d0f1c77783afc1a92807d6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_publication_release_full_rtl_v5_counterexample_review_20261102.json": "db7bb5e11c9583541dc8f4683debbc55eaf2b60067eff5d9b9bedef8d2a38e4e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/research_checks/review_publication_release_contract_lineage_v1.py": "ddd873282fd4ee2b57d3e34d01a4a5a84452045f03153a7d8d6ec3007da4ee56"
+  },
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

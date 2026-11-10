@@ -1,0 +1,44 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 10:02:10 2026
+# Process ID: 2282477
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023
+# Command line: vivado -mode batch -source checkpoint_report.tcl -log checkpoint_report.log -journal checkpoint_report.jou
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/checkpoint_report.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/checkpoint_report.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2700.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source checkpoint_report.tcl
+# set_param general.maxThreads 2
+# open_checkpoint ./project/b_page_controller.runs/synth_1/scratch_page_controller.dcp
+Command: open_checkpoint ./project/b_page_controller.runs/synth_1/scratch_page_controller.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1684.434 ; gain = 0.000 ; free physical = 660294 ; free virtual = 1376816
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3047.113 ; gain = 0.000 ; free physical = 658853 ; free virtual = 1375375
+INFO: [Netlist 29-17] Analyzing 36 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3169.770 ; gain = 0.000 ; free physical = 658665 ; free virtual = 1375187
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 0341533f
+----- Checksum: PlaceDB: 00000000 ShapeSum: 0341533f RouteDB: 00000000 
+open_checkpoint: Time (s): cpu = 00:00:14 ; elapsed = 00:00:16 . Memory (MB): peak = 3169.770 ; gain = 1485.336 ; free physical = 658664 ; free virtual = 1375186
+# report_utilization -file utilization.rpt
+# set b_rams [get_cells -hier -filter {REF_NAME =~ RAMB*}]
+# set b_file [open ram_cells.txt w]
+# foreach b_cell $b_rams {puts $b_file "$b_cell [get_property REF_NAME $b_cell]"}
+# close $b_file
+# if {[llength $b_rams] != 2} {error "Expected exactly two block RAM primitives"}
+# puts "B_CONTROLLER_REPORT_PASS ram_cells=[llength $b_rams]"
+B_CONTROLLER_REPORT_PASS ram_cells=2
+# exit
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 23 10:02:32 2026...

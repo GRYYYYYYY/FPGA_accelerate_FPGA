@@ -1,0 +1,49 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Sat Oct 24 19:43:00 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_service_synthesis_20261024/utilization_hierarchical.rpt
+| Design       : frontier_service
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-------------------------------------------------------------------------+-------------------------------------------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+|                                 Instance                                |                                  Module                                 | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | URAM | DSP Blocks |
++-------------------------------------------------------------------------+-------------------------------------------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+| frontier_service                                                        |                                                                   (top) |       3760 |       3760 |       0 |    0 | 2297 |    116 |      0 |    0 |          0 |
+|   (frontier_service)                                                    |                                                                   (top) |        110 |        110 |       0 |    0 |  290 |      0 |      0 |    0 |          0 |
+|   collector                                                             |                                                       frontier_hls_call |        237 |        237 |       0 |    0 |  213 |      0 |      0 |    0 |          0 |
+|   heap                                                                  |                                                           frontier_step |       3413 |       3413 |       0 |    0 | 1794 |    116 |      0 |    0 |          0 |
+|     commands_U                                                          |                                             frontier_step_fifo_w96_d2_S |        142 |        142 |       0 |    0 |  196 |      0 |      0 |    0 |          0 |
+|       (commands_U)                                                      |                                             frontier_step_fifo_w96_d2_S |          6 |          6 |       0 |    0 |    4 |      0 |      0 |    0 |          0 |
+|       U_frontier_step_fifo_w96_d2_S_ShiftReg                            |                                    frontier_step_fifo_w96_d2_S_ShiftReg |        136 |        136 |       0 |    0 |  192 |      0 |      0 |    0 |          0 |
+|     p_anonymous_namespace_compute_U0                                    |                             frontier_step_p_anonymous_namespace_compute |       3149 |       3149 |       0 |    0 | 1291 |    116 |      0 |    0 |          0 |
+|       (p_anonymous_namespace_compute_U0)                                |                             frontier_step_p_anonymous_namespace_compute |         25 |         25 |       0 |    0 |  250 |      0 |      0 |    0 |          0 |
+|       grp_p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1_fu_216 |    frontier_step_p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1 |        616 |        616 |       0 |    0 |  237 |      0 |      0 |    0 |          0 |
+|       grp_poll_fu_204                                                   |                                                      frontier_step_poll |       2058 |       2058 |       0 |    0 |  798 |      0 |      0 |    0 |          0 |
+|         (grp_poll_fu_204)                                               |                                                      frontier_step_poll |        317 |        317 |       0 |    0 |  316 |      0 |      0 |    0 |          0 |
+|         grp_poll_Pipeline_VITIS_LOOP_38_1_fu_150                        |                             frontier_step_poll_Pipeline_VITIS_LOOP_38_1 |       1741 |       1741 |       0 |    0 |  482 |      0 |      0 |    0 |          0 |
+|       heap_id_U                                                         |       frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W |         37 |         37 |       0 |    0 |    2 |     58 |      0 |    0 |          0 |
+|       heap_key_bits_U                                                   | frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W |        413 |        413 |       0 |    0 |    4 |     58 |      0 |    0 |          0 |
+|     p_anonymous_namespace_load_input_U0                                 |                          frontier_step_p_anonymous_namespace_load_input |          0 |          0 |       0 |    0 |    1 |      0 |      0 |    0 |          0 |
+|     p_anonymous_namespace_store_output_U0                               |                        frontier_step_p_anonymous_namespace_store_output |          0 |          0 |       0 |    0 |   98 |      0 |      0 |    0 |          0 |
+|     responses_U                                                         |                                            frontier_step_fifo_w128_d2_S |        106 |        106 |       0 |    0 |  200 |      0 |      0 |    0 |          0 |
+|       (responses_U)                                                     |                                            frontier_step_fifo_w128_d2_S |          7 |          7 |       0 |    0 |    4 |      0 |      0 |    0 |          0 |
+|       U_frontier_step_fifo_w128_d2_S_ShiftReg                           |                                   frontier_step_fifo_w128_d2_S_ShiftReg |         99 |         99 |       0 |    0 |  196 |      0 |      0 |    0 |          0 |
+|     start_for_p_anonymous_namespace_compute_U0_U                        |                frontier_step_start_for_p_anonymous_namespace_compute_U0 |          8 |          8 |       0 |    0 |    4 |      0 |      0 |    0 |          0 |
+|     start_for_p_anonymous_namespace_store_output_U0_U                   |           frontier_step_start_for_p_anonymous_namespace_store_output_U0 |          8 |          8 |       0 |    0 |    4 |      0 |      0 |    0 |          0 |
++-------------------------------------------------------------------------+-------------------------------------------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+
+

@@ -1,0 +1,9 @@
+# 完整槽号观察修正
+
+本候选继承third_warm_v1的G3恢复契约与全部生产RTL，只修正TB两行：actual_route_slot从payload[1]改为[2:1]，旧saved1/saved2观察数组只采集slot0/slot1，不让slot2追加到旧数组。没有DUT force/deposit或响应替换。最终行为结论必须来自完整运行和独立审计，不从代码改动推断。
+
+v1中slot2的RO/RB/RL/RA/RC日志显示0；这些字段不能作为完整slot证据。v2要求同一命令的实际slot2日志、三个journal键、两轮G3 authority、1次真实INC、原生781条恢复写入/回读、117字path/10字query回执与seq180329重试同时通过。v1与v2另做严格等价比较：所有12AXI/最终图像/事件周期一致，仅允许五类日志中的槽号最低位与完整值之差。该差异是TB观察问题，不是生产RTL修复。
+
+独立审计脚本为scripts/audit_third_warm_system.py及audit_third_warm_records.py；开发v1仅在v2通过后由audit_third_warm_observer_legacy.py核对。输入和完整三槽正常执行依赖results/path_capacity_sources_20261027及其归档。
+
+归档可复现性补充：旧audit_third_warm_observer_legacy.py按Path.iterdir返回顺序写identical_files，实际解包后字典键顺序变化，造成字节重审失败；其解析内容及全部数据哈希一致。保留原失败记录与归档，独立audit_third_warm_observer_stable.py使用排序遍历及sort_keys，并在稳定对照包中记录repackaged_from/原manifest哈希。修正版完整系统审计原本即重审字节一致；此包装问题不改变仿真或生产RTL结论。

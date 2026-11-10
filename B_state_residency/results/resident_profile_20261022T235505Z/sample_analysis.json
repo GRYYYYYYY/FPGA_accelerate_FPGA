@@ -1,0 +1,703 @@
+{
+  "scope": "Completed sampled cases only; exclusive sampled source/stack context, not isolated memory latency. Periodic sampling and DWARF/unwind bias apply; zeros do not prove absence.",
+  "source_sha256": "46da86c4bdb0f1b0ce2ad6073edfa441a2cc187fc0b30a185ce5cb7c4efb1522",
+  "binary_sha256": "10249348bb8069e134b3270f4127a172d877f58292d212d99c4f241461741d6b",
+  "runs": {
+    "vtr_mcml_c4096_sample1009": {
+      "samples": 44136,
+      "pcs_sha256": "60b46c5ce170f30708b205c744a9ea173103e8bd1198b07e2085765ecdfd7c27",
+      "counts": {
+        "other_or_unresolved": 15273,
+        "bbox": 737,
+        "adjacency": 3093,
+        "query_reset": 1304,
+        "lru_pin_dirty": 2944,
+        "label_source_expression": 444,
+        "label_prefetch": 2752,
+        "same_net_owner_lookup": 3193,
+        "priority_queue": 3656,
+        "page_acquire_other": 1731,
+        "zero_page_lookup": 1766,
+        "zero_fill_context": 1959,
+        "victim_selection": 186,
+        "label_interface_wrapper": 3589,
+        "lease_release_or_wrapper": 939,
+        "route_state_updates": 196,
+        "backing_lookup": 176,
+        "writeback_context": 195,
+        "refill_context": 3
+      },
+      "percent": {
+        "other_or_unresolved": 34.60440456769984,
+        "bbox": 1.6698386804422694,
+        "adjacency": 7.007884719956498,
+        "query_reset": 2.954504259561356,
+        "lru_pin_dirty": 6.6702918252673555,
+        "label_source_expression": 1.0059815116911366,
+        "label_prefetch": 6.235272793184702,
+        "same_net_owner_lookup": 7.234457132499547,
+        "priority_queue": 8.283487402573863,
+        "page_acquire_other": 3.921968461120174,
+        "zero_page_lookup": 4.001268805510241,
+        "zero_fill_context": 4.438553561718325,
+        "victim_selection": 0.4214246873300707,
+        "label_interface_wrapper": 8.13168388617002,
+        "lease_release_or_wrapper": 2.1275149537792277,
+        "route_state_updates": 0.44408192858437556,
+        "backing_lookup": 0.3987674460757658,
+        "writeback_context": 0.4418162044589451,
+        "refill_context": 0.006797172376291463
+      },
+      "top_sites": [
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1527",
+          "samples": 3480
+        },
+        {
+          "function": "Router::countUserHot(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:823",
+          "samples": 2662
+        },
+        {
+          "function": "Router::getChildren(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1188",
+          "samples": 2392
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1531",
+          "samples": 2274
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:582",
+          "samples": 1931
+        },
+        {
+          "function": "Router::searchEndY(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:842",
+          "samples": 1860
+        },
+        {
+          "function": "Router::TLD(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:692",
+          "samples": 1761
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:595",
+          "samples": 1682
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:482",
+          "samples": 1634
+        },
+        {
+          "function": "Router::SparseLabels::prefetch(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:609",
+          "samples": 1568
+        },
+        {
+          "function": "Router::SparseLabels::readIsZero(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:556",
+          "samples": 1196
+        },
+        {
+          "function": "Router::TLRead(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:647",
+          "samples": 980
+        },
+        {
+          "function": "Router::routeIndirectConnection(int, long long)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1772",
+          "samples": 915
+        },
+        {
+          "function": "Router::SparseLabels::reset()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:550",
+          "samples": 874
+        },
+        {
+          "function": "??",
+          "location": "??:0",
+          "samples": 867
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:594",
+          "samples": 849
+        },
+        {
+          "function": "Router::SparseLabels::prefetch(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:608",
+          "samples": 812
+        },
+        {
+          "function": "Router::SparseLabels::release(unsigned long)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:602",
+          "samples": 809
+        },
+        {
+          "function": "Router::getNodeCostSearch(int, Router::Connection const&, int, float) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:875",
+          "samples": 656
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:560",
+          "samples": 569
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:483",
+          "samples": 566
+        },
+        {
+          "function": "Router::DaryPQ::offer(float, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:471",
+          "samples": 510
+        },
+        {
+          "function": "Router::SparseLabels::readIsZero(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:554",
+          "samples": 450
+        },
+        {
+          "function": "Router::TLRead(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:648",
+          "samples": 413
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:600",
+          "samples": 389
+        },
+        {
+          "function": "Router::tightenBoundingBoxesCoarse()::{lambda(int)#4}::operator()(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:3758",
+          "samples": 372
+        },
+        {
+          "function": "Router::SparseLabels::prefetch(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:606",
+          "samples": 348
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:564",
+          "samples": 315
+        },
+        {
+          "function": "Router::SparseLabels::reset()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:546",
+          "samples": 306
+        },
+        {
+          "function": "Router::getNodeCostSearch(int, Router::Connection const&, int, float) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:876",
+          "samples": 292
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:561 (discriminator 2)",
+          "samples": 292
+        },
+        {
+          "function": "Router::countUserHot(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:824",
+          "samples": 270
+        },
+        {
+          "function": "Router::graphIsAccessible(int, int, Router::Connection const&)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1263",
+          "samples": 269
+        },
+        {
+          "function": "Router::TLD(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:693",
+          "samples": 251
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1530",
+          "samples": 250
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:598",
+          "samples": 229
+        },
+        {
+          "function": "Router::getNodeCostSearch(int, Router::Connection const&, int, float) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:877",
+          "samples": 215
+        },
+        {
+          "function": "Router::shouldRoute(Router::Connection const&) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1834",
+          "samples": 203
+        },
+        {
+          "function": "Router::getEndTileYCoordinate(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1139",
+          "samples": 194
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:574",
+          "samples": 194
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:596",
+          "samples": 184
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:479",
+          "samples": 179
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:580",
+          "samples": 176
+        },
+        {
+          "function": "Router::getEndTileYCoordinate(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1134",
+          "samples": 169
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1560",
+          "samples": 161
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:481",
+          "samples": 161
+        },
+        {
+          "function": "Router::searchInBB(int, Router::Connection const&) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:852",
+          "samples": 155
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1528 (discriminator 2)",
+          "samples": 155
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1534",
+          "samples": 152
+        },
+        {
+          "function": "Router::tightenBoundingBoxesCoarse()::{lambda(int)#4}::operator()(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:3773",
+          "samples": 151
+        },
+        {
+          "function": "Router::isPartOfExistingRoute(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1153",
+          "samples": 148
+        },
+        {
+          "function": "Router::getNode(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:960",
+          "samples": 137
+        },
+        {
+          "function": "Router::nodeLaguna(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:831",
+          "samples": 136
+        },
+        {
+          "function": "Router::graphIsAccessible(int, int, Router::Connection const&)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1339",
+          "samples": 132
+        },
+        {
+          "function": "Router::searchType(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:828",
+          "samples": 132
+        },
+        {
+          "function": "Router::evaluateCostAndPush(Router::State&, int, int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1463",
+          "samples": 130
+        },
+        {
+          "function": "Router::DaryPQ::offer(float, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:470",
+          "samples": 127
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1529 (discriminator 1)",
+          "samples": 126
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:567",
+          "samples": 118
+        },
+        {
+          "function": "Router::SparseLabels::reset()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:545",
+          "samples": 114
+        }
+      ]
+    },
+    "logicnets_jscl_c256_sample1009": {
+      "samples": 11107,
+      "pcs_sha256": "2550a68c128166da86435ead94ffdc3d75f48d602c5068b2376045cff6e1c669",
+      "counts": {
+        "other_or_unresolved": 3601,
+        "bbox": 1115,
+        "same_net_owner_lookup": 651,
+        "page_acquire_other": 537,
+        "zero_page_lookup": 517,
+        "adjacency": 762,
+        "priority_queue": 707,
+        "lru_pin_dirty": 684,
+        "label_prefetch": 357,
+        "label_source_expression": 146,
+        "zero_fill_context": 817,
+        "label_interface_wrapper": 760,
+        "lease_release_or_wrapper": 158,
+        "query_reset": 47,
+        "backing_lookup": 48,
+        "victim_selection": 49,
+        "route_state_updates": 101,
+        "writeback_context": 49,
+        "refill_context": 1
+      },
+      "percent": {
+        "other_or_unresolved": 32.420995768434324,
+        "bbox": 10.03871432429999,
+        "same_net_owner_lookup": 5.861168632393985,
+        "page_acquire_other": 4.834788871882597,
+        "zero_page_lookup": 4.654722247231476,
+        "adjacency": 6.860538399207707,
+        "priority_queue": 6.365355181417124,
+        "lru_pin_dirty": 6.158278563068335,
+        "label_prefetch": 3.214189250022508,
+        "label_source_expression": 1.3144863599531826,
+        "zero_fill_context": 7.35572161699829,
+        "label_interface_wrapper": 6.842531736742595,
+        "lease_release_or_wrapper": 1.4225263347438553,
+        "query_reset": 0.4231565679301342,
+        "backing_lookup": 0.4321598991626902,
+        "victim_selection": 0.44116323039524624,
+        "route_state_updates": 0.9093364544881606,
+        "writeback_context": 0.44116323039524624,
+        "refill_context": 0.009003331232556045
+      },
+      "top_sites": [
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:582",
+          "samples": 801
+        },
+        {
+          "function": "Router::tightenBoundingBoxesCoarse()::{lambda(int)#4}::operator()(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:3758",
+          "samples": 559
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1527",
+          "samples": 514
+        },
+        {
+          "function": "Router::countUserHot(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:823",
+          "samples": 505
+        },
+        {
+          "function": "Router::searchEndY(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:842",
+          "samples": 418
+        },
+        {
+          "function": "Router::getChildren(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1188",
+          "samples": 385
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1531",
+          "samples": 384
+        },
+        {
+          "function": "Router::SparseLabels::readIsZero(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:556",
+          "samples": 368
+        },
+        {
+          "function": "Router::TLRead(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:647",
+          "samples": 305
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:595",
+          "samples": 298
+        },
+        {
+          "function": "??",
+          "location": "??:0",
+          "samples": 289
+        },
+        {
+          "function": "Router::tightenBoundingBoxesCoarse()::{lambda(int)#4}::operator()(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:3773",
+          "samples": 282
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:482",
+          "samples": 278
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:594",
+          "samples": 261
+        },
+        {
+          "function": "Router::getNodeCostSearch(int, Router::Connection const&, int, float) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:875",
+          "samples": 212
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:560",
+          "samples": 189
+        },
+        {
+          "function": "Router::TLD(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:692",
+          "samples": 187
+        },
+        {
+          "function": "Router::SparseLabels::prefetch(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:608",
+          "samples": 153
+        },
+        {
+          "function": "Router::DaryPQ::offer(float, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:471",
+          "samples": 144
+        },
+        {
+          "function": "Router::SparseLabels::prefetch(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:609",
+          "samples": 140
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:483",
+          "samples": 110
+        },
+        {
+          "function": "Router::routeIndirectConnection(int, long long)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1772",
+          "samples": 110
+        },
+        {
+          "function": "Router::SparseLabels::release(unsigned long)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:602",
+          "samples": 109
+        },
+        {
+          "function": "Router::SparseLabels::readIsZero(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:554",
+          "samples": 107
+        },
+        {
+          "function": "Router::getNodeCostSearch(int, Router::Connection const&, int, float) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:876",
+          "samples": 106
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:600",
+          "samples": 103
+        },
+        {
+          "function": "Router::getNodeCostSearch(int, Router::Connection const&, int, float) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:877",
+          "samples": 103
+        },
+        {
+          "function": "Router::TLRead(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:648",
+          "samples": 103
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:564",
+          "samples": 100
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:561 (discriminator 2)",
+          "samples": 85
+        },
+        {
+          "function": "Router::routeIndirectConnection(int, long long)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1679",
+          "samples": 85
+        },
+        {
+          "function": "Router::getNode(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:960",
+          "samples": 82
+        },
+        {
+          "function": "Router::getEndTileYCoordinate(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1139",
+          "samples": 81
+        },
+        {
+          "function": "Router::isPartOfExistingRoute(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1153",
+          "samples": 80
+        },
+        {
+          "function": "Router::TLD(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:693",
+          "samples": 79
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:598",
+          "samples": 71
+        },
+        {
+          "function": "Router::graphIsAccessible(int, int, Router::Connection const&)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1263",
+          "samples": 70
+        },
+        {
+          "function": "Router::countUserHot(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:824",
+          "samples": 67
+        },
+        {
+          "function": "Router::SparseLabels::prefetch(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:606",
+          "samples": 60
+        },
+        {
+          "function": "Router::tightenBoundingBoxesCoarse()::{lambda(int)#4}::operator()(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:3770",
+          "samples": 56
+        },
+        {
+          "function": "Router::searchInBB(int, Router::Connection const&) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:852",
+          "samples": 56
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:596",
+          "samples": 54
+        },
+        {
+          "function": "Router::graphIsAccessible(int, int, Router::Connection const&)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1339",
+          "samples": 50
+        },
+        {
+          "function": "Router::getEndTileYCoordinate(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1134",
+          "samples": 50
+        },
+        {
+          "function": "Router::tightenBoundingBoxesCoarse()::{lambda(int)#4}::operator()(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:3765",
+          "samples": 49
+        },
+        {
+          "function": "Router::isPartOfExistingRoute(int, int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1157",
+          "samples": 49
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:574",
+          "samples": 49
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:580",
+          "samples": 48
+        },
+        {
+          "function": "Router::shouldRoute(Router::Connection const&) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1834",
+          "samples": 47
+        },
+        {
+          "function": "Router::evaluateCostAndPush(Router::State&, int, int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1463",
+          "samples": 46
+        },
+        {
+          "function": "Router::searchType(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:828",
+          "samples": 45
+        },
+        {
+          "function": "Router::isExcluded(int, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1165",
+          "samples": 39
+        },
+        {
+          "function": "Router::SparseLabels::acquire(int, bool)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:567",
+          "samples": 39
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1560",
+          "samples": 38
+        },
+        {
+          "function": "Router::exploreAndExpand(Router::State&, int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:1530",
+          "samples": 37
+        },
+        {
+          "function": "Router::nodeLaguna(int) const",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:831",
+          "samples": 37
+        },
+        {
+          "function": "Router::TLD(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:691",
+          "samples": 36
+        },
+        {
+          "function": "Router::SparseLabels::readIsZero(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:555",
+          "samples": 34
+        },
+        {
+          "function": "Router::TLRead(int)",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:641",
+          "samples": 32
+        },
+        {
+          "function": "Router::DaryPQ::poll()",
+          "location": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_profile_v1/router.cpp:479",
+          "samples": 32
+        }
+      ]
+    }
+  }
+}

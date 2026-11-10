@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "project_id": "D",
+  "title": "事件驱动搜索数据流",
+  "research_question": "可变出度搜索的队列、访存和更新依赖如何组织，才能提高有效搜索吞吐而不显著增加无效扩展？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "在含并行边、不同出度的有向非负图上运行 Dijkstra，保留边 ID 回溯并验证已知最短代价。"
+    },
+    {
+      "id": "cpu_existing_search",
+      "status": "planned",
+      "description": "现有优化 CPU 搜索"
+    },
+    {
+      "id": "gpu_existing_search",
+      "status": "planned",
+      "description": "现有 GPU 搜索"
+    },
+    {
+      "id": "fpga_exact_queue",
+      "status": "planned",
+      "description": "硬件精确队列"
+    },
+    {
+      "id": "fpga_bucket_queue",
+      "status": "planned",
+      "description": "硬件分桶队列"
+    },
+    {
+      "id": "fpga_batched_frontier",
+      "status": "planned",
+      "description": "有限批量扩展"
+    },
+    {
+      "id": "fpga_multicontext",
+      "status": "planned",
+      "description": "多连接上下文"
+    }
+  ],
+  "controlled_factors": [
+    "队列组织",
+    "并行扩展宽度与上下文数",
+    "更新合并开/关",
+    "内存通道映射"
+  ],
+  "metrics": [
+    {
+      "name": "expanded_nodes",
+      "unit": "count"
+    },
+    {
+      "name": "successful_relaxations",
+      "unit": "count"
+    },
+    {
+      "name": "queue_operations",
+      "unit": "count"
+    },
+    {
+      "name": "update_conflicts",
+      "unit": "count"
+    },
+    {
+      "name": "search_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "routing_ms",
+      "unit": "ms"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": null,
+    "baseline_revision": null,
+    "timing_mode": null,
+    "quality_tolerance": null
+  },
+  "notes": "Only the synthetic reference is executable. Real variants need implementation and validation; null settings are unset, not measured zeros."
+}

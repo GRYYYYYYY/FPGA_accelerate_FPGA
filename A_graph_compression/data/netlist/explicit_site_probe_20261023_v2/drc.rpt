@@ -1,0 +1,55 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Fri Oct 23 06:17:30 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_drc -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/explicit_site_probe_20261023_v2/drc.rpt
+| Design       : routeracc_cost_registered
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Partially Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_explicit_site_probe_20261023_v2
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 3
++-----------+------------------+---------------------------------+------------+
+| Rule      | Severity         | Description                     | Violations |
++-----------+------------------+---------------------------------+------------+
+| PDIL-1    | Error            | Invalid Site Configuration      | 1          |
+| HDOOC-4   | Critical Warning | No Pblock range or LOC for cell | 1          |
+| RTSTAT-13 | Critical Warning | Insufficient Routing            | 1          |
++-----------+------------------+---------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+PDIL-1#1 Error
+Invalid Site Configuration  
+Invalid configuration for site SLICE_X22Y411. Reason: Cannot replace net cg_q[2] with net GLOBAL_LOGIC0 on bel pin G_O/G_O
+, Site pin to site pin route-thru requires conflicting attribute string values for element 'G6LUT in site 'SLICE_X22Y411'. Attribute 'EQN' is programmed to 'O6=A5' but needs a value of 'O6=1' for the route-thru.
+.
+Related violations: <none>
+
+HDOOC-4#1 Critical Warning
+No Pblock range or LOC for cell  
+Cell 'clock_buffer' has no placement constraints. Failure to control placement of logic with either a Pblock or a LOC constraint may result in placement conflicts if the out-of-context implementation results are reused in a top-level design.
+Related violations: <none>
+
+RTSTAT-13#1 Critical Warning
+Insufficient Routing  
+A signficant portion of the design is not routed. Routed nets status (RTSTAT-*) DRC checks will not be run.  For routing information, run report_route_status.  Please run implementation on your design.
+Related violations: <none>
+
+

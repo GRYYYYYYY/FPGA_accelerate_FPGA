@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "manifest_sha256": "17164dd246812ff861955fdea4d9d88289540b0e20557df0119115be272f0498",
+  "auditor_sha256": "80f12f2f5cb88200973e9baa7c4516b6e88cb4f1bc1f9ea6dd7b698d9e94a52f",
+  "coverage": {
+    "nodes": 9089009,
+    "edges": 40469536,
+    "sampled_nodes": 10163,
+    "degree_representatives": {
+      "0": 0,
+      "6": 9,
+      "4": 69,
+      "8": 208344,
+      "12": 382105,
+      "5": 411893,
+      "10": 557220,
+      "16": 834307,
+      "1": 957131,
+      "2": 1389027,
+      "3": 1438973,
+      "18": 2350346
+    },
+    "duplicate_parent": 834307,
+    "queries": 64806,
+    "axi_beats": 221602,
+    "meta": 10163,
+    "child": 44480,
+    "invalid_child_index": 10163,
+    "csr_page_boundaries": 8875
+  },
+  "cases": {
+    "pilot": {
+      "queries": 200,
+      "checks": 222,
+      "configurations": 28,
+      "faults": 19,
+      "AR": 415,
+      "R": 415,
+      "blocked": 74,
+      "cycles": 6140,
+      "audited_real_axi_beats": 377,
+      "trace_sha256": "49de62a85e0476fd46fa740883cf33ceb452fa7186842a358ea123113e7f7609"
+    },
+    "full": {
+      "queries": 64806,
+      "checks": 64828,
+      "configurations": 28,
+      "faults": 19,
+      "AR": 221640,
+      "R": 221640,
+      "blocked": 54973,
+      "cycles": 2678058,
+      "audited_real_axi_beats": 221602,
+      "trace_sha256": "9b0c55969edbf3fb6545d7701346a4317158fb720e86e49e2d91febadc6b0427"
+    }
+  },
+  "scope": "Actual RTL file-backed AXI read service; sampled requests from the complete real CSR/attribute images. No device upload, children-controller integration or board performance claim.",
+  "limitations": [
+    "Sampled RTL queries, not exhaustive hardware traversal of all graph nodes/edges.",
+    "Zero padding of partial final beats is the memory model contract.",
+    "No graph/build/pager system integration or platform/board validation."
+  ]
+}

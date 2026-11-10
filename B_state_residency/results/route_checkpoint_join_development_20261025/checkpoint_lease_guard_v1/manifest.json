@@ -1,0 +1,67 @@
+{
+  "status": "failed",
+  "sources": {
+    "checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "tb_checkpoint_lease_guard.sv": "fc56ec28c24e2fd1b3cb1f8068dba176f6f120c0fa0755bea4390dca2fd39f35",
+    "build.py": "d65cd29069b1ed9c11668706325890c3eb89364948160d97d669afc42e11b442",
+    "run_checkpoint_lease_guard.py": "f0b97bf3d7d7cec4e8b4113074b6408d2a6c477aa6c85eaba685b5dc32cff0bd"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/tmp/B_state_residency_offer_20261025/checkpoint_lease_guard_v1/sources/checkpoint_lease_guard.sv",
+        "/tmp/B_state_residency_offer_20261025/checkpoint_lease_guard_v1/sources/tb_checkpoint_lease_guard.sv"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.6168755758553743
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_checkpoint_lease_guard",
+        "-s",
+        "guard",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.9181247912347317
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "guard",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "events=/tmp/B_state_residency_offer_20261025/checkpoint_lease_guard_v1/events.txt"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.223189665004611
+    }
+  ],
+  "error": "AssertionError()",
+  "artifacts": {
+    "run.tcl": "686cda4779b7bda11d60bcd4bcd9c393c17cd11b47375c40da51ddf38b8de004",
+    "compile.stdout.log": "1d0f907df3d1d80a76b5d1c5bd3ff1ff2e1488e80d5545aa19f35d3ac0b4ff5f",
+    "xvlog.pb": "96f2156bbc2c8eb38f4e2581598b48994e350be5ad61cef419d990155ab78a0f",
+    "xvlog.log": "1d0f907df3d1d80a76b5d1c5bd3ff1ff2e1488e80d5545aa19f35d3ac0b4ff5f",
+    "elaborate.stdout.log": "44f3b621dcc0271a711dfb9a0dd00c13159cf2ec410cca63921fbff18053739f",
+    "xelab.pb": "f536a26e6791e825112a1aa11111f28ec84b8b16b1674d5fb97df3ade3ef7787",
+    "xelab.log": "44f3b621dcc0271a711dfb9a0dd00c13159cf2ec410cca63921fbff18053739f",
+    "simulate.stdout.log": "1920096404790e13442fd570f06e1c0546f229d9cd7e002afb94b7a1b11ff235",
+    "xsim.jou": "b0f18c48f221caf2c84b29d33feddeb90bb1d39e4bea44279fc4324b773d9f39",
+    "simulate.log": "a3e53fc14363a2e18576a5ddd3a03987a0c181f0ca81317a72fa084212144994",
+    "guard.wdb": "65b09ec070f2fc75e372a27fb8f75b7a01eaaefb0f2f7548604394442bb3c9a5",
+    "events.txt": "3b8372f1ce01e1ff7e2e48b55120603e23edb31d8d5d6d68847a242a64a7128e"
+  }
+}

@@ -1,0 +1,11 @@
+# Warm cache与owner overflow真实状态codec
+
+两组真实logicnets准备态已导出并独立逐节点解码通过，每组9089009行。query2恢复72个缓存parent；iteration2恢复1647675个缓存parent，其中1878个已发布空缓存，以及53734条owner overflow记录。所有child顺序、owner/net引用、不同net占用、旧标签、history、价格逐项对应CPU快照。
+
+C++既有owner_store布局模型从真实图像读取全部9089009 primary及53734 overflow GET通过。实际多owner节点208292经primary删除→pool提升→free-list复用重新添加两次提交，occupancy与引用保持正确。该定向操作不代表全部提交组合或RTL已测。
+
+源码 scripts/encode_warm_state.py、audit_warm_state.py、audit_warm_owner_model.py；契约 adapters/warm_state_v1/CONTRACT.md；冻结代码warm_state_sources_20261025。
+
+这里只扩展持久状态子集：State/geometry/net成本表尚未扩展；完整旧visited保留而未转换硬件epoch；native160是导入格式而非分页后备。prune关闭、不支持mutable type变化、CSR度数>32拒绝。重复child取最早匹配位置，只保证有序child序列，不保证快照未记录的位置身份。owner pool容量恰等已有条目，新增引用需容量规划。尚无多query RTL闭环或未知页初始化结果，默认首query基线不变。
+
+三份归档已将原scratch移到.preserved后实际解压并逐文件验证；两份codec恢复后全节点审计重跑，审计JSON逐字节一致。凭据warm_state_restore_20261025.json。run.py check及Python语法检查通过。

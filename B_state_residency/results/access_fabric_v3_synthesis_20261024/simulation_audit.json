@@ -1,0 +1,110 @@
+{
+  "status": "passed",
+  "manifest_sha256": "2aeefc5018b01d9bc46372b4d14fe60a3f987d2c82dc85996382a9e9bdeccc77",
+  "auditor_sha256": "cf2982e1ff18d1a0c1a0e6a635da664706934d26bdcb97acd71fb73e1bfa46b0",
+  "cases": {
+    "synthetic": {
+      "cases": 11664,
+      "steps": 51549,
+      "services": 39885,
+      "owner_calls": 4970,
+      "native_reads": 24690,
+      "checkpoints": 234,
+      "host_blocks": 1936704,
+      "graph_reads": 22600,
+      "table_reads": 4868,
+      "label_reads": 36,
+      "label_writes": 18060,
+      "cycles": 5776306,
+      "requests": {
+        "1": 11664,
+        "2": 10611,
+        "3": 4900,
+        "4": 2990,
+        "5": 1980,
+        "6": 1980,
+        "7": 2434,
+        "8": 2434,
+        "11": 841,
+        "9": 38,
+        "10": 13
+      },
+      "actions": {
+        "0": 5933,
+        "1": 4220,
+        "2": 1511
+      },
+      "coordinate_calls": 10622,
+      "sll_coordinate_reads": 397
+    },
+    "real": {
+      "cases": 512,
+      "steps": 1756,
+      "services": 1244,
+      "owner_calls": 59,
+      "native_reads": 979,
+      "checkpoints": 11,
+      "host_blocks": 63461,
+      "graph_reads": 424,
+      "table_reads": 0,
+      "label_reads": 3,
+      "label_writes": 810,
+      "cycles": 266006,
+      "requests": {
+        "1": 512,
+        "2": 458,
+        "3": 205,
+        "5": 9,
+        "6": 9,
+        "4": 50,
+        "11": 1
+      },
+      "actions": {
+        "0": 237,
+        "1": 273,
+        "2": 2
+      },
+      "coordinate_calls": 206,
+      "sll_coordinate_reads": 0
+    },
+    "pressure": {
+      "cases": 614,
+      "steps": 2727,
+      "services": 2113,
+      "owner_calls": 249,
+      "native_reads": 1304,
+      "checkpoints": 13,
+      "host_blocks": 121178,
+      "graph_reads": 1235,
+      "table_reads": 264,
+      "label_reads": 5,
+      "label_writes": 937,
+      "cycles": 280233,
+      "requests": {
+        "1": 614,
+        "2": 569,
+        "3": 270,
+        "4": 151,
+        "5": 98,
+        "6": 98,
+        "7": 132,
+        "8": 132,
+        "11": 48,
+        "9": 1
+      },
+      "actions": {
+        "0": 304,
+        "1": 227,
+        "2": 83
+      },
+      "coordinate_calls": 582,
+      "sll_coordinate_reads": 22
+    }
+  },
+  "scope": "Actual resident access HLS + dispatch + shared paged labels and graph/table coordinate service. Ownership queries 4/6 use an explicit count/occupancy model; physical occupancy, metadata production and full routing not yet integrated.",
+  "limitations": [
+    "Ownership/overuse queries are explicit test models, not device occupancy state.",
+    "Config/dead/static snapshots provided by fixture, not yet children-store metadata integration.",
+    "No complete search, recursion, commit, routed timing, platform or board."
+  ]
+}

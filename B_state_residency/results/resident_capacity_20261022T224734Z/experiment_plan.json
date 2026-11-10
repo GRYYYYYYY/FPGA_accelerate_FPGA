@@ -1,0 +1,34 @@
+{
+  "status": "planned_and_launched",
+  "manifest": "results/resident_capacity_20261022T224734Z/manifest.json",
+  "build": "build/resident_zero_v1",
+  "capacities": [
+    64,
+    256,
+    1024,
+    4096
+  ],
+  "page_bits": 6,
+  "node_size": 24,
+  "payload_bytes": [
+    98304,
+    393216,
+    1572864,
+    6291456
+  ],
+  "datasets": [
+    "logicnets_jscl",
+    "vtr_mcml"
+  ],
+  "repeats": 1,
+  "cpu": 8,
+  "timeout_seconds_per_run": 1200,
+  "scope": "Synchronous CPU discovery, full route, same serial schedule; global state, page tables and backing excluded from resident payload.",
+  "required_checks": [
+    "result SHA256 matches frozen reference",
+    "full convergence equality",
+    "physical_pages and payload identity",
+    "source and binary and native proof bindings"
+  ],
+  "next": "Audit completed evidence; compare refills/writebacks/zero initializations and route_ms versus capacity. Repeat promising small differences before claiming stable speedup."
+}

@@ -1,0 +1,111 @@
+{
+  "status": "verified_original_jobs_live_after_metadata_proof",
+  "jobs": {
+    "ka_active_configured_formal_v1": {
+      "status": "running",
+      "session": 20887,
+      "active_process": {
+        "stage": "cover",
+        "pid": 2565237,
+        "start_ticks": "1663666178",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-c",
+          "-t",
+          "35",
+          "--dump-vcd",
+          "cover%.vcd",
+          "design.smt2"
+        ]
+      },
+      "commands": [
+        [
+          "core",
+          0
+        ],
+        [
+          "prepare",
+          0
+        ],
+        [
+          "bmc",
+          0
+        ],
+        [
+          "induction",
+          0
+        ]
+      ],
+      "identity_verified": true,
+      "progress": [
+        "##   0:00:12  Checking cover reachability in step 8..",
+        "##   0:00:17  Checking cover reachability in step 9..",
+        "##   0:00:22  Checking cover reachability in step 10..",
+        "##   0:00:28  Checking cover reachability in step 11..",
+        "##   0:00:37  Checking cover reachability in step 12.."
+      ],
+      "children": [
+        {
+          "pid": 2565424,
+          "start_ticks": "1663666192",
+          "cpu_ticks": 270730,
+          "state": "R",
+          "rss": "VmRSS:\t 3042372 kB"
+        }
+      ]
+    },
+    "ka_retired_configured_formal_v1": {
+      "status": "running",
+      "session": 92270,
+      "active_process": {
+        "stage": "induction",
+        "pid": 3013257,
+        "start_ticks": "1663807254",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-i",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "induction_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "commands": [
+        [
+          "prepare",
+          0
+        ],
+        [
+          "bmc",
+          0
+        ]
+      ],
+      "identity_verified": true,
+      "progress": [
+        "##   0:00:00  Solver: z3",
+        "##   0:00:00  Trying induction in step 10..",
+        "##   0:00:00  Trying induction in step 9..",
+        "##   0:01:55  Trying induction in step 8.."
+      ],
+      "children": [
+        {
+          "pid": 3013336,
+          "start_ticks": "1663807268",
+          "cpu_ticks": 129653,
+          "state": "R",
+          "rss": "VmRSS:\t  923992 kB"
+        }
+      ]
+    }
+  },
+  "metadata_review_sha256": "f87c316113ef80bd7d02cc539e46c3ad02f669abaf38cd3b523b657b20b3db1c",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

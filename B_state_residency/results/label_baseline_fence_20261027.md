@@ -1,0 +1,14 @@
+# 第九路基线AXI的排空覆盖与取消退休通过（2026-10-27）
+
+详见results/label_baseline_fence_20261027.json与hardware/variants/label_baseline_fence_v1/CONTRACT.md。新增baseline_retirement_guard只观察真实req/rsp/AR/R，保留服务归属直到回复消费，复用真实AXI drain watcher；reader idle、物理排空、无归属/offer/held回复/配置offer且无fault才retired。仅cold初始化复位，不接target_reset或abort，不屏蔽握手/载荷。query/search/residency三层传入baseline_retired，ENABLE_BASELINE启用时合入f_all_drained及f_backend_idle，已有PC/publication/recovery条件因此覆盖第九路。
+
+选定abort_full_v3/pressure_v3：真实q180327的SOURCE_CHECK在node66893 baseline AR受理/R前qc_abort，实际checkpoint acquire争用。agent真实延迟48+随机周期；32槽58、单槽61个检查周期物理drained/retired/f_all_drained/f_backend_idle/PC ready/target reset保持0。真实R、五次原生seed字段写、原生READ回复与服务回执消费后，lifecycle原生status7/prepare_acked0/committed0，保持8周期。RAM中源标签已填充，不是取消回滚；无owner写/DDR label writeback，工作146MB owner不变，完整旧8AXI及第九路R源字节独立审计。
+
+选定negative_v3仅移除两个新门控。33003周期AR已实际受理、R未返回，guard retired0/physical0而旧f_all_drained1，触发预期Fatal；真实A有记录，R/seed均未发生。**此时旧f_backend_idle仍0，因此反例只证明物理排空指标漏计第九路，不证明旧版实际能提前target reset或完成恢复。** negative的audit通过表示真实反例成立，不是正常仿真成功。
+
+guard单元24项检查覆盖配置offer、req/AR/R背压、物理R完成但逻辑回复仍保持、实际回复消费、非法响应/无AR的R错误。normal_full_v1完整正常回归两条零预加载自然查询，9AXI+7DDR+native trace共17文件及周期逐字节等于label_baseline_pair_full_v2，保留777+4实际标签加载、两份CPU oracle与完整最终图像结论。五个选定归档均实际恢复后重审audit字节一致；源冻结results/label_baseline_fence_sources_20261027。
+
+开发失败已保留：初轮TB误期望取消status2/acked1，实际SOURCE_CHECK取消为7/0；次轮未传延迟宏仅10/13等待周期，正式v3显式参数达到58/61。早期negative在同一受理沿触发Fatal导致agent未记录A，正式v3在实际受理后的边沿观察。部分当次runner scope继承通用两query描述，实际模式以命令、abort_case/negative、trace及audit为准；当前模板已修正描述与模式检查，归档源/元数据未改。
+
+当前仍未执行新路径的恢复命令、target-reset后777标签恢复或G2 warm；取消测试也没有消费最终query失败回复/无复位重试。下一优先原生runtime导出777/389页、owner增量copy/G2共同发布、第二q2 owner-B故障及真实恢复。generic restore首次字段写可能触发777次初始baseline seed，应按阶段审计并最终由777恢复流覆写，不得假装仍只有q2新增四条读。baseline身份/固定price内容/G1 clone仍外部前提，容量有界；任意变价、owner epoch轮转、真实overflow新增回收、认证、综合时序和板卡收益仍缺。研究继续，goal active。
+

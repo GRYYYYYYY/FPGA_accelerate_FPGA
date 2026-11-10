@@ -1,0 +1,1207 @@
+{
+  "audit_development": {
+    "additional_corrections": [
+      {
+        "failed_assertion": "12 authority cookies globally distinct across both attempts",
+        "observed_distinct_cookies": 8,
+        "original_auditor_sha256": "0da1f658ba58f5b7c6312b4e311daa98edf47e1650efaa871c3cd350a67adaae",
+        "reason": "Native coordinator derives authority cookie as recover_cookie XOR index XOR verify-pass bit. Cookies are unique within each six-request attempt but adjacent recover cookies can collide across retired attempts. Assert exact per-attempt values and no pending authority reply across REARM, not unsupported global uniqueness."
+      },
+      {
+        "failed_assertion": "readbeats==109",
+        "observed_read_beats": 113,
+        "original_auditor_sha256": "dcacae90dd40140b5e8d74ef30302089d41de8d137814581913738467478158b",
+        "reason": "A fixed two-beat/GET estimate omitted full-chain authority reads: each GET reads allocator and primary; node558358 additionally reads its foreign-owner overflow record. Derive every expected request address from the actual G4 primary/pool image, including allocator, instead of using an assumed beat count."
+      }
+    ],
+    "case": "restore_seed_retry_cancel_full_v1",
+    "failed_assertion": "len(by('RESET',q4))==2 and not by('AS_REARM',q4)",
+    "observed": {
+      "native_authority_rearm": [
+        3815378
+      ],
+      "rearm_generation": "0000000100000004",
+      "retry_start": 3815375,
+      "target_resets": [
+        3782501,
+        3815385
+      ]
+    },
+    "original_auditor_sha256": "fa1e5f41c0bcb9f75fa9f5f34d9e51d08498a97d6cf233d686e9d9bb13dd37c2",
+    "reason": "Inherited successful single-attempt audit forbade authority rearm. Native noncold retry intentionally rearms the retained G4 reader before its second target reset. Require exactly one G4 rearm in this order instead; no production or simulation change.",
+    "status": "auditor_assumption_corrected"
+  },
+  "cases": {
+    "restore_seed_retry_cancel_full_v1": {
+      "auditor_sha256": "5cc0ae8582f9d31c85978d42e8530b41f0f3a3eb358e0a6e6bb6760a3a073d39",
+      "authority_rounds": 4,
+      "behavioral_cycles": {
+        "events": {
+          "FI": 3782482,
+          "FOURTH_PASS": 4491426,
+          "FOURTH_RETRY_BEGIN": 4103824,
+          "FOURTH_WARM_LABELS": 4101642,
+          "FOURTH_WARM_OWNER": 3783076,
+          "FOURTH_WARM_RELEASE": 4102169,
+          "FOURTH_WARM_START": 3782497,
+          "RESET": 3782501,
+          "WPR": 4102127,
+          "WQR": 4102157
+        },
+        "fault_to_release": 319687,
+        "label_phase": 318566,
+        "owner_phase": 579,
+        "retry_including_exports": 387602
+      },
+      "case": "full",
+      "checkpoint": 20,
+      "connection": 170791,
+      "correction_increments": 3,
+      "empty_slot_floor_probe_status": 1,
+      "failed_attempt_consumed_sequence": 180330,
+      "failed_query_response": [
+        3,
+        7,
+        8,
+        0,
+        0,
+        3
+      ],
+      "failed_search_counts": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "final_cycle": 4491426,
+      "final_journal": 3,
+      "final_labels": 781,
+      "final_pages": 393,
+      "final_path_crc": "eec36b70",
+      "final_query_crc": "626e163b",
+      "final_sequence": 180330,
+      "final_slot_mask": 15,
+      "graph_error_beats": 1,
+      "journal_keys": [
+        990178,
+        558358,
+        265324
+      ],
+      "manifest_sha256": "35ae71886e0b277ec111b6556f659af4fefc7b19594ba791da6a1e9db9b551e8",
+      "modified_production_sources": [
+        "expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+        "expansion_20261024/pager/pager/resident_page_manager.sv",
+        "label_restore_controller.sv",
+        "priced/candidate_recursive_engine.sv",
+        "priced/candidate_recursive_query_core.sv",
+        "query_residency_system.sv",
+        "residency_system.sv",
+        "search_residency_system.sv"
+      ],
+      "native_auditor_sha256": "6558807aeca876c701abf7363fa6e4814bdc0a8abfa39a4bac34ceff28a780a5",
+      "native_labels": {
+        "native_fields": 31091,
+        "read_pages": 3054,
+        "write_pages": 2380
+      },
+      "owner_sha256": "0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595",
+      "path_words": 156,
+      "physical_memory": {
+        "baseline": {
+          "bytes_checked": 290848320,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 2364,
+          "read_burst_lengths": {
+            "1": 2364
+          },
+          "read_transactions": 2364,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "copy": {
+          "axi_sha256": "2cc2644e1f0438f916f09db0972fc3adbad2880402879769296761efc41082d7",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "d4eafc930abc835ad8aed22b80d0c76682e0519b455a03fddad9a06ab11e37bd"
+        },
+        "cost": {
+          "bytes_checked": 36804480,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 5580,
+          "read_burst_lengths": {
+            "1": 5580
+          },
+          "read_transactions": 5580,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "design": {
+          "bytes_checked": 145424192,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4213,
+          "read_burst_lengths": {
+            "1": 4213
+          },
+          "read_transactions": 4213,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "g3copy": {
+          "axi_sha256": "fd2a5b5486f7f95a6985190f00fd79d0f94a2dc7a713ac5c61bc6f0079509f0c",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "d4eafc930abc835ad8aed22b80d0c76682e0519b455a03fddad9a06ab11e37bd"
+        },
+        "graph": {
+          "bytes_checked": 489082472,
+          "error_read_beats": 1,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 45276,
+          "read_burst_lengths": {
+            "1": 45276
+          },
+          "read_transactions": 45276,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "label": {
+          "bytes_checked": 3145728,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": 3054,
+          "logical_192B_writes": 2380,
+          "read_beats": 9162,
+          "read_burst_lengths": {
+            "1": 102,
+            "2": 102,
+            "3": 2952
+          },
+          "read_transactions": 3156,
+          "write_beats": 7140,
+          "write_burst_lengths": {
+            "1": 79,
+            "2": 79,
+            "3": 2301
+          },
+          "write_replies": 2459
+        },
+        "labelsnap": {
+          "axi_sha256": "14b5cc3701682cdc819c149136e13ab5677b1a490e98eb6535c370edbe06e1b8",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "d4eafc930abc835ad8aed22b80d0c76682e0519b455a03fddad9a06ab11e37bd"
+        },
+        "owner": {
+          "bytes_checked": 146284032,
+          "error_read_beats": 0,
+          "error_write_replies": 2,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4882,
+          "read_burst_lengths": {
+            "1": 4882
+          },
+          "read_transactions": 4882,
+          "write_beats": 37,
+          "write_burst_lengths": {
+            "1": 37
+          },
+          "write_replies": 37
+        },
+        "qstate": {
+          "bytes_checked": 11540864,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 705,
+          "read_burst_lengths": {
+            "1": 705
+          },
+          "read_transactions": 705,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "snapshot": {
+          "g4_recovery_read_beats": 28,
+          "read_beats": 113,
+          "read_transactions": 113,
+          "rotation_cut_beats": 72,
+          "versioned_a_bank": true
+        },
+        "table": {
+          "bytes_checked": 1344,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 0,
+          "read_burst_lengths": {},
+          "read_transactions": 0,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        }
+      },
+      "prefix_native_cycles_byte_identical": true,
+      "prefix_rows": 225035,
+      "production_parent": "fourth_warm_full_v2",
+      "query_sequence": 180330,
+      "recreated_primary_owner": 990178,
+      "restore_failure": {
+        "coordinator_status": 6,
+        "external_cold_reset": false,
+        "failed_complete_records": 0,
+        "failed_context": [
+          7,
+          1,
+          7
+        ],
+        "failed_field_writes": 3,
+        "failed_native_status": 7,
+        "final_ddr_identical_to_success": true,
+        "held_failure_cycles": 8,
+        "mode": "cancel",
+        "original_prefix_cycles_identical": true,
+        "retained_journal": 3,
+        "retry_context": [
+          8,
+          2,
+          8
+        ],
+        "retry_corrections": 0,
+        "same_attempt_status": 1,
+        "successful_optimized_reference_audit": "3c5324966d72f2bfbad654f5fbbf8fd713f88af5df0210edb5c275f1b02fa187",
+        "verified_before_failure": 0,
+        "working_ddr_reloaded": false
+      },
+      "restore_seed_bypass": 1,
+      "restored_labels": 781,
+      "restored_source_floor": 180329,
+      "retry_candidates": 402,
+      "retry_costs": 231,
+      "retry_expansions": 82,
+      "retry_label_phase_cycles": 285850,
+      "retry_polls": 83,
+      "scope": "Actual graph R error followed by optimized restore failure/retry, four G4 authority rounds and three native INC repairs including empty primary recreation; original781/156/10-word receipts rebased to fresh attempt8 and source ledger180329, empty fourth-slot floor rejection then CPU q180330 retry. Sequence180330 was consumed in the failed attempt6; this is new-attempt recovery, not global never-reuse proof. Fixed price/history, externally trusted initial clones/full baseline. No arbitrary fault/cancel, overflow allocation/free, persistent floor/authentication or timing/board proof. Two deterministic optimized label failure points only: partial native write cancellation or last-record CRC corruption, according to mode. Both retain three-key journal and require retirement before attempt8 rearm; native same-attempt rejection and six owner GETs on retry, then all781 records verified and CPU q4 retry. Not arbitrary cancellation, AXI-timeout, price-change validity, persistent floor/authentication or board performance proof.",
+      "source_context": [
+        6,
+        0,
+        6
+      ],
+      "source_label_crc": "083ee4ad",
+      "source_path_crc": "f00b72b4",
+      "source_query_crc": "327d3916",
+      "status": "passed",
+      "target_context": [
+        8,
+        2,
+        8
+      ]
+    },
+    "restore_seed_retry_cancel_pressure_v1": {
+      "auditor_sha256": "5cc0ae8582f9d31c85978d42e8530b41f0f3a3eb358e0a6e6bb6760a3a073d39",
+      "authority_rounds": 4,
+      "behavioral_cycles": {
+        "events": {
+          "FI": 4033396,
+          "FOURTH_PASS": 4720798,
+          "FOURTH_RETRY_BEGIN": 4271792,
+          "FOURTH_WARM_LABELS": 4269515,
+          "FOURTH_WARM_OWNER": 4033989,
+          "FOURTH_WARM_RELEASE": 4270042,
+          "FOURTH_WARM_START": 4033411,
+          "RESET": 4033415,
+          "WPR": 4270000,
+          "WQR": 4270030
+        },
+        "fault_to_release": 236646,
+        "label_phase": 235526,
+        "owner_phase": 578,
+        "retry_including_exports": 449006
+      },
+      "case": "pressure",
+      "checkpoint": 20,
+      "connection": 170791,
+      "correction_increments": 3,
+      "empty_slot_floor_probe_status": 1,
+      "failed_attempt_consumed_sequence": 180330,
+      "failed_query_response": [
+        3,
+        7,
+        8,
+        0,
+        0,
+        3
+      ],
+      "failed_search_counts": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "final_cycle": 4720798,
+      "final_journal": 3,
+      "final_labels": 781,
+      "final_pages": 393,
+      "final_path_crc": "eec36b70",
+      "final_query_crc": "626e163b",
+      "final_sequence": 180330,
+      "final_slot_mask": 15,
+      "graph_error_beats": 1,
+      "journal_keys": [
+        990178,
+        558358,
+        265324
+      ],
+      "manifest_sha256": "76752696f698e1c98223588b3b854895e0b5b867d2763560014fc32814fae9d7",
+      "modified_production_sources": [
+        "expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+        "expansion_20261024/pager/pager/resident_page_manager.sv",
+        "label_restore_controller.sv",
+        "priced/candidate_recursive_engine.sv",
+        "priced/candidate_recursive_query_core.sv",
+        "query_residency_system.sv",
+        "residency_system.sv",
+        "search_residency_system.sv"
+      ],
+      "native_auditor_sha256": "6558807aeca876c701abf7363fa6e4814bdc0a8abfa39a4bac34ceff28a780a5",
+      "native_labels": {
+        "native_fields": 31091,
+        "read_pages": 7293,
+        "write_pages": 4407
+      },
+      "owner_sha256": "0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595",
+      "path_words": 156,
+      "physical_memory": {
+        "baseline": {
+          "bytes_checked": 290848320,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 2364,
+          "read_burst_lengths": {
+            "1": 2364
+          },
+          "read_transactions": 2364,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "copy": {
+          "axi_sha256": "2cc2644e1f0438f916f09db0972fc3adbad2880402879769296761efc41082d7",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "e987da9a0e9c855884380aa384cd99451b1c34ffc0afd2d768f9bb0480f2da38"
+        },
+        "cost": {
+          "bytes_checked": 36804480,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 5580,
+          "read_burst_lengths": {
+            "1": 5580
+          },
+          "read_transactions": 5580,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "design": {
+          "bytes_checked": 145424192,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4213,
+          "read_burst_lengths": {
+            "1": 4213
+          },
+          "read_transactions": 4213,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "g3copy": {
+          "axi_sha256": "fd2a5b5486f7f95a6985190f00fd79d0f94a2dc7a713ac5c61bc6f0079509f0c",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "e987da9a0e9c855884380aa384cd99451b1c34ffc0afd2d768f9bb0480f2da38"
+        },
+        "graph": {
+          "bytes_checked": 489082472,
+          "error_read_beats": 1,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 45276,
+          "read_burst_lengths": {
+            "1": 45276
+          },
+          "read_transactions": 45276,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "label": {
+          "bytes_checked": 3145728,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": 7293,
+          "logical_192B_writes": 4407,
+          "read_beats": 21879,
+          "read_burst_lengths": {
+            "1": 317,
+            "2": 317,
+            "3": 6976
+          },
+          "read_transactions": 7610,
+          "write_beats": 13221,
+          "write_burst_lengths": {
+            "1": 195,
+            "2": 195,
+            "3": 4212
+          },
+          "write_replies": 4602
+        },
+        "labelsnap": {
+          "axi_sha256": "4703148c70ac85cf5aa8346f1a4fabb54f4d45136214df1c7965e3c88f4a7a7c",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "e987da9a0e9c855884380aa384cd99451b1c34ffc0afd2d768f9bb0480f2da38"
+        },
+        "owner": {
+          "bytes_checked": 146284032,
+          "error_read_beats": 0,
+          "error_write_replies": 2,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4882,
+          "read_burst_lengths": {
+            "1": 4882
+          },
+          "read_transactions": 4882,
+          "write_beats": 37,
+          "write_burst_lengths": {
+            "1": 37
+          },
+          "write_replies": 37
+        },
+        "qstate": {
+          "bytes_checked": 11540864,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 705,
+          "read_burst_lengths": {
+            "1": 705
+          },
+          "read_transactions": 705,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "snapshot": {
+          "g4_recovery_read_beats": 28,
+          "read_beats": 113,
+          "read_transactions": 113,
+          "rotation_cut_beats": 72,
+          "versioned_a_bank": true
+        },
+        "table": {
+          "bytes_checked": 1344,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 0,
+          "read_burst_lengths": {},
+          "read_transactions": 0,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        }
+      },
+      "prefix_native_cycles_byte_identical": true,
+      "prefix_rows": 250889,
+      "production_parent": "fourth_warm_full_v2",
+      "query_sequence": 180330,
+      "recreated_primary_owner": 990178,
+      "restore_failure": {
+        "coordinator_status": 6,
+        "external_cold_reset": false,
+        "failed_complete_records": 0,
+        "failed_context": [
+          7,
+          1,
+          7
+        ],
+        "failed_field_writes": 3,
+        "failed_native_status": 7,
+        "final_ddr_identical_to_success": true,
+        "held_failure_cycles": 8,
+        "mode": "cancel",
+        "original_prefix_cycles_identical": true,
+        "retained_journal": 3,
+        "retry_context": [
+          8,
+          2,
+          8
+        ],
+        "retry_corrections": 0,
+        "same_attempt_status": 1,
+        "successful_optimized_reference_audit": "2a4a45a721ea677781b1c71bf69713bf9718913f78f2a4bf1ac31b9a023c1d63",
+        "verified_before_failure": 0,
+        "working_ddr_reloaded": false
+      },
+      "restore_seed_bypass": 1,
+      "restored_labels": 781,
+      "restored_source_floor": 180329,
+      "retry_candidates": 402,
+      "retry_costs": 231,
+      "retry_expansions": 82,
+      "retry_label_phase_cycles": 202742,
+      "retry_polls": 83,
+      "scope": "Actual graph R error followed by optimized restore failure/retry, four G4 authority rounds and three native INC repairs including empty primary recreation; original781/156/10-word receipts rebased to fresh attempt8 and source ledger180329, empty fourth-slot floor rejection then CPU q180330 retry. Sequence180330 was consumed in the failed attempt6; this is new-attempt recovery, not global never-reuse proof. Fixed price/history, externally trusted initial clones/full baseline. No arbitrary fault/cancel, overflow allocation/free, persistent floor/authentication or timing/board proof. Two deterministic optimized label failure points only: partial native write cancellation or last-record CRC corruption, according to mode. Both retain three-key journal and require retirement before attempt8 rearm; native same-attempt rejection and six owner GETs on retry, then all781 records verified and CPU q4 retry. Not arbitrary cancellation, AXI-timeout, price-change validity, persistent floor/authentication or board performance proof.",
+      "source_context": [
+        6,
+        0,
+        6
+      ],
+      "source_label_crc": "ae573141",
+      "source_path_crc": "f00b72b4",
+      "source_query_crc": "327d3916",
+      "status": "passed",
+      "target_context": [
+        8,
+        2,
+        8
+      ]
+    },
+    "restore_seed_retry_crc_full_v1": {
+      "auditor_sha256": "5cc0ae8582f9d31c85978d42e8530b41f0f3a3eb358e0a6e6bb6760a3a073d39",
+      "authority_rounds": 4,
+      "behavioral_cycles": {
+        "events": {
+          "FI": 3782482,
+          "FOURTH_PASS": 4661531,
+          "FOURTH_RETRY_BEGIN": 4274567,
+          "FOURTH_WARM_LABELS": 4272366,
+          "FOURTH_WARM_OWNER": 3783076,
+          "FOURTH_WARM_RELEASE": 4272893,
+          "FOURTH_WARM_START": 3782497,
+          "RESET": 3782501,
+          "WPR": 4272851,
+          "WQR": 4272881
+        },
+        "fault_to_release": 490411,
+        "label_phase": 489290,
+        "owner_phase": 579,
+        "retry_including_exports": 386964
+      },
+      "case": "full",
+      "checkpoint": 20,
+      "connection": 170791,
+      "correction_increments": 3,
+      "empty_slot_floor_probe_status": 1,
+      "failed_attempt_consumed_sequence": 180330,
+      "failed_query_response": [
+        3,
+        7,
+        8,
+        0,
+        0,
+        3
+      ],
+      "failed_search_counts": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "final_cycle": 4661531,
+      "final_journal": 3,
+      "final_labels": 781,
+      "final_pages": 393,
+      "final_path_crc": "eec36b70",
+      "final_query_crc": "626e163b",
+      "final_sequence": 180330,
+      "final_slot_mask": 15,
+      "graph_error_beats": 1,
+      "journal_keys": [
+        990178,
+        558358,
+        265324
+      ],
+      "manifest_sha256": "2c0a35bde69e68c8d78746d79183a72a01696b732ecac42e1d4341db3b054e55",
+      "modified_production_sources": [
+        "expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+        "expansion_20261024/pager/pager/resident_page_manager.sv",
+        "label_restore_controller.sv",
+        "priced/candidate_recursive_engine.sv",
+        "priced/candidate_recursive_query_core.sv",
+        "query_residency_system.sv",
+        "residency_system.sv",
+        "search_residency_system.sv"
+      ],
+      "native_auditor_sha256": "6558807aeca876c701abf7363fa6e4814bdc0a8abfa39a4bac34ceff28a780a5",
+      "native_labels": {
+        "native_fields": 34988,
+        "read_pages": 3054,
+        "write_pages": 2740
+      },
+      "owner_sha256": "0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595",
+      "path_words": 156,
+      "physical_memory": {
+        "baseline": {
+          "bytes_checked": 290848320,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 2364,
+          "read_burst_lengths": {
+            "1": 2364
+          },
+          "read_transactions": 2364,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "copy": {
+          "axi_sha256": "2cc2644e1f0438f916f09db0972fc3adbad2880402879769296761efc41082d7",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "d4eafc930abc835ad8aed22b80d0c76682e0519b455a03fddad9a06ab11e37bd"
+        },
+        "cost": {
+          "bytes_checked": 36804480,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 5580,
+          "read_burst_lengths": {
+            "1": 5580
+          },
+          "read_transactions": 5580,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "design": {
+          "bytes_checked": 145424192,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4213,
+          "read_burst_lengths": {
+            "1": 4213
+          },
+          "read_transactions": 4213,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "g3copy": {
+          "axi_sha256": "fd2a5b5486f7f95a6985190f00fd79d0f94a2dc7a713ac5c61bc6f0079509f0c",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "d4eafc930abc835ad8aed22b80d0c76682e0519b455a03fddad9a06ab11e37bd"
+        },
+        "graph": {
+          "bytes_checked": 489082472,
+          "error_read_beats": 1,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 45276,
+          "read_burst_lengths": {
+            "1": 45276
+          },
+          "read_transactions": 45276,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "label": {
+          "bytes_checked": 3145728,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": 3054,
+          "logical_192B_writes": 2740,
+          "read_beats": 9162,
+          "read_burst_lengths": {
+            "1": 102,
+            "2": 102,
+            "3": 2952
+          },
+          "read_transactions": 3156,
+          "write_beats": 8220,
+          "write_burst_lengths": {
+            "1": 90,
+            "2": 90,
+            "3": 2650
+          },
+          "write_replies": 2830
+        },
+        "labelsnap": {
+          "axi_sha256": "14b5cc3701682cdc819c149136e13ab5677b1a490e98eb6535c370edbe06e1b8",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "d4eafc930abc835ad8aed22b80d0c76682e0519b455a03fddad9a06ab11e37bd"
+        },
+        "owner": {
+          "bytes_checked": 146284032,
+          "error_read_beats": 0,
+          "error_write_replies": 2,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4882,
+          "read_burst_lengths": {
+            "1": 4882
+          },
+          "read_transactions": 4882,
+          "write_beats": 37,
+          "write_burst_lengths": {
+            "1": 37
+          },
+          "write_replies": 37
+        },
+        "qstate": {
+          "bytes_checked": 11540864,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 705,
+          "read_burst_lengths": {
+            "1": 705
+          },
+          "read_transactions": 705,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "snapshot": {
+          "g4_recovery_read_beats": 28,
+          "read_beats": 113,
+          "read_transactions": 113,
+          "rotation_cut_beats": 72,
+          "versioned_a_bank": true
+        },
+        "table": {
+          "bytes_checked": 1344,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 0,
+          "read_burst_lengths": {},
+          "read_transactions": 0,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        }
+      },
+      "prefix_native_cycles_byte_identical": true,
+      "prefix_rows": 225035,
+      "production_parent": "fourth_warm_full_v2",
+      "query_sequence": 180330,
+      "recreated_primary_owner": 990178,
+      "restore_failure": {
+        "coordinator_status": 6,
+        "external_cold_reset": false,
+        "failed_complete_records": 780,
+        "failed_context": [
+          7,
+          1,
+          7
+        ],
+        "failed_field_writes": 3900,
+        "failed_native_status": 8,
+        "final_ddr_identical_to_success": true,
+        "held_failure_cycles": 8,
+        "mode": "crc",
+        "original_prefix_cycles_identical": true,
+        "retained_journal": 3,
+        "retry_context": [
+          8,
+          2,
+          8
+        ],
+        "retry_corrections": 0,
+        "same_attempt_status": 1,
+        "successful_optimized_reference_audit": "3c5324966d72f2bfbad654f5fbbf8fd713f88af5df0210edb5c275f1b02fa187",
+        "verified_before_failure": 0,
+        "working_ddr_reloaded": false
+      },
+      "restore_seed_bypass": 1,
+      "restored_labels": 781,
+      "restored_source_floor": 180329,
+      "retry_candidates": 402,
+      "retry_costs": 231,
+      "retry_expansions": 82,
+      "retry_label_phase_cycles": 285910,
+      "retry_polls": 83,
+      "scope": "Actual graph R error followed by optimized restore failure/retry, four G4 authority rounds and three native INC repairs including empty primary recreation; original781/156/10-word receipts rebased to fresh attempt8 and source ledger180329, empty fourth-slot floor rejection then CPU q180330 retry. Sequence180330 was consumed in the failed attempt6; this is new-attempt recovery, not global never-reuse proof. Fixed price/history, externally trusted initial clones/full baseline. No arbitrary fault/cancel, overflow allocation/free, persistent floor/authentication or timing/board proof. Two deterministic optimized label failure points only: partial native write cancellation or last-record CRC corruption, according to mode. Both retain three-key journal and require retirement before attempt8 rearm; native same-attempt rejection and six owner GETs on retry, then all781 records verified and CPU q4 retry. Not arbitrary cancellation, AXI-timeout, price-change validity, persistent floor/authentication or board performance proof.",
+      "source_context": [
+        6,
+        0,
+        6
+      ],
+      "source_label_crc": "083ee4ad",
+      "source_path_crc": "f00b72b4",
+      "source_query_crc": "327d3916",
+      "status": "passed",
+      "target_context": [
+        8,
+        2,
+        8
+      ]
+    },
+    "restore_seed_retry_crc_pressure_v1": {
+      "auditor_sha256": "5cc0ae8582f9d31c85978d42e8530b41f0f3a3eb358e0a6e6bb6760a3a073d39",
+      "authority_rounds": 4,
+      "behavioral_cycles": {
+        "events": {
+          "FI": 4033396,
+          "FOURTH_PASS": 4828820,
+          "FOURTH_RETRY_BEGIN": 4380257,
+          "FOURTH_WARM_LABELS": 4378052,
+          "FOURTH_WARM_OWNER": 4033989,
+          "FOURTH_WARM_RELEASE": 4378579,
+          "FOURTH_WARM_START": 4033411,
+          "RESET": 4033415,
+          "WPR": 4378537,
+          "WQR": 4378567
+        },
+        "fault_to_release": 345183,
+        "label_phase": 344063,
+        "owner_phase": 578,
+        "retry_including_exports": 448563
+      },
+      "case": "pressure",
+      "checkpoint": 20,
+      "connection": 170791,
+      "correction_increments": 3,
+      "empty_slot_floor_probe_status": 1,
+      "failed_attempt_consumed_sequence": 180330,
+      "failed_query_response": [
+        3,
+        7,
+        8,
+        0,
+        0,
+        3
+      ],
+      "failed_search_counts": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "final_cycle": 4828820,
+      "final_journal": 3,
+      "final_labels": 781,
+      "final_pages": 393,
+      "final_path_crc": "eec36b70",
+      "final_query_crc": "626e163b",
+      "final_sequence": 180330,
+      "final_slot_mask": 15,
+      "graph_error_beats": 1,
+      "journal_keys": [
+        990178,
+        558358,
+        265324
+      ],
+      "manifest_sha256": "9c43a154d6410f87548546e20fd7a7cd80270c9d7be835eddedf902a4cce2f31",
+      "modified_production_sources": [
+        "expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+        "expansion_20261024/pager/pager/resident_page_manager.sv",
+        "label_restore_controller.sv",
+        "priced/candidate_recursive_engine.sv",
+        "priced/candidate_recursive_query_core.sv",
+        "query_residency_system.sv",
+        "residency_system.sv",
+        "search_residency_system.sv"
+      ],
+      "native_auditor_sha256": "6558807aeca876c701abf7363fa6e4814bdc0a8abfa39a4bac34ceff28a780a5",
+      "native_labels": {
+        "native_fields": 34988,
+        "read_pages": 7293,
+        "write_pages": 4798
+      },
+      "owner_sha256": "0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595",
+      "path_words": 156,
+      "physical_memory": {
+        "baseline": {
+          "bytes_checked": 290848320,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 2364,
+          "read_burst_lengths": {
+            "1": 2364
+          },
+          "read_transactions": 2364,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "copy": {
+          "axi_sha256": "2cc2644e1f0438f916f09db0972fc3adbad2880402879769296761efc41082d7",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "e987da9a0e9c855884380aa384cd99451b1c34ffc0afd2d768f9bb0480f2da38"
+        },
+        "cost": {
+          "bytes_checked": 36804480,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 5580,
+          "read_burst_lengths": {
+            "1": 5580
+          },
+          "read_transactions": 5580,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "design": {
+          "bytes_checked": 145424192,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4213,
+          "read_burst_lengths": {
+            "1": 4213
+          },
+          "read_transactions": 4213,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "g3copy": {
+          "axi_sha256": "fd2a5b5486f7f95a6985190f00fd79d0f94a2dc7a713ac5c61bc6f0079509f0c",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "e987da9a0e9c855884380aa384cd99451b1c34ffc0afd2d768f9bb0480f2da38"
+        },
+        "graph": {
+          "bytes_checked": 489082472,
+          "error_read_beats": 1,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 45276,
+          "read_burst_lengths": {
+            "1": 45276
+          },
+          "read_transactions": 45276,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "label": {
+          "bytes_checked": 3145728,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": 7293,
+          "logical_192B_writes": 4798,
+          "read_beats": 21879,
+          "read_burst_lengths": {
+            "1": 317,
+            "2": 317,
+            "3": 6976
+          },
+          "read_transactions": 7610,
+          "write_beats": 14394,
+          "write_burst_lengths": {
+            "1": 207,
+            "2": 207,
+            "3": 4591
+          },
+          "write_replies": 5005
+        },
+        "labelsnap": {
+          "axi_sha256": "4703148c70ac85cf5aa8346f1a4fabb54f4d45136214df1c7965e3c88f4a7a7c",
+          "physical_bytes_identical": true,
+          "verified_reference_audit": "e987da9a0e9c855884380aa384cd99451b1c34ffc0afd2d768f9bb0480f2da38"
+        },
+        "owner": {
+          "bytes_checked": 146284032,
+          "error_read_beats": 0,
+          "error_write_replies": 2,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 4882,
+          "read_burst_lengths": {
+            "1": 4882
+          },
+          "read_transactions": 4882,
+          "write_beats": 37,
+          "write_burst_lengths": {
+            "1": 37
+          },
+          "write_replies": 37
+        },
+        "qstate": {
+          "bytes_checked": 11540864,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 705,
+          "read_burst_lengths": {
+            "1": 705
+          },
+          "read_transactions": 705,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        },
+        "snapshot": {
+          "g4_recovery_read_beats": 28,
+          "read_beats": 113,
+          "read_transactions": 113,
+          "rotation_cut_beats": 72,
+          "versioned_a_bank": true
+        },
+        "table": {
+          "bytes_checked": 1344,
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "read_beats": 0,
+          "read_burst_lengths": {},
+          "read_transactions": 0,
+          "write_beats": 0,
+          "write_burst_lengths": {},
+          "write_replies": 0
+        }
+      },
+      "prefix_native_cycles_byte_identical": true,
+      "prefix_rows": 250889,
+      "production_parent": "fourth_warm_full_v2",
+      "query_sequence": 180330,
+      "recreated_primary_owner": 990178,
+      "restore_failure": {
+        "coordinator_status": 6,
+        "external_cold_reset": false,
+        "failed_complete_records": 780,
+        "failed_context": [
+          7,
+          1,
+          7
+        ],
+        "failed_field_writes": 3900,
+        "failed_native_status": 8,
+        "final_ddr_identical_to_success": true,
+        "held_failure_cycles": 8,
+        "mode": "crc",
+        "original_prefix_cycles_identical": true,
+        "retained_journal": 3,
+        "retry_context": [
+          8,
+          2,
+          8
+        ],
+        "retry_corrections": 0,
+        "same_attempt_status": 1,
+        "successful_optimized_reference_audit": "2a4a45a721ea677781b1c71bf69713bf9718913f78f2a4bf1ac31b9a023c1d63",
+        "verified_before_failure": 0,
+        "working_ddr_reloaded": false
+      },
+      "restore_seed_bypass": 1,
+      "restored_labels": 781,
+      "restored_source_floor": 180329,
+      "retry_candidates": 402,
+      "retry_costs": 231,
+      "retry_expansions": 82,
+      "retry_label_phase_cycles": 202677,
+      "retry_polls": 83,
+      "scope": "Actual graph R error followed by optimized restore failure/retry, four G4 authority rounds and three native INC repairs including empty primary recreation; original781/156/10-word receipts rebased to fresh attempt8 and source ledger180329, empty fourth-slot floor rejection then CPU q180330 retry. Sequence180330 was consumed in the failed attempt6; this is new-attempt recovery, not global never-reuse proof. Fixed price/history, externally trusted initial clones/full baseline. No arbitrary fault/cancel, overflow allocation/free, persistent floor/authentication or timing/board proof. Two deterministic optimized label failure points only: partial native write cancellation or last-record CRC corruption, according to mode. Both retain three-key journal and require retirement before attempt8 rearm; native same-attempt rejection and six owner GETs on retry, then all781 records verified and CPU q4 retry. Not arbitrary cancellation, AXI-timeout, price-change validity, persistent floor/authentication or board performance proof.",
+      "source_context": [
+        6,
+        0,
+        6
+      ],
+      "source_label_crc": "ae573141",
+      "source_path_crc": "f00b72b4",
+      "source_query_crc": "327d3916",
+      "status": "passed",
+      "target_context": [
+        8,
+        2,
+        8
+      ]
+    }
+  },
+  "restores": {
+    "restore_seed_retry_cancel_full_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_retry_cancel_full_v1.json",
+      "archive_sha256": "e76f1acd2e1abda933f050a69461b0d7ac4eae8b7425df918b422ecb27a1645e",
+      "audit_byte_identical": true,
+      "audit_sha256": "9d9d20f24b5d477eb6c435b95731cdc8031a244d965e36e0faf66ad1ab9890f4",
+      "auditor": "audit_restore_seed_retry.py",
+      "files": 379,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_retry_cancel_full_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_retry_cancel_full_v1",
+      "status": "passed"
+    },
+    "restore_seed_retry_cancel_pressure_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_retry_cancel_pressure_v1.json",
+      "archive_sha256": "c172b58c8f2a54e5fb89bcb59a55f801896b12b8b5d32378c6a3b12894e531cf",
+      "audit_byte_identical": true,
+      "audit_sha256": "2cf3e54c05d8a3bb676dc6a9305b9384b864aca915723c4c367dd709526af350",
+      "auditor": "audit_restore_seed_retry.py",
+      "files": 379,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_retry_cancel_pressure_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_retry_cancel_pressure_v1",
+      "status": "passed"
+    },
+    "restore_seed_retry_crc_full_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_retry_crc_full_v1.json",
+      "archive_sha256": "d508103fb2097c085ce4dd1bdbaf08c5a7a67eafc91ad35ea3314b26e525c5af",
+      "audit_byte_identical": true,
+      "audit_sha256": "a83925281a0656634c8b301e28c545de4831c464f8ee3d47445364cb6ebb93ac",
+      "auditor": "audit_restore_seed_retry.py",
+      "files": 379,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_retry_crc_full_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_retry_crc_full_v1",
+      "status": "passed"
+    },
+    "restore_seed_retry_crc_pressure_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_retry_crc_pressure_v1.json",
+      "archive_sha256": "249ab2adb053cd5a61858c5203ae0f976b8b0f6bcf11d6dc44ed2a62aad3a206",
+      "audit_byte_identical": true,
+      "audit_sha256": "a401423c2b47972b5ce322615d655a936440c458060cf3499c6f0fd9af1ed561",
+      "auditor": "audit_restore_seed_retry.py",
+      "files": 379,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_retry_crc_pressure_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_retry_crc_pressure_v1",
+      "status": "passed"
+    }
+  },
+  "scope": "Four complete-system behavioral cases: optimized third native field write cancellation and last-record CRC corruption for32/one slot. Retained journal, retired failure, native attempt7 rejection and attempt8 noncold retry; complete781-label/156-path/10-query restore and CPU q4 replay, all12AXI/final DDR. Only two deterministic failure points, fixed price/history, trusted initial clones/baseline/historical path metadata. No resource/timing/board, persistent authorization or arbitrary-failure proof.",
+  "source_files": 187,
+  "source_freeze": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/restore_seed_retry_sources_20261027",
+  "source_freeze_sha256": "bcd23e440f5afd1294d620fa95be0284644e48511349cf2e033c10d9f627033c",
+  "status": "passed"
+}

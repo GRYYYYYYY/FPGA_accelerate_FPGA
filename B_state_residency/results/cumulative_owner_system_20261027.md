@@ -1,0 +1,13 @@
+# 真实owner累计脏行重arm与G3候选通过（2026-10-27）
+
+详见results/cumulative_owner_system_20261027.json与hardware/variants/owner_cumulative_system_v1/CONTRACT.md。新增cumulative_owner_snapshot隔离候选，op0在工作前真实PC lease下绑定design/G1 baseline/source/span/A与C两bank，op1仅在健康且事务退休时清已覆盖AW的B错误，op2以单调generation/checkpoint复制累计脏行。覆盖错误不可重arm，dirty不清，不冒充baseline reseed。278检查/46事务组件及真实AXI独立字节重放通过，归档已恢复复审，源冻结147文件。
+
+选定cumulative_owner_system_full_v4/pressure_v4：G2仍由旧writer产生并原生三方发布；新writer从第一个工作owner写前并行观察全部真实AW/B，经历q2第二owner-B SLVERR、两键原生修复、777流baseline在途取消与attempt5非冷恢复/真实q2重试。两路径实际rc_slots位图为3、sequence180328/store5/3/5。再获原生PC lease，实际healthy/owner drained/全局退休全真，data_error1/coverage_error0/dirty4；op1后data_error0，四条累计dirty与G1身份/floor保留。
+
+实际源DDR→C bank 0xc000000000四条64B写→C回读，8 R/4 W/4 B全部独立重放。339192/558356/265324/990176四行均保留，990179即使回到G1 refs2仍复制。完整146284032B G3候选逐字节等于工作owner，SHA256 0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595；现行A bank G2图像仍82b2185a16ee91455844f6d2a5e386268e0efd078bdc5d27b48ba06a1f205a95。回执锁存design/G1 baseline/G3/CP19/C bank，真实回复消费前manifest与lease释放关闭，消费后精确描述符匹配才许可。
+
+全部12AXI、CPU两query数值oracle、最终781标签/393页/3MB backing和146MB owner独立审计通过；原11AXI原始日志与上轮cancel full/pressure逐字节一致。结束2312490/2488944周期，仅行为仿真。归档恢复审计与154文件源冻结见结果JSON。
+
+边界：G3仅为候选，native authority/coordinator/config仍G2/CP18，未将新manifest接入JP；并非一个新writer已取代全部G2路径。接下来在同实例扩展原生781标签/两path/query floor180328导出与G3/CP19三方发布。静态接线已发现当前g3_healthy使用pc_safe、source_drained使用含as_retired的f_backend_idle；authority准备自身busy会撤销当前receipt。必须先保留实际发布反例，再区分开工/重arm许可、临时busy和源失效，不能把健康/退休固定1或直接冒充发布成功。具体见hardware/variants/owner_cumulative_system_v1/G3_NEXT.md。
+
+MAX_DIRTY有界、初始G1 clone/baseline/描述符外部可信，价格/history内容不变。无G3 warm/自然q3 oracle、实际overflow新增回收、全图baseline reseed、持久化认证/floor、任意变价或综合板卡性能结论。研究继续，goal active。

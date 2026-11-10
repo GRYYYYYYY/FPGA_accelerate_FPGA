@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "pid": 140666,
+  "sources": {
+    "scratch_frame_store_bram.sv": "601a4eb4f3437562ce39e21f819f93129b2fc72097ee6e4796dbd2b4dfad25df",
+    "scratch_page_controller_small.sv": "1a845e403c84755cab9b25018fd2e2c61f486b68404a4e043d346548a9f4cc84",
+    "tb_sparse_records_boundaries.sv": "6abdad412f584e79d7a2af98b704715b04396f8e449445530f62ae4187f9b51a"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_records_boundaries_20261024/sources/scratch_frame_store_bram.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_records_boundaries_20261024/sources/scratch_page_controller_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_records_boundaries_20261024/sources/tb_sparse_records_boundaries.sv"
+      ],
+      "pid": 140668,
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_sparse_records_boundaries",
+        "-s",
+        "boundaries",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "pid": 140702,
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "boundaries",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "pid": 142431,
+      "exit_code": 0
+    }
+  ],
+  "runner_sha256": "9381c14538493e7e906e14b9c742c4d1b573b13847f459123c72bae266d9e0f4",
+  "tb_generator_sha256": "66a90577841fb00d1fbefb0c650463fd586e6bdd217af46b0049058c5fe9e173",
+  "log_sha256": "4d0c878b4598f3c1080859a20f8d90dc0c2d6f77a1e71549f15468866ee56aad"
+}

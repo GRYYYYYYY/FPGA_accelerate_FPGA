@@ -1,0 +1,32 @@
+{
+  "status": "physical_observation_and_primitive_behavior_audited_not_full_clock_model",
+  "physical_capture": "results/clock_semantics_capture_20261023_v1.json",
+  "primitive_simulation": "data/derived/clock_primitive_sim_20261023_v1/report.json",
+  "simulation_counts": {
+    "parameter_cases": 16,
+    "behavioral_samples": 192
+  },
+  "compile_warnings": [
+    "WARNING: [VRFC 10-8426] non-net output port 'done' cannot be initialized at declaration in SystemVerilog mode [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/rtl/tb_clock_primitive_semantics.sv:6]"
+  ],
+  "warning_interpretation": "XSim warns about output-port declaration initialization. Each case explicitly assigns done=1 only after all12 assertions; independent transcript audit verifies all16 IDs and192 samples, so no early/unknown done can establish PASS. Warning is retained; no assertion suppressed.",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/clock_semantics_capture_20261023_v1.json": "80b68ab52eb73f9ac14cff71db9743e80a2c576467a5a3c50b2e0f3dff4229d7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/clock_primitive_sim_20261023_v1/plan.json": "9b33e7c912f0a7ad7c961ad774d0ffc06dd690cbc3b14b62a08420e3b3ce5f9e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/clock_primitive_sim_20261023_v1/report.json": "56f5eb38143f9e81e9405cb13efce151a55be9188a8a5d071387ae721d801ded",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/regression_clock_semantics_evidence_20261023_v1.log": "326cb90174e03da636db80ae4a3385242aeb7d702182d300a3facb7f53cfb31c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_clock_semantics_evidence.py": "db5a862a20905443ad3e53419807c001053e08849cd69dfd986477799b2e3b38"
+  },
+  "requirements_established": [
+    "AfterGSR, asynchronous CE data transfer requires effective clock input heldhigh; SYNC retains enable state while clock high.",
+    "Clock input transfer requires an enabled gate; both inversion bits change which raw input levels are effectivehigh.",
+    "Four physical probe endpoints have a net owner despite IS_USED=0.",
+    "Timesim netlist omits implicit BUFCE route-through instances in this design."
+  ],
+  "remaining": [
+    "Actual physical constant bindings and inversion selections are not exposed by these captures.",
+    "Leaf delay/test bypass behavior and shared/fixed ownership still need evidence; primitive behavior does not authorize the two physical pseudo instances."
+  ],
+  "restored_checkpoint": "data/netlist/site_full_applied_20261023_v1/routed.dcp",
+  "vivado_session": "vivado-20261023-072116-f6c0019b"
+}

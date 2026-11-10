@@ -1,0 +1,14 @@
+# 路由门控完整CRC回归通过，NORMAL准入组件候选通过（2026-10-27）
+
+详见results/route_block_system_crc_20261027.json/.md。route_block_system_crc_pressure_v1仅在已恢复五源combined基线上增加route controller idle_fault与adapter block_external两源变化，累计七源。完整27文件（12AXI/native事件与周期/最终DDR/恢复流）逐字节匹配，结束48288200ns一致；真实CRC失败、保持/退休、旧attempt拒绝、新attempt非冷恢复781标签/156path/10query、CPU q4 83/82/402/231及foreign net保留结论适用于相同观察。379文件归档实际恢复重审audit一致，180文件冻结results/route_block_system_crc_sources_20261027。归档e45678e9bacf7aca586e0338eb09647d2fb4e0f27d5e20d02691a71e2b88f2b2，audit57ac7014644f7a42eeb961db5a71924b66c5009e0522d607594f753257b7820b。运行器/审计器/variant已冻结，不覆盖修改。原仿真PID1005792/会话63725已终态，已完成根缓存释放98.53→96.96GiB，无错误、未删证据。
+
+route_block_synth_v1仍实际综合运行，最近Vivado PID969366/runner969094/会话92622；禁止覆盖重启。已有core can_start、authority rearm/req_ready的Synth8-326警告，results/route_block_synth_observation_20261027保存前缀及活进程，当时7次是发生次数而非唯一/最终环数，也不能由没有route告警认定route环已消失。当前只有完整行为通过，未获完整结构通过。旧combined五源终态仍21环/100-LUT区域/WNS-12.538ns，不能移作新七源的最终计数。
+
+后续诊断链已实际提交：会话8503/Python PID1370396，等待原PID969366且核对start ticks；只在原综合manifest observed/exit0后顺序运行inspect_restore_seed_synth.py、analyze_restore_seed_loops.py、audit_route_block_synth.py，失败即停，不重启综合；等待上限1200秒仅停止观察。下一会话先查现有链/原进程/diagnostic manifest，禁止另起同名诊断。结构审计器尚未实际执行；结构归档/恢复/冻结待终态完成。
+
+独立新候选见results/recovery_normal_native_20261027.json/.md，选定recovery_normal_loops_v2。只将coordinator五个原有NORMAL/!cold_rst门控输出staged_valid/permit_work/j_ready/recover_ready/cfg_ready中的fault/unexpected特化为正常阶段谓词，不再引用AS/OS READY；完整fault/fail_now/unexpected/attempt_reset与全部时序逻辑不变，重试safe/drained/retired覆盖保留。source-bound二态65536组等价检查通过。原生REARM fixed切片仅替换coordinator，3场景179检查、31条事件及3836ns与参考一致，15字段写/3条回读/10失败拒绝/3成功，J0/无owner-authority请求，RAM/config/外部退休模型。不是结构、AXI或完整系统证明。
+
+初版recovery_normal_native_v1因normal_fault在timeout声明前使用而VRFC10-3380编译失败，无展开/仿真；v2先声明wire再在原timeout定义后赋值，单独目录保留失败。失败14文件与成功40文件归档均实际恢复重审audit一致，35文件冻结results/recovery_normal_native_sources_20261027；对应variant/工具/证明已冻结。此NORMAL候选尚未接入route_block两个完整任务；其baseline coordinator与实际运行route源SHA相同。下一须结合新DCP残余路径接入，不替换任意publication/global fault消费者，不将局部恒等式称通用无环。
+
+八项最终矩阵仍只有当前CRC pressure一项通过，其余七例未提交。固定价格、可信初始快照、持久化floor/认证、自然overflow分配回收、物理实现/板卡缺口保留。研究继续，goal active。
+

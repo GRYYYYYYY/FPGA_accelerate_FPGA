@@ -1,0 +1,55 @@
+{
+  "status": "scoped_two_state_admission_pairs_excluded_not_full_reachability_proof",
+  "source_evidence": {
+    "query_residency_system.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/query_residency_system.sv",
+      "sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+      "required_source_fragments": [
+        "wire ap_allow=!rst&&!k_cold_rst&&!abort&&pc_owned&&!jp_owned&&!k_busy&&!k_rec_valid&&!as_cfg_lease&&!k_a_valid&&!ap_owned;",
+        "assign b_k_rec_valid=!boot_pending&&!qc_busy&&!pc_owned&&!as_cfg_lease&&k_rec_valid;",
+        "wire jp_start_open=!ap_valid&&!ap_owned&&!cp_valid&&!qc_cp_valid&&!as_cfg_valid&&f_sv==0&&!k_rec_valid&&!boot_pending;",
+        "assign as_retired=!as_busy&&!as_core_cfg_valid;",
+        ".no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid)"
+      ]
+    },
+    "checkpoint_lease_guard.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_lease_guard.sv",
+      "sha256": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+      "required_source_fragments": [
+        "assign acquire_ready=!rst&&!owned&&healthy&&route_retired&&no_offers&&!command_busy&&!test_reset;"
+      ]
+    },
+    "recovery_coordinator.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/recovery_coordinator.sv",
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+      "required_source_fragments": [
+        "DRAIN:if(backend_drained&&normal_retired)",
+        "AS:if(a_ready)state<=AW;"
+      ]
+    },
+    "residency_system.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/residency_system.sv",
+      "sha256": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+      "required_source_fragments": [
+        ".normal_retired(f_normal_retired&&as_retired&&(!wm_on||wm_services_retired))",
+        "assign as_attempt_reset=k_attempt_reset;"
+      ]
+    }
+  },
+  "admission_assignments_checked": 1024,
+  "drain_assignments_checked": 16,
+  "excluded_same_cycle_pairs": [
+    "recovery/AP offer",
+    "recovery/new lease acquisition",
+    "recovery/publication start"
+  ],
+  "drain_result": "cannot leave DRAIN while authority busy or configuration response pending",
+  "limitations": [
+    "hand-transcribed conjunction overapproximations checked against source fragments",
+    "does not prove sequential invariants or X/Z behavior",
+    "does not prove KA stall globally unreachable or full functional acceptance"
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false,
+  "checker_sha256": "3f64e7142b9c732cdd7c7d6d594bd42e97a74e8f41837a49eaf0723b2d719a83"
+}

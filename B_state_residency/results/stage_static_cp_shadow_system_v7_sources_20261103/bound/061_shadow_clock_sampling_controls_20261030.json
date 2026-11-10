@@ -1,0 +1,119 @@
+{
+  "all_output_comparisons_unchanged": true,
+  "clock_lead_ps": 1,
+  "clock_shadow_sha256": "1b0a2c640445612ffb36f2e26056b419ad177a76c04c4309b39fb5593ca60fa6",
+  "controls": {
+    "shadow_transport_nba_control_v1": {
+      "audit": {
+        "auditor_sha256": "1e78975e0e3cec62ccf6f156b485722bc6297d2dec6f60bfecd2d7092d13fb96",
+        "full_system_functional_netlist_validated": false,
+        "identical_models_verified": true,
+        "manifest_sha256": "3cabaa96f05310dffb4540ef4dba323bf636380ac00a6b3f8209640e67937b76",
+        "outcomes": {
+          "negedge_nba": {
+            "checks": 190,
+            "finish_ns": 1202,
+            "match": true
+          },
+          "posedge_nba": {
+            "failure_ns": 256,
+            "first_failure": "Fatal: FULL_SHADOW_MISMATCH port=qc_cp_crc time=256000 actual=00000001 expected=00000000",
+            "match": false
+          }
+        },
+        "replay_sampling_valid_for_both_controls": false,
+        "scope": "Controlled sequential-model sampling evidence only. v1 posedge NBA fails despite identical models; v2 must pass both without output comparison changes. Not FPGA or arbitrary event-scheduling equivalence.",
+        "status": "passed"
+      },
+      "restoration": {
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/shadow_transport_nba_control_v1.json",
+        "archive_sha256": "3ec8b28e00b067897af63263c2288c9f04dbd217fcc5f69073959065ceb7745f",
+        "audit_byte_identical": true,
+        "audit_sha256": "22d0f8e921d7073cc29dec1ef4b0f935d1091cd4a036577e8ed44289a5124e93",
+        "auditor": "audit_shadow_transport_nba_control_v1.py",
+        "files": 64,
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/shadow_transport_nba_control_v1",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/shadow_transport_nba_control_v1",
+        "status": "passed"
+      }
+    },
+    "shadow_transport_nba_control_v2": {
+      "audit": {
+        "auditor_sha256": "1e78975e0e3cec62ccf6f156b485722bc6297d2dec6f60bfecd2d7092d13fb96",
+        "full_system_functional_netlist_validated": false,
+        "identical_models_verified": true,
+        "manifest_sha256": "0a7d7a4dc46546d4716e4ed0f4f3629e5d120801cad6c84f09b18486e674f4ba",
+        "outcomes": {
+          "negedge_nba": {
+            "checks": 190,
+            "finish_ns": 1202,
+            "match": true
+          },
+          "posedge_nba": {
+            "checks": 190,
+            "finish_ns": 1202,
+            "match": true
+          }
+        },
+        "replay_sampling_valid_for_both_controls": true,
+        "scope": "Controlled sequential-model sampling evidence only. v1 posedge NBA fails despite identical models; v2 must pass both without output comparison changes. Not FPGA or arbitrary event-scheduling equivalence.",
+        "status": "passed"
+      },
+      "restoration": {
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/shadow_transport_nba_control_v2.json",
+        "archive_sha256": "61be0e97cb95e5027fc295db745d039cdfd25d9332b23c86deda2dd650fdfd70",
+        "audit_byte_identical": true,
+        "audit_sha256": "c71d931f3cce9563992c596a193e15040da32bec0b76ac0480b675a9bc82bf79",
+        "auditor": "audit_shadow_transport_nba_control_v1.py",
+        "files": 64,
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/shadow_transport_nba_control_v2",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/shadow_transport_nba_control_v2",
+        "status": "passed"
+      }
+    },
+    "stage_static_cp_shadow_clock_stateful_controls_v1": {
+      "audit": {
+        "auditor_sha256": "437a9c0b0f43c63617eb2036097c8e6597995adc56fdd3b54581162fb3298dc3",
+        "full_system_functional_netlist_validated": false,
+        "manifest_sha256": "8384c4a91e6afc86699d27f10ba6893f0ead6dfafec8c659afd32f8afd1b3f8e",
+        "outcomes": {
+          "known_mismatch": {
+            "expected_fatal": "Fatal: FULL_SHADOW_MISMATCH port=boot_pending time=301000 actual=0 expected=1"
+          },
+          "matching": {
+            "checks": 190,
+            "finish_ns": 1202,
+            "reset_edges": 5
+          },
+          "short_reset": {
+            "expected_fatal": "Fatal: FULL_SHADOW_INCOMPLETE reset=2 checks=0 last=0 end=1000000"
+          },
+          "x_mismatch": {
+            "expected_fatal": "Fatal: FULL_SHADOW_MISMATCH port=boot_pending time=301000 actual=x expected=1"
+          },
+          "z_mismatch": {
+            "expected_fatal": "Fatal: FULL_SHADOW_MISMATCH port=boot_pending time=301000 actual=z expected=1"
+          }
+        },
+        "scope": "Stateful checker control integrity and outcomes only; clocked counter and registered stream drive all known outputs. Equal X/Z outputs accepted, different known/X/Z outputs rejected, insufficient reset rejected, rapid input transport and full output drain exercised. No real FPGA DUT/netlist validation.",
+        "status": "passed"
+      },
+      "restoration": {
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/stage_static_cp_shadow_clock_stateful_controls_v1.json",
+        "archive_sha256": "0e95c9e90cff605762f02c96114da590e68e8484ad26879096af33b60abf0f77",
+        "audit_byte_identical": true,
+        "audit_sha256": "bb4648382b60bd53baf2f75d30ca23a6219a2bd9a547f1fa6fc0de01fe852a17",
+        "auditor": "audit_stage_static_cp_shadow_clock_stateful_controls_v1.py",
+        "files": 157,
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/stage_static_cp_shadow_clock_stateful_controls_v1",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_clock_stateful_controls_v1",
+        "status": "passed"
+      }
+    }
+  },
+  "full_system_functional_netlist_validated": false,
+  "scope": "v1 identical models fail under posedge NBA stimulus, demonstrating replay sampling error. A1ps clock lead restores both edge controls and retains five original negative/reset controls. Bounded fake-model evidence, not arbitrary scheduling/formal or real netlist acceptance.",
+  "source_shadow_sha256": "d4dcbd4d9a666586b83fca423d3b590f6b183229e904c6916c2ebeebd02e6287",
+  "status": "shadow_clock_sampling_controls_actual_restored",
+  "valid_qualification_not_yet_applied": true
+}

@@ -1,0 +1,167 @@
+
+
+================================================================
+== Vitis HLS Report for 'children_step'
+================================================================
+* Date:           Sat Oct 24 18:01:17 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        children_step
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  2.635 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        2|        2|  20.000 ns|  20.000 ns|    3|    3|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +-----------------+-------+---------+---------+-----------+-----------+-----+-----+---------+
+        |                 |       |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+        |     Instance    | Module|   min   |   max   |    min    |    max    | min | max |   Type  |
+        +-----------------+-------+---------+---------+-----------+-----------+-----+-----+---------+
+        |grp_step_fu_253  |step   |        1|        1|  10.000 ns|  10.000 ns|    1|    1|       no|
+        +-----------------+-------+---------+---------+-----------+-----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        -|        -|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|      879|     1584|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|       14|    -|
+|Register             |        -|     -|        3|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      882|     1598|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +-----------------+-------+---------+----+-----+------+-----+
+    |     Instance    | Module| BRAM_18K| DSP|  FF |  LUT | URAM|
+    +-----------------+-------+---------+----+-----+------+-----+
+    |grp_step_fu_253  |step   |        0|   0|  879|  1584|    0|
+    +-----------------+-------+---------+----+-----+------+-----+
+    |Total            |       |        0|   0|  879|  1584|    0|
+    +-----------------+-------+---------+----+-----+------+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    N/A
+
+    * Multiplexer: 
+    +-----------+----+-----------+-----+-----------+
+    |    Name   | LUT| Input Size| Bits| Total Bits|
+    +-----------+----+-----------+-----+-----------+
+    |ap_NS_fsm  |  14|          3|    1|          3|
+    +-----------+----+-----------+-----+-----------+
+    |Total      |  14|          3|    1|          3|
+    +-----------+----+-----------+-----+-----------+
+
+    * Register: 
+    +------------------------------+---+----+-----+-----------+
+    |             Name             | FF| LUT| Bits| Const Bits|
+    +------------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                     |  2|   0|    2|          0|
+    |grp_step_fu_253_ap_start_reg  |  1|   0|    1|          0|
+    +------------------------------+---+----+-----+-----------+
+    |Total                         |  3|   0|    3|          0|
+    +------------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------+-----+-----+------------+-------------------+--------------+
+|         RTL Ports        | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++--------------------------+-----+-----+------------+-------------------+--------------+
+|ap_clk                    |   in|    1|  ap_ctrl_hs|      children_step|  return value|
+|ap_rst                    |   in|    1|  ap_ctrl_hs|      children_step|  return value|
+|ap_start                  |   in|    1|  ap_ctrl_hs|      children_step|  return value|
+|ap_done                   |  out|    1|  ap_ctrl_hs|      children_step|  return value|
+|ap_idle                   |  out|    1|  ap_ctrl_hs|      children_step|  return value|
+|ap_ready                  |  out|    1|  ap_ctrl_hs|      children_step|  return value|
+|op                        |   in|   32|     ap_none|                 op|        scalar|
+|parent                    |   in|   32|     ap_none|             parent|        scalar|
+|count                     |   in|   32|     ap_none|              count|        scalar|
+|prune                     |   in|   32|     ap_none|              prune|        scalar|
+|query                     |   in|   32|     ap_none|              query|        scalar|
+|price                     |   in|   32|     ap_none|              price|        scalar|
+|generation                |   in|   32|     ap_none|         generation|        scalar|
+|position                  |   in|   32|     ap_none|           position|        scalar|
+|phase                     |   in|   32|     ap_none|              phase|        scalar|
+|node                      |   in|   32|     ap_none|               node|        scalar|
+|value_r                   |   in|   32|     ap_none|            value_r|        scalar|
+|aux                       |   in|   32|     ap_none|                aux|        scalar|
+|service_status            |   in|   32|     ap_none|     service_status|        scalar|
+|status                    |  out|   32|      ap_vld|             status|       pointer|
+|status_ap_vld             |  out|    1|      ap_vld|             status|       pointer|
+|result_generation         |  out|   32|      ap_vld|  result_generation|       pointer|
+|result_generation_ap_vld  |  out|    1|      ap_vld|  result_generation|       pointer|
+|request                   |  out|   32|      ap_vld|            request|       pointer|
+|request_ap_vld            |  out|    1|      ap_vld|            request|       pointer|
+|result_position           |  out|   32|      ap_vld|    result_position|       pointer|
+|result_position_ap_vld    |  out|    1|      ap_vld|    result_position|       pointer|
+|result_node               |  out|   32|      ap_vld|        result_node|       pointer|
+|result_node_ap_vld        |  out|    1|      ap_vld|        result_node|       pointer|
+|result_parent             |  out|   32|      ap_vld|      result_parent|       pointer|
+|result_parent_ap_vld      |  out|    1|      ap_vld|      result_parent|       pointer|
+|result_query              |  out|   32|      ap_vld|       result_query|       pointer|
+|result_query_ap_vld       |  out|    1|      ap_vld|       result_query|       pointer|
+|result_price              |  out|   32|      ap_vld|       result_price|       pointer|
+|result_price_ap_vld       |  out|    1|      ap_vld|       result_price|       pointer|
+|emitted                   |  out|   32|      ap_vld|            emitted|       pointer|
+|emitted_ap_vld            |  out|    1|      ap_vld|            emitted|       pointer|
+|active_r                  |  out|   32|      ap_vld|           active_r|       pointer|
+|active_r_ap_vld           |  out|    1|      ap_vld|           active_r|       pointer|
+|fault                     |  out|   32|      ap_vld|              fault|       pointer|
+|fault_ap_vld              |  out|    1|      ap_vld|              fault|       pointer|
++--------------------------+-----+-----+------------+-------------------+--------------+
+

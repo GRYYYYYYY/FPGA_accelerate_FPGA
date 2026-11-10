@@ -1,0 +1,460 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 02:53:53 2026
+# Process ID: 311366
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023
+# Command line: vivado -mode tcl -log .vivado-ai/vivado_24030267_c0dd7fa4.log -journal .vivado-ai/vivado_24030267_c0dd7fa4.jou -notrace -source .vivado-ai/init_24030267_c0dd7fa4.tcl
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/.vivado-ai/vivado_24030267_c0dd7fa4.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/.vivado-ai/vivado_24030267_c0dd7fa4.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 932.401 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source .vivado-ai/init_24030267_c0dd7fa4.tcl -notrace
+INFO: [Common 17-1674] Started webserver at http://localhost:59129
+set_param -quiet messaging.defaultLimit 10000000
+puts "MCPPROBE:76sn3q0mikyh:[get_param messaging.defaultLimit]"
+MCPPROBE:76sn3q0mikyh:10000000
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:fz7d3wd5k48d===}
+INFO: [MCP 00-100] ===MCP_CMD_START:fz7d3wd5k48d===
+puts "VSCSTART" ; set exitCode [catch {puts [version -short]; puts [info commands launch_simulation]; puts [info commands export_simulation]; puts [get_parts -quiet xcu280-fsvh2892-2L-e]; puts [auto_execok /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+2022.2
+launch_simulation
+export_simulation
+xcu280-fsvh2892-2L-e
+/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:fz7d3wd5k48d:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:fz7d3wd5k48d:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:6rx153ts9z5v===}
+INFO: [MCP 00-100] ===MCP_CMD_START:6rx153ts9z5v===
+puts "VSCSTART" ; set exitCode [catch {create_project b_scratch_frame ./project -part xcu280-fsvh2892-2L-e; set_property target_simulator XSim [current_project]; puts [get_property PART [current_project]]; puts [get_property target_simulator [current_project]]; puts [get_filesets -filter {FILESET_TYPE == SimulationSrcs}]; puts [list_property [get_filesets sim_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1719.273 ; gain = 88.961 ; free physical = 713484 ; free virtual = 1388021
+xcu280-fsvh2892-2L-e
+XSim
+sim_1
+32BIT CLASS CONFIGURE_FOR_GUI_MODE FILESET_TYPE FORCE_COMPILE_GLBL FORCE_NO_COMPILE_GLBL GENERATE_SCRIPTS_ONLY GENERIC HBS.CONFIGURE_DESIGN_FOR_HIER_ACCESS HW_EMU.DEBUG_MODE INCLUDE_DIRS INCREMENTAL NAME NEEDS_REFRESH NL.CELL NL.INCL_UNISIM_MODELS NL.PROCESS_CORNER NL.RENAME_TOP NL.SDF_ANNO NL.WRITE_ALL_OVERRIDES RUNTIME SIMMODEL_VALUE_CHECK SIMULATOR_LAUNCH_MODE SOURCE_SET SYSTEMC_INCLUDE_DIRS TOP TRANSPORT_INT_DELAY TRANSPORT_PATH_DELAY UNIFAST UNIT_UNDER_TEST VERILOG_DEFINE VERILOG_UPPERCASE XELAB.DEBUG_LEVEL XELAB.DLL XELAB.LOAD_GLBL XELAB.MORE_OPTIONS XELAB.MT_LEVEL XELAB.NOSORT XELAB.RANGECHECK XELAB.RELAX XELAB.SDF_DELAY XELAB.SNAPSHOT XSIM.COMPILE.TCL.PRE XSIM.COMPILE.XSC.MORE_OPTIONS XSIM.COMPILE.XVHDL.MORE_OPTIONS XSIM.COMPILE.XVHDL.NOSORT XSIM.COMPILE.XVHDL.RELAX XSIM.COMPILE.XVLOG.MORE_OPTIONS XSIM.COMPILE.XVLOG.NOSORT XSIM.COMPILE.XVLOG.RELAX XSIM.ELABORATE.COVERAGE.CELLDEFINE XSIM.ELABORATE.COVERAGE.DIR XSIM.ELABORATE.COVERAGE.LIBRARY XSIM.ELABORATE.COVERAGE.NAME XSIM.ELABORATE.COVERAGE.TYPE XSIM.ELABORATE.DEBUG_LEVEL XSIM.ELABORATE.LINK.C XSIM.ELABORATE.LINK.SYSC XSIM.ELABORATE.LOAD_GLBL XSIM.ELABORATE.MT_LEVEL XSIM.ELABORATE.RANGECHECK XSIM.ELABORATE.RELAX XSIM.ELABORATE.SDF_DELAY XSIM.ELABORATE.SNAPSHOT XSIM.ELABORATE.XELAB.MORE_OPTIONS XSIM.ELABORATE.XSC.MORE_OPTIONS XSIM.MORE_OPTIONS XSIM.SAIF XSIM.SIMULATE.ADD_POSITIONAL XSIM.SIMULATE.CUSTOM_TCL XSIM.SIMULATE.LOG_ALL_SIGNALS XSIM.SIMULATE.NO_QUIT XSIM.SIMULATE.RUNTIME XSIM.SIMULATE.SAIF XSIM.SIMULATE.SAIF_ALL_SIGNALS XSIM.SIMULATE.SAIF_SCOPE XSIM.SIMULATE.TCL.POST XSIM.SIMULATE.WDB XSIM.SIMULATE.XSIM.MORE_OPTIONS XSIM.VIEW XSIM.WDB
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:6rx153ts9z5v:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:6rx153ts9z5v:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:vc8s5pzb7e57===}
+INFO: [MCP 00-100] ===MCP_CMD_START:vc8s5pzb7e57===
+puts "VSCSTART" ; set exitCode [catch {set b_help [exec /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim -help]; foreach b_line [split $b_help \n] {if {[string match *testplusarg* $b_line]} {puts $b_line}}} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+
+****** Vivado Simulator v2022.2
+  **** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+Usage: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xsim [options]
+(Switches with double dash '--' can also be used with a single dash '-')
+    --R                  : Run simulation till end i.e. do 'run all;quit'
+    --autoloadwcfg       : Load already saved waveform configuration file
+    --cov_db_dir         : Functional Coverage database dump directory. The coverage data will be present under <arg>/xsim.covdb/<cov_db_name> directory. Default is ./ or inherits value set in xelab.
+    --cov_db_name        : Functional Coverage database name. The coverage data will be present under <cov_db_dir>/xsim.covdb/<arg> directory. Default is snapshot name or inherits value set in xelab.
+    --downgrade_error2info : Downgrade severity level of HDL messages from Error to Info.
+    --downgrade_error2warning : Downgrade severity level of HDL messages from Error to Warning.
+    --downgrade_fatal2info : Downgrade severity level of HDL messages from Fatal to Info.
+    --downgrade_fatal2warning : Downgrade severity level of HDL messages from Fatal to Warning.
+    --downgrade_severity : Downgrade severity level of HDL messages. Choices are:error2warning|error2info|fatal2warning|fatal2info
+    --f                  : Take command line options from a file
+    --file               : Take command line options from a file
+    --g                  : Run with interactive GUI
+    --gui                : Run with interactive GUI
+    --h                  : Print help message and exit
+    --help               : Print help message and exit
+    --ieeewarnings       : Enable warnings from VHDL IEEE functions
+    --ignore_assertions  : Ignore System Verilog Concurrent Assertions.
+    --ignore_coverage    : Ignore System Verilog Functional Coverage.
+    --ignore_feature     : Ignore effect of specific HDL feature or construct. Choices are: assertion
+    --log                : Specify the log file name
+    --maxdeltaid         : Specify the maximum delta number. Will report error if it exceeds maximum simulation loops at the same time
+    --maxlogsize         : Set the maximum size a log file can reach in MB. The default setting is unlimited
+    --nolog              : Suppress log file generation
+    --nosignalhandlers   : Run with no signal handlers to avoid conflict with security software.
+    --onerror            : Specify behavior upon simulation run-time error: quit|stop
+    --onfinish           : Specify behavior at end of simulation: quit|stop
+    --protoinst          : Specify a .protoinst file for protocol analysis
+    --runall             : Run simulation till end i.e. do 'run all;quit'
+    --stats              : Display memory and cpu stats upon exiting
+    --sv_seed            : seed for sv constraint random
+    --t                  : Specify the TCL file for batch mode execution
+    --tclbatch           : Specify the TCL file for batch mode execution
+    --tempDir            : Specify the temporary directory name
+    --testplusarg        : Specify plus args to be used by $test$plusargs and $value$plusargs system functions
+    --tl                 : Enable printing of file name and line number of statements being executed.
+    --tp                 : Enable printing of hierarchical names of process being executed.
+    --version            : Print the simulator version and quit.
+    --view               : Open a wave configuration file. This switch should be used together with -gui switch
+    --wdb                : Specify the waveform database output file.
+VSCEND:1
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:vc8s5pzb7e57:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:vc8s5pzb7e57:1===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:wcgkwkxo6wtj===}
+INFO: [MCP 00-100] ===MCP_CMD_START:wcgkwkxo6wtj===
+puts "VSCSTART" ; set exitCode [catch {add_files -norecurse {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv}; add_files -fileset sim_1 -norecurse {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv}; set_property top scratch_frame_store [get_filesets sources_1]; set_property top tb_scratch_frame_store [get_filesets sim_1]; set_property xsim.simulate.runtime 120ms [get_filesets sim_1]; set_property xsim.simulate.xsim.more_options {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt} [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts [get_property TOP [get_filesets sim_1]]; puts [get_files -of_objects [get_filesets sim_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+ERROR: [Common 17-170] Unknown option '-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt', please type 'set_property -help' for usage info.
+
+VSCEND:1
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:wcgkwkxo6wtj:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:wcgkwkxo6wtj:1===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:qu65uaenb2hb===}
+INFO: [MCP 00-100] ===MCP_CMD_START:qu65uaenb2hb===
+puts "VSCSTART" ; set exitCode [catch {help set_property} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+set_property
+
+Description: 
+Set property on object(s)
+
+Syntax: 
+set_property  [-dict <args>] [-quiet] [-verbose] <name> <value> <objects>...
+
+Usage: 
+  Name        Description
+  -----------------------
+  [-dict]     list of name/value pairs of properties to set
+  [-quiet]    Ignore command errors
+  [-verbose]  Suspend message limits during command execution
+  <name>      Name of property to set. Not valid with -dict option
+  <value>     Value of property to set. Not valid with -dict option
+  <objects>   Objects to set properties on
+
+Categories: 
+Object, PropertyAndParameter, XDC
+
+Description:
+
+  Assigns the defined property <name> and <value> to the specified <objects>.
+
+  This command can be used to define any property on an object in the design.
+  Each object has a set of predefined properties that have expected values,
+  or a range of values. The set_property command can be used to define the
+  values for these properties. To determine the defined set of properties on
+  an object, use report_property, list_property, or list_property_values.
+
+  You can also define custom properties for an object, by specifying a unique
+  <name> and <value> pair for the object. If an object has custom properties,
+  these will also be reported by the report_property and list_property
+  commands.
+
+  This command returns nothing if successful, and an error if it fails.
+
+  Note: You can use the get_property command to validate any properties that
+  have been set on an object.
+
+Arguments:
+
+  -dict - (Optional) Use this option to specify a dictionary of multiple
+  properties (<name> <value> pairs) on an object with a single set_property
+  command. Multiple <name> <value> pairs must be enclosed in quotes, "", or
+  braces, {}.
+
+    -dict "name1 value1 name2 value2 ... nameN valueN"
+
+  Note: When writing the constraints for a design using either
+  save_constraints, save_constraints_as, or write_xdc, the properties
+  specified using the -dict option will be written as separate set_property
+  commands for each name/value pair. If you don`t want the XDC constraints to
+  be expanded in this manner, you can either use the Tcl script driven
+  approach in a non-project design, or use a Tcl script as a design source in
+  your constraint set. Refer to Vivado Design Suite User Guide: Design Flows
+  Overview (UG892) for more information on non-project based design, or refer
+  to Vivado Design Suite User Guide: Using Constraints (UG903) for more
+  information on using Tcl scripts in constraint sets.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <name> - (Required) Specifies the name of the property to be assigned to
+  the object or objects. The <name> argument is case sensitive and should be
+  specified appropriately.
+
+  <value> - (Required) Specifies the value to assign to the <name> on the
+  specified object or objects. The value is checked against the property type
+  to ensure that the value is valid. If the value is not appropriate for the
+  property an error will be returned.
+
+  Note: In some cases the value of a property may include special characters,
+  such as the dash character (`-`), which can cause the tool to interpret the
+  value as a new argument to the command. In this case, you must use the
+  explicit arguments (-name, -value, -objects) instead of the implied
+  positional arguments (name, value, objects) as described here. This is
+  shown in the Examples section below.
+
+  <objects> - (Required) One or more objects to assign the property to.
+
+Examples:
+
+  Create a user-defined boolean property, TRUTH, for cell objects, and set
+  the property on a cell:
+
+    create_property -type bool truth cell  
+    set_property truth false [lindex [get_cells] 1]
+
+  Use the -dict option to specify multiple properties at one time on the
+  current design:
+
+    set_property -dict "POST_CRC enable POST_CRC_ACTION correct_and_continue" \  
+    [current_design]
+
+  The following example sets the TOP property of the current fileset to
+  define the top module of the project:
+
+    set_property top fftTop [current_fileset]  
+    set_property top_file {C:/Data/sources/fftTop.v} [current_fileset]
+
+  Note: Defining the top module requires the TOP property to be set to the
+  desired hierarchical block in the source fileset of the current project. In
+  the preceding example TOP is the property name, fftTop is the value, and
+  current_fileset is the object. In addition, the TOP_FILE property should be
+  defined to point to the data source for the top module.
+
+  This example shows how to set a property value that includes the dash
+  character, `-`. The dash can cause the tool to interpret the value as a new
+  command argument, rather than part of the value being specified, and will
+  cause an error as shown. In this case, you must use the explicit form of
+  the positional arguments in the set_property command:
+
+    set_property {XELAB.MORE_OPTIONS} {-pulse_e_style ondetect} \  
+       [get_filesets sim_1]  
+    ERROR: [Common 17-170] Unknown option `-pulse_e_style ondetect`,   
+     please type `set_property -help` for usage info. 
+    set_property -name {XELAB.MORE_OPTIONS} -value {-pulse_e_style ondetect}\  
+       -objects [get_filesets sim_1]
+
+  The following example sets the internal VREF property value for the
+  specified IO Bank:
+
+    set_property internal_vref {0.75} [get_iobanks 0]
+
+  The following example defines a DCI Cascade by setting the DCI_CASCADE
+  property for the specified IO Bank:
+
+    set_property DCI_CASCADE {14} [get_iobanks 0 ]
+
+  The following example configures the synth_1 run, setting options for
+  Vivado Synthesis 2013, and then launches the synthesis run:
+
+    set_property flow {Vivado Synthesis 2016} \  
+       [get_runs synth_1]   
+    set_property STEPS.SYNTH_DESIGN.ARGS.GATED_CLOCK_CONVERSION on \  
+       [get_runs synth_1]  
+    set_property STEPS.SYNTH_DESIGN.ARGS.FSM_EXTRACTION one_hot \  
+       [get_runs synth_1]  
+    launch_runs synth_1
+
+  This example is the same as the prior example, except that it uses the
+  -dict option to set all the properties on the synthesis run in a single
+  set_property command:
+
+    set_property -dict [ list flow {Vivado Synthesis 2016} \  
+       STEPS.SYNTH_DESIGN.ARGS.GATED_CLOCK_CONVERSION on \  
+       STEPS.SYNTH_DESIGN.ARGS.FSM_EXTRACTION \  
+       one_hot ] [get_runs synth_1]  
+    launch_runs synth_1
+
+See Also:
+
+   *  current_fileset
+   *  create_property
+   *  create_run
+   *  get_cells
+   *  get_property
+   *  get_runs
+   *  launch_runs
+   *  list_property
+   *  list_property_value
+   *  report_property
+   *  reset_property
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:qu65uaenb2hb:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:qu65uaenb2hb:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:21rcb7vdeb7b===}
+INFO: [MCP 00-100] ===MCP_CMD_START:21rcb7vdeb7b===
+puts "VSCSTART" ; set exitCode [catch {set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts [get_property TOP [get_filesets sim_1]]; puts [get_files -of_objects [get_filesets sim_1]]; puts [get_property xsim.simulate.xsim.more_options [get_filesets sim_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+tb_scratch_frame_store
+/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv
+-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:21rcb7vdeb7b:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:21rcb7vdeb7b:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:r9tjkjs28tcu===}
+INFO: [MCP 00-100] ===MCP_CMD_START:r9tjkjs28tcu===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_scratch_frame_store'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_scratch_frame_store' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_scratch_frame_store_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_frame_store
+ERROR: [VRFC 10-4982] syntax error near 'matches' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:50]
+ERROR: [VRFC 10-8549] SystemVerilog keyword 'matches' used in incorrect context [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:50]
+ERROR: [VRFC 10-4982] syntax error near 'matches' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:101]
+ERROR: [VRFC 10-8549] SystemVerilog keyword 'matches' used in incorrect context [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:101]
+ERROR: [VRFC 10-4982] syntax error near 'else' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:102]
+ERROR: [VRFC 10-8549] SystemVerilog keyword 'else' used in incorrect context [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:102]
+ERROR: [VRFC 10-8530] module 'scratch_frame_store' is ignored due to previous errors [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:5]
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim/xvlog.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim/xvlog.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+
+VSCEND:1
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:r9tjkjs28tcu:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:r9tjkjs28tcu:1===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:c9fg56685hfr===}
+INFO: [MCP 00-100] ===MCP_CMD_START:c9fg56685hfr===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_scratch_frame_store'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_scratch_frame_store' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_scratch_frame_store_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing Verilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_scratch_frame_store_behav xil_defaultlib.tb_scratch_frame_store xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_scratch_frame_store_behav xil_defaultlib.tb_scratch_frame_store xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.scratch_frame_store_default
+Compiling module xil_defaultlib.tb_scratch_frame_store
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_scratch_frame_store_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_scratch_frame_store_behav -key {Behavioral:sim_1:Functional:tb_scratch_frame_store} -tclbatch {tb_scratch_frame_store.tcl} -log {simulate.log} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_scratch_frame_store.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 120ms
+TEST_PASS scratch_frame_store checks=98351 actual_commands=98322 stalled_cycles=17358
+$finish called at time : 3780030 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv" Line 109
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_scratch_frame_store_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 120ms
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:09 . Memory (MB): peak = 1812.141 ; gain = 62.117 ; free physical = 676439 ; free virtual = 1392943
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:c9fg56685hfr:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:c9fg56685hfr:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:kkhkbyz99fiz===}
+INFO: [MCP 00-100] ===MCP_CMD_START:kkhkbyz99fiz===
+puts "VSCSTART" ; set exitCode [catch {close_sim; foreach b_prop [list_property [get_runs synth_1]] {if {[string match *SYNTH_DESIGN.ARGS* $b_prop]} {puts $b_prop}}} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY
+STEPS.SYNTH_DESIGN.ARGS.GATED_CLOCK_CONVERSION
+STEPS.SYNTH_DESIGN.ARGS.BUFG
+STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE
+STEPS.SYNTH_DESIGN.ARGS.RETIMING
+STEPS.SYNTH_DESIGN.ARGS.NO_RETIMING
+STEPS.SYNTH_DESIGN.ARGS.FSM_EXTRACTION
+STEPS.SYNTH_DESIGN.ARGS.KEEP_EQUIVALENT_REGISTERS
+STEPS.SYNTH_DESIGN.ARGS.RESOURCE_SHARING
+STEPS.SYNTH_DESIGN.ARGS.CONTROL_SET_OPT_THRESHOLD
+STEPS.SYNTH_DESIGN.ARGS.NO_LC
+STEPS.SYNTH_DESIGN.ARGS.NO_SRLEXTRACT
+STEPS.SYNTH_DESIGN.ARGS.SHREG_MIN_SIZE
+STEPS.SYNTH_DESIGN.ARGS.MAX_BRAM
+STEPS.SYNTH_DESIGN.ARGS.MAX_URAM
+STEPS.SYNTH_DESIGN.ARGS.MAX_DSP
+STEPS.SYNTH_DESIGN.ARGS.MAX_BRAM_CASCADE_HEIGHT
+STEPS.SYNTH_DESIGN.ARGS.MAX_URAM_CASCADE_HEIGHT
+STEPS.SYNTH_DESIGN.ARGS.CASCADE_DSP
+STEPS.SYNTH_DESIGN.ARGS.ASSERT
+STEPS.SYNTH_DESIGN.ARGS.INCREMENTAL_MODE
+STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:kkhkbyz99fiz:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:kkhkbyz99fiz:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:qhkfz9e80gij===}
+INFO: [MCP 00-100] ===MCP_CMD_START:qhkfz9e80gij===
+puts "VSCSTART" ; set exitCode [catch {add_files -fileset constrs_1 -norecurse {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc}; set_property -name {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} -value {-mode out_of_context} -objects [get_runs synth_1]; puts [get_property {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} [get_runs synth_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+-mode out_of_context
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:qhkfz9e80gij:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:qhkfz9e80gij:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:eqpljk37vdsr===}
+INFO: [MCP 00-100] ===MCP_CMD_START:eqpljk37vdsr===
+puts "VSCSTART" ; set exitCode [catch {launch_runs synth_1 -jobs 2} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+CRITICAL WARNING: [HDL 9-1206] Syntax error near 'matches' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:50]
+CRITICAL WARNING: [HDL 9-1206] Syntax error near 'matches' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:101]
+CRITICAL WARNING: [HDL 9-1206] Syntax error near 'else' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:102]
+WARNING: [Vivado 12-7122] Auto Incremental Compile:: No reference checkpoint was found in run synth_1. Auto-incremental flow will not be run, the standard flow will be run instead.

@@ -1,0 +1,47 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Sat Oct 24 07:49:19 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/record_response_timing_20261024/utilization_hierarchical.rpt
+| Design       : memory_scratch_endpoint_small
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-----------------------------------+-------------------------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+|              Instance             |                Module               | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | URAM | DSP Blocks |
++-----------------------------------+-------------------------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+| memory_scratch_endpoint_small     |                               (top) |      14759 |      14323 |     436 |    0 | 11171 |    319 |      0 |    0 |          3 |
+|   (memory_scratch_endpoint_small) |                               (top) |        143 |        143 |       0 |    0 |   537 |      0 |      0 |    0 |          0 |
+|   memory                          |        record_backing_service_small |       9273 |       9273 |       0 |    0 |  5829 |    317 |      0 |    0 |          3 |
+|     (memory)                      |        record_backing_service_small |        200 |        200 |       0 |    0 |   141 |      0 |      0 |    0 |          0 |
+|     codec                         |            scratch_page_codec_small |       5067 |       5067 |       0 |    0 |  1622 |      0 |      0 |    0 |          0 |
+|     memory_service                |          backing_page_service_small |       4009 |       4009 |       0 |    0 |  4066 |    317 |      0 |    0 |          3 |
+|       (memory_service)            |          backing_page_service_small |         58 |         58 |       0 |    0 |   244 |      0 |      0 |    0 |          0 |
+|       directory                   |       backing_frame_directory_small |       3546 |       3546 |       0 |    0 |  3140 |    317 |      0 |    0 |          3 |
+|       dma                         |              scratch_page_axi_small |        406 |        406 |       0 |    0 |   682 |      0 |      0 |    0 |          0 |
+|   pages                           |       queued_scratch_endpoint_small |       5349 |       4913 |     436 |    0 |  4805 |      2 |      0 |    0 |          0 |
+|     (pages)                       |       queued_scratch_endpoint_small |         17 |         17 |       0 |    0 |    53 |      0 |      0 |    0 |          0 |
+|     endpoint                      |       scratch_page_controller_small |       3616 |       3616 |       0 |    0 |  4723 |      2 |      0 |    0 |          0 |
+|       (endpoint)                  |       scratch_page_controller_small |       1129 |       1129 |       0 |    0 |  2808 |      0 |      0 |    0 |          0 |
+|       storage                     |                 scratch_frame_store |       2489 |       2489 |       0 |    0 |  1915 |      2 |      0 |    0 |          0 |
+|     fence_acks                    |   bounded_sync_fifo__parameterized0 |         40 |         24 |      16 |    0 |     4 |      0 |      0 |    0 |          0 |
+|     fence_requests                | bounded_sync_fifo__parameterized0_0 |         13 |          5 |       8 |    0 |     4 |      0 |      0 |    0 |          0 |
+|     requests                      |                   bounded_sync_fifo |        194 |         40 |     154 |    0 |     7 |      0 |      0 |    0 |          0 |
+|     responses                     |    record_response_fallthrough_fifo |        375 |        271 |     104 |    0 |     7 |      0 |      0 |    0 |          0 |
+|     work                          |                 bounded_sync_fifo_1 |       1114 |        960 |     154 |    0 |     7 |      0 |      0 |    0 |          0 |
++-----------------------------------+-------------------------------------+------------+------------+---------+------+-------+--------+--------+------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

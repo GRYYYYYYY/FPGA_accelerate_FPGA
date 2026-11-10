@@ -1,0 +1,13 @@
+# G3 warm之后的研究入口
+
+选定third_warm_full_v2/pressure_v2，最终证据和恢复凭据见results/third_warm_20261027.json/.md。生产RTL与path_capacity_third正常三槽版本逐文件SHA一致。v2仅修正TB完整槽号观察和旧数组采集范围；开发v1的原归档保留。其审计序列化受目录遍历顺序影响，语义相同但字节重审失败，记录于third_warm_legacy_order_failure_20261027.json；稳定对照包third_warm_full_legacy_stable_v1/pressure_legacy_stable_v1保留原命令/源/运行数据，通过repackaged_from及原manifest哈希明确它们不是新仿真，用独立排序审计完成重审。不要修改旧归档或冻结审计器。
+
+本轮真实恢复源是G3/CP19、5/3/5、781标签、117字q1/q2加空第三槽、floor180328。原CRC：path f4394572、query9493257c；full标签742f5a50、pressure2f1c12da。q3拆线产生三个journal键，第二个commit写558358的B错误之后，G3两轮authority目标2/4/5、工作2/4/4，真实仅265324 INC4→5。全部781写入/回读及原path/query回执、成功回复退休后才放行，恢复6/0/6并保留floor180328。随后重新登记q3历史路径、实际ripup及重试180329，最终三路径117字CRC437e9a9a、query CRC03650e61、floor180329、CP19/journal3。最终三路径尚未作为G4共同发布。
+
+下一自然q4已CPU采集并全量核对，见results/iter2_fourth_20261027.json/.md：sequence180330、connection170791/net26422/source66893/sink6954，旧路径与新路径6954→990178→558358→265324→66893。真实准备释放990178的最后primary owner（refs1→0、occ1→0），另两节点4→3、5→4；q3提交→q4准备的9089009行核对仅五行变化，overflow/prices不变。83poll/82expand/402candidate/231标签更新；231尚非独立cost oracle。
+
+后续应先生成q4自己的cost/CPS1与filter oracle，确认工作表是否与当前相同，不能复用q3数值结果。为保留q1/q2/q3并登记q4旧路径，验证PATH_SLOTS4和MAX_PATH32对应156字镜像：slot位宽仍2，最大合法编码变为3，不能复用三槽的“slot3非法”断言。G4源若为四槽，必须重新实际导出三有效路径加空第四槽并计算156字CRC；不能把已验证117字G3或最终三路径镜像当成156字G4。再接真实三方G4发布、正常q4最后owner释放/重提交流程，以及按实际新journal设计故障恢复，分开报告自然资源释放与overflow池新增/回收。
+
+额外性能证据见third_warm_phases_20261027.json：781条恢复伴随781次baseline读取、3905次恢复字段写和总7810次底层字段写，label阶段373309/290752周期，占恢复主体。这是后续减少恢复期冗余初始化的实验动机，尚无优化结果。若做消融，需在隔离变体中只改经授权的恢复通道，保持原生CRC/回读/失败封锁；正常查询的未知页baseline语义必须保留。两容量导出顺序不同，不能据此直接断言缓存容量优劣或板卡速度。
+
+仍未覆盖G4发布/恢复、自然q4 RTL、q3其他故障点/恢复取消、任意变价、持久化writer/认证/floor、全图baseline reseed、实际overflow新增回收、当前完整层级综合时序或板卡收益。初始G1 clones/full baseline与历史路径元数据仍为外部可信输入。每轮通过归档恢复后用release_experiment_cache.py ROOT --apply释放对应干净文件缓存，不删除数据、不做全局drop_caches。goal保持active。

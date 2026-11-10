@@ -1,0 +1,137 @@
+{
+  "input_sha256": "5df6b2c9d555cc91d36f7e91b262c2f29125de3f0fea8e736937a045667e3d97",
+  "budget_pops": 0,
+  "scheduler": "serial",
+  "runs": {
+    "original_cpu_compat": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_original",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T150707.898770Z/same_net.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T150707.898770Z/same_net_b0_p0_0/original_cpu_compat.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.634841,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0"
+      }
+    },
+    "traced": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T150707.898770Z/same_net.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T150707.898770Z/same_net_b0_p0_0/traced.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.541955,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0",
+        "C_TRACE_PATH": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T150707.898770Z/same_net_b0_p0_0/trace.jsonl",
+        "C_CPU_BUDGET": "0",
+        "C_TRACE_LIMIT": "2000",
+        "C_TRACE_CAP": "200000"
+      }
+    }
+  },
+  "analysis": {
+    "scope": "Observed label accesses/writes and paths; serial execution mapped to original DAG. Potential concurrency hazards, not an observed parallel race or proof of physical legality.",
+    "coverage": {
+      "all_attempts_and_instrumented_sets_recorded": true,
+      "unobserved_attempts": 0,
+      "truncated_attempts": 0,
+      "full_memory_access_coverage": false
+    },
+    "verification": {
+      "record": "verification",
+      "connections": 8,
+      "unrouted": 0,
+      "bad_paths": 0,
+      "final_overused_nodes": 0,
+      "attempts_total": 8,
+      "attempts_recorded": 8,
+      "budget_aborts_total": 0
+    },
+    "search": {
+      "attempts": 8,
+      "pops": 67,
+      "budget_aborts_recorded": 0,
+      "successful_budget_retries_recorded": 0,
+      "attempt_p50_ms_instrumented": 0.015036,
+      "attempt_p95_ms_instrumented": 0.058491,
+      "attempt_max_ms_instrumented": 0.058491,
+      "attempt_sum_ms_instrumented": 0.187893
+    },
+    "partition_tasks": 2,
+    "partition_edges": 0,
+    "unordered_label_access": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "unordered_label_read_write": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "unordered_path_sharing": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "dense_label_page_counts": [
+      {
+        "iteration": 1,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 1,
+        "task": 1,
+        "pages": 1
+      }
+    ]
+  },
+  "checks": {
+    "all_connections_routed": true,
+    "paths_valid_in_exported_graph": true,
+    "final_path_capacity_legal": true,
+    "output_equal_to_cpu_compat_baseline": true
+  },
+  "status": "passed",
+  "artifacts_sha256": {
+    "traced.stderr.log": "3406a9ae411b33740c25c7fade258408d4ff50d309c923382928e7f5ee172839",
+    "original_cpu_compat.stdout.log": "3e9c0994ed922003c58b34f371270ad58a5f8cb2145c7aa82f99fb0b3df7f6ac",
+    "trace.jsonl": "191534a22cd1e6a9998b5147a0015c2a05728076f249157434875a48c88c00e1",
+    "traced.stdout.log": "351e06fb7c7e954432be29c0f172d2ab16acf0ee63a7a0f4dd6df0c6fb0a3c12",
+    "traced.result": "c5f268327c881f49a345fdb85481ab5f7078ff2690af4c4b31ec26075505d77e",
+    "original_cpu_compat.stderr.log": "5bdd64e12f38532590971d46c06604cdfa7ec2f93667cf51668d9743d7c2f156",
+    "original_cpu_compat.result": "c5f268327c881f49a345fdb85481ab5f7078ff2690af4c4b31ec26075505d77e"
+  }
+}

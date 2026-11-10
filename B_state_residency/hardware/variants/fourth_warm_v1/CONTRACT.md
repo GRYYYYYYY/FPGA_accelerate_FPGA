@@ -1,0 +1,17 @@
+# G4最后primary owner释放后的恢复候选
+
+fourth_warm_full_v2与pressure_v2已终态并独立审计通过。故障发生在实际图R握手，查询status7/detail8/committed0/route_acked0，原生search为1poll/1次失败展开/0candidate；TB成功展开计数0。两轮G4核对、工作6GET+3INC、全部781标签写入与回读、156字path及原query CRC回执通过。恢复到7/1/7、floor180329后，在空第四槽原生拒绝180329且无prepare/search/owner副作用；随后180330重试83poll/82expand/402candidate/231cost全部CPU匹配。
+
+全部12AXI及37个owner物理record写重放通过，990178两次实际写全零、恢复及重提交两次重建；完整146284032B最终owner与G4图像相同，781标签/393页和全部3MB物理标签DDR相符，外来net/pool/allocator不变。最终path CRC eec36b70、query CRC8a39d874/版本7/flags5d/floor180330、slots15/CP20/journal3。结束4547230/4775002周期仅行为仿真；owner修复579/578周期，label恢复374180/290780周期。归档恢复和冻结凭据以results/fourth_warm_20261027.json为准。
+
+从已审计fourth_system_full_v2继承全部生产RTL，仅新TB接入源6/0/6、G4/CP20恢复字段。自然q4旧路径原生ripup先清空990178 primary，并把558358/265324 refs降为3/4；在新查询owner commit之前注入真实图R SLVERR。必须由G4原生authority两轮GET和工作owner原生INC恢复三键至1/4/5，包含990178从全零primary重建net26422/ref1/occ1；不能直接载入CPU prepared DDR或手填回复。
+
+原生恢复G4实际导出的781标签、156字前三路径加空第四槽和10字query，原始CRC不改。恢复target7/query1/price7，价格/history内容保持；标签写与781回读验证、path/query回执、服务退休、最终成功回复消费前业务保持关闭。随后重新登记q4历史路径、原生ripup及CPU83poll/82expand/402candidate/231cost重试。
+
+序号边界需明确：query_lifecycle在命令受理时记录sequence。失败attempt6已消费180330，本例不能称“未消费序号重试”。target reset与原生授权rebase在新attempt7建立G4源ledger180329；空第四槽上先提交180329，必须原生status1拒绝且无prepare/search/owner事务，再提交180330。此结论不证明跨attempt的全局永不重复或持久化floor。
+
+独立审计入口scripts/audit_fourth_warm.py，native标签模型只新增实际目标上下文1/7，其余页/字段/物理重放不变。G4发布与首轮q4准备的原始native事件/周期与正常fourth_system逐字节相等；没有制造兼容日志调用旧审计。copy/g3copy/labelsnap三路原始完整日志精确匹配已恢复参考，其余九路按本次真实事务/图错误/分代A区图像重放。
+
+首版fourth_warm_full_v1只在编译时报saved-state数组声明晚于使用，未执行仿真。修正版移动TB声明，生产RTL未改。该失败单独保留/归档，不是生产RTL反例。
+
+固定价格/history、外部可信初始G1 clones/full baseline和历史路径元数据、不涉及overflow新增/回收，且无综合时序或板卡收益。图R故障仅一个确定受理点，不泛化到任意故障/取消。

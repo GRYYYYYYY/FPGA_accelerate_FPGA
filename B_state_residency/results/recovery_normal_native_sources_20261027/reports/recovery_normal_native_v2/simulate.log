@@ -1,0 +1,52 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Tue Oct 27 22:20:05 2026
+# Process ID: 1173414
+# Current directory: /tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/simulate
+# Command line: xsim -log simulate.log -mode tcl -source {xsim.dir/normal_test/xsim_script.tcl}
+# Log file: /tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/simulate/simulate.log
+# Journal file: /tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/simulate/xsim.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 819.408 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source xsim.dir/normal_test/xsim_script.tcl
+# xsim {normal_test} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run 2ms
+RESULT 0 6 2 0
+RESULT 0 1 2 0
+RESET 0 3
+WRITE 0 0 00000001
+WRITE 0 1 00000002
+WRITE 0 2 00000003
+WRITE 0 3 00000004
+WRITE 0 4 00000005
+RESULT 0 0 3 1
+RESULT 1 6 2 0
+RESULT 1 1 2 0
+RESULT 1 6 3 0
+RESULT 1 1 3 0
+RESET 1 4
+WRITE 1 0 00000001
+WRITE 1 1 00000002
+WRITE 1 2 00000003
+WRITE 1 3 00000004
+WRITE 1 4 00000005
+RESULT 1 0 4 1
+RESULT 2 6 2 0
+RESULT 2 1 2 0
+RESULT 2 6 3 0
+RESULT 2 1 3 0
+RESET 2 4
+WRITE 2 0 00000001
+WRITE 2 1 00000002
+WRITE 2 2 00000003
+WRITE 2 3 00000004
+WRITE 2 4 00000005
+RESULT 2 0 4 1
+REARM_LOOP_PASS scenarios=3 successes=3 failures=10 checks=179
+$finish called at time : 3836 ns : File "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/sources/tb_rearm_loop.sv" Line 244
+## quit
+INFO: [Common 17-206] Exiting xsim at Tue Oct 27 22:20:09 2026...

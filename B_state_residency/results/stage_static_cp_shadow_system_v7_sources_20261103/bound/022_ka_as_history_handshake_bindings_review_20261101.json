@@ -1,0 +1,51 @@
+{
+  "status": "actual_drain_and_response_handshake_source_bindings_reviewed_phase_contract_integration_pending",
+  "authority_ports": {
+    "clk": "clk",
+    "rst": "k_cold_rst",
+    "abort": "1'b0",
+    "req_valid": "!ap_owned&&(k_a_valid||ap_offer)",
+    "req_ready": "ap_native_ready",
+    "rsp_valid": "ap_native_valid",
+    "rsp_ready": "ap_owned?ap_rsp_ready:k_a_rsp_ready",
+    "busy": "as_busy",
+    "fault": "as_fault",
+    "drained": "as_drained"
+  },
+  "coordinator_ports": {
+    "clk": "clk",
+    "cold_rst": "k_cold_rst",
+    "backend_drained": "f_all_drained",
+    "normal_retired": "f_normal_retired&&as_retired&&(!wm_on||wm_services_retired)",
+    "a_valid": "k_a_valid",
+    "a_ready": "k_a_ready",
+    "a_rsp_valid": "k_a_rsp_valid",
+    "a_rsp_ready": "k_a_rsp_ready"
+  },
+  "drain_satisfying_rows": 1,
+  "response_rows": 8,
+  "findings": [
+    "Successful DRAIN retirement conditions imply authority !busy, drained and !fault in the same sampled cycle.",
+    "Coordinator and authority share clk/k_cold_rst; authority abort is constant zero, unlike aggregate coordinator abort.",
+    "If independently proven AP-owned is absent, AW valid/ready handshake is exactly authority response handshake.",
+    "Conditional proof retained trace contains AS steps6 and11; all receipt originals and restored files rehashed."
+  ],
+  "remaining": [
+    "Independently discharge phase-wide admin exclusion and AP-owned absence for the quiet-persistence contract, including DRAIN.",
+    "Bind configured guarantee and quiet-to-ready condition without circular reasoning.",
+    "Review memory/reset/environment compatibility for all component composition."
+  ],
+  "source_contract_integration_reviewed": false,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false,
+  "archive_sha256": "abe2fd187f20fd8795d909220e8edf574637214939b133e1b1b76a86c7b20bca",
+  "file_sha256": {
+    "reviewer.py": "eafebfb2a5a52bf51fb2923fba702a50f9222b0362696cc8f886e3a7e3f1773e",
+    "sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "sources/residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+    "sources/recovery_coordinator.sv": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+    "reports/ka_as_ready_history_composition_receipt_review_20261101.json": "cf3da1fdcfdd59572ec0179531fa0d308f2de5bc2bc4d2ecedb811f615cd9528",
+    "reports/ka_reader_quiet_persistence_formal_v1_review_20261101.json": "5c5592b6236309c645e57dcf82309d9aaa896633db373f5efc7697834143af58",
+    "reports/ka_as_no_ap_owned_formal_v1_review_20261031.json": "373b2d0675c7afbb93396b0ed02173c6c7529a968fffad610c629905f17c44ef"
+  }
+}

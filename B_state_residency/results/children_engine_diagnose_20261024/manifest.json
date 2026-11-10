@@ -1,0 +1,65 @@
+{
+  "status": "finished",
+  "original_tb_sha256": "a079948578baba9dd1edc6131c10185651af032fee7973d3502aef5b49afc853",
+  "diagnostic_tb_sha256": "a65005607e5be5a253193c35d58425451b24c767d589f2edd309163aa3e1db89",
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "--define",
+        "GEN3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_20261024/sources/engine/children_hls_call.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_20261024/sources/hls3/children_step.v",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_20261024/sources/hls3/children_step_step.v",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_20261024/sources/engine/children_build_controller.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_20261024/sources/engine/children_build_engine.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_diagnose_20261024/tb_children_build_engine.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_children_build_engine",
+        "-s",
+        "children",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "children",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "fixture=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_engine_20261024/vectors.txt"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "artifacts": {
+    "xsim.jou": "1ccb2eb2c753ce724efaf675e987de3a94c761a097388ef2e4d07daa6c055cad",
+    "simulate.log": "b9e48bc1adc7e7792f8e5aed890272c2b8b79797b3dc5ba98ed4ac5ab0e7ab92",
+    "run.tcl": "1745567fec852c4696897340e8f9967eba962f9894cddee3564638c920b66c3c",
+    "tb_children_build_engine.sv": "a65005607e5be5a253193c35d58425451b24c767d589f2edd309163aa3e1db89",
+    "compile.stdout.log": "ca388c6cd3ae6cae4ef212ee990276df3cf118abac255edd43e6ffd171ecc4d8",
+    "xvlog.pb": "6f0354b5088c2fa9b1675603d52c7a2fd85a7b104af0d91d223d876c388af50b",
+    "xelab.pb": "9a0df2871eb89d0536ec79294c3a9cc2a201b4a830cddea13e71373c733841c1",
+    "xvlog.log": "ca388c6cd3ae6cae4ef212ee990276df3cf118abac255edd43e6ffd171ecc4d8",
+    "simulate.stdout.log": "f98a212242fe6eb4b1f0f16fd8093457e014f21a66db67a033b1cb9a472d67b8",
+    "children.wdb": "f53c8da14d44485f45c5311eeb7e1e8c8f5cc732951f88435102d393f12f461a",
+    "xelab.log": "ca1217692d32ef147fa897a7ffac93732fec54a78585a0bc4cf9688c7fd593c9",
+    "elaborate.stdout.log": "ca1217692d32ef147fa897a7ffac93732fec54a78585a0bc4cf9688c7fd593c9"
+  }
+}

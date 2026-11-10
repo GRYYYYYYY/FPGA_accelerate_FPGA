@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 15:31:44 2026
+# Process ID: 2353535
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_endpoint_legacy_20261023/actual
+# Command line: xsim -log simulate.log -mode tcl -source {xsim.dir/endpoint_tb/xsim_script.tcl}
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_endpoint_legacy_20261023/actual/simulate.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_endpoint_legacy_20261023/actual/xsim.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2699.998 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source xsim.dir/endpoint_tb/xsim_script.tcl
+# xsim {endpoint_tb} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/actual.txt -testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/pages.hex -testplusarg PROFILE=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_endpoint_legacy_20261023/profile -autoloadwcfg -tclbatch {simulate.tcl}
+Time resolution is 1 ps
+source simulate.tcl
+## run 2s
+INDEX_ENDPOINT_PASS clear_cycles=32768 wraps=0 overflows=0
+TEST_PASS memory_endpoint small=0 checks=77099 transfers=6086 fences=19 tag_wraps=4 errors=0 gap_cycles=152 host_stalls=308396 aw=3521 ar=4454 b=3521 r=71064
+PROFILE_PASS samples=7289882 accepted=77099 retired=77099
+$finish called at time : 72898860 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_retained_endpoint_legacy_20261023/sources/hardware/tb/tb_memory_endpoint_retained.sv" Line 324
+run: Time (s): cpu = 00:00:00.09 ; elapsed = 00:00:30 . Memory (MB): peak = 1509.078 ; gain = 0.000 ; free physical = 633743 ; free virtual = 1350843
+## quit
+INFO: xsimkernel Simulation Memory Usage: 138396 KB (Peak: 170564 KB), Simulation CPU Usage: 29980 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct 23 15:32:18 2026...

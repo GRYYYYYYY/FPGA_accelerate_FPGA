@@ -1,0 +1,187 @@
+{
+  "status": "actual_transition_overapprox_ka_active_reset_exclusion_inductively_proved_nonvacuous_mutation_checked_evidence_restored",
+  "scope": "Two-state single-clock transition overapproximation of actual parameter-exact full RTL. Nine state bits kept; other stored/read outputs arbitrary. Not full-system configured-at-AS, KA stall unreachability, full shadow acceptance, X/Z or physical proof.",
+  "retained_state_names": [
+    "inner.backend.recovery_ctl.state",
+    "authority.state",
+    "authority.target",
+    "authority.active_bank"
+  ],
+  "retained_state_bits": 9,
+  "cut_output_cells": 709,
+  "proofs": [
+    "KA valid excludes simultaneous active-bank RESET_BANK phase",
+    "KA valid cannot immediately follow a non-busy cycle absent reset"
+  ],
+  "bmc_steps": 8,
+  "temporal_induction_successful": true,
+  "smt_constraints": {
+    "assert": 2,
+    "assume": 1,
+    "cover": 2
+  },
+  "nonvacuity": {
+    "active_reset_tool_cover_step": 3,
+    "active_reset_vcd_condition_step": 2,
+    "ka_valid_tool_cover_step": 6,
+    "ka_valid_vcd_condition_step": 5,
+    "covers_are_abstraction_only": true
+  },
+  "mutation_control": {
+    "gate": "$logic_not$sources/query_residency_system.sv:516$174",
+    "change": "logic-not recovery-busy input replaced with constant0 in copied model only",
+    "simultaneous_ka_and_active_reset_vcd_step": 5,
+    "assertion_failure_tool_step": 6
+  },
+  "extraction_review": "Retained cells and four DFFs exact original; all cuts preserve output bit IDs and aliases; no dangling used bits; input ports and read-only observation aliases exact; source hash checked. Nonretained state/init correlations removed to overapproximate.",
+  "representation_review": "Coarse word model had one SCC and SMT conversion failure; simplemap on combinational cells plus opt_clean gave zero SCC. Final SMT preparation requires scc -expect0. No loop waiver or RTL change.",
+  "source_json_sha256": "43cb23638b3a2a93e8ab48bb617f336959a90fc924aab378ee539423ed837885",
+  "preparation_sha256": "d010a3ea76c116bc371c9ed09c0a0990e93a5b11e7f82123efc00400a3a029bb",
+  "positive_manifest_sha256": "dc1f379f6bb33fa7b5392ba8b368f01cc8a536afcbd2406c82ac3da62a3d8c58",
+  "mutant_manifest_sha256": "8ffbbf08b4c6458d089af654358b7de1a52efe4b50742d3fa682798e9a8f55ba",
+  "next_obligation": "Establish configured at initial KA AS entry and preserve it through actual rearm/retirement; bank reset exclusion alone does not close KA coverage.",
+  "evidence_inventory": {
+    "ka_reset_state_kernel_v1/kernel.json": {
+      "sha256": "0d6deb6ff48e93bc2c3fdf7b80276fd184f9cf323f7d83be9c1d1625200ce911",
+      "bytes": 49233138
+    },
+    "ka_reset_state_kernel_v1/preparation.json": {
+      "sha256": "d010a3ea76c116bc371c9ed09c0a0990e93a5b11e7f82123efc00400a3a029bb",
+      "bytes": 1042381
+    },
+    "ka_reset_state_kernel_v1/harness.sv": {
+      "sha256": "060405cdab325cf1a0225bad4913aeed023871f66cc791ff4c887bb27e7123f4",
+      "bytes": 15075
+    },
+    "ka_reset_state_kernel_v1/prepare.ys": {
+      "sha256": "47f39ded423bc24894fac1f88329ce92a476175e4aef9cb61b67d68995ba66c1",
+      "bytes": 163
+    },
+    "ka_reset_state_kernel_v1/manifest.json": {
+      "sha256": "c0e29595668b70f651a0795c1ef0abafa7cb64389607fc055ba4fba05b116c7a",
+      "bytes": 697
+    },
+    "ka_reset_state_kernel_v1/prepare.log": {
+      "sha256": "278a37aa60c6c2d25e97968b80fee8e9622c40c9dea37e7a5d24e337ea30d626",
+      "bytes": 98336
+    },
+    "ka_reset_state_kernel_v1/design.smt2": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "ka_reset_state_kernel_diagnostic_v1/kernel.json": {
+      "sha256": "0d6deb6ff48e93bc2c3fdf7b80276fd184f9cf323f7d83be9c1d1625200ce911",
+      "bytes": 49233138
+    },
+    "ka_reset_state_kernel_diagnostic_v1/diagnose.ys": {
+      "sha256": "c6269c2a0e6659b01b28766a45eba4b0b35dd01b9bd088d5d8b7bed7fd97a56b",
+      "bytes": 263
+    },
+    "ka_reset_state_kernel_diagnostic_v1/manifest.json": {
+      "sha256": "3f2b507d93aa62d1948cff15d2a4d2f41551449a37a98cadc5923fe05d35aa74",
+      "bytes": 602
+    },
+    "ka_reset_state_kernel_diagnostic_v1/diagnose.log": {
+      "sha256": "d878a18ba7b3969b4153743a2dcbb47cfdcc9ecf16a181d23ae0d4e4705dae95",
+      "bytes": 597543
+    },
+    "ka_reset_state_kernel_diagnostic_v1/bitmapped.json": {
+      "sha256": "fbb8bdd105fe3d1c1e7fa88fd1f8bb0918640b6dc597f70df8aee8b4fdf7a5a3",
+      "bytes": 16040637
+    },
+    "ka_reset_state_kernel_v2/kernel.json": {
+      "sha256": "fbb8bdd105fe3d1c1e7fa88fd1f8bb0918640b6dc597f70df8aee8b4fdf7a5a3",
+      "bytes": 16040637
+    },
+    "ka_reset_state_kernel_v2/harness.sv": {
+      "sha256": "060405cdab325cf1a0225bad4913aeed023871f66cc791ff4c887bb27e7123f4",
+      "bytes": 15075
+    },
+    "ka_reset_state_kernel_v2/prepare.ys": {
+      "sha256": "53c01150012331b36b020ba047f659d87c563b3eb956f36905b0ca266a00c5d9",
+      "bytes": 177
+    },
+    "ka_reset_state_kernel_v2/manifest.json": {
+      "sha256": "dc1f379f6bb33fa7b5392ba8b368f01cc8a536afcbd2406c82ac3da62a3d8c58",
+      "bytes": 2161
+    },
+    "ka_reset_state_kernel_v2/prepare.log": {
+      "sha256": "c51238cfef1aff281028f6c848fffda8e0f70969d2307d554c0bb1bbc53ec239",
+      "bytes": 66682
+    },
+    "ka_reset_state_kernel_v2/design.smt2": {
+      "sha256": "cb5e5e961d08055e0468789f0d8cc4862644a0a77206f7f9b65b4807bbefdfc8",
+      "bytes": 5015109
+    },
+    "ka_reset_state_kernel_v2/bmc.log": {
+      "sha256": "c9e4cfd5018275a680be32988273c8cc2ee980e72f3f1933312304982e2968c0",
+      "bytes": 422
+    },
+    "ka_reset_state_kernel_v2/induction.log": {
+      "sha256": "41d5e14f525b0902645901e6d32fbde099b35d1436c59711488f80fd27237c4e",
+      "bytes": 228
+    },
+    "ka_reset_state_kernel_v2/cover.log": {
+      "sha256": "79436ae8c12a4c059756bcdc6e480199c9c1901caef17058454d2dcb9ba29b7c",
+      "bytes": 1440
+    },
+    "ka_reset_state_kernel_v2/cover0.vcd": {
+      "sha256": "2b4067d036d44f47f58ac3b195cfcf400b8e9821350533d9fa929f1a1fa66fef",
+      "bytes": 3591674
+    },
+    "ka_reset_state_kernel_v2/cover1.vcd": {
+      "sha256": "5d67a03100f3860697a96c2b793394f7c87c1a5a557d4b883854f39b75eee6b5",
+      "bytes": 6092861
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/mutant.json": {
+      "sha256": "ae77f9fce1082e27342d44c52ae283518e8eb69f32b88de031ba696d12d4b479",
+      "bytes": 49233136
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/harness.sv": {
+      "sha256": "060405cdab325cf1a0225bad4913aeed023871f66cc791ff4c887bb27e7123f4",
+      "bytes": 15075
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/prepare.ys": {
+      "sha256": "f35555f5c10ff7aec9e19c41298c373846e8e8ab18b92a31aaa0b150d90efec4",
+      "bytes": 388
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/manifest.json": {
+      "sha256": "8ffbbf08b4c6458d089af654358b7de1a52efe4b50742d3fa682798e9a8f55ba",
+      "bytes": 1474
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/prepare.log": {
+      "sha256": "230fbcea3a1aa136c197f0a3c00a5df974786aa646085cf6aa5fea551391eb2a",
+      "bytes": 659871
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/design.smt2": {
+      "sha256": "2773173d572ebef80e8863917750fd78956a585994e9d48b57fc20a5a8e4e511",
+      "bytes": 5014902
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/bmc.log": {
+      "sha256": "7a79a063e7cea67571de9e85c1a6f04970e655589060589fa4b88553b28322a3",
+      "bytes": 1848
+    },
+    "ka_reset_state_kernel_no_busy_guard_v1/counterexample.vcd": {
+      "sha256": "18b23cfc4aad82076c948893be97c70938481b07f3d290d8c21d3753a0a0d64a",
+      "bytes": 6092861
+    },
+    "review/prepare_ka_reset_state_kernel_v1.py": {
+      "sha256": "64c589cbcc70468366e94b03e6da594fd20e3ca30242a20686252eb988a4b281",
+      "bytes": 5025
+    },
+    "review/harness.sv": {
+      "sha256": "060405cdab325cf1a0225bad4913aeed023871f66cc791ff4c887bb27e7123f4",
+      "bytes": 15075
+    },
+    "review/scope.json": {
+      "sha256": "a37c8d6c2b678bce25fa2f21fedba4567a01f654ff7d73c48941390d114d4ec8",
+      "bytes": 816
+    }
+  },
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_reset_state_kernel_evidence_v1/evidence.tar",
+  "archive_sha256": "fc26dc4d26e1eedf4231a8c53a57b752c21e432ab248c46b5394b061d41a368a",
+  "actual_restore": "/tmp/B_state_residency_offer_20261025/ka_reset_state_kernel_evidence_v1/restored",
+  "actual_restore_files": 34,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

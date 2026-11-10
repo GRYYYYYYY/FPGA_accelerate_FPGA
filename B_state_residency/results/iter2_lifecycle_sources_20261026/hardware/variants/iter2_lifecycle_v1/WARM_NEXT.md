@@ -1,0 +1,11 @@
+# 下一步真实iteration2 warm恢复接入
+
+选定本轮full_v5/pressure_v5均已完成真实查询/提交/ripup/重复sequence拒绝和全部独立审计。生产coordinator来自multi_owner_capacity_fixed_v1；其余warm层级仍来自warm_retry_system_v2。失败的v1-v4是TB适配开发过程，不能当成生产缺陷：G1 helper旧硬编码G2；误将geometry64置入flags；raw ripup op2截成commit0。实际flags0x104、raw op1已在选定用例验证。
+
+1. 明确扩展恢复容量：residency_system.sv中label_restore实例目前硬编码MAX_RECORDS512，822会被合法拒绝。建议把参数沿query/search/residency三层传递，默认512保持旧fixture，新实例显式1024。同步snapshot_count=822、探针204279和stream末尾821，不能只提高数组上限而留下旧328计数。未使用的TB旧warm tasks/源字段仍是328，并不构成822 warm恢复。
+2. 可先做G1/CP17初始prepared-state的真正warm恢复。822初始标签、完整owner源图像和实际empty path/初始query ledger在首次查询前通过原生PC租约导出，保留真实CRC、generation、sequence_seen/dirty字段，不手填旧seq1。其active存储context3/1/3，算法标签visited仍含完整180327；source/target context与算法sequence分开。
+3. 在真实搜索完成后的owner提交第二节点558358注入物理B错误（第一节点339193已写），应产生实际两项journal。G1恢复应将339193回refs0/occ0，将558358/net26422回refs3/occ2，保留net23916/ref1与整个其他pool。实际journal按两个(node,net)计，不能沿用原q1/q2的J6和共享refs1。
+4. 新attempt4/query2/price4，source版本3/query1/price3，三类原生回执join，恢复822标签、empty path与真实初始query ledger后，再以完整sequence180327重做自然查询和拆线。price/history内容固定是此fixture前提。不得跳过未退休物理B或伪造label/path/query完成。
+5. G2发布与下一实际query仍需另外验证。若从“已成功提交查询后”的G2继续，owner已加引用、labels已变且sequence floor180327已消费，不能直接套用旧prepared-query oracle重跑同sequence。应采集CPU下一prepared-query（自然sequence180328等）及相应闭包/数值oracle，并捕获真实G2 payload。
+
+未来query若要新增overflow owner，原capacity53734恰等live/next_unused，无free槽；本轮路径不需要新slot，因而无此容量冲突。增加预留容量时必须显式绑定zero spare records、pool字节范围与allocator地址/元数据，不能只改cfg_capacity或假定历史padding就是已声明的可用池。

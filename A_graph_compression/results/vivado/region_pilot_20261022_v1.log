@@ -1,0 +1,105 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Thu Oct 22 19:27:07 2026
+# Process ID: 1693605
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression
+# Command line: vivado -mode batch -source adapters/export_region_shard.tcl -log results/vivado/region_pilot_20261022_v1.log -journal results/vivado/region_pilot_20261022_v1.jou -tclargs data/raw/region_u280_20261022_v1/pilot_roots.txt data/raw/region_u280_20261022_v1/pilot.tsv data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp 7ad2b6231b9d29d651cb23b882d3321d8a2955209a244bb55318eb0de15cd143 pilot
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/region_pilot_20261022_v1.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/region_pilot_20261022_v1.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 831.544 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source adapters/export_region_shard.tcl
+# if {[llength $argv]!=5} {error "Expected roots output checkpoint config_sha shard_id"}
+# lassign $argv roots_file output checkpoint config_sha shard_id
+# set script_root [file normalize [file join [file dirname [info script]] ..]]
+# set region_export_library_only 1
+# source -notrace [file join $script_root adapters export_regions.tcl]
+# unset region_export_library_only
+# set_param general.maxThreads 1
+# open_checkpoint $checkpoint
+Command: open_checkpoint data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1697.625 ; gain = 0.000 ; free physical = 721415 ; free virtual = 1394510
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 3047.305 ; gain = 0.000 ; free physical = 720118 ; free virtual = 1393213
+INFO: [Netlist 29-17] Analyzing 120 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'routeracc_cost_registered' is not ideal for floorplanning, since the cellview 'cost_calculator' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are:
+  general.maxThreads
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF Files: Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.18 . Memory (MB): peak = 3529.867 ; gain = 11.906 ; free physical = 719648 ; free virtual = 1392742
+Restored from archive | CPU: 0.180000 secs | Memory: 2.938591 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.18 . Memory (MB): peak = 3529.867 ; gain = 11.906 ; free physical = 719647 ; free virtual = 1392742
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3778.695 ; gain = 0.000 ; free physical = 719739 ; free virtual = 1392834
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 27d9cfd9b
+----- Checksum: PlaceDB: f9ca2dc0 ShapeSum: 90fc7e35 RouteDB: f2d651a6 
+open_checkpoint: Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 3778.695 ; gain = 2081.070 ; free physical = 719740 ; free virtual = 1392835
+# if {[get_property PART [current_design]] ne "xcu280-fsvh2892-2L-e"} {error "Wrong device"}
+# set f [open $roots_file];
+# set source_names [split [string trim [read $f]] \n];
+# close $f
+# if {[llength $source_names]==0 || [lsort -unique $source_names] ne $source_names} {error "Empty/unsorted/duplicate source list"}
+# set source_objects [get_nodes $source_names]
+# set object_by_name [dict create]
+# foreach node $source_objects {dict set object_by_name [get_property NAME $node] $node}
+# if {[lsort [dict keys $object_by_name]] ne $source_names} {error "Canonical source lookup differs"}
+# foreach name {seen_nodes seen_tiles seen_pips roots} {set ::graph_export::$name [dict create]}
+# set ::graph_export::out [open $output {WRONLY CREAT EXCL}]
+COMPLETE sources=24 nodes=126 pips=102
+REGION_SHARD_COMPLETE id=pilot roots=24
+# set export_code [catch {
+#     graph_export::row meta schema vivado_graph_tsv_v1
+#     graph_export::row meta part [get_property PART [current_design]]
+#     graph_export::row meta vivado_version [version -short]
+#     graph_export::row meta vivado_build [string map {\n { | } \r {}} [version]]
+#     graph_export::row meta timestamp_utc [clock format [clock seconds] -gmt 1 -format {%Y-%m-%dT%H:%M:%SZ}]
+#     graph_export::row meta scope complete_downhill_pips_and_nodes_for_selected_roots
+#     graph_export::row meta design routed_routeracc_cost_ooc_netlist
+#     graph_export::row meta purpose independent_endpoint_region_complete_rows
+#     graph_export::row meta selection_config_sha256 $config_sha
+#     graph_export::row meta shard_id $shard_id
+#     set count 0
+#     foreach root $source_names {
+#         set n [dict get $object_by_name $root]
+#         graph_export::select_root $n [lindex [split $root /] 0] independent_endpoint_region_all_nodes
+#         graph_export::node $n
+#         set pips [get_pips -downhill -of_objects $n]
+#         set children [get_nodes -downhill -of_objects $n]
+#         graph_export::row root $root [llength $pips] [llength $children]
+#         foreach child $children {graph_export::row oracle_child $root [graph_export::node $child]}
+#         foreach p $pips {
+#             lassign [graph_export::pip $p] un vn uw vw directional
+#             set name [get_property NAME $p];set emitted 0
+#             if {$un eq $root} {graph_export::row edge $name forward $root $vn $uw $vw;incr emitted}
+#             if {!$directional && $vn eq $root} {graph_export::row edge $name reverse $root $un $vw $uw;incr emitted}
+#             if {!$emitted} {error "Downhill PIP endpoints incompatible: $root $p"}
+#         }
+#         incr count
+#         if {$count%250==0} {
+#             flush $::graph_export::out
+#             puts "REGION_SHARD_PROGRESS id=$shard_id roots=$count/[llength $source_names] nodes=[dict size $::graph_export::seen_nodes]"
+#         }
+#     }
+#     graph_regions::finish
+#     puts "REGION_SHARD_COMPLETE id=$shard_id roots=[llength $source_names]"
+# } result options]
+# close $::graph_export::out
+# if {$export_code} {return -options $options $result}
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 22 19:27:48 2026...

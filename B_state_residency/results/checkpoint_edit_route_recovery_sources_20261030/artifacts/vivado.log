@@ -1,0 +1,970 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 30 00:25:30 2026
+# Process ID: 3761140
+# Current directory: /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1
+# Command line: vivado -mode batch -source /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/run.tcl -log /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/vivado.log -journal /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/vivado.jou
+# Log file: /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/vivado.log
+# Journal file: /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/vivado.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2100.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/run.tcl
+# set state_out {/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1}
+# cd $state_out
+# if {[version -short] ne "2022.2"} {error "Expected matched Vivado 2022.2"}
+# set_param general.maxThreads 2
+# config_webtalk -info
+INFO: [Common 17-1369] WebTalk has been disabled by the current user.
+INFO: [Common 17-1370] WebTalk has been disabled for the current installation.
+INFO: [Common 17-1366] This combination of user/install settings means that WebTalk is currently disabled.
+# set state_maps [open /proc/[pid]/maps r]
+# set state_copy [open runtime_maps.txt w]
+# puts $state_copy [read $state_maps]
+# close $state_maps
+# close $state_copy
+# set state_flow [open milestones.txt w]
+# puts $state_flow "RESUME_PLACED version=[version -short]"
+# flush $state_flow
+# open_checkpoint inputs/resume_placed.dcp
+Command: open_checkpoint inputs/resume_placed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 1702.098 ; gain = 0.000 ; free physical = 483616 ; free virtual = 1372784
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 3350.238 ; gain = 0.000 ; free physical = 480857 ; free virtual = 1371070
+INFO: [Netlist 29-17] Analyzing 10157 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 2 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF Files: Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 4487.785 ; gain = 206.953 ; free physical = 479647 ; free virtual = 1369861
+Restored from archive | CPU: 13.360000 secs | Memory: 184.132195 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 4487.785 ; gain = 206.953 ; free physical = 479671 ; free virtual = 1369884
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 4670.926 ; gain = 0.000 ; free physical = 479576 ; free virtual = 1369790
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 219 instances were transformed.
+  BUFG => BUFGCE: 1 instance 
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 23 instances
+  RAM32M16 => RAM32M16 (RAMD32(x14), RAMS32(x2)): 89 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 4 instances
+  RAM64M => RAM64M (RAMD64E(x4)): 2 instances
+  RAM64M8 => RAM64M8 (RAMD64E(x8)): 100 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 20746388c
+----- Checksum: PlaceDB: e6285cb4 ShapeSum: 26a39439 RouteDB: fa7a479f 
+open_checkpoint: Time (s): cpu = 00:01:09 ; elapsed = 00:01:15 . Memory (MB): peak = 4670.926 ; gain = 2968.828 ; free physical = 479594 ; free virtual = 1369807
+# if {[get_property PART [current_design]] ne "xcu280-fsvh2892-2L-e"} {error "Unexpected part"}
+# if {[llength [get_clocks]] != 1 || [llength [get_clocks core_clk]] != 1} {error "Expected only core_clk"}
+# if {[get_property PERIOD [get_clocks core_clk]] != 10.0} {error "Expected original 10ns clock"}
+# report_clocks -file clocks_resume.rpt
+# report_utilization -file utilization_resume.rpt
+# report_timing_summary -check_timing_verbose -report_unconstrained -max_paths 10 -file timing_resume.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "abort" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_cfg_valid" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[0]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[1]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[2]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[3]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[4]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[5]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[6]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[7]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[8]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[9]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[10]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[11]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[12]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[13]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[14]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[15]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[16]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[17]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[18]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[19]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[20]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[21]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[22]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[23]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[24]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[25]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[26]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[27]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[28]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[29]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[30]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_checkpoint[31]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[0]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[1]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[2]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[3]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[4]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[5]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[6]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[7]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[8]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[9]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[10]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[11]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[12]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[13]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[14]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[15]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[16]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[17]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[18]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[19]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[20]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[21]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[22]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[23]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[24]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[25]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[26]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[27]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[28]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[29]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[30]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[31]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[32]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[33]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[34]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[35]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[36]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[37]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[38]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[39]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[40]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[41]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[42]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[43]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[44]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[45]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[46]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[47]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[48]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[49]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[50]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[51]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[52]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[53]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[54]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[55]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[56]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[57]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[58]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[59]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[60]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[61]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[62]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_design[63]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_generation[0]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "boot_generation[1]" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+INFO: [Common 17-14] Message 'Timing 38-242' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+report_timing_summary: Time (s): cpu = 00:01:59 ; elapsed = 00:01:37 . Memory (MB): peak = 5777.340 ; gain = 1106.414 ; free physical = 478586 ; free virtual = 1368803
+# write_xdc -exclude_physical constraints_resume.xdc
+# puts $state_flow "ROUTE [clock seconds]"
+# flush $state_flow
+# route_design -directive Default
+Command: route_design -directive Default
+Attempting to get a license for feature 'Implementation' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcu280'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors, 39 Advisories
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-270] Using Router directive 'Default'.
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 2 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: e6285cb4 ConstDB: 0 ShapeSum: 26a39439 RouteDB: fa7a479f
+Nodegraph reading from file.  Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 6136.125 ; gain = 54.023 ; free physical = 478092 ; free virtual = 1368309
+WARNING: [Route 35-197] Clock port "clk" does not have an associated HD.CLK_SRC. Without this constraint, timing analysis may not be accurate and upstream checks cannot be done to ensure correct clock placement.
+WARNING: [Route 35-198] Port "lr_s_node[31]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[31]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[30]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[30]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[29]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[29]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[28]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[28]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[27]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[27]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[26]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[26]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[25]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[25]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[24]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[24]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[23]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[23]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[22]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[22]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[21]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[21]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_node[20]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_node[20]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[31]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[31]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[30]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[30]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[29]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[29]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[28]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[28]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[27]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[27]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[26]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[26]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[25]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[25]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[24]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[24]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[23]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[23]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[22]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[22]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[21]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[21]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[20]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[20]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[19]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[19]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[18]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[18]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[17]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[17]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[16]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[16]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[15]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[15]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[14]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[14]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[12]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[12]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[8]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[8]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[6]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[6]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[5]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[5]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[4]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[4]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[35]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[35]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[34]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[34]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[33]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[33]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[32]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[32]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[67]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[67]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[66]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[66]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[65]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[65]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[64]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[64]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[63]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[63]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[62]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[62]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[61]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[61]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[60]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[60]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[59]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[59]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[58]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[58]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[57]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[57]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[56]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[56]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[55]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[55]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[54]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[54]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[53]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[53]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[52]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[52]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[51]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[51]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[50]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[50]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[49]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[49]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[48]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[48]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[47]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[47]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[46]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[46]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[45]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[45]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[44]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[44]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[43]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[43]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[42]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[42]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[41]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[41]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[40]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[40]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[39]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[39]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[38]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[38]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[37]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[37]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[36]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[36]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[71]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[71]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[70]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[70]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[69]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[69]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[68]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[68]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[139]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[139]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[138]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[138]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[137]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[137]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[136]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[136]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[135]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[135]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[134]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[134]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[133]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[133]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[132]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[132]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[131]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[131]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[130]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[130]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[129]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[129]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[128]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[128]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[127]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[127]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[126]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[126]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[125]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[125]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lr_s_payload[124]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lr_s_payload[124]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+INFO: [Common 17-14] Message 'Route 35-198' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+Post Restoration Checksum: NetGraph: ec6ec048 NumContArr: 5a87e4b9 Constraints: 5309035f Timing: 0
+Phase 1 Build RT Design | Checksum: 199ffa860
+
+Time (s): cpu = 00:01:37 ; elapsed = 00:00:46 . Memory (MB): peak = 6248.711 ; gain = 166.609 ; free physical = 478088 ; free virtual = 1368306
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 199ffa860
+
+Time (s): cpu = 00:01:38 ; elapsed = 00:00:47 . Memory (MB): peak = 6291.547 ; gain = 209.445 ; free physical = 477998 ; free virtual = 1368216
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 199ffa860
+
+Time (s): cpu = 00:01:39 ; elapsed = 00:00:48 . Memory (MB): peak = 6295.547 ; gain = 213.445 ; free physical = 477982 ; free virtual = 1368200
+
+Phase 2.3 Global Clock Net Routing
+ Number of Nodes with overlaps = 0
+Phase 2.3 Global Clock Net Routing | Checksum: 10e97a2a6
+
+Time (s): cpu = 00:01:57 ; elapsed = 00:01:01 . Memory (MB): peak = 7098.883 ; gain = 1016.781 ; free physical = 477932 ; free virtual = 1368150
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 123c3bb9b
+
+Time (s): cpu = 00:02:50 ; elapsed = 00:01:44 . Memory (MB): peak = 7098.883 ; gain = 1016.781 ; free physical = 477748 ; free virtual = 1367967
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-3.316 | TNS=-70276.037| WHS=0.010  | THS=0.000  |
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.000219236 %
+  Global Horizontal Routing Utilization  = 0.000552512 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 188430
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 136217
+  Number of Partially Routed Nets     = 52213
+  Number of Node Overlaps             = 31
+
+Phase 2 Router Initialization | Checksum: 1a4ddbe3f
+
+Time (s): cpu = 00:03:57 ; elapsed = 00:02:27 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 477643 ; free virtual = 1367862
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 1a4ddbe3f
+
+Time (s): cpu = 00:03:57 ; elapsed = 00:02:28 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 477638 ; free virtual = 1367857
+Phase 3 Initial Routing | Checksum: 221467507
+
+Time (s): cpu = 00:06:20 ; elapsed = 00:03:54 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 477432 ; free virtual = 1367643
+
+INFO: [Route 35-449] Initial Estimated Congestion
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+|           |___________________|___________________|___________________|
+| Direction | Size   | % Tiles  | Size   | % Tiles  | Size   | % Tiles  |
+|___________|________|__________|________|__________|________|__________|
+|      NORTH|   32x32|      0.47|   32x32|      0.55|   32x32|      0.67|
+|___________|________|__________|________|__________|________|__________|
+|      SOUTH|     4x4|      0.10|     8x8|      0.18|     4x4|      0.24|
+|___________|________|__________|________|__________|________|__________|
+|       EAST|   16x16|      0.62|   64x64|      2.16|   16x16|      0.60|
+|___________|________|__________|________|__________|________|__________|
+|       WEST|     8x8|      0.19|   16x16|      0.64|     8x8|      0.37|
+|___________|________|__________|________|__________|________|__________|
+Congestion Report
+GLOBAL Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+NORTH
+	INT_X95Y47->INT_X110Y102 (CLEM_X95Y47->CLEL_R_X110Y102)
+	INT_X93Y55->INT_X108Y70 (CLEM_X93Y55->CLEL_R_X108Y70)
+	INT_X93Y54->INT_X108Y69 (CLEM_X93Y54->CLEL_R_X108Y69)
+	INT_X93Y53->INT_X108Y68 (CLEM_X93Y53->CLEL_R_X108Y68)
+	INT_X93Y52->INT_X108Y67 (CLEM_X93Y52->CLEL_R_X108Y67)
+EAST
+	INT_X95Y88->INT_X110Y103 (CLEM_X95Y88->CLEL_R_X110Y103)
+	INT_X95Y87->INT_X110Y102 (CLEM_X95Y87->CLEL_R_X110Y102)
+LONG Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+NORTH
+	INT_X89Y50->INT_X112Y105 (CLEM_X89Y50->CLEL_R_X112Y105)
+	INT_X96Y61->INT_X111Y76 (CLEM_X96Y61->DSP_X111Y75)
+	INT_X96Y60->INT_X111Y75 (CLEM_X96Y60->DSP_X111Y75)
+	INT_X96Y59->INT_X111Y74 (CLEM_X96Y59->DSP_X111Y70)
+	INT_X96Y58->INT_X111Y73 (CLEM_X96Y58->DSP_X111Y70)
+EAST
+	INT_X64Y160->INT_X127Y207 (CLEM_X64Y160->CLEL_R_X127Y207)
+	INT_X96Y176->INT_X127Y207 (CLEM_X96Y176->CLEL_R_X127Y207)
+	INT_X96Y175->INT_X127Y206 (CLEM_X96Y175->CLEL_R_X127Y206)
+	INT_X96Y174->INT_X127Y205 (CLEM_X96Y174->CLEL_R_X127Y205)
+	INT_X96Y173->INT_X127Y204 (CLEM_X96Y173->CLEL_R_X127Y204)
+WEST
+	INT_X114Y166->INT_X129Y181 (CLEM_X114Y166->CLEL_R_X129Y181)
+	INT_X120Y168->INT_X127Y175 (CLEM_X120Y168->CLEL_R_X127Y175)
+	INT_X120Y167->INT_X127Y174 (CLEM_X120Y167->CLEL_R_X127Y174)
+	INT_X104Y142->INT_X111Y149 (CLEM_X104Y142->DSP_X111Y145)
+	INT_X120Y174->INT_X127Y181 (CLEM_X120Y174->CLEL_R_X127Y181)
+SHORT Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+NORTH
+	INT_X96Y40->INT_X111Y95 (CLEM_X96Y40->DSP_X111Y95)
+	INT_X104Y88->INT_X111Y95 (CLEM_X104Y88->DSP_X111Y95)
+	INT_X104Y80->INT_X111Y87 (CLEM_X104Y80->DSP_X111Y85)
+	INT_X104Y72->INT_X111Y79 (CLEM_X104Y72->DSP_X111Y75)
+	INT_X104Y64->INT_X111Y71 (CLEM_X104Y64->DSP_X111Y70)
+EAST
+	INT_X102Y54->INT_X109Y105 (CLEL_L_X102Y54->CLEL_R_X109Y105)
+	INT_X104Y88->INT_X111Y95 (CLEM_X104Y88->DSP_X111Y95)
+	INT_X104Y80->INT_X111Y87 (CLEM_X104Y80->DSP_X111Y85)
+	INT_X104Y72->INT_X111Y79 (CLEM_X104Y72->DSP_X111Y75)
+	INT_X104Y64->INT_X111Y71 (CLEM_X104Y64->DSP_X111Y70)
+
+INFO: [Route 35-448] Estimated Global/Short routing congestion is level 5 (32x32). Congestion levels of 5 and greater can reduce routability and impact timing closure.
+
+INFO: [Route 35-581] Estimated Timing congestion is level 6 (64x64). Congestion levels of 5 and greater may impact timing closure.
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 86223
+ Number of Nodes with overlaps = 10400
+ Number of Nodes with overlaps = 1999
+ Number of Nodes with overlaps = 553
+ Number of Nodes with overlaps = 194
+ Number of Nodes with overlaps = 89
+ Number of Nodes with overlaps = 62
+ Number of Nodes with overlaps = 36
+ Number of Nodes with overlaps = 22
+ Number of Nodes with overlaps = 16
+ Number of Nodes with overlaps = 10
+ Number of Nodes with overlaps = 8
+ Number of Nodes with overlaps = 10
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-8.102 | TNS=-234614.330| WHS=0.007  | THS=0.000  |
+
+Phase 4.1 Global Iteration 0 | Checksum: 2cddc9c89
+
+Time (s): cpu = 00:23:58 ; elapsed = 00:15:40 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 481115 ; free virtual = 1372708
+
+Phase 4.2 Global Iteration 1
+ Number of Nodes with overlaps = 30
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-6.365 | TNS=-180497.969| WHS=N/A    | THS=N/A    |
+
+Phase 4.2 Global Iteration 1 | Checksum: 1b09a742f
+
+Time (s): cpu = 00:24:48 ; elapsed = 00:16:26 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 481098 ; free virtual = 1372682
+
+Phase 4.3 Global Iteration 2
+ Number of Nodes with overlaps = 79
+ Number of Nodes with overlaps = 23
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-5.592 | TNS=-153230.780| WHS=N/A    | THS=N/A    |
+
+Phase 4.3 Global Iteration 2 | Checksum: 21dc52de1
+
+Time (s): cpu = 00:25:53 ; elapsed = 00:17:24 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 481004 ; free virtual = 1372590
+
+Phase 4.4 Global Iteration 3
+ Number of Nodes with overlaps = 51
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-5.210 | TNS=-139400.407| WHS=N/A    | THS=N/A    |
+
+Phase 4.4 Global Iteration 3 | Checksum: 10e93f109
+
+Time (s): cpu = 00:26:50 ; elapsed = 00:18:15 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 481049 ; free virtual = 1372635
+
+Phase 4.5 Global Iteration 4
+ Number of Nodes with overlaps = 100
+ Number of Nodes with overlaps = 26
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 5
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.839 | TNS=-126418.352| WHS=N/A    | THS=N/A    |
+
+Phase 4.5 Global Iteration 4 | Checksum: 191b2d986
+
+Time (s): cpu = 00:28:07 ; elapsed = 00:19:25 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 481055 ; free virtual = 1372643
+
+Phase 4.6 Global Iteration 5
+ Number of Nodes with overlaps = 191
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.705 | TNS=-121446.457| WHS=N/A    | THS=N/A    |
+
+Phase 4.6 Global Iteration 5 | Checksum: 27a14d8e9
+
+Time (s): cpu = 00:29:53 ; elapsed = 00:21:03 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 481050 ; free virtual = 1372641
+
+Phase 4.7 Global Iteration 6
+ Number of Nodes with overlaps = 88
+ Number of Nodes with overlaps = 48
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.433 | TNS=-109854.125| WHS=N/A    | THS=N/A    |
+
+Phase 4.7 Global Iteration 6 | Checksum: 22f4128f1
+
+Time (s): cpu = 00:31:42 ; elapsed = 00:22:40 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 480982 ; free virtual = 1372574
+
+Phase 4.8 Global Iteration 7
+ Number of Nodes with overlaps = 90
+ Number of Nodes with overlaps = 130
+ Number of Nodes with overlaps = 48
+ Number of Nodes with overlaps = 11
+ Number of Nodes with overlaps = 9
+ Number of Nodes with overlaps = 6
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.125 | TNS=-104247.425| WHS=N/A    | THS=N/A    |
+
+Phase 4.8 Global Iteration 7 | Checksum: a01ae7c7
+
+Time (s): cpu = 00:34:17 ; elapsed = 00:24:52 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 475321 ; free virtual = 1366917
+
+Phase 4.9 Global Iteration 8
+ Number of Nodes with overlaps = 40
+ Number of Nodes with overlaps = 27
+ Number of Nodes with overlaps = 12
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.114 | TNS=-101231.250| WHS=N/A    | THS=N/A    |
+
+Phase 4.9 Global Iteration 8 | Checksum: 230b6c373
+
+Time (s): cpu = 00:35:45 ; elapsed = 00:26:09 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 479026 ; free virtual = 1370624
+
+Phase 4.10 Global Iteration 9
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 70
+ Number of Nodes with overlaps = 30
+ Number of Nodes with overlaps = 17
+ Number of Nodes with overlaps = 10
+ Number of Nodes with overlaps = 7
+ Number of Nodes with overlaps = 6
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 2
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.071 | TNS=-101987.098| WHS=N/A    | THS=N/A    |
+
+Phase 4.10 Global Iteration 9 | Checksum: 1404a2167
+
+Time (s): cpu = 00:37:22 ; elapsed = 00:27:32 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478774 ; free virtual = 1370373
+Phase 4 Rip-up And Reroute | Checksum: 1404a2167
+
+Time (s): cpu = 00:37:23 ; elapsed = 00:27:33 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478778 ; free virtual = 1370377
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+
+Phase 5.1.1 Update Timing
+Phase 5.1.1 Update Timing | Checksum: a4cec441
+
+Time (s): cpu = 00:38:05 ; elapsed = 00:28:00 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478532 ; free virtual = 1370131
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.071 | TNS=-101987.098| WHS=0.007  | THS=0.000  |
+
+
+Phase 5.1.2 Update Timing
+Phase 5.1.2 Update Timing | Checksum: 1211ced80
+
+Time (s): cpu = 00:38:30 ; elapsed = 00:28:17 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478404 ; free virtual = 1370003
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.071 | TNS=-101987.098| WHS=0.007  | THS=0.000  |
+
+ Number of Nodes with overlaps = 0
+Phase 5.1 Delay CleanUp | Checksum: 1742f0233
+
+Time (s): cpu = 00:38:35 ; elapsed = 00:28:21 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478372 ; free virtual = 1369972
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 1742f0233
+
+Time (s): cpu = 00:38:36 ; elapsed = 00:28:21 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478435 ; free virtual = 1370034
+Phase 5 Delay and Skew Optimization | Checksum: 1742f0233
+
+Time (s): cpu = 00:38:37 ; elapsed = 00:28:22 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478450 ; free virtual = 1370049
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 1ca7dc4f7
+
+Time (s): cpu = 00:39:03 ; elapsed = 00:28:40 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478362 ; free virtual = 1369962
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.071 | TNS=-101960.293| WHS=0.007  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 1ca7dc4f7
+
+Time (s): cpu = 00:39:04 ; elapsed = 00:28:41 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478387 ; free virtual = 1369987
+Phase 6 Post Hold Fix | Checksum: 1ca7dc4f7
+
+Time (s): cpu = 00:39:05 ; elapsed = 00:28:42 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478429 ; free virtual = 1370028
+
+Phase 7 Leaf Clock Prog Delay Opt
+
+Phase 7.1 Hold Fix Iter
+
+Phase 7.1.1 Update Timing
+Phase 7.1.1 Update Timing | Checksum: 1db8d2d3d
+
+Time (s): cpu = 00:40:12 ; elapsed = 00:29:24 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478232 ; free virtual = 1369824
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=-4.071 | TNS=-101960.293| WHS=0.007  | THS=0.000  |
+
+Phase 7.1 Hold Fix Iter | Checksum: 1b431a891
+
+Time (s): cpu = 00:40:13 ; elapsed = 00:29:25 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478238 ; free virtual = 1369830
+Phase 7 Leaf Clock Prog Delay Opt | Checksum: 1b3a29d7d
+
+Time (s): cpu = 00:40:40 ; elapsed = 00:29:44 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478277 ; free virtual = 1369869
+
+Phase 8 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 3.68283 %
+  Global Horizontal Routing Utilization  = 5.18099 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Congestion Report
+North Dir 1x1 Area, Max Cong = 88.2629%, Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+   INT_X109Y97 -> INT_X109Y97
+   INT_X109Y95 -> INT_X109Y95
+   INT_X105Y65 -> INT_X105Y65
+   INT_X101Y61 -> INT_X101Y61
+   INT_X101Y56 -> INT_X101Y56
+South Dir 1x1 Area, Max Cong = 83.8863%, No Congested Regions.
+East Dir 2x2 Area, Max Cong = 89.6635%, Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+   INT_X120Y184 -> INT_X121Y185
+   INT_X102Y96 -> INT_X103Y97
+   INT_X102Y92 -> INT_X103Y93
+   INT_X104Y92 -> INT_X105Y93
+   INT_X104Y90 -> INT_X105Y91
+West Dir 1x1 Area, Max Cong = 90.3846%, Congestion bounded by tiles (Lower Left Tile -> Upper Right Tile):
+   INT_X124Y173 -> INT_X124Y173
+   INT_X118Y172 -> INT_X118Y172
+   INT_X117Y171 -> INT_X117Y171
+   INT_X117Y170 -> INT_X117Y170
+   INT_X118Y170 -> INT_X118Y170
+
+------------------------------
+Reporting congestion hotspots
+------------------------------
+Direction: North
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 1 Aspect Ratio: 0.5 Sparse Ratio: 0.5
+Direction: South
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: East
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 2 Aspect Ratio: 0.347826 Sparse Ratio: 3.875
+Direction: West
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 1 Aspect Ratio: 1 Sparse Ratio: 1.25
+
+Phase 8 Route finalize | Checksum: 143a2a455
+
+Time (s): cpu = 00:40:46 ; elapsed = 00:29:47 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478217 ; free virtual = 1369808
+
+Phase 9 Verifying routed nets
+
+ Verification completed successfully
+Phase 9 Verifying routed nets | Checksum: 143a2a455
+
+Time (s): cpu = 00:40:47 ; elapsed = 00:29:48 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478162 ; free virtual = 1369754
+
+Phase 10 Depositing Routes
+Phase 10 Depositing Routes | Checksum: 143a2a455
+
+Time (s): cpu = 00:41:04 ; elapsed = 00:30:03 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 478010 ; free virtual = 1369602
+Common:
+   
+SLR0
+
+Initial Estimated Congestion
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+|           |___________________|___________________|___________________|
+| Direction | Size   | % Tiles  | Size   | % Tiles  | Size   | % Tiles  |
+|___________|________|__________|________|__________|________|__________|
+|      NORTH|   32x32|      1.41|   32x32|      1.65|   32x32|      2.00|
+|___________|________|__________|________|__________|________|__________|
+|      SOUTH|     4x4|      0.30|     8x8|      0.55|     4x4|      0.71|
+|___________|________|__________|________|__________|________|__________|
+|       EAST|   16x16|      1.87|   64x64|      6.48|   16x16|      1.79|
+|___________|________|__________|________|__________|________|__________|
+|       WEST|     8x8|      0.57|   16x16|      1.93|     8x8|      1.11|
+|___________|________|__________|________|__________|________|__________|
+
+SLR1
+
+Initial Estimated Congestion
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+|           |___________________|___________________|___________________|
+| Direction | Size   | % Tiles  | Size   | % Tiles  | Size   | % Tiles  |
+|___________|________|__________|________|__________|________|__________|
+|      NORTH|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+|      SOUTH|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+|       EAST|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+|       WEST|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+
+SLR2
+
+Initial Estimated Congestion
+ ________________________________________________________________________
+|           | Global Congestion | Long Congestion   | Short Congestion  |
+|           |___________________|___________________|___________________|
+| Direction | Size   | % Tiles  | Size   | % Tiles  | Size   | % Tiles  |
+|___________|________|__________|________|__________|________|__________|
+|      NORTH|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+|      SOUTH|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+|       EAST|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+|       WEST|     1x1|      0.00|     1x1|      0.00|     1x1|      0.00|
+|___________|________|__________|________|__________|________|__________|
+
+
+
+Phase 11 Resolve XTalk
+Phase 11 Resolve XTalk | Checksum: 143a2a455
+
+Time (s): cpu = 00:41:07 ; elapsed = 00:30:06 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 477974 ; free virtual = 1369566
+
+Phase 12 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=-4.071 | TNS=-101960.293| WHS=0.007  | THS=0.000  |
+
+WARNING: [Route 35-328] Router estimated timing not met.
+Resolution: For a complete and accurate timing signoff, report_timing_summary must be run after route_design. Alternatively, route_design can be run with the -timing_summary option to enable a complete timing signoff at the end of route_design.
+Phase 12 Post Router Timing | Checksum: 143a2a455
+
+Time (s): cpu = 00:41:18 ; elapsed = 00:30:13 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 477952 ; free virtual = 1369545
+Skip laguna hold fix in PhysOpt in Router as non-negative WHS value: 7.40401e-12 .
+Time taken to check if laguna hold fix is required (in secs): 0
+
+Phase 13 Physical Synthesis in Router
+
+Phase 13.1 Physical Synthesis Initialization
+INFO: [Physopt 32-668] Current Timing Summary | WNS=-4.059 | TNS=-101699.850 | WHS=0.007 | THS=0.000 |
+Phase 13.1 Physical Synthesis Initialization | Checksum: 143a2a455
+
+Time (s): cpu = 00:43:07 ; elapsed = 00:31:35 . Memory (MB): peak = 7242.453 ; gain = 1160.352 ; free physical = 477368 ; free virtual = 1368962
+WARNING: [Physopt 32-745] Physical Optimization has determined that the magnitude of the negative slack is too large and it is highly unlikely that slack will be improved. Post-Route Physical Optimization is most effective when WNS is above -0.5ns
+
+Phase 13.2 Critical Path Optimization
+INFO: [Physopt 32-668] Current Timing Summary | WNS=-4.059 | TNS=-101699.850 | WHS=0.007 | THS=0.000 |
+INFO: [Physopt 32-953] Path group WNS did not improve. Path group: core_clk. Processed net: inner/backend/config_restore/cf_payload[633].
+INFO: [Physopt 32-953] Path group WNS did not improve. Path group: core_clk. Processed net: inner/backend/dut/core/p/endpoint/memory/memory_service/directory/lease_phase_reg[2]_67[1].
+INFO: [Physopt 32-953] Path group WNS did not improve. Path group: core_clk. Processed net: inner/backend/recovery_ctl/FSM_onehot_state_reg[3]_4.
+INFO: [Physopt 32-668] Current Timing Summary | WNS=-4.059 | TNS=-101699.850 | WHS=0.007 | THS=0.000 |
+Phase 13.2 Critical Path Optimization | Checksum: 1be0eb5d0
+
+Time (s): cpu = 00:43:24 ; elapsed = 00:31:47 . Memory (MB): peak = 7250.457 ; gain = 1168.355 ; free physical = 477228 ; free virtual = 1368822
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 7250.457 ; gain = 0.000 ; free physical = 477196 ; free virtual = 1368790
+INFO: [Physopt 32-669] Post Physical Optimization Timing Summary | WNS=-4.059 | TNS=-101699.850 | WHS=0.007 | THS=0.000 |
+Phase 13 Physical Synthesis in Router | Checksum: 11538b17a
+
+Time (s): cpu = 00:43:28 ; elapsed = 00:31:51 . Memory (MB): peak = 7250.457 ; gain = 1168.355 ; free physical = 477164 ; free virtual = 1368758
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:43:28 ; elapsed = 00:31:51 . Memory (MB): peak = 7250.457 ; gain = 1168.355 ; free physical = 477406 ; free virtual = 1369000
+INFO: [Common 17-83] Releasing license: Implementation
+35 Infos, 103 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:44:00 ; elapsed = 00:32:10 . Memory (MB): peak = 7250.496 ; gain = 1460.219 ; free physical = 477395 ; free virtual = 1368989
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# write_checkpoint routed.dcp
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:41 ; elapsed = 00:00:18 . Memory (MB): peak = 7314.488 ; gain = 40.020 ; free physical = 476581 ; free virtual = 1368746
+report_design_analysis: Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 7314.488 ; gain = 0.000 ; free physical = 476543 ; free virtual = 1368710
+INFO: [Common 17-1381] The checkpoint '/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/routed.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:01:35 ; elapsed = 00:01:14 . Memory (MB): peak = 7314.488 ; gain = 63.992 ; free physical = 476975 ; free virtual = 1368779
+# report_route_status -file route_status.rpt
+# report_utilization -file utilization_routed.rpt
+report_utilization: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 7314.488 ; gain = 0.000 ; free physical = 476933 ; free virtual = 1368737
+# report_utilization -hierarchical -file utilization_routed_hier.rpt
+report_utilization: Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 7314.488 ; gain = 0.000 ; free physical = 476914 ; free virtual = 1368718
+# report_methodology -no_waivers -file methodology_routed.rpt
+Command: report_methodology -no_waivers -file methodology_routed.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-133] Running Methodology with 2 threads
+INFO: [Vivado_Tcl 2-1520] The results of Report Methodology are in file /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/methodology_routed.rpt.
+report_methodology completed successfully
+report_methodology: Time (s): cpu = 00:01:33 ; elapsed = 00:01:03 . Memory (MB): peak = 7866.277 ; gain = 551.789 ; free physical = 476591 ; free virtual = 1368397
+# report_drc -no_waivers -file drc_routed.rpt
+Command: report_drc -no_waivers -file drc_routed.rpt
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/ip'.
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/drc_routed.rpt.
+report_drc completed successfully
+report_drc: Time (s): cpu = 00:00:46 ; elapsed = 00:00:26 . Memory (MB): peak = 7866.277 ; gain = 0.000 ; free physical = 476408 ; free virtual = 1368215
+# report_drc -no_waivers -checks [get_drc_checks LUTLP-1] -file loops_routed.rpt
+Command: report_drc -no_waivers -checks LUTLP-1 -file loops_routed.rpt
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/loops_routed.rpt.
+report_drc completed successfully
+# check_timing -verbose -file check_timing_routed.rpt
+check_timing: Time (s): cpu = 00:00:28 ; elapsed = 00:00:28 . Memory (MB): peak = 7866.277 ; gain = 0.000 ; free physical = 476222 ; free virtual = 1368030
+# report_clocks -file clocks_routed.rpt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+report_clocks: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 7866.277 ; gain = 0.000 ; free physical = 476298 ; free virtual = 1368106
+# report_timing_summary -check_timing_verbose -report_unconstrained -max_paths 10 -file timing_routed.rpt
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+report_timing_summary: Time (s): cpu = 00:00:45 ; elapsed = 00:00:38 . Memory (MB): peak = 7866.277 ; gain = 0.000 ; free physical = 476109 ; free virtual = 1367920
+# write_xdc -exclude_physical constraints_routed.xdc
+# set state_paths [open internal_paths.tsv w]
+# puts $state_paths [join {delay_type slack_ns startpoint endpoint datapath_delay_ns requirement_ns} "\t"]
+# foreach state_dtype {max min} {
+#     set state_found [get_timing_paths -from [get_clocks core_clk] -to [get_clocks core_clk] -delay_type $state_dtype -max_paths 10]
+#     if {[llength $state_found] != 10} {error "Expected ten internal timing paths"}
+#     foreach state_path $state_found {
+#         puts $state_paths [join [list $state_dtype [get_property SLACK $state_path] [get_property STARTPOINT_PIN $state_path] [get_property ENDPOINT_PIN $state_path] [get_property DATAPATH_DELAY $state_path] [get_property REQUIREMENT $state_path]] "\t"]
+#     }
+# }
+# close $state_paths
+# set state_done [open completed.txt w]
+# puts $state_done "STATE_ROUTE_RECOVERY_DONE version=[version -short] part=[get_property PART [current_design]] period=[get_property PERIOD [get_clocks core_clk]]"
+# close $state_done
+# puts $state_flow "STATE_ROUTE_RECOVERY_DONE [clock seconds]"
+# close $state_flow
+# puts STATE_ROUTE_RECOVERY_DONE
+STATE_ROUTE_RECOVERY_DONE
+# close_project
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 30 01:05:06 2026...

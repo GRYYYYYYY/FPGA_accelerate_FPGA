@@ -1,0 +1,44 @@
+{
+  "status": "verified_live_induction_pending_not_proof_acceptance",
+  "root": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1",
+  "original_session": 20887,
+  "controller": {
+    "pid": 2456124,
+    "start_ticks": "1663631491"
+  },
+  "active_process": {
+    "stage": "induction",
+    "pid": 2463077,
+    "start_ticks": "1663633745",
+    "argv": [
+      "python3",
+      "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+      "-s",
+      "z3",
+      "-i",
+      "-t",
+      "12",
+      "--dump-vcd",
+      "induction_failure.vcd",
+      "design.smt2"
+    ]
+  },
+  "children": [
+    {
+      "pid": 2463145,
+      "start_ticks": "1663633759",
+      "cpu_ticks": 23423,
+      "state": "R"
+    }
+  ],
+  "completed_bmc_steps": 12,
+  "preparation_review_sha256": "9ceb9be54bdb89c2532ee1e277fb47f4f2ebedb17650ead9f56f2685cc175ab9",
+  "induction_progress": [
+    "##   0:00:00  Solver: z3",
+    "##   0:00:00  Trying induction in step 12..",
+    "##   0:00:00  Trying induction in step 11..",
+    "##   0:01:04  Trying induction in step 10.."
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

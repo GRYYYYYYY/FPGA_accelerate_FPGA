@@ -1,0 +1,28 @@
+{
+  "status": "csr_full44_elaboration_sigkill_preserved_shared_memory_concurrency_serialized",
+  "exit_code": 137,
+  "elapsed_seconds": 2202.946501592174,
+  "max_rss_kib": 157933656,
+  "cgroup_limit_bytes": 322122547200,
+  "cgroup_events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 2\n",
+  "direct_kernel_pid_attribution_available": false,
+  "root_cause": "Not conclusively attributed: SIGKILL and increased OOM-kill counter are consistent with memory pressure; kernel log access denied and no precise event/PID timestamp",
+  "actions": [
+    "Preserve original failed CSR attempt and all dependent failed supervisor states",
+    "SIGSTOP only owned compact elaborator1509104 while it is small; retain same process and all original scopes",
+    "Controller1665449 resumes same PID only after snapshot compiler2516537 ends and cgroup free memory>=184GiB",
+    "Do not admit large new elaborations using host MemAvailable alone"
+  ],
+  "files": {
+    "/tmp/A_graph_compression_recovery_20261025_v1/compressed_batch_rtl_guarded_v1/state.json": "b99165948fb321d9b665d84a765605f8934cd14e009ffbf3baf8e7e1d63425b6",
+    "/tmp/A_graph_compression_recovery_20261025_v1/compressed_batch_rtl_guarded_v1/elaborate.log": "aeffc2774d3459fb735e9dc8df332ebd6b076a25b85bb7be8485d26f4fda88b1",
+    "/tmp/A_graph_compression_recovery_20261025_v1/compressed_batch_rtl_guarded_v1/elaborate.receipt.json": "08fa79213b01ebe4e1c460f4d359bd36a3949bf5a7c08b4a5884916202a020ae",
+    "/tmp/A_graph_compression_recovery_20261025_v1/compressed_batch_rtl_guarded_v1/plan.json": "b224f50ae8812b7c05b9ce53bfe9885dc54445e0a64cf47b13bd2358d4835f1f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/compact_rtl_memory_serialization_20261025_v1/before.json": "10ea91db931c34122314edff4eb37862d0fc22957b41909dcf56f416cc05c736",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/serialize_compact_rtl_memory.py": "2196c9184c6cf81e8ab3f30d1b80eaadb90099e965ea5df719ec2c20ee664658"
+  },
+  "references": [
+    "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+    "https://docs.amd.com/r/2022.2-English/ug900-vivado-logic-simulation/xelab"
+  ]
+}

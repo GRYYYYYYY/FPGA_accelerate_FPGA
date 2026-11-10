@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "project_id": "B",
+  "execution_kind": "synthetic_state_microbenchmark",
+  "backend": "cpp_cpu",
+  "status": "passed",
+  "timestamp_utc": "20261022T145247.685804Z",
+  "config": {
+    "schema_version": 1,
+    "dataset_kind": "synthetic_state_microbenchmark",
+    "nodes": 262144,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "page_bits": [
+      6,
+      9,
+      12
+    ],
+    "timeout_seconds": 60,
+    "order_seed": 20261022,
+    "variants": [
+      "cpu_dense_init",
+      "cpu_serial_stamp",
+      "cpu_existing_paged",
+      "cpu_paged_node_epoch",
+      "cpu_lifetime_residency"
+    ],
+    "workloads": [
+      {
+        "id": "clustered_short",
+        "queries": 128,
+        "touches": 256,
+        "fanout": 4,
+        "scattered": false
+      },
+      {
+        "id": "scattered_short",
+        "queries": 128,
+        "touches": 256,
+        "fanout": 4,
+        "scattered": true
+      },
+      {
+        "id": "high_fanout",
+        "queries": 128,
+        "touches": 256,
+        "fanout": 128,
+        "scattered": false
+      },
+      {
+        "id": "clustered_long",
+        "queries": 32,
+        "touches": 16384,
+        "fanout": 4,
+        "scattered": false
+      }
+    ]
+  },
+  "config_sha256": "1aeb92ed24c9e95e22c729ce5a377206224212f6199a97b46a5d7121b02babea",
+  "source_provenance": {
+    "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp",
+    "source_sha256": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+    "generated_sha256": "40d407e7352124160ad767895702eef3aa307dd74eb3f43978d8cbe978128911",
+    "excerpts": [
+      {
+        "symbol": "NodeDyn",
+        "start_line": 127,
+        "sha256": "f153588c10004b21b6e51364f7eff382e52338867e9efb2ece965d33daf3b256"
+      },
+      {
+        "symbol": "SparseLabels",
+        "start_line": 502,
+        "sha256": "f8d530879dfa50313320f69e213513dbb47a0acddf8298cf9107be6e2f3cd343"
+      },
+      {
+        "symbol": "countUserSlot",
+        "start_line": 662,
+        "sha256": "b09369e294fe088c2e22aaf6a2eb675c55cfa7360c46b2103d6da510002273bf"
+      },
+      {
+        "symbol": "promoteOverflowOwner",
+        "start_line": 670,
+        "sha256": "732a634e07bbd84d79707f75e487e9fea9f811beb19876a662255ed5785ea062"
+      },
+      {
+        "symbol": "syncHotOcc",
+        "start_line": 702,
+        "sha256": "e5c6baa84915a523bb5b234cb99d3130e9dc28921afc04dcee7e3e76c355ca9c"
+      },
+      {
+        "symbol": "inc_decUserSlot",
+        "start_line": 768,
+        "sha256": "33a449a0168eb7ae926c596c332ec9ed9038d994bd2fa935f99529f619c37851"
+      },
+      {
+        "symbol": "rip_commit",
+        "start_line": 1499,
+        "sha256": "271950ece2a1632092c4c60fcad23c5c5da7ff27373d8e3d39463e826599fca6"
+      },
+      {
+        "symbol": "gatherShareSet",
+        "start_line": 3812,
+        "sha256": "6d7fd343a82a477452c1cb06b8a973c4945f8a70d3009a85b38a859f0d69a9b0"
+      }
+    ]
+  },
+  "local_source_sha256": {
+    "src/state_bench.cpp": "6def6928b181393a1986f2421f8a9b0bc3333c2d3973a277dcd49989515815af",
+    "scripts/benchmark.py": "1ac63a96cdd65b45b51ef7f5027d1ed589067970f7b94c08b7d33e408f49cea0",
+    "adapters/extract_state.py": "0531a317c8040354982aa15423cc0b0ea1aeb9949747afa00e9284c1f32e83e5"
+  },
+  "compiler": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "compile_command": [
+    "/usr/bin/g++",
+    "-std=c++17",
+    "-O3",
+    "-fno-fast-math",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pthread",
+    "-I",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/20261022T145247.685804Z",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/src/state_bench.cpp",
+    "-o",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/20261022T145247.685804Z/state_bench"
+  ],
+  "binary_sha256": "7a1698769473d30e8ca3b3d5990f5fe13af4b0c30802a1185ab8a759fbbc5ba7",
+  "environment": {
+    "platform": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+    "cpu_model": "INTEL(R) XEON(R) GOLD 6530",
+    "affinity_cpu": 0,
+    "allowed_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127
+    ],
+    "python": "3.10.12",
+    "clock": "std::chrono::steady_clock",
+    "loadavg_at_start": [
+      7.0947265625,
+      6.31591796875,
+      5.36572265625
+    ],
+    "loadavg_at_end": [
+      7.0947265625,
+      6.31591796875,
+      5.36572265625
+    ]
+  },
+  "checks": {
+    "self_test": {
+      "status": "passed",
+      "checks": [
+        "epoch_wrap",
+        "pool_growth",
+        "quiescent_reclaim",
+        "context_isolation",
+        "new_search_invalidates_distance",
+        "distinct_net_occupancy",
+        "branch_references",
+        "endpoint_exclusion",
+        "owner_promotion",
+        "history_preservation",
+        "share_set_oracle"
+      ]
+    },
+    "sanitizers": {
+      "status": "passed",
+      "checks": [
+        "epoch_wrap",
+        "pool_growth",
+        "quiescent_reclaim",
+        "context_isolation",
+        "new_search_invalidates_distance",
+        "distinct_net_occupancy",
+        "branch_references",
+        "endpoint_exclusion",
+        "owner_promotion",
+        "history_preservation",
+        "share_set_oracle"
+      ]
+    },
+    "original_source_unchanged": true
+  },
+  "measurement_scope": {
+    "input": "generated accesses and branch paths, no physical graph or search",
+    "first": "first trace pass after allocation and preseeded occupancy",
+    "reuse": "second pass on the same allocated state, labels always invalidated",
+    "reset_ms": "explicit search reset; does not include lazy page/node initialization",
+    "label_access_including_lazy_init_ms": "four access passes, target set/cleanup, checksum arithmetic and lazy initialization",
+    "commit_ms": "original serial owner slots, reduced occupancy mirror and optional net index; excludes path materialization",
+    "sync_host_pack_ms": "host dirty-list packing using a synthetic price formula; no device transfer",
+    "phase_sum_ms": "sum of measured state phases; excludes construction, graph/search, path materialization, validation and I/O",
+    "label_capacity_bytes": "vector payload capacities only; excludes allocator overhead and shared design/net state",
+    "diagnostics": "separate instrumented runs; page miss timers perturb performance, do not use for speedup"
+  },
+  "hardware_measurements": {
+    "device_transfer_ms": null,
+    "fpga_ms": null,
+    "gpu_ms": null,
+    "routing_ms": null,
+    "routing_speedup": null
+  },
+  "samples": [],
+  "diagnostics": [],
+  "elapsed_seconds": 12.666103567928076
+}

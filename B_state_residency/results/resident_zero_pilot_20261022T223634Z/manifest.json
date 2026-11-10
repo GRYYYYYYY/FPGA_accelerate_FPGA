@@ -1,0 +1,1235 @@
+{
+  "status": "passed",
+  "runner_pid": 2444739,
+  "purpose": "single_repeat_paired_discovery",
+  "scope": "Synchronous CPU, same serial schedule, 64 frames x 64 nodes. No hardware/DMA or formal speedup claim.",
+  "builds": {
+    "explicit_rw": {
+      "layout": "resident_rw",
+      "source_sha256": "ce152ce415a0e5e5d94618505447c422d4aa9c8ebb8d707bad2487425a91d684",
+      "binary_sha256": "488d821f8b86eb69ab63907261cd39a8d5ad9256f1fdc206cd300d268ddb0546",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-g",
+        "-fno-fast-math",
+        "-fno-omit-frame-pointer",
+        "-no-pie",
+        "-pthread",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_rw_v2/router.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_rw_v2/router"
+      ],
+      "inputs": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_resident_router.py": "eedb6ddc1fdc4ea2bfe25b8685a35f87e4698871cdd9319d0629c036b14afa58",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/resident_labels.inc": "7a132a0024f8672840b30131055b3596f6ff84f6c08dab23723dc9cee73430c7",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_resident_rw_router.py": "6ac9b4d5132adfbb9b84dd53971dd493f308e8ae2b19d9a833ba921969067d39"
+      },
+      "read_sites": 18,
+      "write_sites": 10
+    },
+    "zero_bypass": {
+      "layout": "resident_zero",
+      "source_sha256": "606bcec1f9d1c8cd45e5762391e00aee1ddabd49f2a09252680bb269b6f54bb0",
+      "binary_sha256": "c3d89093adc39642aac88714f200797ab42570caf392797d1df4ce4c1e83ed14",
+      "command": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-g",
+        "-fno-fast-math",
+        "-fno-omit-frame-pointer",
+        "-no-pie",
+        "-pthread",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_zero_v1/router.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_zero_v1/router"
+      ],
+      "inputs": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_resident_router.py": "eedb6ddc1fdc4ea2bfe25b8685a35f87e4698871cdd9319d0629c036b14afa58",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/resident_labels.inc": "7a132a0024f8672840b30131055b3596f6ff84f6c08dab23723dc9cee73430c7",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_resident_rw_router.py": "6ac9b4d5132adfbb9b84dd53971dd493f308e8ae2b19d9a833ba921969067d39",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_resident_zero_router.py": "fd084fdadd06d448d5ba1852f67f4e933f940b81191258d8750ec7ecc1b01016"
+      },
+      "read_sites": 18,
+      "write_sites": 10
+    }
+  },
+  "semantic_tests": {
+    "explicit_rw": {
+      "status": "passed",
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "test_source_sha256": "31e7698c34bcc7bb5a75a79e9f6afea40410d9510a1d58a487983f20bbd214e7",
+      "router_source_sha256": "ce152ce415a0e5e5d94618505447c422d4aa9c8ebb8d707bad2487425a91d684",
+      "test_binary_sha256": "4d0c6d50895f95d2fd8e7c44d259bdf5d1b26914d402d1bfbffc408fa6683b3a",
+      "log_sha256": "268739bc8bd764c1a1efa145122d4a6067a3876dd2387ba7613c754088c02b57",
+      "command": [
+        "taskset",
+        "-c",
+        "24",
+        "build/resident_rw_v2/test_labels"
+      ],
+      "scope": "Actual generated class; read-only clean eviction, dirty value persistence, clean refill no repeated writeback, plus prior 2-slot/3-page-size RAII/reset/wrap preservation suite."
+    },
+    "zero_bypass": {
+      "status": "passed",
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "test_source_sha256": "41dc21b0ec67d0d608e19e05d684ee227670198dec30dc5730ac3afbbcbba30d",
+      "router_source_sha256": "606bcec1f9d1c8cd45e5762391e00aee1ddabd49f2a09252680bb269b6f54bb0",
+      "test_binary_sha256": "886ef467921887ad432ab313ea4dba0f2d5e9f8d4c3bc24a82012574221d30df",
+      "log_sha256": "268739bc8bd764c1a1efa145122d4a6067a3876dd2387ba7613c754088c02b57",
+      "command": [
+        "taskset",
+        "-c",
+        "24",
+        "build/resident_zero_v1/test_labels"
+      ],
+      "scope": "Actual TLRead/TLD, independent zero reference across writes/reset, resident/backing exclusion, epoch wrap, invalid node, 10000 mixed operations; prior lease/eviction suite retained."
+    }
+  },
+  "reference_manifest_sha256": "8a8baa6b979832c18125687dafe5150f3a104459fa22efaecbe99bab347f6408",
+  "tool_sha256": "03adb130a4b4911486c4d49a44c6092c551781888685e09d45ccb05d174d3a67",
+  "runs": [
+    {
+      "name": "vtr_mcml_explicit_rw",
+      "dataset": "vtr_mcml",
+      "access_mode": "explicit_rw",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/vtr_mcml_explicit_rw.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_rw_v2/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/vtr_mcml_explicit_rw.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "6",
+        "B_RESIDENT_PAGES": "64",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/vtr_mcml_explicit_rw.labels.json"
+      },
+      "pid": 2445539,
+      "verified": true,
+      "exit_code": 0,
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "metrics": {
+        "load_ms": 3122,
+        "route_ms": 236706,
+        "write_ms": 809,
+        "total_ms": 240639,
+        "iterations": 48,
+        "overused": 0,
+        "pushes": 390136023,
+        "used_nodes": 1441009,
+        "wire_length": 778649,
+        "convergence": [
+          [
+            1,
+            122499,
+            136621,
+            0,
+            224819
+          ],
+          [
+            2,
+            81024,
+            83469,
+            0,
+            174672
+          ],
+          [
+            3,
+            42961,
+            43300,
+            0,
+            141707
+          ],
+          [
+            4,
+            18002,
+            18046,
+            0,
+            92385
+          ],
+          [
+            5,
+            5683,
+            5686,
+            0,
+            46007
+          ],
+          [
+            6,
+            1488,
+            1489,
+            0,
+            19316
+          ],
+          [
+            7,
+            583,
+            584,
+            0,
+            9018
+          ],
+          [
+            8,
+            341,
+            341,
+            0,
+            5742
+          ],
+          [
+            9,
+            211,
+            211,
+            0,
+            2618
+          ],
+          [
+            10,
+            138,
+            138,
+            0,
+            910
+          ],
+          [
+            11,
+            86,
+            86,
+            0,
+            580
+          ],
+          [
+            12,
+            75,
+            75,
+            0,
+            176
+          ],
+          [
+            13,
+            59,
+            59,
+            0,
+            140
+          ],
+          [
+            14,
+            50,
+            50,
+            0,
+            128
+          ],
+          [
+            15,
+            37,
+            37,
+            0,
+            99
+          ],
+          [
+            16,
+            29,
+            29,
+            0,
+            68
+          ],
+          [
+            17,
+            24,
+            24,
+            0,
+            58
+          ],
+          [
+            18,
+            23,
+            23,
+            0,
+            48
+          ],
+          [
+            19,
+            20,
+            20,
+            0,
+            48
+          ],
+          [
+            20,
+            19,
+            19,
+            0,
+            50
+          ],
+          [
+            21,
+            15,
+            15,
+            0,
+            37
+          ],
+          [
+            22,
+            15,
+            15,
+            0,
+            26
+          ],
+          [
+            23,
+            14,
+            14,
+            0,
+            26
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            26
+          ],
+          [
+            25,
+            10,
+            10,
+            0,
+            24
+          ],
+          [
+            26,
+            7,
+            7,
+            0,
+            17
+          ],
+          [
+            27,
+            8,
+            8,
+            0,
+            15
+          ],
+          [
+            28,
+            7,
+            7,
+            0,
+            16
+          ],
+          [
+            29,
+            6,
+            6,
+            0,
+            40
+          ],
+          [
+            30,
+            4,
+            4,
+            0,
+            14
+          ],
+          [
+            31,
+            8,
+            8,
+            0,
+            10
+          ],
+          [
+            32,
+            5,
+            5,
+            0,
+            11
+          ],
+          [
+            33,
+            4,
+            4,
+            0,
+            10
+          ],
+          [
+            34,
+            5,
+            5,
+            0,
+            6
+          ],
+          [
+            35,
+            3,
+            3,
+            0,
+            10
+          ],
+          [
+            36,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            37,
+            2,
+            2,
+            0,
+            4
+          ],
+          [
+            38,
+            2,
+            2,
+            0,
+            5
+          ],
+          [
+            39,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            8
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            44,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            45,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            48,
+            0,
+            0,
+            0,
+            2
+          ]
+        ],
+        "bbox_ms": 2990.0
+      },
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "layout": "resident_sync",
+            "page_bits": 6,
+            "physical_pages": 64,
+            "resident_payload_bytes": 98304,
+            "backing_payload_bytes": 3214848,
+            "peak_backing_pages": 15686,
+            "page_table_bytes": 1873936,
+            "writebacks": 183205245,
+            "refills": 290167937,
+            "first_pages": 224311387,
+            "resets": 718921
+          }
+        ]
+      }
+    },
+    {
+      "name": "logicnets_jscl_zero_bypass",
+      "dataset": "logicnets_jscl",
+      "access_mode": "zero_bypass",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/logicnets_jscl_zero_bypass.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_zero_v1/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/logicnets_jscl_zero_bypass.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "6",
+        "B_RESIDENT_PAGES": "64",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/logicnets_jscl_zero_bypass.labels.json"
+      },
+      "pid": 2550119,
+      "verified": true,
+      "exit_code": 0,
+      "result_sha256": "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84",
+      "metrics": {
+        "load_ms": 1991,
+        "route_ms": 51146,
+        "write_ms": 587,
+        "total_ms": 53725,
+        "iterations": 12,
+        "overused": 0,
+        "pushes": 130334832,
+        "used_nodes": 722477,
+        "wire_length": 268901,
+        "convergence": [
+          [
+            1,
+            50416,
+            53734,
+            0,
+            180326
+          ],
+          [
+            2,
+            27950,
+            28300,
+            0,
+            123806
+          ],
+          [
+            3,
+            12160,
+            12193,
+            0,
+            95357
+          ],
+          [
+            4,
+            3497,
+            3501,
+            0,
+            64447
+          ],
+          [
+            5,
+            706,
+            708,
+            0,
+            40470
+          ],
+          [
+            6,
+            292,
+            294,
+            0,
+            27230
+          ],
+          [
+            7,
+            150,
+            151,
+            0,
+            19646
+          ],
+          [
+            8,
+            49,
+            49,
+            0,
+            11977
+          ],
+          [
+            9,
+            14,
+            14,
+            0,
+            5302
+          ],
+          [
+            10,
+            3,
+            3,
+            0,
+            1217
+          ],
+          [
+            11,
+            1,
+            1,
+            0,
+            324
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            184
+          ]
+        ],
+        "bbox_ms": 4479.999999999999
+      },
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 218136216,
+        "node_size": 24,
+        "contexts": [
+          {
+            "layout": "resident_sync",
+            "page_bits": 6,
+            "physical_pages": 64,
+            "resident_payload_bytes": 98304,
+            "backing_payload_bytes": 116736,
+            "peak_backing_pages": 21883,
+            "page_table_bytes": 1136136,
+            "writebacks": 32688678,
+            "refills": 20613598,
+            "zero_reads": 268324529,
+            "first_pages": 52489205,
+            "resets": 570286
+          }
+        ]
+      }
+    },
+    {
+      "name": "vtr_mcml_zero_bypass",
+      "dataset": "vtr_mcml",
+      "access_mode": "zero_bypass",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/vtr_mcml_zero_bypass.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_zero_v1/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/vtr_mcml_zero_bypass.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "6",
+        "B_RESIDENT_PAGES": "64",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/vtr_mcml_zero_bypass.labels.json"
+      },
+      "pid": 2573548,
+      "verified": true,
+      "exit_code": 0,
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "metrics": {
+        "load_ms": 3052,
+        "route_ms": 231715,
+        "write_ms": 635,
+        "total_ms": 235402,
+        "iterations": 48,
+        "overused": 0,
+        "pushes": 390136023,
+        "used_nodes": 1441009,
+        "wire_length": 778649,
+        "convergence": [
+          [
+            1,
+            122499,
+            136621,
+            0,
+            224819
+          ],
+          [
+            2,
+            81024,
+            83469,
+            0,
+            174672
+          ],
+          [
+            3,
+            42961,
+            43300,
+            0,
+            141707
+          ],
+          [
+            4,
+            18002,
+            18046,
+            0,
+            92385
+          ],
+          [
+            5,
+            5683,
+            5686,
+            0,
+            46007
+          ],
+          [
+            6,
+            1488,
+            1489,
+            0,
+            19316
+          ],
+          [
+            7,
+            583,
+            584,
+            0,
+            9018
+          ],
+          [
+            8,
+            341,
+            341,
+            0,
+            5742
+          ],
+          [
+            9,
+            211,
+            211,
+            0,
+            2618
+          ],
+          [
+            10,
+            138,
+            138,
+            0,
+            910
+          ],
+          [
+            11,
+            86,
+            86,
+            0,
+            580
+          ],
+          [
+            12,
+            75,
+            75,
+            0,
+            176
+          ],
+          [
+            13,
+            59,
+            59,
+            0,
+            140
+          ],
+          [
+            14,
+            50,
+            50,
+            0,
+            128
+          ],
+          [
+            15,
+            37,
+            37,
+            0,
+            99
+          ],
+          [
+            16,
+            29,
+            29,
+            0,
+            68
+          ],
+          [
+            17,
+            24,
+            24,
+            0,
+            58
+          ],
+          [
+            18,
+            23,
+            23,
+            0,
+            48
+          ],
+          [
+            19,
+            20,
+            20,
+            0,
+            48
+          ],
+          [
+            20,
+            19,
+            19,
+            0,
+            50
+          ],
+          [
+            21,
+            15,
+            15,
+            0,
+            37
+          ],
+          [
+            22,
+            15,
+            15,
+            0,
+            26
+          ],
+          [
+            23,
+            14,
+            14,
+            0,
+            26
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            26
+          ],
+          [
+            25,
+            10,
+            10,
+            0,
+            24
+          ],
+          [
+            26,
+            7,
+            7,
+            0,
+            17
+          ],
+          [
+            27,
+            8,
+            8,
+            0,
+            15
+          ],
+          [
+            28,
+            7,
+            7,
+            0,
+            16
+          ],
+          [
+            29,
+            6,
+            6,
+            0,
+            40
+          ],
+          [
+            30,
+            4,
+            4,
+            0,
+            14
+          ],
+          [
+            31,
+            8,
+            8,
+            0,
+            10
+          ],
+          [
+            32,
+            5,
+            5,
+            0,
+            11
+          ],
+          [
+            33,
+            4,
+            4,
+            0,
+            10
+          ],
+          [
+            34,
+            5,
+            5,
+            0,
+            6
+          ],
+          [
+            35,
+            3,
+            3,
+            0,
+            10
+          ],
+          [
+            36,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            37,
+            2,
+            2,
+            0,
+            4
+          ],
+          [
+            38,
+            2,
+            2,
+            0,
+            5
+          ],
+          [
+            39,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            8
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            44,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            45,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            48,
+            0,
+            0,
+            0,
+            2
+          ]
+        ],
+        "bbox_ms": 2920.0
+      },
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "layout": "resident_sync",
+            "page_bits": 6,
+            "physical_pages": 64,
+            "resident_payload_bytes": 98304,
+            "backing_payload_bytes": 3211776,
+            "peak_backing_pages": 15686,
+            "page_table_bytes": 1873936,
+            "writebacks": 172283222,
+            "refills": 277833272,
+            "zero_reads": 710244080,
+            "first_pages": 129087713,
+            "resets": 718921
+          }
+        ]
+      }
+    },
+    {
+      "name": "logicnets_jscl_explicit_rw",
+      "dataset": "logicnets_jscl",
+      "access_mode": "explicit_rw",
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/logicnets_jscl_explicit_rw.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/resident_rw_v2/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/logicnets_jscl_explicit_rw.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "6",
+        "B_RESIDENT_PAGES": "64",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/resident_zero_pilot_20261022T223634Z/logicnets_jscl_explicit_rw.labels.json"
+      },
+      "pid": 2675293,
+      "verified": true,
+      "exit_code": 0,
+      "result_sha256": "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84",
+      "metrics": {
+        "load_ms": 2245,
+        "route_ms": 55177,
+        "write_ms": 610,
+        "total_ms": 58033,
+        "iterations": 12,
+        "overused": 0,
+        "pushes": 130334832,
+        "used_nodes": 722477,
+        "wire_length": 268901,
+        "convergence": [
+          [
+            1,
+            50416,
+            53734,
+            0,
+            180326
+          ],
+          [
+            2,
+            27950,
+            28300,
+            0,
+            123806
+          ],
+          [
+            3,
+            12160,
+            12193,
+            0,
+            95357
+          ],
+          [
+            4,
+            3497,
+            3501,
+            0,
+            64447
+          ],
+          [
+            5,
+            706,
+            708,
+            0,
+            40470
+          ],
+          [
+            6,
+            292,
+            294,
+            0,
+            27230
+          ],
+          [
+            7,
+            150,
+            151,
+            0,
+            19646
+          ],
+          [
+            8,
+            49,
+            49,
+            0,
+            11977
+          ],
+          [
+            9,
+            14,
+            14,
+            0,
+            5302
+          ],
+          [
+            10,
+            3,
+            3,
+            0,
+            1217
+          ],
+          [
+            11,
+            1,
+            1,
+            0,
+            324
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            184
+          ]
+        ],
+        "bbox_ms": 4640.0
+      },
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 218136216,
+        "node_size": 24,
+        "contexts": [
+          {
+            "layout": "resident_sync",
+            "page_bits": 6,
+            "physical_pages": 64,
+            "resident_payload_bytes": 98304,
+            "backing_payload_bytes": 153600,
+            "peak_backing_pages": 21883,
+            "page_table_bytes": 1136136,
+            "writebacks": 42851578,
+            "refills": 27665351,
+            "first_pages": 85395215,
+            "resets": 570286
+          }
+        ]
+      }
+    }
+  ]
+}

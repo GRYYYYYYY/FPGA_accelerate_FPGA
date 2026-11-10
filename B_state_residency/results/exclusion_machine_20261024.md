@@ -1,0 +1,9 @@
+# 邻接排除逻辑的显式标签请求
+
+原isExcluded并非纯静态图过滤：它通过isPartOfExistingRoute先按需读取child.prev、child.visited、parent.visited，再按preserved/pinfeed/Laguna/arcLocked处理；arcLocked路径可能再次读取child.prev。getChildren随后缓存首次得到的过滤结果，并更新created与deadEnd，不能预过滤整张raw CSR后假定等价。
+
+hardware/search/exclusion_machine.hpp将单条边判断拆成最多4次有序标签响应。created、图flags与hasLaguna在该边处理期间稳定；每个请求指定child.prev/child.visited/parent.visited/arc.prev之一，DONE拒绝继续响应。当前helper尚无跨边事务标识或硬件接口，下一阶段必须定义重复/过期响应处理及单边上下文准入。
+
+27648组flags/created/Laguna/prev关系/sequence等价类，对机械抽取原函数核对判断和节点读取顺序，全部通过。随后接回已经验证的bounded frontier CPU路径，完整570286次搜索、130334832次push，结果/全部元数据/已有采样标签访问二进制一致，独立源码绑定审计通过。采样轨迹一致不是对所有访问逐条采集；运行时间不作性能对照。
+
+证据：exclusion_unit_20261024/manifest.json，exclusion_real_20261024/source_bound_audit.json。此阶段尚无RTL、自动分页集成或完整设备搜索证明；原上级源码、默认RTL与冻结回放保持不变。

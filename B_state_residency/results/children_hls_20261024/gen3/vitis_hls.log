@@ -1,0 +1,620 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+  **** SW Build 3670227 on Oct 13 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'root' on host 'fpgaacc1--cfc8cd109508-jnnrja5s7q' (Linux_x86_64 version 5.15.0-119-generic) on Sat Oct 24 18:05:20 UTC 2026
+INFO: [HLS 200-10] On os Ubuntu 22.04.4 LTS
+INFO: [HLS 200-10] In directory '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3'
+Sourcing Tcl script '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/run_hls.tcl'
+CHILDREN_HLS_BEGIN generation_bits=3 version=2022.2
+INFO: [HLS 200-1510] Running: open_project -reset children_step 
+INFO: [HLS 200-10] Creating and opening project '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step'.
+INFO: [HLS 200-1510] Running: set_top children_step 
+INFO: [HLS 200-1510] Running: add_files /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/kernel_hls.cpp -cflags -std=c++14 -fno-fast-math -DCHILDREN_GENERATION_BITS=3 -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb 
+INFO: [HLS 200-10] Adding design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/kernel_hls.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb/testbench.cpp -cflags -std=c++14 -fno-fast-math -DCHILDREN_GENERATION_BITS=3 -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb 
+INFO: [HLS 200-10] Adding test bench file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb/testbench.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution -reset solution1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10.000 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: config_rtl -reset state 
+INFO: [HLS 200-1510] Running: csim_design -clean 
+Running Dispatch Server on port: 39429
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../../rearchitect/v1/tb/testbench.cpp in debug mode
+   Compiling ../../../../../rearchitect/v1/src/kernel_hls.cpp in debug mode
+   Generating csim.exe
+CHILDREN_PORT_PASS generation_bits=3 contexts=7 calls=406 rejected=337 next=3 exclude=3 create=3 classify=3 emit=0 check_dead=7 mark_dead=4 publish=7
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0.54 seconds. CPU system time: 0.68 seconds. Elapsed time: 1.32 seconds; current allocated memory: 16.000 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.02 seconds; current allocated memory: 765.371 MB.
+INFO: [HLS 200-10] Analyzing design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/kernel_hls.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.44 seconds. CPU system time: 1.17 seconds. Elapsed time: 1.63 seconds; current allocated memory: 767.129 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::advance()' into 'search_children::Machine::excluded(bool)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_machine.hpp:26:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::advance()' into 'search_children::Machine::classified(bool, bool)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_machine.hpp:35:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::advance()' into 'search_children::Machine::emitted()' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_machine.hpp:40:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::Machine(unsigned int, bool)' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'children_port::Controller<3u>::node() const' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::next(unsigned int, bool)' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::excluded(bool)' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::created()' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::classified(bool, bool)' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::emitted()' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::can_mark_dead(bool)' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::marked_dead()' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 214-178] Inlining function 'search_children::Machine::published()' into 'children_port::Controller<3u>::step(children_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:22:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2.93 seconds. CPU system time: 1 seconds. Elapsed time: 3.95 seconds; current allocated memory: 768.074 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 768.074 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.05 seconds; current allocated memory: 769.145 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.04 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.04 seconds; current allocated memory: 769.504 MB.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:20:54) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:33:21) in function 'children_port::Controller<3u>::step'... converting 3 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_machine.hpp:17:9) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_port.hpp:44:108) in function 'children_port::Controller<3u>::step'... converting 3 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'children_port::Controller<3u>::step' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/children_machine.hpp:15:43)...9 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.17 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.22 seconds; current allocated memory: 775.648 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.13 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.14 seconds; current allocated memory: 793.199 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'children_step' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.21 seconds. CPU system time: 0.07 seconds. Elapsed time: 0.29 seconds; current allocated memory: 793.199 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.13 seconds. CPU system time: 0 seconds. Elapsed time: 0.13 seconds; current allocated memory: 809.199 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'children_step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.24 seconds. CPU system time: 0 seconds. Elapsed time: 0.26 seconds; current allocated memory: 809.199 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.07 seconds; current allocated memory: 809.199 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'step'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.23 seconds. CPU system time: 0 seconds. Elapsed time: 0.24 seconds; current allocated memory: 809.199 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'children_step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/op' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/parent' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/count' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/prune' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/query' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/price' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/generation' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/position' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/phase' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/node' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/value_r' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/aux' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/service_status' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/status' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/result_generation' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/request' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/result_position' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/result_node' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/result_parent' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/result_query' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/result_price' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/emitted' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/active_r' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'children_step/fault' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'children_step' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'children_step'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.63 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.67 seconds; current allocated memory: 809.199 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0.46 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.5 seconds; current allocated memory: 841.199 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.4 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.42 seconds; current allocated memory: 841.199 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for children_step.
+INFO: [VLOG 209-307] Generating Verilog RTL for children_step.
+INFO: [HLS 200-789] **** Estimated Fmax: 379.55 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 6.14 seconds. CPU system time: 2.37 seconds. Elapsed time: 8.66 seconds; current allocated memory: 75.828 MB.
+INFO: [HLS 200-1510] Running: cosim_design -rtl verilog -tool xsim -trace_level none 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+   Build using "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/tps/lnx64/gcc-8.3.0/bin/g++"
+   Compiling apatb_children_step.cpp
+   Compiling kernel_hls.cpp_pre.cpp.tb.cpp
+   Compiling testbench.cpp_pre.cpp.tb.cpp
+   Compiling apatb_children_step_ir.ll
+   Generating cosim.tv.exe
+INFO: [COSIM 212-302] Starting C TB testing ... 
+CHILDREN_PORT_PASS generation_bits=3 contexts=7 calls=406 rejected=337 next=3 exclude=3 create=3 classify=3 emit=0 check_dead=7 mark_dead=4 publish=7
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab xil_defaultlib.apatb_children_step_top glbl -Oenable_linking_all_libraries -prj children_step.prj -L smartconnect_v1_0 -L axi_protocol_checker_v1_1_12 -L axi_protocol_checker_v1_1_13 -L axis_protocol_checker_v1_1_11 -L axis_protocol_checker_v1_1_12 -L xil_defaultlib -L unisims_ver -L xpm -L floating_point_v7_0_20 -L floating_point_v7_1_15 --lib ieee_proposed=./ieee_proposed -s children_step 
+Multi-threading is on. Using 126 slave threads.
+WARNING: [XSIM 43-3431] One or more environment variables have been detected which affect the operation of the C compiler. These are typically not set in standard installations and are not tested by Xilinx, however they may be appropriate for your system, so the flow will attempt to continue.  If errors occur, try running xelab with the "-mt off -v 1" switches to see more information from the C compiler. The following environment variables have been detected:
+    LIBRARY_PATH
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1/sim/verilog/glbl.v" into library work
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1/sim/verilog/children_step.autotb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module apatb_children_step_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1/sim/verilog/children_step_step.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module children_step_step
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1/sim/verilog/children_step.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module children_step
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1/sim/verilog/dataflow_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dataflow_monitor
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_dataflow_monitor_sv
+Compiling module xil_defaultlib.children_step_step
+Compiling module xil_defaultlib.children_step
+Compiling module xil_defaultlib.nodf_module_intf
+Compiling module xil_defaultlib.dataflow_monitor_1
+Compiling module xil_defaultlib.apatb_children_step_top
+Compiling module work.glbl
+Built simulation snapshot children_step
+
+****** xsim v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/children_step/xsim_script.tcl
+# xsim {children_step} -autoloadwcfg -tclbatch {children_step.tcl}
+Time resolution is 1 ps
+source children_step.tcl
+## run all
+////////////////////////////////////////////////////////////////////////////////////
+// Inter-Transaction Progress: Completed Transaction / Total Transaction
+// Intra-Transaction Progress: Measured Latency / Latency Estimation * 100%
+//
+// RTL Simulation : "Inter-Transaction Progress" ["Intra-Transaction Progress"] @ "Simulation Time"
+////////////////////////////////////////////////////////////////////////////////////
+// RTL Simulation : 0 / 406 [0.00%] @ "125000"
+// RTL Simulation : 1 / 406 [100.00%] @ "165000"
+// RTL Simulation : 2 / 406 [100.00%] @ "195000"
+// RTL Simulation : 3 / 406 [100.00%] @ "225000"
+// RTL Simulation : 4 / 406 [100.00%] @ "255000"
+// RTL Simulation : 5 / 406 [100.00%] @ "285000"
+// RTL Simulation : 6 / 406 [100.00%] @ "315000"
+// RTL Simulation : 7 / 406 [100.00%] @ "345000"
+// RTL Simulation : 8 / 406 [100.00%] @ "375000"
+// RTL Simulation : 9 / 406 [100.00%] @ "405000"
+// RTL Simulation : 10 / 406 [100.00%] @ "435000"
+// RTL Simulation : 11 / 406 [100.00%] @ "465000"
+// RTL Simulation : 12 / 406 [100.00%] @ "495000"
+// RTL Simulation : 13 / 406 [100.00%] @ "525000"
+// RTL Simulation : 14 / 406 [100.00%] @ "555000"
+// RTL Simulation : 15 / 406 [100.00%] @ "585000"
+// RTL Simulation : 16 / 406 [100.00%] @ "615000"
+// RTL Simulation : 17 / 406 [100.00%] @ "645000"
+// RTL Simulation : 18 / 406 [100.00%] @ "675000"
+// RTL Simulation : 19 / 406 [100.00%] @ "705000"
+// RTL Simulation : 20 / 406 [100.00%] @ "735000"
+// RTL Simulation : 21 / 406 [100.00%] @ "765000"
+// RTL Simulation : 22 / 406 [100.00%] @ "795000"
+// RTL Simulation : 23 / 406 [100.00%] @ "825000"
+// RTL Simulation : 24 / 406 [100.00%] @ "855000"
+// RTL Simulation : 25 / 406 [100.00%] @ "885000"
+// RTL Simulation : 26 / 406 [100.00%] @ "915000"
+// RTL Simulation : 27 / 406 [100.00%] @ "945000"
+// RTL Simulation : 28 / 406 [100.00%] @ "975000"
+// RTL Simulation : 29 / 406 [100.00%] @ "1005000"
+// RTL Simulation : 30 / 406 [100.00%] @ "1035000"
+// RTL Simulation : 31 / 406 [100.00%] @ "1065000"
+// RTL Simulation : 32 / 406 [100.00%] @ "1095000"
+// RTL Simulation : 33 / 406 [100.00%] @ "1125000"
+// RTL Simulation : 34 / 406 [100.00%] @ "1155000"
+// RTL Simulation : 35 / 406 [100.00%] @ "1185000"
+// RTL Simulation : 36 / 406 [100.00%] @ "1215000"
+// RTL Simulation : 37 / 406 [100.00%] @ "1245000"
+// RTL Simulation : 38 / 406 [100.00%] @ "1275000"
+// RTL Simulation : 39 / 406 [100.00%] @ "1305000"
+// RTL Simulation : 40 / 406 [100.00%] @ "1335000"
+// RTL Simulation : 41 / 406 [100.00%] @ "1365000"
+// RTL Simulation : 42 / 406 [100.00%] @ "1395000"
+// RTL Simulation : 43 / 406 [100.00%] @ "1425000"
+// RTL Simulation : 44 / 406 [100.00%] @ "1455000"
+// RTL Simulation : 45 / 406 [100.00%] @ "1485000"
+// RTL Simulation : 46 / 406 [100.00%] @ "1515000"
+// RTL Simulation : 47 / 406 [100.00%] @ "1545000"
+// RTL Simulation : 48 / 406 [100.00%] @ "1575000"
+// RTL Simulation : 49 / 406 [100.00%] @ "1605000"
+// RTL Simulation : 50 / 406 [100.00%] @ "1635000"
+// RTL Simulation : 51 / 406 [100.00%] @ "1665000"
+// RTL Simulation : 52 / 406 [100.00%] @ "1695000"
+// RTL Simulation : 53 / 406 [100.00%] @ "1725000"
+// RTL Simulation : 54 / 406 [100.00%] @ "1755000"
+// RTL Simulation : 55 / 406 [100.00%] @ "1785000"
+// RTL Simulation : 56 / 406 [100.00%] @ "1815000"
+// RTL Simulation : 57 / 406 [100.00%] @ "1845000"
+// RTL Simulation : 58 / 406 [100.00%] @ "1875000"
+// RTL Simulation : 59 / 406 [100.00%] @ "1905000"
+// RTL Simulation : 60 / 406 [100.00%] @ "1935000"
+// RTL Simulation : 61 / 406 [100.00%] @ "1965000"
+// RTL Simulation : 62 / 406 [100.00%] @ "1995000"
+// RTL Simulation : 63 / 406 [100.00%] @ "2025000"
+// RTL Simulation : 64 / 406 [100.00%] @ "2055000"
+// RTL Simulation : 65 / 406 [100.00%] @ "2085000"
+// RTL Simulation : 66 / 406 [100.00%] @ "2115000"
+// RTL Simulation : 67 / 406 [100.00%] @ "2145000"
+// RTL Simulation : 68 / 406 [100.00%] @ "2175000"
+// RTL Simulation : 69 / 406 [100.00%] @ "2205000"
+// RTL Simulation : 70 / 406 [100.00%] @ "2235000"
+// RTL Simulation : 71 / 406 [100.00%] @ "2265000"
+// RTL Simulation : 72 / 406 [100.00%] @ "2295000"
+// RTL Simulation : 73 / 406 [100.00%] @ "2325000"
+// RTL Simulation : 74 / 406 [100.00%] @ "2355000"
+// RTL Simulation : 75 / 406 [100.00%] @ "2385000"
+// RTL Simulation : 76 / 406 [100.00%] @ "2415000"
+// RTL Simulation : 77 / 406 [100.00%] @ "2445000"
+// RTL Simulation : 78 / 406 [100.00%] @ "2475000"
+// RTL Simulation : 79 / 406 [100.00%] @ "2505000"
+// RTL Simulation : 80 / 406 [100.00%] @ "2535000"
+// RTL Simulation : 81 / 406 [100.00%] @ "2565000"
+// RTL Simulation : 82 / 406 [100.00%] @ "2595000"
+// RTL Simulation : 83 / 406 [100.00%] @ "2625000"
+// RTL Simulation : 84 / 406 [100.00%] @ "2655000"
+// RTL Simulation : 85 / 406 [100.00%] @ "2685000"
+// RTL Simulation : 86 / 406 [100.00%] @ "2715000"
+// RTL Simulation : 87 / 406 [100.00%] @ "2745000"
+// RTL Simulation : 88 / 406 [100.00%] @ "2775000"
+// RTL Simulation : 89 / 406 [100.00%] @ "2805000"
+// RTL Simulation : 90 / 406 [100.00%] @ "2835000"
+// RTL Simulation : 91 / 406 [100.00%] @ "2865000"
+// RTL Simulation : 92 / 406 [100.00%] @ "2895000"
+// RTL Simulation : 93 / 406 [100.00%] @ "2925000"
+// RTL Simulation : 94 / 406 [100.00%] @ "2955000"
+// RTL Simulation : 95 / 406 [100.00%] @ "2985000"
+// RTL Simulation : 96 / 406 [100.00%] @ "3015000"
+// RTL Simulation : 97 / 406 [100.00%] @ "3045000"
+// RTL Simulation : 98 / 406 [100.00%] @ "3075000"
+// RTL Simulation : 99 / 406 [100.00%] @ "3105000"
+// RTL Simulation : 100 / 406 [100.00%] @ "3135000"
+// RTL Simulation : 101 / 406 [100.00%] @ "3165000"
+// RTL Simulation : 102 / 406 [100.00%] @ "3195000"
+// RTL Simulation : 103 / 406 [100.00%] @ "3225000"
+// RTL Simulation : 104 / 406 [100.00%] @ "3255000"
+// RTL Simulation : 105 / 406 [100.00%] @ "3285000"
+// RTL Simulation : 106 / 406 [100.00%] @ "3315000"
+// RTL Simulation : 107 / 406 [100.00%] @ "3345000"
+// RTL Simulation : 108 / 406 [100.00%] @ "3375000"
+// RTL Simulation : 109 / 406 [100.00%] @ "3405000"
+// RTL Simulation : 110 / 406 [100.00%] @ "3435000"
+// RTL Simulation : 111 / 406 [100.00%] @ "3465000"
+// RTL Simulation : 112 / 406 [100.00%] @ "3495000"
+// RTL Simulation : 113 / 406 [100.00%] @ "3525000"
+// RTL Simulation : 114 / 406 [100.00%] @ "3555000"
+// RTL Simulation : 115 / 406 [100.00%] @ "3585000"
+// RTL Simulation : 116 / 406 [100.00%] @ "3615000"
+// RTL Simulation : 117 / 406 [100.00%] @ "3645000"
+// RTL Simulation : 118 / 406 [100.00%] @ "3675000"
+// RTL Simulation : 119 / 406 [100.00%] @ "3705000"
+// RTL Simulation : 120 / 406 [100.00%] @ "3735000"
+// RTL Simulation : 121 / 406 [100.00%] @ "3765000"
+// RTL Simulation : 122 / 406 [100.00%] @ "3795000"
+// RTL Simulation : 123 / 406 [100.00%] @ "3825000"
+// RTL Simulation : 124 / 406 [100.00%] @ "3855000"
+// RTL Simulation : 125 / 406 [100.00%] @ "3885000"
+// RTL Simulation : 126 / 406 [100.00%] @ "3915000"
+// RTL Simulation : 127 / 406 [100.00%] @ "3945000"
+// RTL Simulation : 128 / 406 [100.00%] @ "3975000"
+// RTL Simulation : 129 / 406 [100.00%] @ "4005000"
+// RTL Simulation : 130 / 406 [100.00%] @ "4035000"
+// RTL Simulation : 131 / 406 [100.00%] @ "4065000"
+// RTL Simulation : 132 / 406 [100.00%] @ "4095000"
+// RTL Simulation : 133 / 406 [100.00%] @ "4125000"
+// RTL Simulation : 134 / 406 [100.00%] @ "4155000"
+// RTL Simulation : 135 / 406 [100.00%] @ "4185000"
+// RTL Simulation : 136 / 406 [100.00%] @ "4215000"
+// RTL Simulation : 137 / 406 [100.00%] @ "4245000"
+// RTL Simulation : 138 / 406 [100.00%] @ "4275000"
+// RTL Simulation : 139 / 406 [100.00%] @ "4305000"
+// RTL Simulation : 140 / 406 [100.00%] @ "4335000"
+// RTL Simulation : 141 / 406 [100.00%] @ "4365000"
+// RTL Simulation : 142 / 406 [100.00%] @ "4395000"
+// RTL Simulation : 143 / 406 [100.00%] @ "4425000"
+// RTL Simulation : 144 / 406 [100.00%] @ "4455000"
+// RTL Simulation : 145 / 406 [100.00%] @ "4485000"
+// RTL Simulation : 146 / 406 [100.00%] @ "4515000"
+// RTL Simulation : 147 / 406 [100.00%] @ "4545000"
+// RTL Simulation : 148 / 406 [100.00%] @ "4575000"
+// RTL Simulation : 149 / 406 [100.00%] @ "4605000"
+// RTL Simulation : 150 / 406 [100.00%] @ "4635000"
+// RTL Simulation : 151 / 406 [100.00%] @ "4665000"
+// RTL Simulation : 152 / 406 [100.00%] @ "4695000"
+// RTL Simulation : 153 / 406 [100.00%] @ "4725000"
+// RTL Simulation : 154 / 406 [100.00%] @ "4755000"
+// RTL Simulation : 155 / 406 [100.00%] @ "4785000"
+// RTL Simulation : 156 / 406 [100.00%] @ "4815000"
+// RTL Simulation : 157 / 406 [100.00%] @ "4845000"
+// RTL Simulation : 158 / 406 [100.00%] @ "4875000"
+// RTL Simulation : 159 / 406 [100.00%] @ "4905000"
+// RTL Simulation : 160 / 406 [100.00%] @ "4935000"
+// RTL Simulation : 161 / 406 [100.00%] @ "4965000"
+// RTL Simulation : 162 / 406 [100.00%] @ "4995000"
+// RTL Simulation : 163 / 406 [100.00%] @ "5025000"
+// RTL Simulation : 164 / 406 [100.00%] @ "5055000"
+// RTL Simulation : 165 / 406 [100.00%] @ "5085000"
+// RTL Simulation : 166 / 406 [100.00%] @ "5115000"
+// RTL Simulation : 167 / 406 [100.00%] @ "5145000"
+// RTL Simulation : 168 / 406 [100.00%] @ "5175000"
+// RTL Simulation : 169 / 406 [100.00%] @ "5205000"
+// RTL Simulation : 170 / 406 [100.00%] @ "5235000"
+// RTL Simulation : 171 / 406 [100.00%] @ "5265000"
+// RTL Simulation : 172 / 406 [100.00%] @ "5295000"
+// RTL Simulation : 173 / 406 [100.00%] @ "5325000"
+// RTL Simulation : 174 / 406 [100.00%] @ "5355000"
+// RTL Simulation : 175 / 406 [100.00%] @ "5385000"
+// RTL Simulation : 176 / 406 [100.00%] @ "5415000"
+// RTL Simulation : 177 / 406 [100.00%] @ "5445000"
+// RTL Simulation : 178 / 406 [100.00%] @ "5475000"
+// RTL Simulation : 179 / 406 [100.00%] @ "5505000"
+// RTL Simulation : 180 / 406 [100.00%] @ "5535000"
+// RTL Simulation : 181 / 406 [100.00%] @ "5565000"
+// RTL Simulation : 182 / 406 [100.00%] @ "5595000"
+// RTL Simulation : 183 / 406 [100.00%] @ "5625000"
+// RTL Simulation : 184 / 406 [100.00%] @ "5655000"
+// RTL Simulation : 185 / 406 [100.00%] @ "5685000"
+// RTL Simulation : 186 / 406 [100.00%] @ "5715000"
+// RTL Simulation : 187 / 406 [100.00%] @ "5745000"
+// RTL Simulation : 188 / 406 [100.00%] @ "5775000"
+// RTL Simulation : 189 / 406 [100.00%] @ "5805000"
+// RTL Simulation : 190 / 406 [100.00%] @ "5835000"
+// RTL Simulation : 191 / 406 [100.00%] @ "5865000"
+// RTL Simulation : 192 / 406 [100.00%] @ "5895000"
+// RTL Simulation : 193 / 406 [100.00%] @ "5925000"
+// RTL Simulation : 194 / 406 [100.00%] @ "5955000"
+// RTL Simulation : 195 / 406 [100.00%] @ "5985000"
+// RTL Simulation : 196 / 406 [100.00%] @ "6015000"
+// RTL Simulation : 197 / 406 [100.00%] @ "6045000"
+// RTL Simulation : 198 / 406 [100.00%] @ "6075000"
+// RTL Simulation : 199 / 406 [100.00%] @ "6105000"
+// RTL Simulation : 200 / 406 [100.00%] @ "6135000"
+// RTL Simulation : 201 / 406 [100.00%] @ "6165000"
+// RTL Simulation : 202 / 406 [100.00%] @ "6195000"
+// RTL Simulation : 203 / 406 [100.00%] @ "6225000"
+// RTL Simulation : 204 / 406 [100.00%] @ "6255000"
+// RTL Simulation : 205 / 406 [100.00%] @ "6285000"
+// RTL Simulation : 206 / 406 [100.00%] @ "6315000"
+// RTL Simulation : 207 / 406 [100.00%] @ "6345000"
+// RTL Simulation : 208 / 406 [100.00%] @ "6375000"
+// RTL Simulation : 209 / 406 [100.00%] @ "6405000"
+// RTL Simulation : 210 / 406 [100.00%] @ "6435000"
+// RTL Simulation : 211 / 406 [100.00%] @ "6465000"
+// RTL Simulation : 212 / 406 [100.00%] @ "6495000"
+// RTL Simulation : 213 / 406 [100.00%] @ "6525000"
+// RTL Simulation : 214 / 406 [100.00%] @ "6555000"
+// RTL Simulation : 215 / 406 [100.00%] @ "6585000"
+// RTL Simulation : 216 / 406 [100.00%] @ "6615000"
+// RTL Simulation : 217 / 406 [100.00%] @ "6645000"
+// RTL Simulation : 218 / 406 [100.00%] @ "6675000"
+// RTL Simulation : 219 / 406 [100.00%] @ "6705000"
+// RTL Simulation : 220 / 406 [100.00%] @ "6735000"
+// RTL Simulation : 221 / 406 [100.00%] @ "6765000"
+// RTL Simulation : 222 / 406 [100.00%] @ "6795000"
+// RTL Simulation : 223 / 406 [100.00%] @ "6825000"
+// RTL Simulation : 224 / 406 [100.00%] @ "6855000"
+// RTL Simulation : 225 / 406 [100.00%] @ "6885000"
+// RTL Simulation : 226 / 406 [100.00%] @ "6915000"
+// RTL Simulation : 227 / 406 [100.00%] @ "6945000"
+// RTL Simulation : 228 / 406 [100.00%] @ "6975000"
+// RTL Simulation : 229 / 406 [100.00%] @ "7005000"
+// RTL Simulation : 230 / 406 [100.00%] @ "7035000"
+// RTL Simulation : 231 / 406 [100.00%] @ "7065000"
+// RTL Simulation : 232 / 406 [100.00%] @ "7095000"
+// RTL Simulation : 233 / 406 [100.00%] @ "7125000"
+// RTL Simulation : 234 / 406 [100.00%] @ "7155000"
+// RTL Simulation : 235 / 406 [100.00%] @ "7185000"
+// RTL Simulation : 236 / 406 [100.00%] @ "7215000"
+// RTL Simulation : 237 / 406 [100.00%] @ "7245000"
+// RTL Simulation : 238 / 406 [100.00%] @ "7275000"
+// RTL Simulation : 239 / 406 [100.00%] @ "7305000"
+// RTL Simulation : 240 / 406 [100.00%] @ "7335000"
+// RTL Simulation : 241 / 406 [100.00%] @ "7365000"
+// RTL Simulation : 242 / 406 [100.00%] @ "7395000"
+// RTL Simulation : 243 / 406 [100.00%] @ "7425000"
+// RTL Simulation : 244 / 406 [100.00%] @ "7455000"
+// RTL Simulation : 245 / 406 [100.00%] @ "7485000"
+// RTL Simulation : 246 / 406 [100.00%] @ "7515000"
+// RTL Simulation : 247 / 406 [100.00%] @ "7545000"
+// RTL Simulation : 248 / 406 [100.00%] @ "7575000"
+// RTL Simulation : 249 / 406 [100.00%] @ "7605000"
+// RTL Simulation : 250 / 406 [100.00%] @ "7635000"
+// RTL Simulation : 251 / 406 [100.00%] @ "7665000"
+// RTL Simulation : 252 / 406 [100.00%] @ "7695000"
+// RTL Simulation : 253 / 406 [100.00%] @ "7725000"
+// RTL Simulation : 254 / 406 [100.00%] @ "7755000"
+// RTL Simulation : 255 / 406 [100.00%] @ "7785000"
+// RTL Simulation : 256 / 406 [100.00%] @ "7815000"
+// RTL Simulation : 257 / 406 [100.00%] @ "7845000"
+// RTL Simulation : 258 / 406 [100.00%] @ "7875000"
+// RTL Simulation : 259 / 406 [100.00%] @ "7905000"
+// RTL Simulation : 260 / 406 [100.00%] @ "7935000"
+// RTL Simulation : 261 / 406 [100.00%] @ "7965000"
+// RTL Simulation : 262 / 406 [100.00%] @ "7995000"
+// RTL Simulation : 263 / 406 [100.00%] @ "8025000"
+// RTL Simulation : 264 / 406 [100.00%] @ "8055000"
+// RTL Simulation : 265 / 406 [100.00%] @ "8085000"
+// RTL Simulation : 266 / 406 [100.00%] @ "8115000"
+// RTL Simulation : 267 / 406 [100.00%] @ "8145000"
+// RTL Simulation : 268 / 406 [100.00%] @ "8175000"
+// RTL Simulation : 269 / 406 [100.00%] @ "8205000"
+// RTL Simulation : 270 / 406 [100.00%] @ "8235000"
+// RTL Simulation : 271 / 406 [100.00%] @ "8265000"
+// RTL Simulation : 272 / 406 [100.00%] @ "8295000"
+// RTL Simulation : 273 / 406 [100.00%] @ "8325000"
+// RTL Simulation : 274 / 406 [100.00%] @ "8355000"
+// RTL Simulation : 275 / 406 [100.00%] @ "8385000"
+// RTL Simulation : 276 / 406 [100.00%] @ "8415000"
+// RTL Simulation : 277 / 406 [100.00%] @ "8445000"
+// RTL Simulation : 278 / 406 [100.00%] @ "8475000"
+// RTL Simulation : 279 / 406 [100.00%] @ "8505000"
+// RTL Simulation : 280 / 406 [100.00%] @ "8535000"
+// RTL Simulation : 281 / 406 [100.00%] @ "8565000"
+// RTL Simulation : 282 / 406 [100.00%] @ "8595000"
+// RTL Simulation : 283 / 406 [100.00%] @ "8625000"
+// RTL Simulation : 284 / 406 [100.00%] @ "8655000"
+// RTL Simulation : 285 / 406 [100.00%] @ "8685000"
+// RTL Simulation : 286 / 406 [100.00%] @ "8715000"
+// RTL Simulation : 287 / 406 [100.00%] @ "8745000"
+// RTL Simulation : 288 / 406 [100.00%] @ "8775000"
+// RTL Simulation : 289 / 406 [100.00%] @ "8805000"
+// RTL Simulation : 290 / 406 [100.00%] @ "8835000"
+// RTL Simulation : 291 / 406 [100.00%] @ "8865000"
+// RTL Simulation : 292 / 406 [100.00%] @ "8895000"
+// RTL Simulation : 293 / 406 [100.00%] @ "8925000"
+// RTL Simulation : 294 / 406 [100.00%] @ "8955000"
+// RTL Simulation : 295 / 406 [100.00%] @ "8985000"
+// RTL Simulation : 296 / 406 [100.00%] @ "9015000"
+// RTL Simulation : 297 / 406 [100.00%] @ "9045000"
+// RTL Simulation : 298 / 406 [100.00%] @ "9075000"
+// RTL Simulation : 299 / 406 [100.00%] @ "9105000"
+// RTL Simulation : 300 / 406 [100.00%] @ "9135000"
+// RTL Simulation : 301 / 406 [100.00%] @ "9165000"
+// RTL Simulation : 302 / 406 [100.00%] @ "9195000"
+// RTL Simulation : 303 / 406 [100.00%] @ "9225000"
+// RTL Simulation : 304 / 406 [100.00%] @ "9255000"
+// RTL Simulation : 305 / 406 [100.00%] @ "9285000"
+// RTL Simulation : 306 / 406 [100.00%] @ "9315000"
+// RTL Simulation : 307 / 406 [100.00%] @ "9345000"
+// RTL Simulation : 308 / 406 [100.00%] @ "9375000"
+// RTL Simulation : 309 / 406 [100.00%] @ "9405000"
+// RTL Simulation : 310 / 406 [100.00%] @ "9435000"
+// RTL Simulation : 311 / 406 [100.00%] @ "9465000"
+// RTL Simulation : 312 / 406 [100.00%] @ "9495000"
+// RTL Simulation : 313 / 406 [100.00%] @ "9525000"
+// RTL Simulation : 314 / 406 [100.00%] @ "9555000"
+// RTL Simulation : 315 / 406 [100.00%] @ "9585000"
+// RTL Simulation : 316 / 406 [100.00%] @ "9615000"
+// RTL Simulation : 317 / 406 [100.00%] @ "9645000"
+// RTL Simulation : 318 / 406 [100.00%] @ "9675000"
+// RTL Simulation : 319 / 406 [100.00%] @ "9705000"
+// RTL Simulation : 320 / 406 [100.00%] @ "9735000"
+// RTL Simulation : 321 / 406 [100.00%] @ "9765000"
+// RTL Simulation : 322 / 406 [100.00%] @ "9795000"
+// RTL Simulation : 323 / 406 [100.00%] @ "9825000"
+// RTL Simulation : 324 / 406 [100.00%] @ "9855000"
+// RTL Simulation : 325 / 406 [100.00%] @ "9885000"
+// RTL Simulation : 326 / 406 [100.00%] @ "9915000"
+// RTL Simulation : 327 / 406 [100.00%] @ "9945000"
+// RTL Simulation : 328 / 406 [100.00%] @ "9975000"
+// RTL Simulation : 329 / 406 [100.00%] @ "10005000"
+// RTL Simulation : 330 / 406 [100.00%] @ "10035000"
+// RTL Simulation : 331 / 406 [100.00%] @ "10065000"
+// RTL Simulation : 332 / 406 [100.00%] @ "10095000"
+// RTL Simulation : 333 / 406 [100.00%] @ "10125000"
+// RTL Simulation : 334 / 406 [100.00%] @ "10155000"
+// RTL Simulation : 335 / 406 [100.00%] @ "10185000"
+// RTL Simulation : 336 / 406 [100.00%] @ "10215000"
+// RTL Simulation : 337 / 406 [100.00%] @ "10245000"
+// RTL Simulation : 338 / 406 [100.00%] @ "10275000"
+// RTL Simulation : 339 / 406 [100.00%] @ "10305000"
+// RTL Simulation : 340 / 406 [100.00%] @ "10335000"
+// RTL Simulation : 341 / 406 [100.00%] @ "10365000"
+// RTL Simulation : 342 / 406 [100.00%] @ "10395000"
+// RTL Simulation : 343 / 406 [100.00%] @ "10425000"
+// RTL Simulation : 344 / 406 [100.00%] @ "10455000"
+// RTL Simulation : 345 / 406 [100.00%] @ "10485000"
+// RTL Simulation : 346 / 406 [100.00%] @ "10515000"
+// RTL Simulation : 347 / 406 [100.00%] @ "10545000"
+// RTL Simulation : 348 / 406 [100.00%] @ "10575000"
+// RTL Simulation : 349 / 406 [100.00%] @ "10605000"
+// RTL Simulation : 350 / 406 [100.00%] @ "10635000"
+// RTL Simulation : 351 / 406 [100.00%] @ "10665000"
+// RTL Simulation : 352 / 406 [100.00%] @ "10695000"
+// RTL Simulation : 353 / 406 [100.00%] @ "10725000"
+// RTL Simulation : 354 / 406 [100.00%] @ "10755000"
+// RTL Simulation : 355 / 406 [100.00%] @ "10785000"
+// RTL Simulation : 356 / 406 [100.00%] @ "10815000"
+// RTL Simulation : 357 / 406 [100.00%] @ "10845000"
+// RTL Simulation : 358 / 406 [100.00%] @ "10875000"
+// RTL Simulation : 359 / 406 [100.00%] @ "10905000"
+// RTL Simulation : 360 / 406 [100.00%] @ "10935000"
+// RTL Simulation : 361 / 406 [100.00%] @ "10965000"
+// RTL Simulation : 362 / 406 [100.00%] @ "10995000"
+// RTL Simulation : 363 / 406 [100.00%] @ "11025000"
+// RTL Simulation : 364 / 406 [100.00%] @ "11055000"
+// RTL Simulation : 365 / 406 [100.00%] @ "11085000"
+// RTL Simulation : 366 / 406 [100.00%] @ "11115000"
+// RTL Simulation : 367 / 406 [100.00%] @ "11145000"
+// RTL Simulation : 368 / 406 [100.00%] @ "11175000"
+// RTL Simulation : 369 / 406 [100.00%] @ "11205000"
+// RTL Simulation : 370 / 406 [100.00%] @ "11235000"
+// RTL Simulation : 371 / 406 [100.00%] @ "11265000"
+// RTL Simulation : 372 / 406 [100.00%] @ "11295000"
+// RTL Simulation : 373 / 406 [100.00%] @ "11325000"
+// RTL Simulation : 374 / 406 [100.00%] @ "11355000"
+// RTL Simulation : 375 / 406 [100.00%] @ "11385000"
+// RTL Simulation : 376 / 406 [100.00%] @ "11415000"
+// RTL Simulation : 377 / 406 [100.00%] @ "11445000"
+// RTL Simulation : 378 / 406 [100.00%] @ "11475000"
+// RTL Simulation : 379 / 406 [100.00%] @ "11505000"
+// RTL Simulation : 380 / 406 [100.00%] @ "11535000"
+// RTL Simulation : 381 / 406 [100.00%] @ "11565000"
+// RTL Simulation : 382 / 406 [100.00%] @ "11595000"
+// RTL Simulation : 383 / 406 [100.00%] @ "11625000"
+// RTL Simulation : 384 / 406 [100.00%] @ "11655000"
+// RTL Simulation : 385 / 406 [100.00%] @ "11685000"
+// RTL Simulation : 386 / 406 [100.00%] @ "11715000"
+// RTL Simulation : 387 / 406 [100.00%] @ "11745000"
+// RTL Simulation : 388 / 406 [100.00%] @ "11775000"
+// RTL Simulation : 389 / 406 [100.00%] @ "11805000"
+// RTL Simulation : 390 / 406 [100.00%] @ "11835000"
+// RTL Simulation : 391 / 406 [100.00%] @ "11865000"
+// RTL Simulation : 392 / 406 [100.00%] @ "11895000"
+// RTL Simulation : 393 / 406 [100.00%] @ "11925000"
+// RTL Simulation : 394 / 406 [100.00%] @ "11955000"
+// RTL Simulation : 395 / 406 [100.00%] @ "11985000"
+// RTL Simulation : 396 / 406 [100.00%] @ "12015000"
+// RTL Simulation : 397 / 406 [100.00%] @ "12045000"
+// RTL Simulation : 398 / 406 [100.00%] @ "12075000"
+// RTL Simulation : 399 / 406 [100.00%] @ "12105000"
+// RTL Simulation : 400 / 406 [100.00%] @ "12135000"
+// RTL Simulation : 401 / 406 [100.00%] @ "12165000"
+// RTL Simulation : 402 / 406 [100.00%] @ "12195000"
+// RTL Simulation : 403 / 406 [100.00%] @ "12225000"
+// RTL Simulation : 404 / 406 [100.00%] @ "12255000"
+// RTL Simulation : 405 / 406 [100.00%] @ "12285000"
+// RTL Simulation : 406 / 406 [100.00%] @ "12315000"
+////////////////////////////////////////////////////////////////////////////////////
+$finish called at time : 12375 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/children_step/solution1/sim/verilog/children_step.autotb.v" Line 1611
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 24 18:06:01 2026...
+INFO: [COSIM 212-316] Starting C post checking ...
+CHILDREN_PORT_PASS generation_bits=3 contexts=7 calls=406 rejected=337 next=3 exclude=3 create=3 classify=3 emit=0 check_dead=7 mark_dead=4 publish=7
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [HLS 200-111] Finished Command cosim_design CPU user time: 20.94 seconds. CPU system time: 4.41 seconds. Elapsed time: 19.04 seconds; current allocated memory: 0.000 MB.
+INFO: [HLS 200-1510] Running: close_project 
+CHILDREN_HLS_DONE generation_bits=3
+INFO: [HLS 200-112] Total CPU user time: 30.16 seconds. Total CPU system time: 8.21 seconds. Total elapsed time: 42.01 seconds; peak allocated memory: 841.199 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Sat Oct 24 18:06:01 2026...

@@ -1,0 +1,1 @@
+最终发布验证改用../owner_g3_publish_v2。不要把此目录的receipt-only修复当成已完成：prepared会关闭普通工作permit，必须使用独立真实发布退休条件。负例/不完整修复保留；export_manifest无错误后非冷重arm接口，arm和bundle捕获仍外部，不宣称通用取消恢复、持久化或认证。

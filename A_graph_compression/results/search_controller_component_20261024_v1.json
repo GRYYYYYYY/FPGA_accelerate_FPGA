@@ -1,0 +1,46 @@
+{
+  "status": "bounded_single_search_controller_cpu_differential_and_boundaries_verified",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_controller.hpp": "91af29a70355f2e243d1a1c15dff9f46296dcefab1aecc70eb85593da9909ac2",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/search_controller_adapter.hpp": "f84cd4e3baad760b52012bd0d0921a8aebee51aaf0e896f50a6a450a70af711b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/controller_search_transform.py": "fa7e84a04839445bb0d7d55c06794a3bd45d4cada338b50770a5f424e86dd3b4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_controller.cpp": "45e87193d88f2515c1ccfe0786a97bc332f63e7f6b9d3dabddb58ad4de746a7f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_controller_bounds.cpp": "2a59a05663e34daaa0cef6a7107d274c56979929a25aec2a24bd6ae0285971d7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_controller_cxx14.cpp": "8120230055c813cc3a037922abec09ffd5fb880a37284f6e0bb4fbea7d7b0f0a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_controller_search_integration.py": "4693bfed7e7d50385c667c626480d58a6797ea9a70f3f14a5c1696523cf970dd",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_heap.hpp": "92561b7ca4cb328727b544bce359e816fdfcf6f0a054a08530b2fe46e8c744be",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_heap_external.hpp": "784f7c8efc9cb33f16f80f8fa8b3de0cb73f9ff785735765960c74c960a83be5",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_site_state.hpp": "bb7ae721b07c42d5306a578cf01fc10f6c03c23a72e5d5d1c74624e03a0a2f25",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_label_index.hpp": "c3d919e6eef4701e8568a395ea028ff15290166bfcabf35c1b1f399db3f18c84",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_label_records.hpp": "5ba43cb2013a7103dc43b83cfa200c74a9df8435f5267128c5efacfb5e051248",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_controller_random_20261024_v1.log": "0dad4fcf566c0827fedf90b66063d30080eae5d06c6bbef532a8d059bb74af7c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_controller_bounds_20261024_v1.log": "265ddc2bd36a9320602bc451a2f1c9e3cb43ed41db460ce48983ae3742e730cb",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_controller_cxx14_20261024_v1.log": "297276dd6ae3addc3df63c9f8820d8b17b87445e82581325cdad9e3369c17ec4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_controller_integration_20261024_v1.log": "bb68d2d7e84280bcfd96ed57c4feaf8d4addf0640cb16f4612252bb606a8954b"
+  },
+  "checks": {
+    "random_differential_cases": 1000,
+    "random_statuses": {
+      "budget_exhausted": 182,
+      "found": 570,
+      "incomplete_domain": 70,
+      "no_path": 119,
+      "unknown_site_semantics": 59
+    },
+    "capacity_classes": 10,
+    "native_driver_scenarios": 12,
+    "epoch_rollover": true,
+    "cxx14_static_provider": true,
+    "compiler_flags": "-O1 -g -Wall -Wextra -Werror -fsanitize=address,undefined"
+  },
+  "scope": [
+    "Exact full path edge fields, cost, status, expansion/block counters, full normalized demands and unknown evidence compared on random CPU graphs.",
+    "Native search entrypoint replaces full search body; 12 existing independent native scenarios match.",
+    "C++14 static provider instantiates the complete core without native containers; two searches verify path/state and unknown-PIP output."
+  ],
+  "limitations": [
+    "No full 1062-net controller result yet.",
+    "No HLS top, synthesis, RTL, implementation or board result for this controller.",
+    "CPU bridge still uses native graph, semantics normalization, compatibility and cost callbacks; full negotiation remains CPU."
+  ]
+}

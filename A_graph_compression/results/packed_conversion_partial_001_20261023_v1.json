@@ -1,0 +1,33 @@
+{
+  "artifacts": {
+    "data/derived/packed_conversion_statistics_20261023_v1/plan.json": "5441f2a39afc3d3ca4ec4c8ee7bc607b169c39dd77e3b82031f65e343512507f",
+    "data/derived/packed_conversion_statistics_20261023_v1/worker_000.agr": "932372df51c3943dda1e910bd6a9395912e7b86399277fd8ae4c95f8f5ee870a",
+    "data/derived/packed_conversion_statistics_20261023_v1/worker_000.json": "23fd10669887f2a4fc8224f38390f9a8d713bc44034ed4dd45f99a5e9e015a9f",
+    "data/derived/packed_conversion_statistics_20261023_v1/worker_000.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "data/derived/packed_conversion_statistics_20261023_v1/worker_000.receipt.json": "af38bf0db27b923ce19a930f0ca1295ab823bb9a74c0c6da4433cd89c86a0180",
+    "data/derived/packed_conversion_statistics_20261023_v1/worker_000.submission.json": "7147c33fc2e38b3acc82f7adef8fd1a6de2087a6161e80d46eb154099ec41f22"
+  },
+  "auditor_sha256": "9e9e174f3a2e0ab8f7d9159bfdf53af5dfc592f2a131c736bce7ffd0f6ecb795",
+  "completed_workers": 1,
+  "limitations": [
+    "CPU conversion from an existing captured TSV to AGR only; excludes Vivado acquisition, bank training, query/site fixture preparation, native routing and board transfer.",
+    "Exact source graph and frozen bank; CSR does not pay unnecessary compact bank loading or exception construction.",
+    "File writes close normally without fsync; page-cache and concurrent host activity are uncontrolled. This is not cold-disk IO.",
+    "Child peak includes parser and serializer objects; parent/hash audit memory is excluded.",
+    "Conversion phase excludes post-write hash validation; process wall includes interpreter/imports, conversion, validation, and cleanup."
+  ],
+  "planned_workers": 14,
+  "status": "partial_conversion_workers_audited",
+  "summary_medians": {
+    "csr": {
+      "bank_load_ms": 0.002302229404449463,
+      "conversion_ms": 37895.23233473301,
+      "n": 1,
+      "peak_child_kib": 6205320,
+      "process_wall_ms": 40726.88665613532,
+      "read_export_ms": 15394.95380781591,
+      "serialize_ms": 22500.270465388894,
+      "validation_ms": 1711.7766849696636
+    }
+  }
+}

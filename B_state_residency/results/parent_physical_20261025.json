@@ -1,0 +1,171 @@
+{
+  "status": "passed",
+  "root": "/tmp/B_state_residency_offer_20261025/parent_physical_v2",
+  "audit_sha256": "1f7df34293398d1d2addcd8b943108b638616607f8636230d66b08b446204830",
+  "cases": {
+    "baseline": {
+      "synth": {
+        "LUT": 2620.0,
+        "FF": 1951.0,
+        "CARRY8": 123.0,
+        "BRAM": 0.0,
+        "DSP": 0.0,
+        "latches": 0.0
+      },
+      "routed": {
+        "LUT": 2576.0,
+        "FF": 1951.0,
+        "CARRY8": 123.0,
+        "BRAM": 0.0,
+        "DSP": 0.0,
+        "latches": 0.0
+      },
+      "sampled_internal_setup_slack_ns": 2.847,
+      "sampled_internal_hold_slack_ns": 0.041,
+      "reported_WNS_ns": 2.847,
+      "reported_TNS_ns": 0.0,
+      "reported_WHS_ns": 0.041,
+      "reported_THS_ns": 0.0,
+      "failing_endpoints": {
+        "setup": 0,
+        "hold": 0,
+        "pulse_width": 0
+      },
+      "constrained_internal_10ns_setup_hold_met": true,
+      "methodology": {
+        "synth": {
+          "TIMING-18": {
+            "severity": "Warning",
+            "count": 1000
+          }
+        },
+        "routed": {
+          "TIMING-18": {
+            "severity": "Warning",
+            "count": 1000
+          }
+        }
+      },
+      "unconstrained_IO_checks": {
+        "no_input_delay": 939,
+        "no_output_delay": 771
+      },
+      "route": {
+        "routable nets": 3583,
+        "fully routed nets": 3583,
+        "nets with routing errors": 0
+      },
+      "worst_setup": {
+        "delay_type": "max",
+        "slack_ns": "2.847",
+        "startpoint": "arithmetic/arithmetic/icmp_ln8_1_reg_258_reg[0]/C",
+        "endpoint": "arithmetic/arithmetic/grp_add_fu_150/retval_1_reg_160_reg[26]/S",
+        "datapath_delay_ns": "7.034",
+        "requirement_ns": "10.000"
+      },
+      "worst_hold": {
+        "delay_type": "min",
+        "slack_ns": "0.041",
+        "startpoint": "arithmetic/arithmetic/grp_add_fu_150/grp_add_Pipeline_VITIS_LOOP_30_1_fu_185/s_fu_56_reg[57]/C",
+        "endpoint": "arithmetic/arithmetic/grp_add_fu_150/grp_add_Pipeline_VITIS_LOOP_30_1_fu_185/s_fu_56_reg[58]/D",
+        "datapath_delay_ns": "0.094",
+        "requirement_ns": "0.000"
+      },
+      "routed_dcp_sha256": "6c8b678f0928316b066935d8ad4c4273243ab41b73fe3f27348a3502bbf13084"
+    },
+    "cached": {
+      "synth": {
+        "LUT": 2729.0,
+        "FF": 2117.0,
+        "CARRY8": 141.0,
+        "BRAM": 0.0,
+        "DSP": 0.0,
+        "latches": 0.0
+      },
+      "routed": {
+        "LUT": 2683.0,
+        "FF": 2117.0,
+        "CARRY8": 141.0,
+        "BRAM": 0.0,
+        "DSP": 0.0,
+        "latches": 0.0
+      },
+      "sampled_internal_setup_slack_ns": 2.786,
+      "sampled_internal_hold_slack_ns": 0.042,
+      "reported_WNS_ns": 2.786,
+      "reported_TNS_ns": 0.0,
+      "reported_WHS_ns": 0.042,
+      "reported_THS_ns": 0.0,
+      "failing_endpoints": {
+        "setup": 0,
+        "hold": 0,
+        "pulse_width": 0
+      },
+      "constrained_internal_10ns_setup_hold_met": true,
+      "methodology": {
+        "synth": {
+          "TIMING-18": {
+            "severity": "Warning",
+            "count": 1000
+          }
+        },
+        "routed": {
+          "TIMING-18": {
+            "severity": "Warning",
+            "count": 1000
+          }
+        }
+      },
+      "unconstrained_IO_checks": {
+        "no_input_delay": 939,
+        "no_output_delay": 771
+      },
+      "route": {
+        "routable nets": 3783,
+        "fully routed nets": 3783,
+        "nets with routing errors": 0
+      },
+      "worst_setup": {
+        "delay_type": "max",
+        "slack_ns": "2.786",
+        "startpoint": "arithmetic/arithmetic/ap_CS_fsm_reg[10]/C",
+        "endpoint": "arithmetic/arithmetic/grp_add_fu_150/retval_1_reg_160_reg[0]/CE",
+        "datapath_delay_ns": "7.111",
+        "requirement_ns": "10.000"
+      },
+      "worst_hold": {
+        "delay_type": "min",
+        "slack_ns": "0.042",
+        "startpoint": "arithmetic/arithmetic/input_r_load_1_reg_253_reg[14]/C",
+        "endpoint": "arithmetic/arithmetic/xor_ln10_reg_287_reg[14]/D",
+        "datapath_delay_ns": "0.095",
+        "requirement_ns": "0.000"
+      },
+      "routed_dcp_sha256": "f0d10d1346e91f4106d382df0345850f118ee60c2eb508bfcc7174126a3006cd"
+    }
+  },
+  "delta": {
+    "synth": {
+      "LUT": 109.0,
+      "FF": 166.0,
+      "CARRY8": 18.0,
+      "BRAM": 0.0,
+      "DSP": 0.0,
+      "latches": 0.0
+    },
+    "routed": {
+      "LUT": 107.0,
+      "FF": 166.0,
+      "CARRY8": 18.0,
+      "BRAM": 0.0,
+      "DSP": 0.0,
+      "latches": 0.0
+    }
+  },
+  "scope": "Matched isolated OOC post modules including identical real center arithmetic. Research clock only; no board I/O budgets or whole-accelerator Fmax.",
+  "limitations": [
+    "Module-only OOC, identical 10ns clock; no board input/output delays or HD.CLK_SRC constraint.",
+    "Sampled internal paths and full timing-summary minima reported separately; no whole-accelerator or board Fmax.",
+    "Single default placement/routing per netlist, no seed/voltage/frequency sweep; no new post-route functional simulation."
+  ]
+}

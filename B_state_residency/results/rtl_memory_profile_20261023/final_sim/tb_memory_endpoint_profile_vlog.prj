@@ -1,0 +1,20 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../sources/hardware/rtl/backing_frame_directory_lookup.sv" \
+"../../../../../sources/hardware/rtl/backing_page_service_lookup.sv" \
+"../../../../../sources/hardware/rtl/bounded_sync_fifo.sv" \
+"../../../../../sources/hardware/rtl/memory_scratch_endpoint.sv" \
+"../../../../../sources/hardware/rtl/queued_scratch_endpoint.sv" \
+"../../../../../sources/hardware/rtl/record_backing_service.sv" \
+"../../../../../sources/hardware/rtl/scratch_frame_store_bram.sv" \
+"../../../../../sources/hardware/rtl/scratch_page_axi.sv" \
+"../../../../../sources/hardware/rtl/scratch_page_codec.sv" \
+"../../../../../sources/hardware/rtl/scratch_page_controller.sv" \
+"../../../../../sources/hardware/tb/tb_memory_endpoint.sv" \
+"../../../../../sources/hardware/tb/tb_memory_endpoint_profile.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

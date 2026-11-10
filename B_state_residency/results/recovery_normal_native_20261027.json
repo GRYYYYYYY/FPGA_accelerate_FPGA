@@ -1,0 +1,140 @@
+{
+  "complete_system_tested": false,
+  "evidence": {
+    "recovery_normal_native_v1": {
+      "audit": {
+        "audit_kind": "source-bound compile-failure evidence only",
+        "auditor_sha256": "a66c72dd0c91b2b1049e2cfb5c0ba3f77445d85e7eacc326763af79d45237b64",
+        "error_code": "VRFC 10-3380",
+        "manifest_sha256": "e573a729fbb1fe9e5df734125c47b66170185fe4ee2a370c79f7b7f2f37851ed",
+        "scope": "Initial candidate referenced timeout before its declaration; no elaboration or runtime occurred. This audit does not accept the candidate RTL or establish a protocol counterexample.",
+        "simulated": false,
+        "status": "passed"
+      },
+      "restoration": {
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/recovery_normal_native_v1.json",
+        "archive_sha256": "cdf5565c15331698b04a8bee0ff6e7fbe1dda201e6900689df10c293a3029260",
+        "audit_byte_identical": true,
+        "audit_sha256": "5374cfdacb6f665fc9c9f84ba1c18449a9c6fdfcac248fe3cf922ef0bd8ddd92",
+        "auditor": "audit_recovery_normal_compile.py",
+        "files": 14,
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/recovery_normal_native_v1",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v1",
+        "status": "passed"
+      }
+    },
+    "recovery_normal_native_v2": {
+      "audit": {
+        "actual_field_writes": 15,
+        "auditor_sha256": "b2791442feeb4718b5b77ce9c1da9ebc17af39bdd61182edea22a6274eb5cede",
+        "boolean_valuations": 65536,
+        "builder_sha256": "f9aae14f1f480e9d8657519fd4fac11626e43c0df6535436a02c650363c8244b",
+        "checks": 179,
+        "failed_or_rejected_results": 10,
+        "finish_time": "3836 ns",
+        "journal_entries": 0,
+        "manifest_sha256": "62803d730f9c387a88c39dfd9945a9bf21735fc93d3bead5291bf16c7fcb9552",
+        "native_trace_identical": true,
+        "owner_authority_requests": 0,
+        "reference_audit_sha256": "39e68c8982a53bfee0931baaccab8e51e9aa01dad500ae183eed9def6a27727e",
+        "reference_restore_sha256": "76ccc036eb6a3a1b5a855993b79ba34b4efe82b10b7594b3d18fb10375380674",
+        "scenarios": 3,
+        "scope": "Native coordinator/label J0 lifecycle only, same RAM/config/retirement models and TB as restored REARM fixed reference. No synthesis, AXI or full-system loop-removal claim.",
+        "status": "passed",
+        "successful_retries": 3,
+        "trace": [
+          "RESULT 0 6 2 0",
+          "RESULT 0 1 2 0",
+          "RESET 0 3",
+          "WRITE 0 0 00000001",
+          "WRITE 0 1 00000002",
+          "WRITE 0 2 00000003",
+          "WRITE 0 3 00000004",
+          "WRITE 0 4 00000005",
+          "RESULT 0 0 3 1",
+          "RESULT 1 6 2 0",
+          "RESULT 1 1 2 0",
+          "RESULT 1 6 3 0",
+          "RESULT 1 1 3 0",
+          "RESET 1 4",
+          "WRITE 1 0 00000001",
+          "WRITE 1 1 00000002",
+          "WRITE 1 2 00000003",
+          "WRITE 1 3 00000004",
+          "WRITE 1 4 00000005",
+          "RESULT 1 0 4 1",
+          "RESULT 2 6 2 0",
+          "RESULT 2 1 2 0",
+          "RESULT 2 6 3 0",
+          "RESULT 2 1 3 0",
+          "RESET 2 4",
+          "WRITE 2 0 00000001",
+          "WRITE 2 1 00000002",
+          "WRITE 2 2 00000003",
+          "WRITE 2 3 00000004",
+          "WRITE 2 4 00000005",
+          "RESULT 2 0 4 1"
+        ],
+        "trace_sha256": "0301aa2919f50639eb63ddf487d40637fa41ab0fc945da238185f990dc54d504",
+        "verified_records": 3
+      },
+      "restoration": {
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/recovery_normal_native_v2.json",
+        "archive_sha256": "bdf45a78573d67f2b1af7840cb44e456d6f54b9d6c35ff531027555a54eaf647",
+        "audit_byte_identical": true,
+        "audit_sha256": "249654b7c88a9f869ab02a1300bb0bdd29ddb02aec694cb0e5a8270a948dcb5d",
+        "auditor": "audit_recovery_normal_native.py",
+        "files": 40,
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/recovery_normal_native_v2",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v2",
+        "status": "passed"
+      }
+    }
+  },
+  "identity": {
+    "analyzer_sha256": "77fcb6a832d6194bb9d1306f7d59776045ecb8ae2296025638d5214528cd076c",
+    "candidate_predicates": {
+      "normal_fault": "stopped || abort || timeout || a_rsp_valid || o_rsp_valid",
+      "normal_unexpected": "a_rsp_valid || o_rsp_valid"
+    },
+    "checked_source_expressions": [
+      "localparam NORMAL=0,DRAIN=1,RESET=2,RECONFIG=3,AS=4,AW=5,OS=6,OW=7,NEXT=8,LABELS=9,FAILWAIT=10,DONE=11,REARM=12;",
+      "reg[3:0]state;",
+      "wire unexpected=(a_rsp_valid&&state!=AW&&!(state==AS&&a_ready))||(o_rsp_valid&&state!=OW&&!(state==OS&&o_ready));",
+      "wire fail_now=(abort&&state!=REARM)||timeout||unexpected;",
+      "assign fault=!cold_rst&&(stopped||fail_now);",
+      "assign staged_valid=!cold_rst&&!abort&&prepared&&!cfg_rsp_valid&&state==NORMAL&&!fault;",
+      "assign permit_work=!cold_rst&&!prepared&&configured&&!fault&&state==NORMAL&&!cfg_rsp_valid&&!cfg_valid&&!recover_valid;",
+      "assign j_ready=!cold_rst&&!prepared&&configured&&!fault&&state==NORMAL&&!cfg_rsp_valid&&(j_op==1||j_op==2)&&(duplicate||journal_count<ENTRIES);",
+      "assign recover_ready=!cold_rst&&!prepared&&configured&&state==NORMAL&&!cfg_rsp_valid&&!cfg_valid&&!j_valid&&!unexpected&&(!fault||(stopped&&retry_safe&&backend_drained&&normal_retired));",
+      "assign cfg_ready=!cold_rst&&!fault&&state==NORMAL&&!cfg_rsp_valid&&!recover_valid&&!j_valid&&backend_drained&&normal_retired;"
+    ],
+    "limitations": [
+      "Two-state combinational identities only, no X/Z or sequential proof",
+      "Full fault, fail_now and unexpected outside these NORMAL-gated outputs must remain unchanged",
+      "Does not justify replacing publication fault or other arbitrary fault consumers",
+      "No production RTL modification, synthesis, simulation or full-root loop-removal claim"
+    ],
+    "ordinary_outputs": [
+      "staged_valid",
+      "permit_work",
+      "j_ready",
+      "cfg_ready"
+    ],
+    "proven": [
+      "All four ordinary outputs retain their value after substitution under their existing NORMAL/cold_rst gates",
+      "recover_ready retains the stopped/safe/drained/retired override and its value",
+      "State-qualified ordinary permission implies the original complete fault is false"
+    ],
+    "reference": "/tmp/B_state_residency_offer_20261025/combined_loops_synth_v1",
+    "reference_audit_sha256": "990e14c888ffce7d0f1d943aac88ade9c781e134fcda17d25a98661fde5c4e95",
+    "separate_retry_output": "recover_ready",
+    "source_sha256": "058018867ef7790b9af1f987bddf88cac8a91da1125ee8bebefc4be26e847dde",
+    "status": "normal_admission_boolean_identity_not_rtl_validation",
+    "valuations": 65536
+  },
+  "scope": "One coordinator NORMAL admission rewrite on the already fixed REARM native slice. No full fault or sequential change. Initial declaration-order compile failure is preserved separately. Current route_block full jobs do not contain this candidate.",
+  "selected_variant": "recovery_normal_loops_v2",
+  "status": "native_component_behavior_passed_structure_not_tested",
+  "synthesized": false
+}

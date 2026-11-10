@@ -1,0 +1,10 @@
+2026-10-27: Ross timing methodology workflow, adapted to installed Vivado 2022.2 text reports. Existing MCP sessions could not report version correctly; fresh local batch used. No waiver or timing exception added.
+
+| Check | Evidence | Understanding / confidence | Action |
+| --- | --- | --- | --- |
+| TIMING-23 / LUTLP-1 | Reopened off/on DCPs: one103/107-LUT region each; check_timing count20 each | Structural combinational feedback confirmed/high; full RTL root cause not yet isolated/medium | New isolated candidate and protocol regressions, no fix applied yet |
+| TIMING-16 | on WNS -9.910ns at declared10ns,84 logic levels on worst reported path | Long registered-to-registered cone/high; exact physical delay unknown/low | Remove loops before trusting timing improvements; no frequency claim |
+| TIMING-18 | OOC all runtime inputs retained, no interface delays specified | Known experiment boundary/high; board interface requirements absent | Preserve warning, do not invent delays/asynchronous exceptions |
+| SYNTH-10 | Reported wide multipliers in directory and cost arithmetic | Tool observation/high; algebraic optimization not investigated | Preserve as secondary finding, no arithmetic change |
+
+TIMING-23-specific skill reference was absent; GENERAL_GUIDELINES used. TIMING-16 and TIMING-18 references read. The checklist records diagnostic understanding only; a concrete fix must additionally establish protocol preservation and post-change evidence. Session authorization permits isolated research fixes; no approval is pending.

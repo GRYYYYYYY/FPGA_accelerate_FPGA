@@ -1,0 +1,95 @@
+{
+  "dataset_kind": "synthetic_smoke",
+  "fixture_id": "toy_F",
+  "local_graph": {
+    "nodes": [
+      {
+        "id": 0
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "edges": [
+      {
+        "id": "e01slow",
+        "src": 0,
+        "dst": 1,
+        "cost": 5
+      },
+      {
+        "id": "e01fast",
+        "src": 0,
+        "dst": 1,
+        "cost": 1
+      },
+      {
+        "id": "e02",
+        "src": 0,
+        "dst": 2,
+        "cost": 2
+      },
+      {
+        "id": "e13",
+        "src": 1,
+        "dst": 3,
+        "cost": 1
+      },
+      {
+        "id": "e23",
+        "src": 2,
+        "dst": 3,
+        "cost": 4
+      },
+      {
+        "id": "e34",
+        "src": 3,
+        "dst": 4,
+        "cost": 1
+      }
+    ]
+  },
+  "fixed_reserved_nodes": [
+    2
+  ],
+  "candidates": [
+    {
+      "id": "good",
+      "source": 0,
+      "targets": [
+        4
+      ],
+      "budget": 10
+    },
+    {
+      "id": "tiny_budget",
+      "source": 0,
+      "targets": [
+        4
+      ],
+      "budget": 1
+    },
+    {
+      "id": "blocked_target",
+      "source": 0,
+      "targets": [
+        2
+      ],
+      "budget": 10
+    }
+  ],
+  "expected_status": {
+    "good": "local_path_found",
+    "tiny_budget": "unknown_budget_exhausted",
+    "blocked_target": "no_path_in_fixed_local_model"
+  }
+}

@@ -1,0 +1,89 @@
+==============================================================================
+== Reading Interchange: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_Acc/projects/persistroute/third_party/fpga24/logicnets_jscl/logicnets_jscl.netlist ==
+==============================================================================
+==============================================================================
+==                             Read LogNetlist                              ==
+==============================================================================
+               Read File:     0.063s
+            Read Strings:     0.102s
+              Read Ports:     0.019s
+          Read CellDecls:     0.020s
+              Read Insts:     0.043s
+              Read Cells:     0.194s
+            Populate Top:     0.000s
+         Order Libraries:     0.021s
+           Expand Macros:     0.711s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     1.173s
+    Read Logical Netlist:     1.216s
+==============================================================================
+==                             Read PhysNetlist                             ==
+==============================================================================
+               Read File:     1.137s
+            Read Strings:     0.093s
+          Read SiteInsts:     0.021s
+          Read Placement:     0.136s
+            Read Routing:     0.807s
+       Read Design Props:     0.001s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     2.196s
+   Read Physical Netlist:     2.200s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     3.417s
+==============================================================================
+==                               Route Design                               ==
+==============================================================================
+INFO: [cpp-import] injected 180326 connection results (0 with swapped sources)
+
+INFO: Route 0 direct connections 
+
+INFO: No PIP overlaps
+
+==============================================================================
+==                                Statistics                                ==
+==============================================================================
+Total wirelength:                       268789
+Nodes popped:                                0
+Route design:                            4.70s
+├─ Initialization:                       1.54s
+└─ Routing:                              3.16s
+==============================================================================
+==============================================================================
+==                            Write PhysNetlist                             ==
+==============================================================================
+              Initialize:     0.005s
+         Write SiteInsts:     0.011s
+         Write Placement:     0.149s
+           Write Routing:     4.600s
+      Write Design Props:     0.001s
+           Write Strings:     0.030s
+              Write File:     2.313s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     7.109s
+==============================================================================
+==                             Read PhysNetlist                             ==
+==============================================================================
+               Read File:     0.149s
+            Read Strings:     0.029s
+          Read SiteInsts:     0.005s
+          Read Placement:     0.051s
+            Read Routing:     0.288s
+       Read Design Props:     0.000s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     0.522s
+==============================================================================
+==                             Read PhysNetlist                             ==
+==============================================================================
+               Read File:     0.298s
+            Read Strings:     0.005s
+          Read SiteInsts:     0.004s
+          Read Placement:     0.029s
+            Read Routing:     0.753s
+       Read Design Props:     0.000s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     1.089s
+B_PHYSICAL_COMPARISON differences=1401
+Exception in thread "main" java.lang.RuntimeException: Physical reinjection failed
+	at com.xilinx.rapidwright.rwroute.RWRouteCppImport.main(RWRouteCppImport.java:164)
+Caused by: java.lang.RuntimeException: Placement/site/static/clock differences after reinjection
+	at com.xilinx.rapidwright.rwroute.RWRouteCppImport.main(RWRouteCppImport.java:161)

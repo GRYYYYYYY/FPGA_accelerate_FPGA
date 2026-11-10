@@ -1,0 +1,67 @@
+{
+  "status": "failed",
+  "sources": {
+    "transaction_fence.sv": "b509e9017d28ce1efe71635b73c8874a823b3f4380a8926f22a7c5462d9eb836",
+    "tb_transaction_fence.sv": "3efe8b40de3b6d9568971bd7138d835fffd15c0b5f1832e61b7eff533b83a0a9",
+    "run_transaction_fence_unit.py": "c748586a2f85182859e6e2308574447eb6f33197644cbe2fbfaf72e62fe955ef"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/tmp/B_state_residency_offer_20261025/transaction_fence_unit_v1/sources/transaction_fence.sv",
+        "/tmp/B_state_residency_offer_20261025/transaction_fence_unit_v1/sources/tb_transaction_fence.sv"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.9191683325916529
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_transaction_fence",
+        "-s",
+        "transaction_fence",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 2.8728238102048635
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "transaction_fence",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "events=/tmp/B_state_residency_offer_20261025/transaction_fence_unit_v1/events.txt"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.427792834118009
+    }
+  ],
+  "scope": "Transactional ingress ownership unit: buffered host/admin and route, recovery priority/drain, parallel callback routing and held/failing completions.",
+  "error": "AssertionError()",
+  "artifacts": {
+    "run.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "compile.stdout.log": "74acfd592fa2d78bf53f0a2320a178e5500f799fb1b99fb170ced07f9bcb3dc8",
+    "xvlog.pb": "875d8458284d1eac3943159905091954a3f845d5b6b27d9a7bf5ad2d168a1441",
+    "xvlog.log": "74acfd592fa2d78bf53f0a2320a178e5500f799fb1b99fb170ced07f9bcb3dc8",
+    "elaborate.stdout.log": "0ce8ed24e097c02310014ee19a04c7b78c8cb92a0d21c9d51680d6779b3ae530",
+    "xelab.pb": "07080ff7f29b487fcc830b705feb460668c8178de0a9874383577efbf49972d7",
+    "xelab.log": "0ce8ed24e097c02310014ee19a04c7b78c8cb92a0d21c9d51680d6779b3ae530",
+    "simulate.stdout.log": "dc48a1a769081d13e6197a40dd0a812ce6e4cfbf6bccab8a701993676656ec22",
+    "xsim.jou": "bc87f8ce21952bd33e0269fc5048965d15d912be9dc87235022beb0458b8b531",
+    "simulate.log": "94afe5b2bdd97159668570f2070a195c96c4997233ccfb18ceca86d88a0eb04e",
+    "transaction_fence.wdb": "c100b48fae499cc2913e7d7a86a557b3bd68a48ebaccd72f5a75fd23a116a679",
+    "events.txt": "cac6fe51dfdcc4bb271ec5498ab676f29d61c0df86096a26bd7cfb272c57c27a"
+  }
+}

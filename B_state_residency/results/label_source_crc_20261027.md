@@ -1,0 +1,14 @@
+# 原生源标签CRC硬件绑定与错误隔离通过（2026-10-27）
+
+详见results/label_source_crc_20261027.json与hardware/variants/label_source_crc_v1/CONTRACT.md。新增默认关闭CHECK_LABEL_CRC，经query/search/residency传入label_restore_controller的CHECK_SOURCE_CRC。snapshot_label_crc与其他快照描述字段在实际backend recover受理时一起锁存，leaf启动再次锁存；lr_source_crc输出已接收源记录的CRC32。按原生导出顺序累积node32+payload160的24B LE CRC32/IEEE，最后记录CRC不匹配返回native label status8，在该条写入前失败。
+
+选定full_v2/pressure_v2，显式开启后使用原生822条流CRC（32槽a2b92ed0、单槽9ae2e09b）；recover受理后改变外部CRC引脚仍按锁存源成功，实际822写入/回读验证、三类回执与退休、最终成功回复消费后才放行。G2第二owner-B修正、path/query原始CRC/floor180327恢复及query180328重试完整通过；两次第二query各114poll/113expand/564candidate/302cost匹配CPU，最终ledger180328/storage4/2/4，两路径共存。全部10AXI/DDR及822标签独立重放。
+
+选定bad_full_v3：在受理前选错CRC xor1，同一原生822输入实际计算正确源CRC，但label status8/written821/verified0；最后行未写，未进入checkpoint/verify，且没有成功label/path/query回执或重试。原生coordinator返回status6、journal2保留，回复消费后仍owned/fault、业务关闭。两键owner先已正确恢复G2 refs1/3，完整146284032B工作owner等于G2快照；10个物理owner记录写及全部AXI重放通过。部分821标签已写，不是取消回滚。首个负例仅停在把预期wm_fault当意外的旧健康TB断言，正式v3只调整该断言，不掩码DUT握手/载荷。
+
+CRC单元启用32项、默认关闭16项保持检查；独立zlib及实际后端字段写/控制命令/读计数核对正确CRC+改引脚、错误CRC、payload改单bit与记录换序。默认关闭的完整G2 runtime snapshot/warm恢复19文件（10AXI、7DDR、native trace、标签流）及周期逐字节等于上一已审计基线。正式六归档均实际恢复重审audit逐字节一致。源冻结results/label_source_crc_sources_20261027（52文件）。
+
+这是源镜像完整性检查，不是认证或持久化授权；描述符/启动上下文仍可信，初始CPU未来读闭包、历史路径与准确G1 clone仍在。尚未在CRC失败后测试更高attempt非冷重试；owner epoch轮转、未知页初始化、任意变价/回绕、真实overflow新分配/回收、综合时序及板卡收益仍缺。下一优先见hardware/variants/label_source_crc_v1/NEXT.md；不得将821部分写入称作回滚，也不得把CRC当签名。研究继续，goal active。
+
+以下保留历史。
+

@@ -1,0 +1,71 @@
+{
+  "status": "failed",
+  "original_source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_real_20261024/sources/trace.cpp",
+  "original_source_sha256": "1eac9ec2c99fd128070bcb64622bc69fbed2c9236260810be672270bc4e593ca",
+  "runner_sha256": "c9be49b37fd03aa478fc949b472b82cd93ca988cb8e4838786d41cbf8d5851eb",
+  "sources": {
+    "hls_config.cfg": "aab63c5a056fe03f1a859740c76d35e850892058ce67fe3f1c5457bda771a6b3",
+    "original_geometry.inc": "c1e21965c126ca183f71cbd0ad6654a2ad280c4c67da020fd62b51e61186fc93",
+    "testbench.cpp": "79c2882ff3c99177394efbb415331c68aabe8e4719ae19d45e76269db190517f",
+    "kernel.cpp": "f17b2864169c5bd8f40cc056fd6f54a1b8dd5d460ef22b5800b334500ed1b426",
+    "geometry.hpp": "54a9a729c85eb48a922d6da3a2f6b1655dcea0db6d93995c867becef1dfd8a29"
+  },
+  "commands": [
+    {
+      "stage": "vectors",
+      "argv": [
+        "/usr/bin/python3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/make_vectors.py",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/vectors.txt"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/sources/kernel.cpp",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/sources/testbench.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/verify"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "verify",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/verify"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "original_ub_probe",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_geometry_unit_20261024/verify",
+        "--probe-ub"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "error": "AssertionError()",
+  "artifacts": {
+    "vectors.txt": "4df0d408274a2a5d16df03271401e04c05f0b8878b8b5ab57a6eb632e7cdf211",
+    "make_vectors.py": "e8897ebe9fedd9ae7167aacfd4321085f33c0cbdb0c07920374491ad6742c65e",
+    "verify.log": "ec616cddcede17b04340bf96a0a1c0fe9c1831b01b8667b4c494cb4b50d8d36b",
+    "observed.txt": "146d93ee1fb13708560ce272a0de2434027bc5da45f334f35154e49c8eee284c",
+    "verify": "c4e10acfadfaf9c51bdaf19ba310e416919e8a3261b520c7fd58f2ef2799d8b8",
+    "vectors.log": "80c58d7890be794ac4ac08d0dc2ee7ad3b21e48fb36effd108a771320a9d2ea9",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_ub_probe.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner.py": "c9be49b37fd03aa478fc949b472b82cd93ca988cb8e4838786d41cbf8d5851eb",
+    "sources/hls_config.cfg": "aab63c5a056fe03f1a859740c76d35e850892058ce67fe3f1c5457bda771a6b3",
+    "sources/original_geometry.inc": "c1e21965c126ca183f71cbd0ad6654a2ad280c4c67da020fd62b51e61186fc93",
+    "sources/testbench.cpp": "79c2882ff3c99177394efbb415331c68aabe8e4719ae19d45e76269db190517f",
+    "sources/kernel.cpp": "f17b2864169c5bd8f40cc056fd6f54a1b8dd5d460ef22b5800b334500ed1b426",
+    "sources/geometry.hpp": "54a9a729c85eb48a922d6da3a2f6b1655dcea0db6d93995c867becef1dfd8a29"
+  }
+}

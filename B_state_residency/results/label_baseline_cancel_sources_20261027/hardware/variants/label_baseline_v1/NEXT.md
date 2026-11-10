@@ -1,0 +1,17 @@
+# 必须完成的原生miss接入
+
+当前reader组件通过，不代表完整查询已摆脱CPU未来读闭包。新基线全部9089009节点、32B/记录、64B对齐，epoch是外部授权的身份，绝非认证。reader在事务期间拒绝重配；非法配置保留原绑定；没有abort接口，外部必须等待真实idle，不能把请求或R VALID屏蔽为退休。
+
+接入点：当前resident_page_manager的ACCESS和CLIENT读取返回native_rsp_present；REFILL status8仅代表未知页并走bound_ready。所有io写和client读必须经同一缺失加载路径。当前初次字段WRITE可能建立present并保留其他字段的零，不可先WRITE后再判断是否需要基线。
+
+建议参数默认关闭的manager扩展：
+
+1. 每次io字段写先原生READ探测该offset；正常io读和CLIENT读复用其实际READ结果。present为1则保留实时记录，不能用初始基线覆盖。
+2. absent时锁存page/offset/slot/generation及原请求；向reader发node={page,offset}及经外部上下文验证的epoch。等实际回执，status非零走原生fail_request，禁止用零载荷继续。
+3. 原生WRITE字段0..4逐一写入基线的全部五字段；每次成功才推进。随后重新发原始READ或单字段WRITE，以真实native返回作为业务回复。不得伪造present或客户端回复。
+4. **只读请求引起的seed也必须置dirty_slots**，否则manager会把它作为clean释放并丢失baseline记录，后续重复读取/快照缺失；dirty必须在首次成功seed写后置位，失败时仍封锁。CLIENT phase必须保留租约直到真实最终回复消费。
+5. 错误/取消时保留已暴露命令和R回复的退休责任；运行时价格、恢复目标上下文与初始baseline身份如何绑定必须明确，不得把namespace转换当作价格有效性证明。
+
+完整实验先关闭所有imports预加载（不是缩减到source/sink），保持源/target正常字段写与两份原CPU oracle；独立记录每个miss、baseline AR/R和seed字段写，验证未访问节点不预填。G2原生目录导出、CRC恢复和822容量假设需按实际记录集重新评估，不能硬留旧822/403计数。默认关闭回归须逐字节相等。
+
+另需覆盖无present的首次写、同页不同offset、已修改实时record不被baseline覆盖、驱逐/重载、单槽、provider错误与上下文拒绝。组件测试未覆盖畸形多beat从设备、取消、完整manager或板卡。

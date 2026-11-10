@@ -1,0 +1,116 @@
+Compiled from "SiteConfig.java"
+public class com.xilinx.rapidwright.design.SiteConfig {
+  public static com.xilinx.rapidwright.design.SiteConfig createSiteConfig(com.xilinx.rapidwright.device.Site, com.xilinx.rapidwright.device.SiteTypeEnum);
+  public com.xilinx.rapidwright.device.Site getSite();
+  public com.xilinx.rapidwright.device.SiteTypeEnum getSiteTypeEnum();
+  public java.lang.String getName();
+  public java.lang.String getSiteName();
+  public com.xilinx.rapidwright.design.BELAttr addBELAttribute(com.xilinx.rapidwright.device.BEL, java.lang.String, java.lang.String, com.xilinx.rapidwright.design.Net);
+  public com.xilinx.rapidwright.design.BELAttr getBELAttribute(com.xilinx.rapidwright.device.BEL, java.lang.String);
+  public java.util.Map<com.xilinx.rapidwright.device.BEL, java.util.Map<java.lang.String, com.xilinx.rapidwright.design.BELAttr>> getBELAttributes();
+  public com.xilinx.rapidwright.design.BELAttr removeBELAttribute(com.xilinx.rapidwright.device.BEL, java.lang.String);
+}
+Compiled from "BELAttr.java"
+public class com.xilinx.rapidwright.design.BELAttr {
+  public com.xilinx.rapidwright.design.BELAttr(java.lang.String, java.lang.String, com.xilinx.rapidwright.design.Net);
+  public java.lang.String getName();
+  public void setName(java.lang.String);
+  public java.lang.String getValue();
+  public void setValue(java.lang.String);
+  public com.xilinx.rapidwright.design.Net getNet();
+  public void setNet(com.xilinx.rapidwright.design.Net);
+}
+public final class com.xilinx.rapidwright.device.SitePIPStatus extends java.lang.Enum<com.xilinx.rapidwright.device.SitePIPStatus> {
+  public static final com.xilinx.rapidwright.device.SitePIPStatus OFF;
+  public static final com.xilinx.rapidwright.device.SitePIPStatus ON;
+  public static final com.xilinx.rapidwright.device.SitePIPStatus OFF_FIXED;
+  public static final com.xilinx.rapidwright.device.SitePIPStatus ON_FIXED;
+  public static final com.xilinx.rapidwright.device.SitePIPStatus[] values;
+  public static com.xilinx.rapidwright.device.SitePIPStatus[] values();
+  public static com.xilinx.rapidwright.device.SitePIPStatus valueOf(java.lang.String);
+  public final boolean isUsed();
+  public final boolean isFixed();
+  static {};
+}
+public class com.xilinx.rapidwright.design.Net implements java.io.Serializable, java.lang.Comparable<com.xilinx.rapidwright.design.Net> {
+  public static final java.lang.String VCC_NET;
+  public static final java.lang.String GND_NET;
+  public static final java.lang.String USED_NET;
+  public static final java.lang.String Z_NET;
+  public static final java.lang.String VCC_WIRE_NAME;
+  public static final java.lang.String GND_WIRE_NAME;
+  public com.xilinx.rapidwright.design.Net();
+  public com.xilinx.rapidwright.design.Net(java.lang.String);
+  protected com.xilinx.rapidwright.design.Net(java.lang.String, com.xilinx.rapidwright.design.Design);
+  public com.xilinx.rapidwright.design.Net(java.lang.String, com.xilinx.rapidwright.edif.EDIFHierNet);
+  public com.xilinx.rapidwright.design.Net(java.lang.String, com.xilinx.rapidwright.design.NetType);
+  public com.xilinx.rapidwright.design.Net(com.xilinx.rapidwright.edif.EDIFHierNet);
+  public java.lang.String getName();
+  public com.xilinx.rapidwright.design.NetType getType();
+  public java.util.List<com.xilinx.rapidwright.design.SitePinInst> getPins();
+  public java.util.List<com.xilinx.rapidwright.device.PIP> getPIPs();
+  public int getFanOut();
+  public boolean hasPIPs();
+  public void setName(java.lang.String);
+  public boolean updateName(java.lang.String);
+  public com.xilinx.rapidwright.design.Design getDesign();
+  public void setDesign(com.xilinx.rapidwright.design.Design);
+  public void setType(com.xilinx.rapidwright.design.NetType);
+  public boolean setPins(java.util.List<com.xilinx.rapidwright.design.SitePinInst>);
+  public void setPIPs(java.util.Set<com.xilinx.rapidwright.device.PIP>);
+  public void setPIPs(java.util.List<com.xilinx.rapidwright.device.PIP>);
+  public com.xilinx.rapidwright.design.SitePinInst createPin(java.lang.String, com.xilinx.rapidwright.design.SiteInst);
+  public com.xilinx.rapidwright.design.SitePinInst connect(com.xilinx.rapidwright.design.Cell, java.lang.String);
+  public boolean addPin(com.xilinx.rapidwright.design.SitePinInst);
+  public com.xilinx.rapidwright.design.SitePinInst getAlternateSource();
+  public void setAlternateSource(com.xilinx.rapidwright.design.SitePinInst);
+  public boolean addPin(com.xilinx.rapidwright.design.SitePinInst, boolean);
+  public boolean addPins(java.util.List<com.xilinx.rapidwright.design.SitePinInst>);
+  public boolean removePin(com.xilinx.rapidwright.design.SitePinInst);
+  public boolean removePin(com.xilinx.rapidwright.design.SitePinInst, boolean);
+  public void unroutePin(com.xilinx.rapidwright.design.SitePinInst);
+  public void trimPartitionPins(com.xilinx.rapidwright.util.Pair<com.xilinx.rapidwright.device.Tile, com.xilinx.rapidwright.device.Tile>);
+  protected final void a(com.xilinx.rapidwright.util.Pair<com.xilinx.rapidwright.device.Tile, com.xilinx.rapidwright.device.Tile>, com.xilinx.rapidwright.design.PartitionPin);
+  public void addPIP(com.xilinx.rapidwright.device.PIP);
+  public boolean removePIP(com.xilinx.rapidwright.device.PIP);
+  public boolean isStaticNet();
+  public boolean needsClockNetworkResources();
+  public void removeSource();
+  public void setSource(com.xilinx.rapidwright.design.SitePinInst);
+  public com.xilinx.rapidwright.design.SitePinInst replaceSource(com.xilinx.rapidwright.design.SitePinInst);
+  public com.xilinx.rapidwright.design.SitePinInst getSource();
+  public com.xilinx.rapidwright.device.Tile getSourceTile();
+  public void unroute();
+  public com.xilinx.rapidwright.design.Module getModuleTemplate();
+  public void setModuleTemplate(com.xilinx.rapidwright.design.Module);
+  public void setModuleTemplateNet(com.xilinx.rapidwright.design.Net);
+  public com.xilinx.rapidwright.design.Net getModuleTemplateNet();
+  public void setModuleInst(com.xilinx.rapidwright.design.ModuleInst);
+  public com.xilinx.rapidwright.design.ModuleInst getModuleInst();
+  public void detachFromModule();
+  public void lockRouting();
+  public void unlockRouting();
+  public com.xilinx.rapidwright.edif.EDIFNet getLogicalNet();
+  public void setLogicalHierNet(com.xilinx.rapidwright.edif.EDIFHierNet);
+  public com.xilinx.rapidwright.edif.EDIFHierNet getLogicalHierNet();
+  public int compareTo(com.xilinx.rapidwright.design.Net);
+  public java.lang.String toString();
+  public java.lang.String toStringFull();
+  public int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.util.Set<com.xilinx.rapidwright.design.SiteInst> getSiteInsts();
+  protected final boolean a(com.xilinx.rapidwright.design.SiteInst);
+  protected final com.xilinx.rapidwright.design.SitePinInst a();
+  protected final void a();
+  protected final boolean b(com.xilinx.rapidwright.design.SiteInst);
+  public boolean isClockNet();
+  public java.util.List<com.xilinx.rapidwright.design.SitePinInst> getSinkPins();
+  public boolean setBufferDelay(com.xilinx.rapidwright.device.Site, int);
+  public int getBufferDelay(com.xilinx.rapidwright.device.Site);
+  public void improveSLRClockingDelay(java.lang.String, java.lang.String);
+  public boolean rename(java.lang.String);
+  public boolean hasGapRouting();
+  public void setHasGapRouting(boolean);
+  public int compareTo(java.lang.Object);
+  static {};
+}

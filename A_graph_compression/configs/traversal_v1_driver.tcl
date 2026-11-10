@@ -1,0 +1,2 @@
+source -notrace {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_traversal.tcl}
+traversal::run {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/traversal_20261022_v1} {{training {INT_X2Y90/EE2_E_BEG0 INT_X3Y120/EE2_E_BEG0 INT_X2Y90/EE12_BEG0 INT_X3Y120/EE12_BEG0 LAG_LAG_X104Y0/UBUMP0 LAG_LAG_X40Y0/UBUMP0}} {evaluation {INT_X8Y390/EE2_E_BEG0 INT_X9Y630/EE2_E_BEG0 INT_X10Y870/EE2_E_BEG0 INT_X8Y390/EE12_BEG0}}} 5 20000

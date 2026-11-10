@@ -1,0 +1,9 @@
+# 实际iteration2中间态G2共同发布
+
+基于iter2_pair_v1，仅变更独立TB与候选只读authority输入。第一query180327提交、下一连接历史路径原生ripup后，在真实PC lease下导出保留slot0的78字路径及generation G2的10字查询镜像，ledger为180327，storage3/1/3。导出future generation不改变当前G1绑定。
+
+共同发布执行真实authority候选准备、coordinator/config两组件准备与回复消费、111共同提交及完成回复退休：G1/CP17/J4→G2/CP18/J0。候选owner为已审计continuous_prep完整146284032B工作输出，不能用第一query原初输入替代。通过原生AP拒绝旧generation并读取G2四个变更节点（含990179与558358真实多net行），然后原生导出/导入G2查询镜像，释放lease后正常执行第二query180328。
+
+独立审计须同时核对第一与第二query数值oracle、两组完整822标签、路径与查询原始导出及CRC/sequence、唯一111提交、真实readonly snapshot AXI与全部其他AXI、最终owner完整图像/其他net、九次工作owner记录写。保持准备/完成回复期间的封锁与元数据不变由TB检查。
+
+manifest_ready仍是外部测试许可。候选authority由已审计上一实验输出供给，不是运行中snapshot writer。本例不证明换代后warm故障恢复；下一步须新attempt恢复822标签及含ledger180327的实际path/query源。行为仿真不代表综合时序或板卡收益。

@@ -1,0 +1,413 @@
+{
+  "status": "passed",
+  "research_goal": "active",
+  "scope": "Version-bound owner authority and owner-recovery subchain, not full checkpoint or full-query integration",
+  "evidence": {
+    "checkpoint_authority_v1": {
+      "audit": {
+        "status": "passed",
+        "manifest_sha256": "c08314b20ef4fa41d44e7d4c38a5b5ac325a99e9028178414b805dae2c6d144c",
+        "sources": {
+          "checkpoint_authority_reader.sv": "592ef4ccd8300a834640bb183530411e1657ddd4e05af7f881b87317aeea2672",
+          "tb_checkpoint_authority.sv": "4fcbddca18634893d76de2b91ea9ceee89655ee66cad344568f5b1121fa11f6e",
+          "owner_state_store.sv": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+          "axi_file_memory.sv": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5",
+          "prepare_checkpoint_authority_vectors.py": "229cd23a03bcf67fab2dc029bb84253442cee2b469459bc549ac641fd6b582da",
+          "run_checkpoint_authority.py": "652dc61b8c28f9b1948bb40b3b59fd53b4b9e9b93c74f9fabde21bdbb92b8b00"
+        },
+        "cases": {
+          "warm_q2_codec_v1": {
+            "cpu_oracle_replies": 302,
+            "vector_requests": 298,
+            "overflow_queries": 0,
+            "cfg_checks": 7,
+            "private_resets": 5,
+            "safe_rearms": 2,
+            "axi": {
+              "error_read_beats": 1,
+              "error_write_replies": 0,
+              "read_transactions": 590,
+              "read_beats": 590,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 590
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "result": "CHECKPOINT_AUTHORITY_PASS checks=302 cfg=7 reads=590 writes=0 cycles=12181"
+          },
+          "warm_iter2_codec_v1": {
+            "cpu_oracle_replies": 434,
+            "vector_requests": 430,
+            "overflow_queries": 58,
+            "cfg_checks": 7,
+            "private_resets": 5,
+            "safe_rearms": 2,
+            "axi": {
+              "error_read_beats": 1,
+              "error_write_replies": 0,
+              "read_transactions": 1208,
+              "read_beats": 1208,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1208
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 146284032
+            },
+            "result": "CHECKPOINT_AUTHORITY_PASS checks=434 cfg=7 reads=1208 writes=0 cycles=21589"
+          }
+        },
+        "scope": "Generation-bound owner snapshot authority component, immutable real prepared primary/pool/allocator images. Only GET requests. Not yet a full checkpoint or integrated recovery-coordinator producer.",
+        "auditor_sha256": "f717804d46c6f55f739a8e6e690138ff7ad9f785f1dccaee46aeb26d131b9d89"
+      },
+      "restore": {
+        "status": "passed",
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/checkpoint_authority_v1.json",
+        "archive_sha256": "6a343e09e49077af7eae5e08c9bf41ebf24c5f37a218d75a4a28ca18163d849e",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/checkpoint_authority_v1",
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/checkpoint_authority_v1",
+        "files": 60,
+        "audit_byte_identical": true,
+        "audit_sha256": "edb650da2818465e2f1e3bf86a7b41f268ac9ae41645be4aa9c33e87d9447bb2",
+        "auditor": "audit_checkpoint_authority.py"
+      }
+    },
+    "checkpoint_authority_v2": {
+      "audit": {
+        "status": "passed",
+        "manifest_sha256": "41204f06b112fa972120db10e8de6c9210f8be25a5d44ad2847112ac9642e07b",
+        "sources": {
+          "checkpoint_authority_reader.sv": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+          "tb_checkpoint_authority.sv": "4fcbddca18634893d76de2b91ea9ceee89655ee66cad344568f5b1121fa11f6e",
+          "owner_state_store.sv": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+          "axi_file_memory.sv": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5",
+          "prepare_checkpoint_authority_vectors.py": "229cd23a03bcf67fab2dc029bb84253442cee2b469459bc549ac641fd6b582da",
+          "run_checkpoint_authority.py": "652dc61b8c28f9b1948bb40b3b59fd53b4b9e9b93c74f9fabde21bdbb92b8b00"
+        },
+        "cases": {
+          "warm_q2_codec_v1": {
+            "cpu_oracle_replies": 302,
+            "vector_requests": 298,
+            "overflow_queries": 0,
+            "cfg_checks": 7,
+            "private_resets": 5,
+            "safe_rearms": 2,
+            "axi": {
+              "error_read_beats": 1,
+              "error_write_replies": 0,
+              "read_transactions": 590,
+              "read_beats": 590,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 590
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "result": "CHECKPOINT_AUTHORITY_PASS checks=302 cfg=7 reads=590 writes=0 cycles=12181"
+          },
+          "warm_iter2_codec_v1": {
+            "cpu_oracle_replies": 434,
+            "vector_requests": 430,
+            "overflow_queries": 58,
+            "cfg_checks": 7,
+            "private_resets": 5,
+            "safe_rearms": 2,
+            "axi": {
+              "error_read_beats": 1,
+              "error_write_replies": 0,
+              "read_transactions": 1208,
+              "read_beats": 1208,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1208
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 146284032
+            },
+            "result": "CHECKPOINT_AUTHORITY_PASS checks=434 cfg=7 reads=1208 writes=0 cycles=21589"
+          }
+        },
+        "scope": "Generation-bound owner snapshot authority component, immutable real prepared primary/pool/allocator images. Only GET requests. Not yet a full checkpoint or integrated recovery-coordinator producer.",
+        "auditor_sha256": "f717804d46c6f55f739a8e6e690138ff7ad9f785f1dccaee46aeb26d131b9d89"
+      },
+      "restore": {
+        "status": "passed",
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/checkpoint_authority_v2.json",
+        "archive_sha256": "33ead017d55f87edbeb5816b425d07a2c5c6c78e236aeaeac0a1c3e637fb900f",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/checkpoint_authority_v2",
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/checkpoint_authority_v2",
+        "files": 60,
+        "audit_byte_identical": true,
+        "audit_sha256": "fe5a3a923d542504d9896ba315e0e6a8634fdecce7444148406447073942f8d0",
+        "auditor": "audit_checkpoint_authority.py"
+      }
+    },
+    "authority_recovery_v1": {
+      "audit": {
+        "status": "passed",
+        "experiment_status": "failed_expected_counterexample",
+        "manifest_sha256": "6f459f4c632f954a3a97417a5f3086fbd445997a04ecf77162f53e05eb5e2b1f",
+        "source_hashes": {
+          "checkpoint_authority_reader.sv": "592ef4ccd8300a834640bb183530411e1657ddd4e05af7f881b87317aeea2672",
+          "tb_authority_recovery.sv": "a6c970fceb29896836046710d382554d5140f188fb96982f72bfed42d4a71d44",
+          "owner_state_store.sv": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+          "axi_file_memory.sv": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5",
+          "recovery_coordinator.sv": "b76daea8a982c1bb095f4fd255f7bcb9896c0499d19564b6f9d935d715604d68",
+          "prepare_authority_recovery_mutations.py": "f2b0c78157ba6c0a6f9e9c48652b02a16042c2f5e0d277828fb10e72c4214825",
+          "build_recovery_tb.py": "e0591a12ae92d22f609b9849c1bb5d07fdb39e89146b3510ef153a26e300acfe",
+          "prepare_checkpoint_authority_vectors.py": "229cd23a03bcf67fab2dc029bb84253442cee2b469459bc549ac641fd6b582da",
+          "run_authority_recovery.py": "503eb809a342895e3d11c1178c5b9615fac3621ac33b761156168eebcb890c6c"
+        },
+        "counterexample": "First real snapshot SLVERR retained journal=3; explicit safe rearm still returns status6 before second target reset because stale authority fault poisons coordinator DRAIN. No successful recovery claim.",
+        "evidence": {
+          "events.txt": "19ee56feb271cb98d4fdcbc638670c3ce9f69c9c04d3ccdb7c595365dea03b10",
+          "simulate.log": "b6ba73012b8bc70c8064b388ca50527d0d4d1c7281b8ae5ee5b8edfbcf618f89",
+          "snapshot_axi.txt": "da8d978b715aea4df4923d4a11346a85898fa3835d3c374c519ca6669d2e0cd0",
+          "live_axi.txt": "fd276bf5ecc89b6c4b36647de31447f6009a5f138be2ee60a896bf3c6979ac88"
+        },
+        "auditor_sha256": "32123cd6cb8304332cc256eb84ac7333dd61da45db36e710cbabfe2c1a85d9b8"
+      },
+      "restore": {
+        "status": "passed",
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/authority_recovery_v1.json",
+        "archive_sha256": "f83d8ab0d7cf5b8338ed44807f90b70b1b73da98bbbdb831b36d7ce0378bb4d7",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/authority_recovery_v1",
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/authority_recovery_v1",
+        "files": 63,
+        "audit_byte_identical": true,
+        "audit_sha256": "91fe0a77dc528070c8dd1b5130422b8ddaae99a3da25d0407b56032add6ca9b5",
+        "auditor": "audit_authority_recovery_failure.py"
+      }
+    },
+    "authority_recovery_v2": {
+      "audit": {
+        "status": "passed",
+        "manifest_sha256": "d4bc7efb5faa4b317a196e78e78f80d40e1a36d3721ff557cbf5d4ea07b8e9d5",
+        "sources": {
+          "checkpoint_authority_reader.sv": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+          "tb_authority_recovery.sv": "a6c970fceb29896836046710d382554d5140f188fb96982f72bfed42d4a71d44",
+          "owner_state_store.sv": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+          "axi_file_memory.sv": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5",
+          "recovery_coordinator.sv": "b76daea8a982c1bb095f4fd255f7bcb9896c0499d19564b6f9d935d715604d68",
+          "prepare_authority_recovery_mutations.py": "f2b0c78157ba6c0a6f9e9c48652b02a16042c2f5e0d277828fb10e72c4214825",
+          "build_recovery_tb.py": "e0591a12ae92d22f609b9849c1bb5d07fdb39e89146b3510ef153a26e300acfe",
+          "prepare_checkpoint_authority_vectors.py": "229cd23a03bcf67fab2dc029bb84253442cee2b469459bc549ac641fd6b582da",
+          "run_authority_recovery.py": "503eb809a342895e3d11c1178c5b9615fac3621ac33b761156168eebcb890c6c"
+        },
+        "cases": {
+          "warm_q2_codec_v1": {
+            "dirty_keys": 3,
+            "failed_attempt_status": 6,
+            "journal_retained": 3,
+            "retry_corrected": 3,
+            "journal_final": 0,
+            "authority_queries": 7,
+            "snapshot_axi": {
+              "error_read_beats": 1,
+              "error_write_replies": 0,
+              "read_transactions": 13,
+              "read_beats": 13,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 13
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "live_axi": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 30,
+              "read_beats": 30,
+              "write_beats": 6,
+              "write_replies": 6,
+              "read_burst_lengths": {
+                "1": 30
+              },
+              "write_burst_lengths": {
+                "1": 6
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "complete_owner_semantics_restored": true,
+            "untouched_primary_pool_bytes_identical": true,
+            "allocator_identical": true,
+            "live_byte_identical": true,
+            "generation": 4294967297,
+            "labels_completion": "mock",
+            "result": "AUTHORITY_RECOVERY_PASS dirty=3 resets=10 soft=1 snapshot_reads=13 live_writes=6"
+          },
+          "warm_iter2_codec_v1": {
+            "dirty_keys": 5,
+            "failed_attempt_status": 6,
+            "journal_retained": 5,
+            "retry_corrected": 5,
+            "journal_final": 0,
+            "authority_queries": 11,
+            "snapshot_axi": {
+              "error_read_beats": 1,
+              "error_write_replies": 0,
+              "read_transactions": 25,
+              "read_beats": 25,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 25
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 146284032
+            },
+            "live_axi": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 59,
+              "read_beats": 59,
+              "write_beats": 14,
+              "write_replies": 14,
+              "read_burst_lengths": {
+                "1": 59
+              },
+              "write_burst_lengths": {
+                "1": 14
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 146284032
+            },
+            "complete_owner_semantics_restored": true,
+            "untouched_primary_pool_bytes_identical": true,
+            "allocator_identical": true,
+            "live_byte_identical": false,
+            "generation": 4294967298,
+            "labels_completion": "mock",
+            "result": "AUTHORITY_RECOVERY_PASS dirty=5 resets=10 soft=1 snapshot_reads=25 live_writes=14"
+          }
+        },
+        "scope": "Real snapshot authority joined to recovery coordinator and writable owner engine. Labels completion is a mock; not a full checkpoint or query system.",
+        "auditor_sha256": "aeaebadc993a6e0861b777edde202eae17c9108af8f311b24b2791e5a59a58a1"
+      },
+      "restore": {
+        "status": "passed",
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/authority_recovery_v2.json",
+        "archive_sha256": "b37042212e72b7cec4b42629da01ed83e6cf1e08b33623b0b4bfce6adb957b58",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/authority_recovery_v2",
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/authority_recovery_v2",
+        "files": 71,
+        "audit_byte_identical": true,
+        "audit_sha256": "5992ea253f9684c4bdfca053814b296d46818de9d8b08b2cf0c963af40c72a03",
+        "auditor": "audit_authority_recovery.py"
+      }
+    },
+    "checkpoint_authority_synth_v1": {
+      "audit": {
+        "status": "passed",
+        "manifest_sha256": "14c94bda674752eb73724da231f219034a7ff4f2926823e13c597ee7592b9206",
+        "unit_audit_sha256": "fe5a3a923d542504d9896ba315e0e6a8634fdecce7444148406447073942f8d0",
+        "auditor_sha256": "661668dfb4777edbf4017a8f897176224d1cb657f5c178d332a4d2cc35bf0ab7",
+        "utilization": {
+          "LUT": 4537.0,
+          "FF": 3973.0,
+          "latches": 0.0,
+          "BRAM": 0.0,
+          "DSP": 0.0
+        },
+        "facts": {
+          "cells": 9808,
+          "latches": 0,
+          "blackboxes": 0,
+          "ports": 2420,
+          "logical_ports": 74,
+          "port_bits": 2420
+        },
+        "files": {
+          ".vivado-ai/init_63527361_5a3b6acf.tcl": "5457f3c023fe8f38b8de5548007865425336b5f817e73adedcd31d1e27f251c6",
+          ".vivado-ai/vivado_63527361_5a3b6acf.jou": "59769a8f1a1a4966fa3ba692fd18c7f1130f8997d2cd22928672cbabc94eadbc",
+          ".vivado-ai/vivado_63527361_5a3b6acf.log": "0fd878ed1b07c2d08412d47d01061089ad8d60f211b813c5d2258b69c4a7a81a",
+          ".vivado-ai/vivado_proxy_2782384.log": "4e50d477210173e1e1b5e3a07034164a78bb1dcc5eb5788ec5e687d4d76baa45",
+          "counts.txt": "0353ccdaafa00f379ec8ea3452da0ff6a94c0df9eeeb234cb7fa4745ae21a28d",
+          "manifest.json": "14c94bda674752eb73724da231f219034a7ff4f2926823e13c597ee7592b9206",
+          "port_counts.txt": "884b176726b4d68bf71b7bc8ba2e1087b34bff322d7168f3e1938e2310ea99bd",
+          "sources/checkpoint_authority_reader.sv": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+          "sources/owner_state_store.sv": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+          "synth.dcp": "cff6083bb667123e984f8d60f54e0b31a8be921702032b7c222652b39e3f8581",
+          "synth.tcl": "6061acd8bbc4e69eb183464365633aa598ead20f5fa8872ff7c2bdb1e2bfb838",
+          "synth.v": "37988e5519941576b6793b8b1664f07f5776b8cce11f462640c9f634c364d942",
+          "utilization.rpt": "e379329076b43dad73698dbd0a2320df3d874ba28e2fc4cb248ce31160eff727",
+          "vivado.log": "0fd878ed1b07c2d08412d47d01061089ad8d60f211b813c5d2258b69c4a7a81a"
+        },
+        "scope": "Owner authority only OOC; no joined-system resource or timing evidence."
+      },
+      "restore": {
+        "status": "passed",
+        "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/checkpoint_authority_synth_v1.json",
+        "archive_sha256": "a3bb0a8a6da09e50f3dd199f8d42ecea318344d7eb0f9e26cf8face06443e29a",
+        "restored_root": "/tmp/B_state_residency_offer_20261025/checkpoint_authority_synth_v1",
+        "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/checkpoint_authority_synth_v1",
+        "files": 15,
+        "audit_byte_identical": true,
+        "audit_sha256": "4d64ccd6af45dc4a48e9bf719d4d8d4290e720a7f4be534078481f44326aaaa5",
+        "auditor": "audit_checkpoint_authority_synth.py"
+      }
+    }
+  },
+  "archive_files": 269,
+  "frozen_sources": {
+    "hardware/variants/checkpoint_authority_v1/checkpoint_authority_reader.sv": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+    "hardware/variants/checkpoint_authority_v1/tb_authority_recovery.sv": "a6c970fceb29896836046710d382554d5140f188fb96982f72bfed42d4a71d44",
+    "hardware/variants/checkpoint_authority_v1/CONTRACT.md": "6b95f8abbb6b3a984beaf06d0bfc6f8ee5bff9b01aeb644fb47821daa3a37303",
+    "hardware/variants/checkpoint_authority_v1/build_recovery_tb.py": "e0591a12ae92d22f609b9849c1bb5d07fdb39e89146b3510ef153a26e300acfe",
+    "hardware/variants/checkpoint_authority_v1/tb_checkpoint_authority.sv": "4fcbddca18634893d76de2b91ea9ceee89655ee66cad344568f5b1121fa11f6e",
+    "scripts/prepare_checkpoint_authority_vectors.py": "229cd23a03bcf67fab2dc029bb84253442cee2b469459bc549ac641fd6b582da",
+    "scripts/prepare_authority_recovery_mutations.py": "f2b0c78157ba6c0a6f9e9c48652b02a16042c2f5e0d277828fb10e72c4214825",
+    "scripts/run_checkpoint_authority.py": "652dc61b8c28f9b1948bb40b3b59fd53b4b9e9b93c74f9fabde21bdbb92b8b00",
+    "scripts/run_authority_recovery.py": "503eb809a342895e3d11c1178c5b9615fac3621ac33b761156168eebcb890c6c",
+    "scripts/audit_checkpoint_authority.py": "f717804d46c6f55f739a8e6e690138ff7ad9f785f1dccaee46aeb26d131b9d89",
+    "scripts/audit_authority_recovery.py": "aeaebadc993a6e0861b777edde202eae17c9108af8f311b24b2791e5a59a58a1",
+    "scripts/audit_authority_recovery_failure.py": "32123cd6cb8304332cc256eb84ac7333dd61da45db36e710cbabfe2c1a85d9b8",
+    "scripts/audit_checkpoint_authority_synth.py": "661668dfb4777edbf4017a8f897176224d1cb657f5c178d332a4d2cc35bf0ab7",
+    "scripts/report_checkpoint_authority.py": "988daddb85fac6ef0cfe23d341282a5dd06cbcbcd323e365f497ca62f83e777f"
+  },
+  "coverage": {
+    "status": "incomplete",
+    "new_evidence": "Generic generation-bound owner snapshot GET service and actual owner-recovery subsystem retry are validated. Labels completion is a mock. Existing full-query top still uses earlier limited authority.",
+    "validated": [
+      "design64/checkpoint32/generation64 immutable binding and identity/range rejection before AXI",
+      "real primary/pool/allocator GET and overflow-chain validation against original CPU oracle",
+      "actual SLVERR and stalled AR cancel with retirement before rearm",
+      "journal-preserving owner subsystem retry, 3/5 dirty keys, promotion and overflow references",
+      "all snapshot/live AXI bytes and complete owner semantics; untouched records byte identical"
+    ],
+    "missing": [
+      "unified path/owner/design/history/price/labels/directory/config/journal checkpoint publication",
+      "full-query top integration with this generic reader and real label restore",
+      "query sequence/epoch/version lower-bound serialization and restart",
+      "snapshot authenticity, memory immutability enforcement and durable atomic storage",
+      "unknown pages, stale predecessor/frontier restart policy, arbitrary reroute",
+      "real changing prices, rollover, worst-case capacity/performance and board evidence"
+    ],
+    "previous_full_query_evidence": "results/route_checkpoint_join_20261025.json"
+  },
+  "basic_check": "python3 scripts/run.py check passed"
+}

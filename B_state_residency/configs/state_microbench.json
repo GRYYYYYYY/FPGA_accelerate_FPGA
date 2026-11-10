@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "dataset_kind": "synthetic_state_microbenchmark",
+  "nodes": 262144,
+  "seeds": [1, 2, 3],
+  "repetitions": 3,
+  "page_bits": [6, 9, 12],
+  "timeout_seconds": 60,
+  "order_seed": 20261022,
+  "variants": ["cpu_dense_init", "cpu_serial_stamp", "cpu_existing_paged", "cpu_paged_node_epoch", "cpu_lifetime_residency"],
+  "workloads": [
+    {"id": "clustered_short", "queries": 128, "touches": 256, "fanout": 4, "scattered": false},
+    {"id": "scattered_short", "queries": 128, "touches": 256, "fanout": 4, "scattered": true},
+    {"id": "high_fanout", "queries": 128, "touches": 256, "fanout": 128, "scattered": false},
+    {"id": "clustered_long", "queries": 32, "touches": 16384, "fanout": 4, "scattered": false}
+  ]
+}

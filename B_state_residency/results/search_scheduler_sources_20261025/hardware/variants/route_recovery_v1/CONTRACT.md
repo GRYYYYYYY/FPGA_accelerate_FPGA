@@ -1,0 +1,13 @@
+# 同实例协调复位与提交checkpoint恢复
+
+在五类真实故障测试之上，同一XSim/DUT实例等待物理AXI排空、故障响应退休和32周期围栏确认，才协调rst。初次创建的文件/AXI memory句柄保留，rst不清物理owner、design、cost或标签后备；不得用重启sim或重写文件冒充恢复。
+
+外部journal在route controller的owner请求握手时记录node，保留跨DUT reset。它是TB中的协调器状态，不是已综合的耐掉电日志；不依据ACK=0假定无副作用，也不依据ACK=1直接重放INC。当前故障发生在首个owner操作，journal至多1节点；label错误可为0，owner读错误也记录1个可能脏节点。
+
+复位后重新配置真实服务，保持route/expand/frontier入口关闭，允许唯一恢复协调器使用host接口。对journal节点真实GET；权威初态已独立确认该节点无owner（来自冻结q1初始owner图像）。GET若refs=1/occupancy=1则DEC并等待确认，再GET核验refs=occupancy=0；若GET为0则不DEC。未知net占用、refs>1或修复不归零则停止，不宣称通用修复。这是排他恢复场景，不允许其他写者。
+
+重新OPEN使用存储query epoch2、price标签4、full version4，并保持物理价格/history字节不变。price标签必须匹配version低4位；v1测试台用price3/version4曾被原身份检查拒绝，修正协调器后运行v2。不是实际价格变化的有效性证明。先探测node150697要求present=0，确认不能把旧物理页字节作为新epoch有效记录；随后从原CPU q1搜索末态权威快照按字段重载328记录、checkpoint、逐条真实读取核验。完成前新route/expand/frontier请求持续被门控；不把缺失标签的零payload当CPU默认prev=-1。
+
+恢复门打开后重新TRACE_COMMIT同一查询结果，必须完整6节点、6ACK、slot发布且fault清除；最终owner全图像应为恰提交一次q1路径的CPU q2准备态。其他预占用、history和design文件不能随reset清除。没有backdoor owner修复/文件替换，全部副作用通过真实owner GET/DEC/INC和AXI日志验证。
+
+此处checkpoint仅覆盖独立回溯提交操作的标签/owner及固定输入；未重建完整CPU q1搜索末态的warm children/created、外层frontier/调度或全部connection路径表。设计/价格文件维持测试初态。不能称完整search恢复。仅一次非回绕epoch1→2/version3→4，非epoch回绕/并发恢复、任意checkpoint差异或未知工作集初始化。协调器和恢复准入门当前在TB，不是生产恢复FSM。日志不提供断电持久性保证。

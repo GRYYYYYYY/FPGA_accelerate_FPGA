@@ -1,0 +1,17 @@
+# 保留数据的端点 checkpoint 先导
+
+新增独立memory_scratch_endpoint_retained，公共opcode12由顶层展开为页BEGIN、等待真实队列/peer/ACK排空、页FINISH、服务opcode5（目录事务回收）、内部恢复同query/price。旧模块不变。公共12不直接发送给已有queued层12/13控制命令。
+
+成功QUERY跟踪独占性，第二次成功外部QUERY使checkpoint不可用，直到普通完整RECYCLE。成功BIND/RELEASE维护bound_mask，仍有LIVE槽、租约或正在draining时在进入排空之前拒绝，避免阻塞主机后再要求释放槽。checkpoint锁存原query/price，忽略该公共命令携带的无关身份字段。等待过程无外部quiescence布尔值；只有页FINISH成功后才向目录提交可信fence信号。任何内部阶段失败封锁后续正常操作；最终成功响应消费前禁止新命令。
+
+小位宽先导XSim通过134检查、21checkpoint、21完整页传输、11次1位fence tag回绕。20次保留页回收后复用generation0/tx0，通过原字节AXI检查和字段读值123；另一次完整RECYCLE后空数据checkpoint验证独占性恢复。覆盖无query拒绝、clean/dirty LIVE拒绝、多个query拒绝、内部重建query占用tag、host响应背压及竞争QUERY禁止。
+
+旧小测试370检查/46传输/25fence/9故障与19真实小查询77099命令/6086传输原样通过。仅替换模块引用，原测试和期望值不改；19查询profile.counts.csv与profile.commands.csv均逐字节等于旧索引端点，含初始化总周期7289882、结束72898860ns不变。该回归没有新增checkpoint，不代表checkpoint开销为零。
+
+四个故障对照：忽略LIVE槽、跳过内部QUERY恢复、错误完整清空目录、忽略query独占性均被检出。第三项先触发原有“address RECYCLE before page fence acknowledgement”断言，比预期内容检查更早；原runner43727退出1并保留，最后一项由独立runner8517完成，未修改检查或重跑已完成故障。最终审计明确分类此差异。
+
+证据：results/rtl_retained_endpoint_pilot_20261023/manifest.json（e6c446cd38f6fdaf9e9385bddabfaa55aee7e2ad9555b6e9a02934c7c95ab0fe）、final_audit.json；legacy simulation_manifest（cc27f6d96f2ee52abdc4e0af87d7d37010e5c4d91ccfc932d5d34357008fd1a1）；两份guards目录。pilot32822、legacy71586、最后负例8517和审计均终止。
+
+尚待完成：主动阻塞各个排空/ACK阶段的定向测试、更多多页/多字段checkpoint边界与故障注入、默认容量综合、全38真实查询含31checkpoint的完整RTL流式回放。当前只在封闭同钟队列内建立协调，不覆盖域外迟到/重复包、CDC、整路由或实卡性能。新源和证据冻结。
+
+后续更新：主动阻塞与默认容量综合已完成，见 `rtl_retained_stalls_and_synthesis_20261023.md`；全38查询向量仍在生成。

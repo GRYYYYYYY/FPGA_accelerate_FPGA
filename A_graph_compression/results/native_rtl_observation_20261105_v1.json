@@ -1,0 +1,96 @@
+{
+  "observed_at_utc": "2026-11-05T00:00:54.604329+00:00",
+  "status": "live_process_and_log_observation_not_functional_acceptance",
+  "functional_acceptance": false,
+  "o2": {
+    "trial": "/tmp/A_graph_compression_recovery_20261025_v1/native_o2_full_rtl_20261103_v1",
+    "identity_verified": true,
+    "functional_acceptance_inferred": false,
+    "status": "running",
+    "stage": "rtl",
+    "pid": 576099,
+    "log_age_seconds": 109.318,
+    "last_sample": {
+      "step": 837,
+      "wall_ms": 1793836745186,
+      "values": {
+        "0": "00000000",
+        "1": "00000001",
+        "2": "00ff6e86",
+        "3": "0",
+        "4": "200000",
+        "5": "0",
+        "6": "0",
+        "7": "1",
+        "8": "0",
+        "9": "13fe25",
+        "10": "XXXXXX",
+        "11": "1",
+        "12": "0"
+      },
+      "completed": 0,
+      "clock_count": 16739974,
+      "init_index": 2097152,
+      "trace_scan_1_index": 1310245,
+      "trace_scan_2_index": null
+    },
+    "last_interval_cycles_per_wall_second": 152.9917537444732,
+    "rtl_receipt_exists": false,
+    "audit_report_exists": false,
+    "terminal_receipt_exists": false,
+    "note": "Samples are recorded DUT/TB values. Report existence or process activity alone is not acceptance; the independent audit and its exit receipt are required.",
+    "resource_abort_reason_since_start": null
+  },
+  "o0": {
+    "identity_verified": true,
+    "functional_acceptance_inferred": false,
+    "pid": 3191525,
+    "elapsed_hours": 124.99867500000012,
+    "cpu_hours": 125.01438333333334,
+    "lifetime_cpu_percent": 100.01256679987465,
+    "rss_gib": 15.28048324584961,
+    "last_logged_completed": 0,
+    "total_transactions": 4,
+    "last_logged_simulation_ms": 250.000158,
+    "log_file_age_hours": 0.384655503431956,
+    "rtl_receipt_exists": false,
+    "output_snapshot_files": 0,
+    "resource_abort_reason_since_start": null,
+    "memory_events": {
+      "low": 0,
+      "high": 0,
+      "max": 254,
+      "oom": 0,
+      "oom_kill": 2
+    },
+    "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=61954315\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=61486455\n",
+    "cpu_pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=676039275\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=375279835\n",
+    "note": "CPU activity is not simulation progress. Last logged time is not the current internal simulation time. Output files and exit receipts alone do not grant acceptance; the independent checker is required."
+  },
+  "supervisors": [
+    {
+      "task": "native_directory_recovery_supervisor_v2",
+      "status": "running",
+      "owner_verified": true
+    },
+    {
+      "task": "bus64_full_rtl_supervisor_v3",
+      "status": "waiting_dependency",
+      "owner_verified": true
+    },
+    {
+      "task": "route_tree_recovery_supervisor_v3",
+      "status": "waiting_dependency",
+      "owner_verified": true
+    },
+    {
+      "task": "snapshot_read_serial_supervisor_v2",
+      "status": "waiting_dependency",
+      "owner_verified": true
+    }
+  ],
+  "limitations": [
+    "Point-in-time read-only observation; not a full input or output audit.",
+    "Sample and last logged simulation time are not current internal state or completion estimates."
+  ]
+}

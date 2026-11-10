@@ -1,0 +1,134 @@
+{
+  "status": "reviewed_component_safety_composition_as_excludes_authority_cfg_publish_discard_rearm",
+  "proof_report_sha256": {
+    "lease_temporal": "622240ac2f11d5783fe31e9e25fadeb0bf2faaba3817287310ad61924c036bda",
+    "discard_phase": "4334c031b68e90db6142580f6106bfa4c8aee9b906eaf7f1da15cd906930fe32",
+    "combinational": "3830a51444e15549ab9a15c2f7bc1a425419aea75b8768003186d39c852e804f"
+  },
+  "checked_boolean_rows": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+    ]
+  ],
+  "source_bindings": {
+    "publication_instance": ".clk(clk),.rst(rst||k_cold_rst),.lease_owned(pc_owned),\n.retired(pc_retired&&pc_route_retired&&as_drained&&as_retired&&!cp_busy&&!qc_cp_busy&&!qc_restore_pending),\n.stage_busy(as_busy||as_cfg_lease||k_busy||(|jp_reply)),.fault(abort||as_fault||fault||rc_fault||k_fault||cf_fault||lr_fault||f_fault||ss_fault||qc_fault),.manifest_ready(jp_manifest_ready),\n.start_valid(jp_start&&jp_start_open),.start_ready(jp_core_start_ready),.start_design(jp_design),.start_generation(jp_generation),.start_checkpoint(jp_checkpoint),.start_version(jp_version),.start_query(jp_query),.start_price(jp_price),\n.commit_valid(jp_commit),.commit_ready(jp_commit_ready),.cancel_valid(jp_cancel),.cancel_ready(jp_cancel_ready),.owned(jp_owned),.prepare_allowed(jp_prepare),.done_valid(jp_done),.done_ready(jp_done_ready),.done_status(jp_result),\n.prepared({jp_prepared,jp_ap}),.publish_ready({jp_pubready,jp_apr}),.discard_ready({jp_dropready,jp_adr}),.publish_valid(jp_pv),.discard_valid(jp_dv),\n.a_design(as_bound_design),.a_generation(as_bound_generation),.a_checkpoint(as_bound_checkpoint),.k_design(jp_kdesign),.c_design(jp_cdesign),.k_checkpoint(jp_kcp),.c_checkpoint(jp_ccp),.k_version(jp_kver),.c_version(jp_cver),.k_query(jp_kquery),.k_price(jp_kprice),.journal_count(k_count),\n.sa_design(jp_ad),.sa_generation(jp_ag),.sa_checkpoint(jp_ac),.sk_design(jp_skdesign),.sc_design(jp_scdesign),.sk_checkpoint(jp_skcp),.sc_checkpoint(jp_sccp),.sk_version(jp_skver),.sc_version(jp_scver),.sk_query(jp_skquery),.sk_price(jp_skprice))",
+    "lease_instance": "checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));",
+    "authority_instance": ".cfg_stage(jp_authority_stage),.publish_valid(jp_pv[0]),.publish_permit(pc_owned&&jp_owned),.discard_valid(jp_dv[0]),.publish_ready(jp_apr),.discard_ready(jp_adr),.active_slot(),.staged_valid(jp_ap),.staged_design(jp_ad),.staged_generation(jp_ag),.staged_checkpoint(jp_ac),.clk(clk),.rst(k_cold_rst),.abort(1'b0),.cfg_permit(as_initial_safe||as_cfg_lease||as_attempt_reset||(pc_owned&&jp_owned)),\n.cfg_valid((!boot_pending||boot_admin_allowed)&&as_cfg_valid&&(as_initial_safe||(jp_prepare&&jp_authority_stage))),.cfg_ready(as_core_cfg_ready),.cfg_design(as_cfg_design),.cfg_generation(as_cfg_generation),.cfg_primary(as_cfg_primary),.cfg_pool(as_cfg_pool),.cfg_allocator(as_cfg_allocator),.cfg_checkpoint(as_cfg_checkpoint),.cfg_nodes(as_cfg_nodes),.cfg_nets(as_cfg_nets),.cfg_capacity(as_cfg_capacity),\n.rearm_valid(as_attempt_reset),.rearm_ready(as_rearm_ready),.cfg_rsp_valid(as_core_cfg_valid),.cfg_rsp_ready(as_core_cfg_rearmed||as_cfg_rsp_ready),.cfg_status(as_core_cfg_status),.cfg_rearmed(as_core_cfg_rearmed),.configured(as_configured),.bound_design(as_bound_design),.bound_generation(as_bound_generation),.bound_checkpoint(as_bound_checkpoint),\n.req_valid(!ap_owned&&(k_a_valid||ap_offer)),.req_ready(ap_native_ready),.req_design(ap_offer?ap_design:k_a_design),.req_generation(ap_offer?ap_generation:as_bound_generation),.req_checkpoint(ap_offer?ap_checkpoint:k_a_checkpoint),.req_node(ap_offer?ap_node:k_a_node),.req_net(ap_offer?ap_net:k_a_net),.req_cookie(ap_offer?ap_cookie:k_a_cookie),.rsp_valid(ap_native_valid),.rsp_ready(ap_owned?ap_rsp_ready:k_a_rsp_ready),.rsp_status(as_core_status),.rsp_design(k_a_rsp_design),.rsp_generation(as_rsp_generation),.rsp_checkpoint(k_a_rsp_checkpoint),.rsp_cookie(k_a_rsp_cookie),.rsp_refs(k_a_refs),.rsp_occupancy(k_a_occ),.busy(as_busy),.fault(as_fault),.drained(as_drained),\n.m_araddr(as_m_araddr),.m_arlen(as_m_arlen),.m_arsize(as_m_arsize),.m_arburst(as_m_arburst),.m_arid(as_m_arid),.m_arvalid(as_m_arvalid),.m_arready(as_m_arready),.m_rdata(as_m_rdata),.m_rid(as_m_rid),.m_rresp(as_m_rresp),.m_rlast(as_m_rlast),.m_rvalid(as_m_rvalid),.m_rready(as_m_rready),.m_awaddr(as_m_awaddr),.m_awlen(as_m_awlen),.m_awsize(as_m_awsize),.m_awburst(as_m_awburst),.m_awid(as_m_awid),.m_awvalid(as_m_awvalid),.m_awready(as_m_awready),.m_wdata(as_m_wdata),.m_wstrb(as_m_wstrb),.m_wlast(as_m_wlast),.m_wvalid(as_m_wvalid),.m_wready(as_m_wready),.m_bid(as_m_bid),.m_bresp(as_m_bresp),.m_bvalid(as_m_bvalid),.m_bready(as_m_bready))"
+  },
+  "consequence": "After initial cold reset in current parameter-matched two-state RTL, AS-valid excludes authority cfg_valid, publish_valid, discard_valid and rearm_valid. Discard consequence checks both reset cases and exact vector bit wiring.",
+  "scope": "Compositional safety consequence of reviewed inductive/combination results and source wiring; not a new monolithic formal run, XZ/all-parameter proof, fixture full regression, or KA-ready proof. No publication-owned implies lease-owned premise used.",
+  "remaining": [
+    "Authority reader IDLE/codec busy/response retirement and drained persistence at each AS.",
+    "Compose payload/ready and KA coverage requirements without waiver.",
+    "Full initialized publication/release reproduction still waiting memory; caller protocol legality remains separate."
+  ],
+  "archive_sha256": "53e9904dc81959ec1bd56593eff2d4068b597637162d8bae72225a719861b9e9",
+  "file_sha256": {
+    "reviewer.py": "de87e10d0cde706c3e46b6f80105de45e6475ca3d95b0e1eff7dc55e3ac508b5",
+    "reports/ka_lease_temporal_boundary_v1_review_20261101.json": "622240ac2f11d5783fe31e9e25fadeb0bf2faaba3817287310ad61924c036bda",
+    "reports/ka_publication_discard_lease_unit_v1_review_20261101.json": "4334c031b68e90db6142580f6106bfa4c8aee9b906eaf7f1da15cd906930fe32",
+    "reports/ka_as_admin_combinational_formal_v1_review_20261031.json": "3830a51444e15549ab9a15c2f7bc1a425419aea75b8768003186d39c852e804f",
+    "sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "sources/search_residency_system.sv": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63",
+    "sources/residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+    "sources/recovery_coordinator.sv": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+    "sources/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "sources/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3"
+  },
+  "reviewer_sha256": "de87e10d0cde706c3e46b6f80105de45e6475ca3d95b0e1eff7dc55e3ac508b5",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

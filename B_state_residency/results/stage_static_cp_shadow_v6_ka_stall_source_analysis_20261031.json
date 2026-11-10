@@ -1,0 +1,134 @@
+{
+  "status": "source_bound_ka_stall_reachability_analysis_incomplete",
+  "files": {
+    "recovery_coordinator.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/recovery_coordinator.sv",
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+      "evidence": {
+        "assign a_valid=": [
+          {
+            "line": 61,
+            "text": " assign a_valid=!cold_rst&&state==AS;assign a_rsp_ready=!cold_rst&&state==AW;"
+          }
+        ],
+        "AS:if(a_ready)": [
+          {
+            "line": 115,
+            "text": "    AS:if(a_ready)state<=AW;"
+          }
+        ],
+        "AW:if(a_rsp_valid)": [
+          {
+            "line": 116,
+            "text": "    AW:if(a_rsp_valid)begin"
+          }
+        ],
+        "RECONFIG:if(reconfigure_done)": [
+          {
+            "line": 111,
+            "text": "    RECONFIG:if(reconfigure_done)begin"
+          }
+        ],
+        "NEXT:begin": [
+          {
+            "line": 145,
+            "text": "    NEXT:begin"
+          }
+        ]
+      }
+    },
+    "query_residency_system.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/query_residency_system.sv",
+      "sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+      "evidence": {
+        "wire ap_allow=": [
+          {
+            "line": 528,
+            "text": "wire ap_allow=!rst&&!k_cold_rst&&!abort&&pc_owned&&!jp_owned&&!k_busy&&!k_rec_valid&&!as_cfg_lease&&!k_a_valid&&!ap_owned;"
+          }
+        ],
+        "assign k_a_ready=": [
+          {
+            "line": 531,
+            "text": "assign k_a_ready=!ap_offer&&!ap_owned&&ap_native_ready;"
+          }
+        ],
+        ".req_valid(!ap_owned": [
+          {
+            "line": 545,
+            "text": ".req_valid(!ap_owned&&(k_a_valid||ap_offer)),.req_ready(ap_native_ready),.req_design(ap_offer?ap_design:k_a_design),.req_generation(ap_offer?ap_generation:as_bound_generation),.req_checkpoint(ap_offer?ap_checkpoint:k_a_checkpoint),.req_node(ap_offer?ap_node:k_a_node),.req_net(ap_offer?ap_net:k_a_net),.req_cookie(ap_offer?ap_cookie:k_a_cookie),.rsp_valid(ap_native_valid),.rsp_ready(ap_owned?ap_rsp_ready:k_a_rsp_ready),.rsp_status(as_core_status),.rsp_design(k_a_rsp_design),.rsp_generation(as_rsp_generation),.rsp_checkpoint(k_a_rsp_checkpoint),.rsp_cookie(k_a_rsp_cookie),.rsp_refs(k_a_refs),.rsp_occupancy(k_a_occ),.busy(as_busy),.fault(as_fault),.drained(as_drained),"
+          }
+        ]
+      }
+    },
+    "checkpoint_authority_rotator.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_rotator.sv",
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+      "evidence": {
+        "assign req_ready=": [
+          {
+            "line": 133,
+            "text": " assign req_ready=!rst&&state==IDLE&&!cfg_valid&&!publish_valid&&!discard_valid&&!rearm_valid&&(active_bank?b1_req_ready:b0_req_ready);"
+          }
+        ],
+        "assign rearm_ready=": [
+          {
+            "line": 132,
+            "text": " assign rearm_ready=!rst&&state==IDLE&&!cfg_valid&&!publish_valid&&!discard_valid&&(active_bank?b1_rearm_ready:b0_rearm_ready);"
+          }
+        ],
+        "assign cfg_ready=": [
+          {
+            "line": 128,
+            "text": " assign cfg_ready=!rst&&state==IDLE&&cfg_permit&&!abort&&!publish_valid&&!discard_valid&&!rearm_valid&&all_quiet;"
+          }
+        ]
+      }
+    },
+    "checkpoint_authority_reader.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+      "evidence": {
+        "assign req_ready=": [
+          {
+            "line": 32,
+            "text": " assign req_ready=!rst&&state==IDLE&&!cfg_rsp_valid&&!cfg_valid&&!rearm_valid&&configured&&!fault&&!abort&&drained&&!c_busy;"
+          }
+        ],
+        "assign rsp_valid=": [
+          {
+            "line": 33,
+            "text": " assign rsp_valid=!rst&&state==REPLY;"
+          }
+        ],
+        "else if(req_valid&&req_ready)": [
+          {
+            "line": 69,
+            "text": "     end else if(req_valid&&req_ready)begin"
+          }
+        ],
+        "REPLY:if(rsp_ready)": [
+          {
+            "line": 94,
+            "text": "    REPLY:if(rsp_ready)state<=IDLE;"
+          }
+        ]
+      }
+    }
+  },
+  "findings": [
+    "KA producer valid is state AS, independent of ready; AS holds until ready then enters AW.",
+    "Each subsequent request is sequenced through authority response and owner processing before NEXT returns to AS.",
+    "Authority response latency alone stalls AW, not AS; delaying AXI response is not sufficient evidence of KA request backpressure.",
+    "AP offer is inhibited by KA valid and recovery busy, but pre-existing AP ownership and configuration overlap require additional reachability analysis.",
+    "Reader ready depends on IDLE, configuration/rearm qualifiers, configured/fault/abort, drained and codec busy; rotator adds configuration/publish/discard qualifiers."
+  ],
+  "not_proven": [
+    "KA stall globally unreachable",
+    "legal full-system stimulus producing KA stall",
+    "full functional acceptance"
+  ],
+  "next_action": "Trace configuration, rearm and AP ownership admission against recovery entry; design a separate real-DUT stimulus only after a legal overlap is established. Do not rerun unchanged full fixture or relax v6 gate.",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

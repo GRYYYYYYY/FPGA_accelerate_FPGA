@@ -1,0 +1,886 @@
+{
+  "status": "static_capacity_and_source_xml_abi_checked_board_unverified",
+  "execution_kind": "static_memory_plan",
+  "kernel": "search_kernel_top",
+  "compute_unit": "search_kernel_top_1",
+  "arguments": [
+    {
+      "id": 0,
+      "name": "image",
+      "pointer": true,
+      "element_bytes": 4,
+      "const": true,
+      "depth": 33554432,
+      "bundle": "graph_mem",
+      "port": "M_AXI_GRAPH_MEM",
+      "payload_bytes": 134217728
+    },
+    {
+      "id": 1,
+      "name": "config",
+      "pointer": true,
+      "element_bytes": 4,
+      "const": true,
+      "depth": 32,
+      "bundle": "input_mem",
+      "port": "M_AXI_INPUT_MEM",
+      "payload_bytes": 128
+    },
+    {
+      "id": 2,
+      "name": "image_words",
+      "pointer": false,
+      "element_bytes": 4,
+      "port": "S_AXI_CONTROL"
+    },
+    {
+      "id": 3,
+      "name": "roots",
+      "pointer": true,
+      "element_bytes": 4,
+      "const": true,
+      "depth": 1048576,
+      "bundle": "input_mem",
+      "port": "M_AXI_INPUT_MEM",
+      "payload_bytes": 4194304
+    },
+    {
+      "id": 4,
+      "name": "packet",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": true,
+      "depth": 4194304,
+      "bundle": "input_mem",
+      "port": "M_AXI_INPUT_MEM",
+      "payload_bytes": 33554432
+    },
+    {
+      "id": 5,
+      "name": "packet_words",
+      "pointer": false,
+      "element_bytes": 4,
+      "port": "S_AXI_CONTROL"
+    },
+    {
+      "id": 6,
+      "name": "heap",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 393216,
+      "bundle": "heap_mem",
+      "port": "M_AXI_HEAP_MEM",
+      "payload_bytes": 3145728
+    },
+    {
+      "id": 7,
+      "name": "slots",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 1048576,
+      "bundle": "index_mem",
+      "port": "M_AXI_INDEX_MEM",
+      "payload_bytes": 8388608
+    },
+    {
+      "id": 8,
+      "name": "records",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 5242880,
+      "bundle": "record_mem",
+      "port": "M_AXI_RECORD_MEM",
+      "payload_bytes": 41943040
+    },
+    {
+      "id": 9,
+      "name": "keys",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 34078720,
+      "bundle": "key_mem",
+      "port": "M_AXI_KEY_MEM",
+      "payload_bytes": 272629760
+    },
+    {
+      "id": 10,
+      "name": "unknown_nodes",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 16384,
+      "bundle": "output_mem",
+      "port": "M_AXI_OUTPUT_MEM",
+      "payload_bytes": 131072
+    },
+    {
+      "id": 11,
+      "name": "unknown_pips",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 1100754,
+      "bundle": "output_mem",
+      "port": "M_AXI_OUTPUT_MEM",
+      "payload_bytes": 8806032
+    },
+    {
+      "id": 12,
+      "name": "path",
+      "pointer": true,
+      "element_bytes": 4,
+      "const": false,
+      "depth": 4194304,
+      "bundle": "output_mem",
+      "port": "M_AXI_OUTPUT_MEM",
+      "payload_bytes": 16777216
+    },
+    {
+      "id": 13,
+      "name": "meta",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 2,
+      "bundle": "output_mem",
+      "port": "M_AXI_OUTPUT_MEM",
+      "payload_bytes": 16
+    },
+    {
+      "id": 14,
+      "name": "result",
+      "pointer": true,
+      "element_bytes": 8,
+      "const": false,
+      "depth": 81,
+      "bundle": "output_mem",
+      "port": "M_AXI_OUTPUT_MEM",
+      "payload_bytes": 648
+    }
+  ],
+  "abi": {
+    "csr": [
+      {
+        "id": 0,
+        "name": "image",
+        "port": "M_AXI_GRAPH_MEM",
+        "control_offset": 16,
+        "host_size": 8,
+        "axi_width": 32
+      },
+      {
+        "id": 1,
+        "name": "config",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 28,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 2,
+        "name": "image_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 40,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 3,
+        "name": "roots",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 48,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 4,
+        "name": "packet",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 60,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 5,
+        "name": "packet_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 72,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 6,
+        "name": "heap",
+        "port": "M_AXI_HEAP_MEM",
+        "control_offset": 80,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 7,
+        "name": "slots",
+        "port": "M_AXI_INDEX_MEM",
+        "control_offset": 92,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 8,
+        "name": "records",
+        "port": "M_AXI_RECORD_MEM",
+        "control_offset": 104,
+        "host_size": 8,
+        "axi_width": 128
+      },
+      {
+        "id": 9,
+        "name": "keys",
+        "port": "M_AXI_KEY_MEM",
+        "control_offset": 116,
+        "host_size": 8,
+        "axi_width": 64
+      },
+      {
+        "id": 10,
+        "name": "unknown_nodes",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 128,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 11,
+        "name": "unknown_pips",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 140,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 12,
+        "name": "path",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 152,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 13,
+        "name": "meta",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 164,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 14,
+        "name": "result",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 176,
+        "host_size": 8,
+        "axi_width": 256
+      }
+    ],
+    "compact": [
+      {
+        "id": 0,
+        "name": "image",
+        "port": "M_AXI_GRAPH_MEM",
+        "control_offset": 16,
+        "host_size": 8,
+        "axi_width": 32
+      },
+      {
+        "id": 1,
+        "name": "config",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 28,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 2,
+        "name": "image_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 40,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 3,
+        "name": "roots",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 48,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 4,
+        "name": "packet",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 60,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 5,
+        "name": "packet_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 72,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 6,
+        "name": "heap",
+        "port": "M_AXI_HEAP_MEM",
+        "control_offset": 80,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 7,
+        "name": "slots",
+        "port": "M_AXI_INDEX_MEM",
+        "control_offset": 92,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 8,
+        "name": "records",
+        "port": "M_AXI_RECORD_MEM",
+        "control_offset": 104,
+        "host_size": 8,
+        "axi_width": 128
+      },
+      {
+        "id": 9,
+        "name": "keys",
+        "port": "M_AXI_KEY_MEM",
+        "control_offset": 116,
+        "host_size": 8,
+        "axi_width": 64
+      },
+      {
+        "id": 10,
+        "name": "unknown_nodes",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 128,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 11,
+        "name": "unknown_pips",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 140,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 12,
+        "name": "path",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 152,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 13,
+        "name": "meta",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 164,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 14,
+        "name": "result",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 176,
+        "host_size": 8,
+        "axi_width": 256
+      }
+    ]
+  },
+  "layouts": {
+    "ddr_shared": {
+      "allocations": [
+        {
+          "id": 0,
+          "name": "image",
+          "group": "DDR[0]",
+          "payload_bytes": 134217728,
+          "requested_bytes": 134217728
+        },
+        {
+          "id": 1,
+          "name": "config",
+          "group": "DDR[0]",
+          "payload_bytes": 128,
+          "requested_bytes": 4096
+        },
+        {
+          "id": 3,
+          "name": "roots",
+          "group": "DDR[0]",
+          "payload_bytes": 4194304,
+          "requested_bytes": 4194304
+        },
+        {
+          "id": 4,
+          "name": "packet",
+          "group": "DDR[0]",
+          "payload_bytes": 33554432,
+          "requested_bytes": 33554432
+        },
+        {
+          "id": 6,
+          "name": "heap",
+          "group": "DDR[0]",
+          "payload_bytes": 3145728,
+          "requested_bytes": 3145728
+        },
+        {
+          "id": 7,
+          "name": "slots",
+          "group": "DDR[0]",
+          "payload_bytes": 8388608,
+          "requested_bytes": 8388608
+        },
+        {
+          "id": 8,
+          "name": "records",
+          "group": "DDR[0]",
+          "payload_bytes": 41943040,
+          "requested_bytes": 41943040
+        },
+        {
+          "id": 9,
+          "name": "keys",
+          "group": "DDR[0]",
+          "payload_bytes": 272629760,
+          "requested_bytes": 272629760
+        },
+        {
+          "id": 10,
+          "name": "unknown_nodes",
+          "group": "DDR[0]",
+          "payload_bytes": 131072,
+          "requested_bytes": 131072
+        },
+        {
+          "id": 11,
+          "name": "unknown_pips",
+          "group": "DDR[0]",
+          "payload_bytes": 8806032,
+          "requested_bytes": 8806400
+        },
+        {
+          "id": 12,
+          "name": "path",
+          "group": "DDR[0]",
+          "payload_bytes": 16777216,
+          "requested_bytes": 16777216
+        },
+        {
+          "id": 13,
+          "name": "meta",
+          "group": "DDR[0]",
+          "payload_bytes": 16,
+          "requested_bytes": 4096
+        },
+        {
+          "id": 14,
+          "name": "result",
+          "group": "DDR[0]",
+          "payload_bytes": 648,
+          "requested_bytes": 4096
+        }
+      ],
+      "pools": {
+        "DDR[0]": {
+          "channels": [
+            "DDR[0]"
+          ],
+          "capacity_bytes": 17179869184,
+          "requested_bytes": 523800576,
+          "arguments": [
+            "image",
+            "config",
+            "roots",
+            "packet",
+            "heap",
+            "slots",
+            "records",
+            "keys",
+            "unknown_nodes",
+            "unknown_pips",
+            "path",
+            "meta",
+            "result"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 16639291392
+        }
+      },
+      "total_payload_bytes": 523788712,
+      "total_requested_bytes": 523800576
+    },
+    "hbm_shared": {
+      "allocations": [
+        {
+          "id": 0,
+          "name": "image",
+          "group": "HBM[0:3]",
+          "payload_bytes": 134217728,
+          "requested_bytes": 134217728
+        },
+        {
+          "id": 1,
+          "name": "config",
+          "group": "HBM[0:3]",
+          "payload_bytes": 128,
+          "requested_bytes": 4096
+        },
+        {
+          "id": 3,
+          "name": "roots",
+          "group": "HBM[0:3]",
+          "payload_bytes": 4194304,
+          "requested_bytes": 4194304
+        },
+        {
+          "id": 4,
+          "name": "packet",
+          "group": "HBM[0:3]",
+          "payload_bytes": 33554432,
+          "requested_bytes": 33554432
+        },
+        {
+          "id": 6,
+          "name": "heap",
+          "group": "HBM[0:3]",
+          "payload_bytes": 3145728,
+          "requested_bytes": 3145728
+        },
+        {
+          "id": 7,
+          "name": "slots",
+          "group": "HBM[0:3]",
+          "payload_bytes": 8388608,
+          "requested_bytes": 8388608
+        },
+        {
+          "id": 8,
+          "name": "records",
+          "group": "HBM[0:3]",
+          "payload_bytes": 41943040,
+          "requested_bytes": 41943040
+        },
+        {
+          "id": 9,
+          "name": "keys",
+          "group": "HBM[0:3]",
+          "payload_bytes": 272629760,
+          "requested_bytes": 272629760
+        },
+        {
+          "id": 10,
+          "name": "unknown_nodes",
+          "group": "HBM[0:3]",
+          "payload_bytes": 131072,
+          "requested_bytes": 131072
+        },
+        {
+          "id": 11,
+          "name": "unknown_pips",
+          "group": "HBM[0:3]",
+          "payload_bytes": 8806032,
+          "requested_bytes": 8806400
+        },
+        {
+          "id": 12,
+          "name": "path",
+          "group": "HBM[0:3]",
+          "payload_bytes": 16777216,
+          "requested_bytes": 16777216
+        },
+        {
+          "id": 13,
+          "name": "meta",
+          "group": "HBM[0:3]",
+          "payload_bytes": 16,
+          "requested_bytes": 4096
+        },
+        {
+          "id": 14,
+          "name": "result",
+          "group": "HBM[0:3]",
+          "payload_bytes": 648,
+          "requested_bytes": 4096
+        }
+      ],
+      "pools": {
+        "HBM[0:3]": {
+          "channels": [
+            "HBM[0]",
+            "HBM[1]",
+            "HBM[2]",
+            "HBM[3]"
+          ],
+          "capacity_bytes": 1073741824,
+          "requested_bytes": 523800576,
+          "arguments": [
+            "image",
+            "config",
+            "roots",
+            "packet",
+            "heap",
+            "slots",
+            "records",
+            "keys",
+            "unknown_nodes",
+            "unknown_pips",
+            "path",
+            "meta",
+            "result"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 533164032
+        }
+      },
+      "total_payload_bytes": 523788712,
+      "total_requested_bytes": 523800576
+    },
+    "hbm_split": {
+      "allocations": [
+        {
+          "id": 0,
+          "name": "image",
+          "group": "HBM[0]",
+          "payload_bytes": 134217728,
+          "requested_bytes": 134217728
+        },
+        {
+          "id": 1,
+          "name": "config",
+          "group": "HBM[1]",
+          "payload_bytes": 128,
+          "requested_bytes": 4096
+        },
+        {
+          "id": 3,
+          "name": "roots",
+          "group": "HBM[1]",
+          "payload_bytes": 4194304,
+          "requested_bytes": 4194304
+        },
+        {
+          "id": 4,
+          "name": "packet",
+          "group": "HBM[1]",
+          "payload_bytes": 33554432,
+          "requested_bytes": 33554432
+        },
+        {
+          "id": 6,
+          "name": "heap",
+          "group": "HBM[2]",
+          "payload_bytes": 3145728,
+          "requested_bytes": 3145728
+        },
+        {
+          "id": 7,
+          "name": "slots",
+          "group": "HBM[3]",
+          "payload_bytes": 8388608,
+          "requested_bytes": 8388608
+        },
+        {
+          "id": 8,
+          "name": "records",
+          "group": "HBM[4]",
+          "payload_bytes": 41943040,
+          "requested_bytes": 41943040
+        },
+        {
+          "id": 9,
+          "name": "keys",
+          "group": "HBM[6:7]",
+          "payload_bytes": 272629760,
+          "requested_bytes": 272629760
+        },
+        {
+          "id": 10,
+          "name": "unknown_nodes",
+          "group": "HBM[5]",
+          "payload_bytes": 131072,
+          "requested_bytes": 131072
+        },
+        {
+          "id": 11,
+          "name": "unknown_pips",
+          "group": "HBM[5]",
+          "payload_bytes": 8806032,
+          "requested_bytes": 8806400
+        },
+        {
+          "id": 12,
+          "name": "path",
+          "group": "HBM[5]",
+          "payload_bytes": 16777216,
+          "requested_bytes": 16777216
+        },
+        {
+          "id": 13,
+          "name": "meta",
+          "group": "HBM[5]",
+          "payload_bytes": 16,
+          "requested_bytes": 4096
+        },
+        {
+          "id": 14,
+          "name": "result",
+          "group": "HBM[5]",
+          "payload_bytes": 648,
+          "requested_bytes": 4096
+        }
+      ],
+      "pools": {
+        "HBM[0]": {
+          "channels": [
+            "HBM[0]"
+          ],
+          "capacity_bytes": 268435456,
+          "requested_bytes": 134217728,
+          "arguments": [
+            "image"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 117440512
+        },
+        "HBM[1]": {
+          "channels": [
+            "HBM[1]"
+          ],
+          "capacity_bytes": 268435456,
+          "requested_bytes": 37752832,
+          "arguments": [
+            "config",
+            "roots",
+            "packet"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 213905408
+        },
+        "HBM[2]": {
+          "channels": [
+            "HBM[2]"
+          ],
+          "capacity_bytes": 268435456,
+          "requested_bytes": 3145728,
+          "arguments": [
+            "heap"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 248512512
+        },
+        "HBM[3]": {
+          "channels": [
+            "HBM[3]"
+          ],
+          "capacity_bytes": 268435456,
+          "requested_bytes": 8388608,
+          "arguments": [
+            "slots"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 243269632
+        },
+        "HBM[4]": {
+          "channels": [
+            "HBM[4]"
+          ],
+          "capacity_bytes": 268435456,
+          "requested_bytes": 41943040,
+          "arguments": [
+            "records"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 209715200
+        },
+        "HBM[6:7]": {
+          "channels": [
+            "HBM[6]",
+            "HBM[7]"
+          ],
+          "capacity_bytes": 536870912,
+          "requested_bytes": 272629760,
+          "arguments": [
+            "keys"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 247463936
+        },
+        "HBM[5]": {
+          "channels": [
+            "HBM[5]"
+          ],
+          "capacity_bytes": 268435456,
+          "requested_bytes": 25722880,
+          "arguments": [
+            "unknown_nodes",
+            "unknown_pips",
+            "path",
+            "meta",
+            "result"
+          ],
+          "reserve_bytes": 16777216,
+          "spare_after_reserve_bytes": 225935360
+        }
+      },
+      "total_payload_bytes": 523788712,
+      "total_requested_bytes": 523800576
+    }
+  },
+  "references": [
+    "https://docs.amd.com/r/en-US/ug1120-alveo-platforms/U280-Gen3x16-XDMA-base_1-Platform",
+    "https://xilinx.github.io/Vitis-Tutorials/2021-1/build/html/docs/Hardware_Acceleration/Feature_Tutorials/07-using-hbm/2_Migrating_to_HBM.html"
+  ],
+  "policy": {
+    "host_request_alignment_bytes": 4096,
+    "reserve_bytes_per_pool": 16777216,
+    "reserve_is_policy_not_measured_free_memory": true,
+    "all_thirteen_buffers_simultaneously_resident": true,
+    "graph_allocated_at_full_pragma_depth": true
+  },
+  "evidence": {
+    "platform_linked": false,
+    "device_allocated": false,
+    "hardware_executed": false
+  },
+  "limitations": [
+    "Nominal U280 capacities; actual platform memory topology and free capacity must be checked.",
+    "Group connectivity must be validated by v++ link for the installed U280 platform.",
+    "Allocate each BO using kernel.group_id(argument_id); never treat a group ID as a physical MEM_TOPOLOGY bank index.",
+    "HBM split changes topology; it is a separate topology experiment, not a pure DDR/HBM comparison.",
+    "No bandwidth, timing, board availability, performance or power result is established."
+  ],
+  "files": {
+    "hardware/vitis/search_kernel_offsets_v3/search_kernel_top.cpp": "aad9e8ccdad1e5dfe4fc0386d472e096d34d35e4215ed794cad55ec8016fa040",
+    "build/search_kernel_hls_20261024_v3/csr/kernel.xml": "bd289eeb17b558642be2c1fe683af121780ef6a15ded36dca8781b69a9de5ae4",
+    "build/search_kernel_hls_20261024_v3/compact/kernel.xml": "bd289eeb17b558642be2c1fe683af121780ef6a15ded36dca8781b69a9de5ae4",
+    "scripts/search_kernel_memory_plan.py": "96ce20c151ef15d3cc250b0e314ba1dafccc8d0bc3c23df590fd04ccde05943a"
+  },
+  "configs": {
+    "ddr_shared.cfg": "7d48163d7d458757e487b22a52a840283c06cc4a0eda0bdc780d777e2cf48a8d",
+    "hbm_shared.cfg": "f5af9cc445483dc859aa06040be922bba0d55de16351a2832a81605c951045c7",
+    "hbm_split.cfg": "dd15a0456d79821eb603ce216e9f7bcd23cf2966cef86917347799ff0693e607"
+  }
+}

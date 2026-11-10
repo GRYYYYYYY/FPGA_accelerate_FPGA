@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "part": "xcvu13p-fhgb2104-2-e",
+  "raw_path": "data/raw/xcvu13p_sample_20261022_v2.tsv",
+  "raw_sha256": "94b76533891139c44269a201067391d8b81fe2347f227e8c15dcf8102ff25664",
+  "exporter_sha256_at_capture": "fbf7aa486b884295ec3cfee2ec1cfdbb89e784b3e40d30733c1c0ed6fb5becf5",
+  "capture_method": "MCP Tcl session, set graph_export_path then source -notrace adapters/export_vivado.tcl",
+  "purpose": "semantic_validation_only",
+  "sampling": "20 seed tiles; up to four canonical roots per intent plus bidirectional/pseudo/excluded PIP endpoints and two remote aliases per seed; complete one-hop adjacency for all selected roots",
+  "reproduction_export_command": [
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado",
+    "-mode",
+    "batch",
+    "-source",
+    "adapters/export_vivado.tcl",
+    "-tclargs",
+    "data/raw/NEW_SAMPLE.tsv"
+  ],
+  "capture_commands": [
+    "create_project -in_memory graph_sample -part xcvu13p-fhgb2104-2-e; link_design -part xcvu13p-fhgb2104-2-e -top graph_sample",
+    "set graph_export_path {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022_v2.tsv}",
+    "source -notrace /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_vivado.tcl"
+  ]
+}

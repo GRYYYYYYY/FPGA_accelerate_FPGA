@@ -1,0 +1,34 @@
+{
+  "utc": "2026-10-23T11:09:43.886477+00:00",
+  "state_at_capture": {
+    "owner_pid": 3749868,
+    "status": "running",
+    "stage": "capacity_trials",
+    "completed_workers": 1,
+    "worker": 1,
+    "condition": {
+      "limit_mib": 4096,
+      "mode": "csr",
+      "execution": "direct",
+      "cache_rows": 4096
+    },
+    "child_pid": 3948120
+  },
+  "plan_sha256": "90074916ffe8ed6df1f7afd785e50d5b3b66fbc0eb4b597bbe0a1f1208f8095d",
+  "owner": {
+    "pid": 3749868,
+    "start_ticks": "1590840320",
+    "command": "python3 -u scripts/site_capacity_experiment.py --output data/derived/site_capacity_region_20261023_v1 --cpu 124 ",
+    "cpu_list": "124",
+    "address_space_limit_line": "Max address space         unlimited            unlimited            bytes     "
+  },
+  "observed_child": {
+    "pid": 3948120,
+    "start_ticks": "1590887104",
+    "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/native_site_runtime_20261023_v1 /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/csr.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_csr_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_csr_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct ",
+    "cpu_list": "124",
+    "address_space_limit_line": "Max address space         4294967296           4294967296           bytes     "
+  },
+  "exec_session": 42804,
+  "note": "Observed current child actual Linux limits and stable state. Previous3GiB child completed before binding capture; do not mislabel this4GiB child as the first condition. Preserve original owner and per-worker receipts."
+}

@@ -1,0 +1,140 @@
+{
+  "status": "observations_complete",
+  "pid": 4004631,
+  "runs": [
+    {
+      "name": "baseline_no_debug",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "backing_frame_directory_small.sv",
+            "tb_small_directory.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_small_directory",
+            "-s",
+            "diagnosis",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "diagnosis",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "verdict_lines": [
+        "Fatal: response check=97 got=1 frame=0 pub=0 expected=0/0/1"
+      ]
+    },
+    {
+      "name": "mutant_typical",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "backing_frame_directory_small.sv",
+            "tb_small_directory.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_small_directory",
+            "-s",
+            "diagnosis",
+            "--mt",
+            "2",
+            "--debug",
+            "typical"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "diagnosis",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "verdict_lines": [
+        "Fatal: checkpoint lost allocation"
+      ]
+    },
+    {
+      "name": "mutant_no_debug",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "backing_frame_directory_small.sv",
+            "tb_small_directory.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_small_directory",
+            "-s",
+            "diagnosis",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "diagnosis",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "verdict_lines": [
+        "Fatal: response check=97 got=1 frame=0 pub=0 expected=0/0/1"
+      ]
+    }
+  ],
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_directory_mutants_20261023/drop_checkpoint_backing/backing_frame_directory_small.sv": "d558a2c9dfc9cc29ae0ab38777531b92fb5cc28ba5cf2ea39bc81c8dc5e6aaf0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_small_directory.sv": "888c242699fc464a51fde2235032ad13295e77006c29f948c05e72be1f78be14",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/diagnose_small_directory_mutant.py": "92a9775065afdf1b8ff28d6985b0a63e701b4f1a4e94fbd09d15672be8c28288"
+  }
+}

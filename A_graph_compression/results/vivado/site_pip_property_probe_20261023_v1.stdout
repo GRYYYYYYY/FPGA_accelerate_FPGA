@@ -1,0 +1,60 @@
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source adapters/probe_site_pip_properties_20261023_v1.tcl
+# set root /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression
+# set_param general.maxThreads 1
+# open_checkpoint $root/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+Command: open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1698.359 ; gain = 0.000 ; free physical = 682253 ; free virtual = 1398714
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 3047.039 ; gain = 0.000 ; free physical = 680930 ; free virtual = 1397392
+INFO: [Netlist 29-17] Analyzing 120 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'routeracc_cost_registered' is not ideal for floorplanning, since the cellview 'cost_calculator' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are:
+  general.maxThreads
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF Files: Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.19 . Memory (MB): peak = 3531.539 ; gain = 15.844 ; free physical = 680498 ; free virtual = 1396960
+Restored from archive | CPU: 0.200000 secs | Memory: 2.938591 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.19 . Memory (MB): peak = 3531.539 ; gain = 15.844 ; free physical = 680498 ; free virtual = 1396960
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3779.367 ; gain = 0.000 ; free physical = 680242 ; free virtual = 1396704
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 27d9cfd9b
+----- Checksum: PlaceDB: f9ca2dc0 ShapeSum: 90fc7e35 RouteDB: f2d651a6 
+open_checkpoint: Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 3779.367 ; gain = 2081.008 ; free physical = 680241 ; free virtual = 1396704
+# set f [open $root/data/raw/region_u280_20261022_v1/site_pip_property_probe.tsv {WRONLY CREAT EXCL}]
+# set count 0
+# foreach site_name {SLICE_X22Y411 BUFCE_LEAF_X115Y26} {
+#     foreach pip [get_site_pips -of_objects [get_sites $site_name]] {
+#         set name [get_property NAME $pip]
+#         foreach prop [list_property $pip] {
+#             set value [get_property $prop $pip]
+#             if {[regexp {[\t\r\n]} $value]} {error "Control characters in site PIP property"}
+#             puts $f [join [list property $site_name $name $prop $value] "\t"]
+#         }
+#         incr count
+#     }
+# }
+# puts $f "complete\t$count"
+# close $f
+# puts "SITE_PIP_PROPERTY_PROBE_COMPLETE pips=$count"
+SITE_PIP_PROPERTY_PROBE_COMPLETE pips=190
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 23 05:46:40 2026...

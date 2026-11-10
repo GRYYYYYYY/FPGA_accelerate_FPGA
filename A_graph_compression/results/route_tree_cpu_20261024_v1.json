@@ -1,0 +1,94 @@
+{
+  "status": "route_tree_production_top_cpu_oracle_and_sanitizers_passed",
+  "inputs": [
+    {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_route_tree_cpu.py",
+      "sha256": "6bd7b0e44de4d40e0c48e516e47b429e3dc098deb5e4b9eee6c781ee5dd1ecf3",
+      "bytes": 3386
+    },
+    {
+      "path": "hardware/vitis/search_key_words.hpp",
+      "sha256": "4ebb85bedf8361ddcc90826981c2c7553be1effdafc216d46587ff2208844b1e",
+      "bytes": 5908
+    },
+    {
+      "path": "hardware/vitis/search_label_index.hpp",
+      "sha256": "c3d919e6eef4701e8568a395ea028ff15290166bfcabf35c1b1f399db3f18c84",
+      "bytes": 5793
+    },
+    {
+      "path": "hardware/vitis/search_route_tree.hpp",
+      "sha256": "2dabc92e9f681d08321479b13b4a434d475d7ab833ab0c21ae61cb17ca9b476e",
+      "bytes": 4639
+    },
+    {
+      "path": "hardware/vitis/search_route_tree_top.cpp",
+      "sha256": "2fbe64a6c7fe682e0325cc43b6f829278c66fe83d3d1148ca6f698a3aeaf2e28",
+      "bytes": 2940
+    },
+    {
+      "path": "hardware/vitis/search_site_state.hpp",
+      "sha256": "bb7ae721b07c42d5306a578cf01fc10f6c03c23a72e5d5d1c74624e03a0a2f25",
+      "bytes": 5927
+    },
+    {
+      "path": "tests/test_search_route_tree.cpp",
+      "sha256": "38b7252776d91c38ec467dc03ad884f2e526e7b12c931047379dea3b0582baec",
+      "bytes": 8859
+    }
+  ],
+  "binary": {
+    "path": "build/route_tree_cpu_20261024_v1/test_route_tree",
+    "sha256": "494eee47ae99cd43c9bc81df46ba7139829a8bb303160e96bee9dd652f0e8dca",
+    "bytes": 2052672
+  },
+  "receipts": [
+    {
+      "command": [
+        "g++",
+        "-std=c++14",
+        "-Ihardware/vitis",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unknown-pragmas",
+        "tests/test_search_route_tree.cpp",
+        "hardware/vitis/search_route_tree_top.cpp",
+        "-o",
+        "build/route_tree_cpu_20261024_v1/test_route_tree"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "build/route_tree_cpu_20261024_v1/compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/route_tree_cpu_20261024_v1/test_route_tree"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "build/route_tree_cpu_20261024_v1/cpu.log",
+        "sha256": "05d98530cba3137a8b8d526ab63dfebcb6f8027c245dff91ccdbb3a08ef94b69",
+        "bytes": 160
+      }
+    }
+  ],
+  "coverage": [
+    "random accepted=1000 nonfound=1000 atomic_rejections=21",
+    "production nodes=1048576 max_path=524288 state=32/16/8 full_buffers_and_guards=PASS",
+    "route_tree_cpu PASS"
+  ],
+  "limitations": [
+    "CPU component only; no RTL synthesis/simulation evidence",
+    "Full router integration pending",
+    "Path connectivity and state inclusion checked; physical edge/site semantics trusted from search",
+    "Internal state trusted; buffers must be disjoint and exclusively owned"
+  ]
+}

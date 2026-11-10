@@ -1,0 +1,20 @@
+# 真实iteration2在当前完整查询层级的生命周期
+
+基于warm_retry_system_v2的完整query_residency_system/search_residency_system/residency_system，仅沿用上一轮multi_owner_capacity_fixed_v1的coordinator候选；本轮不新增生产RTL修改。独立TB使用真实iteration2 prepared-query、owner primary/pool/allocator、history/price/net/CPS1数据和CPU数值oracle，不能混入原q1/q2数据。
+
+## 实际绑定与流程
+
+- connection170782/connId38037，net26422，source66893/sink204279，完整sequence180327。存储context独立为version3/query1/price3，expand flags=0x104；net geometry中的64不是flags。raw route操作0为commit、1为ripup。
+- N9089009，overflow capacity53734。primary145424192B、pool859776B、allocator64B，总owner146284032B。live base61fffff000，pool6208aaef40，allocator6208b80dc0；G1只读窗口从91fffff000覆盖完整图像，pool9208aaef40，allocator9208b80dc0，CP17/G100000001。候选G2窗口仍未发布。
+- 配置和822条标签从CPU保守未来读闭包加载，完成真实flush；在实际PC租约下通过原生authority检查节点208292的两个net及558358/net23916，全部经过真实overflow链读取，回复保持8周期并退休后释放租约。
+- 原生query_lifecycle完成source/target准备、自主heap POLL/search、真实previous-pointer回溯和三节点owner提交、target清理/flush。171poll/170expand/849candidate/421cost，所有数值/标签ACK与CPU oracle一致。
+- CPU实际previous-pointer链204279→339193→558358→265324→66893。提交后net26422三个内部节点refs依次1/4/5，occupancy1/2/1；558358另一net23916始终ref1。原生ripup后refs0/3/4、occupancy0/2/1，整个owner文件逐字节回到原输入。
+- 同一version再次提交完整sequence180327被status1拒绝，prepare_acked0、无搜索/路径变化；最终last_sequence180327与storage context3/1/3保持分离。
+
+## 审计与范围
+
+audit_iter2_lifecycle.py检查冻结生产源与TB重建、真实输入绑定、CPU原事件/全部421数值结果、822标签及403逻辑页对应的全部3MB物理页（包括空页）、三节点六次物理record写、完整owner恢复、未变design/cost和8条AXI逐字节重放。选定full_v5/pressure_v5；归档恢复重审见results/iter2_lifecycle_20261026.json。
+
+本路径只更新已有net引用或空primary，不新增overflow条目；实际pool读取、多net计数/保护已覆盖，allocator分配/回收与满池顺序仍由前轮组件试验证明。不是把组件与本轮组合成完整多net warm故障恢复结论。
+
+822标签是CPU未来读闭包，不是运行时全图cache构建或未知页初始化。尚未执行本数据的G2三方发布与warm恢复；当前label_restore_controller的MAX_RECORDS仍512，snapshot_count等旧fixture字段尚未迁移到822。综合时序、板卡速度、任意价格变化有效性和全设计路由仍未验证。

@@ -1,0 +1,79 @@
+{
+  "status": "retained_nodes_production_top_cpu_oracle_and_sanitizers_passed",
+  "inputs": [
+    {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_retained_nodes_cpu.py",
+      "sha256": "0b15f4047c027aef0c8d7980da3699ebbe36f4042815cd0dc3f9bdee78b88c41",
+      "bytes": 3640
+    },
+    {
+      "path": "hardware/vitis/search_retained_nodes.hpp",
+      "sha256": "d26c69c0879a0afc2a305dbedf66c2976207895a2e687a283c83272d2e04cea1",
+      "bytes": 3021
+    },
+    {
+      "path": "hardware/vitis/search_retained_nodes_top.cpp",
+      "sha256": "32cf801257e2a817b188c2d96ea902269515212a6b18ac0d9e53fe006e07315e",
+      "bytes": 2050
+    },
+    {
+      "path": "tests/test_search_retained_nodes.cpp",
+      "sha256": "687d8cf6c5b43e0bdcbe0d64c1cd8df6d24253cec3fbf4a940391d5cae9312be",
+      "bytes": 5761
+    }
+  ],
+  "binary": {
+    "path": "build/retained_nodes_cpu_20261024_v1/test_retained_nodes",
+    "sha256": "cf1d0c64aec62b1662e24502ba55ccadaad3d90258e19052e85aea6291cd0209",
+    "bytes": 1959976
+  },
+  "receipts": [
+    {
+      "command": [
+        "g++",
+        "-std=c++14",
+        "-Ihardware/vitis",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wno-unknown-pragmas",
+        "tests/test_search_retained_nodes.cpp",
+        "hardware/vitis/search_retained_nodes_top.cpp",
+        "-o",
+        "build/retained_nodes_cpu_20261024_v1/test_retained_nodes"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "build/retained_nodes_cpu_20261024_v1/compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/retained_nodes_cpu_20261024_v1/test_retained_nodes"
+      ],
+      "returncode": 0,
+      "log": {
+        "path": "build/retained_nodes_cpu_20261024_v1/cpu.log",
+        "sha256": "56512b2eb7389093d369c18c15b58f6b3649a3be616013c1ca9d9a8448558016",
+        "bytes": 169
+      }
+    }
+  ],
+  "coverage": [
+    "RETAINED_RANDOM_PASS operations=6000 accepted=3106 rejected=2894",
+    "RETAINED_PRODUCTION_PASS nodes=1048576 pairs=2097152 seeded_nets=65536 full_buffers=1",
+    "RETAINED_ALL_PASS"
+  ],
+  "limitations": [
+    "CPU component only; no RTL synthesis/simulation evidence",
+    "Full router integration pending",
+    "Node retention only; edges/site state are outside this component.65536-net boundary is explicitly seeded;2m pairs reached by actual operations",
+    "Internal state trusted; buffers must be disjoint and exclusively owned"
+  ]
+}

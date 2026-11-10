@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "performance": null,
+  "toolchain": "Vivado/XSim 2022.2",
+  "part": "xcu280-fsvh2892-2L-e",
+  "clock_constraint_ns": 10.0,
+  "commands": [
+    {
+      "stage": "compile",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "--work",
+        "xil_defaultlib",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "xil_defaultlib.tb_scratch_frame_store",
+        "--snapshot",
+        "scratch_bram_tb",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "scratch_bram_tb",
+        "--tclbatch",
+        "simulate.tcl",
+        "--testplusarg",
+        "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "synthesize",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado",
+        "-mode",
+        "batch",
+        "-source",
+        "synthesize.tcl",
+        "-log",
+        "synthesize.log",
+        "-journal",
+        "synthesize.jou"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_scratch_bram.py": "e3394d9c6ed17750e769692b58cb845d9ae86393e3bf13d0ed72f0ff81a7a188",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv": "62b4249f86d3e78d97cba61d4c89963c5c3fa06aa8645720dc4f5864e8354a4e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv": "676eda889f25c06539a974d290e26b58e8a41f56a38b286c7f1b26468de43752",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc": "a9259339b45b2eef2df30687117b50aed5a9a207d151e14f8538c125057c4459",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt": "3c7166c04b3e74ae5de71d1cf879b9f19f31def8da228c9159ea502ad91b2cb1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/vectors_manifest.json": "d31f18d544f5b889217b4161b5f7e176383ba27f6b1fa276e3a2ed77e16f5748"
+  },
+  "scope": "Single-owner scratch frame storage primitive, trusted external CLEAN and binding quarantine. Cold reset only. Behavioral simulation and out-of-context synthesis, no DMA controller, timing closure, board execution or speed claim.",
+  "simulation": {
+    "status": "passed",
+    "checks": 98351,
+    "actual_commands": 98322,
+    "stalled_cycles": 17358,
+    "actual_queries": 19,
+    "actual_field_accesses": 56588
+  },
+  "synthesis": {
+    "status": "passed",
+    "ram_cells": [
+      "data_reg_0 RAMB36E2",
+      "data_reg_1 RAMB36E2"
+    ]
+  },
+  "artifacts": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/simulate.tcl": "a2dc10133deed3a1380e0316641635a75c50786bdb433830b185f3a978f88277",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/simulate.log": "314fa84a44fa5c16169df1b4e1cd1ba56801c2ef38f59e4691abb82d7ee9f7ec",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/synthesize.tcl": "cb99cd52fb97538ef7af350693385446d7c1d002b8c780565d0ca653b2e83c48",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/synthesize.log": "73cfa804b29e020952b8e2a833025a1d1c47f1991ce5ec2aafc9a93be437f01d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/utilization.rpt": "843ff02c90ad1f652fdae39958f26d7c15fd737ca6ab397f472998b10aa49f01",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/ram_cells.txt": "d6220c462aeb2f0058c5fa3c16ed255f53aea7137fe167f75832f2b98d628f9d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/scratch_frame_store.dcp": "9ea2de455ab350ed36479e3cb2dab62caac56697823e33d88258bc245ec3153f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/compile.console.log": "a0f4ef6b162ad51729616c8fb0ef9e277605c27577497435d8526228bfeba5cd",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/elaborate.console.log": "67d787496661cb9f816ecf45f1674fe1288c73d2c7229241998d9ca967f1681d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/simulate.console.log": "053f140f8742e01e8fbf442d2999d975ceb240efd18e56874815b8067b18dfe2",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_bram_20261023T090356Z/synthesize.console.log": "3ae098c2da2ce4e721c57ef02a26feb9c1f69bfaf3dc2d93d9dfc62fb652188a"
+  }
+}

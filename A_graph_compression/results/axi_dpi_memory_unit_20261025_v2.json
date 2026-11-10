@@ -1,0 +1,68 @@
+{
+  "status": "small_five_width_native_sv_vs_dpi_four_state_and_nba_storage_parity_verified",
+  "cases": 5,
+  "updates_per_case": 128,
+  "rows": [
+    {
+      "phase": "xsc",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsc",
+        "--cppversion",
+        "14",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/sim/axi_dpi_memory_v1.cpp"
+      ],
+      "exit_code": 0,
+      "log_sha256": "473a263f4bea434ae23672c83af684b1a99d07dcf518113af1b1427bdb420a8e"
+    },
+    {
+      "phase": "xvlog",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "--work",
+        "xil_defaultlib",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/sim/test_axi_dpi_memory_v2.sv"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0adc9c5ee70c2681efe6890073ed9f2576d7332b701303f06c3d286a7ef15076"
+    },
+    {
+      "phase": "xelab",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "xil_defaultlib.test_axi_dpi_memory_v2",
+        "-s",
+        "dpi_memory_test",
+        "-mt",
+        "off",
+        "--sv_lib",
+        "dpi",
+        "--sv_root",
+        "xsim.dir/work/xsc"
+      ],
+      "exit_code": 0,
+      "log_sha256": "57f1889dba8e47fbd8f8ad2820d3b6ed45a67e7c6515ef0bf1b9b45ed7a1d5c0"
+    },
+    {
+      "phase": "xsim",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "dpi_memory_test",
+        "-tclbatch",
+        "/tmp/A_graph_compression_recovery_20261025_v1/axi_dpi_memory_test_v2/run.tcl"
+      ],
+      "exit_code": 0,
+      "log_sha256": "b2e4507853db4dba1325e6da426678432fd9c51d83c0923ae7ed30a73f943ed5"
+    }
+  ],
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/sim/axi_dpi_memory_v1.cpp": "bba510ebd21c4a1a6111099eeae5b81426b22f60c821ed5645ff0679ca60ec20",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/sim/test_axi_dpi_memory_v2.sv": "e304b1458b749288e770e94828feafac7fd4a1dad9127e84ab49cfdbf3ccf40d",
+    "/tmp/A_graph_compression_recovery_20261025_v1/axi_dpi_memory_test_v2/run.tcl": "9c54d4a1c9033937bec6a195904c6fe4bd10d055e5677c174f362122594f38b3",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/test_axi_dpi_memory_v2.py": "5e9455b65ef12d8fbb535935607eaa492b2995bb4e4c568391c6b5b5f820789b"
+  },
+  "limits": [
+    "Small storage-semantic tests only; no transformed HLS AXI model or full RTL acceptance yet",
+    "Full DUT, declared depths, transaction count and protocol must remain unchanged in subsequent model validation"
+  ]
+}

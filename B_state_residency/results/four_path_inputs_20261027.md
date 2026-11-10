@@ -1,0 +1,11 @@
+# 第四查询独立输入与四路径组件通过
+
+详见同名JSON。真实sequence180330、connection170791、net26422、source66893、sink6954的231个代价包已经独立binary32重算；83poll/82expand/402candidate，filter重算428原始children到402候选。cost.bin及CPS1 connections.bin分别与第三查询逐字节相同，无需更换连续系统工作表。426标签/188页的保守闭包只供审计，不预加载硬件。
+
+PATH_SLOTS4的原生path controller通过3275检查、13次checkpoint、8次route事务；156字实际路径镜像包含已采集q1/q2/q3及真实q4历史路径。第四槽编码3合法，验证其导入/导出、坏CRC/重复节点/错误design/过长路径/旧117字流拒绝，以及第四槽部分导入取消保留旧状态。18个mock owner操作、5个CPU回溯标签读取与独立模型一致；独立拆除四槽后mock引用符合预期。此组件不证明实际DDR或overflow池操作。
+
+四槽export_manifest组件通过126检查/16场景，包括第四槽identity、长度、流索引和旧117字终止拒绝；其回调为合成握手，独立于原生控制器证据。
+
+四个归档均已实际恢复并重新审计，audit逐字节一致。34文件源码冻结在results/four_path_inputs_sources_20261027，现有生产RTL未修改。
+
+完整四槽G3恢复/G4发布/连续q4候选仍在运行，尚未审计。不能把以上组件通过等同于完整系统、G4故障恢复、综合时序或板卡收益。

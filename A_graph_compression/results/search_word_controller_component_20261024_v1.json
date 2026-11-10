@@ -1,0 +1,43 @@
+{
+  "status": "word_key_storage_and_complete_search_cpu_differential_verified",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/plan.json": "bb9a677cbeffd52606cf36b00b4010358fa7dd856663b1c7cdee0670d63a7add",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_controller.log": "0dad4fcf566c0827fedf90b66063d30080eae5d06c6bbef532a8d059bb74af7c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_controller.receipt.json": "69efc91ce92c12e967a6ea44af642c8d25f056a22f24ad7a14a71b3884df90ff",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_controller_bounds.log": "265ddc2bd36a9320602bc451a2f1c9e3cb43ed41db460ce48983ae3742e730cb",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_controller_bounds.receipt.json": "687914db97971c181600982362e2424a64a8ebc7438777f3fb2e981c02dac792",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_snapshot_provider.log": "243bbe45fbb90bccc6ec4a8f6a95e4f6a13fcc8eb6d22dc6e0400aa9cd08c08f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_snapshot_provider.receipt.json": "781f55f63d0fc71d0d3ec5b4f79d4a5b382d15cb24b870f598492c68941cbcf0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_snapshot_cxx14.log": "d098cdfa5315fd2d5081bf9a0ffe100d06e8a2259719a73912d663c0fcfad0f7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/word_controller_checks_20261024_v1/test_search_snapshot_cxx14.receipt.json": "728be80cadc57709cd9b552b9cdbd7ae5bb97c4992d3a1969b261abfc071fa21",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_key_words.hpp": "4ebb85bedf8361ddcc90826981c2c7553be1effdafc216d46587ff2208844b1e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_controller_words.hpp": "24e87992d45d8557fff4da4f81f1ec18672faa58457a1d3a95eb2f0e92ce67bf",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/search_word_controller_adapter.hpp": "0d7b89f13d146918e6871ff7d99cf336585e6f952572ccb2068914f112296212",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_key_words.cpp": "deb898ee59caa4cf936ba819d2c13b783c1f67db0f005ee5c98dd0518b97709c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_key_words_20261024_v1.log": "255e70d74b587b45d87dbfd31dd0ea4f3c7a04182307a8bc6fc825a10630b007"
+  },
+  "checks": {
+    "index_operations": 60000,
+    "native_search_random_cases": 1000,
+    "snapshot_search_random_cases": 1000,
+    "capacity_classes": 10,
+    "cxx14_complete_search_transactions": 3,
+    "literal_abi_fixture_words": 13,
+    "production_key_words": 65,
+    "production_key_bytes": 520,
+    "production_label_capacity": 524288,
+    "production_key_pool_bytes": 272629760
+  },
+  "scope": [
+    "Explicit layout independently checked against literal expected words; randomized find/insert/reset/epoch wrap compared to frozen native full-state index.",
+    "Search derivation checker permits only class/index/key-buffer substitutions and guarded key loads; unchanged search algorithm then compared to original native oracle.",
+    "All compiled drivers ran with ASAN/UBSAN and strict warnings; C++14 static-provider case exercises full cost/state behavior."
+  ],
+  "limitations": [
+    "No full 1062-net word-key result yet.",
+    "No HLS top, synthesis, RTL, memory-controller timing or board evidence.",
+    "Snapshot negotiated-router integration still uses the frozen original key storage; a new version must bind WordSearchController before full word-key routing validation.",
+    "260 MiB is only the configured key pool payload, not board memory usage or a verified HBM allocation.",
+    "Unused word slots are canonical zero on store and ignored on load; semantic equality remains complete normalized state."
+  ]
+}

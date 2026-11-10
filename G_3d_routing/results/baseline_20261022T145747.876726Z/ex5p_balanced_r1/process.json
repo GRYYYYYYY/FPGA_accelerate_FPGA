@@ -1,0 +1,124 @@
+{
+  "execution_kind": "real_benchmark",
+  "model_scope": "stacked_3d_fpga_architecture_model",
+  "backend": "native_vpr_cpu",
+  "variant": "original_vpr",
+  "case_id": "ex5p_balanced",
+  "placement_kind": "constructed_balanced_clb_layer_fixture",
+  "seed": 1,
+  "timestamp_utc": "2026-10-22T14:58:06.900888+00:00",
+  "command": [
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/3D_FPGA_routing/artifacts/bin/baseline/vpr",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/3D_FPGA_routing/vendor/vtr/vtr_flow/arch/multi_die/hecate/3d/hecate_3d_sb_10um_bidir_fanin_16_fanout_16_with_esd_7nm.xml",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/3D_FPGA_routing/vendor/vtr/vtr_flow/benchmarks/blif/ex5p.blif",
+    "--route_chan_width",
+    "100",
+    "--device_width",
+    "30",
+    "--target_utilization",
+    "0.1",
+    "--seed",
+    "1",
+    "--num_workers",
+    "1",
+    "--router_algorithm",
+    "timing_driven",
+    "--flat_routing",
+    "off",
+    "--check_route",
+    "full",
+    "--net_file",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/3D_FPGA_routing/results/runs/baseline_ex5p_w100_seed1/packed.net",
+    "--place_file",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/3D_FPGA_routing/results/runs/fixture_ex5p_balanced1/fixed.place",
+    "--route_file",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/G_3d_routing/results/baseline_20261022T145747.876726Z/ex5p_balanced_r1/routed.route",
+    "--timing_report_npaths",
+    "10",
+    "--route",
+    "--analysis",
+    "--read_rr_graph",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/3D_FPGA_routing/results/runs/baseline_ex5p_w100_seed1/rr_graph.xml"
+  ],
+  "cwd": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/G_3d_routing/results/baseline_20261022T145747.876726Z/ex5p_balanced_r1",
+  "timeout_seconds": 120,
+  "input_hashes": {
+    "architecture": "1e9d59fb5d6d3a39b1f95e0eee7b0d528e67d3c763cd6e1c99e649c63da4ce54",
+    "circuit": "4efbea0113705c5a9375c2e2664150521465f6647dd60023d53203311aa06a63",
+    "packed_netlist": "71ec4c9c979c79c71dfc71a73cc3027180c292e1dde10958ef1be5dd5f866612",
+    "placement": "c57269a9a2da651dad47c14562e9e512d5e55ed21d368b91073a772fca32b13f",
+    "rr_graph": "6ed35333d25d5c08af7d77706de9cb1764529349649cbe70005fc6c19cf50317"
+  },
+  "binary_sha256": "37cc22c8b1b5d9d378e25379e85afcb7e56b5f1f6f72e3e9186e5e107ed5ce62",
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "LC_ALL": "C",
+    "LD_LIBRARY_PATH": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/G_3d_routing/toolchain/runtime/usr/lib/x86_64-linux-gnu"
+  },
+  "experimental_environment": {},
+  "status": "completed",
+  "returncode": 0,
+  "process_wall_seconds": 5.625164343044162,
+  "metrics": {
+    "critical_path_delay_ns": 5.61388,
+    "routed_wirelength": 19666.0,
+    "routing_seconds": 0.64,
+    "routing_iterations": 18.0,
+    "native_full_check_passed": true,
+    "routing_success": true
+  },
+  "output_files": {
+    "report_unconstrained_timing.hold.rpt": {
+      "sha256": "a7199d762a2bfff75440657d7c3f3c3aba28e678cb0d7e172995e689e078d1f3",
+      "bytes": 173
+    },
+    "report_timing.setup.rpt": {
+      "sha256": "548f4174d21feb5874e46a13a529393f8d6097f26d807f413e421de06c87b2e5",
+      "bytes": 26849
+    },
+    "chanx_occupancy.txt": {
+      "sha256": "15d5d7b31c9384b37f17d08e11a909341d1f721918c68757453b27332d7110cc",
+      "bytes": 95755
+    },
+    "packing_pin_util.rpt": {
+      "sha256": "e057fb3042cdfb79dd0e293605aa5f013d3b992d5f0987618698a864b26d78b6",
+      "bytes": 2317
+    },
+    "report_timing.hold.rpt": {
+      "sha256": "f18b0f491393dff67ce01fe91ec9da2e081e64deabb48f4403c472f5c1393138",
+      "bytes": 22140
+    },
+    "report_unconstrained_timing.setup.rpt": {
+      "sha256": "4630c79791d7773493ca0086c6f045bdc434fffa1baf61491cca3ebd69ddb111",
+      "bytes": 175
+    },
+    "vpr.log": {
+      "sha256": "1605d4688c8836d2d4d19df7d286b040a1e734b64d1f2bd63469273897837a8f",
+      "bytes": 58559
+    },
+    "resource_usage.txt": {
+      "sha256": "34ff0a1f108ac02a9bf4bd515be4a5b702602d81897e89bf13bb09f864c9488d",
+      "bytes": 2032
+    },
+    "vpr_stdout.log": {
+      "sha256": "e2f4505246d880f5dc363e6029435711f8f3af8197f805acc1eaf62c6925a769",
+      "bytes": 58264
+    },
+    "invocation.json": {
+      "sha256": "e25add77662a6a301fd0140aed3aa7c1e8cca0710b39ccf9774fdb00650c2f1d",
+      "bytes": 2915
+    },
+    "chany_occupancy.txt": {
+      "sha256": "25959d6635c00aad07a7c08b4ddc440627c460b1417ec59e501361ac498139a7",
+      "bytes": 95755
+    },
+    "routed.route": {
+      "sha256": "53e0f2bde8a54cf86f5331ba403ddcc456f2cb17557ae97033ec842db7cea256",
+      "bytes": 779654
+    },
+    "chanz_occupancy.txt": {
+      "sha256": "4f8ea483795f11e286f026f22215038c1cb6015bac6bf7fb4be0090bc8d7349a",
+      "bytes": 99055
+    }
+  }
+}

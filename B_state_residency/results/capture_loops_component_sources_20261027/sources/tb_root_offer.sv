@@ -1,0 +1,171 @@
+`timescale 1ns/1ps
+module tb_root_offer;
+reg [31:0] active_version=0;
+reg [63:0] active_design=0;
+reg [511:0] e_context=0;
+reg [31:0] e_depth=0;
+wire [511:0] e_expand_context;
+wire [31:0] out_parent;
+wire [31:0] out_root_cookie;
+reg  clk=0;
+reg  rst=0;
+reg  enable=0;
+reg  abort=0;
+reg  subsystem_fault=0;
+reg [31:0] nodes=0;
+reg  active=0;
+reg [1:0] active_query=0;
+reg [3:0] active_price=0;
+reg  expand_valid=0;
+wire  expand_ready;
+reg [31:0] expand_cookie=0;
+reg [31:0] expand_parent=0;
+reg [31:0] expand_prune=0;
+reg [31:0] expand_has_laguna=0;
+reg [31:0] expand_sink=0;
+reg [31:0] expand_net=0;
+reg [31:0] expand_sequence=0;
+reg [31:0] expand_flags=0;
+reg [31:0] expand_xmin=0;
+reg [31:0] expand_xmax=0;
+reg [31:0] expand_ymin=0;
+reg [31:0] expand_ymax=0;
+wire  out_valid;
+reg  out_ready=0;
+wire [31:0] out_cookie;
+wire [31:0] out_node;
+wire [31:0] out_position;
+wire [31:0] out_sequence;
+wire [31:0] out_bits;
+wire [31:0] out_action;
+wire [31:0] out_steps;
+wire [31:0] out_services;
+wire [255:0] out_attrs;
+wire [447:0] out_config;
+wire  result_valid;
+reg  result_ready=0;
+wire [3:0] result_status;
+wire [31:0] result_cookie;
+wire [31:0] result_count;
+wire [31:0] result_expanded_count;
+wire [31:0] result_raw_count;
+wire [31:0] result_mask;
+wire  result_hit;
+wire  result_early;
+wire  operation_pending;
+wire  stopped;
+wire  e_expand_valid;
+wire  e_expand_ready;
+wire [31:0] e_expand_cookie;
+wire [31:0] e_expand_parent;
+wire [31:0] e_expand_prune;
+wire [31:0] e_expand_has_laguna;
+reg  e_out_valid=0;
+wire  e_out_ready;
+reg [31:0] e_out_node=0;
+reg [31:0] e_out_position=0;
+reg [31:0] e_out_sequence=0;
+reg [255:0] e_out_attrs=0;
+reg  e_result_valid=0;
+wire  e_result_ready;
+reg [3:0] e_result_status=0;
+reg [31:0] e_result_cookie=0;
+reg [31:0] e_result_count=0;
+reg [31:0] e_result_raw_count=0;
+reg [31:0] e_result_mask=0;
+reg  e_result_hit=0;
+wire  m_req_valid;
+reg  m_req_ready=0;
+wire [31:0] m_req_cookie;
+wire [31:0] m_req_parent;
+wire [31:0] m_req_child;
+wire [31:0] m_req_sink;
+wire [31:0] m_req_net;
+wire [31:0] m_req_sequence;
+wire [31:0] m_req_flags;
+wire [31:0] m_req_xmin;
+wire [31:0] m_req_xmax;
+wire [31:0] m_req_ymin;
+wire [31:0] m_req_ymax;
+wire [1:0] m_req_query;
+wire [3:0] m_req_price;
+reg  m_rsp_valid=0;
+wire  m_rsp_ready;
+reg [3:0] m_rsp_status=0;
+reg [31:0] m_rsp_cookie=0;
+reg [31:0] m_rsp_parent=0;
+reg [31:0] m_rsp_child=0;
+reg [31:0] m_rsp_sink=0;
+reg [31:0] m_rsp_net=0;
+reg [1:0] m_rsp_query=0;
+reg [3:0] m_rsp_price=0;
+reg [447:0] m_rsp_config=0;
+reg  m_rsp_created=0;
+wire  a_req_valid;
+reg  a_req_ready=0;
+wire [31:0] a_req_cookie;
+wire [31:0] a_req_parent;
+wire [31:0] a_req_child;
+wire [31:0] a_req_sink;
+wire [31:0] a_req_net;
+wire [1:0] a_req_query;
+wire [3:0] a_req_price;
+wire [447:0] a_req_config;
+reg  a_rsp_valid=0;
+wire  a_rsp_ready;
+reg [3:0] a_rsp_status=0;
+reg [31:0] a_rsp_cookie=0;
+reg [31:0] a_rsp_parent=0;
+reg [31:0] a_rsp_child=0;
+reg [31:0] a_rsp_sink=0;
+reg [31:0] a_rsp_net=0;
+reg [31:0] a_rsp_bits=0;
+reg [31:0] a_rsp_action=0;
+reg [31:0] a_rsp_steps=0;
+reg [31:0] a_rsp_services=0;
+reg [1:0] a_rsp_query=0;
+reg [3:0] a_rsp_price=0;
+always #5 clk=~clk;
+reg permit=0;integer expected_stall=0,accepted=0,checks=0;
+recursive_candidate_controller #(.MAX_CYCLES(1000))dut(.*);
+// A legal receiver may wait for VALID before asserting READY.
+assign e_expand_ready=permit&&e_expand_valid;
+always @(posedge clk)if(!rst&&e_expand_valid&&e_expand_ready)begin
+ accepted=accepted+1;
+ if(!expand_valid||!expand_ready||e_expand_cookie!=201||e_expand_parent!=1)$fatal(1,"unpaired root acceptance");
+ $display("ACCEPT %0d %0d",accepted,e_expand_cookie);
+end
+task tick;begin @(posedge clk);#1;end endtask
+initial begin
+ if(!$value$plusargs("expected_stall=%d",expected_stall))$fatal(1,"missing mode");
+ rst=1;repeat(3)tick;@(negedge clk);rst=0;
+ enable=1;active=1;active_version=3;active_design=99;active_query=1;active_price=3;nodes=4;
+ expand_cookie=201;expand_parent=1;expand_sink=3;expand_net=5;expand_valid=1;
+ repeat(5)begin tick;
+  if(expand_ready||accepted||operation_pending)$fatal(1,"accepted before permission");
+  if(!expected_stall&&(!e_expand_valid||e_expand_cookie!=201||e_expand_parent!=1))$fatal(1,"offer not held while ready low");
+  checks=checks+1;
+ end
+ @(negedge clk);permit=1;
+ if(expected_stall)begin
+  repeat(16)begin tick;if(expand_ready||accepted||operation_pending)$fatal(1,"baseline unexpectedly accepted");end
+  $display("ROOT_OFFER_BASELINE_BLOCKED cycles=16");$finish;
+ end
+ tick;if(accepted!=1||!operation_pending)$fatal(1,"offer did not make progress");
+ @(negedge clk);expand_valid=0;expand_parent=99;e_depth=1;e_result_cookie=201;e_result_valid=1;
+ #1;if(!e_result_ready)$fatal(1,"empty completion blocked");tick;
+ @(negedge clk);e_result_valid=0;e_depth=0;
+ repeat(8)begin tick;if(!result_valid||result_status||result_cookie!=201||!operation_pending||accepted!=1)$fatal(1,"held result changed");checks=checks+1;end
+ @(negedge clk);result_ready=1;tick;@(negedge clk);result_ready=0;
+ tick;if(operation_pending||stopped)$fatal(1,"root not retired");
+ // Invalid root must complete locally, even with physical receiver not ready.
+ @(negedge clk);permit=0;expand_parent=9;expand_cookie=202;expand_valid=1;
+ #1;if(!expand_ready||e_expand_valid)$fatal(1,"invalid root depended on expander ready");tick;
+ @(negedge clk);expand_valid=0;
+ repeat(5)begin tick;if(!result_valid||result_status!=1||result_cookie!=202||accepted!=1)$fatal(1,"invalid root leaked request");checks=checks+1;end
+ @(negedge clk);result_ready=1;tick;@(negedge clk);result_ready=0;
+ if(operation_pending||stopped)$fatal(1,"invalid root retirement");
+ $display("ROOT_OFFER_FIXED_PASS checks=%0d accepted=%0d",checks,accepted);$finish;
+end
+initial begin #10000;$fatal(1,"watchdog");end
+endmodule

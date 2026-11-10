@@ -1,0 +1,148 @@
+{
+  "status": "passed",
+  "functional_manifest_sha256": "775c3a6e2aa11acf2dda82470856f7ba603d97bc1c9a73ce6a88d2f881a2dc09",
+  "sources": {
+    "table_body.inc": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/coordinate_boundaries_v1/table_body.inc",
+      "sha256": "156ced3a618129c47d33d509e96d4c2284ecd3ad624bbe796307d57d37e6fcb2"
+    },
+    "tb_geometry_table_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/coordinate_boundaries_v1/tb_geometry_table_reader.sv",
+      "sha256": "42fbee05a891d613910d16d1359a611d8be2855e371f62890ca424c4519b8216"
+    },
+    "controller_body.inc": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/coordinate_boundaries_v1/controller_body.inc",
+      "sha256": "20c4d1fb02feca11f388e6351a77c32fc85416934d0be2bce07efb26f30978d1"
+    },
+    "generate.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/coordinate_boundaries_v1/generate.py",
+      "sha256": "3e99c58229b4c2f00f9a99512da675f53ada76ffed76da1dcfcab19827b0ff02"
+    },
+    "tb_coordinate_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/coordinate_boundaries_v1/tb_coordinate_controller.sv",
+      "sha256": "12b5205fbe03edb90746a3f167010e6ce7c263416075b6783b7139e82dbadf56"
+    },
+    "coordinate_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_service_v2_20261024/sources/coordinate/coordinate_controller.sv",
+      "sha256": "58e5db15091621a56d1021457970d73f5ae1a452c43136337a9412e00e1462e0"
+    },
+    "geometry_table_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_service_v2_20261024/sources/coordinate/geometry_table_reader.sv",
+      "sha256": "d31672b7b43eb27091075480158180df408d500b728014a8ac82bb3c0dbaf43d"
+    },
+    "run_coordinate_boundaries.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_coordinate_boundaries.py",
+      "sha256": "e3539ee1165a46ce7060f8225ff6c9822f404a49f52ac91ab180d7265926ac1a"
+    }
+  },
+  "cases": {
+    "coordinate_controller": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_boundaries_20261024/sources/coordinate_controller.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_boundaries_20261024/sources/tb_coordinate_controller.sv"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 1.6731956396251917
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_coordinate_controller",
+            "-s",
+            "test",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 2.784560449421406
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 5.578996414318681
+        }
+      ],
+      "result": "CONTROLLER_BOUNDARIES_PASS cases=40 cycles=761",
+      "artifacts": {
+        "simulate.log": "922a08a8e5e4de59cd0f8e8411e97921661c51daf001594272452caed4262bf9",
+        "run.tcl": "1745567fec852c4696897340e8f9967eba962f9894cddee3564638c920b66c3c",
+        "compile.stdout.log": "9340ea8ff687087eb1f5abc1785688f9d71da1afe7e914c0960255874817d4eb",
+        "xvlog.log": "9340ea8ff687087eb1f5abc1785688f9d71da1afe7e914c0960255874817d4eb",
+        "simulate.stdout.log": "b7047c635bf3cee92d8a86f7536917d81b92777ef3470fe00c5590b25e96e75c",
+        "xelab.log": "73c0afd8a837d769a40ef524e1d410df2378061b9a45f9f8a4d105d5d4635e90",
+        "elaborate.stdout.log": "73c0afd8a837d769a40ef524e1d410df2378061b9a45f9f8a4d105d5d4635e90"
+      }
+    },
+    "geometry_table_reader": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_boundaries_20261024/sources/geometry_table_reader.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_boundaries_20261024/sources/tb_geometry_table_reader.sv"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 1.7101661451160908
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_geometry_table_reader",
+            "-s",
+            "test",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 2.4749792516231537
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "test",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 5.428807266056538
+        }
+      ],
+      "result": "TABLE_BOUNDARIES_PASS cases=17 cycles=210",
+      "artifacts": {
+        "simulate.log": "828e87b736e8062bcf539913d08b48189a89ea766bc8272a164a3c81cfdcbd22",
+        "run.tcl": "1745567fec852c4696897340e8f9967eba962f9894cddee3564638c920b66c3c",
+        "compile.stdout.log": "2771939e8642fccd4f4f8553d3f0ef0b08aa7f5b77aa818baf8811aebd704d00",
+        "xvlog.log": "2771939e8642fccd4f4f8553d3f0ef0b08aa7f5b77aa818baf8811aebd704d00",
+        "simulate.stdout.log": "7145530427a70acca8d950eecb396903c5d9c899ee7b4777cc3b8fd54c12f475",
+        "xelab.log": "5afc69cd097092a281d1edbc15f3c0f6ea9851834f02aad47b2ba6abfd420689",
+        "elaborate.stdout.log": "5afc69cd097092a281d1edbc15f3c0f6ea9851834f02aad47b2ba6abfd420689"
+      }
+    }
+  }
+}

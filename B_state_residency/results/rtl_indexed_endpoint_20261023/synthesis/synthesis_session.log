@@ -1,0 +1,643 @@
+B_INDEXED_ENDPOINT_SYNTH_BEGIN version=2022.2
+# create_project -in_memory -part xcu280-fsvh2892-2L-e
+# foreach b_module {bounded_sync_fifo scratch_frame_store_bram scratch_page_controller queued_scratch_endpoint scratch_page_axi backing_frame_directory_indexed backing_page_service_indexed scratch_page_codec_wide record_backing_service_indexed memory_scratch_endpoint_indexed} {
+#     read_verilog -sv [file join $b_evidence sources hardware rtl ${b_module}.sv]
+# }
+# set b_xdc [file join $b_evidence synthesis research_clock.xdc]
+# set b_file [open $b_xdc w]
+# puts $b_file {create_clock -name core_clk -period 10.000 [get_ports clk]}
+# close $b_file
+# read_xdc $b_xdc
+# synth_design -top memory_scratch_endpoint_indexed -part xcu280-fsvh2892-2L-e -mode out_of_context
+Command: synth_design -top memory_scratch_endpoint_indexed -part xcu280-fsvh2892-2L-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611430 ; free virtual = 1328428
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3868.328; parent = 3731.392; children = 136.937
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'memory_scratch_endpoint_indexed' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/memory_scratch_endpoint_indexed.sv:4]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/memory_scratch_endpoint_indexed.sv:46]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/memory_scratch_endpoint_indexed.sv:46]
+INFO: [Synth 8-6157] synthesizing module 'queued_scratch_endpoint' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/queued_scratch_endpoint.sv:5]
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+	Parameter TAG_BITS bound to: 2 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 265 - type: integer 
+	Parameter DEPTH bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo__parameterized0' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 181 - type: integer 
+	Parameter DEPTH bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo__parameterized0' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo__parameterized1' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 24 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo__parameterized1' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_controller' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_page_controller.sv:4]
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'scratch_frame_store' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_frame_store_bram.sv:5]
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'scratch_frame_store' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_frame_store_bram.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_controller' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_page_controller.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'queued_scratch_endpoint' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/queued_scratch_endpoint.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'record_backing_service_indexed' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/record_backing_service_indexed.sv:6]
+	Parameter FRAMES bound to: 23405 - type: integer 
+	Parameter INDEX_BITS bound to: 15 - type: integer 
+	Parameter HASH_BITS bound to: 15 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 8 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_codec_wide' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_page_codec_wide.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_codec_wide' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_page_codec_wide.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'backing_page_service_indexed' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/backing_page_service_indexed.sv:6]
+	Parameter FRAMES bound to: 23405 - type: integer 
+	Parameter INDEX_BITS bound to: 15 - type: integer 
+	Parameter HASH_BITS bound to: 15 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 8 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'backing_frame_directory_indexed' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/backing_frame_directory_indexed.sv:7]
+	Parameter FRAMES bound to: 23405 - type: integer 
+	Parameter INDEX_BITS bound to: 15 - type: integer 
+	Parameter HASH_BITS bound to: 15 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'backing_frame_directory_indexed' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/backing_frame_directory_indexed.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_axi' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_page_axi.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_axi' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/scratch_page_axi.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'backing_page_service_indexed' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/backing_page_service_indexed.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'record_backing_service_indexed' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/record_backing_service_indexed.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'memory_scratch_endpoint_indexed' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/sources/hardware/rtl/memory_scratch_endpoint_indexed.sv:4]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611521 ; free virtual = 1328519
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3906.770; parent = 3765.750; children = 141.020
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611531 ; free virtual = 1328530
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3906.770; parent = 3765.750; children = 141.020
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611530 ; free virtual = 1328528
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3906.770; parent = 3765.750; children = 141.020
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.17 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611445 ; free virtual = 1328444
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/synthesis/research_clock.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/synthesis/research_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611455 ; free virtual = 1328454
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.32 ; elapsed = 00:00:00.23 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611445 ; free virtual = 1328443
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611562 ; free virtual = 1328561
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.026
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu280-fsvh2892-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611573 ; free virtual = 1328572
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.026
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611583 ; free virtual = 1328582
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.026
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'record_backing_service_indexed'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'memory_scratch_endpoint_indexed'
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo:/memory_reg" of size (depth=4 x width=265) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo__parameterized0:/memory_reg" of size (depth=4 x width=181) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo__parameterized1:/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_indexed:/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 4 because memory depth for RAM "backing_frame_directory_indexed:/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 18 for RAM "backing_frame_directory_indexed:/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "backing_frame_directory_indexed:/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 3 and width 4 for RAM "backing_frame_directory_indexed:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 2 and width 2 for RAM "backing_frame_directory_indexed:/owners_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "backing_frame_directory_indexed:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_indexed:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_indexed:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 4 for RAM "backing_frame_directory_indexed:/frame_index_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "backing_frame_directory_indexed:/frame_index_reg"
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              011 |                             0000
+*
+                    SEND |                              001 |                             0011
+             WAIT_MEMORY |                              110 |                             0100
+                  CANCEL |                              100 |                             0111
+                  COMMIT |                              101 |                             0101
+                   START |                              000 |                             0001
+                  ENCODE |                              111 |                             0010
+                  FINISH |                              010 |                             0110
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'record_backing_service_indexed'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |            000000000000000000010 |                            00000
+*
+             Q_HOST_SEND |            000000000000000010000 |                            00001
+             Q_HOST_WAIT |            000000001000000000000 |                            00010
+          M_RECYCLE_SEND |            000000000000100000000 |                            10011
+          M_RECYCLE_WAIT |            000000000001000000000 |                            10100
+             M_LOOK_SEND |            000000000000000001000 |                            00011
+             M_LOOK_WAIT |            000000000100000000000 |                            00100
+            Q_START_SEND |            100000000000000000000 |                            00101
+            Q_START_WAIT |            001000000000000000000 |                            00110
+         M_TRANSFER_SEND |            000100000000000000000 |                            00111
+                  RF_GET |            000000000000001000000 |                            01011
+            RF_BEAT_SEND |            000000000000010000000 |                            01100
+            RF_BEAT_WAIT |            000000000000000100000 |                            01101
+          WB_EXPORT_SEND |            000010000000000000000 |                            01000
+          WB_EXPORT_WAIT |            010000000000000000000 |                            01001
+                  WB_PUT |            000001000000000000000 |                            01010
+                M_STATUS |            000000000000000000001 |                            01110
+         Q_COMPLETE_SEND |            000000000000000000100 |                            01111
+         Q_COMPLETE_WAIT |            000000100000000000000 |                            10000
+           M_RETIRE_SEND |            000000010000000000000 |                            10001
+           M_RETIRE_WAIT |            000000000010000000000 |                            10010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'memory_scratch_endpoint_indexed'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 5770.902 ; gain = 0.000 ; free physical = 611594 ; free virtual = 1328593
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 3     
+	   3 Input   27 Bit       Adders := 1     
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 3     
+	   2 Input   15 Bit       Adders := 4     
+	   2 Input   12 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 3     
+	   2 Input    7 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 8     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 7     
+	   2 Input    2 Bit       Adders := 11    
+	   2 Input    1 Bit       Adders := 4     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   2 Input     15 Bit         XORs := 1     
++---Registers : 
+	              512 Bit    Registers := 3     
+	              160 Bit    Registers := 5     
+	              136 Bit    Registers := 4     
+	              128 Bit    Registers := 1     
+	               64 Bit    Registers := 18    
+	               32 Bit    Registers := 10    
+	               25 Bit    Registers := 1     
+	               24 Bit    Registers := 3     
+	               23 Bit    Registers := 1     
+	               18 Bit    Registers := 10    
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 20    
+	               15 Bit    Registers := 15    
+	                9 Bit    Registers := 1     
+	                8 Bit    Registers := 3     
+	                6 Bit    Registers := 8     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 24    
+	                3 Bit    Registers := 18    
+	                2 Bit    Registers := 26    
+	                1 Bit    Registers := 55    
++---RAMs : 
+	             736K Bit	(32768 X 23 bit)          RAMs := 1     
+	             571K Bit	(23405 X 25 bit)          RAMs := 1     
+	              34K Bit	(256 X 136 bit)          RAMs := 1     
+	               8K Bit	(64 X 136 bit)          RAMs := 1     
+	               1K Bit	(4 X 265 bit)          RAMs := 2     
+	              724 Bit	(4 X 181 bit)          RAMs := 1     
+	               48 Bit	(2 X 24 bit)          RAMs := 2     
++---Muxes : 
+	   2 Input  512 Bit        Muxes := 5     
+	  13 Input  512 Bit        Muxes := 2     
+	   2 Input  181 Bit        Muxes := 1     
+	   2 Input  160 Bit        Muxes := 9     
+	  21 Input  160 Bit        Muxes := 2     
+	   2 Input  136 Bit        Muxes := 4     
+	   2 Input  128 Bit        Muxes := 5     
+	  13 Input  128 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 161   
+	  13 Input   64 Bit        Muxes := 1     
+	   4 Input   64 Bit        Muxes := 11    
+	   6 Input   64 Bit        Muxes := 4     
+	   3 Input   64 Bit        Muxes := 4     
+	  10 Input   64 Bit        Muxes := 4     
+	   5 Input   64 Bit        Muxes := 4     
+	   2 Input   32 Bit        Muxes := 15    
+	   9 Input   32 Bit        Muxes := 1     
+	  15 Input   32 Bit        Muxes := 2     
+	   6 Input   32 Bit        Muxes := 1     
+	   8 Input   32 Bit        Muxes := 1     
+	   2 Input   25 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 1     
+	   2 Input   23 Bit        Muxes := 1     
+	  21 Input   21 Bit        Muxes := 1     
+	   2 Input   21 Bit        Muxes := 53    
+	   4 Input   18 Bit        Muxes := 2     
+	  10 Input   17 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 10    
+	   6 Input   16 Bit        Muxes := 3     
+	  15 Input   16 Bit        Muxes := 1     
+	  21 Input   16 Bit        Muxes := 2     
+	   4 Input   16 Bit        Muxes := 3     
+	  10 Input   16 Bit        Muxes := 1     
+	   4 Input   15 Bit        Muxes := 1     
+	   2 Input   15 Bit        Muxes := 16    
+	   6 Input   15 Bit        Muxes := 3     
+	  15 Input   15 Bit        Muxes := 3     
+	   8 Input   15 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 5     
+	   6 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 8     
+	   2 Input    6 Bit        Muxes := 36    
+	  13 Input    6 Bit        Muxes := 1     
+	  21 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 4     
+	  13 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 79    
+	   3 Input    4 Bit        Muxes := 4     
+	   5 Input    4 Bit        Muxes := 1     
+	  10 Input    4 Bit        Muxes := 6     
+	  21 Input    4 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 3     
+	   6 Input    4 Bit        Muxes := 4     
+	  11 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 43    
+	  13 Input    3 Bit        Muxes := 2     
+	   3 Input    3 Bit        Muxes := 13    
+	   5 Input    3 Bit        Muxes := 3     
+	  15 Input    3 Bit        Muxes := 1     
+	   8 Input    3 Bit        Muxes := 2     
+	   6 Input    3 Bit        Muxes := 2     
+	  29 Input    3 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 2     
+	  12 Input    3 Bit        Muxes := 1     
+	   7 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 83    
+	   6 Input    2 Bit        Muxes := 7     
+	   4 Input    2 Bit        Muxes := 4     
+	   3 Input    2 Bit        Muxes := 6     
+	   5 Input    2 Bit        Muxes := 1     
+	  10 Input    2 Bit        Muxes := 12    
+	   2 Input    1 Bit        Muxes := 489   
+	  13 Input    1 Bit        Muxes := 8     
+	  15 Input    1 Bit        Muxes := 21    
+	   6 Input    1 Bit        Muxes := 34    
+	   4 Input    1 Bit        Muxes := 6     
+	   5 Input    1 Bit        Muxes := 2     
+	   8 Input    1 Bit        Muxes := 9     
+	  21 Input    1 Bit        Muxes := 20    
+	   3 Input    1 Bit        Muxes := 10    
+	  10 Input    1 Bit        Muxes := 13    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 9024 (col length:94)
+BRAMs: 4032 (col length: RAMB18 288 RAMB36 144)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP p_1_out, operation Mode is: A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+INFO: [Synth 8-6904] The RAM "memory_scratch_endpoint_indexed/pages/requests/memory_reg" of size (depth=4 x width=265) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "memory_scratch_endpoint_indexed/pages/work/memory_reg" of size (depth=4 x width=265) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "memory_scratch_endpoint_indexed/pages/responses/memory_reg" of size (depth=4 x width=181) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "memory_scratch_endpoint_indexed/pages/fence_requests/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "memory_scratch_endpoint_indexed/pages/fence_acks/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 4 because memory depth for RAM "i_0/\memory/memory_service /directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 18 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "i_0/\memory/memory_service /directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 3 and width 4 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 2 and width 2 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 4 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:57 ; elapsed = 00:01:00 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611236 ; free virtual = 1328236
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++--------------------------------------+-----------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name                           | RTL Object      | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++--------------------------------------+-----------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|i_0/\memory/codec                     | labels_reg      | 64 x 136(READ_FIRST)   | W |   | 64 x 136(WRITE_FIRST)  |   | R | Port A and B     | 0      | 2      |                 | 
+|i_0/\memory/memory_service /directory | owners_reg      | 22 K x 25(READ_FIRST)  | W |   | 22 K x 25(WRITE_FIRST) |   | R | Port A and B     | 0      | 18     | 8,4,3,2,1       | 
+|i_0/\memory/memory_service /directory | frame_index_reg | 32 K x 23(READ_FIRST)  | W |   | 32 K x 23(WRITE_FIRST) |   | R | Port A and B     | 0      | 21     | 8,8,4,1         | 
+|i_1/\pages/endpoint /storage          | data_reg        | 256 x 136(READ_FIRST)  | W |   | 256 x 136(WRITE_FIRST) |   | R | Port A and B     | 0      | 2      |                 | 
++--------------------------------------+-----------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++--------------------------------+---------------------------------+-----------+----------------------+----------------+
+|Module Name                     | RTL Object                      | Inference | Size (Depth x Width) | Primitives     | 
++--------------------------------+---------------------------------+-----------+----------------------+----------------+
+|memory_scratch_endpoint_indexed | pages/requests/memory_reg       | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|memory_scratch_endpoint_indexed | pages/work/memory_reg           | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|memory_scratch_endpoint_indexed | pages/responses/memory_reg      | Implied   | 4 x 181              | RAM32M16 x 13  | 
+|memory_scratch_endpoint_indexed | pages/fence_requests/memory_reg | Implied   | 2 x 24               | RAM32M16 x 2   | 
+|memory_scratch_endpoint_indexed | pages/fence_acks/memory_reg     | Implied   | 2 x 24               | RAM32M16 x 2   | 
++--------------------------------+---------------------------------+-----------+----------------------+----------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++--------------------------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name                     | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++--------------------------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|backing_frame_directory_indexed | A*B            | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_indexed | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_indexed | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++--------------------------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:58 ; elapsed = 00:01:01 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611200 ; free virtual = 1328200
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5556] The block RAM "i_0/\memory/memory_service /directory/owners_reg" may be mapped as a cascade chain, because it is not timing critical.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 4 because memory depth for RAM "i_0/\memory/memory_service /directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 18 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "i_0/\memory/memory_service /directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 3 and width 4 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 2 and width 2 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "i_0/\memory/memory_service /directory/owners_reg"
+INFO: [Synth 8-5556] The block RAM "i_0/\memory/memory_service /directory/frame_index_reg" may be mapped as a cascade chain, because it is not timing critical.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 4 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "i_0/\memory/memory_service /directory/frame_index_reg"
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:03 ; elapsed = 00:01:06 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611155 ; free virtual = 1328155
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++--------------------------------------+-----------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name                           | RTL Object      | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++--------------------------------------+-----------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|i_0/\memory/codec                     | labels_reg      | 64 x 136(READ_FIRST)   | W |   | 64 x 136(WRITE_FIRST)  |   | R | Port A and B     | 0      | 2      |                 | 
+|i_0/\memory/memory_service /directory | owners_reg      | 22 K x 25(READ_FIRST)  | W |   | 22 K x 25(WRITE_FIRST) |   | R | Port A and B     | 0      | 18     | 8,4,3,2,1       | 
+|i_0/\memory/memory_service /directory | frame_index_reg | 32 K x 23(READ_FIRST)  | W |   | 32 K x 23(WRITE_FIRST) |   | R | Port A and B     | 0      | 21     | 8,8,4,1         | 
+|i_1/\pages/endpoint /storage          | data_reg        | 256 x 136(READ_FIRST)  | W |   | 256 x 136(WRITE_FIRST) |   | R | Port A and B     | 0      | 2      |                 | 
++--------------------------------------+-----------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+
+Distributed RAM: Final Mapping Report
++--------------------------------+---------------------------------+-----------+----------------------+----------------+
+|Module Name                     | RTL Object                      | Inference | Size (Depth x Width) | Primitives     | 
++--------------------------------+---------------------------------+-----------+----------------------+----------------+
+|memory_scratch_endpoint_indexed | pages/requests/memory_reg       | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|memory_scratch_endpoint_indexed | pages/work/memory_reg           | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|memory_scratch_endpoint_indexed | pages/responses/memory_reg      | Implied   | 4 x 181              | RAM32M16 x 13  | 
+|memory_scratch_endpoint_indexed | pages/fence_requests/memory_reg | Implied   | 2 x 24               | RAM32M16 x 2   | 
+|memory_scratch_endpoint_indexed | pages/fence_acks/memory_reg     | Implied   | 2 x 24               | RAM32M16 x 2   | 
++--------------------------------+---------------------------------+-----------+----------------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance memory/codec/labels_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/codec/labels_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/owners_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/owners_reg_bram_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/owners_reg_bram_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/owners_reg_bram_16 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/owners_reg_bram_17 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/frame_index_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/frame_index_reg_bram_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/frame_index_reg_bram_19 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory/memory_service/directory/frame_index_reg_bram_20 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pages/endpoint/storage/data_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pages/endpoint/storage/data_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:06 ; elapsed = 00:01:10 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611098 ; free virtual = 1328097
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611044 ; free virtual = 1328044
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:10 ; elapsed = 00:01:14 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611043 ; free virtual = 1328043
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:11 ; elapsed = 00:01:15 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611038 ; free virtual = 1328038
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:11 ; elapsed = 00:01:15 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611037 ; free virtual = 1328037
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611041 ; free virtual = 1328041
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611034 ; free virtual = 1328034
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++--------------------------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name                     | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++--------------------------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|backing_frame_directory_indexed | A*B          | 15     | 18     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_indexed | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_indexed | PCIN>>17+A*B | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++--------------------------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |CARRY8          |    54|
+|2     |DSP_ALU         |     3|
+|3     |DSP_A_B_DATA    |     3|
+|4     |DSP_C_DATA      |     3|
+|5     |DSP_MULTIPLIER  |     3|
+|6     |DSP_M_DATA      |     3|
+|7     |DSP_OUTPUT      |     3|
+|8     |DSP_PREADD      |     3|
+|9     |DSP_PREADD_DATA |     3|
+|10    |LUT1            |    29|
+|11    |LUT2            |   748|
+|12    |LUT3            |  1220|
+|13    |LUT4            |   802|
+|14    |LUT5            |  1139|
+|15    |LUT6            |  3099|
+|16    |MUXF7           |   102|
+|17    |MUXF8           |    51|
+|18    |RAM32M16        |    54|
+|19    |RAMB36E2        |    43|
+|29    |FDRE            |  5280|
+|30    |FDSE            |     8|
++------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611031 ; free virtual = 1328031
+Synthesis current peak Physical Memory [PSS] (MB): peak = 4039.500; parent = 3898.481; children = 141.027
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 6831.469; parent = 5738.891; children = 1092.578
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:03 ; elapsed = 00:01:08 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611057 ; free virtual = 1328057
+Synthesis Optimization Complete : Time (s): cpu = 00:01:12 ; elapsed = 00:01:16 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611050 ; free virtual = 1328050
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.1 ; elapsed = 00:00:00.1 . Memory (MB): peak = 5866.887 ; gain = 0.000 ; free physical = 611164 ; free virtual = 1328164
+INFO: [Netlist 29-17] Analyzing 264 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/synthesis/research_clock.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/synthesis/research_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 5866.887 ; gain = 0.000 ; free physical = 611064 ; free virtual = 1328064
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 57 instances were transformed.
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 3 instances
+  RAM32M16 => RAM32M16 (RAMD32(x14), RAMS32(x2)): 54 instances
+
+Synth Design complete, checksum: 7b42574a
+INFO: [Common 17-83] Releasing license: Synthesis
+98 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:24 ; elapsed = 00:01:26 . Memory (MB): peak = 5866.887 ; gain = 95.984 ; free physical = 611269 ; free virtual = 1328269
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# report_utilization -file [file join $b_evidence synthesis utilization.rpt]
+# report_utilization -hierarchical -file [file join $b_evidence synthesis utilization_hierarchical.rpt]
+# write_checkpoint -force [file join $b_evidence synthesis memory_scratch_endpoint_indexed.dcp]
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_endpoint_20261023/synthesis/memory_scratch_endpoint_indexed.dcp' has been generated.
+# set b_rams [get_cells -hier -filter {REF_NAME =~ RAMB*}]
+# set b_file [open [file join $b_evidence synthesis ram_cells.txt] w]
+# foreach b_cell $b_rams {puts $b_file "$b_cell [get_property REF_NAME $b_cell]"}
+# close $b_file
+# close_project
+# puts "B_INDEXED_ENDPOINT_SYNTH_DONE"
+B_INDEXED_ENDPOINT_SYNTH_DONE

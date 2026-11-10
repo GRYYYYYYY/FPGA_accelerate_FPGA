@@ -1,0 +1,125 @@
+{
+  "status": "real_nested_graph_semantics_and_bounded_decoder_capacity_verified",
+  "utc": "2026-10-23T10:55:30.378947+00:00",
+  "files": {
+    "data/derived/scale_domain_region_20261023_v1/report.json": "5c94802330b99546005f7b47fc604d24638ce7f0fbb4423f6acf633ab42da39e",
+    "results/scale_capacity_region_audit_20261023_v1.json": "303f3c7907ee3120cc5c57f23569a93f9d857c284476b4f734cff852990a06e1",
+    "results/regression_scale_domain_20261023_v1.log": "9337ff33f7754edeaba8fecc2d9c9299a749ed3a0a1a8c02fb086d049f9572ba",
+    "results/regression_scale_capacity_20261023_v1.log": "f0186309605140d00da1800ffa21f72531c7451947e9aeee40c8ee3ab49cbec4",
+    "results/regression_scale_capacity_audit_20261023_v1.log": "d100ec6ad6dec9c8eb55622b102e9f916be431c0842a849a96ed2e5bf5275708",
+    "scripts/check_scale_capacity.py": "ab279cd88dda7f0b000c8ba57313840147464a197d6e9e22f8588acea944a009",
+    "tests/test_scale_capacity_audit.py": "1f9c2c21dad661c3bcc7df650c44f560822c7b06c001e57292f45e9af1b4a280"
+  },
+  "summary": [
+    {
+      "denominator": 16,
+      "known_rows": 471,
+      "modes": {
+        "compact": {
+          "failed_tested_limits_mib": [
+            8
+          ],
+          "image_bytes": 3508608,
+          "smallest_successful_tested_limit_mib": 16
+        },
+        "csr": {
+          "failed_tested_limits_mib": [
+            8
+          ],
+          "image_bytes": 3508416,
+          "smallest_successful_tested_limit_mib": 16
+        }
+      },
+      "nodes": 3537
+    },
+    {
+      "denominator": 4,
+      "known_rows": 28640,
+      "modes": {
+        "compact": {
+          "failed_tested_limits_mib": [
+            8,
+            16
+          ],
+          "image_bytes": 18922112,
+          "smallest_successful_tested_limit_mib": 32
+        },
+        "csr": {
+          "failed_tested_limits_mib": [
+            8,
+            16
+          ],
+          "image_bytes": 19547200,
+          "smallest_successful_tested_limit_mib": 32
+        }
+      },
+      "nodes": 54627
+    },
+    {
+      "denominator": 2,
+      "known_rows": 115095,
+      "modes": {
+        "compact": {
+          "failed_tested_limits_mib": [
+            8,
+            16,
+            32
+          ],
+          "image_bytes": 53211136,
+          "smallest_successful_tested_limit_mib": 64
+        },
+        "csr": {
+          "failed_tested_limits_mib": [
+            8,
+            16,
+            32
+          ],
+          "image_bytes": 55321280,
+          "smallest_successful_tested_limit_mib": 64
+        }
+      },
+      "nodes": 156827
+    },
+    {
+      "denominator": 1,
+      "known_rows": 220973,
+      "modes": {
+        "compact": {
+          "failed_tested_limits_mib": [
+            8,
+            16,
+            32,
+            64
+          ],
+          "image_bytes": 93507968,
+          "smallest_successful_tested_limit_mib": 96
+        },
+        "csr": {
+          "failed_tested_limits_mib": [
+            8,
+            16,
+            32,
+            64,
+            96
+          ],
+          "image_bytes": 98255808,
+          "smallest_successful_tested_limit_mib": 128
+        }
+      },
+      "nodes": 274732
+    }
+  ],
+  "remaining": [
+    "Complete partial-site-model repeated routing performance matrices remain running.",
+    "Complete special resource constant/inversion/ownership model remains incomplete.",
+    "Full-router capacity, larger captured device domains, real DDR/HBM/platform/board power and complete end-to-end remain unverified."
+  ],
+  "limitations": [
+    "RLIMIT_AS includes the executable, libraries, image and native decoder allocations; it is virtual address space, not physical RSS.",
+    "The source parser, bank/fixture preparation, routing occupancy/search/trace and external auditing are outside this process limit.",
+    "One fresh process per cell. Outcomes are feasibility at tested limits, not an exact minimum or statistical runtime comparison.",
+    "Uses real nested source domains with full outgoing edges; no graph replication and no claim beyond the largest captured domain.",
+    "Spatial prefixes vary resource composition and row density as well as size; compare CSR and compact within each domain, not as a pure node-count scaling law.",
+    "These are CPU decoder capacity measurements, not board DDR/HBM capacity or whole-router capacity."
+  ]
+}

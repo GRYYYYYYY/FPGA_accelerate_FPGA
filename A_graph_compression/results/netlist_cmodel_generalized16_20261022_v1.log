@@ -1,0 +1,99 @@
+CMODEL_ROUTING csr 0 16 16 7 0
+CMODEL_ROUTING csr 1 16 16 0 0
+CMODEL_ROUTING compact 0 16 16 7 0
+CMODEL_ROUTING compact 1 16 16 0 0
+{
+  "status": "equivalent",
+  "created_utc": "2026-10-22T19:45:53.913597+00:00",
+  "nets": 16,
+  "results": {
+    "csr": {
+      "validation": {
+        "legal_individual_trees": true,
+        "completed_nets": 16,
+        "conflicts": {},
+        "pip_conflicts": {},
+        "total_pips": 987,
+        "all_nets_routed_without_conflicts": true
+      },
+      "identical_to_software_csr_except_time": true,
+      "execution_kind": "native_cpu_execution_of_hls_c_model",
+      "initialize_validate_ms": 6352.464415132999,
+      "native_cpu_cmodel_route_ms": 931.5728936344385,
+      "kernel_calls": 87466,
+      "unknown_calls": 61979,
+      "returned_records": 126380
+    },
+    "compact": {
+      "validation": {
+        "legal_individual_trees": true,
+        "completed_nets": 16,
+        "conflicts": {},
+        "pip_conflicts": {},
+        "total_pips": 987,
+        "all_nets_routed_without_conflicts": true
+      },
+      "identical_to_software_csr_except_time": true,
+      "execution_kind": "native_cpu_execution_of_hls_c_model",
+      "initialize_validate_ms": 5969.040719792247,
+      "native_cpu_cmodel_route_ms": 907.7364597469568,
+      "kernel_calls": 87466,
+      "unknown_calls": 61979,
+      "returned_records": 126380
+    }
+  },
+  "evidence": {
+    "csr": {
+      "source_sha256": "b6bd1affc6172140e1851fc24df8c2dcb22fe6a7cbee9432c61ac4104152b1d5",
+      "image_sha256": "b7db65fb4ff97bbc7ad663a77f5f684c271f56c3942f6f85a92d048c07f4c4e3",
+      "library_sha256": "a2c969d51aec799d8b18b5781d9e589fd430c4f539d2d81d35389758d043b6bc",
+      "compile_command": [
+        "g++",
+        "-std=c++14",
+        "-O3",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wno-unknown-pragmas",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_u280_fixtures_20261022_v1/csr/graph_expand.cpp",
+        "-o",
+        "data/derived/netlist_cmodel_generalized16_20261022_v1/csr.so"
+      ]
+    },
+    "compact": {
+      "source_sha256": "c2e22c906bab77a53bd94ababf3ad2c6e3bcfeb661c525e0236500230385efdf",
+      "image_sha256": "7cb96885fd2b3e91e170ba99e11cc2de1ca806a67d0d9636fc01f00d025af031",
+      "library_sha256": "9be54811a53ba52e4c52dfaffb3cb2d44d143d6c7d3eafb9d0fbe21e9e17ab2e",
+      "compile_command": [
+        "g++",
+        "-std=c++14",
+        "-O3",
+        "-shared",
+        "-fPIC",
+        "-Wall",
+        "-Wextra",
+        "-Wno-unknown-pragmas",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_u280_fixtures_20261022_v1/compact/graph_expand.cpp",
+        "-o",
+        "data/derived/netlist_cmodel_generalized16_20261022_v1/compact.so"
+      ]
+    }
+  },
+  "source_experiment_report_sha256": "04d805cda082dd5ebd2a267237ab785f4ac7a24a11c7775b3a30198c8cf0b48d",
+  "source_fixture_manifest_sha256": "ca4b45668f2429970f50b365c15053b7e4725fa1614205568dae125abb02517b",
+  "source_config_sha256": "e2c1764ff46c67b5c2349b7fbcb9af2f23146fcd25b4fa9ec17f1840555acc7d",
+  "graph_sha256": "7109356caa0e085e18836e6d3a68b1f95b9d04cc209dd681736868a22e2a838f",
+  "scope": "Reference-route source rows plus full outgoing neighbors. Integration domain; not an independent full-device routing-performance benchmark. Expand unknown boundaries in subsequent rounds.",
+  "host_code_sha256": {
+    "scripts/netlist_cmodel_check.py": "ab259bd00a66d85b436559529ff5149172be0b7c456c9309ee5321f134a0ec0f",
+    "src/hls_cmodel.py": "b93d1aa91396603b0becebfdb4779f0ed463b850cc5c70050ce10fb70adaf2b7",
+    "src/netlist_routing.py": "8da230c8abde51bbb8c4a35ff2a518e6fc6b72e3960c894a5bf2064b2c70f9df",
+    "hardware/hls/prepare_fixtures.py": "b1ee18244bbe0b0d637e967de8c68e1297393e4c334f74bd0e66f2b62f837a3c"
+  },
+  "limitations": [
+    "CPU execution of HLS C++ providers, not FPGA/XRT execution or board speedup.",
+    "Graph scope follows audited source experiment; external IO and physical board memory unverified.",
+    "One C-model routing run per representation; timings are integration diagnostics, not statistical speedup evidence."
+  ]
+}

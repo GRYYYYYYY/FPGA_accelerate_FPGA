@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "project_id": "G",
+  "title": "三维跨层资源选择与分层搜索",
+  "research_question": "针对离散固定的跨层资源，候选端口选择和局部搜索能否改善三维布线的求解时间与质量？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "两层有向图含两个固定垂直端口，逐个限制端口求局部路径，并与不限制端口的参考路径一起输出。"
+    },
+    {
+      "id": "original_vpr",
+      "status": "planned",
+      "description": "固定版本原始 VPR：ex5p 两种布局的独立 baseline 入口已接入；完整比较矩阵待扩展",
+      "standalone_entrypoint": "python3 scripts/run.py baseline",
+      "standalone_status": "implemented_model_baseline"
+    },
+    {
+      "id": "simple_vertical_penalty",
+      "status": "planned",
+      "description": "简单跨层代价基线"
+    },
+    {
+      "id": "cpu_portal_selection",
+      "status": "planned",
+      "description": "CPU 离散端口选择"
+    },
+    {
+      "id": "cpu_tree_dp",
+      "status": "planned",
+      "description": "树上选择/共享：后续实现"
+    },
+    {
+      "id": "fpga_portal_eval",
+      "status": "planned",
+      "description": "同一算法 FPGA 候选评估"
+    }
+  ],
+  "controlled_factors": [
+    "垂直资源密度与分布",
+    "跨层延迟与容量",
+    "层数和 net 扇出",
+    "端口候选数及分层搜索策略"
+  ],
+  "metrics": [
+    {
+      "name": "routing_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "critical_path_delay",
+      "unit": "ns"
+    },
+    {
+      "name": "routed_wirelength",
+      "unit": "tool_unit"
+    },
+    {
+      "name": "vertical_resources_used",
+      "unit": "count"
+    },
+    {
+      "name": "overflow_resources",
+      "unit": "count"
+    },
+    {
+      "name": "routing_success",
+      "unit": "boolean"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": 120,
+    "baseline_revision": "0b912334fdd83bb754b302146ac0d1ec9edc9a0e",
+    "timing_mode": "VPR native model STA; route-only CPU wall time and VPR Routing took measured separately",
+    "quality_tolerance": null
+  },
+  "notes": "Legacy smoke/plan schema retains planned matrix status. Original VPR is executable via standalone baseline on explicitly registered model datasets; algorithm variants remain planned. Pilot uses seed 1, three repetitions; seeds 2/3 remain future campaign settings. Null quality tolerance is unset."
+}

@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "simulate/compile.stdout.log": "d5ff666cdd40c099563de6fb293b351a67b7c63585623a5fc4ba3343c2e6a0c5",
+    "simulate/elaborate.stdout.log": "79ad1b1ef143fb3c492f52d301a950c28f3071de1af5a35e6c5a9c8387b6d76b",
+    "simulate/run.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "simulate/simulate.log": "20fa682f9e9cfdfd7604ef9cbe3d7d595741b04e192580aaec4f441190b36709",
+    "simulate/simulate.stdout.log": "84791eb24281f447efdff07aedf0d5a52a48f99244ba6975b7426b7de9a04683",
+    "simulate/xelab.log": "79ad1b1ef143fb3c492f52d301a950c28f3071de1af5a35e6c5a9c8387b6d76b",
+    "simulate/xsim.dir/normal_test/Compile_Options.txt": "af824fa4a68d178a7eba40625b8e34705fa3cd0ddca27ac4d049fd50415778b7",
+    "simulate/xsim.dir/normal_test/TempBreakPointFile.txt": "b4cb40d28ae548744312392beffad452d7b3cc0d8a3c187635a7e3925f3c3aa7",
+    "simulate/xsim.dir/normal_test/xsim_script.tcl": "5679c71dcbb72d7d1436fa0e1255279aeb9f28d44bd458ed4fbfb804877041b8",
+    "simulate/xsim.dir/normal_test/xsimcrash.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "simulate/xsim.dir/normal_test/xsimkernel.log": "a9cdbdc6e730c5b8b51076ec49503da4152a161d18d2485d4094d00f9ae2d1dc",
+    "simulate/xvlog.log": "d5ff666cdd40c099563de6fb293b351a67b7c63585623a5fc4ba3343c2e6a0c5"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/sources/recovery_coordinator.sv",
+        "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/sources/label_restore_controller.sv",
+        "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/sources/rearm_loop_slice.sv",
+        "/tmp/B_state_residency_offer_20261025/recovery_normal_native_v2/sources/tb_rearm_loop.sv"
+      ],
+      "elapsed_s": 1.7171297278255224,
+      "exit_code": 0,
+      "stage": "compile"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_rearm_loop",
+        "-s",
+        "normal_test",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "elapsed_s": 2.7193062510341406,
+      "exit_code": 0,
+      "stage": "elaborate"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "normal_test",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "elapsed_s": 5.524013927206397,
+      "exit_code": 0,
+      "stage": "simulate"
+    }
+  ],
+  "reference": "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v2",
+  "reference_audit_sha256": "39e68c8982a53bfee0931baaccab8e51e9aa01dad500ae183eed9def6a27727e",
+  "reference_restore_sha256": "76ccc036eb6a3a1b5a855993b79ba34b4efe82b10b7594b3d18fb10375380674",
+  "runner_sha256": "a7970a24012ffa55795c870f51c782637cfdd9301640901f500fee1ee2720104",
+  "scope": "Native coordinator/label J0 lifecycle only, same RAM/config/retirement models and TB as restored REARM fixed reference. No synthesis, AXI or full-system loop-removal claim.",
+  "sources": {
+    "CONTRACT.md": "08ec63ad9885ecc024eba8f35865061b8ce4d14cf7d6a822b7ade7c96addca5a",
+    "build.py": "f9aae14f1f480e9d8657519fd4fac11626e43c0df6535436a02c650363c8244b",
+    "identity.json": "2499a3369ce2ca93be69c9ffa38bf7bca210be07438a16fc31a03abf0575f924",
+    "label_restore_controller.sv": "2bd4c0c92e5fbf9fefe34ecad2b62e2abaeeef0b1fdd78023cc71039992fd097",
+    "rearm_loop_slice.sv": "e329c56028ed9817d9c79b8fe4f03d48ed07b88061ad8cd4f3a2f99bd1a628d0",
+    "recovery_coordinator.sv": "b1faac8beed7f56b2657deb8ff95ae26d9872aa46619c624e6229849e38412c6",
+    "tb_rearm_loop.sv": "3a4fe327299d9be84c325b1fedc7077351ee7dfb55c7cb44b7ceeb21f4489344"
+  },
+  "status": "observed"
+}

@@ -1,0 +1,1 @@
+set ::AESL_AUTOSIM::gTopFileName /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_hls_20261025/cost_center_step/solution1/./sim/autowrap/testbench/kernel.cpp_pre.cpp.tb.cpp

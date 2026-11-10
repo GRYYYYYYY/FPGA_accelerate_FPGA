@@ -1,0 +1,42 @@
+{
+  "analyzer_sha256": "77fcb6a832d6194bb9d1306f7d59776045ecb8ae2296025638d5214528cd076c",
+  "candidate_predicates": {
+    "normal_fault": "stopped || abort || timeout || a_rsp_valid || o_rsp_valid",
+    "normal_unexpected": "a_rsp_valid || o_rsp_valid"
+  },
+  "checked_source_expressions": [
+    "localparam NORMAL=0,DRAIN=1,RESET=2,RECONFIG=3,AS=4,AW=5,OS=6,OW=7,NEXT=8,LABELS=9,FAILWAIT=10,DONE=11,REARM=12;",
+    "reg[3:0]state;",
+    "wire unexpected=(a_rsp_valid&&state!=AW&&!(state==AS&&a_ready))||(o_rsp_valid&&state!=OW&&!(state==OS&&o_ready));",
+    "wire fail_now=(abort&&state!=REARM)||timeout||unexpected;",
+    "assign fault=!cold_rst&&(stopped||fail_now);",
+    "assign staged_valid=!cold_rst&&!abort&&prepared&&!cfg_rsp_valid&&state==NORMAL&&!fault;",
+    "assign permit_work=!cold_rst&&!prepared&&configured&&!fault&&state==NORMAL&&!cfg_rsp_valid&&!cfg_valid&&!recover_valid;",
+    "assign j_ready=!cold_rst&&!prepared&&configured&&!fault&&state==NORMAL&&!cfg_rsp_valid&&(j_op==1||j_op==2)&&(duplicate||journal_count<ENTRIES);",
+    "assign recover_ready=!cold_rst&&!prepared&&configured&&state==NORMAL&&!cfg_rsp_valid&&!cfg_valid&&!j_valid&&!unexpected&&(!fault||(stopped&&retry_safe&&backend_drained&&normal_retired));",
+    "assign cfg_ready=!cold_rst&&!fault&&state==NORMAL&&!cfg_rsp_valid&&!recover_valid&&!j_valid&&backend_drained&&normal_retired;"
+  ],
+  "limitations": [
+    "Two-state combinational identities only, no X/Z or sequential proof",
+    "Full fault, fail_now and unexpected outside these NORMAL-gated outputs must remain unchanged",
+    "Does not justify replacing publication fault or other arbitrary fault consumers",
+    "No production RTL modification, synthesis, simulation or full-root loop-removal claim"
+  ],
+  "ordinary_outputs": [
+    "staged_valid",
+    "permit_work",
+    "j_ready",
+    "cfg_ready"
+  ],
+  "proven": [
+    "All four ordinary outputs retain their value after substitution under their existing NORMAL/cold_rst gates",
+    "recover_ready retains the stopped/safe/drained/retired override and its value",
+    "State-qualified ordinary permission implies the original complete fault is false"
+  ],
+  "reference": "/tmp/B_state_residency_offer_20261025/combined_loops_synth_v1",
+  "reference_audit_sha256": "990e14c888ffce7d0f1d943aac88ade9c781e134fcda17d25a98661fde5c4e95",
+  "separate_retry_output": "recover_ready",
+  "source_sha256": "058018867ef7790b9af1f987bddf88cac8a91da1125ee8bebefc4be26e847dde",
+  "status": "normal_admission_boolean_identity_not_rtl_validation",
+  "valuations": 65536
+}

@@ -1,0 +1,47 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Fri Oct 23 05:49:58 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_drc -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/lut_route_probes_20261023_v2/drc_4.rpt
+| Design       : routeracc_cost_registered
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Fully Placed
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_routed
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 2
++-----------+------------------+---------------------------------+------------+
+| Rule      | Severity         | Description                     | Violations |
++-----------+------------------+---------------------------------+------------+
+| HDOOC-4   | Critical Warning | No Pblock range or LOC for cell | 1          |
+| RTSTAT-13 | Critical Warning | Insufficient Routing            | 1          |
++-----------+------------------+---------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+HDOOC-4#1 Critical Warning
+No Pblock range or LOC for cell  
+Cell 'clock_buffer' has no placement constraints. Failure to control placement of logic with either a Pblock or a LOC constraint may result in placement conflicts if the out-of-context implementation results are reused in a top-level design.
+Related violations: <none>
+
+RTSTAT-13#1 Critical Warning
+Insufficient Routing  
+A signficant portion of the design is not routed. Routed nets status (RTSTAT-*) DRC checks will not be run.  For routing information, run report_route_status.  Please run implementation on your design.
+Related violations: <none>
+
+

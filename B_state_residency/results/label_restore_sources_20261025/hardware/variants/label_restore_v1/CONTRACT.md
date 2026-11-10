@@ -1,0 +1,13 @@
+# 可综合标签恢复服务
+
+label_restore_controller 接受经过信任边界验证的 snapshot 流，将 OPEN、absent 探测、五字段导入、CHECKPOINT、完整读回和物理排空实现为 RTL FSM。默认 MAX_RECORDS512、MAX_CYCLES1048576，两参数必须至少1；每条(node32,payload160)保存到本地RAM用于独立读回比较。只复位控制状态，不清RAM；尚未加载的RAM条目不被访问。start_count非零且不超过容量，node/probe小于器件节点数，设计与checkpoint匹配外部expected身份，price等于version低4位。cookie绑定每条stream，s_last必须恰在规定末条。
+
+由调用者保证开始前目标已重新配置到空逻辑epoch、当前query/price/version可安装且该模块独占control/label端口。硬件OPEN后检查指定probe absent；这只证明一个探针，不证明所有未知页或任意旧epoch均不可见。page服务的全局epoch契约仍是前提。恢复成功需所有规定记录的五字段写成功、CHECKPOINT成功、每个原始node读回present且payload逐位相等、backend_drained。相同node重复且payload不一致会读回失败；源记录集合完整性、去重和真实性由外部可信快照提供，本模块没有snapshot读取器/签名/全图枚举。
+
+stream是已验证来源的快照数据生产者接口，不是CPU逐字段发标签请求。接收一条记录后模块独立完成五次写；全部导入后不再需要生产者重放即可读回。缺失末条/额外提前last/错误cookie/越界node拒绝；计数已满足后s_ready关闭，额外流尾不被接受。没有end-of-file检测信号，截断靠超时拒绝。
+
+取消/超时不撤掉已暴露的control/label VALID；等待接受、回复和backend_drained后返回失败，物理修改可能部分完成，无rollback。故障锁定start_ready，必须外部协调恢复，不能当自动重试服务。持有完成响应时元数据稳定且不接受新start，成功响应退休后可在同实例接下一个恢复。rst为本服务冷复位，调用者不能在未排空事务中任意拉高；真实组合连接独立k_cold_rst，target_reset不清服务状态。
+
+status1输入身份/边界，2control服务错误，3探针仍present，4label服务错误，5流身份/范围/last错误，6读回不存在或字节不符，7取消/超时。written只统计整条五字段确认成功，不能当物理副作用上界；verified仅统计完整读回成功条数。
+
+该模块不恢复owner/design/history/frontier/route slots，也不完成配置发包、持久快照读取、耐掉电、epoch/价格回绕或未知工作集初始化。完整恢复仍由recovery_coordinator协调。当前组合提供实际CPU328条记录，先前五故障发生在正常route路径；标签恢复本身错误/取消/超时另用注册mock模型验证，不能冒称这些新故障已注入真实AXI。

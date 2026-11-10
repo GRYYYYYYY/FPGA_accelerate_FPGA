@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "manifest_sha256": "158bf20f132d9f032883eb425aaca793ff1936777ad8b91c61cbcfc389f46dc4",
+  "demand_manifest_sha256": "cbc1340cf62b89ea6b00e3f1a62a8476857a5ac3c36bc0a0ca78243a16c6fbda",
+  "totals": {
+    "bindings": 2435492,
+    "writes": 3723220,
+    "accesses": 14047736,
+    "hits": 11612244,
+    "reads": 10324516,
+    "writebacks": 577471,
+    "releases": 2435492,
+    "refills": 2166458,
+    "checkpoints": 31,
+    "transfers": 2743929
+  },
+  "delta_from_unbounded_no_checkpoint_census": {
+    "bindings": 49,
+    "accesses": 0,
+    "writes": 0,
+    "hits": -49,
+    "reads": 0,
+    "writebacks": 1,
+    "refills": 48,
+    "transfers": 49
+  },
+  "negative_controls": [
+    {
+      "fault": "drop_published_page",
+      "detected": true,
+      "error": "actual read differs after retained checkpoint"
+    },
+    {
+      "fault": "corrupt_published_value",
+      "detected": true,
+      "error": "actual read differs after retained checkpoint"
+    },
+    {
+      "fault": "skip_dirty_flush",
+      "detected": true,
+      "error": "actual read differs after retained checkpoint"
+    }
+  ],
+  "rtl_checkpoint_proven": false,
+  "source_sha256": "ad9e8cff1f5982089966b3cf95931796f908a56e08fb26427aa1adada364e43c"
+}

@@ -1,0 +1,11 @@
+# 原生后端互斥候选完整CRC恢复回归通过
+
+recovery_backend_system_crc_pressure_v2在已恢复route_block参考上修改coordinator/residency/search/query四源，累计九个生产文件。通用组件EXCLUSIVE_BACKEND_RESPONSES默认关闭，原生query顶层开启，去掉互斥接口不可能的AS/OS READY分支。时序逻辑与输入不变；NORMAL候选、capture退休新修改均未包含。
+
+完整27文件（12AXI、native事件及周期、DDR、恢复流等）逐字节等于参考，结束48288200ns一致。实际CRC末记录失败、错误回复保持/消费/退休、旧attempt拒绝、新attempt8非冷恢复781标签/156path/10query、最终回复消费后放行、CPU q4 83poll/82expand/402candidate/231cost及其他net保留结论适用于相同字节观察。
+
+TB只读监视4828815个非冷复位周期，原生authority请求/回复各26，owner请求/回复各32，READY与回复VALID无重叠或未知重叠条件，覆盖非空journal修复及验证；没有修改握手或输入。此前九项原生coordinator模型测试验证默认兼容性，不能替代本完整系统，两个证据范围单列。
+
+379文件归档实际恢复复审audit逐字节一致。归档fd9f4d2253b4cccdcd51034ae4df510529922762bd49324e2044d62dd1a5ab1b，audit2e9a1c160c8eaf3e40e45199aebddfb21f2dd24f3eed1e24cee6591730f5abcb。源码和检查工具冻结。
+
+V1仅因TB声明顺序编译失败，V2生产RTL与V1完全相同，失败证据已另行保留。该结果只有单槽CRC一项，不代表其余七项矩阵、完整消环或物理时序通过。原生后端加capture退休的合并版本已由唯一后续链开始独立验证；当前报告不覆盖该额外修改。固定价格、可信初始快照、持久化floor/认证、自然overflow、物理实现与板卡缺口保持。

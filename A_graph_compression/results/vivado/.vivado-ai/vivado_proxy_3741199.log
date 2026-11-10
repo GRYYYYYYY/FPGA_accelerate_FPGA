@@ -1,0 +1,61 @@
+2026/10/22 15:05:12.333170 vivado-proxy: starting PID=3741199 host=fpgaacc1--cfc8cd109508-jnnrja5s7q go=go1.25.11 GOARCH=amd64 GOOS=linux
+2026/10/22 15:05:12.333794 vivado-proxy: listening on 127.0.0.1:40037
+2026/10/22 15:05:12.333865 vivado-proxy: MCP_PROXY_PORT_DIR unset — running without connection authentication (loopback only)
+2026/10/22 15:05:12.335932 vivado-proxy: spawning: [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado -mode tcl -log .vivado-ai/vivado_81512297_50a19b96.log -journal .vivado-ai/vivado_81512297_50a19b96.jou -notrace -source .vivado-ai/init_81512297_50a19b96.tcl]
+2026/10/22 15:05:12.336761 vivado-proxy: child PID 3741214
+2026/10/22 15:05:12.337607 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:05:12.337739 vivado-proxy: output stream client connected from 127.0.0.1:40384
+2026/10/22 15:05:12.337861 vivado-proxy: output stream resuming from stdout=0 stderr=0
+2026/10/22 15:05:19.375037 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:05:19.375246 vivado-proxy: config webserver_url = http://localhost:52441
+2026/10/22 15:05:19.375309 vivado-proxy: config log_file_path = /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/.vivado-ai/vivado_81512297_50a19b96.log
+2026/10/22 15:05:22.343842 vivado-proxy: message limit verified (10000000)
+2026/10/22 15:05:30.975737 vivado-proxy: exec [0eh7f4intohg] req=vivado-20261022-150512-e2be528a-270189ee-cmd-1 create_project -in_memory graph_holdout -part xcvu13p-fhgb2104-2-e
+2026/10/22 15:05:33.929552 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:05:33.930747 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:05:35.665703 vivado-proxy: exec [3t8g37g2yo7g] req=vivado-20261022-150512-e2be528a-270189ee-cmd-2 link_design -part xcvu13p-fhgb2104-2-e -top graph_holdout
+2026/10/22 15:05:43.927976 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:05:43.928887 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:05:47.996725 vivado-proxy: exec [3i0h8x8knlkf] req=vivado-20261022-150512-e2be528a-270189ee-cmd-3 puts [version -short]; puts [get_slrs]; report_property [lindex [get_slrs] 0]; foreach y {239 240 479 480 719 720} {puts "INT_X0Y$y slr=[get_property SLR_REGION_ID [get_tiles INT_X0Y$y]]"}; foreach s {0 1 2 3} {puts "slr$s lag [lrange [get_tiles -filter \"TYPE == LAG_LAG && SLR_REGION_ID == $s\"] 0 2]"}
+2026/10/22 15:06:34.210525 vivado-proxy: exec [utkmaw2zjbrj] req=vivado-20261022-150512-e2be528a-270189ee-cmd-4 foreach s {0 1 2 3} {set filt [format {TYPE == LAG_LAG && SLR_REGION_ID == %d} $s]; set ts [get_tiles -filter $filt]; puts [list slr $s lag_count [llength $ts] example [lrange $ts 0 2] rows [lsort -integer -unique [get_property ROW $ts]]]}
+2026/10/22 15:07:30.494554 vivado-proxy: exec [91yfiktp5j1g] req=vivado-20261022-150512-e2be528a-270189ee-cmd-5 set ns [get_nodes -of_objects [get_tiles LAG_LAG_X4Y479] -filter {INTENT_CODE_NAME == NODE_LAGUNA_DATA}]; puts [lrange $ns 0 5]; foreach n [lrange $ns 0 2] {puts [list $n children [get_nodes -downhill -of_objects $n]]}; puts [get_nodes INT_X0Y360/EE2_E_BEG0]; puts [get_nodes INT_X0Y600/EE2_E_BEG0]
+2026/10/22 15:08:55.918769 vivado-proxy: exec [pnlzorean0qj] req=vivado-20261022-150512-e2be528a-270189ee-cmd-6 set region_export_dir {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/regions_20261022_v1}
+2026/10/22 15:08:58.231461 vivado-proxy: exec [hsvp692huoz8] req=vivado-20261022-150512-e2be528a-270189ee-cmd-7 source -notrace /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_regions.tcl
+2026/10/22 15:09:03.927220 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:03.928219 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:13.930968 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:13.932271 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:23.926795 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:23.927516 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:33.926664 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:33.927636 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:43.926895 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:43.927875 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:53.926906 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:09:53.928048 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:03.925843 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:03.927186 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:13.927177 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:13.928353 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:23.926163 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:23.927170 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:33.926903 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:33.927832 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:43.926706 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:43.927591 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:53.928094 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:10:53.928961 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:03.929940 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:03.932188 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:13.927040 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:13.928036 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:23.926550 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:23.927428 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:33.929072 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:33.930139 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:43.926526 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:43.927573 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:53.928238 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:11:53.929354 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:12:03.926489 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 15:12:03.927467 vivado-proxy: HELLO handshake complete, protocol v3

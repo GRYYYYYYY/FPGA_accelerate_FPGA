@@ -1,0 +1,40 @@
+{
+  "status": "official_public_clock_documentation_reviewed_physical_configuration_gap_remains",
+  "observed_utc": "2026-10-25T11:17:03.317448+00:00",
+  "sources": [
+    {
+      "url": "https://docs.amd.com/r/en-US/ug572-ultrascale-clocking/BUFCE_LEAF-Clock-Buffer",
+      "document": "AMD UG572",
+      "revision": "1.11",
+      "release_date": "2025-05-29",
+      "findings": [
+        "Leaf clock gating uses CE; the documented CE_TYPE options are SYNC and ASYNC.",
+        "The page notes that the leaf buffer is informational and unavailable for user instantiation or placement in Vivado."
+      ]
+    },
+    {
+      "url": "https://docs.amd.com/r/en-US/ug572-ultrascale-clocking/Clock-Routing-Resources-Overview",
+      "document": "AMD UG572",
+      "revision": "1.11",
+      "release_date": "2025-05-29",
+      "findings": [
+        "Local BUFCE_LEAF buffers connect horizontal clock distribution to device blocks."
+      ]
+    }
+  ],
+  "inference": "Public primitive behavior does not certify implicit physical route-through configuration or resource ownership. Direct primitive placement is not a justified replacement for capturing the actual configuration.",
+  "unresolved": [
+    "Observed LCLK_TEST_DELAY/CONFIG.DELAY encoding and effects",
+    "Actual implicit constant and inversion configuration",
+    "Shared and fixed ownership compatibility"
+  ],
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/clock_public_model_surface_audit_20261025_v1.json": "416d4bd3c94222d722bdc18ce7227d924403aa832f3dd263a5ea67f5a06ab92e"
+  },
+  "limits": [
+    "Public documentation revision is newer than installed Vivado2022.2; no new command compatibility is inferred",
+    "No matching public delay/test control encoding was established by this review; search absence does not prove undocumented hardware absence",
+    "No new physical experiment or expanded routing model"
+  ],
+  "full_clock_model_complete": false
+}

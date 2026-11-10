@@ -1,0 +1,41 @@
+{
+  "datasets": [
+    {
+      "id": "toy_B",
+      "kind": "synthetic_smoke",
+      "status": "ready",
+      "path": "toy.json",
+      "description": "稠密清零与有限位宽 epoch 标签执行同一组读写；覆盖搜索切换和 epoch 回绕。只统计逻辑操作。"
+    },
+    {
+      "id": "synthetic_state_matrix_B",
+      "kind": "synthetic_state_microbenchmark",
+      "status": "ready",
+      "path": "../configs/state_microbench.json",
+      "description": "C++ 状态原语的确定性合成访问和分支路径配置；无真实器件图"
+    },
+    {
+      "id": "real_B_1",
+      "kind": "real",
+      "status": "ready",
+      "path": "derived/logicnets_jscl.rrt",
+      "description": "真实 FPGA24 logicnets_jscl 已布局设计；完整 CPU 拥塞迭代及访问/分支轨迹",
+      "target_device": "xcvu3p-ffvc1517-2-e",
+      "source_version": "FPGA24 Interchange; RapidWright v2025.2.1-beta; frozen supplied C++ router",
+      "sha256": "d03de37af1a4a0b10f8bb29812b0048c4d2dd57ba6dadb70f61853225e39b6f4",
+      "provenance": "derived/logicnets_jscl_provenance.json",
+      "report": "../results/real_trace_20261022.md"
+    },
+    {
+      "id": "real_B_2",
+      "kind": "real",
+      "status": "ready",
+      "path": "derived/vtr_mcml.rrt",
+      "description": "独立真实 FPGA24 VTR mcml 已布局设计：14991410 节点，70980 个待布 net，224819 条间接连接",
+      "target_device": "xcvu3p-ffvc1517-3-e",
+      "source_version": "FPGA24 v1.8; RapidWright v2025.2.1-beta; frozen original C++ router",
+      "sha256": "68431e9730197f0b89c4b287822a5d7360f4df0478955eb0556212121dab6577",
+      "provenance": "derived/vtr_mcml_provenance.json"
+    }
+  ]
+}

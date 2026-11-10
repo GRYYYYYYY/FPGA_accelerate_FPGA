@@ -1,0 +1,13 @@
+# 路径控制器接入真实host服务
+
+route_commit_host_adapter封装已通过组件测试的route_commit_controller，连接原candidate_recursive_engine的真实host native label和owner服务，后端保持原paged/AXI实现。原109份生产RTL/dat不变，新增两个可综合RTL模块；测试台只在四个阶段发trace-commit/ripup请求，不生成prev链地址或owner修改列表。
+
+仲裁：外部admit须证明search空闲、所有旧host/config/frontier请求和回复均已排空。请求握手时取得held，整个控制器操作及响应退休期间保持；core busy清除后再释放。held期间所有label/owner后端请求由控制器独占；旧host请求/回复ready-valid双向阻挡。fault保持block_external直到协调重置，不能仅凭busy变低恢复。
+
+调用方必须用block_external围栏剩余入口。本测试台对host ctrl/design、expand、frontier seed及q/g/d/t/owner/cost所有cfg端口同时阻挡valid/ready，admit还核验相关pending回复。操作及响应保持期间对这些入口和两个host服务持续施加valid，任何可见ready即失败。该静态连接用于验证，完整生产top/平台仲裁仍需迁移，不能仅连接两个host mux而忘记其他入口。
+
+实际场景：同实例双query（初次328标签联合工作集、价格和存储epoch不变）。q1末态由RTL读取sink至source共8条实际prev，保存6内部节点并提交；q2 prepare仍由TB写5个字段，q2实际heap搜索结束后，RTL同样读取8条prev保存/提交slot1，随后两slot由RTL使用保存路径ripup，不重读prev。源码观察器只记录控制器实际请求，不驱动路径。owner GET仍由TB作为评分读取。
+
+四阶段owner检查：slot0提交、两slot提交、拆slot0、拆slot1。stage0只检查已知slot0的6节点，其他阶段检查两个实际提交列表的12记录，共42 GET；24次owner修改的完整图像核验不减少，第二slot提交仍对照原CPU sequence3全节点。
+
+成功证明范围：真实分页标签/owner AXI、控制器正常回溯提交/保存路径拆除及阻断冲突入口；不是mock owner。但本组合未注入真实pager/AXI故障或在途配置漂移，不能把core组件25项mock边界直接外推为组合故障恢复。控制器有界MAX_PATH32，只支持无altSink规则；未知页依然依赖CPU预知联合工作集；外层search调度、prepare、价格更新仍TB/未完成，无板卡性能结论。

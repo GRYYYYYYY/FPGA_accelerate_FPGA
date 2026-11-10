@@ -1,0 +1,140 @@
+{
+  "artifacts": {
+    "baseline/simulate/compile.stdout.log": "b9623f7e341dd983e109defdeaa86060794468d4e4418fd749d847ed56cc2622",
+    "baseline/simulate/elaborate.stdout.log": "d1880913c14827ae52390d67a207ed9b63738e40cdda0d5a83ed59ce8c05cc74",
+    "baseline/simulate/run.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "baseline/simulate/simulate.log": "2e935025c92f3c7b5f8d97e489bf3d1c05a704327fc9daa61bd3b14b1ef6e78c",
+    "baseline/simulate/simulate.stdout.log": "b5c00dafc90642a7e522897a358bc18c64549847282abc534274996f233008d1",
+    "baseline/simulate/xelab.log": "d1880913c14827ae52390d67a207ed9b63738e40cdda0d5a83ed59ce8c05cc74",
+    "baseline/simulate/xsim.dir/rearm_test/Compile_Options.txt": "493e93d5838a32b4caa90f6040ef3a3d866b5391de9bc57fbc528ca1506143ce",
+    "baseline/simulate/xsim.dir/rearm_test/TempBreakPointFile.txt": "b4cb40d28ae548744312392beffad452d7b3cc0d8a3c187635a7e3925f3c3aa7",
+    "baseline/simulate/xsim.dir/rearm_test/xsim_script.tcl": "8392d9413aad967403e27080b236f664ffd78583ee44ffaaef3fecd9bcad2a7d",
+    "baseline/simulate/xsim.dir/rearm_test/xsimcrash.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "baseline/simulate/xsim.dir/rearm_test/xsimkernel.log": "bf8683c821cc872ff805979320aab756b8964c9cb5e1a79d6c1ed065d1b8b528",
+    "baseline/simulate/xvlog.log": "b9623f7e341dd983e109defdeaa86060794468d4e4418fd749d847ed56cc2622",
+    "baseline/synth/check_timing.rpt": "ae57e7468734cf6416b75f665b5c2e179270b80d537e9421935fc5b5e31e39d8",
+    "baseline/synth/facts.txt": "968e3f2835defdc723883f5f7fca6d75647fd3916e9b54cae0b4f0c4bc34ccde",
+    "baseline/synth/loops.rpt": "a4cd7a1f37fe8a01206ed756091ca9430801c6e2e00bc93a7213fac5ed0633b6",
+    "baseline/synth/synth.dcp": "bd18a25f0aae77a5f014c0e852eac53975a10d4ff679433f6db029ef3c5eb35c",
+    "baseline/synth/synth.stdout.log": "639aa8b29473701752c1c403c4fb03b22e9e0541f55080b7740ecbd57d9acf0e",
+    "baseline/synth/synth.tcl": "bba511614e2d602d97cadfbb61147bc8249d86f1045c312e5ed49f83cfb9b28b",
+    "baseline/synth/synth.v": "013505f07350778f5a017e1882bf71189b4055a1c966af1a82d82f6f3334f9a4",
+    "baseline/synth/utilization.rpt": "611463fe10a92f9d7a7f528cf09de86a5e5cda0a7477f51338ffa8a8c0a33fc2",
+    "baseline/synth/vivado.log": "61fbc4ca393519d4ca935e483e9c35068b7f12a806621a62b90371b6a077caad"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado",
+        "-mode",
+        "batch",
+        "-source",
+        "synth.tcl",
+        "-log",
+        "vivado.log",
+        "-journal",
+        "vivado.jou"
+      ],
+      "elapsed_s": 113.9555033557117,
+      "exit_code": 0,
+      "stage": "baseline/synth/synth"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v1/sources/baseline/recovery_coordinator.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v1/sources/baseline/label_restore_controller.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v1/sources/baseline/rearm_loop_slice.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v1/sources/tb_rearm_loop.sv"
+      ],
+      "elapsed_s": 1.6177167054265738,
+      "exit_code": 0,
+      "stage": "baseline/simulate/compile"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_rearm_loop",
+        "-s",
+        "rearm_test",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "elapsed_s": 2.5697989482432604,
+      "exit_code": 0,
+      "stage": "baseline/simulate/elaborate"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "rearm_test",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "elapsed_s": 5.322975248098373,
+      "exit_code": 0,
+      "stage": "baseline/simulate/simulate"
+    }
+  ],
+  "error": "AssertionError()",
+  "reference": "/tmp/B_state_residency_offer_20261025/restore_seed_synth_on_v1",
+  "reference_audit_sha256": "0cdcabe2b7a26a63663739870cb20417f8b803fa3e8b93094c5c4f49cb3439d2",
+  "runner_sha256": "10359573df3fa7d96280e6b21b1f11099d5455bd943774ab808279054a234e54",
+  "scope": "Actual recovery_coordinator and label_restore_controller, J0 failed CRC/held receipts/unsafe rearm/late unexpected response/attempt-floor rejection/noncold retry. Native five-field restore and readback against a RAM model. External reconfiguration, physical retirement and authority/owner interfaces are modeled; no AXI, full warm join or full-root zero-loop claim.",
+  "sources": {
+    "CONTRACT.md": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/CONTRACT.md",
+      "sha256": "dc7ee768a49aa71c8e7875791ffed864e9ee275770268d49e5d1fd1584ec9b0a"
+    },
+    "agent.log": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/agent.log",
+      "sha256": "338604ee001324d28c2e605379a061ecdbde4eb826c57c8251701590b278f18c"
+    },
+    "baseline/label_restore_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/baseline/label_restore_controller.sv",
+      "sha256": "08a50cd7dd82ef6dad7c5f0f9b1969334e46b4133cdb3d93a23e40d1ef7b1a38"
+    },
+    "baseline/rearm_loop_slice.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/baseline/rearm_loop_slice.sv",
+      "sha256": "a2622655cb4d516322ee52fbed8b5d2e92b5fdcff7beec66048e3cdd3d84186a"
+    },
+    "baseline/recovery_coordinator.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/baseline/recovery_coordinator.sv",
+      "sha256": "d2a960311af7a64bb8476809371a5e39ff89920154ad28b098d0a117b7d11e8e"
+    },
+    "baseline/residency_system.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/baseline/residency_system.sv",
+      "sha256": "1a833984146f1c5a08ea815285eb6aa2c8615cd06dc082f015a73435d9b1841e"
+    },
+    "build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/build.py",
+      "sha256": "6a0486105f8832c01c02a59b3c941aa774cdf05455944b4d9073c0407224005b"
+    },
+    "fixed/label_restore_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/fixed/label_restore_controller.sv",
+      "sha256": "2bd4c0c92e5fbf9fefe34ecad2b62e2abaeeef0b1fdd78023cc71039992fd097"
+    },
+    "fixed/rearm_loop_slice.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/fixed/rearm_loop_slice.sv",
+      "sha256": "e329c56028ed9817d9c79b8fe4f03d48ed07b88061ad8cd4f3a2f99bd1a628d0"
+    },
+    "fixed/recovery_coordinator.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/fixed/recovery_coordinator.sv",
+      "sha256": "058018867ef7790b9af1f987bddf88cac8a91da1125ee8bebefc4be26e847dde"
+    },
+    "fixed/residency_system.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/fixed/residency_system.sv",
+      "sha256": "433ba1726251ab9414f216f0b463b5729d8713dc56e04ff3c29d2a913bf5baaf"
+    },
+    "tb_rearm_loop.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/rearm_loops_v1/tb_rearm_loop.sv",
+      "sha256": "b05471e99601c9adcac8c81ec40a672c37b0b0568551f8a58c0d0b4a83fc5849"
+    }
+  },
+  "status": "failed"
+}

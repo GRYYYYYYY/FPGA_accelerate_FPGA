@@ -1,0 +1,11 @@
+# 后端互斥与capture退休合并版本完整CRC回归通过
+
+native_retirement_system_crc_pressure_v1基于已恢复route_block参考，合并后端四源与query core退休一源，累计相对原seed十个唯一生产文件。通用backend参数默认关闭，原生query显式开启；retired_idle保留零depth条件，仅删除由零depth蕴含的无capture结果项。全部时序逻辑和输入不变，未包含独立NORMAL候选。
+
+27文件（12AXI、native事件/周期、DDR、恢复流等）逐字节匹配，结束48288200ns一致；实际CRC错误、保持/消费/退休、旧attempt拒绝、attempt8非冷恢复781标签/156path/10query、CPU q4 83poll/82expand/402candidate/231cost和其他net保留结论适用于相同观察。未归一化日志或放宽周期检查。
+
+backend只读观测4828815周期、authority请求回复各26、owner各32，两接口READY与回复VALID互斥成立。capture退休观测4828815周期，非零depth共3560497周期、结果VALID共705周期；零depth无结果，实际retired_idle逐周期等于完整原谓词，没有强制DUT信号。
+
+379文件归档已实际恢复复审，audit逐字节一致。archive 8e823e32192e7c901035a339cf6911948d30de926bfdff709debb1225b9e8470，audit 538975200040ec24b88302ca534363227f7c57a18e20106b99ca2a483e7b0442。源码、工具与局部8192组二态证明冻结；局部证明并非X/Z形式等价，本回归也不代表所有输入。
+
+仅单槽CRC压力例完成；同源综合见独立结构报告，不能从行为一致推断无组合环或时序。其余七项最终矩阵待独立执行；原始CRC参考直接核对由audit_native_matrix_crc_anchor.py单列，避免重复仿真。固定价格、可信初始快照、持久化floor/认证、自然overflow、物理实现和板卡缺口保持。

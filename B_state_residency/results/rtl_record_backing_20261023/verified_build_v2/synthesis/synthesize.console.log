@@ -1,0 +1,440 @@
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source synthesize.tcl
+# set_param general.maxThreads 2
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_page_axi.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/backing_frame_directory_lookup.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/backing_page_service_lookup.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_page_codec.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/record_backing_service.sv}
+# read_xdc {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_frame_store.xdc}
+# synth_design -top record_backing_service -part xcu280-fsvh2892-2L-e -mode out_of_context
+Command: synth_design -top record_backing_service -part xcu280-fsvh2892-2L-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 531423
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 3408.957 ; gain = 365.738 ; free physical = 640676 ; free virtual = 1357340
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2638.218; parent = 2495.902; children = 142.315
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4374.496; parent = 3408.961; children = 965.535
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'record_backing_service' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/record_backing_service.sv:6]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_codec' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_page_codec.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_codec' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_page_codec.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'backing_page_service_lookup' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/backing_page_service_lookup.sv:6]
+	Parameter FRAMES bound to: 23405 - type: integer 
+	Parameter INDEX_BITS bound to: 15 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'backing_frame_directory_lookup' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/backing_frame_directory_lookup.sv:6]
+	Parameter FRAMES bound to: 23405 - type: integer 
+	Parameter INDEX_BITS bound to: 15 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'backing_frame_directory_lookup' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/backing_frame_directory_lookup.sv:6]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_axi' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_page_axi.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_axi' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_page_axi.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'backing_page_service_lookup' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/backing_page_service_lookup.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'record_backing_service' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/record_backing_service.sv:6]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3502.863 ; gain = 459.645 ; free physical = 640662 ; free virtual = 1357326
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2638.218; parent = 2495.902; children = 142.315
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4468.402; parent = 3502.867; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 3520.676 ; gain = 477.457 ; free physical = 640576 ; free virtual = 1357240
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2638.218; parent = 2495.902; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4486.215; parent = 3520.680; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 3520.676 ; gain = 477.457 ; free physical = 640552 ; free virtual = 1357216
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2638.218; parent = 2495.902; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4486.215; parent = 3520.680; children = 965.535
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3520.676 ; gain = 0.000 ; free physical = 640461 ; free virtual = 1357124
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_frame_store.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_frame_store.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3652.215 ; gain = 0.000 ; free physical = 638991 ; free virtual = 1355655
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3652.215 ; gain = 0.000 ; free physical = 638991 ; free virtual = 1355655
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3652.215 ; gain = 608.996 ; free physical = 639033 ; free virtual = 1355697
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2727.345; parent = 2585.031; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4617.754; parent = 3652.219; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu280-fsvh2892-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3652.215 ; gain = 608.996 ; free physical = 639038 ; free virtual = 1355702
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2727.345; parent = 2585.031; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4617.754; parent = 3652.219; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 3652.215 ; gain = 608.996 ; free physical = 639014 ; free virtual = 1355678
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2727.345; parent = 2585.031; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4617.754; parent = 3652.219; children = 965.535
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'record_backing_service'
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_lookup:/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 4 because memory depth for RAM "backing_frame_directory_lookup:/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 18 for RAM "backing_frame_directory_lookup:/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "backing_frame_directory_lookup:/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 3 and width 4 for RAM "backing_frame_directory_lookup:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 2 and width 2 for RAM "backing_frame_directory_lookup:/owners_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "backing_frame_directory_lookup:/owners_reg"
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              011 |                             0000
+*
+                    SEND |                              001 |                             0011
+             WAIT_MEMORY |                              110 |                             0100
+                  CANCEL |                              100 |                             0111
+                  COMMIT |                              101 |                             0101
+                   START |                              000 |                             0001
+                  ENCODE |                              111 |                             0010
+                  FINISH |                              010 |                             0110
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'record_backing_service'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 3652.215 ; gain = 608.996 ; free physical = 638998 ; free virtual = 1355662
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2727.345; parent = 2585.031; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4617.754; parent = 3652.219; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   32 Bit       Adders := 1     
+	   3 Input   27 Bit       Adders := 1     
+	   3 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 2     
+	   2 Input   15 Bit       Adders := 2     
+	   2 Input   12 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 3     
+	   2 Input    8 Bit       Adders := 2     
+	   2 Input    7 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 7     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 1     
++---Registers : 
+	              512 Bit    Registers := 3     
+	              160 Bit    Registers := 2     
+	               64 Bit    Registers := 10    
+	               32 Bit    Registers := 7     
+	               25 Bit    Registers := 1     
+	               24 Bit    Registers := 3     
+	               16 Bit    Registers := 2     
+	               15 Bit    Registers := 11    
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 2     
+	                6 Bit    Registers := 5     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 8     
+	                2 Bit    Registers := 4     
+	                1 Bit    Registers := 28    
++---RAMs : 
+	             571K Bit	(23405 X 25 bit)          RAMs := 1     
+	              10K Bit	(320 X 32 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input  512 Bit        Muxes := 4     
+	  14 Input  512 Bit        Muxes := 2     
+	   2 Input  160 Bit        Muxes := 1     
+	  14 Input  160 Bit        Muxes := 2     
+	   2 Input   64 Bit        Muxes := 7     
+	   3 Input   64 Bit        Muxes := 1     
+	  14 Input   64 Bit        Muxes := 1     
+	   4 Input   64 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 15    
+	   8 Input   32 Bit        Muxes := 2     
+	   2 Input   25 Bit        Muxes := 2     
+	   6 Input   16 Bit        Muxes := 2     
+	   2 Input   16 Bit        Muxes := 4     
+	   4 Input   15 Bit        Muxes := 1     
+	   6 Input   15 Bit        Muxes := 2     
+	   2 Input   15 Bit        Muxes := 14    
+	   7 Input   15 Bit        Muxes := 1     
+	   8 Input   15 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 7     
+	  14 Input    9 Bit        Muxes := 2     
+	   2 Input    8 Bit        Muxes := 6     
+	   2 Input    6 Bit        Muxes := 30    
+	  14 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 4     
+	  14 Input    5 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 9     
+	   3 Input    4 Bit        Muxes := 1     
+	   6 Input    4 Bit        Muxes := 1     
+	   5 Input    4 Bit        Muxes := 1     
+	   7 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 28    
+	  14 Input    3 Bit        Muxes := 2     
+	   3 Input    3 Bit        Muxes := 5     
+	   5 Input    3 Bit        Muxes := 2     
+	   7 Input    3 Bit        Muxes := 1     
+	   8 Input    3 Bit        Muxes := 2     
+	   6 Input    3 Bit        Muxes := 1     
+	  29 Input    3 Bit        Muxes := 1     
+	  14 Input    2 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 30    
+	   6 Input    2 Bit        Muxes := 4     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 277   
+	   4 Input    1 Bit        Muxes := 4     
+	  14 Input    1 Bit        Muxes := 9     
+	   7 Input    1 Bit        Muxes := 14    
+	   6 Input    1 Bit        Muxes := 14    
+	   5 Input    1 Bit        Muxes := 2     
+	   8 Input    1 Bit        Muxes := 9     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 9024 (col length:94)
+BRAMs: 4032 (col length: RAMB18 288 RAMB36 144)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 4 because memory depth for RAM "memory_service/directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 18 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "memory_service/directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 3 and width 4 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 2 and width 2 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "memory_service/directory/owners_reg"
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3652.215 ; gain = 608.996 ; free physical = 637185 ; free virtual = 1353849
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2727.345; parent = 2585.031; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4617.754; parent = 3652.219; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++-------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name              | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++-------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|codec                    | words_reg  | 320 x 32(READ_FIRST)   | W |   | 320 x 32(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      |                 | 
+|memory_service/directory | owners_reg | 22 K x 25(READ_FIRST)  | W |   | 22 K x 25(WRITE_FIRST) |   | R | Port A and B     | 0      | 18     | 8,4,3,2,1       | 
++-------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 3938.699 ; gain = 895.480 ; free physical = 636415 ; free virtual = 1353079
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3158.310; parent = 3015.996; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4904.238; parent = 3938.703; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5556] The block RAM "memory_service/directory/owners_reg" may be mapped as a cascade chain, because it is not timing critical.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 4 because memory depth for RAM "memory_service/directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 18 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 4 reduced to 3 because memory depth for RAM "memory_service/directory/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 3 and width 4 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 2 and width 2 for RAM "memory_service/directory/owners_reg"
+INFO: [Synth 8-7030] Implemented Non-Cascaded Block Ram (cascade_height = 1) of width 1 for RAM "memory_service/directory/owners_reg"
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:51 ; elapsed = 00:00:56 . Memory (MB): peak = 4047.449 ; gain = 1004.230 ; free physical = 636245 ; free virtual = 1352910
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3250.167; parent = 3107.853; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5012.988; parent = 4047.453; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name              | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++-------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|codec                    | words_reg  | 320 x 32(READ_FIRST)   | W |   | 320 x 32(WRITE_FIRST)  |   | R | Port A and B     | 1      | 0      |                 | 
+|memory_service/directory | owners_reg | 22 K x 25(READ_FIRST)  | W |   | 22 K x 25(WRITE_FIRST) |   | R | Port A and B     | 0      | 18     | 8,4,3,2,1       | 
++-------------------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance codec/words_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory_service/directory/owners_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory_service/directory/owners_reg_bram_11 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory_service/directory/owners_reg_bram_14 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory_service/directory/owners_reg_bram_16 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance memory_service/directory/owners_reg_bram_17 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:52 ; elapsed = 00:00:57 . Memory (MB): peak = 4071.473 ; gain = 1028.254 ; free physical = 636227 ; free virtual = 1352892
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3256.179; parent = 3113.866; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5037.012; parent = 4071.477; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:56 ; elapsed = 00:01:01 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636170 ; free virtual = 1352835
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.120; parent = 3114.808; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:56 ; elapsed = 00:01:01 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636165 ; free virtual = 1352830
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.135; parent = 3114.823; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:56 ; elapsed = 00:01:02 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636121 ; free virtual = 1352786
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.495; parent = 3115.183; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:56 ; elapsed = 00:01:02 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636105 ; free virtual = 1352770
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.506; parent = 3115.194; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:56 ; elapsed = 00:01:02 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636118 ; free virtual = 1352783
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.576; parent = 3115.265; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:56 ; elapsed = 00:01:02 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636117 ; free virtual = 1352781
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.576; parent = 3115.265; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY8   |    30|
+|2     |LUT1     |     5|
+|3     |LUT2     |   189|
+|4     |LUT3     |   721|
+|5     |LUT4     |   409|
+|6     |LUT5     |   470|
+|7     |LUT6     |   953|
+|8     |MUXF7    |    72|
+|9     |MUXF8    |    36|
+|10    |RAMB18E2 |     1|
+|11    |RAMB36E2 |    18|
+|20    |FDRE     |  3033|
+|21    |FDSE     |     2|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:56 ; elapsed = 00:01:02 . Memory (MB): peak = 4079.410 ; gain = 1036.191 ; free physical = 636115 ; free virtual = 1352780
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3257.623; parent = 3115.312; children = 142.322
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5044.949; parent = 4079.414; children = 965.535
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:48 ; elapsed = 00:00:54 . Memory (MB): peak = 4079.410 ; gain = 904.652 ; free physical = 636140 ; free virtual = 1352805
+Synthesis Optimization Complete : Time (s): cpu = 00:00:56 ; elapsed = 00:01:02 . Memory (MB): peak = 4079.418 ; gain = 1036.191 ; free physical = 636141 ; free virtual = 1352805
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.04 . Memory (MB): peak = 4090.379 ; gain = 0.000 ; free physical = 636241 ; free virtual = 1352905
+INFO: [Netlist 29-17] Analyzing 138 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_frame_store.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/sources/hardware/rtl/scratch_frame_store.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4146.816 ; gain = 0.000 ; free physical = 636093 ; free virtual = 1352758
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 4714f0da
+INFO: [Common 17-83] Releasing license: Synthesis
+57 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:15 ; elapsed = 00:01:21 . Memory (MB): peak = 4146.816 ; gain = 2444.223 ; free physical = 636346 ; free virtual = 1353011
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# report_utilization -file utilization.rpt
+# report_utilization -hierarchical -file utilization_hierarchical.rpt
+# write_checkpoint record_backing_service.dcp
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_record_backing_20261023/verified_build_v2/synthesis/record_backing_service.dcp' has been generated.
+# set b_rams [get_cells -hier -filter {REF_NAME =~ RAMB*}]
+# set b_file [open ram_cells.txt w]
+# foreach b_cell $b_rams {puts $b_file "$b_cell [get_property REF_NAME $b_cell]"}
+# close $b_file
+# if {[llength $b_rams] == 0} {error "Adapter BRAM was not inferred"}
+# puts "B_RECORD_BACKING_SYNTH_PASS ram_cells=[llength $b_rams]"
+B_RECORD_BACKING_SYNTH_PASS ram_cells=19
+# exit
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 23 11:40:30 2026...

@@ -1,0 +1,60 @@
+{
+  "status": "synthetic_parser_calibration_only_not_actual_probe",
+  "checker_sha256": "20dbd4b25e8f2c66ea0c01a63ec769aead0af45f559c6e06391f2af3b972a18f",
+  "positive_fixture": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+  "expected": {
+    "ready_ps": 830000,
+    "accept_ps": 835000,
+    "split_ps": 836000,
+    "halt_ps": 846000,
+    "cycles": [
+      83,
+      83,
+      84,
+      85
+    ],
+    "scope": "Observed interface invariant failure; not full regression PASS."
+  },
+  "negative_fixtures": {
+    "missing_ready": "FULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "duplicate_ready": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "extra_malformed_marker": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\nFULL_PROBE_READY damaged\n",
+    "accept_x": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=x release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "not_accept_both": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=0\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "no_split": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=1\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "wrong_status": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=0\n$finish called at time : 846 ns\n",
+    "wrong_split_delay": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=837000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "wrong_halt_delay": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=856000 status=3\n$finish called at time : 846 ns\n",
+    "wrong_drive_phase": "FULL_PROBE_READY cycle=83 time=831000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "wrong_generation": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000002 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "wrong_checkpoint": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=18 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "wrong_version": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=4\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "pre_cold_prefix": "FULL_PROBE_READY cycle=12 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "cycle_jump": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=100 time=846000 status=3\n$finish called at time : 846 ns\n",
+    "missing_finish": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n",
+    "runtime_fatal": "FULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\nFatal: unexpected old assertion\n",
+    "event_reorder": "FULL_SIMULTANEOUS_ACCEPT cycle=83 time=835000 start=1 release=1\nFULL_PROBE_READY cycle=83 time=830000 generation=0000000100000001 checkpoint=17 version=3\nFULL_OWNERSHIP_SPLIT cycle=84 time=836000 publication=1 lease=0\nFULL_RTL_RELEASE_OVERLAP_OBSERVED cycle=85 time=846000 status=3\n$finish called at time : 846 ns\n"
+  },
+  "rejected": [
+    "missing_ready",
+    "duplicate_ready",
+    "extra_malformed_marker",
+    "accept_x",
+    "not_accept_both",
+    "no_split",
+    "wrong_status",
+    "wrong_split_delay",
+    "wrong_halt_delay",
+    "wrong_drive_phase",
+    "wrong_generation",
+    "wrong_checkpoint",
+    "wrong_version",
+    "pre_cold_prefix",
+    "cycle_jump",
+    "missing_finish",
+    "runtime_fatal",
+    "event_reorder"
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

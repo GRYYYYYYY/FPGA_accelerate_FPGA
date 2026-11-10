@@ -1,0 +1,2502 @@
+{
+  "conclusions": [
+    "The synthesized top has fixed parameters; direct RTL instance parameter overrides must not be passed blindly to its functional netlist.",
+    "Existing scoreboard, coverage, task decisions and fault injection conditions depend on internal RTL hierarchy, not only observer printouts. Removing hierarchical statements would change verification semantics.",
+    "A gate validation entry must preserve externally driven transactions, negative-case decisions and expected responses; any internal diagnostics that cannot be mapped need explicit coverage accounting.",
+    "Port stimulus replay can test the complete recorded run if input timing and all output comparisons are preserved, but it does not independently reproduce adaptive closed-loop stimulus or replace the original behavioral monitors."
+  ],
+  "force_release_lines": [],
+  "full_system_functional_netlist_validated": false,
+  "hierarchical_reference_count": 558,
+  "hierarchical_references": {
+    "system.as_attempt_reset": [
+      1322
+    ],
+    "system.as_bound_generation": [
+      1394,
+      1439,
+      2429,
+      2616
+    ],
+    "system.as_cfg_checkpoint": [
+      2446
+    ],
+    "system.as_cfg_generation": [
+      2446
+    ],
+    "system.as_cfg_lease": [
+      1331,
+      2813
+    ],
+    "system.as_core_cfg_valid": [
+      2813
+    ],
+    "system.boot_pending": [
+      2452
+    ],
+    "system.boot_rsp_valid": [
+      2452
+    ],
+    "system.c_service_lane": [
+      2185,
+      2186
+    ],
+    "system.c_service_payload": [
+      2185
+    ],
+    "system.c_service_ready": [
+      2185
+    ],
+    "system.c_service_rsp_payload": [
+      2186
+    ],
+    "system.c_service_rsp_ready": [
+      2186
+    ],
+    "system.c_service_rsp_valid": [
+      2186
+    ],
+    "system.c_service_valid": [
+      2185
+    ],
+    "system.controller.abort": [
+      3469,
+      3483
+    ],
+    "system.controller.backend_fault": [
+      3470,
+      3483
+    ],
+    "system.controller.cp_bad": [
+      3471,
+      3482
+    ],
+    "system.controller.cp_busy": [
+      3408
+    ],
+    "system.controller.cp_drift": [
+      3470,
+      3482
+    ],
+    "system.controller.cp_failed": [
+      3469,
+      3482
+    ],
+    "system.controller.cp_importing": [
+      3468
+    ],
+    "system.controller.cp_m_ready": [
+      3412
+    ],
+    "system.controller.cp_m_valid": [
+      3412
+    ],
+    "system.controller.cp_ready": [
+      3409
+    ],
+    "system.controller.cp_rebasing": [
+      3468,
+      3483
+    ],
+    "system.controller.cp_rsp_ready": [
+      3410
+    ],
+    "system.controller.cp_rsp_valid": [
+      3410
+    ],
+    "system.controller.cp_running": [
+      3472,
+      3480
+    ],
+    "system.controller.cp_s_ready": [
+      3411
+    ],
+    "system.controller.cp_s_valid": [
+      3411
+    ],
+    "system.controller.cp_safe": [
+      3401,
+      3403,
+      3406,
+      3428,
+      3434,
+      3454
+    ],
+    "system.controller.cp_stage": [
+      3473,
+      3473,
+      3477,
+      3481,
+      3484,
+      3484
+    ],
+    "system.controller.cp_state": [
+      3466
+    ],
+    "system.controller.cp_valid": [
+      3409
+    ],
+    "system.controller.cp_wanted": [
+      3472,
+      3480
+    ],
+    "system.controller.host_label_edit": [
+      3401,
+      3403,
+      3407,
+      3428,
+      3430,
+      3454
+    ],
+    "system.controller.label_state_dirty": [
+      1398,
+      3418,
+      3474,
+      3481,
+      3498,
+      3561
+    ],
+    "system.controller.last_design": [
+      3419
+    ],
+    "system.controller.last_price": [
+      3420
+    ],
+    "system.controller.last_query": [
+      3420
+    ],
+    "system.controller.last_sequence": [
+      1364,
+      1388,
+      1391,
+      1392,
+      1393,
+      1403,
+      1425,
+      1439,
+      1441,
+      2374,
+      2379,
+      2385,
+      2515,
+      2516,
+      2549,
+      2574,
+      2575,
+      2592,
+      2617,
+      2630,
+      2635,
+      2670,
+      2672,
+      2780,
+      2782,
+      2846,
+      2847,
+      2863,
+      2912,
+      2914,
+      2936,
+      2954,
+      2955,
+      2984,
+      2995,
+      3039,
+      3043,
+      3044,
+      3052,
+      3053,
+      3104,
+      3106,
+      3121,
+      3139,
+      3140,
+      3157,
+      3159,
+      3160,
+      3168,
+      3180,
+      3239,
+      3243,
+      3244,
+      3248,
+      3249,
+      3255,
+      3257,
+      3419,
+      3474,
+      3484,
+      3499,
+      3562
+    ],
+    "system.controller.last_version": [
+      2515,
+      2592,
+      3420
+    ],
+    "system.controller.operation": [
+      1000,
+      1001,
+      1001,
+      1001,
+      2230
+    ],
+    "system.controller.owned": [
+      3434,
+      3497
+    ],
+    "system.controller.route_ready": [
+      3390,
+      3396
+    ],
+    "system.controller.route_rsp_ready": [
+      3397
+    ],
+    "system.controller.route_rsp_valid": [
+      3390,
+      3397
+    ],
+    "system.controller.route_valid": [
+      3396
+    ],
+    "system.controller.rst": [
+      3468
+    ],
+    "system.controller.search_ready": [
+      3389,
+      3394
+    ],
+    "system.controller.search_rsp_ready": [
+      3395
+    ],
+    "system.controller.search_rsp_valid": [
+      3389,
+      3395
+    ],
+    "system.controller.search_valid": [
+      3394
+    ],
+    "system.controller.sequence_seen": [
+      1388,
+      1398,
+      3418,
+      3498
+    ],
+    "system.controller.service_ready": [
+      3388,
+      3392
+    ],
+    "system.controller.service_rsp_ready": [
+      3393
+    ],
+    "system.controller.service_rsp_valid": [
+      3388,
+      3393
+    ],
+    "system.controller.service_valid": [
+      3392
+    ],
+    "system.cp_s_ready": [
+      2470,
+      2507,
+      2567,
+      2664,
+      2774,
+      2945,
+      3022,
+      3130,
+      3222
+    ],
+    "system.inner.b_out_ready": [
+      2160
+    ],
+    "system.inner.backend.b_l_field": [
+      1840
+    ],
+    "system.inner.backend.b_l_node": [
+      1841
+    ],
+    "system.inner.backend.b_l_payload": [
+      1842
+    ],
+    "system.inner.backend.b_l_present": [
+      1843
+    ],
+    "system.inner.backend.b_l_ready": [
+      1844
+    ],
+    "system.inner.backend.b_l_rsp_ready": [
+      1845
+    ],
+    "system.inner.backend.b_l_rsp_valid": [
+      1846
+    ],
+    "system.inner.backend.b_l_status": [
+      1847
+    ],
+    "system.inner.backend.b_l_valid": [
+      1848
+    ],
+    "system.inner.backend.b_l_value": [
+      1849
+    ],
+    "system.inner.backend.b_l_write": [
+      1850
+    ],
+    "system.inner.backend.b_o_cookie": [
+      1851
+    ],
+    "system.inner.backend.b_o_count": [
+      1852
+    ],
+    "system.inner.backend.b_o_net": [
+      1853
+    ],
+    "system.inner.backend.b_o_node": [
+      1854
+    ],
+    "system.inner.backend.b_o_occupancy": [
+      1855
+    ],
+    "system.inner.backend.b_o_op": [
+      1856
+    ],
+    "system.inner.backend.b_o_ready": [
+      1857
+    ],
+    "system.inner.backend.b_o_rsp_cookie": [
+      1858
+    ],
+    "system.inner.backend.b_o_rsp_ready": [
+      1859
+    ],
+    "system.inner.backend.b_o_rsp_valid": [
+      1860
+    ],
+    "system.inner.backend.b_o_status": [
+      1861
+    ],
+    "system.inner.backend.b_o_valid": [
+      1862
+    ],
+    "system.inner.backend.b_o_will_overuse": [
+      1863
+    ],
+    "system.inner.backend.cf_busy": [
+      1864
+    ],
+    "system.inner.backend.cf_payload": [
+      1865
+    ],
+    "system.inner.backend.cf_ready": [
+      1866
+    ],
+    "system.inner.backend.cf_replies": [
+      1867
+    ],
+    "system.inner.backend.cf_reply_ready": [
+      1868
+    ],
+    "system.inner.backend.cf_retired": [
+      1869
+    ],
+    "system.inner.backend.cf_rsp_cookie": [
+      1870
+    ],
+    "system.inner.backend.cf_rsp_status": [
+      1871
+    ],
+    "system.inner.backend.cf_rsp_valid": [
+      1872
+    ],
+    "system.inner.backend.cf_saved_checkpoint": [
+      1873
+    ],
+    "system.inner.backend.cf_saved_design": [
+      1874
+    ],
+    "system.inner.backend.cf_sent": [
+      1875
+    ],
+    "system.inner.backend.cf_status": [
+      1876
+    ],
+    "system.inner.backend.cf_valid": [
+      1877
+    ],
+    "system.inner.backend.config_restore.descriptor": [
+      1378,
+      1394,
+      1440,
+      3489,
+      3504
+    ],
+    "system.inner.backend.dut.center_retired_idle": [
+      1758,
+      2236
+    ],
+    "system.inner.backend.dut.cl_field": [
+      1207
+    ],
+    "system.inner.backend.dut.cl_node": [
+      1207
+    ],
+    "system.inner.backend.dut.cl_payload": [
+      1208
+    ],
+    "system.inner.backend.dut.cl_present": [
+      1208
+    ],
+    "system.inner.backend.dut.cl_ready": [
+      1207
+    ],
+    "system.inner.backend.dut.cl_rsp_ready": [
+      1208
+    ],
+    "system.inner.backend.dut.cl_rsp_valid": [
+      1208
+    ],
+    "system.inner.backend.dut.cl_status": [
+      1208
+    ],
+    "system.inner.backend.dut.cl_valid": [
+      1207
+    ],
+    "system.inner.backend.dut.cl_value": [
+      1207
+    ],
+    "system.inner.backend.dut.commit_busy": [
+      2236
+    ],
+    "system.inner.backend.dut.core.a_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core.access.controller.state": [
+      1188
+    ],
+    "system.inner.backend.dut.core.arb_d_busy": [
+      24,
+      2238,
+      2295
+    ],
+    "system.inner.backend.dut.core.arb_g_busy": [
+      24,
+      2238,
+      2295
+    ],
+    "system.inner.backend.dut.core.arb_io_busy": [
+      24,
+      2238,
+      2295
+    ],
+    "system.inner.backend.dut.core.b_result_valid": [
+      26,
+      2295
+    ],
+    "system.inner.backend.dut.core.b_retired_idle": [
+      25,
+      2237
+    ],
+    "system.inner.backend.dut.core.busy": [
+      24
+    ],
+    "system.inner.backend.dut.core.c_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core.capture_depth": [
+      25,
+      2238,
+      2295,
+      3378,
+      3383
+    ],
+    "system.inner.backend.dut.core.capture_fault": [
+      1188
+    ],
+    "system.inner.backend.dut.core.ce_expand_cookie": [
+      1193
+    ],
+    "system.inner.backend.dut.core.ce_expand_parent": [
+      1193
+    ],
+    "system.inner.backend.dut.core.ce_expand_ready": [
+      1193
+    ],
+    "system.inner.backend.dut.core.ce_expand_valid": [
+      1193
+    ],
+    "system.inner.backend.dut.core.ce_result_cookie": [
+      1194
+    ],
+    "system.inner.backend.dut.core.ce_result_count": [
+      1194
+    ],
+    "system.inner.backend.dut.core.ce_result_ready": [
+      1194
+    ],
+    "system.inner.backend.dut.core.ce_result_valid": [
+      26,
+      1194,
+      2295
+    ],
+    "system.inner.backend.dut.core.child_capture.frame_fault": [
+      2238
+    ],
+    "system.inner.backend.dut.core.child_capture.state": [
+      1196,
+      2238
+    ],
+    "system.inner.backend.dut.core.controller.frame_cookie": [
+      1197
+    ],
+    "system.inner.backend.dut.core.controller.state": [
+      1188,
+      2238,
+      2298
+    ],
+    "system.inner.backend.dut.core.coordinates.state": [
+      2298
+    ],
+    "system.inner.backend.dut.core.d_fault": [
+      1188
+    ],
+    "system.inner.backend.dut.core.d_rsp_valid": [
+      26,
+      2295
+    ],
+    "system.inner.backend.dut.core.e_result_valid": [
+      26,
+      3378,
+      3384
+    ],
+    "system.inner.backend.dut.core.expansion.state": [
+      1188,
+      1196,
+      2238,
+      2298
+    ],
+    "system.inner.backend.dut.core.g_rsp_ready": [
+      2238
+    ],
+    "system.inner.backend.dut.core.g_rsp_valid": [
+      26,
+      2238,
+      2295
+    ],
+    "system.inner.backend.dut.core.m_req_child": [
+      1197
+    ],
+    "system.inner.backend.dut.core.m_req_parent": [
+      1197
+    ],
+    "system.inner.backend.dut.core.m_req_ready": [
+      1195
+    ],
+    "system.inner.backend.dut.core.m_req_valid": [
+      1195
+    ],
+    "system.inner.backend.dut.core.m_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core.metadata.state": [
+      1188,
+      2298
+    ],
+    "system.inner.backend.dut.core.o_b_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core.o_fault": [
+      1188
+    ],
+    "system.inner.backend.dut.core.o_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_field": [
+      1833,
+      3320
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_generation": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_offset": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_op": [
+      1833,
+      3319
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_page": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_price": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_query": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_ready": [
+      1833,
+      3318
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_slot": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_valid": [
+      1833,
+      3317
+    ],
+    "system.inner.backend.dut.core.p.native_cmd_value": [
+      1833
+    ],
+    "system.inner.backend.dut.core.p.native_rsp_payload": [
+      1834
+    ],
+    "system.inner.backend.dut.core.p.native_rsp_present": [
+      1834
+    ],
+    "system.inner.backend.dut.core.p.native_rsp_ready": [
+      1834
+    ],
+    "system.inner.backend.dut.core.p.native_rsp_status": [
+      1834
+    ],
+    "system.inner.backend.dut.core.p.native_rsp_valid": [
+      1834,
+      3324
+    ],
+    "system.inner.backend.dut.core.p.pager": [
+      3263
+    ],
+    "system.inner.backend.dut.core.p.pager.restore_write": [
+      3323
+    ],
+    "system.inner.backend.dut.core.p_draining": [
+      2237
+    ],
+    "system.inner.backend.dut.core.p_fault": [
+      1188
+    ],
+    "system.inner.backend.dut.core.p_memory_leases": [
+      2237
+    ],
+    "system.inner.backend.dut.core.p_page_leases": [
+      2237
+    ],
+    "system.inner.backend.dut.core.p_result_valid": [
+      27,
+      2237
+    ],
+    "system.inner.backend.dut.core.pc_arb_busy": [
+      24,
+      2238,
+      2295
+    ],
+    "system.inner.backend.dut.core.retired_idle": [
+      3380
+    ],
+    "system.inner.backend.dut.core.rst": [
+      24
+    ],
+    "system.inner.backend.dut.core.s_l_field": [
+      1200,
+      1201
+    ],
+    "system.inner.backend.dut.core.s_l_node": [
+      1200,
+      1201
+    ],
+    "system.inner.backend.dut.core.s_l_payload": [
+      1205
+    ],
+    "system.inner.backend.dut.core.s_l_ready": [
+      1199
+    ],
+    "system.inner.backend.dut.core.s_l_rsp_ready": [
+      1203
+    ],
+    "system.inner.backend.dut.core.s_l_rsp_valid": [
+      1203
+    ],
+    "system.inner.backend.dut.core.s_l_status": [
+      1205
+    ],
+    "system.inner.backend.dut.core.s_l_valid": [
+      1199
+    ],
+    "system.inner.backend.dut.core.s_l_write": [
+      1200,
+      1201
+    ],
+    "system.inner.backend.dut.core.s_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core.t_rsp_valid": [
+      27
+    ],
+    "system.inner.backend.dut.core_busy": [
+      1758,
+      2236
+    ],
+    "system.inner.backend.dut.cost_lease": [
+      2236
+    ],
+    "system.inner.backend.dut.frontier.fs_req_cookie": [
+      1210
+    ],
+    "system.inner.backend.dut.frontier.fs_req_id": [
+      1210
+    ],
+    "system.inner.backend.dut.frontier.fs_req_key": [
+      1210
+    ],
+    "system.inner.backend.dut.frontier.fs_req_op": [
+      1210
+    ],
+    "system.inner.backend.dut.frontier.fs_req_ready": [
+      1210
+    ],
+    "system.inner.backend.dut.frontier.fs_req_valid": [
+      1210
+    ],
+    "system.inner.backend.dut.frontier.fs_rsp_id": [
+      1211
+    ],
+    "system.inner.backend.dut.frontier.fs_rsp_key": [
+      1211
+    ],
+    "system.inner.backend.dut.frontier.fs_rsp_ready": [
+      1211
+    ],
+    "system.inner.backend.dut.frontier.fs_rsp_size": [
+      1211
+    ],
+    "system.inner.backend.dut.frontier.fs_rsp_status": [
+      1211
+    ],
+    "system.inner.backend.dut.frontier.fs_rsp_valid": [
+      1211
+    ],
+    "system.inner.backend.dut.frontier_retired_idle": [
+      1758,
+      2236
+    ],
+    "system.inner.backend.dut.frontier_size": [
+      1209,
+      1415,
+      1444
+    ],
+    "system.inner.backend.dut.held_parent": [
+      2162,
+      2162,
+      2174
+    ],
+    "system.inner.backend.dut.k_retired_idle": [
+      2236
+    ],
+    "system.inner.backend.dut.of_id": [
+      1209
+    ],
+    "system.inner.backend.dut.of_key": [
+      1209
+    ],
+    "system.inner.backend.dut.of_ready": [
+      1209
+    ],
+    "system.inner.backend.dut.of_valid": [
+      1209
+    ],
+    "system.inner.backend.dut.offer_busy": [
+      2236
+    ],
+    "system.inner.backend.dut.operation_pending": [
+      2236
+    ],
+    "system.inner.backend.dut.post_inputs.state": [
+      2238
+    ],
+    "system.inner.backend.dut.post_retired_idle": [
+      1758,
+      2236
+    ],
+    "system.inner.backend.dut.prefetch.state": [
+      2238
+    ],
+    "system.inner.backend.dut.prefetch_retired_idle": [
+      1758,
+      2236
+    ],
+    "system.inner.backend.dut.q_lease": [
+      2236
+    ],
+    "system.inner.backend.f_brecover_ready": [
+      1878
+    ],
+    "system.inner.backend.f_brecover_rsp_ready": [
+      1879
+    ],
+    "system.inner.backend.f_brecover_rsp_valid": [
+      1880
+    ],
+    "system.inner.backend.f_brecover_valid": [
+      1881
+    ],
+    "system.inner.backend.f_broute_payload": [
+      1267,
+      1882,
+      2191
+    ],
+    "system.inner.backend.f_broute_ready": [
+      1883
+    ],
+    "system.inner.backend.f_broute_rsp_ready": [
+      1884
+    ],
+    "system.inner.backend.f_broute_rsp_valid": [
+      1885
+    ],
+    "system.inner.backend.f_broute_valid": [
+      1886
+    ],
+    "system.inner.backend.f_cbp": [
+      1887
+    ],
+    "system.inner.backend.f_cbr": [
+      1888
+    ],
+    "system.inner.backend.f_cbrp": [
+      1889
+    ],
+    "system.inner.backend.f_cbrr": [
+      1890
+    ],
+    "system.inner.backend.f_cbrv": [
+      1891
+    ],
+    "system.inner.backend.f_cbv": [
+      1892
+    ],
+    "system.inner.backend.f_dp": [
+      1893
+    ],
+    "system.inner.backend.f_dr": [
+      1894
+    ],
+    "system.inner.backend.f_drp": [
+      1895
+    ],
+    "system.inner.backend.f_drr": [
+      1896
+    ],
+    "system.inner.backend.f_drv": [
+      1897
+    ],
+    "system.inner.backend.f_dv": [
+      1898
+    ],
+    "system.inner.backend.f_pending": [
+      1899,
+      2235
+    ],
+    "system.inner.backend.f_sp": [
+      1763
+    ],
+    "system.inner.backend.f_sr": [
+      1763
+    ],
+    "system.inner.backend.f_sv": [
+      1763
+    ],
+    "system.inner.backend.f_watch_fault": [
+      1900
+    ],
+    "system.inner.backend.f_watch_idle": [
+      1901
+    ],
+    "system.inner.backend.fd_cc_req_cookie": [
+      1902
+    ],
+    "system.inner.backend.fd_cc_req_design_id": [
+      1903
+    ],
+    "system.inner.backend.fd_cc_req_price": [
+      1904
+    ],
+    "system.inner.backend.fd_cc_req_query": [
+      1905
+    ],
+    "system.inner.backend.fd_cc_req_ready": [
+      1906
+    ],
+    "system.inner.backend.fd_cc_req_valid": [
+      1907
+    ],
+    "system.inner.backend.fd_cc_req_version": [
+      1908
+    ],
+    "system.inner.backend.fd_cc_req_words": [
+      1909
+    ],
+    "system.inner.backend.fd_cc_rsp_cookie": [
+      1910
+    ],
+    "system.inner.backend.fd_cc_rsp_design_id": [
+      1911
+    ],
+    "system.inner.backend.fd_cc_rsp_price": [
+      1912
+    ],
+    "system.inner.backend.fd_cc_rsp_query": [
+      1913
+    ],
+    "system.inner.backend.fd_cc_rsp_ready": [
+      1914
+    ],
+    "system.inner.backend.fd_cc_rsp_status": [
+      1915
+    ],
+    "system.inner.backend.fd_cc_rsp_valid": [
+      1916
+    ],
+    "system.inner.backend.fd_cc_rsp_version": [
+      1917
+    ],
+    "system.inner.backend.fd_cc_rsp_words": [
+      1918
+    ],
+    "system.inner.backend.fd_cf_load_ready": [
+      1919
+    ],
+    "system.inner.backend.fd_cf_load_rsp_ready": [
+      1920
+    ],
+    "system.inner.backend.fd_cf_load_rsp_valid": [
+      1921
+    ],
+    "system.inner.backend.fd_cf_load_status": [
+      1922
+    ],
+    "system.inner.backend.fd_cf_load_valid": [
+      1923
+    ],
+    "system.inner.backend.fd_cs_cfg_design_id": [
+      1924
+    ],
+    "system.inner.backend.fd_cs_cfg_history": [
+      1925
+    ],
+    "system.inner.backend.fd_cs_cfg_net_count": [
+      1926
+    ],
+    "system.inner.backend.fd_cs_cfg_nets": [
+      1927
+    ],
+    "system.inner.backend.fd_cs_cfg_nodes": [
+      1928
+    ],
+    "system.inner.backend.fd_cs_cfg_prices": [
+      1929
+    ],
+    "system.inner.backend.fd_cs_cfg_ready": [
+      1930
+    ],
+    "system.inner.backend.fd_cs_cfg_rsp_ready": [
+      1931
+    ],
+    "system.inner.backend.fd_cs_cfg_rsp_valid": [
+      1932
+    ],
+    "system.inner.backend.fd_cs_cfg_status": [
+      1933
+    ],
+    "system.inner.backend.fd_cs_cfg_valid": [
+      1934
+    ],
+    "system.inner.backend.fd_cs_cfg_version": [
+      1935
+    ],
+    "system.inner.backend.fd_cs_req_cookie": [
+      1936
+    ],
+    "system.inner.backend.fd_cs_req_host": [
+      1937
+    ],
+    "system.inner.backend.fd_cs_req_index": [
+      1938
+    ],
+    "system.inner.backend.fd_cs_req_op": [
+      1939
+    ],
+    "system.inner.backend.fd_cs_req_price": [
+      1940
+    ],
+    "system.inner.backend.fd_cs_req_query": [
+      1941
+    ],
+    "system.inner.backend.fd_cs_req_ready": [
+      1942
+    ],
+    "system.inner.backend.fd_cs_req_valid": [
+      1943
+    ],
+    "system.inner.backend.fd_cs_req_value": [
+      1944
+    ],
+    "system.inner.backend.fd_cs_req_version": [
+      1945
+    ],
+    "system.inner.backend.fd_cs_rsp_cookie": [
+      1946
+    ],
+    "system.inner.backend.fd_cs_rsp_data": [
+      1947
+    ],
+    "system.inner.backend.fd_cs_rsp_host": [
+      1948
+    ],
+    "system.inner.backend.fd_cs_rsp_index": [
+      1949
+    ],
+    "system.inner.backend.fd_cs_rsp_op": [
+      1950
+    ],
+    "system.inner.backend.fd_cs_rsp_price": [
+      1951
+    ],
+    "system.inner.backend.fd_cs_rsp_query": [
+      1952
+    ],
+    "system.inner.backend.fd_cs_rsp_ready": [
+      1953
+    ],
+    "system.inner.backend.fd_cs_rsp_status": [
+      1954
+    ],
+    "system.inner.backend.fd_cs_rsp_valid": [
+      1955
+    ],
+    "system.inner.backend.fd_cs_rsp_version": [
+      1956
+    ],
+    "system.inner.backend.fd_d_cfg_base": [
+      1957
+    ],
+    "system.inner.backend.fd_d_cfg_nodes": [
+      1958
+    ],
+    "system.inner.backend.fd_d_cfg_ready": [
+      1959
+    ],
+    "system.inner.backend.fd_d_cfg_rsp_ready": [
+      1960
+    ],
+    "system.inner.backend.fd_d_cfg_rsp_valid": [
+      1961
+    ],
+    "system.inner.backend.fd_d_cfg_status": [
+      1962
+    ],
+    "system.inner.backend.fd_d_cfg_valid": [
+      1963
+    ],
+    "system.inner.backend.fd_expand_connection": [
+      1964
+    ],
+    "system.inner.backend.fd_expand_cookie": [
+      1965
+    ],
+    "system.inner.backend.fd_expand_flags": [
+      1966
+    ],
+    "system.inner.backend.fd_expand_has_laguna": [
+      1967
+    ],
+    "system.inner.backend.fd_expand_net": [
+      1968
+    ],
+    "system.inner.backend.fd_expand_parent": [
+      1969
+    ],
+    "system.inner.backend.fd_expand_prune": [
+      1970
+    ],
+    "system.inner.backend.fd_expand_ready": [
+      1971
+    ],
+    "system.inner.backend.fd_expand_sequence": [
+      1972
+    ],
+    "system.inner.backend.fd_expand_sink": [
+      1973
+    ],
+    "system.inner.backend.fd_expand_valid": [
+      1974
+    ],
+    "system.inner.backend.fd_expand_version": [
+      1975
+    ],
+    "system.inner.backend.fd_expand_xmax": [
+      1976
+    ],
+    "system.inner.backend.fd_expand_xmin": [
+      1977
+    ],
+    "system.inner.backend.fd_expand_ymax": [
+      1978
+    ],
+    "system.inner.backend.fd_expand_ymin": [
+      1979
+    ],
+    "system.inner.backend.fd_fa_authoritative": [
+      1980
+    ],
+    "system.inner.backend.fd_fa_checkpoint": [
+      1981
+    ],
+    "system.inner.backend.fd_fa_design": [
+      1982
+    ],
+    "system.inner.backend.fd_fa_price": [
+      1983
+    ],
+    "system.inner.backend.fd_fa_query": [
+      1984
+    ],
+    "system.inner.backend.fd_fa_version": [
+      1985
+    ],
+    "system.inner.backend.fd_fc_authoritative": [
+      1986
+    ],
+    "system.inner.backend.fd_fc_checkpoint": [
+      1987
+    ],
+    "system.inner.backend.fd_fc_design": [
+      1988
+    ],
+    "system.inner.backend.fd_fc_payload": [
+      1989
+    ],
+    "system.inner.backend.fd_g_cfg_attrs_base": [
+      1990
+    ],
+    "system.inner.backend.fd_g_cfg_edges": [
+      1991
+    ],
+    "system.inner.backend.fd_g_cfg_edges_base": [
+      1992
+    ],
+    "system.inner.backend.fd_g_cfg_nodes": [
+      1993
+    ],
+    "system.inner.backend.fd_g_cfg_offsets_base": [
+      1994
+    ],
+    "system.inner.backend.fd_g_cfg_ready": [
+      1995
+    ],
+    "system.inner.backend.fd_g_cfg_rsp_ready": [
+      1996
+    ],
+    "system.inner.backend.fd_g_cfg_rsp_valid": [
+      1997
+    ],
+    "system.inner.backend.fd_g_cfg_status": [
+      1998
+    ],
+    "system.inner.backend.fd_g_cfg_valid": [
+      1999
+    ],
+    "system.inner.backend.fd_host_ctrl_op": [
+      2000
+    ],
+    "system.inner.backend.fd_host_ctrl_price": [
+      2001
+    ],
+    "system.inner.backend.fd_host_ctrl_query": [
+      2002
+    ],
+    "system.inner.backend.fd_host_ctrl_ready": [
+      2003
+    ],
+    "system.inner.backend.fd_host_ctrl_rsp_ready": [
+      2004
+    ],
+    "system.inner.backend.fd_host_ctrl_rsp_valid": [
+      2005
+    ],
+    "system.inner.backend.fd_host_ctrl_status": [
+      2006
+    ],
+    "system.inner.backend.fd_host_ctrl_valid": [
+      2007
+    ],
+    "system.inner.backend.fd_host_ctrl_version": [
+      2008
+    ],
+    "system.inner.backend.fd_host_design_req_arg": [
+      2009
+    ],
+    "system.inner.backend.fd_host_design_req_cookie": [
+      2010
+    ],
+    "system.inner.backend.fd_host_design_req_node": [
+      2011
+    ],
+    "system.inner.backend.fd_host_design_req_op": [
+      2012
+    ],
+    "system.inner.backend.fd_host_design_req_owner": [
+      2013
+    ],
+    "system.inner.backend.fd_host_design_req_ready": [
+      2014
+    ],
+    "system.inner.backend.fd_host_design_req_valid": [
+      2015
+    ],
+    "system.inner.backend.fd_host_design_rsp_cookie": [
+      2016
+    ],
+    "system.inner.backend.fd_host_design_rsp_count": [
+      2017
+    ],
+    "system.inner.backend.fd_host_design_rsp_flags": [
+      2018
+    ],
+    "system.inner.backend.fd_host_design_rsp_mask": [
+      2019
+    ],
+    "system.inner.backend.fd_host_design_rsp_ready": [
+      2020
+    ],
+    "system.inner.backend.fd_host_design_rsp_status": [
+      2021
+    ],
+    "system.inner.backend.fd_host_design_rsp_valid": [
+      2022
+    ],
+    "system.inner.backend.fd_host_io_field": [
+      2023
+    ],
+    "system.inner.backend.fd_host_io_node": [
+      2024
+    ],
+    "system.inner.backend.fd_host_io_payload": [
+      2025
+    ],
+    "system.inner.backend.fd_host_io_present": [
+      2026
+    ],
+    "system.inner.backend.fd_host_io_ready": [
+      2027
+    ],
+    "system.inner.backend.fd_host_io_rsp_ready": [
+      2028
+    ],
+    "system.inner.backend.fd_host_io_rsp_valid": [
+      2029
+    ],
+    "system.inner.backend.fd_host_io_status": [
+      2030
+    ],
+    "system.inner.backend.fd_host_io_valid": [
+      2031
+    ],
+    "system.inner.backend.fd_host_io_value": [
+      2032
+    ],
+    "system.inner.backend.fd_host_io_write": [
+      2033
+    ],
+    "system.inner.backend.fd_host_owner_req_cookie": [
+      2034
+    ],
+    "system.inner.backend.fd_host_owner_req_net": [
+      2035
+    ],
+    "system.inner.backend.fd_host_owner_req_node": [
+      2036
+    ],
+    "system.inner.backend.fd_host_owner_req_op": [
+      2037
+    ],
+    "system.inner.backend.fd_host_owner_req_ready": [
+      2038
+    ],
+    "system.inner.backend.fd_host_owner_req_valid": [
+      2039
+    ],
+    "system.inner.backend.fd_host_owner_rsp_cookie": [
+      2040
+    ],
+    "system.inner.backend.fd_host_owner_rsp_count": [
+      2041
+    ],
+    "system.inner.backend.fd_host_owner_rsp_occupancy": [
+      2042
+    ],
+    "system.inner.backend.fd_host_owner_rsp_ready": [
+      2043
+    ],
+    "system.inner.backend.fd_host_owner_rsp_status": [
+      2044
+    ],
+    "system.inner.backend.fd_host_owner_rsp_valid": [
+      2045
+    ],
+    "system.inner.backend.fd_host_owner_rsp_will_overuse": [
+      2046
+    ],
+    "system.inner.backend.fd_k_cfg_ready": [
+      2047
+    ],
+    "system.inner.backend.fd_k_cfg_rsp_ready": [
+      2048
+    ],
+    "system.inner.backend.fd_k_cfg_rsp_valid": [
+      2049
+    ],
+    "system.inner.backend.fd_k_cfg_status": [
+      2050
+    ],
+    "system.inner.backend.fd_k_cfg_valid": [
+      2051
+    ],
+    "system.inner.backend.fd_owner_cfg_allocator": [
+      2052
+    ],
+    "system.inner.backend.fd_owner_cfg_capacity": [
+      2053
+    ],
+    "system.inner.backend.fd_owner_cfg_nodes": [
+      2054
+    ],
+    "system.inner.backend.fd_owner_cfg_pool": [
+      2055
+    ],
+    "system.inner.backend.fd_owner_cfg_primary": [
+      2056
+    ],
+    "system.inner.backend.fd_owner_cfg_ready": [
+      2057
+    ],
+    "system.inner.backend.fd_owner_cfg_rsp_ready": [
+      2058
+    ],
+    "system.inner.backend.fd_owner_cfg_rsp_valid": [
+      2059
+    ],
+    "system.inner.backend.fd_owner_cfg_status": [
+      2060
+    ],
+    "system.inner.backend.fd_owner_cfg_valid": [
+      2061
+    ],
+    "system.inner.backend.fd_q_cfg_base": [
+      2062
+    ],
+    "system.inner.backend.fd_q_cfg_connections": [
+      2063
+    ],
+    "system.inner.backend.fd_q_cfg_design": [
+      2064
+    ],
+    "system.inner.backend.fd_q_cfg_nets": [
+      2065
+    ],
+    "system.inner.backend.fd_q_cfg_nodes": [
+      2066
+    ],
+    "system.inner.backend.fd_q_cfg_ready": [
+      2067
+    ],
+    "system.inner.backend.fd_q_cfg_revision": [
+      2068
+    ],
+    "system.inner.backend.fd_q_cfg_rsp_ready": [
+      2069
+    ],
+    "system.inner.backend.fd_q_cfg_rsp_valid": [
+      2070
+    ],
+    "system.inner.backend.fd_q_cfg_status": [
+      2071
+    ],
+    "system.inner.backend.fd_q_cfg_valid": [
+      2072
+    ],
+    "system.inner.backend.fd_result_cookie": [
+      2073
+    ],
+    "system.inner.backend.fd_result_count": [
+      2074
+    ],
+    "system.inner.backend.fd_result_early": [
+      2075
+    ],
+    "system.inner.backend.fd_result_expanded_count": [
+      2076
+    ],
+    "system.inner.backend.fd_result_hit": [
+      2077
+    ],
+    "system.inner.backend.fd_result_mask": [
+      2078
+    ],
+    "system.inner.backend.fd_result_raw_count": [
+      2079
+    ],
+    "system.inner.backend.fd_result_ready": [
+      2080
+    ],
+    "system.inner.backend.fd_result_status": [
+      2081
+    ],
+    "system.inner.backend.fd_result_valid": [
+      2082
+    ],
+    "system.inner.backend.fd_seed_cookie": [
+      2083
+    ],
+    "system.inner.backend.fd_seed_id": [
+      2084
+    ],
+    "system.inner.backend.fd_seed_key": [
+      2085
+    ],
+    "system.inner.backend.fd_seed_op": [
+      2086
+    ],
+    "system.inner.backend.fd_seed_ready": [
+      2087
+    ],
+    "system.inner.backend.fd_seed_rsp_cookie": [
+      2088
+    ],
+    "system.inner.backend.fd_seed_rsp_id": [
+      2089
+    ],
+    "system.inner.backend.fd_seed_rsp_key": [
+      2090
+    ],
+    "system.inner.backend.fd_seed_rsp_ready": [
+      2091
+    ],
+    "system.inner.backend.fd_seed_rsp_size": [
+      2092
+    ],
+    "system.inner.backend.fd_seed_rsp_status": [
+      2093
+    ],
+    "system.inner.backend.fd_seed_rsp_valid": [
+      2094
+    ],
+    "system.inner.backend.fd_seed_valid": [
+      2095
+    ],
+    "system.inner.backend.fd_seed_version": [
+      2096
+    ],
+    "system.inner.backend.fd_t_cfg_columns": [
+      2097
+    ],
+    "system.inner.backend.fd_t_cfg_columns_base": [
+      2098
+    ],
+    "system.inner.backend.fd_t_cfg_ready": [
+      2099
+    ],
+    "system.inner.backend.fd_t_cfg_rows": [
+      2100
+    ],
+    "system.inner.backend.fd_t_cfg_rows_base": [
+      2101
+    ],
+    "system.inner.backend.fd_t_cfg_rsp_ready": [
+      2102
+    ],
+    "system.inner.backend.fd_t_cfg_rsp_valid": [
+      2103
+    ],
+    "system.inner.backend.fd_t_cfg_status": [
+      2104
+    ],
+    "system.inner.backend.fd_t_cfg_valid": [
+      2105
+    ],
+    "system.inner.backend.jp_cr": [
+      2440
+    ],
+    "system.inner.backend.jp_kr": [
+      2439
+    ],
+    "system.inner.backend.k_j_net": [
+      2106
+    ],
+    "system.inner.backend.k_j_node": [
+      2107
+    ],
+    "system.inner.backend.k_j_op": [
+      2108
+    ],
+    "system.inner.backend.k_j_ready": [
+      2109
+    ],
+    "system.inner.backend.k_j_valid": [
+      2110
+    ],
+    "system.inner.backend.k_labels_done": [
+      2111
+    ],
+    "system.inner.backend.k_labels_valid": [
+      2112,
+      3274
+    ],
+    "system.inner.backend.k_new_price": [
+      2113
+    ],
+    "system.inner.backend.k_new_query": [
+      2114
+    ],
+    "system.inner.backend.k_new_version": [
+      2115
+    ],
+    "system.inner.backend.k_o_cookie": [
+      2116
+    ],
+    "system.inner.backend.k_o_net": [
+      2117
+    ],
+    "system.inner.backend.k_o_node": [
+      2118
+    ],
+    "system.inner.backend.k_o_op": [
+      2119
+    ],
+    "system.inner.backend.k_o_ready": [
+      2120,
+      3368,
+      3373
+    ],
+    "system.inner.backend.k_o_rsp_ready": [
+      2121,
+      3374
+    ],
+    "system.inner.backend.k_o_rsp_valid": [
+      2122,
+      3368,
+      3374
+    ],
+    "system.inner.backend.k_o_valid": [
+      2123,
+      3373
+    ],
+    "system.inner.backend.k_rcfg_done": [
+      2124
+    ],
+    "system.inner.backend.k_rcfg_valid": [
+      2125
+    ],
+    "system.inner.backend.label_drained": [
+      2126
+    ],
+    "system.inner.backend.label_restore": [
+      3264
+    ],
+    "system.inner.backend.label_restore.l_import": [
+      3322
+    ],
+    "system.inner.backend.label_restore.row": [
+      1475
+    ],
+    "system.inner.backend.label_restore.state": [
+      1474,
+      1475
+    ],
+    "system.inner.backend.label_watch_fault": [
+      2127
+    ],
+    "system.inner.backend.lr_busy": [
+      2128
+    ],
+    "system.inner.backend.lr_c_op": [
+      2129
+    ],
+    "system.inner.backend.lr_c_price": [
+      2130
+    ],
+    "system.inner.backend.lr_c_query": [
+      2131
+    ],
+    "system.inner.backend.lr_c_ready": [
+      2132
+    ],
+    "system.inner.backend.lr_c_rsp_ready": [
+      2133
+    ],
+    "system.inner.backend.lr_c_valid": [
+      2134
+    ],
+    "system.inner.backend.lr_c_version": [
+      2135
+    ],
+    "system.inner.backend.lr_l_field": [
+      2136
+    ],
+    "system.inner.backend.lr_l_node": [
+      2137
+    ],
+    "system.inner.backend.lr_l_ready": [
+      2138
+    ],
+    "system.inner.backend.lr_l_rsp_ready": [
+      2139
+    ],
+    "system.inner.backend.lr_l_rsp_valid": [
+      2140
+    ],
+    "system.inner.backend.lr_l_valid": [
+      2141
+    ],
+    "system.inner.backend.lr_l_value": [
+      2142
+    ],
+    "system.inner.backend.lr_l_write": [
+      2143
+    ],
+    "system.inner.backend.lr_rsp_cookie": [
+      2144
+    ],
+    "system.inner.backend.lr_rsp_ready": [
+      2145
+    ],
+    "system.inner.backend.lr_rsp_valid": [
+      2146,
+      3284
+    ],
+    "system.inner.backend.lr_start_ready": [
+      2147
+    ],
+    "system.inner.backend.lr_start_valid": [
+      2148
+    ],
+    "system.inner.backend.owner_drained": [
+      2149
+    ],
+    "system.inner.backend.owner_watch_fault": [
+      2150
+    ],
+    "system.inner.backend.rc_req_ready": [
+      1767
+    ],
+    "system.inner.backend.rc_req_valid": [
+      1767
+    ],
+    "system.inner.backend.rc_rsp_ready": [
+      2189
+    ],
+    "system.inner.backend.rc_rsp_valid": [
+      2189
+    ],
+    "system.inner.backend.recover_open": [
+      2151
+    ],
+    "system.inner.backend.recovery_ctl.attempt_query": [
+      1442
+    ],
+    "system.inner.backend.recovery_ctl.attempt_version": [
+      1442
+    ],
+    "system.inner.backend.recovery_ctl.current_price": [
+      1442
+    ],
+    "system.inner.backend.recovery_ctl.current_query": [
+      1442
+    ],
+    "system.inner.backend.recovery_ctl.current_version": [
+      1442
+    ],
+    "system.inner.backend.recovery_ctl.nets": [
+      1443
+    ],
+    "system.inner.backend.recovery_ctl.nodes": [
+      1443
+    ],
+    "system.inner.backend.recovery_ctl.state": [
+      2484
+    ],
+    "system.inner.backend.route_join.held": [
+      1458
+    ],
+    "system.inner.backend.route_join.l_node": [
+      1284,
+      1284
+    ],
+    "system.inner.backend.route_join.l_ready": [
+      1284
+    ],
+    "system.inner.backend.route_join.l_rsp_ready": [
+      1285
+    ],
+    "system.inner.backend.route_join.l_rsp_valid": [
+      1285
+    ],
+    "system.inner.backend.route_join.l_valid": [
+      1284
+    ],
+    "system.inner.backend.route_join.o_node": [
+      1287,
+      1289,
+      1290
+    ],
+    "system.inner.backend.route_join.o_op": [
+      1287,
+      1288
+    ],
+    "system.inner.backend.route_join.o_ready": [
+      1286
+    ],
+    "system.inner.backend.route_join.o_rsp_ready": [
+      1293
+    ],
+    "system.inner.backend.route_join.o_rsp_valid": [
+      1293
+    ],
+    "system.inner.backend.route_join.o_valid": [
+      1286
+    ],
+    "system.inner.c_lane": [
+      2178
+    ],
+    "system.inner.c_rsp_payload": [
+      2179,
+      2179,
+      2179,
+      2179,
+      2179,
+      2180,
+      2180,
+      2180,
+      2180,
+      2180
+    ],
+    "system.inner.c_rsp_ready": [
+      2178
+    ],
+    "system.inner.c_rsp_valid": [
+      2178
+    ],
+    "system.inner.ss_rsp_ready": [
+      2188
+    ],
+    "system.jp_adr": [
+      2444
+    ],
+    "system.jp_ap": [
+      2365,
+      2366,
+      2437,
+      2621,
+      2622,
+      2890,
+      2893,
+      3082,
+      3085
+    ],
+    "system.jp_apr": [
+      2437
+    ],
+    "system.jp_ccp": [
+      2370,
+      2372,
+      2442,
+      2445,
+      2448,
+      2626,
+      2628,
+      2904,
+      2907,
+      3096,
+      3099
+    ],
+    "system.jp_checkpoint": [
+      2439,
+      2440,
+      2864
+    ],
+    "system.jp_commit_ready": [
+      2423
+    ],
+    "system.jp_cver": [
+      2438
+    ],
+    "system.jp_design": [
+      2864
+    ],
+    "system.jp_dropready": [
+      2444
+    ],
+    "system.jp_dv": [
+      2444,
+      2444
+    ],
+    "system.jp_generation": [
+      2864
+    ],
+    "system.jp_load": [
+      2439,
+      2440
+    ],
+    "system.jp_prepare": [
+      2439,
+      2440
+    ],
+    "system.jp_prepared": [
+      2368,
+      2369,
+      2420,
+      2422,
+      2429,
+      2437,
+      2443,
+      2624,
+      2625,
+      2895,
+      2896,
+      3087,
+      3088
+    ],
+    "system.jp_price": [
+      2864
+    ],
+    "system.jp_pubready": [
+      2437
+    ],
+    "system.jp_pv": [
+      2445,
+      2445,
+      2862
+    ],
+    "system.jp_query": [
+      2864
+    ],
+    "system.jp_version": [
+      2439,
+      2440,
+      2864
+    ],
+    "system.k_a_ready": [
+      3366,
+      3371
+    ],
+    "system.k_a_rsp_ready": [
+      3372
+    ],
+    "system.k_a_rsp_valid": [
+      3366,
+      3372
+    ],
+    "system.k_a_valid": [
+      3371
+    ],
+    "system.pc_safe": [
+      1415,
+      1439,
+      2374,
+      2431,
+      2630,
+      2811
+    ],
+    "system.publication.state": [
+      2437
+    ],
+    "system.wm_label_done": [
+      2526
+    ],
+    "system.wm_on": [
+      2525
+    ],
+    "system.wm_rec_accept": [
+      2525
+    ],
+    "system.wm_retired": [
+      2484,
+      2485,
+      3332,
+      3336
+    ]
+  },
+  "named_port_connections": 552,
+  "parameter_overrides": [
+    "ENABLE_RESTORE_SEED_BYPASS",
+    "PATH_SLOTS",
+    "ENABLE_BASELINE",
+    "SLOTS",
+    "FRAMES",
+    "INDEX_BITS",
+    "HASH_BITS",
+    "ENABLE_TEST_INJECTION",
+    "ENABLE_WARM_RECOVERY",
+    "RESTORE_RECORDS",
+    "ENABLE_FRAME_SCAN",
+    "CHECK_LABEL_CRC"
+  ],
+  "ports": [
+    "restore_seed_enable",
+    "baseline_permit",
+    "baseline_epoch",
+    "baseline_retired",
+    "baseline_req_valid",
+    "baseline_req_ready",
+    "baseline_req_node",
+    "baseline_req_epoch",
+    "baseline_rsp_valid",
+    "baseline_rsp_ready",
+    "baseline_rsp_status",
+    "baseline_rsp_node",
+    "baseline_rsp_epoch",
+    "baseline_rsp_payload",
+    "snapshot_label_crc",
+    "lr_source_crc",
+    "scan_valid",
+    "scan_ready",
+    "scan_permit",
+    "scan_frame",
+    "scan_rsp_valid",
+    "scan_rsp_ready",
+    "scan_status",
+    "scan_result_frame",
+    "scan_owner",
+    "scan_published",
+    "wm_enable",
+    "wm_source_version",
+    "wm_source_query",
+    "wm_source_price",
+    "wm_path_crc",
+    "wm_query_crc",
+    "wm_owned",
+    "wm_fault",
+    "wm_joined",
+    "wm_receipts",
+    "boot_required",
+    "boot_cfg_valid",
+    "boot_verify_valid",
+    "boot_rsp_ready",
+    "boot_design",
+    "boot_generation",
+    "boot_checkpoint",
+    "boot_version",
+    "boot_nodes",
+    "boot_label_count",
+    "boot_label_crc",
+    "boot_path_crc",
+    "boot_query_crc",
+    "boot_query",
+    "boot_slots",
+    "boot_price",
+    "boot_payload",
+    "jp_start",
+    "jp_start_ready",
+    "jp_commit",
+    "jp_commit_ready",
+    "jp_cancel",
+    "jp_cancel_ready",
+    "jp_owned",
+    "jp_done",
+    "jp_done_ready",
+    "jp_result",
+    "jp_manifest_ready",
+    "jp_generation",
+    "jp_design",
+    "jp_checkpoint",
+    "jp_version",
+    "jp_query",
+    "jp_price",
+    "jp_load",
+    "jp_ack",
+    "jp_ready",
+    "jp_reply",
+    "jp_status",
+    "jp_authority_stage",
+    "ap_valid",
+    "ap_ready",
+    "ap_rsp_valid",
+    "ap_rsp_ready",
+    "ap_status",
+    "ap_refs",
+    "ap_occ",
+    "ap_rsp_cookie",
+    "ap_rsp_checkpoint",
+    "ap_rsp_generation",
+    "ap_rsp_design",
+    "ap_node",
+    "ap_net",
+    "ap_cookie",
+    "ap_generation",
+    "ap_design",
+    "ap_checkpoint",
+    "cp_ready",
+    "cp_busy",
+    "cp_rsp_valid",
+    "cp_status",
+    "cp_crc",
+    "cp_m_valid",
+    "cp_m_index",
+    "cp_m_data",
+    "cp_m_last",
+    "qc_cp_generation",
+    "pc_acquire_ready",
+    "pc_release_ready",
+    "pc_owned",
+    "qc_cp_valid",
+    "qc_cp_restore",
+    "qc_cp_rsp_ready",
+    "qc_cp_s_valid",
+    "qc_cp_s_last",
+    "qc_cp_m_ready",
+    "qc_cp_test_reset",
+    "qc_cp_ready",
+    "qc_cp_busy",
+    "qc_cp_rsp_valid",
+    "qc_cp_s_ready",
+    "qc_cp_m_valid",
+    "qc_cp_m_last",
+    "qc_restore_pending",
+    "qc_cp_expected_crc",
+    "qc_cp_s_index",
+    "qc_cp_s_data",
+    "qc_cp_crc",
+    "qc_cp_m_index",
+    "qc_cp_m_data",
+    "qc_cp_status",
+    "as_cfg_valid",
+    "as_cfg_ready",
+    "as_cfg_design",
+    "as_cfg_generation",
+    "as_cfg_primary",
+    "as_cfg_pool",
+    "as_cfg_allocator",
+    "as_cfg_checkpoint",
+    "as_cfg_nodes",
+    "as_cfg_nets",
+    "as_cfg_capacity",
+    "as_configured",
+    "as_bound_design",
+    "as_bound_generation",
+    "as_bound_checkpoint",
+    "as_m_araddr",
+    "as_m_arlen",
+    "as_m_arsize",
+    "as_m_arburst",
+    "as_m_arid",
+    "as_m_arvalid",
+    "as_m_arready",
+    "as_m_rdata",
+    "as_m_rid",
+    "as_m_rresp",
+    "as_m_rlast",
+    "as_m_rvalid",
+    "as_m_rready",
+    "as_m_awaddr",
+    "as_m_awlen",
+    "as_m_awsize",
+    "as_m_awburst",
+    "as_m_awid",
+    "as_m_awvalid",
+    "as_m_awready",
+    "as_m_wdata",
+    "as_m_wstrb",
+    "as_m_wlast",
+    "as_m_wvalid",
+    "as_m_wready",
+    "as_m_bid",
+    "as_m_bresp",
+    "as_m_bvalid",
+    "as_m_bready",
+    "as_cfg_rsp_valid",
+    "as_cfg_rsp_ready",
+    "as_cfg_status",
+    "as_busy",
+    "as_fault",
+    "as_drained",
+    "as_retired",
+    "as_rsp_generation",
+    "pc_acquire_valid",
+    "pc_release_valid",
+    "cp_valid",
+    "cp_restore",
+    "cp_rsp_ready",
+    "cp_s_valid",
+    "cp_s_last",
+    "cp_m_ready",
+    "cp_test_reset",
+    "cp_nodes",
+    "cp_nets",
+    "cp_expected_crc",
+    "cp_s_index",
+    "cp_s_data",
+    "cp_design",
+    "qc_cmd_valid",
+    "qc_cmd_ready",
+    "qc_cmd_slot",
+    "qc_cmd_cookie",
+    "qc_cmd_route_cookie",
+    "qc_cmd_source",
+    "qc_cmd_key",
+    "qc_cmd_nodes",
+    "qc_cmd_max_polls",
+    "qc_cmd_poll_cookie",
+    "qc_cmd_design",
+    "qc_cmd_query",
+    "qc_cmd_price",
+    "qc_cmd_expand",
+    "qc_rsp_valid",
+    "qc_rsp_ready",
+    "qc_rsp_status",
+    "qc_rsp_detail",
+    "qc_rsp_cookie",
+    "qc_rsp_nodes",
+    "qc_rsp_acked",
+    "qc_rsp_committed",
+    "qc_abort",
+    "qc_busy",
+    "qc_fault",
+    "qc_phase",
+    "qc_prepared_event",
+    "qc_prepare_acked",
+    "qc_cleanup_acked",
+    "ss_start_ready",
+    "ss_rsp_valid",
+    "ss_rsp_status",
+    "ss_rsp_cookie",
+    "ss_polls",
+    "ss_expands",
+    "ss_candidates",
+    "ss_result_node",
+    "ss_result_key",
+    "ss_busy",
+    "ss_fault",
+    "ss_phase",
+    "ss_poll_event",
+    "ss_poll_node",
+    "ss_poll_key",
+    "ss_poll_size",
+    "abort",
+    "busy",
+    "cc_busy",
+    "cc_fault",
+    "cf_fault",
+    "clk",
+    "cost_lease",
+    "cs_busy",
+    "cs_configured",
+    "cs_design_id",
+    "cs_editing",
+    "cs_fault",
+    "cs_m_araddr",
+    "cs_m_arburst",
+    "cs_m_arid",
+    "cs_m_arlen",
+    "cs_m_arready",
+    "cs_m_arsize",
+    "cs_m_arvalid",
+    "cs_m_awaddr",
+    "cs_m_awburst",
+    "cs_m_awid",
+    "cs_m_awlen",
+    "cs_m_awready",
+    "cs_m_awsize",
+    "cs_m_awvalid",
+    "cs_m_bid",
+    "cs_m_bready",
+    "cs_m_bresp",
+    "cs_m_bvalid",
+    "cs_m_rdata",
+    "cs_m_rid",
+    "cs_m_rlast",
+    "cs_m_rready",
+    "cs_m_rresp",
+    "cs_m_rvalid",
+    "cs_m_wdata",
+    "cs_m_wlast",
+    "cs_m_wready",
+    "cs_m_wstrb",
+    "cs_m_wvalid",
+    "cs_published_version",
+    "cs_ready_for_query",
+    "d_configured",
+    "d_m_araddr",
+    "d_m_arburst",
+    "d_m_arid",
+    "d_m_arlen",
+    "d_m_arready",
+    "d_m_arsize",
+    "d_m_arvalid",
+    "d_m_awaddr",
+    "d_m_awburst",
+    "d_m_awid",
+    "d_m_awlen",
+    "d_m_awready",
+    "d_m_awsize",
+    "d_m_awvalid",
+    "d_m_bid",
+    "d_m_bready",
+    "d_m_bresp",
+    "d_m_bvalid",
+    "d_m_rdata",
+    "d_m_rid",
+    "d_m_rlast",
+    "d_m_rready",
+    "d_m_rresp",
+    "d_m_rvalid",
+    "d_m_wdata",
+    "d_m_wlast",
+    "d_m_wready",
+    "d_m_wstrb",
+    "d_m_wvalid",
+    "design_id",
+    "f_all_drained",
+    "f_backend_idle",
+    "f_fault",
+    "f_normal_retired",
+    "f_phase",
+    "f_recovery_owned",
+    "f_route_payload",
+    "f_sp",
+    "f_sr",
+    "f_srp",
+    "f_srr",
+    "f_srv",
+    "f_sv",
+    "fault",
+    "g_configured",
+    "g_m_araddr",
+    "g_m_arburst",
+    "g_m_arid",
+    "g_m_arlen",
+    "g_m_arready",
+    "g_m_arsize",
+    "g_m_arvalid",
+    "g_m_rdata",
+    "g_m_rid",
+    "g_m_rlast",
+    "g_m_rready",
+    "g_m_rresp",
+    "g_m_rvalid",
+    "k_a_checkpoint",
+    "k_a_cookie",
+    "k_a_design",
+    "k_a_net",
+    "k_a_node",
+    "k_a_occ",
+    "k_a_ready",
+    "k_a_refs",
+    "k_a_rsp_checkpoint",
+    "k_a_rsp_cookie",
+    "k_a_rsp_design",
+    "k_a_rsp_ready",
+    "k_a_rsp_valid",
+    "k_a_status",
+    "k_a_valid",
+    "k_busy",
+    "k_cold_rst",
+    "k_corrected",
+    "k_count",
+    "k_fault",
+    "k_full",
+    "k_permit",
+    "k_rec_ready",
+    "k_rec_valid",
+    "k_rsp_cookie",
+    "k_rsp_ready",
+    "k_rsp_status",
+    "k_rsp_valid",
+    "k_saved_checkpoint",
+    "k_saved_design",
+    "k_target_reset",
+    "lr_fault",
+    "lr_rsp_status",
+    "lr_s_cookie",
+    "lr_s_last",
+    "lr_s_node",
+    "lr_s_payload",
+    "lr_s_ready",
+    "lr_s_valid",
+    "lr_verified",
+    "lr_written",
+    "operation_pending",
+    "out_action",
+    "out_attrs",
+    "out_bits",
+    "out_commit_acked",
+    "out_commit_payload",
+    "out_commit_status",
+    "out_commit_valid",
+    "out_config",
+    "out_connection",
+    "out_cookie",
+    "out_cost_geometry",
+    "out_cost_geometry_result",
+    "out_cost_packet",
+    "out_cost_status",
+    "out_cost_valid",
+    "out_cost_words",
+    "out_node",
+    "out_offer_before",
+    "out_offer_key",
+    "out_offer_node",
+    "out_offer_size",
+    "out_offer_status",
+    "out_offer_valid",
+    "out_params",
+    "out_params_valid",
+    "out_position",
+    "out_post_attrs",
+    "out_post_distance",
+    "out_post_prev_read",
+    "out_post_status",
+    "out_post_upstream",
+    "out_post_valid",
+    "out_post_x",
+    "out_post_y",
+    "out_prep_count",
+    "out_prep_history",
+    "out_prep_net_data",
+    "out_prep_occupancy",
+    "out_prep_price_index",
+    "out_prep_price_value",
+    "out_prep_status",
+    "out_prep_valid",
+    "out_profile_revision",
+    "out_ready",
+    "out_sequence",
+    "out_services",
+    "out_steps",
+    "out_valid",
+    "owner_configured",
+    "owner_m_araddr",
+    "owner_m_arburst",
+    "owner_m_arid",
+    "owner_m_arlen",
+    "owner_m_arready",
+    "owner_m_arsize",
+    "owner_m_arvalid",
+    "owner_m_awaddr",
+    "owner_m_awburst",
+    "owner_m_awid",
+    "owner_m_awlen",
+    "owner_m_awready",
+    "owner_m_awsize",
+    "owner_m_awvalid",
+    "owner_m_bid",
+    "owner_m_bready",
+    "owner_m_bresp",
+    "owner_m_bvalid",
+    "owner_m_rdata",
+    "owner_m_rid",
+    "owner_m_rlast",
+    "owner_m_rready",
+    "owner_m_rresp",
+    "owner_m_rvalid",
+    "owner_m_wdata",
+    "owner_m_wlast",
+    "owner_m_wready",
+    "owner_m_wstrb",
+    "owner_m_wvalid",
+    "p_active",
+    "p_active_price",
+    "p_active_query",
+    "p_m_araddr",
+    "p_m_arburst",
+    "p_m_arid",
+    "p_m_arlen",
+    "p_m_arready",
+    "p_m_arsize",
+    "p_m_arvalid",
+    "p_m_awaddr",
+    "p_m_awburst",
+    "p_m_awid",
+    "p_m_awlen",
+    "p_m_awready",
+    "p_m_awsize",
+    "p_m_awvalid",
+    "p_m_bid",
+    "p_m_bready",
+    "p_m_bresp",
+    "p_m_bvalid",
+    "p_m_rdata",
+    "p_m_rid",
+    "p_m_rlast",
+    "p_m_rready",
+    "p_m_rresp",
+    "p_m_rvalid",
+    "p_m_wdata",
+    "p_m_wlast",
+    "p_m_wready",
+    "p_m_wstrb",
+    "p_m_wvalid",
+    "q_busy",
+    "q_configured",
+    "q_fault",
+    "q_m_araddr",
+    "q_m_arburst",
+    "q_m_arid",
+    "q_m_arlen",
+    "q_m_arready",
+    "q_m_arsize",
+    "q_m_arvalid",
+    "q_m_rdata",
+    "q_m_rid",
+    "q_m_rlast",
+    "q_m_rready",
+    "q_m_rresp",
+    "q_m_rvalid",
+    "query_ready",
+    "query_version",
+    "rc_block",
+    "rc_busy",
+    "rc_fault",
+    "rc_req_ready",
+    "rc_req_valid",
+    "rc_rsp_acked",
+    "rc_rsp_cookie",
+    "rc_rsp_nodes",
+    "rc_rsp_ready",
+    "rc_rsp_status",
+    "rc_rsp_valid",
+    "rc_slots",
+    "recover_checkpoint",
+    "recover_cookie",
+    "recover_design",
+    "recover_price",
+    "recover_query",
+    "recover_version",
+    "rst",
+    "snapshot_checkpoint",
+    "snapshot_cookie",
+    "snapshot_count",
+    "snapshot_design",
+    "snapshot_nodes",
+    "snapshot_probe",
+    "t_configured",
+    "t_m_araddr",
+    "t_m_arburst",
+    "t_m_arid",
+    "t_m_arlen",
+    "t_m_arready",
+    "t_m_arsize",
+    "t_m_arvalid",
+    "t_m_rdata",
+    "t_m_rid",
+    "t_m_rlast",
+    "t_m_rready",
+    "t_m_rresp",
+    "t_m_rvalid",
+    "test_route_abort",
+    "test_route_version_flip"
+  ],
+  "source": "/tmp/B_state_residency_offer_20261025/checkpoint_host_edit_system_v1/sources/tb_query_fault.sv",
+  "source_sha256": "854428f75647c007b129cf14e6b8e029663b5c946f3fd178873b6f51b1e04db0",
+  "status": "existing_host_tb_netlist_interface_inventory",
+  "timestamp_utc": "2026-10-30T08:51:18.729938+00:00"
+}

@@ -1,0 +1,49 @@
+{
+  "all_pin_strict_equivalence": false,
+  "auditor_sha256": "357a6a1247ed5580c4a6740c83b55e759643337648e34e5872e69f3ad5dfba3d",
+  "checker_sha256": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1",
+  "clock_lead_ps": 1,
+  "complete_contract_controls_passed": false,
+  "completed_expected_cases": 4,
+  "full_system_functional_netlist_validated": false,
+  "manifest_sha256": "8a13d8d0c4830818f3e18a5073e2346483f74cb4480bd41ef16cc6d4cf267141",
+  "outcomes": {
+    "active_data_flip": {
+      "fatal": "Fatal: CP_DATA_MISMATCH phase=0 ready=1 time=416000 actual=d00d0003 expected=d00d0002",
+      "verdict": "expected_rejection"
+    },
+    "edge_only_data_flip": {
+      "fatal": "Fatal: CP_DATA_MISMATCH phase=0 ready=1 time=411000 actual=d00d0000 expected=d00d0001",
+      "verdict": "corruption_detected_but_edge_control_not_isolated"
+    },
+    "matching": {
+      "active": 30,
+      "edges": 10,
+      "idle": 254,
+      "idle_differences": 254,
+      "stalled": 16,
+      "transfers": 5,
+      "verdict": "match"
+    },
+    "ready_nba": {
+      "active": 33,
+      "edges": 11,
+      "idle": 251,
+      "idle_differences": 251,
+      "stalled": 18,
+      "transfers": 5,
+      "verdict": "match"
+    },
+    "stall_data_flip": {
+      "fatal": "Fatal: CP_DATA_MISMATCH phase=0 ready=0 time=346000 actual=d00d0001 expected=d00d0000",
+      "verdict": "expected_rejection"
+    }
+  },
+  "planned_cases": 17,
+  "scope": "Bounded observer controls: two legal5-beat matches with idle X/0, stalls and NBA stimulus; negative corruption/unknown/control/frame/reset and non-vacuous coverage cases. Partial v4 preserves its failed phase-isolation expectation. No actual FPGA gate proof.",
+  "status": "passed",
+  "unconditional_outputs": 345,
+  "valid_qualified_outputs": [
+    "cp_m_data"
+  ]
+}

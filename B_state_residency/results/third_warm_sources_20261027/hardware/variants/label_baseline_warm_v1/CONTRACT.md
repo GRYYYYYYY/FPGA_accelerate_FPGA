@@ -1,0 +1,19 @@
+# 零初始预加载的777标签G2 warm恢复
+
+全系统使用前轮七层按需baseline与第九路退休guard；原生q180327后只有777记录/389页，以真实PC lease/control(1)/目录扫描/1167个DDR R产生777条源流和CRC b539040c。TB只捕获实际VALID/READY记录到runtime_labels.txt后原字节回送，不用CPU生成warm标签文件；初始imports和中间final host读均删除。owner四行实际AXI增量copy后，authority/config/coordinator共同发布G2/CP18，保存原生78字path/10字query及floor180327。
+
+q180328的第二owner-B SLVERR产生两键journal，工作owner真实GET/DEC/GET修复990179 refs2→1、558358 refs4→3/occ2，foreign net23916仍ref1。真实target reset5周期全部retired1/physical1/owned0，baseline service及guard不随之复位；attempt4/query2/price4恢复777标签并实际回读777、原生path/query及CRC转换，回执/退休/最终回复消费后才放行，随后完整q2重试。无外部cold reset或working DDR重装。
+
+实际集成反例full_v2/pressure_v2：旧恢复器的空目标检查是普通READ；在新manager中，该READ自动seed node204279，真实present变1，原生label status3/written0/verified0，未接受源流或成功恢复。leaf的拒绝是正确的，不能删掉空目标校验。反例已独立审计/归档；audit通过表示这个失败原因得到证明。
+
+生产修复：label_restore_controller只新增只读l_probe输出，PS/PW期间保持，不改变原l_present拒绝分支。residency仅在ENABLE_BASELINE&&f_recovery_owned&&k_labels_valid&&l_probe时产生baseline_raw_probe，经engine/core/paged传到manager；manager在真实IO受理时锁存。带标记的read执行原生READ并如实返回present/payload，不触发baseline，已有记录仍present1；带标记写返回status3。CLIENT与普通IO继续按需初始化。该信号是恢复状态限定的内部侧带，不是顶层用户授权输入。
+
+选定full_v3/pressure_v3：首条查询171poll/170expand/849candidate/421cost；故障前与重试的第二条各114/113/564/302，原CPU数值轨迹逐项一致。q1 prefix至LIFECYCLE的原始字节/周期也分别精确等于前轮正常full/pressure。源777/CRC原生核对，第一probe真实absent0，五字段完整restore并verify777。第九路1562实际R按777/4/777/4四阶段核对，每次回执后五个seed字段写匹配全节点immutable CPU baseline。总15809原生字段写；32槽1147WB/1304RF，单槽2268WB/3638RF。reset清除的是目录/驻留上下文，不清工作DDR，独立模型按此重放所有原生命令、present位和物理页字节。
+
+最终781记录/393页及全部3MB物理页（含空页）、完整146284032B owner、13个owner记录写和全部11AXI均独立重放通过。原始path/query CRC1d36e333/79283e8e，最终sequence180328/store4/2/4，两路径共存。结束2274789/2449788周期仅行为仿真，不是板卡性能。
+
+配套probe_full_v1/probe_single_v1各106检查证明空raw读不seed、普通读seed后raw读真实present1、raw标记在受理后改变不影响在途请求、raw写被拒绝且原记录不变；原生WB/RF及DDR字节模型仍通过。完整warm与两反例、两组件共六归档实际恢复重审audit一致，实际编译输入以各archive sources为准。
+
+仍为固定price/history内容，epoch3的immutable baseline身份、G1 owner clone及配置可信；sourceprice4是namespace转换，不能推导任意变价距离有效。真实历史路径仍来自CPU观察；无新增overflow分配/回收、owner snapshot epoch重arm、永久认证/floor、完整运行时label/path/query持久化writer、综合时序或板卡证明。未将前轮SOURCE_CHECK取消与本轮owner-B恢复合成任意在途取消证明；CRC失败后的776部分写/更高attempt重试尚待新路径验证。
+
+复现：build.py/build_tb.py生成候选；scripts/run_label_baseline_warm.py NEW --full-only（或--pressure-only），audit_label_baseline_warm.py NEW。反例用audit_baseline_probe_reject.py审计保留的v2；不要覆盖选定结果。初轮额外host-read已移除，旧unflushed-reject前提不再存在，正式例删除该调用但保留真实snapshot_clean准入；不是人为填脏页凑拒绝测试。

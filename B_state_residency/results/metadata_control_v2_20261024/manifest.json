@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "sources": {
+    "tb_metadata_control.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/metadata_control_tests_v1/tb_metadata_control.sv",
+      "sha256": "3088ea54b8544c3450eac18bb513981822bbd8371798d0895b946777c28c4bf0"
+    },
+    "body.inc": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/metadata_control_tests_v1/body.inc",
+      "sha256": "3dd402cf79c653c04241c2de9244b8701c0e1600836569f4fca4bc17743e2764"
+    },
+    "metadata_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/metadata_v1/metadata_controller.sv",
+      "sha256": "81a5856ce608ef4b6c5086a836b804c91f568f762fff63b7d6b96b702f86afe5"
+    },
+    "run_metadata_control.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_metadata_control.py",
+      "sha256": "743e19f1952a6559e74f76cf8912e0d7e9543b5bd653a3a70dfef14e029dc45b"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_control_v2_20261024/sources/metadata_controller.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_control_v2_20261024/sources/tb_metadata_control.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_metadata_control",
+        "-s",
+        "test",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "test",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "result": "METADATA_CONTROL_PASS checks=17 errors=16 cycles=244"
+}

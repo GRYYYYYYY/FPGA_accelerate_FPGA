@@ -1,0 +1,233 @@
+{
+  "status": "stratified_baseline_interpreted_after_independent_audit",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_stratified_audit_20261023_v1.json": "b87a445ee83f4f8935ff1e9657dcd5b7517edb5c2642083958045d5be865faae",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/vitis_stratified_cosim_20261023_v1/audit_receipt.json": "b6040ba0381fd9f88b6528cdbf08ade379f17431d28e714c23e6432e825001b4"
+  },
+  "comparisons": [
+    {
+      "label": "empty",
+      "requests": 2,
+      "records": 0,
+      "csr_cycles": 1101,
+      "compact_cycles": 1255,
+      "compact_over_csr": 1.1398728428701181,
+      "sample_degrees": [
+        0,
+        0
+      ],
+      "population_rows": 11913
+    },
+    {
+      "label": "degree_1_2",
+      "requests": 2,
+      "records": 4,
+      "csr_cycles": 1326,
+      "compact_cycles": 23866,
+      "compact_over_csr": 17.998491704374057,
+      "sample_degrees": [
+        2,
+        2
+      ],
+      "population_rows": 30305
+    },
+    {
+      "label": "degree_3_4",
+      "requests": 2,
+      "records": 8,
+      "csr_cycles": 1536,
+      "compact_cycles": 45986,
+      "compact_over_csr": 29.938802083333332,
+      "sample_degrees": [
+        4,
+        4
+      ],
+      "population_rows": 74733
+    },
+    {
+      "label": "degree_5_8",
+      "requests": 2,
+      "records": 14,
+      "csr_cycles": 1858,
+      "compact_cycles": 79684,
+      "compact_over_csr": 42.88697524219591,
+      "sample_degrees": [
+        8,
+        6
+      ],
+      "population_rows": 102964
+    },
+    {
+      "label": "degree_9_63",
+      "requests": 2,
+      "records": 24,
+      "csr_cycles": 2390,
+      "compact_cycles": 136412,
+      "compact_over_csr": 57.076150627615064,
+      "sample_degrees": [
+        12,
+        12
+      ],
+      "population_rows": 522
+    },
+    {
+      "label": "degree_64_127",
+      "requests": 2,
+      "records": 240,
+      "csr_cycles": 13954,
+      "compact_cycles": 1486572,
+      "compact_over_csr": 106.53375376236205,
+      "sample_degrees": [
+        120,
+        120
+      ],
+      "population_rows": 264
+    },
+    {
+      "label": "degree_128_255",
+      "requests": 2,
+      "records": 292,
+      "csr_cycles": 16740,
+      "compact_cycles": 1647096,
+      "compact_over_csr": 98.39283154121864,
+      "sample_degrees": [
+        146,
+        146
+      ],
+      "population_rows": 248
+    },
+    {
+      "label": "degree_512_1024",
+      "requests": 2,
+      "records": 1284,
+      "csr_cycles": 69800,
+      "compact_cycles": 9136018,
+      "compact_over_csr": 130.8885100286533,
+      "sample_degrees": [
+        642,
+        642
+      ],
+      "population_rows": 24
+    },
+    {
+      "label": "unknown",
+      "requests": 2,
+      "records": 0,
+      "csr_cycles": 738,
+      "compact_cycles": 738,
+      "compact_over_csr": 1.0,
+      "sample_degrees": [
+        -1,
+        -1
+      ],
+      "population_rows": 53759
+    },
+    {
+      "label": "uniform_64",
+      "requests": 64,
+      "records": 368,
+      "csr_cycles": 45108,
+      "compact_cycles": 2108498,
+      "compact_over_csr": 46.74332712600869,
+      "sample_degrees": [
+        4,
+        4,
+        0,
+        6,
+        4,
+        6,
+        -1,
+        4,
+        6,
+        4,
+        -1,
+        146,
+        4,
+        -1,
+        8,
+        2,
+        6,
+        6,
+        6,
+        4,
+        -1,
+        -1,
+        -1,
+        6,
+        4,
+        6,
+        4,
+        -1,
+        8,
+        6,
+        6,
+        4,
+        4,
+        4,
+        8,
+        6,
+        6,
+        4,
+        -1,
+        4,
+        2,
+        0,
+        0,
+        4,
+        4,
+        4,
+        6,
+        2,
+        4,
+        -1,
+        -1,
+        4,
+        4,
+        6,
+        4,
+        4,
+        6,
+        6,
+        0,
+        2,
+        -1,
+        6,
+        -1,
+        -1
+      ],
+      "population_rows": 274732
+    },
+    {
+      "label": "capacity",
+      "requests": 4,
+      "records": 0,
+      "csr_cycles": 11106,
+      "compact_cycles": 4545566,
+      "compact_over_csr": 409.28921303799746
+    },
+    {
+      "label": "wrong_mode",
+      "requests": 2,
+      "records": 0,
+      "csr_cycles": 588,
+      "compact_cycles": 588,
+      "compact_over_csr": 1.0
+    }
+  ],
+  "uniform_sample": {
+    "requests": 64,
+    "known": 51,
+    "unknown": 13,
+    "known_empty": 4,
+    "max_degree": 146,
+    "records": 368
+  },
+  "findings": [
+    "All sampled known nonempty degree strata are slower for the compact RTL than CSR.",
+    "Old121.13 ratio is not a universal access cost; current sampled nonempty strata range17.998..130.889.",
+    "Uniform64 requests take compact2108498 versus CSR45108 cycles, ratio46.743; still no speedup in this sample.",
+    "Each nonempty degree stratum has only two nodes; uniform64 includes one146-degree node contributing146/368 records. Neither sample is the actual router access distribution.",
+    "No algorithm or clock changed in this baseline experiment; all RTL remains identical to the independently audited XO."
+  ],
+  "scope": "HLS AXI co-simulation cycles only, not board timing or full-router speedup."
+}

@@ -1,0 +1,9 @@
+# G4 sole-owner恢复之后
+
+以results/fourth_warm_20261027.json/.md及fourth_warm_phases_20261027.json为入口。选定full_v2/pressure_v2，生产RTL与正常fourth_system完全相同。一个确定图R错误、原生6GET+3INC、完整781/156/10恢复、新attempt7中的source-floor180329拒绝与q180330重试已验证；编译full_v1只记录TB声明晚于使用，不是硬件反例。
+
+严格区分失败attempt6已受理180330与新attempt7恢复旧快照ledger180329。不能称180330未被消费，不能把本轮称为全局序号永不重放或持久化floor证明。每轮使用原始G4 query327d3916/path f00b72b4，target7实际导出query8a39d874；不手填source字节或CRC。
+
+下一优先开展恢复开销消融，避免继续机械增加相似正常query数量。见hardware/variants/restore_seed_bypass_v1/PLAN.md：当前实测781次baseline读、3905恢复字段写之外还有3905次baseline seed写，label阶段374180/290780周期。隔离候选应默认关闭，并只给原生恢复整记录写提供与其实际事务归属绑定的许可；普通查询未知记录仍必须走baseline。先做默认关闭精确回归，再开启后的完整数值/字节/回执审计，并覆盖写中途取消及错误CRC后非冷重试，不能以减周期为理由跳过这些边界。
+
+尚无该优化实现或收益结论。现有G4恢复只覆盖一个图R错误点，任意故障/取消、变价标签有效性、全图baseline reseed、持久化writer/认证/floor、自然overflow pool新增回收、综合时序与板卡仍缺。原始clones/full baseline和历史路径元数据外部可信。审计归档恢复后释放本轮干净缓存，不删除证据。goal保持active。

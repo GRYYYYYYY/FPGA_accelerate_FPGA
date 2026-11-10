@@ -1,0 +1,1 @@
+Native coordinator nine-case audit and actual restoration passed; see results/recovery_backend_native_20261027.json. Production v1/v2 identical. V1 full TB compile failure preserved; V2 declaration order repaired and full CRC simulation running. No full structural acceptance. This STATUS file is not part of the frozen source bundle.

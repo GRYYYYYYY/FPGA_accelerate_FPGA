@@ -1,0 +1,31 @@
+{
+  "analyzer_sha256": "d5c91af8c5d4378be2c8c8e28904ba4f7dad922ad4511d2966cad9e23780dab3",
+  "capture_valuations": 256,
+  "checked_expressions": [
+    "CP_IDLE:if(cp_valid&&cp_ready)begin",
+    "if(cp_design!=active_design||cp_nodes==0||cp_nets==0)begin cp_status<=1;cp_state<=CP_DONE;end",
+    "else if(cp_restore)cp_state<=CP_IMPORT;",
+    "cp_stage[a*CP_STRIDE]<=slot_valid[a]?1:0;",
+    "cp_stage[a*CP_STRIDE+1]<=slot_valid[a]?sizes[a]:0;",
+    "cp_stage[a*CP_STRIDE+2]<=slot_valid[a]?nets[a]:0;",
+    "cp_stage[a*CP_STRIDE+3]<=slot_valid[a]?sources[a]:0;",
+    "cp_stage[a*CP_STRIDE+4]<=slot_valid[a]?sinks[a]:0;",
+    "cp_stage[a*CP_STRIDE+5]<=slot_valid[a]?designs[a][31:0]:0;",
+    "cp_stage[a*CP_STRIDE+6]<=slot_valid[a]?designs[a][63:32]:0;",
+    "for(b=0;b<MAX_PATH;b=b+1)cp_stage[a*CP_STRIDE+7+b]<=slot_valid[a]&&b<sizes[a]?path[a][b]:0;",
+    "CP_IMPORT:if(cp_failed||abort||fault||cp_drift)begin cp_status<=2;cp_state<=CP_DONE;end",
+    "else if(cp_s_valid&&cp_s_ready)begin",
+    "if(cp_s_index!=cp_pos||cp_s_last!=(cp_pos+1==CP_WORDS))begin cp_status<=1;cp_state<=CP_DONE;end",
+    "else begin cp_stage[cp_pos]<=cp_s_data;cp_running<=crc_word(cp_running,cp_s_data);"
+  ],
+  "export_word_checks": 21756,
+  "import_valuations": 64,
+  "indexed_import_cases": 461,
+  "proposal": "Static per-word cp_stage writes, retaining original nested if/else control tree, no register or cycle added. Default-off option on the path area candidate; CP remains timing reference.",
+  "reference_audit_sha256": "e416196b88c1973d71313e327439ad88f90034113a07be0baa61fe249f048154",
+  "restore_receipt_sha256": "0156e323cf05b96048827567c92860dcc77b06aab393483db303ba14242ab3fc",
+  "scope": "Two-state control predicates and bounded Python word/index model only, not RTL formal or X/Z proof. Actual candidate must compare complete path and stage banks and event cycles, including failed imports, export snapshots, cancellation and reset behavior.",
+  "source_sha256": "038ad85d9540c89aa91ee17e0fa8ed727600926083057a6bfd10b44b252443e6",
+  "status": "source_bound_control_and_bounded_word_model_not_RTL_validation",
+  "valuations": 262144
+}

@@ -1,0 +1,1 @@
+join_v1 failed: lifecycle q_busy/q_fault collided with existing connection-service outputs, yielding X/idle watchdog. Preserved frozen source/manifest/logs. join_v2 uses qc_* ports and builder collision assertions, passed real execution and independent audit.

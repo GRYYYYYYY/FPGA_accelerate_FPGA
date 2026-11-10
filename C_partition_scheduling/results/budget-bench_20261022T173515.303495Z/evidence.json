@@ -1,0 +1,1136 @@
+{
+  "schema_version": 1,
+  "timestamp_utc": "20261022T173515.303495Z",
+  "measurement_kind": "synthetic_router_fixture",
+  "context": {
+    "input_sha256": "1983d8a58826e72623326b289f50fca0471e6ae91b0039215fed13c2c5ae9632",
+    "binary_sha256": "187ae40d078438d77d671450371b0f0490ce7065d4ae0f5c148a34f837315eb6",
+    "runner_sha256": "6aaec728a405d401821077edc07655315a93da79175ccfcab2d28ebc5f6d218b",
+    "environment_sha256": "c67078ef56837fb01082222e7aacc0e32b45655ac643f9349c798a6228f21b13",
+    "constraints_sha256": "63757a88360b5593fb8584eb3dbd4a50656e5c5c70b64bafefeefb5d999a0366",
+    "timing_scope": "whole_process_warm_filesystem_v1",
+    "baseline": {
+      "backend": "cpp_cpu",
+      "scheduler": "serial",
+      "budget_pops": 0
+    },
+    "candidate": {
+      "backend": "cpp_cpu",
+      "scheduler": "serial",
+      "budget_pops": 8
+    }
+  },
+  "accounting": "exclusive_wall_components",
+  "timing_includes_all_costs": true,
+  "footprint_collection": false,
+  "legality_scope": "exported_graph",
+  "complete_campaign": true,
+  "planned_pairs": 10,
+  "pairs": [
+    {
+      "pair_id": 0,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/0_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/0_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.258855,
+        "useful_search_ms": 0.069803,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.284958,
+        "transfer_ms": 0.0,
+        "other_ms": 7.904094000000001,
+        "metrics": {
+          "route_ns": 354761,
+          "search_ns": 69803,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "1364a5e92ff91b9556c58f877cce1e4620e55ec4d0556c71e714d7b5fbbb75e5",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/0_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/0_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.233109,
+        "useful_search_ms": 0.069698,
+        "discarded_search_ms": 0.007787,
+        "scheduling_and_state_ms": 0.28872200000000003,
+        "transfer_ms": 0.0,
+        "other_ms": 7.8669020000000005,
+        "metrics": {
+          "route_ns": 366207,
+          "search_ns": 77485,
+          "discarded_search_ns": 7787,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "7b7a4b4a778ce88a8b15a5c09535909699bf7b4f377c71911fe44da73ad5ae2d",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 1,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/1_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/1_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.218244,
+        "useful_search_ms": 0.07107100000000001,
+        "discarded_search_ms": 0.007711,
+        "scheduling_and_state_ms": 0.29244899999999996,
+        "transfer_ms": 0.0,
+        "other_ms": 7.8470130000000005,
+        "metrics": {
+          "route_ns": 371231,
+          "search_ns": 78782,
+          "discarded_search_ns": 7711,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "8253f7ced21a942e6b397c8431899ec86d640672c7af49610b42c80105d68674",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/1_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/1_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.206529,
+        "useful_search_ms": 0.06982,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.279649,
+        "transfer_ms": 0.0,
+        "other_ms": 7.85706,
+        "metrics": {
+          "route_ns": 349469,
+          "search_ns": 69820,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "8e8910a2a5785b15a4270735226baf125d730572fab1ae15b11c582d5f7f9235",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 2,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/2_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/2_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.209494,
+        "useful_search_ms": 0.07011,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.251305,
+        "transfer_ms": 0.0,
+        "other_ms": 7.888078999999999,
+        "metrics": {
+          "route_ns": 321415,
+          "search_ns": 70110,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "f06796e5e68bd7416faf5607036dbe5e19f0d32bf61d44b9379bc4e52230d070",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/2_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/2_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.20643,
+        "useful_search_ms": 0.06986,
+        "discarded_search_ms": 0.007645,
+        "scheduling_and_state_ms": 0.286241,
+        "transfer_ms": 0.0,
+        "other_ms": 7.842683999999999,
+        "metrics": {
+          "route_ns": 363746,
+          "search_ns": 77505,
+          "discarded_search_ns": 7645,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "d1c84efa2878f6fb4e70a63597d903fc273cf333e8e24bcabfc7da83d381a5ee",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 3,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/3_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/3_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.207701,
+        "useful_search_ms": 0.06919900000000001,
+        "discarded_search_ms": 0.007905,
+        "scheduling_and_state_ms": 0.24541200000000002,
+        "transfer_ms": 0.0,
+        "other_ms": 7.885185,
+        "metrics": {
+          "route_ns": 322516,
+          "search_ns": 77104,
+          "discarded_search_ns": 7905,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "202052bb8a0b0cb7e9bcd8c87ed7cbf88b9ecd7c04784249a4a00f02e9fad8f3",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/3_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/3_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.216341,
+        "useful_search_ms": 0.071687,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.29085,
+        "transfer_ms": 0.0,
+        "other_ms": 7.853804,
+        "metrics": {
+          "route_ns": 362537,
+          "search_ns": 71687,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "6ec39276f0abe1d34b6376e3076764be354883848bcb4a16d75fce8106442996",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 4,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/4_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/4_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.250689,
+        "useful_search_ms": 0.070606,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.246189,
+        "transfer_ms": 0.0,
+        "other_ms": 7.933894,
+        "metrics": {
+          "route_ns": 316795,
+          "search_ns": 70606,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "d0453f95642178a7b8eff9e7cfb34225a921f5535abb43f4d41fedfd2822b653",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/4_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/4_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.208593,
+        "useful_search_ms": 0.07112199999999999,
+        "discarded_search_ms": 0.007982,
+        "scheduling_and_state_ms": 0.272403,
+        "transfer_ms": 0.0,
+        "other_ms": 7.857086000000001,
+        "metrics": {
+          "route_ns": 351507,
+          "search_ns": 79104,
+          "discarded_search_ns": 7982,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "38f65496ccdf31a15ce49f2bad28a077d6fdb1e7cdc5dbfbe08c17e0cc893f03",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "372970580100c5ed264e43ce3857d3dc2767b1d3e335531df6667a623697ce9e",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 5,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/5_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/5_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.240791,
+        "useful_search_ms": 0.070006,
+        "discarded_search_ms": 0.00767,
+        "scheduling_and_state_ms": 0.30432400000000004,
+        "transfer_ms": 0.0,
+        "other_ms": 7.858791,
+        "metrics": {
+          "route_ns": 382000,
+          "search_ns": 77676,
+          "discarded_search_ns": 7670,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "181d833a13cb6c680e2d983b7cee8cab6dafd4358a45df3ecf019d1b62e06879",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/5_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/5_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.332865,
+        "useful_search_ms": 0.0701,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.284153,
+        "transfer_ms": 0.0,
+        "other_ms": 7.978612,
+        "metrics": {
+          "route_ns": 354253,
+          "search_ns": 70100,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "38f65496ccdf31a15ce49f2bad28a077d6fdb1e7cdc5dbfbe08c17e0cc893f03",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "762526cf0e66091d8386b39dafd76ee1c99f2433380b0798c769c1f3edf1a694",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 6,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/6_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/6_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.271011,
+        "useful_search_ms": 0.069915,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.28099799999999997,
+        "transfer_ms": 0.0,
+        "other_ms": 7.920097999999999,
+        "metrics": {
+          "route_ns": 350913,
+          "search_ns": 69915,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "25abec9bf023dddec598e65bfdc33a4925cf1878ac5472fe821eb75f6e9cd4d5",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/6_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/6_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.273224,
+        "useful_search_ms": 0.07000300000000001,
+        "discarded_search_ms": 0.007903,
+        "scheduling_and_state_ms": 0.296107,
+        "transfer_ms": 0.0,
+        "other_ms": 7.899211000000001,
+        "metrics": {
+          "route_ns": 374013,
+          "search_ns": 77906,
+          "discarded_search_ns": 7903,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "fff0186e35836d1c90c67743fa302c3d15251f19179cccb69788dd07107ba4b3",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 7,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/7_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/7_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.303699,
+        "useful_search_ms": 0.06996000000000001,
+        "discarded_search_ms": 0.007797,
+        "scheduling_and_state_ms": 0.294514,
+        "transfer_ms": 0.0,
+        "other_ms": 7.931428,
+        "metrics": {
+          "route_ns": 372271,
+          "search_ns": 77757,
+          "discarded_search_ns": 7797,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "d15228a752d711643ab018a0da4850594f68f12071229ba81956ba53ce0463ce",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/7_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/7_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.253821,
+        "useful_search_ms": 0.069232,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.253115,
+        "transfer_ms": 0.0,
+        "other_ms": 7.931474000000001,
+        "metrics": {
+          "route_ns": 322347,
+          "search_ns": 69232,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "2d809b6fe8d62849e04237bf2fcd90488d0db2fcf7b9335f6d59a4241e921309",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 8,
+      "order": [
+        "baseline",
+        "candidate"
+      ],
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/8_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/8_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.286901,
+        "useful_search_ms": 0.069593,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.280704,
+        "transfer_ms": 0.0,
+        "other_ms": 7.936604,
+        "metrics": {
+          "route_ns": 350297,
+          "search_ns": 69593,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "e1a3d4b943e1510a733c35fb91d3e019920f3491fd807883fa78425fa739a173",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/8_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/8_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.218809,
+        "useful_search_ms": 0.07061,
+        "discarded_search_ms": 0.007875,
+        "scheduling_and_state_ms": 0.296724,
+        "transfer_ms": 0.0,
+        "other_ms": 7.8436,
+        "metrics": {
+          "route_ns": 375209,
+          "search_ns": 78485,
+          "discarded_search_ns": 7875,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "38f65496ccdf31a15ce49f2bad28a077d6fdb1e7cdc5dbfbe08c17e0cc893f03",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "12760f89d1bc9292d9a0ce2cc5d36a85611335ab2f883fbf1842f4d5f5984cdc",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    },
+    {
+      "pair_id": 9,
+      "order": [
+        "candidate",
+        "baseline"
+      ],
+      "candidate": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/9_candidate/route.result"
+        ],
+        "budget_pops": 8,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/9_candidate",
+        "returncode": 0,
+        "end_to_end_ms": 8.186313,
+        "useful_search_ms": 0.07008299999999999,
+        "discarded_search_ms": 0.007717,
+        "scheduling_and_state_ms": 0.261338,
+        "transfer_ms": 0.0,
+        "other_ms": 7.847175,
+        "metrics": {
+          "route_ns": 339138,
+          "search_ns": 77800,
+          "discarded_search_ns": 7717,
+          "pops": 82,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 10,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 2
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "38f65496ccdf31a15ce49f2bad28a077d6fdb1e7cdc5dbfbe08c17e0cc893f03",
+          "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+          "metrics.json": "be1bb7c7871eaf564d3b0b34b10f7f98ac2020f2aa3c760a6bde2bfb76ab59fc",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "legal": true,
+        "quality_passed": true,
+        "backend_switches": 0,
+        "reschedules": 0,
+        "command": [
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/9_baseline/route.result"
+        ],
+        "budget_pops": 0,
+        "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/9_baseline",
+        "returncode": 0,
+        "end_to_end_ms": 8.220125,
+        "useful_search_ms": 0.070081,
+        "discarded_search_ms": 0.0,
+        "scheduling_and_state_ms": 0.297631,
+        "transfer_ms": 0.0,
+        "other_ms": 7.852412999999999,
+        "metrics": {
+          "route_ns": 367712,
+          "search_ns": 70081,
+          "discarded_search_ns": 0,
+          "pops": 64,
+          "verification": {
+            "record": "verification",
+            "connections": 8,
+            "unrouted": 0,
+            "bad_paths": 0,
+            "final_overused_nodes": 0,
+            "attempts_total": 8,
+            "attempts_recorded": 0,
+            "budget_aborts_total": 0
+          }
+        },
+        "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+        "artifacts_sha256": {
+          "stdout.log": "38f65496ccdf31a15ce49f2bad28a077d6fdb1e7cdc5dbfbe08c17e0cc893f03",
+          "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+          "metrics.json": "23ae25c3adca53ddaa46b8e73a0be241f2b9f8babcd4717ab1fd49e768f751ca",
+          "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+        }
+      }
+    }
+  ],
+  "provenance": null,
+  "build": {
+    "identity": {
+      "files": {
+        "build/cpu_trace/main.cpp": "a511107310ab145911db24bfccf6fcb8dae430385baa64915bde986d30f446b2",
+        "build/cpu_trace/baseline.cpp": "559952597c5906834f35b03c75927ee7f87244e96cda5eed214f7aa61983412d",
+        "adapters/instrument_router.py": "e17fb1fd97ea8b8a626e967885027efca1faa5fa0d5cda381617fe2ed9656e14",
+        "adapters/trace.hpp": "298c09b235ce0ef3e7272081ba24ab5350b75b84db6fe6c79899c54b4978ed60",
+        "adapters/router_hooks.inc": "197c4259a47ac23cde4d9d63a7effd192fa0029311f56b0924a6bf98d37ebc5b",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+      },
+      "compiler": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+      "flags": [
+        "-std=c++17",
+        "-O3",
+        "-fno-fast-math",
+        "-pthread"
+      ]
+    },
+    "commands": [
+      [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-fno-fast-math",
+        "-pthread",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/adapters",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/main.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace"
+      ],
+      [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-fno-fast-math",
+        "-pthread",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/adapters",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/baseline.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_original"
+      ]
+    ],
+    "binaries": {
+      "router_trace": "187ae40d078438d77d671450371b0f0490ce7065d4ae0f5c148a34f837315eb6",
+      "router_original": "e531b83b39b83f697274084caf7876d24abc61d382ec5b4fbeac47fb502b2446"
+    }
+  },
+  "limitations": "Same CPU/scheduler, immediate retry; serial timers remain in both arms. Scheduling/state includes all non-search routing time. Other includes process launch, load, verification, output and observer wait. No host/device transfer. Fresh processes after one retained warm-up pair. Graph checks are not source-tool signoff.",
+  "warmup": {
+    "pair_id": -1,
+    "order": [
+      "candidate",
+      "baseline"
+    ],
+    "candidate": {
+      "status": "passed",
+      "legal": true,
+      "quality_passed": true,
+      "backend_switches": 0,
+      "reschedules": 0,
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/warmup_candidate/route.result"
+      ],
+      "budget_pops": 8,
+      "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/warmup_candidate",
+      "returncode": 0,
+      "end_to_end_ms": 8.472546,
+      "useful_search_ms": 0.072337,
+      "discarded_search_ms": 0.007746,
+      "scheduling_and_state_ms": 0.258802,
+      "transfer_ms": 0.0,
+      "other_ms": 8.133661,
+      "metrics": {
+        "route_ns": 338885,
+        "search_ns": 80083,
+        "discarded_search_ns": 7746,
+        "pops": 82,
+        "verification": {
+          "record": "verification",
+          "connections": 8,
+          "unrouted": 0,
+          "bad_paths": 0,
+          "final_overused_nodes": 0,
+          "attempts_total": 10,
+          "attempts_recorded": 0,
+          "budget_aborts_total": 2
+        }
+      },
+      "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+      "artifacts_sha256": {
+        "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+        "stderr.log": "d417b44a5c33e6d74671ae313025ab8c1285eda3c88828574dd23b1d04c26bbe",
+        "metrics.json": "b7c887db9f1a3f5ec536ad58d06414fdcaa80d676e3e45c390749bd8b32159b6",
+        "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+      }
+    },
+    "baseline": {
+      "status": "passed",
+      "legal": true,
+      "quality_passed": true,
+      "backend_switches": 0,
+      "reschedules": 0,
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/shared_candidate.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/warmup_baseline/route.result"
+      ],
+      "budget_pops": 0,
+      "artifact_directory": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/budget-bench_20261022T173515.303495Z/warmup_baseline",
+      "returncode": 0,
+      "end_to_end_ms": 8.309015,
+      "useful_search_ms": 0.07113,
+      "discarded_search_ms": 0.0,
+      "scheduling_and_state_ms": 0.286937,
+      "transfer_ms": 0.0,
+      "other_ms": 7.950948,
+      "metrics": {
+        "route_ns": 358067,
+        "search_ns": 71130,
+        "discarded_search_ns": 0,
+        "pops": 64,
+        "verification": {
+          "record": "verification",
+          "connections": 8,
+          "unrouted": 0,
+          "bad_paths": 0,
+          "final_overused_nodes": 0,
+          "attempts_total": 8,
+          "attempts_recorded": 0,
+          "budget_aborts_total": 0
+        }
+      },
+      "result_sha256": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+      "artifacts_sha256": {
+        "stdout.log": "1669ae44ef1468d398b0ca9669b53f7b3f45c3f9063336508e512d653d12ba6e",
+        "stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+        "metrics.json": "ef71d49f55fe11db839256e3174530309fdda4d5762fe8bc0c4f035a38df1a5f",
+        "route.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+      }
+    }
+  }
+}

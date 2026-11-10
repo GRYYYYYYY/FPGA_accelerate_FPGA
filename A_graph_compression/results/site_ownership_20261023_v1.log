@@ -1,0 +1,45 @@
+==============================================================================
+==                         Reading DCP: routed.dcp                          ==
+==============================================================================
+ XML Parse & Device Load:     9.165s
+Exception in thread "main" java.lang.RuntimeException: 
+*******************************************************************************
+** ERROR: Unable to find a readable EDIF file for the DCP:
+          /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+
+          Failed to auto-generate an EDIF file. Please see options below to create one manually:
+
+          When Vivado generates DCPs, by default it includes an EDIF file that
+          is generally not readable by RapidWright.  However, a readable EDIF
+          can be generated using 'write_edif'.  Two options exist to resolve
+          this issue:
+
+          1) Always run 'write_edif' after 'write_checkpoint' in Vivado.  This
+             is the most efficient and least error prone way.  A convenience 
+             Tcl command is available in $RAPIDWRIGHT_PATH/tcl/rapidwright.tcl 
+             called 'write_rw_checkpoint <file>'.  Just source rapidwright.tcl 
+             and replace your 'write_checkpoint' call with this command.
+
+          2) If option #1 is skipped, RapidWright can automatically invoke
+             Vivado and attempt to do it automatically.  This assumes a 
+             compatible Vivado is on your PATH.  This mode is enabled by 
+             default.  Auto-generation can be disabled two ways:
+               (1) set environment variable RW_AUTO_GENERATE_READABLE_EDIF=0, or
+               (2) call 'Design.setAutoGenerateReadableEdif (false)' in 
+                   your RapidWright program.
+
+          We apologize for the inconvenience of this added step.
+*******************************************************************************
+
+	at c.a(Unknown Source)
+	at c.a(Unknown Source)
+	at com.xilinx.rapidwright.design.Design.readCheckpoint(Unknown Source)
+	at com.xilinx.rapidwright.design.Design.readCheckpoint(Unknown Source)
+	at com.xilinx.rapidwright.design.Design.readCheckpoint(Unknown Source)
+	at ExportSiteOwnership.main(ExportSiteOwnership.java:18)
+Caused by: java.lang.RuntimeException: ERROR: Couldn't find vivado on PATH
+	at com.xilinx.rapidwright.util.FileTools.getExecutablePath(FileTools.java:1951)
+	at com.xilinx.rapidwright.util.FileTools.getVivadoPath(FileTools.java:1962)
+	at com.xilinx.rapidwright.design.DesignTools.generateReadableEDIFJob(DesignTools.java:3994)
+	at com.xilinx.rapidwright.design.DesignTools.generateReadableEDIF(DesignTools.java:4079)
+	... 6 more

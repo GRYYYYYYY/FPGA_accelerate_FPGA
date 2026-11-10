@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "project_id": "E",
+  "execution_kind": "synthetic_smoke",
+  "backend": "python_cpu",
+  "variant": "reference",
+  "timestamp_utc": "2026-10-22T14:07:19.165427+00:00",
+  "status": "passed",
+  "input_sha256": "b49d771064ed14656617c10e2d9cfb2f3c40718faf4ae2131f6566f7d474450e",
+  "config_sha256": "e683a6e410145dcd6b2595f0bcd2556ebbc8ced51f7d5fedee96e92d137c9196",
+  "reference_sha256": "27c11e2110e1d26b844cf936a766275a3c4338084c65590d9978dc157e44d82b",
+  "framework_sha256": "b9201ee2097574b1f2e581d3da1f982430b40cc71fe74a28ba463e96c891eb16",
+  "common_sha256": "183c90724153bfb77a7772abbe166bf7094d2a2736f2a06e6aab9102a3d742de",
+  "python_version": "3.10.12",
+  "measurements": {
+    "kernel_ms": null,
+    "end_to_end_ms": null,
+    "power_w": null,
+    "energy_j": null,
+    "achieved_clock_mhz": null,
+    "speedup": null
+  },
+  "checks": {
+    "expected_best_candidate": true,
+    "legality_baseline": true,
+    "legality_near": true,
+    "legality_wrong_type": true,
+    "legality_collision": true,
+    "legality_fixed_move": true,
+    "legality_break_cascade": true
+  },
+  "observations": {
+    "candidate_count": 6,
+    "scope": "site coordinates, resource type, region and simple cascades only; no timing/site-pin model"
+  },
+  "outputs": {
+    "candidates": [
+      {
+        "id": "baseline",
+        "legal_in_toy_model": true,
+        "violations": [],
+        "weighted_hpwl": 3
+      },
+      {
+        "id": "near",
+        "legal_in_toy_model": true,
+        "violations": [],
+        "weighted_hpwl": 1
+      },
+      {
+        "id": "wrong_type",
+        "legal_in_toy_model": false,
+        "violations": [
+          "resource_type:a",
+          "region:a",
+          "site_conflict:d0"
+        ],
+        "weighted_hpwl": 2
+      },
+      {
+        "id": "collision",
+        "legal_in_toy_model": false,
+        "violations": [
+          "region:a",
+          "site_conflict:l3"
+        ],
+        "weighted_hpwl": 0
+      },
+      {
+        "id": "fixed_move",
+        "legal_in_toy_model": false,
+        "violations": [
+          "fixed_cell:b"
+        ],
+        "weighted_hpwl": 1
+      },
+      {
+        "id": "break_cascade",
+        "legal_in_toy_model": false,
+        "violations": [
+          "cascade:d:e"
+        ],
+        "weighted_hpwl": 3
+      }
+    ],
+    "best_candidate": "near"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "status": "three_terminal_experiments_verified_and_cross_checked",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/kernel_router_integration_audit_20261023_v1.json": "5552e5b3b6b590fc95b1da6df3248567b2363d8701fb07c7066c1eaea3c06631",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_tile_cache_cosim_audit_20261023_v1.json": "c77f5d99da0afc0e197224e4d469113795730aecbf660968d6960ec308fc428a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_tile_cache_comparison_20261023_v1.json": "9a0a09c3a5570a2905badb3de06e14d718b7a20941b93263b8e0b5b1713e64da",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/router_access_profile_audit_20261023_v1.json": "7e655f37d265d5bfe718bb8fcc139e12a1b615fe2a6b3219aa7581bc93100d3f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_stratified_audit_20261023_v1.json": "b87a445ee83f4f8935ff1e9657dcd5b7517edb5c2642083958045d5be865faae"
+  },
+  "verified_binding_counts": {
+    "kernel_router_integration_audit": 18,
+    "vitis_tile_cache_cosim_audit": 26,
+    "vitis_tile_cache_comparison": 27,
+    "router_access_profile_audit": 8
+  },
+  "native_and_kernel_call_counts_match": [
+    {
+      "mode": "csr",
+      "batch": 0,
+      "cache_hits": 5780146,
+      "cache_misses_and_kernel_calls": 136095859
+    },
+    {
+      "mode": "csr",
+      "batch": 1,
+      "cache_hits": 5780172,
+      "cache_misses_and_kernel_calls": 136095833
+    },
+    {
+      "mode": "compact",
+      "batch": 0,
+      "cache_hits": 5780146,
+      "cache_misses_and_kernel_calls": 136095859
+    },
+    {
+      "mode": "compact",
+      "batch": 1,
+      "cache_hits": 5780172,
+      "cache_misses_and_kernel_calls": 136095833
+    }
+  ],
+  "rtl_comparisons": [
+    {
+      "label": "empty",
+      "baseline_cycles": 1255,
+      "tile_cache_cycles": 1255,
+      "tile_cache_over_baseline": 1.0,
+      "reduction_fraction": 0.0,
+      "csr_cycles": 1101,
+      "tile_cache_over_csr": 1.1398728428701181
+    },
+    {
+      "label": "degree_1_2",
+      "baseline_cycles": 23866,
+      "tile_cache_cycles": 20548,
+      "tile_cache_over_baseline": 0.8609737702170451,
+      "reduction_fraction": 0.13902622978295487,
+      "csr_cycles": 1326,
+      "tile_cache_over_csr": 15.496229260935143
+    },
+    {
+      "label": "degree_3_4",
+      "baseline_cycles": 45986,
+      "tile_cache_cycles": 37166,
+      "tile_cache_over_baseline": 0.8082024964119514,
+      "reduction_fraction": 0.1917975035880486,
+      "csr_cycles": 1536,
+      "tile_cache_over_csr": 24.196614583333332
+    },
+    {
+      "label": "degree_5_8",
+      "baseline_cycles": 79684,
+      "tile_cache_cycles": 62520,
+      "tile_cache_over_baseline": 0.7845991667084986,
+      "reduction_fraction": 0.2154008332915014,
+      "csr_cycles": 1858,
+      "tile_cache_over_csr": 33.64908503767492
+    },
+    {
+      "label": "degree_9_63",
+      "baseline_cycles": 136412,
+      "tile_cache_cycles": 108972,
+      "tile_cache_over_baseline": 0.7988446764214292,
+      "reduction_fraction": 0.2011553235785708,
+      "csr_cycles": 2390,
+      "tile_cache_over_csr": 45.59497907949791
+    },
+    {
+      "label": "degree_64_127",
+      "baseline_cycles": 1486572,
+      "tile_cache_cycles": 1235538,
+      "tile_cache_over_baseline": 0.8311322963166264,
+      "reduction_fraction": 0.16886770368337356,
+      "csr_cycles": 13954,
+      "tile_cache_over_csr": 88.54364339974201
+    },
+    {
+      "label": "degree_128_255",
+      "baseline_cycles": 1647096,
+      "tile_cache_cycles": 1259072,
+      "tile_cache_over_baseline": 0.7644193173925503,
+      "reduction_fraction": 0.2355806826074497,
+      "csr_cycles": 16740,
+      "tile_cache_over_csr": 75.21338112305854
+    },
+    {
+      "label": "degree_512_1024",
+      "baseline_cycles": 9136018,
+      "tile_cache_cycles": 7456102,
+      "tile_cache_over_baseline": 0.8161216407410756,
+      "reduction_fraction": 0.18387835925892437,
+      "csr_cycles": 69800,
+      "tile_cache_over_csr": 106.82094555873925
+    },
+    {
+      "label": "unknown",
+      "baseline_cycles": 738,
+      "tile_cache_cycles": 738,
+      "tile_cache_over_baseline": 1.0,
+      "reduction_fraction": 0.0,
+      "csr_cycles": 738,
+      "tile_cache_over_csr": 1.0
+    },
+    {
+      "label": "uniform_64",
+      "baseline_cycles": 2108498,
+      "tile_cache_cycles": 1662934,
+      "tile_cache_over_baseline": 0.7886818009787062,
+      "reduction_fraction": 0.21131819902129378,
+      "csr_cycles": 45108,
+      "tile_cache_over_csr": 36.86561142147735
+    },
+    {
+      "label": "capacity",
+      "baseline_cycles": 4545566,
+      "tile_cache_cycles": 3705608,
+      "tile_cache_over_baseline": 0.8152137709583361,
+      "reduction_fraction": 0.18478622904166386,
+      "csr_cycles": 11106,
+      "tile_cache_over_csr": 333.6582027732757
+    },
+    {
+      "label": "wrong_mode",
+      "baseline_cycles": 588,
+      "tile_cache_cycles": 588,
+      "tile_cache_over_baseline": 1.0,
+      "reduction_fraction": 0.0,
+      "csr_cycles": 588,
+      "tile_cache_over_csr": 1.0
+    }
+  ],
+  "decisions": [
+    "Tile-cache is a viable isolated candidate for subsequent routed timing/resource checks and access-weighted matched RTL; it is not promoted to the default.",
+    "Do not prioritize high-degree sorting for this workload: independently observed degree>=64 accesses are zero.",
+    "The full Vitis-ABI C-model routing gate is satisfied for four conditions and two complete1062-net batches each; XRT hardware execution still needs real platform/card.",
+    "Keep all original baseline/merge/candidate artifacts frozen. Future weighted stimuli must preserve multiplicities and matching canonical identities across representations."
+  ],
+  "limitations": [
+    "Sampled tile-cache RTL improves over compact baseline but remains slower than CSR.",
+    "Known-row per-batch hit rate is about4.074%, with136095859/136095833 direct kernel calls; no actual board launch cost measured.",
+    "C-model timings include CPU provider/guard overhead and n=1 per condition; not FPGA acceleration evidence.",
+    "Partial14-site-instance semantics, remaining repeated statistics, platform/card DDR/HBM and power, and full FPGA search remain incomplete."
+  ]
+}

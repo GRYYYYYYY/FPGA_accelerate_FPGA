@@ -1,0 +1,60 @@
+{
+  "status": "passed",
+  "sources": {
+    "bridge_body.inc": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_bridge_v1/bridge_body.inc",
+      "sha256": "6a50f436b7781e196fd02e366fa008e1eea6720c3cda4215555fbab074941998"
+    },
+    "tb_owner_bridge.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_bridge_v1/tb_owner_bridge.sv",
+      "sha256": "7a32e408fbdd3bcfec632fa4a52953fcdfa737d1b8694ec4d8e165bb6780b085"
+    },
+    "owner_bridge.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_bridge_v1/owner_bridge.sv",
+      "sha256": "8bc285d65770085a258cf12d71c9ec5bf9b186a5d7f67e4fa404e0f0a2baa7e0"
+    },
+    "run_owner_bridge.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_owner_bridge.py",
+      "sha256": "7587f0f952dae98fb3f03519c9b7c9ed6e8d40d201cdd1bdfe872c9fa4c531a0"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_bridge_v3_20261024/sources/owner_bridge.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_bridge_v3_20261024/sources/tb_owner_bridge.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_owner_bridge",
+        "-s",
+        "test",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "test",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "result": "OWNER_BRIDGE_PASS checks=15 fault_cases=12 cycles=177"
+}

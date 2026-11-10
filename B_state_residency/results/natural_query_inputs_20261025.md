@@ -1,0 +1,20 @@
+# 自然查询硬件输入与独立过滤/成本oracle通过（2026-10-25，优先历史）
+
+机器汇总 results/natural_query_inputs_20261025.json；脚本 summarize_natural_query_inputs.py。已将真实首查询快照生成graph绑定、design/owner/cost/connection State/native label硬件格式，并独立核验实际过滤和全部成本值。仍未执行此自然查询的RTL搜索循环，不能把输入通过表述为硬件通过。
+
+主输入 results/natural_query_inputs_v1，从已通过的natural_query_v2快照恢复原Router，新增只读成本观测和输入导出；派生器 adapters/natural_query_v1/derive_cost_inputs.py，codec export_inputs.hpp，运行 prepare_natural_query_inputs.py。全部9个既有搜索文件仍逐字节等于自然采集：前后全节点状态、events、State、heap等，不改变搜索顺序。原成本函数在push前仅记录23输入/5结果，去掉新增观测恢复既有Router。独立audit_natural_query_inputs.py检查源、依赖、完整文件及数值。
+
+全9089009节点：design.bin按16B flags/count/mask/reserved编码，created只取相对raw初始标记的增量（本快照0），design_sink来自原RRT全部连接及替代sink；owners.bin按net+1主key、refs低16/occupancy高16编码；cost.bin保留全history与256价格及27960个net的几何/fanout；initial_labels.native160为全节点lb/upstream/prev/visited/target五字记录。真实180326个sink预引用/活跃owner节点和180326个总引用完整保留，不得把owner区清零。初始overflow/cache为空，pool capacity0，allocator独立64B全零；若换到非空溢出池或预热cache，本codec显式拒绝，不会静默丢失。所有64B区尾填零已审计。
+
+connections.bin含全部180326条64B CPS1记录，其identity和初始串行权重逐条从RRT解码校验；当前query index16506的权重来自实际State。全表不是所有未来时刻的State快照。cost price_offset=36356096、net_offset=36357120；rows311、columns0、hasLaguna0。原完整graph直接绑定 results/graph_image_20261024（9089009节点/40469536边）及同一RRT SHA，未改图或复制成小合成图。
+
+171个实际成本包全部独立按binary32逐阶段舍入重算，3933输入字/855结果字一致；geometry从原RRT坐标及动态prev/current upstream重建，不能用前轮合成常量代替。child类型NON_LOCAL96、LOCAL_BOTH4、LOCAL_EAST70、EXCLUSIVE_SINK_EAST1；查询net引用最大1，目标成本1次。本轮没有landmark/crossSLR/SLL成本覆盖，其他用例已有覆盖不能自动算入这个自然查询。
+
+独立过滤oracle results/natural_query_oracle_v1，由 verify_natural_query_filters.py 从完整原CSR和根前快照重新执行getChildren/excluded/access/visited/target判定。72次真实扩展、382条原始边→271条保留候选、0cache hit；170普通push+1target push，8bbox拒绝、28visited跳过、24graph_access拒绝、40非目标exclusive sink拒绝。lookahead0，EARLY1，全部202个created增量与完整搜索后快照一致。此oracle不依赖旧1216-parent脚本向量。
+
+从所有原始候选及实际标签读导出的保守读取范围为308节点/111个8-node逻辑页；initial_label_imports.u32逐行(node,lb,upstream,prev,visited,target)，expected_label_reads.u32为同节点搜索后记录。必须在自然查询开始前实际host导入这些字面值（包括prev=-1和source已seed状态），再让硬件自己驱动搜索。全量native160文件不是现有paged backing格式，也不能直接当label AXI后备；308条host导入只保证这个已审计query的读取范围，不能据此假定其他节点或后续查询的默认值正确。读集合由本次观测路径和独立过滤共同约束，硬件偏离路径应立即失败，不能再从CPU脚本替它选下一parent。
+
+持久化：natural_query_inputs_v1归档43文件/14032515B，natural_query_oracle_v1归档4文件/3587B，索引在 results/offer_archives_20261025。两个scratch根均实际移开后解包逐成员核验，重新汇总逐字节一致，凭据 results/natural_query_inputs_restore_20261025.json；输入原有图与natural_query_v2依赖仍需存在。原通过结果/共享基线保持不变。
+
+下一步为这个真实输入编写闭环TB：actual heap POLL产生parent→实际graph/design首次过滤→metadata/access→geometry/cost→prev及三ACK→actual OFFER；目标实际CLEAR后POLL到target停止，持续同一State/标签/heap/设计。对照72扩展/271候选/171成本/73POLL及308最终记录和202 created，测试32槽与单槽或其他压力容量。不要向TB逐parent注入CPU预定顺序，不要在候选间重置query标签或owner。按Ross技能和现有B Vivado MCP会话执行真实仿真。query级State驻留/提交优化尚需实现和公平计时，不能将减少加载次数估计为实测加速。后续多查询/价格版本/回溯与owner提交/MCML/板卡仍待完成，goal active。
+

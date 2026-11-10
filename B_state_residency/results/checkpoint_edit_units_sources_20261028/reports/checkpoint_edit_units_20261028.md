@@ -1,0 +1,7 @@
+# CP编辑互斥候选原生单元验证
+
+baseline/default/exclusive各覆盖原checkpoint测试、原rebase测试、独立native_cp和generic_overlap场景，共12例。四组baseline/default完整事件与结束时间一致；合法checkpoint/rebase/native_cp的exclusive也一致，共7组比较。默认通用协议保留。
+
+native_cp覆盖半流许可撤销且编辑、CRC正确重试恢复、导出背压及许可撤销、dirty标记保留。generic_overlap故意提供cp_safe真且编辑真的非原生输入：baseline/default拒绝，特化可接受。这是必须保持默认关闭的合同反例，不能称对任意接口安全。
+
+独立审计与归档实际恢复audit字节一致，源码/工具/输入/回执冻结。这里只验证query_lifecycle与模型后端；尚无完整系统轨迹、匹配新综合网表或时序改善结论。下一先在完整系统监视真实cp_safe/edit端口并执行27输出/周期精确比较，再测OOC。

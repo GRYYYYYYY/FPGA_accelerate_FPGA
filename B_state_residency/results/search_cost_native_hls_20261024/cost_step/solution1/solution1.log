@@ -1,0 +1,66 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10.000 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: csim_design -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0.37 seconds. CPU system time: 0.74 seconds. Elapsed time: 1.31 seconds; current allocated memory: 16.000 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 771.324 MB.
+INFO: [HLS 200-10] Analyzing design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 1.15 seconds. CPU system time: 1.24 seconds. Elapsed time: 2.69 seconds; current allocated memory: 773.465 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-178] Inlining function 'float const& std::min<float>(float const&, float const&)' into 'search_cost::node_cost(float, float, float, float, int, float, int)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/search_cost.hpp:9:0)
+INFO: [HLS 214-178] Inlining function 'fp(unsigned int)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'search_cost::sharing_factor(float, int)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'search_cost::node_cost(float, float, float, float, int, float, int)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'search_cost::partial_cost(float, float, float, int, float)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'search_cost::heuristic(float, int, bool, unsigned short const*, unsigned short const*, float)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'search_cost::total_cost(float, float, float)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 214-178] Inlining function 'raw(float)' into 'cost_step(unsigned int const*, unsigned int*)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:6:0)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2.85 seconds. CPU system time: 1.04 seconds. Elapsed time: 4.19 seconds; current allocated memory: 773.996 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 773.996 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.02 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.03 seconds; current allocated memory: 774.820 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.02 seconds. CPU system time: 0 seconds. Elapsed time: 0.02 seconds; current allocated memory: 774.906 MB.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_11_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:11) in function 'cost_step' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_25_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/search_cost.hpp:24) in function 'cost_step' automatically.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.06 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.09 seconds; current allocated memory: 780.516 MB.
+INFO: [HLS 200-472] Inferring partial write operation for 'target' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:11:52)
+INFO: [HLS 200-472] Inferring partial write operation for 'child' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/kernel.cpp:11:79)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.05 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.06 seconds; current allocated memory: 797.336 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'cost_step' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cost_step_Pipeline_VITIS_LOOP_11_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_11_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 2, loop 'VITIS_LOOP_11_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.08 seconds. CPU system time: 0.09 seconds. Elapsed time: 0.17 seconds; current allocated memory: 797.336 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 813.336 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'cost_step_Pipeline_VITIS_LOOP_25_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_25_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 2, loop 'VITIS_LOOP_25_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.1 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.11 seconds; current allocated memory: 813.336 MB.

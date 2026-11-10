@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "pid": 4139469,
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_small_directory_capacity_v2.sv": "0678b8af9fc012d086fd327ea46c6f8f217019a91e5b13538ed07dd1c371c764",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_small_directory_capacity_v2.py": "f032772eb289ea566c79de0a2aa63b611febd9de162e7fefcf155ec50acce565"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_directory_capacity_v2_20261023/sources/backing_frame_directory_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_directory_capacity_v2_20261023/sources/tb_small_directory_capacity_v2.sv"
+      ],
+      "pid": 4139471,
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_small_directory_capacity_v2",
+        "-s",
+        "small_codec",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "pid": 4139507,
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "small_codec",
+        "--tclbatch",
+        "simulate.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "pid": 4139831,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Default163840-frame directory full allocation/lookup and high-frame checkpoint metadata, no physical memory data or synthesis proof",
+  "results": [
+    "SMALL_DIRECTORY_CAPACITY_PASS checks=327703 frames=163840"
+  ],
+  "artifacts": {
+    "simulate.log": "d7f34a65086930b1a47960bdc47836f6345afceec2742d661f64690738e7c9d8",
+    "compile.stdout.log": "9b11295abf01d84eeb721090abb4945841045f312785411eb2c42870069bdb43",
+    "xvlog.log": "9b11295abf01d84eeb721090abb4945841045f312785411eb2c42870069bdb43",
+    "simulate.stdout.log": "bc8d2cfb7c432e8551632423abb6b3aa3777b8a4113406413356215cfc8fa43f",
+    "xelab.log": "7cdc27b0f52d9d321224fd87bca28239073e82ba8c6afbb6dd5a66ba42419669",
+    "simulate.tcl": "e5f880bfa6e5ddde62924d66f0a5a7f7304c868f797d002abcf614514769a85b",
+    "elaborate.stdout.log": "7cdc27b0f52d9d321224fd87bca28239073e82ba8c6afbb6dd5a66ba42419669"
+  }
+}

@@ -1,0 +1,150 @@
+
+
+================================================================
+== Vitis HLS Report for 'accept'
+================================================================
+* Date:           Sat Oct 24 16:12:08 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        exclusion_step
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  1.523 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |        0|        0|      0 ns|      0 ns|    0|    0|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      106|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        -|        -|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|      142|    -|
+|Register             |        -|     -|        -|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|        0|      248|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|        0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|        0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +-----------------------+----------+----+---+----+------------+------------+
+    |     Variable Name     | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |and_ln19_1_fu_224_p2   |       and|   0|  0|   2|           1|           1|
+    |and_ln19_fu_348_p2     |       and|   0|  0|   2|           1|           1|
+    |grp_fu_68_p2           |       and|   0|  0|   2|           1|           1|
+    |grp_fu_80_p2           |       and|   0|  0|   2|           1|           1|
+    |icmp_ln28_fu_290_p2    |      icmp|   0|  0|  20|          32|           2|
+    |icmp_ln32_1_fu_142_p2  |      icmp|   0|  0|  20|          32|          32|
+    |icmp_ln32_fu_136_p2    |      icmp|   0|  0|  20|          32|          32|
+    |value_1_fu_110_p2      |      icmp|   0|  0|  20|          32|          32|
+    |or_ln18_1_fu_192_p2    |        or|   0|  0|   2|           1|           1|
+    |or_ln18_fu_316_p2      |        or|   0|  0|   2|           1|           1|
+    |or_ln32_1_fu_160_p2    |        or|   0|  0|   2|           1|           1|
+    |or_ln32_fu_154_p2      |        or|   0|  0|   2|           1|           1|
+    |xor_ln18_2_fu_186_p2   |       xor|   0|  0|   2|           1|           2|
+    |xor_ln18_fu_310_p2     |       xor|   0|  0|   2|           1|           2|
+    |xor_ln19_1_fu_210_p2   |       xor|   0|  0|   2|           1|           2|
+    |xor_ln19_fu_334_p2     |       xor|   0|  0|   2|           1|           2|
+    |xor_ln32_fu_148_p2     |       xor|   0|  0|   2|           1|           2|
+    +-----------------------+----------+----+---+----+------------+------------+
+    |Total                  |          |   0|  0| 106|         141|         116|
+    +-----------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------------------+----+-----------+-----+-----------+
+    |                 Name                | LUT| Input Size| Bits| Total Bits|
+    +-------------------------------------+----+-----------+-----+-----------+
+    |controller_machine_child_sequence_o  |   9|          2|   32|         64|
+    |controller_machine_excluded          |  59|         11|    1|         11|
+    |controller_machine_previous_o        |   9|          2|   32|         64|
+    |controller_machine_request_o         |  65|         15|    3|         45|
+    +-------------------------------------+----+-----------+-----+-----------+
+    |Total                                | 142|         30|   68|        184|
+    +-------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    N/A
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------------------------+-----+-----+------------+-----------------------------------+--------------+
+|                  RTL Ports                 | Dir | Bits|  Protocol  |           Source Object           |    C Type    |
++--------------------------------------------+-----+-----+------------+-----------------------------------+--------------+
+|ap_ready                                    |  out|    1|  ap_ctrl_hs|                             accept|  return value|
+|value_r                                     |   in|   32|     ap_none|                            value_r|        scalar|
+|controller_machine_request_i                |   in|    3|     ap_ovld|         controller_machine_request|       pointer|
+|controller_machine_request_o                |  out|    3|     ap_ovld|         controller_machine_request|       pointer|
+|controller_machine_request_o_ap_vld         |  out|    1|     ap_ovld|         controller_machine_request|       pointer|
+|controller_machine_flags                    |   in|    7|     ap_none|           controller_machine_flags|       pointer|
+|controller_machine_created                  |   in|    1|     ap_none|         controller_machine_created|       pointer|
+|controller_machine_has_laguna               |   in|    1|     ap_none|      controller_machine_has_laguna|       pointer|
+|controller_machine_parent                   |   in|   32|     ap_none|          controller_machine_parent|       pointer|
+|controller_machine_previous_i               |   in|   32|     ap_ovld|        controller_machine_previous|       pointer|
+|controller_machine_previous_o               |  out|   32|     ap_ovld|        controller_machine_previous|       pointer|
+|controller_machine_previous_o_ap_vld        |  out|    1|     ap_ovld|        controller_machine_previous|       pointer|
+|controller_machine_excluded                 |  out|    1|      ap_vld|        controller_machine_excluded|       pointer|
+|controller_machine_excluded_ap_vld          |  out|    1|      ap_vld|        controller_machine_excluded|       pointer|
+|controller_machine_child_sequence_i         |   in|   32|     ap_ovld|  controller_machine_child_sequence|       pointer|
+|controller_machine_child_sequence_o         |  out|   32|     ap_ovld|  controller_machine_child_sequence|       pointer|
+|controller_machine_child_sequence_o_ap_vld  |  out|    1|     ap_ovld|  controller_machine_child_sequence|       pointer|
++--------------------------------------------+-----+-----+------------+-----------------------------------+--------------+
+

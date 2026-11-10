@@ -1,0 +1,471 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+  **** SW Build 3670227 on Oct 13 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'root' on host 'fpgaacc1--cfc8cd109508-jnnrja5s7q' (Linux_x86_64 version 5.15.0-119-generic) on Thu Oct 22 18:00:41 UTC 2026
+INFO: [HLS 200-10] On os Ubuntu 22.04.4 LTS
+INFO: [HLS 200-10] In directory '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression'
+Sourcing Tcl script '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/run_fixed.tcl'
+INFO: [HLS 200-1510] Running: open_project hls_fixed_compact_20261022_v1 
+INFO: [HLS 200-10] Creating and opening project '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/hls_fixed_compact_20261022_v1'.
+INFO: [HLS 200-1510] Running: set_top graph_expand 
+INFO: [HLS 200-1510] Running: add_files /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp -cflags -std=c++14 
+INFO: [HLS 200-10] Adding design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/test_graph_expand.cpp -cflags -std=c++14 
+INFO: [HLS 200-10] Adding test bench file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/test_graph_expand.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution solution -flow_target vitis 
+INFO: [HLS 200-10] Creating and opening solution '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/hls_fixed_compact_20261022_v1/solution'.
+INFO: [HLS 200-1505] Using flow_target 'vitis'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vitis' configuration: config_interface -m_axi_latency=64
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vitis' configuration: config_interface -m_axi_alignment_byte_size=64
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vitis' configuration: config_interface -m_axi_max_widen_bitwidth=512
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vitis' configuration: config_rtl -register_reset_num=3
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: create_clock -period 5 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 5ns.
+INFO: [HLS 200-1510] Running: csim_design -argv /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/full.txt 
+Running Dispatch Server on port: 33329
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../../data/derived/hls_fixed_modes_20261022_v1/compact/test_graph_expand.cpp in debug mode
+   Compiling ../../../../../data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp in debug mode
+   Generating csim.exe
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/traversal.full.bin requests=10275 records=12824 failed=7409
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/traversal.capacity.bin requests=3 records=0 failed=3
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/intent.full.bin requests=10275 records=12824 failed=7409
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/intent.capacity.bin requests=3 records=0 failed=3
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/traversal_full_rules.full.bin requests=10275 records=12824 failed=7409
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/traversal_full_rules.capacity.bin requests=3 records=0 failed=3
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/traversal_equal_budget.full.bin requests=10275 records=12824 failed=7409
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/traversal_equal_budget.capacity.bin requests=3 records=0 failed=3
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/heldout_compact.full.bin requests=8340 records=8111 failed=7512
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixtures_20261022_v2/heldout_compact.capacity.bin requests=3 records=0 failed=3
+CASE_PASS /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/wrong_mode.bin requests=2 records=0 failed=2
+GRAPH_EXPAND_PASS cases=11
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 0.76 seconds. CPU system time: 0.7 seconds. Elapsed time: 1.41 seconds; current allocated memory: 16.000 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.02 seconds; current allocated memory: 775.285 MB.
+INFO: [HLS 200-10] Analyzing design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.63 seconds. CPU system time: 1.12 seconds. Elapsed time: 1.82 seconds; current allocated memory: 778.008 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vitis' flow target.
+INFO: [HLS 214-178] Inlining function 'tile_lookup(unsigned int const*, unsigned int const*, int, int, bool&)' into 'expand_rule(unsigned int const*, unsigned int const*, unsigned int, int, int, unsigned int, bool, unsigned int, bool&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:46:0)
+INFO: [HLS 214-178] Inlining function 'offset32(unsigned int const*, unsigned int, unsigned int, bool&)' into 'decode(unsigned int const*, unsigned int const*, unsigned int, EdgeRecord*, unsigned int&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:59:0)
+INFO: [HLS 214-178] Inlining function 'indexed_find(unsigned int const*, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int&)' into 'decode(unsigned int const*, unsigned int const*, unsigned int, EdgeRecord*, unsigned int&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:59:0)
+INFO: [HLS 214-178] Inlining function 'less_edge(EdgeRecord const&, EdgeRecord const&)' into 'decode(unsigned int const*, unsigned int const*, unsigned int, EdgeRecord*, unsigned int&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:59:0)
+INFO: [HLS 214-115] Multiple burst reads of length 2 and bit width 32 has been inferred on bundle 'graph'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:25:21)
+INFO: [HLS 214-115] Multiple burst reads of length 2 and bit width 32 has been inferred on bundle 'graph'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:48:36)
+INFO: [HLS 214-115] Multiple burst reads of length 2 and bit width 32 has been inferred on bundle 'graph'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:13:29)
+INFO: [HLS 214-115] Multiple burst reads of length 2 and bit width 32 has been inferred on bundle 'graph'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:51:17)
+INFO: [HLS 214-115] Multiple burst reads of length 2 and bit width 32 has been inferred on bundle 'graph'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:77:28)
+INFO: [HLS 214-115] Multiple burst reads of length 7 and bit width 32 has been inferred on bundle 'graph'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:79:30)
+INFO: [HLS 214-115] Multiple burst reads of length 2 and bit width 512 has been inferred on bundle 'control_data'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:138:20)
+INFO: [HLS 214-115] Multiple burst writes of length 7 and bit width 32 in loop 'VITIS_LOOP_148_4'(/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148:35) has been inferred on bundle 'output_data'. These burst requests might be further partitioned into multiple requests during RTL generation, based on max_read_burst_length or max_write_burst_length settings. (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148:35)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 3.57 seconds. CPU system time: 1 seconds. Elapsed time: 4.81 seconds; current allocated memory: 779.812 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 779.812 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.07 seconds; current allocated memory: 780.840 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.08 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.08 seconds; current allocated memory: 782.117 MB.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_23_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24) in function 'alias_lookup' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_11_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12) in function 'expand_rule' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_36_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) in function 'decode' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_36_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) in function 'decode' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_103_6' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103) in function 'decode' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_107_7' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:107) in function 'decode' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_138_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:138) in function 'graph_expand' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_146_3' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:146) in function 'graph_expand' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_146_3' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:146) in function 'graph_expand' for pipelining.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_103_6' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103) in function 'decode' for pipelining.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_148_4' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) in function 'graph_expand' completely with a factor of 7.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_41_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41) in function 'decode' completely with a factor of 7.
+INFO: [XFORM 203-102] Partitioning array 'ref.tmp' automatically.
+INFO: [XFORM 203-102] Partitioning array 'ref.tmp203' automatically.
+INFO: [XFORM 203-102] Partitioning array 'value.w' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:102) automatically.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12:28) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:11:22) in function 'expand_rule'... converting 4 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103:68) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103:31) in function 'decode'... converting 14 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24:28) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:23:22) in function 'alias_lookup'... converting 4 basic blocks.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.27 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.28 seconds; current allocated memory: 785.652 MB.
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_141_2' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:141:36) in function 'graph_expand' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-960.html
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_87_3' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:87:43) in function 'decode' more than one sub loop.
+Resolution: For help on HLS 200-960 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-960.html
+WARNING: [HLS 200-960] Cannot flatten loop 'VITIS_LOOP_101_5' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:101:40) in function 'decode' the outer loop is not a perfect loop because there is nontrivial logic before entering the inner loop.
+Resolution: For help on HLS 200-960 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-960.html
+INFO: [HLS 200-472] Inferring partial write operation for 'c' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:138:57)
+INFO: [HLS 200-472] Inferring partial write operation for 'buffer' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:93:33)
+INFO: [HLS 200-472] Inferring partial write operation for 'buffer' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:98:29)
+INFO: [HLS 200-472] Inferring partial write operation for 'buffer' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103:84)
+INFO: [HLS 200-472] Inferring partial write operation for 'buffer' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:104:22)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.24 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.28 seconds; current allocated memory: 895.215 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'graph_expand' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'graph_expand_Pipeline_VITIS_LOOP_138_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_138_1'.
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 1, Depth = 3, loop 'VITIS_LOOP_138_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.16 seconds. CPU system time: 0.07 seconds. Elapsed time: 0.22 seconds; current allocated memory: 897.387 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.04 seconds; current allocated memory: 912.496 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'decode_Pipeline_VITIS_LOOP_36_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_36_1'.
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 70, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_1' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 72, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 73, Depth = 75, loop 'VITIS_LOOP_36_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.18 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.19 seconds; current allocated memory: 912.578 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.25 seconds. CPU system time: 0 seconds. Elapsed time: 0.24 seconds; current allocated memory: 913.242 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'decode_Pipeline_VITIS_LOOP_36_12' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_36_1'.
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 70, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'decode_Pipeline_VITIS_LOOP_36_12' (loop 'VITIS_LOOP_36_1'): Unable to enforce a carried dependence constraint (II = 72, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln36_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36) and 'add' operation ('add_ln36', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:36).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 73, Depth = 75, loop 'VITIS_LOOP_36_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.18 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.2 seconds; current allocated memory: 913.340 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.25 seconds. CPU system time: 0 seconds. Elapsed time: 0.26 seconds; current allocated memory: 913.957 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'expand_rule_Pipeline_VITIS_LOOP_11_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_11_1'.
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 70, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 72, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_11_1' (loop 'VITIS_LOOP_11_1'): Unable to enforce a carried dependence constraint (II = 73, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln14_2', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:14) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:12).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 74, Depth = 75, loop 'VITIS_LOOP_11_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.2 seconds. CPU system time: 0 seconds. Elapsed time: 0.21 seconds; current allocated memory: 914.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.26 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.26 seconds; current allocated memory: 914.828 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_23_1'.
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 70, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 72, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' (loop 'VITIS_LOOP_23_1'): Unable to enforce a carried dependence constraint (II = 73, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln26_2', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:26) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:24).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 74, Depth = 75, loop 'VITIS_LOOP_23_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.21 seconds. CPU system time: 0 seconds. Elapsed time: 0.23 seconds; current allocated memory: 914.934 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.26 seconds. CPU system time: 0 seconds. Elapsed time: 0.26 seconds; current allocated memory: 915.637 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'alias_lookup' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.45 seconds. CPU system time: 0 seconds. Elapsed time: 0.45 seconds; current allocated memory: 915.762 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.95 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.96 seconds; current allocated memory: 917.137 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'expand_rule' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.98 seconds. CPU system time: 0 seconds. Elapsed time: 0.99 seconds; current allocated memory: 917.828 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 1.94 seconds. CPU system time: 0.01 seconds. Elapsed time: 1.96 seconds; current allocated memory: 920.969 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'decode_Pipeline_VITIS_LOOP_103_6' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_103_6'.
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41)) in the first pipeline iteration (II = 1 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41)) in the first pipeline iteration (II = 2 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41)) in the first pipeline iteration (II = 3 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41)) in the first pipeline iteration (II = 4 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41)) in the first pipeline iteration (II = 7 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-885] The II Violation in module 'decode_Pipeline_VITIS_LOOP_103_6' (loop 'VITIS_LOOP_103_6'): Unable to schedule 'store' operation ('buffer_addr_write_ln103', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103) of variable 'buffer_load', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:41 on array 'buffer_r' due to limited memory ports (II = 9). Please consider using a memory core with more ports or partitioning the array 'buffer_r'.
+Resolution: For help on HLS 200-885 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-885.html
+WARNING: [HLS 200-885] The II Violation in module 'decode_Pipeline_VITIS_LOOP_103_6' (loop 'VITIS_LOOP_103_6'): Unable to schedule 'load' operation ('buffer_load_16', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:103) on array 'buffer_r' due to limited memory ports (II = 10). Please consider using a memory core with more ports or partitioning the array 'buffer_r'.
+Resolution: For help on HLS 200-885 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-885.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 11, Depth = 17, loop 'VITIS_LOOP_103_6'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.75 seconds. CPU system time: 0 seconds. Elapsed time: 0.76 seconds; current allocated memory: 923.004 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.17 seconds. CPU system time: 0 seconds. Elapsed time: 0.18 seconds; current allocated memory: 924.344 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'decode_Pipeline_VITIS_LOOP_107_7' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_107_7'.
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln109', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:109)) in the first pipeline iteration (II = 1 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln109_1', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:109)) in the first pipeline iteration (II = 2 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln109_2', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:109)) in the first pipeline iteration (II = 3 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln110', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:110)) in the first pipeline iteration (II = 4 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln110_3', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:110)) in the first pipeline iteration (II = 7 cycles).
+Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 8, Depth = 8, loop 'VITIS_LOOP_107_7'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.21 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.23 seconds; current allocated memory: 924.344 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.07 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.08 seconds; current allocated memory: 924.969 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'decode' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.44 seconds. CPU system time: 0.01 seconds. Elapsed time: 1.44 seconds; current allocated memory: 924.988 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 2.86 seconds. CPU system time: 0.01 seconds. Elapsed time: 2.88 seconds; current allocated memory: 924.988 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'graph_expand_Pipeline_VITIS_LOOP_146_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_146_3'.
+WARNING: [HLS 200-880] The II Violation in module 'graph_expand_Pipeline_VITIS_LOOP_146_3' (loop 'VITIS_LOOP_146_3'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) and bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'graph_expand_Pipeline_VITIS_LOOP_146_3' (loop 'VITIS_LOOP_146_3'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) and bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'graph_expand_Pipeline_VITIS_LOOP_146_3' (loop 'VITIS_LOOP_146_3'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) and bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-880] The II Violation in module 'graph_expand_Pipeline_VITIS_LOOP_146_3' (loop 'VITIS_LOOP_146_3'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) and bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148).
+Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html
+WARNING: [HLS 200-885] The II Violation in module 'graph_expand_Pipeline_VITIS_LOOP_146_3' (loop 'VITIS_LOOP_146_3'): Unable to schedule bus write operation ('output_data_addr_1_write_ln148', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) on port 'output_data' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_fixed_modes_20261022_v1/compact/graph_expand.cpp:148) due to limited memory ports (II = 7). Please consider using a memory core with more ports or partitioning the array.
+Resolution: For help on HLS 200-885 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-885.html
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 8, Depth = 78, loop 'VITIS_LOOP_146_3'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 1.19 seconds. CPU system time: 0.01 seconds. Elapsed time: 1.21 seconds; current allocated memory: 924.988 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.3 seconds. CPU system time: 0 seconds. Elapsed time: 0.3 seconds; current allocated memory: 924.988 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'graph_expand' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.44 seconds. CPU system time: 0 seconds. Elapsed time: 0.46 seconds; current allocated memory: 924.988 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.92 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.92 seconds; current allocated memory: 924.988 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'graph_expand_Pipeline_VITIS_LOOP_138_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'graph_expand_Pipeline_VITIS_LOOP_138_1' pipeline 'VITIS_LOOP_138_1' pipeline type 'loop pipeline'
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARVALID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARADDR' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARID' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARLEN' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARSIZE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARBURST' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARLOCK' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARCACHE' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARPROT' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARQOS' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARREGION' to 0.
+WARNING: [RTGEN 206-101] Setting dangling out port 'graph_expand_Pipeline_VITIS_LOOP_138_1/m_axi_control_data_ARUSER' to 0.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'graph_expand_Pipeline_VITIS_LOOP_138_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.73 seconds. CPU system time: 0 seconds. Elapsed time: 0.74 seconds; current allocated memory: 924.988 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'decode_Pipeline_VITIS_LOOP_36_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'decode_Pipeline_VITIS_LOOP_36_1' pipeline 'VITIS_LOOP_36_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'decode_Pipeline_VITIS_LOOP_36_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.1 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.12 seconds; current allocated memory: 924.988 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'decode_Pipeline_VITIS_LOOP_36_12' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'decode_Pipeline_VITIS_LOOP_36_12' pipeline 'VITIS_LOOP_36_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'decode_Pipeline_VITIS_LOOP_36_12'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.17 seconds. CPU system time: 0 seconds. Elapsed time: 0.18 seconds; current allocated memory: 926.770 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'expand_rule_Pipeline_VITIS_LOOP_11_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'expand_rule_Pipeline_VITIS_LOOP_11_1' pipeline 'VITIS_LOOP_11_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'expand_rule_Pipeline_VITIS_LOOP_11_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.15 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.17 seconds; current allocated memory: 929.059 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'alias_lookup_Pipeline_VITIS_LOOP_23_1' pipeline 'VITIS_LOOP_23_1' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'alias_lookup_Pipeline_VITIS_LOOP_23_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.18 seconds. CPU system time: 0 seconds. Elapsed time: 0.2 seconds; current allocated memory: 931.770 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'alias_lookup' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'alias_lookup'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.21 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.22 seconds; current allocated memory: 947.266 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'expand_rule' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'expand_rule'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.41 seconds. CPU system time: 0 seconds. Elapsed time: 0.43 seconds; current allocated memory: 953.141 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'decode_Pipeline_VITIS_LOOP_103_6' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'decode_Pipeline_VITIS_LOOP_103_6'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.71 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.74 seconds; current allocated memory: 963.215 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'decode_Pipeline_VITIS_LOOP_107_7' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'decode_Pipeline_VITIS_LOOP_107_7'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.33 seconds. CPU system time: 0 seconds. Elapsed time: 0.35 seconds; current allocated memory: 968.883 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'decode' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'decode'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.4 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.42 seconds; current allocated memory: 971.699 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'graph_expand_Pipeline_VITIS_LOOP_146_3' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-1030] Apply Unified Pipeline Control on module 'graph_expand_Pipeline_VITIS_LOOP_146_3' pipeline 'VITIS_LOOP_146_3' pipeline type 'loop pipeline'
+INFO: [RTGEN 206-100] Finished creating RTL model for 'graph_expand_Pipeline_VITIS_LOOP_146_3'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1.63 seconds. CPU system time: 0.02 seconds. Elapsed time: 1.66 seconds; current allocated memory: 985.773 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'graph_expand' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Design contains AXI ports. Reset is fixed to synchronous and active low.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/graph' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/control_data' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/output_data' to 'm_axi'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/image_r' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/config_r' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/requests' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/output_r' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/result' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/request_count' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/output_capacity_words' to 's_axilite & ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/written_records' to 's_axilite & ap_none'.
+WARNING: [RTGEN 206-101] Port 'written_records' with mode 'ap_none' may require an associated data valid signal to correctly communicate with other blocks or a test bench; automatic C/RTL co-simulation may not be able to verify such a port.
+INFO: [RTGEN 206-500] Setting interface mode on port 'graph_expand/failed_requests' to 's_axilite & ap_none'.
+WARNING: [RTGEN 206-101] Port 'failed_requests' with mode 'ap_none' may require an associated data valid signal to correctly communicate with other blocks or a test bench; automatic C/RTL co-simulation may not be able to verify such a port.
+INFO: [RTGEN 206-500] Setting interface mode on function 'graph_expand' to 's_axilite & ap_ctrl_chain'.
+INFO: [RTGEN 206-100] Bundling port 'image_r', 'config_r', 'requests', 'output_r', 'result', 'request_count', 'output_capacity_words', 'written_records', 'failed_requests' and 'return' to AXI-Lite port control.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'graph_expand'.
+INFO: [RTMG 210-278] Implementing memory 'graph_expand_c_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'graph_expand_buffer_RAM_2P_BRAM_1R1W' using block RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.36 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.39 seconds; current allocated memory: 987.305 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 1.68 seconds. CPU system time: 0.1 seconds. Elapsed time: 1.86 seconds; current allocated memory: 1008.414 MB.
+INFO: [HLS 200-1603] Design has inferred MAXI bursts and missed bursts, see Vitis HLS GUI synthesis summary report for detailed information.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 1.32 seconds. CPU system time: 0.08 seconds. Elapsed time: 1.41 seconds; current allocated memory: 1.009 GB.
+INFO: [VHDL 208-304] Generating VHDL RTL for graph_expand.
+INFO: [VLOG 209-307] Generating Verilog RTL for graph_expand.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were NOT satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 273.97 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 28.01 seconds. CPU system time: 2.65 seconds. Elapsed time: 31.35 seconds; current allocated memory: 257.512 MB.
+FIXED_SYNTH_COMPLETE
+INFO: [HLS 200-112] Total CPU user time: 31.41 seconds. Total CPU system time: 4.08 seconds. Total elapsed time: 45.83 seconds; peak allocated memory: 1.009 GB.
+INFO: [Common 17-206] Exiting vitis_hls at Thu Oct 22 18:01:27 2026...

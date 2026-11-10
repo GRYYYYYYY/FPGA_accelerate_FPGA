@@ -1,0 +1,124 @@
+{
+  "status": "completed_bounded_experiment",
+  "result": "results/recovery_fault_matrix_v2",
+  "manifest_sha256": "f637052a7be8ecb157070e9e402cb31aba23aaf3037e0a01c053ba74417fe829",
+  "audit_sha256": "e0f59905c1b890f5e4715298d08fdf98f99ccd100c3f54b9cf89156f100a213e",
+  "outcomes": {
+    "fail_closed": 10
+  },
+  "meaning": "All10 fail-closed checks passed; none is a successful restoration after the second fault. No automatic recovery retry.",
+  "unchanged_inherited_RTL_dat": 122,
+  "production_changed": false,
+  "source_files": 9,
+  "restart_gap_sha256": "7d8e3d218b1bf6148acbd9fd272e49c09b7e2c7d20f91777885a80a0a171d584",
+  "case_data": {
+    "full_1": {
+      "native_error_status": 3,
+      "confirmed_corrections": 0,
+      "journal_count": 1,
+      "snapshot_written": 0,
+      "snapshot_verified": 0,
+      "owner_sha256": "3565b2842d41f010e35bcdf7817719c78e51fd8a8a2760c4dbd563d8fdf9d264",
+      "error_to_response_cycles": 4
+    },
+    "full_2": {
+      "native_error_status": 3,
+      "confirmed_corrections": 0,
+      "journal_count": 1,
+      "snapshot_written": 0,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 4
+    },
+    "full_3": {
+      "native_error_status": 6,
+      "confirmed_corrections": 1,
+      "journal_count": 1,
+      "snapshot_written": 53,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 6
+    },
+    "full_4": {
+      "native_error_status": 6,
+      "confirmed_corrections": 1,
+      "journal_count": 1,
+      "snapshot_written": 328,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 6
+    },
+    "full_5": {
+      "native_error_status": 6,
+      "confirmed_corrections": 1,
+      "journal_count": 1,
+      "snapshot_written": 328,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 22
+    },
+    "pressure_1": {
+      "native_error_status": 3,
+      "confirmed_corrections": 0,
+      "journal_count": 1,
+      "snapshot_written": 0,
+      "snapshot_verified": 0,
+      "owner_sha256": "3565b2842d41f010e35bcdf7817719c78e51fd8a8a2760c4dbd563d8fdf9d264",
+      "error_to_response_cycles": 4
+    },
+    "pressure_2": {
+      "native_error_status": 3,
+      "confirmed_corrections": 0,
+      "journal_count": 1,
+      "snapshot_written": 0,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 4
+    },
+    "pressure_3": {
+      "native_error_status": 6,
+      "confirmed_corrections": 1,
+      "journal_count": 1,
+      "snapshot_written": 1,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 6
+    },
+    "pressure_4": {
+      "native_error_status": 6,
+      "confirmed_corrections": 1,
+      "journal_count": 1,
+      "snapshot_written": 328,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 6
+    },
+    "pressure_5": {
+      "native_error_status": 6,
+      "confirmed_corrections": 1,
+      "journal_count": 1,
+      "snapshot_written": 328,
+      "snapshot_verified": 0,
+      "owner_sha256": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+      "error_to_response_cycles": 31
+    }
+  },
+  "archive_restore": {
+    "status": "passed",
+    "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/recovery_fault_matrix_v2.json",
+    "archive_sha256": "888dd43b9162f02f6fd255d67e58b072b21c6d0937b09b52dd04b3896292c81c",
+    "restored_root": "/tmp/B_state_residency_offer_20261025/recovery_fault_matrix_v2",
+    "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/recovery_fault_matrix_v2",
+    "files": 623,
+    "audit_byte_identical": true,
+    "audit_sha256": "e0f59905c1b890f5e4715298d08fdf98f99ccd100c3f54b9cf89156f100a213e",
+    "auditor": "audit_recovery_fault.py"
+  },
+  "limits": [
+    "Known q1 six-owner authority and328 initial labels; design backing retained.",
+    "One original owner B SLVERR plus one recovery-phase AXI SLVERR per run.",
+    "Failed recovery is latched closed and preserves journal; externally assured recovery is still needed before reset/restart.",
+    "Full checkpoint, unknown pages/general reroute/actual price changes/wrap/capacity/durable recovery and board measurements remain incomplete."
+  ],
+  "next": "Implement complete checkpoint coverage and a journal-preserving restart protocol after failed recovery; do not use cold reset to discard evidence."
+}

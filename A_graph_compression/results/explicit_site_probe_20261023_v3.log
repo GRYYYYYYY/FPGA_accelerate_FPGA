@@ -1,0 +1,17 @@
+==============================================================================
+==                         Reading DCP: routed.dcp                          ==
+==============================================================================
+ XML Parse & Device Load:     1.678s
+    (Read PhysDB Caches):            (    0.320s)
+   (Read PhysDB Routing):            (    0.187s)
+ (Read PhysDB Placement):            (    0.354s)
+(Read PhysDB Finalizing):            (    0.019s)
+            (EDIF Parse):            (    0.717s)
+   Read Netlist & PhysDB:     0.724s
+------------------------------------------------------------------------------
+         [No GC] *Total*:     2.402s
+SITE_ENDPOINTS site=SLICE_X22Y411 type=SLICEL src=SLICE_X22Y411/G5 dst=SLICE_X22Y411/GMUX start=G5.G5 end=GMUX.GMUX net=cg_q[2]
+Exception in thread "main" java.lang.NullPointerException
+	at com.xilinx.rapidwright.design.SiteInst.a(Unknown Source)
+	at com.xilinx.rapidwright.design.SiteInst.routeIntraSiteNet(Unknown Source)
+	at ProbeExplicitSiteRoute.main(ProbeExplicitSiteRoute.java:39)

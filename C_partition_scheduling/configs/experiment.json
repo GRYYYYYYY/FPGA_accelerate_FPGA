@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "project_id": "C",
+  "title": "自适应分区与异构调度",
+  "research_question": "联合搜索工作量、驻留复用和共享资源依赖安排任务，能否提高利用率并降低完整布线时间？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "在两个抽象 worker 上调度带依赖、资源集合和容量约束的任务；输出抽象工作单位的排程。"
+    },
+    {
+      "id": "existing_partition",
+      "status": "planned",
+      "description": "现有分区/DAG 调度"
+    },
+    {
+      "id": "fixed_tiles",
+      "status": "planned",
+      "description": "固定图分区"
+    },
+    {
+      "id": "workload_adaptive",
+      "status": "planned",
+      "description": "按工作量自适应划分"
+    },
+    {
+      "id": "residency_aware",
+      "status": "planned",
+      "description": "工作量 + 图页驻留复用"
+    },
+    {
+      "id": "cpu_fpga",
+      "status": "planned",
+      "description": "CPU/FPGA 调度"
+    },
+    {
+      "id": "cpu_gpu_fpga",
+      "status": "planned",
+      "description": "三类设备调度；设备齐备后研究"
+    }
+  ],
+  "controlled_factors": [
+    "任务划分策略",
+    "复用感知开/关",
+    "设备分配与预算阈值",
+    "工作集容量和跨区比例"
+  ],
+  "metrics": [
+    {
+      "name": "pe_idle_ratio",
+      "unit": "ratio"
+    },
+    {
+      "name": "transfer_bytes",
+      "unit": "byte"
+    },
+    {
+      "name": "tail_task_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "fallback_count",
+      "unit": "count"
+    },
+    {
+      "name": "reroute_iterations",
+      "unit": "count"
+    },
+    {
+      "name": "routing_ms",
+      "unit": "ms"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": null,
+    "baseline_revision": null,
+    "timing_mode": null,
+    "quality_tolerance": null
+  },
+  "notes": "reference is the synthetic Python scheduler. Separate build-router/trace-smoke/profile commands provide a hash-pinned C++ RRT1 diagnostic adapter, validated only on synthetic router fixtures. Real variants and GPU/FPGA runs remain planned; null metrics are unset. Public VPR benchmarks and commercial Interchange/DCP inputs have been located; scheme C source adapters and real runs are pending. See INPUT_SOURCES.md.",
+  "diagnostic_adapter": {
+    "entrypoint": "python3 scripts/run.py trace-smoke",
+    "real_entrypoint": "python3 scripts/run.py profile --input INPUT.rrt --provenance PROVENANCE.json",
+    "status": "validated_on_synthetic_rrt1",
+    "real_data_available": true,
+    "execution_kinds": [
+      "synthetic_router_validation",
+      "real_cpu_diagnostic"
+    ],
+    "report": "results/EXPERIMENT_20261022.md",
+    "located_source_adapters_ready": false,
+    "input_inventory": "data/input_inventory_20261022.json"
+  },
+  "budget_policy": {
+    "implementation": "src/budget_policy.py",
+    "version": 1,
+    "default_mode": "off",
+    "diagnostic_mode_available": true,
+    "admission": "matched_real_paired_end_to_end_evidence",
+    "thresholds_in_implementation": {
+      "min_pairs": 10,
+      "min_gain_fraction": 0.02,
+      "max_one_sided_sign_test_p": 0.05
+    },
+    "current_optimization_enabled": false,
+    "current_reason": "Only same-CPU immediate retries exist; synthetic measurements do not establish backend or rescheduling gains.",
+    "documentation": "BUDGET_POLICY.md",
+    "report": "results/BUDGET_POLICY_20261022.md"
+  }
+}

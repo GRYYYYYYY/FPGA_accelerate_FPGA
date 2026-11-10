@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+"""Verify actual Csim/setup and every transaction's full AXI memory stimulus depth."""
+import argparse
+import hashlib
+import json
+import mmap
+from pathlib import Path
+import re
+from check_vitis_kernel import digest,require
+from resident_snapshot_rtl_contract import golden
+
+# Derived from declared pointer depths, packed widths and bundle alignment.
+BUS={'control_mem':(81,64),'static_mem':(4194304,64),'meta_mem':(10,64),
+     'count_mem':(1048576,32),'node_history_mem':(1048576,64),'node_table_mem':(3145728,64),
+     'site_table_mem':(131072,256),'site_history_mem':(131072,128),'packet_mem':(524288,512),'result_mem':(1,512)}
+POINTERS=['control','stat','initial_r','node_meta','node_counts','node_history','node_keys','node_flags',
+          'site_meta','site_owners','site_history','packet','result']
+
+
+def vector_file(path,depth,count,hex_digits):
+    with path.open('rb') as stream,mmap.mmap(stream.fileno(),0,access=mmap.ACCESS_READ) as data:
+        # Actual generated wrapc Output::begin/from and AESL_axi_master read_binary
+        # use BE uint64 depth, depth fixed-width words, and this 8-byte EOF mark.
+        if data[:13]!=b'[[[runtime]]]':
+            word_bytes=(hex_digits+1)//2;stride=8+depth*word_bytes
+            require(len(data)==count*stride+8,'Truncated/extra binary vector data '+str(path))
+            require(data[-8:]==bytes.fromhex('5a5aa5a50f0ff0f0'),'Wrong binary vector EOF')
+            for index in range(count):
+                at=index*stride
+                require(int.from_bytes(data[at:at+8],'big')==depth,'Wrong binary vector depth at transaction '+str(index))
+            return dict(sha256=hashlib.sha256(data).hexdigest(),transactions=count,words_per_transaction=depth,
+                        packed_word_bits=4*hex_digits,bytes=len(data),format='binary_be_depth_records')
+        header=b'[[[runtime]]]\n';footer=b'[[[/runtime]]]\n';end=b'[[/transaction]]\n'
+        require(data[:len(header)]==header,'Wrong vector header '+str(path));position=len(header)
+        marker=re.compile(rb'\[\[transaction\]\][ \t]+(\d+)\n')
+        bad_width=re.compile(rb'0x[0-9a-fA-FxX]{'+str(hex_digits+1).encode()+rb'}')
+        for index in range(count):
+            match=marker.match(data,position)
+            require(match is not None and int(match[1])==index,'Missing/reordered vector transaction '+str(path))
+            stop=data.find(end,match.end());require(stop>=0,'Unterminated vector transaction')
+            body=data[match.end():stop]
+            require(body.startswith(b'0x') and body.endswith(b'\n') and body.count(b'\n')==depth
+                    and body.count(b'\n0x')==depth-1,'Wrong full vector depth '+str(path)+' transaction '+str(index))
+            require(not re.search(rb'[^0-9a-fA-FxX\n]',body) and b'0x\n' not in body and not bad_width.search(body),
+                    'Malformed/wide vector word '+str(path))
+            position=stop+len(end)
+        require(data[position:]==footer,'Unexpected additional vector data '+str(path))
+        return dict(sha256=hashlib.sha256(data).hexdigest(),transactions=count,words_per_transaction=depth,
+                    packed_word_bits=4*hex_digits,bytes=len(data),format='text_runtime_records')
+
+
+def audit(bundle,output):
+    require(not output.exists(),'Refusing existing setup audit')
+    plan_path=bundle/'plan.json';setup_path=bundle/'setup.json';execution_path=bundle/'execution_plan.json'
+    plan=json.loads(plan_path.read_text());setup=json.loads(setup_path.read_text());execution=json.loads(execution_path.read_text())
+    require(plan['transactions']==30 and plan['simulation_bound_ns']==10000000000 and plan['stack_bytes']==67108864,
+            'Changed RTL execution scope')
+    require(setup['status']=='full_depth_30_transaction_setup_verified_rtl_pending' and setup['production_synthesis']=='unchanged',
+            'Incomplete RTL setup')
+    require(execution['plan_sha256']==digest(plan_path) and execution['setup_sha256']==digest(setup_path),'Changed setup plan')
+    files={**plan['files'],**plan['synthesis'],**setup['files'],**execution['files']}
+    for p,h in files.items():require(digest(p)==h,'Changed prepared RTL input '+p)
+    root=Path(__file__).resolve().parents[1]
+    predecessor=root/'data/derived/resident_snapshot_router_20261024_v1'
+    native_report=predecessor/'report.json';native=json.loads(native_report.read_text())
+    for source in (predecessor/'source').iterdir():
+        require(digest(source)==native['artifacts'][str(source)],'Changed original native oracle/input '+str(source))
+        copied=bundle/'cpu_source'/source.name
+        require(digest(copied)==digest(source),'CPU oracle copy differs '+source.name)
+        files[str(source)]=digest(source);files[str(copied)]=digest(copied)
+    tb=root/'hardware/vitis/test_resident_snapshot_rtl.cpp'
+    require(digest(bundle/'cpu_source'/tb.name)==digest(tb)==digest(bundle/'source'/tb.name),'CPU/HLS testbenches differ')
+    files[str(native_report)]=digest(native_report)
+    files[str(root/'tests/test_resident_snapshot_rtl_setup.py')]=digest(root/'tests/test_resident_snapshot_rtl_setup.py')
+
+    for phase in ['compile_cpu','cpu','prepare']:
+        log=bundle/(phase+'.log');rp=bundle/(phase+'.receipt.json');sp=bundle/(phase+'.submission.json')
+        receipt=json.loads(rp.read_text());submission=json.loads(sp.read_text());text=log.read_text()
+        require(receipt['exit_code']==0 and receipt['log_sha256']==digest(log)
+                and receipt['command']==submission['command']==plan['commands'][phase]['command']
+                and submission['cwd']==plan['commands'][phase]['cwd'] and submission['plan_sha256']==digest(plan_path),
+                'Failed/different setup phase '+phase)
+        require(not any(s in text for s in ['ERROR:','FATAL_ERROR','runtime error:']),'Setup error')
+        if phase=='cpu':golden(text)
+        if phase=='prepare':
+            before,after=text.split('Running: cosim_design',1);golden(before);golden(after)
+            require('RESIDENT_SNAPSHOT_COSIM_SETUP_COMPLETE' in text and 'CSim done with 0 errors.' in before,'Csim/setup incomplete')
+        for p in [log,rp,sp]:files[str(p)]=digest(p)
+    solution=Path(plan['project'])/'solution';cdata=solution/'sim/tv/cdatafile';ref=cdata/'ref.tcl'
+    depths={name:int(n) for name,n in re.findall(r'\{(\w+) (\d+)\}',ref.read_text())}
+    require(depths=={**{name:1 for name in POINTERS},**{k:v[0] for k,v in BUS.items()}}
+            and re.search(r'^set trans_num 30$',ref.read_text(),re.M),'Wrong packed memory depths')
+    vectors={}
+    for direction in ['in','out']:
+        for name,(depth,bits) in BUS.items():
+            if direction=='out' and name not in ('packet_mem','result_mem'):continue # Read-only bundle.
+            path=cdata/('c.search_resident_snapshot_top.autotv'+direction+'_'+name+'.dat')
+            checked=vector_file(path,depth,30,bits//4)
+            require(checked['sha256']==setup['files'][str(path)],'Changed stimulus during full-depth check')
+            vectors[str(path)]=checked
+    for p in [plan_path,setup_path,execution_path,Path(__file__).resolve(),
+              solution/'sim/wrapc/apatb_search_resident_snapshot_top.cpp',solution/'sim/verilog/AESL_axi_master_control_mem.v']:files[str(p)]=digest(p)
+    result=dict(status='production_resident_snapshot_full_capacity_30_transaction_setup_independently_verified_rtl_pending',
+        files=files,memory_vectors=vectors,production_synthesis='unchanged',transactions=30,
+        capacities=dict(nodes=1048576,packet_words=4194304,max_logical_packet_words=3850849,site_owners=65536,site_history=65536),rtl_verified=False,
+        limitations=['Actual CPU/Csim/stimulus-generation evidence only; no RTL completion claim.',
+                     'All30 transactions have full packed AXI memory depths; golden outputs are C-model expectations, not RTL output.',
+                     'Complete metadata and site owner/history counts reach production maxima; all packet words and stale tails are checked by separate native/C++14 oracles.'])
+    with output.open('x') as stream:json.dump(result,stream,indent=2);stream.write('\n')
+    print(result['status'],flush=True)
+
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--bundle',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
+    a=p.parse_args();audit(a.bundle.resolve(),a.output.resolve())

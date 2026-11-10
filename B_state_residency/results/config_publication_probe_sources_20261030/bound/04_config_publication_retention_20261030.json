@@ -1,0 +1,171 @@
+{
+  "analyzer_sha256": "2f5ca32fa1497d71b1a91afa6f11d0d530f7d0b44b8dbeede4d99f685aa34c8e",
+  "binary_bit_projection_cases": 9216,
+  "binary_control_valuations": 1048576,
+  "binary_events": {
+    "initial_descriptor_write": 128,
+    "prepared_start_blocked": 262144,
+    "publication": 128,
+    "stage_capture": 8
+  },
+  "bound": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_edit_route_diagnostics_20261030.json": "568ee4b8952efb7d9cded28b9eef0ed5c5b2e0cc7da35dfd84c20226911a7d86",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_edit_route_recovery_timing_20261030.json": "42c5688a67e6c5fb93c4a8c05215fd58d32cec8f2b6a95128a97e44c748f2d0d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_edit_route_recovery_v1_restore_20261025.json": "b7447e2f4c67a0a8bb1e6e4d6d333d78adc381ab7ada9fcb16d26035ba30ad5b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_config_publication_retention_v1.py": "2f5ca32fa1497d71b1a91afa6f11d0d530f7d0b44b8dbeede4d99f685aa34c8e",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/manifest.json": "dacf74bd3c4ebb4b83a26e1a462aeec43afaa5785c8ab2148403b3f868eef8df",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/source_bound_audit.json": "74f38fc3e387624bfc1a077526a69aa9930bfb1c460f20c4262fda5465da98bf",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/sources/config_restore_controller.sv": "7f2407faf05bcacfac10173033e2c1c6347d3d360825bf406c594bfe4f55b3f1",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_synth_v1/manifest.json": "2b391accc255068ffd5b45ed18acff67d9d261faa485c9d4085c795c5de51f2d"
+  },
+  "candidate_selected": false,
+  "conclusion": "Do not claim unconditional equivalence or replace the baseline. The binary invariant does not cover X/Z payloads; the original source can stage and publish an unknown bit that a retained descriptor would hide.",
+  "descriptor_ok_slices": [
+    [
+      160,
+      32
+    ],
+    [
+      192,
+      32
+    ],
+    [
+      64,
+      64
+    ],
+    [
+      2112,
+      64
+    ],
+    [
+      128,
+      32
+    ],
+    [
+      224,
+      32
+    ],
+    [
+      576,
+      32
+    ],
+    [
+      832,
+      32
+    ],
+    [
+      1728,
+      32
+    ],
+    [
+      2176,
+      32
+    ],
+    [
+      2208,
+      32
+    ],
+    [
+      256,
+      128
+    ],
+    [
+      640,
+      128
+    ],
+    [
+      864,
+      288
+    ],
+    [
+      1344,
+      192
+    ],
+    [
+      1792,
+      128
+    ],
+    [
+      2272,
+      32
+    ]
+  ],
+  "formal_proof": false,
+  "known_input_invariant_argument": [
+    "Reset clears prepared. Successful stage capture requires configured and IDLE and captures active_payload.",
+    "Under prepared, load branches reject overwriting initial/temporary payload and start_ready is false.",
+    "While prepared remains set, state stays IDLE; DRAIN current_version update cannot execute.",
+    "Reset, attempt reset, discard, abort/fail, or publication clears prepared. No other descriptor/shadow writes exist in this frozen source.",
+    "Thus for reachable binary operation since reset, publication can retain the 2272 descriptor bits outside [2271:2240] while writing the 32 version bits."
+  ],
+  "limitations": [
+    "Python guard and bit projections plus a manually source-bound induction argument, not RTL equivalence.",
+    "No fault injection into state/registers or unreset start-state guarantee.",
+    "Native payload knownness has not been monitored in the full system.",
+    "Initial-load write enable may remain on the same deep control cone even if publication writes are reduced."
+  ],
+  "next_steps": [
+    "Reproduce the X/Z counterexample in the original RTL after the existing matrix owner releases the behavioral solver.",
+    "Decide between a documented native binary-input specialization with actual-port monitors and a four-value-preserving structural transformation.",
+    "Preserve load/start/publish/discard/attempt-reset/abort/backpressure tests and exact-cycle/full-bank comparisons.",
+    "Only select a candidate after full-system audit/actual restore and matched synthesis/physical measurements."
+  ],
+  "rtl_compiled": false,
+  "rtl_generated": false,
+  "rtl_simulated": false,
+  "source_expressions": [
+    "assign active_payload=configured?{descriptor[2303:2272],current_version,descriptor[2239:0]}:2304'd0;",
+    "assign staged_valid=!rst&&!abort&&prepared&&!load_rsp_valid&&state==IDLE&&!fault;",
+    "assign publish_ready=staged_valid&&publish_permit&&!load_valid&&!start_valid&&!attempt_reset&&!discard_valid&&backend_drained&&normal_retired;",
+    "assign load_ready=!rst&&!abort&&!attempt_reset&&!stopped&&state==IDLE&&!load_rsp_valid&&backend_drained&&normal_retired;",
+    "assign start_ready=!rst&&!prepared&&!attempt_reset&&!stopped&&configured&&state==IDLE&&!load_rsp_valid&&!load_valid&&backend_drained&&normal_retired;",
+    "wire fail_now=busy&&!rsp_valid&&(abort||elapsed>=MAX_CYCLES);",
+    "assign busy=!rst&&state!=IDLE;assign fault=!rst&&(stopped||fail_now);",
+    "else if(attempt_reset&&state==IDLE&&!load_rsp_valid&&backend_drained&&normal_retired)begin",
+    "if(load_valid&&load_ready)begin",
+    "if(prepared||(!load_stage&&configured))load_status<=1;",
+    "if(!publish_permit||!configured||!load_authoritative||load_design!=saved_design||load_checkpoint<=saved_checkpoint||!descriptor_ok(load_payload,load_design)||load_payload!=active_payload)load_status<=1;",
+    "else begin prepared<=1;shadow_payload<=load_payload;shadow_design<=load_design;shadow_checkpoint<=load_checkpoint;end",
+    "else begin descriptor<=load_payload;saved_design<=load_design;saved_checkpoint<=load_checkpoint;current_version<=load_payload[2240+:32];configured<=1;end",
+    "if(publish_valid&&publish_ready)begin descriptor<=shadow_payload;saved_design<=shadow_design;saved_checkpoint<=shadow_checkpoint;current_version<=shadow_payload[2240+:32];prepared<=0;end",
+    "if((discard_valid&&discard_ready)||abort||fail_now)prepared<=0;"
+  ],
+  "source_sha256": "7f2407faf05bcacfac10173033e2c1c6347d3d360825bf406c594bfe4f55b3f1",
+  "status": "binary_projection_checked_four_value_counterexample_found",
+  "timing_benefit_measured": false,
+  "unknown_payload_counterexamples": [
+    {
+      "all_other_reject_terms": "0",
+      "bit": 0,
+      "descriptor_before": "0",
+      "externally_visible_difference": "active_payload[0] and cfg_payload[0]",
+      "load_payload_bit": "x",
+      "original_descriptor_after_publish": "x",
+      "original_rejects": false,
+      "original_stage_captures": "x",
+      "payload_not_equal": "x",
+      "publication_ready": "1",
+      "retained_descriptor_after_publish": "0"
+    },
+    {
+      "all_other_reject_terms": "0",
+      "bit": 0,
+      "descriptor_before": "0",
+      "externally_visible_difference": "active_payload[0] and cfg_payload[0]",
+      "load_payload_bit": "z",
+      "original_descriptor_after_publish": "z",
+      "original_rejects": false,
+      "original_stage_captures": "z",
+      "payload_not_equal": "x",
+      "publication_ready": "1",
+      "retained_descriptor_after_publish": "0"
+    }
+  ],
+  "version_slice_counterexample": {
+    "all_writes_removed": 0,
+    "captured_version": 1,
+    "current_version": 1,
+    "descriptor_version": 0,
+    "original_descriptor_after_publish": 1
+  }
+}

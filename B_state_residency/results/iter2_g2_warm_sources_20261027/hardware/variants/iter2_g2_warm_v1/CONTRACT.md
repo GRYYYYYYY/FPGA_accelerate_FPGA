@@ -1,0 +1,11 @@
+# 实际iteration2 G2发布后多owner warm恢复
+
+基于iter2_g2_v1，只修改独立TB、恢复标签输入并复用已审计iter2_warm_v1三层RESTORE_RECORDS参数接线。生产coordinator仍multi_owner_capacity_fixed_v1，其余warm_retry_system_v2生产层级。默认512保持，此实例1024，实际恢复822条。
+
+原生q180327提交、下一历史路径拆线、真实G2/CP18共同发布后，执行q180328。在第二owner写558358物理B注入BRESP2，首写990179成功，形成两个真实journal键。原生G2 authority两轮读取的旧目标为990179/net26422 refs1/occ2、558358/net26422 refs3/occ2。原生工作owner GET/DEC/GET实际纠正，多net引用及其他net保留。
+
+更高attempt4/query2/price4，实际target reset后原生恢复全部822标签并回读验证。标签源为q180327实际final、204279 target清理；source仍visited180327，67922还未置target。实际G2 path78字/CRC1d36e333、query10字/CRC79283e8e/flags0x4d/floor180327恢复，不手填seq0、不使用第二query prepared源。三类原生回执联合、服务退休及最终成功回复消费后才放行，路径slot0和floor180327保留。
+
+原生重试sequence180328，故障前和重试两次搜索各114poll/113expand/564candidate/302cost，对独立CPU oracle。真实路径slot1回溯提交，最后两路径共存、ledger180328/storage4/2/4。全822最终标签/全部3MB backing、完整146284032B owner图像、13次owner记录写、31个snapshot读beat及全部8AXI重放审计；价格/history内容不变，无外部cold reset/工作DDR重装。
+
+本例仍是行为仿真。历史路径由CPU已观察轨迹经原生接口导入，候选authority由前轮审计工作图像供给，manifest_ready为外部测试许可，无运行中snapshot writer/路径发现、全图cache、任意变价、持久化认证或板卡收益证明。运行及审计使用scripts/run_iter2_g2_warm.py和audit_iter2_g2_warm.py；只有实际通过审计/归档恢复后才能宣称本例成功。

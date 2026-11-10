@@ -1,0 +1,15 @@
+# 两条完整自然查询使用原生按需标签基线
+
+生产变体由已审计label_source_crc_full_v2的query/search/residency/candidate engine/query core/paged exclusion六层派生，增加默认关闭ENABLE_BASELINE和12个请求/回复/身份端口；第七层使用原已审计label_baseline_miss manager。只读baseline_reader与独立64B AXI端口在本实验TB连接，真实数据来自完整9089009节点prepared基线，不接受未来节点列表。所有descriptor初始化仍由外部可信配置完成，baseline epoch在OPEN时锁存；不是认证或任意价格有效性证明。
+
+启用时初始working backing全部为零，删除全部822条标签预加载和imports文件参数；不留下source/sink隐含种子。正常query lifecycle的source/target字段写仍执行并会触发真实miss。删除两次按822列表执行的final标签host读，避免第一query后审计操作提前填充第二query数据。最终标签由实际miss集合和全部3MB物理DDR与CPU最终状态独立比较，不通过额外host读获得。
+
+实际q180327提交、原生q2历史路径ripup及q180328连续查询；sequence180327/180328与存储3/query1/price3分离。保留原CPU完整POLL、每个候选、每次cost与heap/backtrace/owner检查。q1 171poll/170expand/849candidate/421cost，q2 114/113/564/302，均原CPU数值oracle；原生三节点路径提交和共享owner refs/外部net保留，9次物理owner记录写、完整146284032B最终owner与CPU prepared/full replay一致。历史路径描述仍为CPU观察所得并经真实PC lease导入，不是硬件发现。
+
+选定full_v2/pressure_v2：第一条777记录/389页，第二条新增648770、125130、84955、84114四条，总781记录/393页，全部基线请求epoch300010003。无重复加载；旧822保守闭包的41条未加载。每次真实baseline回执后必须按node和字段顺序实际执行五次原生seed WRITE，再执行原请求。总6807字段写；独立模型检查每个native命令/回复、present位、槽page/generation/query/price、写回/refill字节。32槽591WB/555RF，单槽1386WB/2202RF；全部9路AXI及最终owner/781标签/3MB backing重放。周期只是行为仿真周期。
+
+新第九路baseline AXI尚未纳入原顶层8路physical-drained/target-reset退休协议；正常成功例所有781回执与AR/R均实际消费，但无故障窗口证明。新baseline通道尚未接入runtime G2 snapshot/warm故障恢复或恢复身份许可；已有旧G2 warm822结果不自动成为新路径的恢复证明。working目录仍受FRAMES=16384的有界容量限制，不是全图无限cache。未做综合时序、板卡、任意变价、epoch轮转、持久化认证、真实overflow新增/回收。
+
+初轮v1只因TB新增信号在使用后声明而编译失败，v2将声明/reader实例移至root实例前；无DUT握手掩码或载荷伪造。复现：build.py、build_tb.py生成本目录候选；运行scripts/run_label_baseline_pair.py NEW --full-only，单槽--pressure-only，审计audit_label_baseline_pair.py NEW。默认关闭使用--disabled --full-only与audit_label_baseline_pair_default.py；不能覆盖正式结果。
+
+默认关闭七层通道的完整回归16文件/周期精确等于iter2_pair_full_v1。三个选定归档实际恢复重审audit一致。源冻结results/label_baseline_pair_sources_20261027；各归档sources保留当次真正编译输入。

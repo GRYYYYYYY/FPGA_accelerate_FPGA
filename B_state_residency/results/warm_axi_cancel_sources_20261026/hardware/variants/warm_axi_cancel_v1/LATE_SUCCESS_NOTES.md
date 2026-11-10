@@ -1,0 +1,9 @@
+# 下一步：成功完成发布后的abort边界（尚未验证）
+
+本轮四例取消都早于成功提交：原生coordinator尚未清journal，失败保留J6。不能用这些结果覆盖成功回复已经VALID之后的abort。
+
+实际源码边界：recovery_coordinator LABELS满足全部回执/退休后，同沿提交current上下文、清journal并complete(0)，进入DONE；DONE只在真实rsp_valid/rsp_ready受理后回NORMAL。transaction_fence在RECRUN消费回复时记录recover_error/normal_fault/fault，再于RECDRAIN决定BLOCKED或IDLE。warm join在DONE遇abort会HALT/owned。下一用例必须观察这些真实边界，不能伪造成功、恢复journal或改用早一点的取消点。
+
+建议至少分别覆盖：status0 VALID且被背压8周期后abort；status0真正消费的同沿abort。首先明确已承诺回复的VALID/状态/cookie稳定性，不为表示取消而改写已有背压响应。检查coordinator current/attempt floor、journal0、warm owned/fault、fence phase、所有普通业务入口。abort撤销及旧回复/fence退休后，尝试同attempt应拒绝；下一严格更高attempt是否能非冷复位恢复需实测。J0情况下不能套用本轮两轮六键GET或corrected0/J6的脚本断言。
+
+价格/history仍固定；数据、路径和查询镜像继续用实际G2原镜像与新目标context。最终成功放行后继续CPU oracle与两路径拆线。若发现响应稳定性、业务封锁或重试缺陷，先保存实际失败证据，再隔离修复并回归本轮R/B四例及此前query9/10取消。

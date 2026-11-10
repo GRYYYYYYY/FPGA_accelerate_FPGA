@@ -1,0 +1,103 @@
+{
+  "status": "seven_component_core_provenance_and_current_parameter_bindings_reviewed",
+  "components": [
+    {
+      "component": "ka_reader_quiet_persistence_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1/core.json",
+      "core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+      "parameters": {
+        "MAX_CYCLES": 1048576
+      },
+      "clock": "clk"
+    },
+    {
+      "component": "ka_as_ready_history_composition_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_coordinator_contract_core_v1/core.json",
+      "core_sha256": "9c4d144ee1a45da7d1a2b004603cfd3559d67bd6a63b80d4bca734f8a31d79c0",
+      "parameters": {
+        "ENTRIES": 32,
+        "EXCLUSIVE_BACKEND_RESPONSES": 1,
+        "MAX_CORRECTIONS": 1024,
+        "MAX_CYCLES": 1048576,
+        "RESET_HOLD": 5
+      },
+      "clock": "clk"
+    },
+    {
+      "component": "ka_as_configured_composition_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_coordinator_contract_core_v1/core.json",
+      "core_sha256": "9c4d144ee1a45da7d1a2b004603cfd3559d67bd6a63b80d4bca734f8a31d79c0",
+      "parameters": {
+        "ENTRIES": 32,
+        "EXCLUSIVE_BACKEND_RESPONSES": 1,
+        "MAX_CORRECTIONS": 1024,
+        "MAX_CYCLES": 1048576,
+        "RESET_HOLD": 5
+      },
+      "clock": "clk"
+    },
+    {
+      "component": "ka_retirement_state_kernel_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1/core.json",
+      "core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+      "parameters": {
+        "MAX_CYCLES": 1048576
+      },
+      "clock": "clk"
+    },
+    {
+      "component": "ka_generation_persistence_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1/core.json",
+      "core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+      "parameters": {
+        "MAX_CYCLES": 1048576
+      },
+      "clock": "clk"
+    },
+    {
+      "component": "ka_configured_persistence_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1/core.json",
+      "core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+      "parameters": {
+        "MAX_CYCLES": 1048576
+      },
+      "clock": "clk"
+    },
+    {
+      "component": "ka_ready_combinational_formal_v1",
+      "core": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1/core.json",
+      "core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+      "parameters": {
+        "MAX_CYCLES": 1048576
+      },
+      "clock": "clk"
+    }
+  ],
+  "findings": [
+    "Authority component proofs share the identical SHA-bound MAX_CYCLES1048576 core.",
+    "Both coordinator compositions share the identical SHA-bound 32entry/5reset/1024correction/1048576cycle/exclusive-response core matching actual source instantiation.",
+    "Actual testbench initially asserts cold reset; temporal proofs still require matching sampled initial-reset and past-valid qualification in final integration."
+  ],
+  "remaining": [
+    "Complete final temporal composition audit of first-AS and subsequent-AS induction, including sampled reset and all cuts; parameter matching alone does not discharge it."
+  ],
+  "archive_sha256": "ef1cb5a123fd8d2fb36ce39d49fb88e698879db17bf79e0b482c32b70067cccf",
+  "file_sha256": {
+    "reviewer.py": "ac6387179120e0942511b05944737880dbe450cce5cbf675ad3697645803a789",
+    "preparation/ka_reader_quiet_persistence_formal_v1.json": "969bab7ee012bf143cd0145df20cd57443108200c55e2dc94177d9b062b020a1",
+    "preparation/ka_as_ready_history_composition_formal_v1.json": "5d0e70332def2379ec6b8f8702c867832c2e1674700c0d1d1e28fab41e9ef8f7",
+    "preparation/ka_as_configured_composition_formal_v1.json": "6552e3badbfd9c7ba7daeed0a2e30a9bfebc908f70dc6feaa7038ec4922db240",
+    "preparation/ka_retirement_state_kernel_formal_v1.json": "00289da2c107faf2a9890e1ec8c1067eb1a557f37c3924d41908d8bd9aa7077a",
+    "preparation/ka_generation_persistence_formal_v1.json": "c7ebdca769aa679aec897d33fc01e206c54f04013690517d697d0745f8e26220",
+    "preparation/ka_configured_persistence_formal_v1.json": "c431a03d7e34818f8ebfe9fc493c1c48680911c72a38c5c703aaea4d60a123fb",
+    "preparation/ka_ready_combinational_formal_v1.json": "f9d441b4cd662ff2e0b805403eb6ebc4ef8112780057a8b8dbf965586e6d39b3",
+    "coordinator_core_manifest.json": "bd5d4c8d2a5dcba5a95bd84600fab5f24d3f6f16ec8361faee043c64b44357f0",
+    "sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "sources/residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+    "sources/recovery_coordinator.sv": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+    "sources/checkpoint_authority_rotator.sv": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+    "sources/tb_query_fault.sv": "0f79196ed63c79c80d5722e2884046898836ae10dc943a0ed95c0979eab0502e"
+  },
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

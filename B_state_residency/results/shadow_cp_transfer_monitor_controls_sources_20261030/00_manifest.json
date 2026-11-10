@@ -1,0 +1,118 @@
+{
+  "cases": {
+    "matching": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "shadow.sv",
+            "control.sv",
+            "monitor.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "9cc31b5df72253ddc913b24304e262fccb9c7f20af6183e0d49dbe27a0148cb2"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "shadow_cp_transfer_monitor",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "fc34865c493d3f4856238a91696bf674fdf7ac7884533d859005eba17ad2b16a"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "c7d7aa3784d7a6fd4a263e2ebba93ade6e050dd901e0861f911a59b0c4817a87"
+        }
+      ],
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "monitor.sv": "1977476401544ce25779803d5917436662df025155c4305ce9ab8e67df6a548b",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "ready_nba": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "READY_NBA",
+            "shadow.sv",
+            "control.sv",
+            "monitor.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "f8313863d61198076691b6122e5c4a4764e396ae70737e4bf5afcd63e88941db"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "shadow_cp_transfer_monitor",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "04ba4e4102f6aded57b4391a999cf98192201a4407991428f6b9b6d3f00eaffc"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "aefd1247df300e777c3150d22caae31d13f27fbcd8dad9ffae900408a93822b3"
+        }
+      ],
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "monitor.sv": "1977476401544ce25779803d5917436662df025155c4305ce9ab8e67df6a548b",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    }
+  },
+  "full_system_functional_netlist_validated": false,
+  "monitor_sha256": "1977476401544ce25779803d5917436662df025155c4305ce9ab8e67df6a548b",
+  "runner_pid": 3494248,
+  "runner_sha256": "6fa08c5eae5c4fa5a164ce9e22b02dff903e67fb212ad3799af4e5399aea4de3",
+  "runner_start_ticks": "1651356972",
+  "scope": "Read-only pre-edge transfer logger calibration on two finite fake producer controls; no FPGA netlist acceptance.",
+  "stage": "complete",
+  "status": "observed"
+}

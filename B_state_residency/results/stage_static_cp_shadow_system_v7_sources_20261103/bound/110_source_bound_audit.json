@@ -1,0 +1,97 @@
+{
+  "all_pin_strict_equivalence": false,
+  "auditor_sha256": "357a6a1247ed5580c4a6740c83b55e759643337648e34e5872e69f3ad5dfba3d",
+  "checker_sha256": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1",
+  "clock_lead_ps": 1,
+  "complete_contract_controls_passed": true,
+  "completed_expected_cases": 17,
+  "full_system_functional_netlist_validated": false,
+  "manifest_sha256": "0e89fa84b716c5e24371f6f58066b0d4bf6c9651ebc80ddfc2fd03dbd5d5675d",
+  "outcomes": {
+    "active_data_flip": {
+      "fatal": "Fatal: CP_DATA_MISMATCH phase=0 ready=1 time=416000 actual=d00d0003 expected=d00d0002",
+      "verdict": "expected_rejection"
+    },
+    "active_unknown_both": {
+      "fatal": "Fatal: CP_DATA_UNKNOWN phase=0 time=346000 actual=xxxxxxxx expected=xxxxxxxx",
+      "verdict": "expected_rejection"
+    },
+    "edge_only_data_flip": {
+      "fatal": "Fatal: CP_DATA_MISMATCH phase=1 ready=1 time=415000 actual=d00d0000 expected=d00d0001",
+      "verdict": "expected_rejection"
+    },
+    "idle_valid_unknown_both": {
+      "fatal": "Fatal: CP_VALID_UNKNOWN phase=0 time=256000 actual=x expected=x",
+      "verdict": "expected_rejection"
+    },
+    "matching": {
+      "active": 30,
+      "edges": 10,
+      "idle": 254,
+      "idle_differences": 254,
+      "stalled": 16,
+      "transfers": 5,
+      "verdict": "match"
+    },
+    "metadata_flip": {
+      "fatal": "Fatal: CP_META_MISMATCH phase=0 time=416000",
+      "verdict": "expected_rejection"
+    },
+    "no_stalls": {
+      "fatal": "Fatal: CP_PROTOCOL_COVERAGE_MISSING active=15 stalled=0 transfers=5 edges=5 idle=269",
+      "verdict": "expected_rejection"
+    },
+    "no_stream": {
+      "fatal": "Fatal: CP_PROTOCOL_COVERAGE_MISSING active=0 stalled=0 transfers=0 edges=0 idle=284",
+      "verdict": "expected_rejection"
+    },
+    "no_transfers": {
+      "fatal": "Fatal: CP_PROTOCOL_COVERAGE_MISSING active=257 stalled=257 transfers=0 edges=85 idle=27",
+      "verdict": "expected_rejection"
+    },
+    "other_control_flip": {
+      "fatal": "Fatal: FULL_SHADOW_MISMATCH port=boot_pending time=366000 actual=1 expected=0",
+      "verdict": "expected_rejection"
+    },
+    "other_control_x": {
+      "fatal": "Fatal: FULL_SHADOW_MISMATCH port=boot_pending time=366000 actual=x expected=0",
+      "verdict": "expected_rejection"
+    },
+    "other_control_z": {
+      "fatal": "Fatal: FULL_SHADOW_MISMATCH port=boot_pending time=366000 actual=z expected=0",
+      "verdict": "expected_rejection"
+    },
+    "ready_nba": {
+      "active": 33,
+      "edges": 11,
+      "idle": 251,
+      "idle_differences": 251,
+      "stalled": 18,
+      "transfers": 5,
+      "verdict": "match"
+    },
+    "short_reset": {
+      "fatal": "Fatal: FULL_SHADOW_INCOMPLETE reset=2 checks=0 last=0 end=1000000",
+      "verdict": "expected_rejection"
+    },
+    "stall_data_flip": {
+      "fatal": "Fatal: CP_DATA_MISMATCH phase=0 ready=0 time=346000 actual=d00d0001 expected=d00d0000",
+      "verdict": "expected_rejection"
+    },
+    "valid_drop": {
+      "fatal": "Fatal: CP_VALID_MISMATCH phase=0 time=416000 actual=0 expected=1",
+      "verdict": "expected_rejection"
+    },
+    "valid_unknown_both": {
+      "fatal": "Fatal: CP_VALID_UNKNOWN phase=0 time=366000 actual=x expected=x",
+      "verdict": "expected_rejection"
+    }
+  },
+  "planned_cases": 17,
+  "scope": "Bounded observer controls: two legal5-beat matches with idle X/0, stalls and NBA stimulus; negative corruption/unknown/control/frame/reset and non-vacuous coverage cases. Partial v4 preserves its failed phase-isolation expectation. No actual FPGA gate proof.",
+  "status": "passed",
+  "unconditional_outputs": 345,
+  "valid_qualified_outputs": [
+    "cp_m_data"
+  ]
+}

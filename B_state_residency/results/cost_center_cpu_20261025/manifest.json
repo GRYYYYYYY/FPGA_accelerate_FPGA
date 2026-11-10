@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "sources": {
+    "hls/cost_center/v1/testbench.cpp": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/hls/cost_center/v1/testbench.cpp",
+      "sha256": "a45cad9b19794c0b6ddcc28c1f8b213e4051d68cfd1f1e86d2e9cc7d7cc95fb6"
+    },
+    "hls/cost_center/v1/cost_center.hpp": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/hls/cost_center/v1/cost_center.hpp",
+      "sha256": "b3a3a5784756cea1e752f10338785c2d837511527a7ba7f5b48095ed39ffd603"
+    },
+    "hls/cost_center/v1/kernel.cpp": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/hls/cost_center/v1/kernel.cpp",
+      "sha256": "6f9eb044e4d8b5fb7e09611dc7b928c402da28457cabe61cf13ee25ec5b75a14"
+    },
+    "hls/search_cost/exact_v2/softfloat32.hpp": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/hls/search_cost/exact_v2/softfloat32.hpp",
+      "sha256": "fdbeea3d7f4ac79ff6be8907f22ab44250dc53f405161fc95016b601835ae8cd"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fsanitize=undefined",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_cpu_20261025/sources/hls/cost_center/v1/kernel.cpp",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_cpu_20261025/sources/hls/cost_center/v1/testbench.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_cpu_20261025/center"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "execute",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_cpu_20261025/center",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/nodes.rrt32",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_cpu_20261025/net_records.bin",
+        "9089009",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_cpu_20261025/vectors.txt"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "scope": "Host bit-exact characterization of net-center distance, extracted original float expression vs integer binary32 helper. Actual values sampled from graph/net import, not live evaluateCost trace, HLS or joined packet proof.",
+  "original_sha256": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+  "fragment_sha256": "d89415e77289fbb7459b585ab7f4ab644823ba5063540dccd48c62fc5e74bbdf",
+  "net_sha256": "34f459f3fab3544410863804184ad09ec92eaaf6c79d1e02ad605eaf89b9b5b0",
+  "input_manifest_sha256": "56068cd7215ed55c2e6d60ee6d904e8f39aae0a195fde9feea13be8e1f4f8cd3",
+  "result": "COST_CENTER_CPU_PASS cases=110397 rejected=12054 real_samples=27960 sll_alternate=37",
+  "vectors_sha256": "1e8519249559177b504c96fa870026f57638b866f25bb1229d789b7ef080ef96",
+  "artifacts": {
+    "vectors.txt": "1e8519249559177b504c96fa870026f57638b866f25bb1229d789b7ef080ef96",
+    "center": "a04965f9803c5a0b12fc143a9dee677a72ab1bdb1b998810d40613f085433182",
+    "compile.log": "0105845cb09a80e0800489b237f7c24311f60514de0f57f9a404b8b53829ba08",
+    "net_records.bin": "34f459f3fab3544410863804184ad09ec92eaaf6c79d1e02ad605eaf89b9b5b0",
+    "execute.log": "c9e98312ae4988b4802810bb430aede0fee1be6122b7a75cba6790096b2f08b2",
+    "runner.py": "e949a97d963282178fcd2780a382a353694fedda8f5adb49ece1e6455f5e7705"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "status": "failed",
+  "cases": {
+    "small": {
+      "status": "running",
+      "baseline_sha256": "9ef586ffdcf0a541cdea68ee8c17dc235e419439b153faf1903958d01374d91e",
+      "observer_sha256": "329e4db7cd00d0d9f113b967ba9ac519cb7a1464fd33bde7a7c6e6a26326bb15",
+      "commands": [
+        {
+          "stage": "compile",
+          "pid": 4103424,
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/scratch_page_controller_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/queued_scratch_endpoint_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/memory_scratch_endpoint_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/scratch_page_codec_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/scratch_page_axi_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/backing_frame_directory_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/backing_page_service_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/record_backing_service_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_full_20261024/small/sources/tb_small_endpoint_checkpoint_stream_v3_init_observer.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "pid": 4103562,
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_small_endpoint_checkpoint_stream_v3_init_observer_large",
+            "-s",
+            "checkpoint_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "pid": 4105762,
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "checkpoint_tb",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/small_checkpoint_vectors_full_20261023/actual.txt",
+            "--testplusarg",
+            "PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/small_checkpoint_vectors_full_20261023/pages.hex"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "modified_tb_sha256": "581630755a0a7cedf7aa33d0216c2abd6cd366be980e0745f286fba321190a59"
+    }
+  },
+  "error": "AssertionError()"
+}

@@ -1,0 +1,877 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Thu Oct 22 14:30:04 2026
+# Process ID: 3008171
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado
+# Command line: vivado -mode tcl -log .vivado-ai/vivado_79401023_83c1b6e3.log -journal .vivado-ai/vivado_79401023_83c1b6e3.jou -notrace -source .vivado-ai/init_79401023_83c1b6e3.tcl
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/.vivado-ai/vivado_79401023_83c1b6e3.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/.vivado-ai/vivado_79401023_83c1b6e3.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2100.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source .vivado-ai/init_79401023_83c1b6e3.tcl -notrace
+INFO: [Common 17-1674] Started webserver at http://localhost:60327
+set_param -quiet messaging.defaultLimit 10000000
+puts "MCPPROBE:ce56j9wavtkf:[get_param messaging.defaultLimit]"
+MCPPROBE:ce56j9wavtkf:10000000
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:gzrk8w4w6cke===}
+INFO: [MCP 00-100] ===MCP_CMD_START:gzrk8w4w6cke===
+puts "VSCSTART" ; set exitCode [catch {version -short; get_parts xcvu13p*; help get_pips; help get_nodes; help get_wires} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+get_wires
+
+Description: 
+Get a list of wires.
+
+Syntax: 
+get_wires  [-regexp] [-nocase] [-filter <arg>] [-of_objects <args>] [-uphill]
+           [-downhill] [-from <args>] [-to <args>] [-quiet] [-verbose]
+           [<patterns>]
+
+Returns: 
+wires
+
+Usage: 
+  Name           Description
+  --------------------------
+  [-regexp]      Patterns are full regular expressions
+  [-nocase]      Perform case-insensitive matching. (valid only when -regexp 
+                 specified)
+  [-filter]      Filter list with expression
+  [-of_objects]  Get the wires of these tiles, nodes, pips, or nets.
+  [-uphill]      Get the wires uphill from the provided pip.
+  [-downhill]    Get the wires downhill from the provided pip.
+  [-from]        -from <pip/site pin> Return the ordered list of wires 
+                 beginning at this pip or site pin.  May be used in 
+                 combination with uphill.  Default is downhill.  -all is 
+                 implied.
+  [-to]          -to <pip/site pin> Return the ordered list of wires ending 
+                 at this wire or site pin.  May be used in combination with 
+                 uphill.  Default is downhill.  -all is implied.
+  [-quiet]       Ignore command errors
+  [-verbose]     Suspend message limits during command execution
+  [<patterns>]   Match wires against patterns
+                 Default: *
+
+Categories: 
+Device, Object, XDC
+
+Description:
+
+  Returns a list of wires in the design that match a specified search pattern
+  in an open design.
+
+  The default command gets a list of all wires in the design.
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_wires based on property values on the wires. You can find the
+  properties on an object with the report_property or list_property commands.
+  Any property/value pair can be used as a filter. In the case of the wire
+  object, "NAME", "NUM_DOWNHILL_PIPS" and "NUM_UPHILL_PIPS" are some of the
+  properties that can be used to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"} 
+    
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED} 
+    
+
+  -of_objects <args> - (Optional) Return the wires of the specified nodes,
+  PIPs, or tiles.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Return wires matching the specified search
+  patterns. The default pattern is the wildcard `*` which gets a list of all
+  wires in the design. More than one search pattern can be specified to find
+  wires based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces, {}, or quotes,
+  "", to present the list as a single element.
+
+Examples:
+
+  The following example returns the wires associated with the specified tile:
+
+    get_wires -of_objects [get_tiles IO_INT_INTERFACE_L_X0Y198] 
+    
+
+See Also:
+
+   *  get_nodes
+   *  get_pips
+   *  get_tiles
+   *  list_property
+   *  report_property
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:gzrk8w4w6cke:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:gzrk8w4w6cke:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:v2amf4snkfmr===}
+INFO: [MCP 00-100] ===MCP_CMD_START:v2amf4snkfmr===
+puts "VSCSTART" ; set exitCode [catch {puts [version -short]; puts [get_parts xcvu13p*]; puts [help get_pips -return_string]; puts [help get_nodes -return_string]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+2022.2
+xcvu13p-fhga2104-1-e xcvu13p-fhga2104-1-i xcvu13p-fhga2104-2-e xcvu13p-fhga2104-2-i xcvu13p-fhga2104-2L-e xcvu13p-fhga2104-2LV-e xcvu13p-fhga2104-3-e xcvu13p-fhgb2104-1-e xcvu13p-fhgb2104-1-i xcvu13p-fhgb2104-2-e xcvu13p-fhgb2104-2-i xcvu13p-fhgb2104-2L-e xcvu13p-fhgb2104-2LV-e xcvu13p-fhgb2104-3-e xcvu13p-fhgc2104-1-e xcvu13p-fhgc2104-1-i xcvu13p-fhgc2104-2-e xcvu13p-fhgc2104-2-i xcvu13p-fhgc2104-2L-e xcvu13p-fhgc2104-2LV-e xcvu13p-fhgc2104-3-e xcvu13p-figd2104-1-e xcvu13p-figd2104-1-i xcvu13p-figd2104-2-e xcvu13p-figd2104-2-i xcvu13p-figd2104-2L-e xcvu13p-figd2104-2LV-e xcvu13p-figd2104-3-e xcvu13p-flga2577-1-e xcvu13p-flga2577-1-i xcvu13p-flga2577-2-e xcvu13p-flga2577-2-i xcvu13p-flga2577-2L-e xcvu13p-flga2577-2LV-e xcvu13p-flga2577-3-e xcvu13p-fsga2577-1-e xcvu13p-fsga2577-1-i xcvu13p-fsga2577-2-e xcvu13p-fsga2577-2-i xcvu13p-fsga2577-2L-e xcvu13p-fsga2577-2LV-e xcvu13p-fsga2577-3-e xcvu13p_CIV-fhga2104-1-e xcvu13p_CIV-fhga2104-1-i xcvu13p_CIV-fhga2104-2-e xcvu13p_CIV-fhga2104-2-i xcvu13p_CIV-fhga2104-2L-e xcvu13p_CIV-fhga2104-2LV-e xcvu13p_CIV-fhga2104-3-e xcvu13p_CIV-fhgb2104-1-e xcvu13p_CIV-fhgb2104-1-i xcvu13p_CIV-fhgb2104-2-e xcvu13p_CIV-fhgb2104-2-i xcvu13p_CIV-fhgb2104-2L-e xcvu13p_CIV-fhgb2104-2LV-e xcvu13p_CIV-fhgb2104-3-e xcvu13p_CIV-fhgc2104-1-e xcvu13p_CIV-fhgc2104-1-i xcvu13p_CIV-fhgc2104-2-e xcvu13p_CIV-fhgc2104-2-i xcvu13p_CIV-fhgc2104-2L-e xcvu13p_CIV-fhgc2104-2LV-e xcvu13p_CIV-fhgc2104-3-e xcvu13p_CIV-figd2104-1-e xcvu13p_CIV-figd2104-1-i xcvu13p_CIV-figd2104-2-e xcvu13p_CIV-figd2104-2-i xcvu13p_CIV-figd2104-2L-e xcvu13p_CIV-figd2104-2LV-e xcvu13p_CIV-figd2104-3-e xcvu13p_CIV-flga2577-1-e xcvu13p_CIV-flga2577-1-i xcvu13p_CIV-flga2577-2-e xcvu13p_CIV-flga2577-2-i xcvu13p_CIV-flga2577-2L-e xcvu13p_CIV-flga2577-2LV-e xcvu13p_CIV-flga2577-3-e xcvu13p_CIV-fsga2577-1-e xcvu13p_CIV-fsga2577-1-i xcvu13p_CIV-fsga2577-2-e xcvu13p_CIV-fsga2577-2-i xcvu13p_CIV-fsga2577-2L-e xcvu13p_CIV-fsga2577-2LV-e xcvu13p_CIV-fsga2577-3-e
+ERROR: [Common 17-170] Unknown option '-return_string', please type 'help -help' for usage info.
+
+VSCEND:1
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:v2amf4snkfmr:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:v2amf4snkfmr:1===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:kxhlwgrt71wv===}
+INFO: [MCP 00-100] ===MCP_CMD_START:kxhlwgrt71wv===
+puts "VSCSTART" ; set exitCode [catch {create_project -in_memory graph_sample -part xcvu13p-fhgb2104-2-e; link_design -part xcvu13p-fhgb2104-2-e -top graph_sample} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:13 . Memory (MB): peak = 1718.605 ; gain = 88.961 ; free physical = 735208 ; free virtual = 1406914
+Command: link_design -part xcvu13p-fhgb2104-2-e -top graph_sample
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xcvu13p-fhgb2104-2-e
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2902.207 ; gain = 0.000 ; free physical = 734049 ; free virtual = 1405760
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3024.801 ; gain = 0.000 ; free physical = 733905 ; free virtual = 1405620
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+4 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:13 ; elapsed = 00:00:17 . Memory (MB): peak = 3024.801 ; gain = 1306.195 ; free physical = 733905 ; free virtual = 1405620
+design_1
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:kxhlwgrt71wv:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:kxhlwgrt71wv:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:8nno0k0jlpv7===}
+INFO: [MCP 00-100] ===MCP_CMD_START:8nno0k0jlpv7===
+puts "VSCSTART" ; set exitCode [catch {puts [get_tiles INT_X0Y0]; report_property [get_tiles INT_X0Y0]; set p [lindex [get_pips -of_objects [get_tiles INT_X0Y0]] 0]; puts $p; report_property $p; puts "up [get_wires -uphill -of_objects $p] down [get_wires -downhill -of_objects $p]"; report_property [lindex [get_nodes -of_objects $p] 0]; puts "laguna [lrange [get_tiles -filter {TYPE =~ LAG*}] 0 5]"; puts "bram [lrange [get_tiles -filter {TYPE =~ BRAM*}] 0 3]"; puts "dsp [lrange [get_tiles -filter {TYPE =~ DSP*}] 0 3]"} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INT_X0Y0
+Property               Type    Read-only  Value
+CLASS                  string  true       tile
+COLUMN                 int     true       52
+DEVICE_ID              int     true       0
+FIRST_SITE_ID          int     true       359435
+GRID_POINT_X           int     true       52
+GRID_POINT_Y           int     true       994
+INDEX                  int     true       780342
+INT_TILE_X             int     true       0
+INT_TILE_Y             int     true       959
+IS_CENTER_TILE         bool    true       0
+IS_DCM_TILE            bool    true       0
+IS_GT_CLOCK_SITE_TILE  bool    true       0
+IS_GT_SITE_TILE        bool    true       0
+NAME                   string  true       INT_X0Y0
+NUM_ARCS               int     true       3774
+NUM_SITES              int     true       0
+ROW                    int     true       994
+SLR_REGION_ID          int     true       0
+TILE_PATTERN_IDX       int     true       47419
+TILE_TYPE              enum    true       INT
+TILE_TYPE_INDEX        int     true       110
+TILE_X                 int     true       52
+TILE_Y                 int     true       1
+TYPE                   string  true       INT
+INT_X0Y0/INT.VCC_WIRE->>BOUNCE_E_0_FT1
+Property            Type    Read-only  Value
+CAN_INVERT          bool    true       0
+CLASS               string  true       pip
+IS_BUFFERED_2_0     bool    true       0
+IS_BUFFERED_2_1     bool    true       1
+IS_DIRECTIONAL      bool    true       1
+IS_EXCLUDED_PIP     bool    true       0
+IS_FIXED_INVERSION  bool    true       0
+IS_INVERTED         bool    true       0
+IS_PSEUDO           bool    true       0
+IS_SITE_PIP         bool    true       0
+IS_TEST_PIP         bool    true       0
+NAME                string  true       INT_X0Y0/INT.VCC_WIRE->>BOUNCE_E_0_FT1
+SPEED_INDEX         int     true       113470
+TILE                string  true       INT_X0Y0
+report_property: Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 3293.277 ; gain = 268.477 ; free physical = 733731 ; free virtual = 1405447
+up INT_X0Y0/VCC_WIRE down INT_X0Y0/BOUNCE_E_0_FT1
+Property           Type    Read-only  Value
+BASE_CLOCK_REGION  string  true       X0Y0
+CLASS              string  true       node
+INTENT_CODE        int     true       0
+INTENT_CODE_NAME   enum    true       INTENT_DEFAULT
+IS_BAD             bool    true       0
+IS_COMPLETE        bool    true       1
+IS_GND             bool    true       0
+IS_INPUT_PIN       bool    true       0
+IS_OUTPUT_PIN      bool    true       0
+IS_PIN             bool    true       0
+IS_VCC             bool    true       1
+NAME               string  true       INT_X0Y0/VCC_WIRE
+NUM_WIRES          int     true       1
+PIN_WIRE           int     true       -1
+SPEED_CLASS        int     true       4
+laguna LAG_LAG_TERM_T_X4Y959 LAG_LAG_TERM_T_X12Y959 LAG_LAG_TERM_T_X23Y959 LAG_LAG_TERM_T_X31Y959 LAG_LAG_TERM_T_X40Y959 LAG_LAG_TERM_T_X52Y959
+bram BRAM_TERM_T_X6Y959 BRAM_TERM_T_X10Y959 BRAM_TERM_T_X21Y959 BRAM_TERM_T_X35Y959
+dsp DSP_TERM_T_X1Y959 DSP_TERM_T_X11Y959 DSP_TERM_T_X17Y959 DSP_TERM_T_X19Y959
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:8nno0k0jlpv7:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:8nno0k0jlpv7:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:cgbgzfdfkrps===}
+INFO: [MCP 00-100] ===MCP_CMD_START:cgbgzfdfkrps===
+puts "VSCSTART" ; set exitCode [catch {puts "lagtypes [lsort -unique [get_property TYPE [get_tiles -filter {TYPE =~ LAG*}]]]"; puts "bramtypes [lsort -unique [get_property TYPE [get_tiles -filter {TYPE =~ BRAM*}]]]"; puts "dsptypes [lsort -unique [get_property TYPE [get_tiles -filter {TYPE =~ DSP*}]]]"; puts "bidir [lrange [get_pips -of_objects [get_tiles INT_X0Y1] -filter {IS_DIRECTIONAL == 0}] 0 3]"; set ns [get_nodes -of_objects [get_tiles INT_X0Y1]]; puts "nodes [llength $ns] [lrange $ns 0 30]"; puts "intent [lsort -unique [get_property INTENT_CODE_NAME $ns]]"; puts [help get_pips]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+lagtypes LAG_C2L_RBRK LAG_LAG LAG_LAG2C_RBRK LAG_LAG_TERM_B LAG_LAG_TERM_T
+bramtypes BRAM BRAM_RBRK BRAM_TERM_B BRAM_TERM_T
+dsptypes DSP DSP_RBRK DSP_TERM_B DSP_TERM_T
+bidir INT_X0Y1/INT.INT_NODE_IMUX_18_INT_OUT0<<->>BYPASS_E14 INT_X0Y1/INT.INT_NODE_IMUX_37_INT_OUT0<<->>BYPASS_W8 INT_X0Y1/INT.INT_NODE_IMUX_50_INT_OUT0<<->>BYPASS_W14 INT_X0Y1/INT.INT_NODE_IMUX_5_INT_OUT0<<->>BYPASS_E8
+nodes 1257 RCLK_INT_L_X0Y29/CLK_LEAF_SITES_0_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_12_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_13_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_14_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_15_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_1_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_20_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_21_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_22_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_23_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_28_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_29_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_4_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_5_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_6_CLK_LEAF RCLK_INT_L_X0Y29/CLK_LEAF_SITES_7_CLK_LEAF INT_X0Y13/SS12_BEG0 INT_X0Y13/SS12_BEG1 INT_X0Y13/SS12_BEG2 INT_X0Y13/SS12_BEG3 INT_X0Y13/SS12_BEG4 INT_X0Y13/SS12_BEG5 INT_X0Y13/SS12_BEG6 INT_X0Y13/SS12_BEG7 INT_X0Y12/SS12_BEG0 INT_X0Y12/SS12_BEG1 INT_X0Y12/SS12_BEG2 INT_X0Y12/SS12_BEG3 INT_X0Y12/SS12_BEG4 INT_X0Y12/SS12_BEG5 INT_X0Y12/SS12_BEG6
+intent INTENT_DEFAULT NODE_CLE_OUTPUT NODE_DOUBLE NODE_GLOBAL_LEAF NODE_HLONG NODE_HQUAD NODE_INT_INTERFACE NODE_LOCAL NODE_PINBOUNCE NODE_PINFEED NODE_SINGLE NODE_VLONG NODE_VQUAD
+get_pips
+
+Description: 
+Get a list of programmable interconnect points (pips) on the current device.
+
+Syntax: 
+get_pips  [-regexp] [-nocase] [-filter <arg>] [-of_objects <args>] [-uphill]
+          [-downhill] [-from <args>] [-to <args>] [-quiet] [-verbose]
+          [<patterns>]
+
+Returns: 
+pips
+
+Usage: 
+  Name           Description
+  --------------------------
+  [-regexp]      Patterns are full regular expressions
+  [-nocase]      Perform case-insensitive matching. (valid only when -regexp 
+                 specified)
+  [-filter]      Filter list with expression
+  [-of_objects]  Get the pips of these sites, tiles, wires, nodes, pips, or 
+                 nets.
+  [-uphill]      Get the pips uphill from the provided wire or pip.
+  [-downhill]    Get the pips downhill from the provided wire or pip.
+  [-from]        -from <pip/site pin> Return the ordered list of pips 
+                 beginning at this pip or site pin.  May be used in 
+                 combination with uphill.  Default is downhill.  -all is 
+                 implied.
+  [-to]          -to <pip/site pin> Return the ordered list of pips ending at
+                 this wire or site pin.  May be used in combination with 
+                 uphill.  Default is downhill.  -all is implied.
+  [-quiet]       Ignore command errors
+  [-verbose]     Suspend message limits during command execution
+  [<patterns>]   Match pips against patterns
+                 Default: *
+
+Categories: 
+Device, Object, XDC
+
+Description:
+
+  Programmable interconnect points, or PIPs, provide the physical routing
+  paths on the device used to connect logic networks. This command returns a
+  list of PIPs on the device that match a specified search pattern. The
+  command requires a design to be open.
+
+  The default command gets a list of all PIPs on the device. However, this is
+  not a recommended use of the command due to the number of pips on a device.
+  You should specify the -of_objects argument to limit the number of pips
+  returned.
+
+  Note: To improve memory and performance, the get_* commands return a
+  container list of a single type of objects (e.g. cells, nets, pins, or
+  ports). You can add new objects to the list (using lappend for instance),
+  but you can only add the same type of object that is currently in the list.
+  Adding a different type of object, or string, to the list is not permitted
+  and will result in a Tcl error.
+
+Arguments:
+
+  -regexp - (Optional) Specifies that the search <patterns> are written as
+  regular expressions. Both search <patterns> and -filter expressions must be
+  written as regular expressions when this argument is used. Xilinx regular
+  expression Tcl commands are always anchored to the start of the search
+  string. You can add ".*" to the beginning or end of a search string to
+  widen the search to include a substring. See
+  http://perldoc.perl.org/perlre.html for help with regular expression
+  syntax.
+
+  Note: The Tcl built-in command regexp is not anchored, and works as a
+  standard Tcl command. For more information refer to
+  http://www.tcl.tk/man/tcl8.5/TclCmd/regexp.htm.
+
+  -nocase - (Optional) Perform case-insensitive matching when a pattern has
+  been specified. This argument applies to the use of -regexp only.
+
+  -filter <args> - (Optional) Filter the results list with the specified
+  expression. The -filter argument filters the list of objects returned by
+  get_pips based on property values on the PIPs. You can find the properties
+  on an object with the report_property or list_property commands. Any
+  property/value pair can be used as a filter. In the case of the PIP object,
+  "IS_DIRECTIONAL" and "FROM_PIN" are two of the properties that can be used
+  to filter results.
+
+  The filter search pattern should be quoted to avoid having to escape
+  special characters that may be found in net, pin, or cell names, or other
+  properties. String matching is case-sensitive and is always anchored to the
+  start and to the end of the search string. The wildcard "*" character can
+  be used at the beginning or at the end of a search string to widen the
+  search to include a substring of the property value.
+
+  Note: The filter returns an object if a specified property exists on the
+  object, and the specified pattern matches the property value on the object.
+  In the case of the "*" wildcard character, this will match a property with
+  a defined value of "".
+
+  For string comparison, the specific operators that can be used in filter
+  expressions are "equal" (==), "not-equal" (!=), "match" (=~), and
+  "not-match" (!~). Numeric comparison operators <, >, <=, and >= can also be
+  used. Multiple filter expressions can be joined by AND and OR (&& and ||).
+  The following gets input pins that do NOT contain the "RESET" substring
+  within their name:
+
+    get_pins * -filter {DIRECTION == IN && NAME !~ "*RESET*"} 
+    
+
+  Boolean (bool) type properties can be directly evaluated in filter
+  expressions as true or not true:
+
+    -filter {IS_PRIMITIVE && !IS_LOC_FIXED} 
+    
+
+  -of_objects <args> - (Optional) Return the PIPs of the specified sites,
+  tiles, wires, nodes, pips, or nets objects. Xilinx recommends that you
+  always use the -of_objects argument to limit the runtime and memory used by
+  the get_pips command. The number of programmable interconnect points
+  returned can be considerable.
+
+  Note: The -of_objects option requires objects to be specified using the
+  get_* commands, such as get_cells or get_pins, rather than specifying
+  objects by name. In addition, -of_objects cannot be used with a search
+  <pattern>.
+
+  -uphill - (Optional) Return the PIPs uphill of the specified wire or PIPs.
+  Uphill PIPs precede the specified object in the logic network.
+
+  -downhill - (Optional) Return the PIPs downhill of the specified wire or
+  PIPs. Downhill PIPs follow the specified object in the logic network.
+
+  -from <args> - (Optional) Defines the starting points of the pips to get
+  from wire or site_pin objects. This option can be combined with -uphill.
+  The default is to return pips downhill of a start point. By default, all
+  pips will be returned.
+
+  -to <args> - (Optional) Defines the ending points of the pips to get from
+  wire or site_pin objects. This option can be combined with -uphill. The
+  default is to return pips downhill of a start point to the specified end
+  point. By default, all pips will be returned.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <patterns> - (Optional) Return PIPs matching the specified search patterns.
+  The default pattern is the wildcard `*` which gets a list of all PIPs on
+  the device. More than one search pattern can be specified to find PIPs
+  based on different search criteria.
+
+  Note: You must enclose multiple search patterns in braces, {}, or quotes,
+  "", to present the list as a single element.
+
+Examples:
+
+  The following example returns the PIPs associated with the specified tile:
+
+    get_pips -of_object [get_tiles DSP_R_X9Y75] 
+    
+
+See Also:
+
+   *  get_sites
+   *  get_tiles
+   *  get_wires
+   *  list_property
+   *  report_property
+
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:cgbgzfdfkrps:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:cgbgzfdfkrps:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:cmbygsdv3zaz===}
+INFO: [MCP 00-100] ===MCP_CMD_START:cmbygsdv3zaz===
+puts "VSCSTART" ; set exitCode [catch {set p [lindex [get_pips -of_objects [get_tiles INT_X0Y1] -filter {IS_DIRECTIONAL == 0}] 0]; puts "pip $p up [get_wires -uphill -of_objects $p] down [get_wires -downhill -of_objects $p] nodes [get_nodes -of_objects $p]"; foreach w [get_wires -of_objects $p] {set n [get_nodes -of_objects $w]; puts "$w node $n pips-down [llength [get_pips -downhill -of_objects $n]] has-pip [expr {[lsearch -exact [get_pips -downhill -of_objects $n] $p]>=0}] nodes-down [get_nodes -downhill -of_objects $n]"}; puts "lags [lrange [get_tiles -filter {TYPE == LAG_LAG}] 0 5]"; puts "brams [lrange [get_tiles -filter {TYPE == BRAM}] 0 2]"; puts "dsps [lrange [get_tiles -filter {TYPE == DSP}] 0 2]"; puts "rclk [lrange [get_tiles -filter {TYPE == RCLK_INT_L}] 0 2]"} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+pip INT_X0Y1/INT.INT_NODE_IMUX_18_INT_OUT0<<->>BYPASS_E14 up INT_X0Y1/INT_NODE_IMUX_18_INT_OUT0 down INT_X0Y1/BYPASS_E14 nodes INT_X0Y1/BYPASS_E14 INT_X0Y1/INT_NODE_IMUX_18_INT_OUT0
+INT_X0Y1/INT_NODE_IMUX_18_INT_OUT0 node INT_X0Y1/INT_NODE_IMUX_18_INT_OUT0 pips-down 6 has-pip 1 nodes-down INT_X0Y1/BOUNCE_E_13_FT0 INT_X0Y1/BYPASS_E14 INT_X0Y1/IMUX_E13 INT_X0Y1/IMUX_E14 INT_X0Y1/IMUX_E42 INT_X0Y1/IMUX_E43
+INT_X0Y1/BYPASS_E14 node INT_X0Y1/BYPASS_E14 pips-down 4 has-pip 1 nodes-down INT_X0Y1/INT_NODE_IMUX_17_INT_OUT0 INT_X0Y1/INT_NODE_IMUX_17_INT_OUT1 INT_X0Y1/INT_NODE_IMUX_18_INT_OUT0 INT_X0Y1/INT_NODE_IMUX_18_INT_OUT1
+lags LAG_LAG_X4Y959 LAG_LAG_X12Y959 LAG_LAG_X23Y959 LAG_LAG_X31Y959 LAG_LAG_X40Y959 LAG_LAG_X52Y959
+brams BRAM_X6Y955 BRAM_X10Y955 BRAM_X21Y955
+dsps DSP_X1Y955 DSP_X11Y955 DSP_X17Y955
+rclk RCLK_INT_L_X0Y929 RCLK_INT_L_X1Y929 RCLK_INT_L_X2Y929
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:cmbygsdv3zaz:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:cmbygsdv3zaz:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:5mbr00i1gijt===}
+INFO: [MCP 00-100] ===MCP_CMD_START:5mbr00i1gijt===
+puts "VSCSTART" ; set exitCode [catch {set graph_export_path {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022.tsv}} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022.tsv
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:5mbr00i1gijt:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:5mbr00i1gijt:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:wdgkbduk7rcp===}
+INFO: [MCP 00-100] ===MCP_CMD_START:wdgkbduk7rcp===
+puts "VSCSTART" ; set exitCode [catch {source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_vivado.tcl} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+# namespace eval graph_export {
+#     variable out
+#     variable seen_nodes [dict create]
+#     variable seen_tiles [dict create]
+#     variable seen_pips [dict create]
+#     variable roots [dict create]
+#     proc row {args} {
+#         variable out
+#         foreach value $args {
+#             if {[regexp {[\t\r\n]} $value]} {error "TSV control character in field"}
+#         }
+#         puts $out [join $args "\t"]
+#     }
+#     proc props {obj} {
+#         set result {}
+#         foreach key [lsort [list_property $obj]] {
+#             if {$key ni {NAME CLASS}} {lappend result $key [get_property $key $obj]}
+#         }
+#         return $result
+#     }
+#     proc tile {name} {
+#         variable seen_tiles
+#         if {[dict exists $seen_tiles $name]} {return}
+#         set obj [get_tiles $name]
+#         if {[llength $obj] != 1} {error "Ambiguous tile $name"}
+#         dict set seen_tiles $name 1
+#         row tile $name {*}[props $obj]
+#     }
+#     proc node {obj} {
+#         variable seen_nodes
+#         if {[llength $obj] != 1} {error "Expected one canonical node, got $obj"}
+#         set name [get_property NAME $obj]
+#         if {[dict exists $seen_nodes $name]} {return $name}
+#         dict set seen_nodes $name 1
+#         row node $name {*}[props $obj]
+#         foreach w [get_wires -of_objects $obj] {
+#             set wn [get_property NAME $w]
+#             set actual [get_nodes -of_objects $w]
+#             if {[llength $actual] != 1 || [get_property NAME $actual] ne $name} {
+#                 error "Alias does not resolve to canonical node: $wn -> $name"
+#             }
+#             row alias $wn $name
+#             tile [lindex [split $wn /] 0]
+#         }
+#         return $name
+#     }
+#     proc pip {obj} {
+#         variable seen_pips
+#         set name [get_property NAME $obj]
+#         if {[dict exists $seen_pips $name]} {return [dict get $seen_pips $name]}
+#         set u [get_wires -uphill -of_objects $obj]
+#         set v [get_wires -downhill -of_objects $obj]
+#         if {[llength $u] != 1 || [llength $v] != 1} {error "Unsupported PIP endpoints $name: $u $v"}
+#         set un [node [get_nodes -of_objects $u]]
+#         set vn [node [get_nodes -of_objects $v]]
+#         set uw [get_property NAME $u]
+#         set vw [get_property NAME $v]
+#         set directional [get_property IS_DIRECTIONAL $obj]
+#         row pip $name $uw $vw {*}[props $obj]
+#         tile [get_property TILE $obj]
+#         set info [list $un $vn $uw $vw $directional]
+#         dict set seen_pips $name $info
+#         return $info
+#     }
+#     proc select_root {obj seed reason} {
+#         variable roots
+#         set name [get_property NAME $obj]
+#         dict set roots $name 1
+#         row selection $name $seed $reason
+#     }
+#     proc run {path} {
+#         variable out
+#         variable roots
+#         variable seen_nodes
+#         variable seen_pips
+#         set part xcvu13p-fhgb2104-2-e
+#         if {[current_project -quiet] eq ""} {
+#             create_project -in_memory graph_sample -part $part
+#             link_design -part $part -top graph_sample
+#         }
+#         if {[get_property PART [current_design]] ne $part} {error "Unexpected part"}
+#         # All output files are exclusive-create. A missing 'complete' row marks interrupted export.
+#         set out [open $path {WRONLY CREAT EXCL}]
+#         try {
+#             row meta schema vivado_graph_tsv_v1
+#             row meta part $part
+#             row meta vivado_version [version -short]
+#             row meta vivado_build [string map {\n { | } \r {}} [version]]
+#             row meta timestamp_utc [clock format [clock seconds] -gmt 1 -format {%Y-%m-%dT%H:%M:%SZ}]
+#             row meta scope complete_downhill_pips_and_nodes_for_selected_roots
+#             row meta design empty_linked_device_no_netlist_occupancy
+#             set seeds {INT_X0Y0 INT_X0Y1 INT_X0Y30 INT_X0Y239 INT_X0Y240 INT_X0Y959 INT_X1Y1 INT_X1Y30}
+#             foreach ty {LAG_LAG BRAM DSP RCLK_INT_L} {
+#                 set candidates [lsort [get_property NAME [get_tiles -filter "TYPE == $ty"]]]
+#                 foreach idx [lsort -integer -unique [list 0 [expr {[llength $candidates]/2}] [expr {[llength $candidates]-1}]]] {
+#                     lappend seeds [lindex $candidates $idx]
+#                 }
+#             }
+#             foreach seed $seeds {
+#                 set t [get_tiles $seed]
+#                 tile $seed
+#                 row seed_tile $seed
+#                 set groups [dict create]
+#                 foreach n [get_nodes -of_objects $t] {
+#                     set name [get_property NAME $n]
+#                     # Prefer canonical base wires within the seed tile, but include aliases below.
+#                     if {[lindex [split $name /] 0] ne $seed} {continue}
+#                     dict lappend groups [get_property INTENT_CODE_NAME $n] $name
+#                 }
+#                 foreach intent [lsort [dict keys $groups]] {
+#                     set names [lsort -unique [dict get $groups $intent]]
+#                     set choices [concat [lrange $names 0 2] [lrange $names end end]]
+#                     foreach name [lsort -unique $choices] {select_root [get_nodes $name] $seed "intent:$intent"}
+#                 }
+#                 # Ensure two directions of real bidirectional PIPs and special flags are sampled.
+#                 foreach flag {IS_DIRECTIONAL IS_PSEUDO IS_EXCLUDED_PIP} value {0 1 1} {
+#                     set matches [get_pips -of_objects $t -filter "$flag == $value"]
+#                     foreach p [lrange $matches 0 1] {
+#                         foreach n [get_nodes -of_objects $p] {select_root $n $seed "pip:$flag=$value"}
+#                     }
+#                 }
+#                 # Include non-local canonical nodes reached through this tile's wires.
+#                 set aliases {}
+#                 foreach n [get_nodes -of_objects $t] {
+#                     if {[lindex [split [get_property NAME $n] /] 0] ne $seed} {lappend aliases [get_property NAME $n]}
+#                 }
+#                 foreach name [lrange [lsort -unique $aliases] 0 1] {select_root [get_nodes $name] $seed alias}
+#             }
+#             set count 0
+#             foreach root [lsort [dict keys $roots]] {
+#                 set n [get_nodes $root]
+#                 node $n
+#                 set pips [get_pips -downhill -of_objects $n]
+#                 set children [get_nodes -downhill -of_objects $n]
+#                 row root $root [llength $pips] [llength $children]
+#                 foreach child $children {row oracle_child $root [node $child]}
+#                 foreach p $pips {
+#                     lassign [pip $p] un vn uw vw directional
+#                     set name [get_property NAME $p]
+#                     set emitted 0
+#                     if {$un eq $root} {row edge $name forward $root $vn $uw $vw; incr emitted}
+#                     if {!$directional && $vn eq $root} {row edge $name reverse $root $un $vw $uw; incr emitted}
+#                     if {!$emitted} {error "Downhill PIP has incompatible endpoints: $root $p"}
+#                 }
+#                 incr count
+#                 if {$count % 50 == 0} {puts "graph_export roots=$count/[dict size $roots] nodes=[dict size $seen_nodes] pips=[dict size $seen_pips]"; flush $out}
+#             }
+#             row complete [dict size $roots] [dict size $seen_nodes] [dict size $seen_pips]
+#             puts "graph_export COMPLETE roots=[dict size $roots] nodes=[dict size $seen_nodes] pips=[dict size $seen_pips] path=$path"
+#         } finally {close $out}
+#     }
+# }
+# if {[info exists graph_export_path]} {
+#     graph_export::run $graph_export_path
+# } elseif {[info exists argv] && [llength $argv] == 1} {
+#     graph_export::run [lindex $argv 0]
+# } else {error "Set graph_export_path or pass exactly one output TSV argument"}
+invalid command name "try"
+VSCEND:1
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:wdgkbduk7rcp:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:wdgkbduk7rcp:1===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:aubuu7yl7ria===}
+INFO: [MCP 00-100] ===MCP_CMD_START:aubuu7yl7ria===
+puts "VSCSTART" ; set exitCode [catch {close $graph_export::out; set graph_export_path {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022_v2.tsv}} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022_v2.tsv
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:aubuu7yl7ria:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:aubuu7yl7ria:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:c65r381j2k9j===}
+INFO: [MCP 00-100] ===MCP_CMD_START:c65r381j2k9j===
+puts "VSCSTART" ; set exitCode [catch {source -notrace /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_vivado.tcl} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_TERM_T_X94Y959/GND_WIRE0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X10Y0/BRAM_BRAM_CORE_1_ADDRAU10_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X10Y0/BRAM_BRAM_CORE_1_ADDRAU11_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X10Y0/BRAM_BRAM_CORE_1_ADDRAU12_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X10Y0/BRAM_BRAM_CORE_3_START_RSR_NEXT]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X56Y0/BRAM_BRAM_CORE_1_ADDRAU10_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X56Y0/BRAM_BRAM_CORE_1_ADDRAU11_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X56Y0/BRAM_BRAM_CORE_1_ADDRAU12_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X56Y0/BRAM_BRAM_CORE_3_START_RSR_NEXT]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X94Y955/BRAM_BRAM_CORE_1_ADDRAU10_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X94Y955/BRAM_BRAM_CORE_1_ADDRAU11_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X94Y955/BRAM_BRAM_CORE_1_ADDRAU12_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X94Y955/BRAM_BRAM_CORE_3_CASOUTDBITERR]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes BRAM_X94Y955/BRAM_BRAM_CORE_3_CASOUTSBITERR]'
+graph_export roots=50/534 nodes=134 pips=84
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X100Y0/DSP_DSP48_0_ACIN_B0_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X100Y0/DSP_DSP48_0_ACIN_B10_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X100Y0/DSP_DSP48_0_ACIN_B11_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X27Y0/DSP_DSP48_0_ACIN_B0_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X27Y0/DSP_DSP48_0_ACIN_B10_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X27Y0/DSP_DSP48_0_ACIN_B11_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X95Y955/DSP_DSP48_0_ACIN_B0_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X95Y955/DSP_DSP48_0_ACIN_B10_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X95Y955/DSP_DSP48_0_ACIN_B11_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes DSP_X95Y955/DSP_DSP48_1_PCOUT9]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_INTF_L_TERM_GT_X0Y0/GND_WIRE0]'
+graph_export roots=100/534 nodes=239 pips=144
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_INTF_L_TERM_GT_X0Y0/GND_WIRE1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_INTF_L_TERM_GT_X0Y959/GND_WIRE0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_INTF_L_TERM_GT_X0Y959/GND_WIRE1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y0/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y0/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y0/CTRL_E2]'
+graph_export roots=150/534 nodes=621 pips=519
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y1/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y1/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y1/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y239/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y239/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y239/CTRL_E2]'
+graph_export roots=200/534 nodes=1017 pips=917
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y240/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y240/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y240/CTRL_E2]'
+graph_export roots=250/534 nodes=1422 pips=1318
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y30/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y30/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y30/CTRL_E2]'
+graph_export roots=300/534 nodes=1833 pips=1726
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y959/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y959/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X0Y959/CTRL_E2]'
+graph_export roots=350/534 nodes=2371 pips=2276
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X1Y1/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X1Y1/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X1Y1/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X1Y30/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X1Y30/CTRL_E1]'
+graph_export roots=400/534 nodes=2758 pips=2662
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X1Y30/CTRL_E2]'
+graph_export roots=450/534 nodes=3120 pips=3028
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X0Y149/CLK_LEAF_SITES_0_CLK_CASC_IN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X0Y149/CLK_LEAF_SITES_0_ENSEL_PROG_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X0Y149/CLK_LEAF_SITES_10_CLK_CASC_IN_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X0Y149/CLK_LEAF_SITES_30_CLK_CASC_OUT]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X0Y149/INT_RCLK_TO_CLK_RIGHT_1_2]'
+graph_export roots=500/534 nodes=3793 pips=3674
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X37Y149/CLK_LEAF_SITES_0_CLK_CASC_IN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X37Y149/CLK_LEAF_SITES_0_ENSEL_PROG_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X37Y149/CLK_LEAF_SITES_10_CLK_CASC_IN_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X37Y149/CLK_LEAF_SITES_30_CLK_CASC_OUT]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X37Y149/INT_RCLK_TO_CLK_RIGHT_1_2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X9Y929/CLK_LEAF_SITES_0_CLK_CASC_IN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X9Y929/CLK_LEAF_SITES_0_ENSEL_PROG_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X9Y929/CLK_LEAF_SITES_10_CLK_CASC_IN_PIN]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X9Y929/CLK_LEAF_SITES_30_CLK_CASC_OUT]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X9Y929/INT_RCLK_TO_CLK_RIGHT_1_2]'
+graph_export COMPLETE roots=534 nodes=5005 pips=4870 path=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022_v2.tsv
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:c65r381j2k9j:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:c65r381j2k9j:0===
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 22 14:50:17 2026...

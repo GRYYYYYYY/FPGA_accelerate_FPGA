@@ -1,0 +1,106 @@
+"""Independent two-query protocol, transition, complete memory and AXI audit."""
+from pathlib import Path
+from collections import Counter
+import json,hashlib,struct,mmap,contextlib,sys,re,importlib.util
+from audit_natural_axi import replay
+ROOT=Path(__file__).resolve().parents[1]
+def sha(p):
+ h=hashlib.sha256()
+ with p.open('rb')as f:
+  for b in iter(lambda:f.read(1<<20),b''):h.update(b)
+ return h.hexdigest()
+def native(p):return {v[0]:list(v[1:])for v in struct.iter_unpack('<6I',p.read_bytes())}
+def main():
+ out=Path(sys.argv[1]).resolve();m=json.loads((out/'manifest.json').read_text());assert m['status']=='passed';inp=Path(m['input']);oracle=Path('/tmp/B_state_residency_offer_20261025/continuous_oracle_v1');graph=ROOT/'results/graph_image_20261024';baseline=ROOT/'results/candidate_recursive_pilot_20261025';bm=json.loads((baseline/'manifest.json').read_text())
+ for n,v in m['sources'].items():assert sha(out/'sources'/n)==v['sha256']
+ same=0
+ for n,v in m['sources'].items():
+  if n in ['runner.py','tb_continuous_query.sv']:continue
+  assert v['sha256']==bm['sources'][n]['sha256'];same+=1
+ assert same==109
+ builder=ROOT/'hardware/variants/continuous_query_v1/build_tb.py';sp=importlib.util.spec_from_file_location('builder',builder);mod=importlib.util.module_from_spec(sp);sp.loader.exec_module(mod);assert mod.make().encode()==(out/'sources/tb_continuous_query.sv').read_bytes()
+ for n,v in m['scoreboards'].items():assert sha(out/n)==v
+ assert m['input_manifest_sha256']==sha(inp/'manifest.json') and m['oracle_audit_sha256']==sha(oracle/'source_bound_audit.json') and m['graph_audit_sha256']==sha(graph/'source_bound_audit.json')
+ q1=ROOT/'results/natural_query_v2';q2=ROOT/'results/followup_q2_v1';c2=ROOT/'results/followup_q2_cost_v1';assert m['q2_audit_sha256']==sha(q2/'source_bound_audit.json') and m['q2_cost_audit_sha256']==sha(c2/'source_bound_audit.json')
+ imports=native(oracle/'initial_label_imports.u32');final1=native(oracle/'expected_label_reads.u32');prepared=native(oracle/'prepared.u32');final=native(oracle/'final2.u32');assert len(imports)==328
+ expected=bytearray((inp/'design.bin').read_bytes());cpuP=[];cpuO=[];costs=[];phases=[];expectedACK=[];expectedWrites=[];chain=[]
+ with contextlib.ExitStack()as stack:
+  def mm(p):return stack.enter_context(mmap.mmap(stack.enter_context(p.open('rb')).fileno(),0,access=mmap.ACCESS_READ))
+  offsets=mm(graph/'offsets.u32le');edges=mm(graph/'edges.u32le');attrs=mm(graph/'nodes.rrt32')
+  for phase,(cpu,costroot) in enumerate([(q1,inp),(q2,c2)]):
+   snap=mm(cpu/'initial_nodes.u32');last=mm(cpu/'search_final_nodes.u32');current={};lines=[l.split()for l in(cpu/'events.txt').read_text().splitlines()];K={};parent=None
+   for t in lines:
+    if t[0]=='E':parent=int(t[1]);K[parent]=[]
+    elif t[0]=='K':K[parent].append(int(t[2]))
+   def label(i):return current.get(i,struct.unpack_from('<11I',snap,i*44)[:6])
+   def created(i):return bool(attrs[i*32+9]&1 or expected[i*16]&1)
+   def excluded(parent,child):
+    flags=attrs[child*32+9];v=label(child)
+    if created(child) and v[3]!=0xffffffff and v[4]!=label(parent)[4] and v[3]==parent and flags&64:return False
+    if flags&64:return True
+    if flags&4 and not created(child):return True
+    if flags&2:return True
+    return bool(created(child) and flags&32 and v[3]!=parent)
+   for i,t in enumerate(lines):
+    if t[0]=='P':cpuP.append([int(t[1]),int(t[2]),int(t[3])])
+    if t[0]=='C':cpuO.append([int(t[1]),int(t[2]),int(t[3]),int(i+1<len(lines)and lines[i+1][0]=='W')])
+    if t[0]=='E':
+     parent=int(t[1]);lo,hi=struct.unpack_from('<II',offsets,parent*4);raw=struct.unpack_from('<'+'I'*(hi-lo),edges,lo*4);flags,count,mask,_=struct.unpack_from('<4I',expected,parent*16)
+     if flags&4:assert [child for pos,child in enumerate(raw)if mask>>pos&1]==K[parent]
+     else:
+      mask=0;kept=[]
+      for pos,child in enumerate(raw):
+       if excluded(parent,child):continue
+       expected[child*16]|=1
+       if attrs[child*32+8]==17:continue
+       mask|=1<<pos;kept.append(child)
+      assert kept==K[parent];flags=struct.unpack_from('<I',expected,parent*16)[0]|4;struct.pack_into('<4I',expected,parent*16,flags,len(raw),mask,0)
+    if t[0]=='W':
+     child,prev,lb,up,seq,target=map(int,t[1:7]);old=label(child);current[child]=(lb,up,old[2],prev,seq,target)
+   for t in map(str.split,(costroot/'cost_vectors.txt').read_text().splitlines()):
+    parent,node=map(int,t[:2]);packet=list(map(lambda x:int(x,16),t[2:25]));result=list(map(lambda x:int(x,16),t[25:]));costs.append((node,packet,result));phases.append(phase)
+    v=list(struct.unpack_from('<11I',snap,node*44));lab=[v[0],v[1],parent,v[4],v[5]]
+    for field,value in [(0,result[4]),(1,result[2]),(3,phase+1)]:
+     expectedWrites.append([node,field,value]);lab[field]=value;expectedACK.append(sum(x<<(32*j)for j,x in enumerate(lab)))
+   records=[imports,prepared][phase];expectedrecords=[final1,final][phase]
+   for node,record in records.items():
+    v=struct.unpack_from('<11I',snap,node*44);assert record==[v[0],v[1],v[3],v[4],v[5]]
+    v=struct.unpack_from('<11I',last,node*44);assert expectedrecords[node]==[v[0],v[1],v[3],v[4],v[5]]
+  last=mm(q1/'search_final_nodes.u32');node=150697
+  while node!=65185:
+   prev=struct.unpack_from('<I',last,node*44+12)[0];assert prev!=0xffffffff and len(chain)<32;chain.append([node,prev]);node=prev
+ pages={}
+ for node,record in final.items():
+  p,slot=divmod(node,8);data=pages.setdefault(p,bytearray(192));data[0]|=1<<slot;struct.pack_into('<5I',data,1+slot*20,*record)
+ want=Counter(map(bytes,pages.values()));want[bytes(192)]+=16384-len(pages);counts={}
+ for case,cm in m['cases'].items():
+  d=out/case;assert cm['status']=='passed'and all(x['exit_code']==0 for x in cm['commands'])
+  assert len(cm['commands'])==3 and ('PRESSURE' in cm['commands'][0]['argv'])==(case=='pressure')
+  for n,h in cm['artifacts'].items():assert sha(d/n)==h
+  c={k:int(v)for k,v in re.findall(r'(\w+)=(\d+)',cm['result'])};assert [c[k]for k in ['outputs','commits','offers','expands','polls','visited','State_R']]==[447,293,293,114,116,447,114]
+  log=(d/'simulate.log').read_text();assert cm['result']in log and '$finish called'in log and 'Fatal:'not in log
+  rows=[l.split()for l in(d/'natural_trace.txt').read_text().splitlines()];by=lambda tag:[t for t in rows if t[0]==tag]
+  assert all(int(a[1])<=int(b[1])for a,b in zip(rows,rows[1:]))
+  assert [[int(t[2]),int(t[3],16),int(t[4])]for t in by('P')]==cpuP
+  assert [[int(t[3]),int(t[4]),int(t[6]),int(t[5])]for t in by('O')]==cpuO
+  assert len(by('C'))==len(costs)==293
+  for t,(node,packet,result)in zip(by('C'),costs):assert int(t[2])==node and int(t[3],16)==sum(x<<(32*j)for j,x in enumerate(packet)) and int(t[4],16)==sum(x<<(32*j)for j,x in enumerate(result))
+  assert [[int(t[2]),int(t[3]),int(t[4],16)]for t in by('W')]==expectedWrites
+  assert len(by('A'))==879 and all(t[2:4]==['0','1']for t in by('A')) and [int(t[4],16)for t in by('A')]==expectedACK
+  for phase,records in enumerate([final1,final]):assert {int(t[2]):[(int(t[3],16)>>(32*j))&0xffffffff for j in range(5)]for t in by('R')if int(t[4])==phase}==records
+  assert {int(t[2]):[(int(t[3],16)>>(32*j))&0xffffffff for j in range(5)]for t in by('T')}==prepared
+  assert [[int(t[2]),int(t[3])]for t in by('BT')]==chain
+  assert [[int(t[2]),int(t[3]),int(t[4])]for t in by('OC')]==[[pair[1],1,1]for pair in chain[:-1]]
+  assert {int(t[2]):[(int(t[3],16)>>(32*j))&0xffffffff for j in range(5)]for t in by('I')}==imports
+  assert len(by('I'))==328 and max(int(t[1])for t in by('I'))<int(by('P')[0][1])
+  assert int(by('P')[72][1])<int(by('BT')[0][1])<int(by('OC')[-1][1])<int(by('T')[0][1])<int(by('T')[-1][1])<int(by('P')[73][1])
+  data=(d/'labels.bin').read_bytes();assert Counter(data[i:i+192]for i in range(0,len(data),192))==want
+  assert (d/'design.bin').read_bytes()==expected
+  assert (d/'owners.bin').read_bytes()==(ROOT/'results/warm_q2_codec_v1/owners.bin').read_bytes()+(inp/'owner_allocator.bin').read_bytes()
+  memory={}
+  for tag,regions,ff in [('graph',[(0x1fffff000,graph/'offsets.u32le'),(0x10fffff000,graph/'edges.u32le'),(0x20fffff000,graph/'nodes.rrt32')],None),('design',[(0x31fffff000,inp/'design.bin')],d/'design.bin'),('label',[(0,bytes(3145728))],d/'labels.bin'),('owner',[(0x61fffff000,(inp/'owners.bin').read_bytes()+(inp/'owner_allocator.bin').read_bytes())],d/'owners.bin'),('cost',[(0x71fffff000,inp/'cost.bin')],None),('qstate',[(0x81fffff000,inp/'connections.bin')],None),('table',[(0x41fffff000,inp/'rows.bin'),(0x51fffff000,inp/'columns.bin')],None)]:memory[tag]=replay(d/(tag+'_axi.txt'),regions,ff)
+  assert memory['owner']['write_replies']==6 and memory['qstate']['read_beats']==114
+  counts[case]=dict(result=cm['result'],memory=memory,label_sha256=sha(d/'labels.bin'),design_sha256=sha(d/'design.bin'),owner_sha256=sha(d/'owners.bin'))
+ result=dict(status='passed',manifest_sha256=sha(out/'manifest.json'),auditor_sha256=sha(Path(__file__)),unchanged_production_RTL_dat=same,chain=chain,initial_union_records=328,final_pages=len(pages),counts=counts,scope='Same-instance q1 search, actual prev host-interface backtrace/6 owner commits, target/source q2 prepare without reload, q2 search; costs/ACK/native states/full backing/AXI. TB orchestrated, CPU-known union, same price/epoch, not autonomous hardware backtrace/controller or price switch.')
+ (out/'source_bound_audit.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+if __name__=='__main__':main()

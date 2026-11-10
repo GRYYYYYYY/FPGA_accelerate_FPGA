@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "codecs": {
+    "warm_q2_codec_v1": {
+      "status": "passed",
+      "manifest_sha256": "c569c51044e6a2ab5c4ebbef4ca7053ce51479168773ead517a56d62e49e58be",
+      "auditor_sha256": "1b0dee241ef4fdaec6e346041b9c23d2311e26be8417a513a4edfb0f820ff507",
+      "rows_verified": 9089009,
+      "overflow_entries_verified": 0,
+      "warm_parents_verified": 72,
+      "empty_cached_parents": 0,
+      "scope": "Independent full-image decoding against real prepared CPU snapshots and original ordered CSR. No RTL replay or unknown-page initialization proof."
+    },
+    "warm_iter2_codec_v1": {
+      "status": "passed",
+      "manifest_sha256": "f3f82136b2c97f3f4af52be75338ccb478851d8fde3c4e3d6d5d8ab96aa9a4b4",
+      "auditor_sha256": "1b0dee241ef4fdaec6e346041b9c23d2311e26be8417a513a4edfb0f820ff507",
+      "rows_verified": 9089009,
+      "overflow_entries_verified": 53734,
+      "warm_parents_verified": 1647675,
+      "empty_cached_parents": 1878,
+      "scope": "Independent full-image decoding against real prepared CPU snapshots and original ordered CSR. No RTL replay or unknown-page initialization proof."
+    }
+  },
+  "owner_model": {
+    "status": "passed",
+    "auditor_sha256": "f0a9f21a37be789ac86d0eef4bac630afa79295b1c053c3a5141d2068b246c47",
+    "base_audit_sha256": "fc59fb8cad8e9175819acd7b5538f87fed4612fa437c30ec067214236a1c878b",
+    "commands": [
+      [
+        "g++",
+        "-O2",
+        "-std=c++17",
+        "-UNDEBUG",
+        "-I",
+        "/tmp/B_state_residency_offer_20261025/warm_iter2_owner_model_v1/sources",
+        "/tmp/B_state_residency_offer_20261025/warm_iter2_owner_model_v1/sources/check_owner_image.cpp",
+        "-o",
+        "/tmp/B_state_residency_offer_20261025/warm_iter2_owner_model_v1/check"
+      ],
+      [
+        "/tmp/B_state_residency_offer_20261025/warm_iter2_owner_model_v1/check",
+        "/tmp/B_state_residency_offer_20261025/warm_iter2_codec_v1",
+        "9089009",
+        "53734"
+      ]
+    ],
+    "metrics": {
+      "status": "passed",
+      "nodes": 9089009,
+      "occupied_nodes": 593088,
+      "overflow_gets": 53734,
+      "promotion_node": 208292,
+      "transitions": 2
+    },
+    "files": {
+      "execute.log": "059f6a4346b4814c9101ea352b16c1c1ab0764bd558d58210b10fce62a3d5012",
+      "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "check": "37e800c888d720e35b9e86aee1efcb136ac5269bf704599271646a4eabc0e680",
+      "sources/check_owner_image.cpp": "46d3ab463288dfa6a545be4feb0d7a09f02001c46d4b72fa9881d8938719fd1a",
+      "sources/owner_store.hpp": "ca5c47be5526b8772f44cb81e5eaefc1967c86101f4548bac85b48d8a485d959",
+      "sources/audit_warm_owner_model.py": "f0a9f21a37be789ac86d0eef4bac630afa79295b1c053c3a5141d2068b246c47"
+    },
+    "scope": "Existing executable owner layout specification, all real primary/overflow GETs; one actual multiowner primary-removal/promotion/free-list-reuse sequence. Not RTL or all mutation permutations."
+  },
+  "scope": "CPU-prepared persistent subset exported to existing service layouts. Not full query input, RTL import/search, unknown page initialization or board result."
+}

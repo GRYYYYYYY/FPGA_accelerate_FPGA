@@ -1,0 +1,15 @@
+{
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-fsyntax-only",
+    "-pthread",
+    "-I",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp"
+  ],
+  "upstream_sha256": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+  "returncode": 1,
+  "stderr": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp: In member function \u2018void Router::releaseBulkArrays()\u2019:\n/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp:5506:14: error: \u2018floodCong\u2019 was not declared in this scope\n 5506 |         drop(floodCong); drop(floodCongShare); drop(shareMark);\n      |              ^~~~~~~~~\n/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp:5506:31: error: \u2018floodCongShare\u2019 was not declared in this scope\n 5506 |         drop(floodCong); drop(floodCongShare); drop(shareMark);\n      |                               ^~~~~~~~~~~~~~\n/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp:5506:53: error: \u2018shareMark\u2019 was not declared in this scope\n 5506 |         drop(floodCong); drop(floodCongShare); drop(shareMark);\n      |                                                     ^~~~~~~~~\n",
+  "conclusion": "Upstream CPU-only compile fails at CUDA-only cleanup members; both local builds guard these lines with WITH_CUDA."
+}

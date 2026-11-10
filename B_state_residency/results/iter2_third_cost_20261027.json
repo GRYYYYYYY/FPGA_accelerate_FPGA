@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "cases": {
+    "followup_iter2_third_cost_v1": {
+      "status": "passed",
+      "manifest_sha256": "d72c6d4604c874b39b501a17adffb0107bbf5e57f5967fc1122ac7b141405407",
+      "auditor_sha256": "33576174fd7fcace364e4699ea4232106cbdb9181bb8fde30ce16dcb93b4a6a3",
+      "base_audit_sha256": "87b2cd9eab1c72a2cc6ffca1ec3c3ca5cbd9022c5c81ea915daa276bac36892a",
+      "graph_audit_sha256": "3ee5b9e8d5cf99511fd723ecc45d2b8686fa741c2a588a22a0fc133e6a8f97e3",
+      "nodes": 9089009,
+      "connections": 180326,
+      "cost_packets": 302,
+      "cost_input_words": 6946,
+      "cost_result_words": 1510,
+      "cost_child_types": {
+        "14": 52,
+        "12": 245,
+        "13": 4,
+        "2": 1
+      },
+      "max_query_refs": 166,
+      "target_costs": 1,
+      "scope": "Full history/prices/net table and CPS1 connection table; actual restored search nine-file identity; binary32 geometry/cost independently recomputed per push including overflow lookup. Cost/State subset only: input_layout owner_pool_capacity is unused legacy zero, not owner pool metadata. No RTL or epoch/unknown-page proof."
+    },
+    "followup_iter2_third_oracle_v1": {
+      "status": "passed",
+      "input_root": "/tmp/B_state_residency_offer_20261025/followup_iter2_third_cost_v1",
+      "input_audit_sha256": "47e04de961d2595dd955dc18bd9634ac15423cb627083056fb943579812f7506",
+      "capture_audit_sha256": "87b2cd9eab1c72a2cc6ffca1ec3c3ca5cbd9022c5c81ea915daa276bac36892a",
+      "graph_audit_sha256": "3ee5b9e8d5cf99511fd723ecc45d2b8686fa741c2a588a22a0fc133e6a8f97e3",
+      "runner_sha256": "67e0e14cc7c9a3914cc7e4ae1aff5f27b545fd99a94cc9752ac51a5546f29200",
+      "raw_children": 600,
+      "filtered_children": 565,
+      "expansions": 113,
+      "cache_hits": 113,
+      "decisions": {
+        "push": 301,
+        "graph_access": 175,
+        "bbox": 29,
+        "exclusive_sink": 53,
+        "visited": 6,
+        "target": 1
+      },
+      "pushes": 302,
+      "lookahead": 0,
+      "early": 1,
+      "created_transitions": 0,
+      "label_import_records": 584,
+      "logical_pages": 285,
+      "artifacts": {
+        "initial_label_imports.u32": "1bad910f74208fd366e4d13beb74d17450d8dae54d3da6a56953ddc7159d0081",
+        "expected_label_reads.u32": "01d2265873286294453d43be9e969dfad21daf525a49c08d41cf943d81569186"
+      },
+      "scope": "Independent natural eager getChildren/exclusion/access/visited/target decisions, complete created transitions, and conservative literal label read closure. No RTL execution or board measurement.",
+      "manifest_sha256": "c0e6ed8c233b047efac2afdd02c8806052c2c5a628eb18ae8680e3b5f1e538ea"
+    }
+  },
+  "restores": {
+    "followup_iter2_third_cost_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/followup_iter2_third_cost_v1.json",
+      "archive_sha256": "5011b8d7c521b54c3c68cba9abca35fac4a08c79e7057524d1528774b283afda",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/followup_iter2_third_cost_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/followup_iter2_third_cost_v1",
+      "files": 39,
+      "audit_byte_identical": true,
+      "audit_sha256": "47e04de961d2595dd955dc18bd9634ac15423cb627083056fb943579812f7506",
+      "auditor": "audit_followup_cost.py"
+    },
+    "followup_iter2_third_oracle_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/followup_iter2_third_oracle_v1.json",
+      "archive_sha256": "e4c27c0fe7adfb3fee44e47e86df114e8035f585067722ae87934f97f21db0bd",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/followup_iter2_third_oracle_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/followup_iter2_third_oracle_v1",
+      "files": 4,
+      "audit_byte_identical": true,
+      "audit_sha256": "1ea89b1552b53d8a841d84395114501505885c5acb5e807205fcb8ee471fb029",
+      "auditor": "audit_followup_filters_replay.py",
+      "orchestration_note": "Initial post-restore audit ran while cost dependency was being restored and failed on missing dependency path. After cost restore completed, all restored member hashes and independent replay were verified; archive and audit unchanged."
+    }
+  },
+  "scope": "Independent binary32 cost/CPS1 and filter replay for natural q3; conservative label closure is audit-only and is not loaded into hardware."
+}

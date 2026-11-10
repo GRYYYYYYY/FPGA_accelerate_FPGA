@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "sources": {
+    "children_step_step.v": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen32/children_step/solution1/syn/verilog/children_step_step.v",
+      "sha256": "b51b033ceaa81f738a1da1a7dc06b5bc24729e6abd60abef198c66f2e8eb7720"
+    },
+    "children_step.v": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen32/children_step/solution1/syn/verilog/children_step.v",
+      "sha256": "e85a2c2ed7957fcf223ab101202257bad095d89f53dd625676f8dd42f42f8e97"
+    },
+    "tb_children_reset.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/children_reset_check/tb_children_reset.sv",
+      "sha256": "13e596f3b05b89b11764a030ff8ac1773399c2b75a8fcd8490eb72863bd26bef"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_reset_20261024/sources/children_step_step.v",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_reset_20261024/sources/children_step.v",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_reset_20261024/sources/tb_children_reset.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_children_reset",
+        "-s",
+        "reset_test",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "reset_test",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "hls_gate": {
+    "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/source_bound_audit.json",
+    "sha256": "dcede2349e00bf48b8292fdf02a8159b59466db58b308f0211673ec08d241d20"
+  },
+  "runner_sha256": "436882fdf98381462a39611f82bc316b8a8720283bb4fdd20a7a7842135e9091",
+  "artifacts": {
+    "simulate.log": "0d9e3943de80e8436e4dfe0f17ffa4ec6e0c8b8da1ea27bcbe56cb855df65526",
+    "run.tcl": "9c54d4a1c9033937bec6a195904c6fe4bd10d055e5677c174f362122594f38b3",
+    "compile.stdout.log": "e82307cc2965137f05fb6a05f6cfaad2393415ae5edcb51112210285ef869c64",
+    "xvlog.log": "e82307cc2965137f05fb6a05f6cfaad2393415ae5edcb51112210285ef869c64",
+    "simulate.stdout.log": "95d3054ba851a610c09725195d50d7e1fd2038356769061d33896d9ab5d8a499",
+    "xelab.log": "0a916252534fb8fd35c50cd3ab96b7e42ff1aec445e4527dd051ead81bfa8829",
+    "elaborate.stdout.log": "0a916252534fb8fd35c50cd3ab96b7e42ff1aec445e4527dd051ead81bfa8829"
+  }
+}

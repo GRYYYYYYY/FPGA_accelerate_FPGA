@@ -1,0 +1,11 @@
+--- baseline/query_residency_system.sv
++++ candidate/query_residency_system.sv
+@@ -587,7 +587,7 @@
+ wire pc_quiet=!rst&&!k_cold_rst&&!abort&&p_active&&k_permit&&f_phase==0&&f_normal_retired&&f_backend_idle&&f_all_drained&&(!qc_busy||qc_cp_busy)&&!ss_busy&&!qc_fault&&!ss_fault&&!fault&&!rc_fault&&!k_fault&&!cf_fault&&!lr_fault&&!f_fault&&!k_busy&&!f_recovery_owned&&!as_cfg_lease&&!as_fault;
+ 
+ wire pc_retired=!rst&&!k_cold_rst&&f_normal_retired&&f_backend_idle&&f_all_drained&&!qc_busy&&!ss_busy&&!k_busy&&!f_recovery_owned&&(f_phase==0||f_phase==6);
+-checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));
++checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(jp_start||ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));
+ wire host_base=!wm_owned&&!qc_busy&&!qc_fault&&!pc_owned&&!as_cfg_lease;
+ wire host_open=host_base&&!boot_pending;
+ wire boot_admin_open=host_base&&boot_admin_allowed;

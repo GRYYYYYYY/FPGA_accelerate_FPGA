@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "pid": 2851436,
+  "input_sha256": "d03de37af1a4a0b10f8bb29812b0048c4d2dd57ba6dadb70f61853225e39b6f4",
+  "provenance_sha256": "718163550394426ec9ae2f9bbed15fcd97fff89446093e3f67dc8dc6a222e37c",
+  "frontier_gate_sha256": "1afbb7673985301e61fcecae4e7500f328e60665e6b5d5f0987b77cf47d6fb92",
+  "runner_sha256": "6222bc7a8a472310270dc3760561120ead495550220153d51b5bb4b52d5e288d",
+  "commands": [
+    {
+      "stage": "build",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fno-fast-math",
+        "-pthread",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/reference",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/reference/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/verify_graph_image.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/verify_graph"
+      ],
+      "pid": 2858597,
+      "exit_code": 0
+    },
+    {
+      "stage": "verify",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/verify_graph",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+        "9089009",
+        "40469536"
+      ],
+      "pid": 2863768,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Lossless raw graph and attributes, not filtered adjacency, live occupancy/history snapshot, device upload or hardware graph expansion.",
+  "nodes": 9089009,
+  "edges": 40469536,
+  "max_degree": 18,
+  "reserved_flag16_nodes": 9035754,
+  "node_section_start": 1324,
+  "node_section_end": 489083792,
+  "rrt_bytes": 495649674,
+  "sources": {
+    "reference/trace.cpp": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+    "reference/real_trace.hpp": "d76ace3cdc74ebe93d25249c5065cda3948bd1f737488e9912d1798997f9f46e",
+    "reference/real_router_hooks.inc": "aa44a7cca13856af257e0c1fae47dedc872f29ddff910d72733624c14781cc56",
+    "reference/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "reference/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "reference/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "reference/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "reference/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "reference/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  },
+  "verifier_sha256": "021ede96dccfed9954f09bb4e588e894217c4694a2720629c61a5941189519ea",
+  "artifacts": {
+    "nodes.rrt32": "4b85c1329d66bc5a4e7fb520ce03d48fa6f3d41dfbc75120083c4f32afb3e4b9",
+    "offsets.u32le": "3fdd2e3811dfadbabfb178e5664ee46e1708066ffdb9e7971dcf88c6f4ff0a47",
+    "config_prefix.rrtbin": "27e00eb7eba8d78acab9d71fca53608f58a48fec0a2bc454fb4f87f986694c6f",
+    "design_suffix.rrtbin": "3a03e2a571f56ab67045dd219909375b26d22c125c8b75d87e3a2236f7bd1b09",
+    "edges.u32le": "930ec8f23fef75750f60b1f6054bfac7ff34646b4a274a6fe2bbe6eaeac2da8b"
+  },
+  "binary_sha256": "5f97205689dd05d52dcb2d44367118d50a0cdb12d08657819ff7efe12d025cf0",
+  "verify_log_sha256": "9051791eae47943a62a2e19b348a09ca761068ad3a6819d2b868db9476700291"
+}

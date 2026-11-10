@@ -1,0 +1,1455 @@
+EXPANSION_SYNTH_BEGIN version=2022.2
+# set_param general.maxThreads 2
+# create_project -in_memory -part xcu280-fsvh2892-2L-e
+# foreach b_name [split $b_files \n] {read_verilog -sv [file join $b_out sources $b_name]}
+# set b_f [open [file join $b_out research_clock.xdc] w]
+# puts $b_f {create_clock -name research_clock -period 10.000 [get_ports clk]}
+# close $b_f
+# read_xdc [file join $b_out research_clock.xdc]
+# synth_design -top node_expansion_engine -part xcu280-fsvh2892-2L-e -mode out_of_context
+Command: synth_design -top node_expansion_engine -part xcu280-fsvh2892-2L-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 640465 ; free virtual = 1360337
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5174.169; parent = 5033.047; children = 141.122
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9616.035; parent = 8523.461; children = 1092.574
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'node_expansion_engine' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/expansion/node_expansion_engine.sv:2]
+INFO: [Synth 8-6157] synthesizing module 'graph_static_reader' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/graph/graph_static_reader.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'graph_static_reader' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/graph/graph_static_reader.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'design_state_store' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/design/design_state_store.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'design_state_store' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/design/design_state_store.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'children_build_engine' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/engine/children_build_engine.sv:2]
+INFO: [Synth 8-6157] synthesizing module 'children_build_controller' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/engine/children_build_controller.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'children_build_controller' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/engine/children_build_controller.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'children_hls_call' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/engine/children_hls_call.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'children_hls_call' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/engine/children_hls_call.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'children_step' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/hls32/children_step.v:10]
+INFO: [Synth 8-6157] synthesizing module 'children_step_step' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/hls32/children_step_step.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'children_step_step' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/hls32/children_step_step.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'children_step' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/hls32/children_step.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'children_build_engine' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/children/engine/children_build_engine.sv:2]
+INFO: [Synth 8-6157] synthesizing module 'paged_exclusion_engine' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/pager/paged_exclusion_engine.sv:2]
+	Parameter SLOTS bound to: 32 - type: integer 
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GEN_BITS bound to: 16 - type: integer 
+	Parameter FRAMES bound to: 163840 - type: integer 
+	Parameter INDEX_BITS bound to: 18 - type: integer 
+	Parameter HASH_BITS bound to: 18 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'resident_page_manager' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/pager/resident_page_manager.sv:3]
+	Parameter SLOTS bound to: 32 - type: integer 
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GEN_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'resident_page_manager' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/pager/resident_page_manager.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_edge_engine' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/engine/exclusion_edge_engine.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_edge_controller' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/engine/exclusion_edge_controller.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_edge_controller' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/engine/exclusion_edge_controller.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_hls_call' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/engine/exclusion_hls_call.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_hls_call' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/engine/exclusion_hls_call.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_p_anonymous_namespace_load_input' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_p_anonymous_namespace_load_input.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_p_anonymous_namespace_load_input' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_p_anonymous_namespace_load_input.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_p_anonymous_namespace_compute' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_p_anonymous_namespace_compute.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_step' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_step.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_accept' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_accept.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_accept' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_accept.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_step' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_step.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_p_anonymous_namespace_compute' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_p_anonymous_namespace_compute.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_p_anonymous_namespace_store_output' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_p_anonymous_namespace_store_output.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_p_anonymous_namespace_store_output' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_p_anonymous_namespace_store_output.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_fifo_w288_d2_S' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w288_d2_S.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_fifo_w288_d2_S_ShiftReg' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w288_d2_S.v:111]
+	Parameter DATA_WIDTH bound to: 288 - type: integer 
+	Parameter ADDR_WIDTH bound to: 1 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_fifo_w288_d2_S_ShiftReg' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w288_d2_S.v:111]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_fifo_w288_d2_S' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w288_d2_S.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_fifo_w160_d2_S' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w160_d2_S.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_fifo_w160_d2_S_ShiftReg' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w160_d2_S.v:111]
+	Parameter DATA_WIDTH bound to: 160 - type: integer 
+	Parameter ADDR_WIDTH bound to: 1 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_fifo_w160_d2_S_ShiftReg' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w160_d2_S.v:111]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_fifo_w160_d2_S' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_fifo_w160_d2_S.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_compute_U0' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_compute_U0_ShiftReg' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v:107]
+	Parameter DATA_WIDTH bound to: 1 - type: integer 
+	Parameter ADDR_WIDTH bound to: 1 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_compute_U0_ShiftReg' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v:107]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_compute_U0' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_store_output_U0' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_store_output_U0_ShiftReg' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v:107]
+	Parameter DATA_WIDTH bound to: 1 - type: integer 
+	Parameter ADDR_WIDTH bound to: 1 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_store_output_U0_ShiftReg' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v:107]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step_start_for_p_anonymous_namespace_store_output_U0' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_step' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/hls32/exclusion_step.v:10]
+INFO: [Synth 8-6157] synthesizing module 'exclusion_label_adapter' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/adapter/exclusion_label_adapter.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_label_adapter' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/adapter/exclusion_label_adapter.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'exclusion_edge_engine' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/engine/exclusion_edge_engine.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'memory_scratch_endpoint_small_staticcodec' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/memory_scratch_endpoint_small_staticcodec.sv:4]
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+	Parameter TAG_BITS bound to: 2 - type: integer 
+	Parameter FRAMES bound to: 163840 - type: integer 
+	Parameter INDEX_BITS bound to: 18 - type: integer 
+	Parameter HASH_BITS bound to: 18 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 16 - type: integer 
+WARNING: [Synth 8-693] zero replication count - replication ignored [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/memory_scratch_endpoint_small_staticcodec.sv:58]
+WARNING: [Synth 8-693] zero replication count - replication ignored [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/memory_scratch_endpoint_small_staticcodec.sv:58]
+INFO: [Synth 8-6157] synthesizing module 'queued_scratch_endpoint_small' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/queued_scratch_endpoint_small.sv:5]
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+	Parameter TAG_BITS bound to: 2 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 268 - type: integer 
+	Parameter DEPTH bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'record_response_fallthrough_fifo' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/response_fallthrough_fifo.sv:4]
+	Parameter WIDTH bound to: 181 - type: integer 
+	Parameter DEPTH bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'record_response_fallthrough_fifo' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/response_fallthrough_fifo.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo__parameterized0' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 24 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo__parameterized0' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_controller_small' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_controller_small.sv:4]
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'scratch_frame_store' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_frame_store_bram.sv:5]
+	Parameter SLOTS bound to: 32 - type: integer 
+	Parameter SLOT_BITS bound to: 5 - type: integer 
+	Parameter OFFSET_BITS bound to: 3 - type: integer 
+	Parameter PAGE_BITS bound to: 21 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'scratch_frame_store' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_frame_store_bram.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_controller_small' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_controller_small.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'queued_scratch_endpoint_small' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/queued_scratch_endpoint_small.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'record_backing_service_small_staticcodec' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/record_backing_service_small_staticcodec.sv:6]
+	Parameter FRAMES bound to: 163840 - type: integer 
+	Parameter INDEX_BITS bound to: 18 - type: integer 
+	Parameter HASH_BITS bound to: 18 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_codec_small_static' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_codec_small_static.sv:4]
+INFO: [Synth 8-155] case statement is not full and has no default [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_codec_small_static.sv:36]
+INFO: [Synth 8-155] case statement is not full and has no default [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_codec_small_static.sv:85]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_codec_small_static' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_codec_small_static.sv:4]
+INFO: [Synth 8-6157] synthesizing module 'backing_page_service_small' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/backing_page_service_small.sv:6]
+	Parameter FRAMES bound to: 163840 - type: integer 
+	Parameter INDEX_BITS bound to: 18 - type: integer 
+	Parameter HASH_BITS bound to: 18 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'backing_frame_directory_small' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/backing_frame_directory_small.sv:7]
+	Parameter FRAMES bound to: 163840 - type: integer 
+	Parameter INDEX_BITS bound to: 18 - type: integer 
+	Parameter HASH_BITS bound to: 18 - type: integer 
+	Parameter PROBE_LIMIT bound to: 64 - type: integer 
+	Parameter EPOCH_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'backing_frame_directory_small' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/backing_frame_directory_small.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_axi_small' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_axi_small.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_axi_small' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/scratch_page_axi_small.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'backing_page_service_small' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/backing_page_service_small.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'record_backing_service_small_staticcodec' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/record_backing_service_small_staticcodec.sv:6]
+INFO: [Synth 8-6155] done synthesizing module 'memory_scratch_endpoint_small_staticcodec' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/backend/memory_scratch_endpoint_small_staticcodec.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'paged_exclusion_engine' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/pager/pager/paged_exclusion_engine.sv:2]
+INFO: [Synth 8-6157] synthesizing module 'expansion_controller' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/expansion/expansion_controller.sv:2]
+	Parameter TOKEN_BITS bound to: 32 - type: integer 
+	Parameter OWNER_BITS bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'expansion_controller' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/expansion/expansion_controller.sv:2]
+INFO: [Synth 8-6155] done synthesizing module 'node_expansion_engine' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/expansion/node_expansion_engine.sv:2]
+WARNING: [Synth 8-7129] Port native_rsp_payload[159] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[158] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[157] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[156] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[155] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[154] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[153] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[152] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[151] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[150] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[149] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[148] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[147] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[146] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[145] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[144] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[143] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[142] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[141] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[140] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[139] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[138] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[137] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[136] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[135] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[134] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[133] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[132] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[131] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[130] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[129] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[128] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[63] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[62] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[61] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[60] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[59] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[58] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[57] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[56] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[55] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[54] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[53] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[52] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[51] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[50] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[49] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[48] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[47] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[46] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[45] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[44] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[43] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[42] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[41] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[40] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[39] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[38] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[37] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[36] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[35] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[34] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[33] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[32] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[31] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[30] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[29] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[28] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[27] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[26] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[25] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[24] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[23] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[22] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[21] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[20] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[19] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[18] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[17] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[16] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[15] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[14] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[13] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[12] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[11] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[10] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[9] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[8] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[7] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[6] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[5] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[4] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[3] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[2] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[1] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[0] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port controller_machine_flags[4] in module exclusion_step_accept is either unconnected or has no load
+WARNING: [Synth 8-7129] Port controller_machine_flags[0] in module exclusion_step_accept is either unconnected or has no load
+WARNING: [Synth 8-7129] Port p_read16[7] in module exclusion_step_step is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_load_input is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_load_input is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_load_input is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_load_input is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637671 ; free virtual = 1358249
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5306.549; parent = 5165.419; children = 141.130
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9616.035; parent = 8523.461; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:17 ; elapsed = 00:00:22 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637338 ; free virtual = 1358011
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5306.549; parent = 5165.419; children = 141.130
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9616.035; parent = 8523.461; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:22 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637291 ; free virtual = 1357991
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5306.549; parent = 5165.419; children = 141.130
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9616.035; parent = 8523.461; children = 1092.574
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.55 ; elapsed = 00:00:00.56 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 636818 ; free virtual = 1357528
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/research_clock.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/research_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 635113 ; free virtual = 1355823
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.77 ; elapsed = 00:00:00.54 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 635022 ; free virtual = 1355732
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 634011 ; free virtual = 1354722
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5485.634; parent = 5344.655; children = 141.130
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9616.035; parent = 8523.461; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu280-fsvh2892-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 633813 ; free virtual = 1354523
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5485.634; parent = 5344.655; children = 141.130
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9627.957; parent = 8527.379; children = 1100.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:42 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 633815 ; free virtual = 1354526
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5485.634; parent = 5344.655; children = 141.996
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 9642.633; parent = 8527.379; children = 1115.254
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'kind_reg' in module 'graph_static_reader'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'children_hls_call'
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'exclusion_hls_call'
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'scratch_page_codec_small_static'
+INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'record_backing_service_small_staticcodec'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+               OFF_FIRST |                               00 |                               00
+              OFF_SECOND |                               01 |                               01
+                    EDGE |                               10 |                               10
+                    ATTR |                               11 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'kind_reg' using encoding 'sequential' in module 'graph_static_reader'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              001 |                               00
+                  ACTIVE |                              010 |                               01
+                  iSTATE |                              100 |                               10
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'children_hls_call'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                              001 |                               00
+                  ACTIVE |                              010 |                               01
+                  iSTATE |                              100 |                               10
+*
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'exclusion_hls_call'
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo:/memory_reg" of size (depth=4 x width=268) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "record_response_fallthrough_fifo:/memory_reg" of size (depth=4 x width=181) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo__parameterized0:/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    IDLE |                          0000001 |                              000
+                  RAW_IN |                          0010000 |                              011
+                   CHECK |                          0001000 |                              100
+                  COMMIT |                          0000100 |                              101
+              RECORD_OUT |                          0000010 |                              110
+                  ENCODE |                          1000000 |                              001
+                 RAW_OUT |                          0100000 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'scratch_page_codec_small_static'
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 5 because memory depth for RAM "backing_frame_directory_small:/owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 5 and width 1 for RAM "backing_frame_directory_small:/owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 2 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 2 for RAM "backing_frame_directory_small:/frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 1 for RAM "backing_frame_directory_small:/frame_index_reg"
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  iSTATE |                              011 |                             0000
+*
+                    SEND |                              001 |                             0011
+             WAIT_MEMORY |                              110 |                             0100
+                  CANCEL |                              100 |                             0111
+                  COMMIT |                              101 |                             0101
+                   START |                              000 |                             0001
+                  ENCODE |                              111 |                             0010
+                  FINISH |                              010 |                             0110
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'record_backing_service_small_staticcodec'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:50 ; elapsed = 00:00:59 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 628624 ; free virtual = 1349335
+Synthesis current peak Physical Memory [PSS] (MB): peak = 7624.568; parent = 5344.655; children = 2543.088
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 14121.867; parent = 8527.379; children = 5594.496
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   65 Bit       Adders := 4     
+	   2 Input   64 Bit       Adders := 7     
+	   2 Input   38 Bit       Adders := 1     
+	   2 Input   37 Bit       Adders := 1     
+	   2 Input   35 Bit       Adders := 2     
+	   2 Input   33 Bit       Adders := 2     
+	   2 Input   32 Bit       Adders := 18    
+	   3 Input   32 Bit       Adders := 2     
+	   2 Input   26 Bit       Adders := 1     
+	   3 Input   20 Bit       Adders := 1     
+	   2 Input   19 Bit       Adders := 2     
+	   2 Input   18 Bit       Adders := 4     
+	   2 Input   17 Bit       Adders := 2     
+	   2 Input   16 Bit       Adders := 4     
+	   2 Input   12 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 2     
+	   2 Input    8 Bit       Adders := 2     
+	   2 Input    7 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 7     
+	  32 Input    6 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 3     
+	   3 Input    5 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 9     
+	   2 Input    2 Bit       Adders := 18    
+	   2 Input    1 Bit       Adders := 4     
++---XORs : 
+	   2 Input     32 Bit         XORs := 2     
+	   2 Input     18 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 7     
++---Registers : 
+	             1536 Bit    Registers := 1     
+	              512 Bit    Registers := 2     
+	              416 Bit    Registers := 2     
+	              352 Bit    Registers := 1     
+	              288 Bit    Registers := 4     
+	              256 Bit    Registers := 4     
+	              160 Bit    Registers := 10    
+	              136 Bit    Registers := 1     
+	              128 Bit    Registers := 1     
+	               72 Bit    Registers := 37    
+	               64 Bit    Registers := 7     
+	               34 Bit    Registers := 1     
+	               32 Bit    Registers := 169   
+	               31 Bit    Registers := 2     
+	               29 Bit    Registers := 1     
+	               28 Bit    Registers := 2     
+	               27 Bit    Registers := 3     
+	               21 Bit    Registers := 100   
+	               19 Bit    Registers := 2     
+	               18 Bit    Registers := 42    
+	               17 Bit    Registers := 2     
+	               16 Bit    Registers := 137   
+	               11 Bit    Registers := 1     
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 68    
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 4     
+	                5 Bit    Registers := 12    
+	                4 Bit    Registers := 103   
+	                3 Bit    Registers := 41    
+	                2 Bit    Registers := 157   
+	                1 Bit    Registers := 143   
++---RAMs : 
+	            8704K Bit	(262144 X 34 bit)          RAMs := 1     
+	            4480K Bit	(163840 X 28 bit)          RAMs := 1     
+	              34K Bit	(256 X 136 bit)          RAMs := 1     
+	               1K Bit	(4 X 268 bit)          RAMs := 2     
+	              724 Bit	(4 X 181 bit)          RAMs := 1     
+	               48 Bit	(2 X 24 bit)          RAMs := 2     
++---Muxes : 
+	   2 Input 1536 Bit        Muxes := 1     
+	   5 Input 1536 Bit        Muxes := 1     
+	   7 Input 1536 Bit        Muxes := 2     
+	  10 Input 1288 Bit        Muxes := 1     
+	   2 Input  512 Bit        Muxes := 2     
+	   4 Input  512 Bit        Muxes := 1     
+	   5 Input  512 Bit        Muxes := 1     
+	   6 Input  416 Bit        Muxes := 1     
+	   3 Input  352 Bit        Muxes := 2     
+	   2 Input  352 Bit        Muxes := 1     
+	   6 Input  288 Bit        Muxes := 1     
+	   2 Input  288 Bit        Muxes := 1     
+	   4 Input  256 Bit        Muxes := 1     
+	   2 Input  256 Bit        Muxes := 1     
+	   2 Input  181 Bit        Muxes := 2     
+	   2 Input  160 Bit        Muxes := 22    
+	   5 Input  160 Bit        Muxes := 1     
+	   3 Input  160 Bit        Muxes := 3     
+	  32 Input  160 Bit        Muxes := 1     
+	   4 Input  160 Bit        Muxes := 1     
+	  10 Input  160 Bit        Muxes := 2     
+	  13 Input  160 Bit        Muxes := 2     
+	   2 Input  136 Bit        Muxes := 3     
+	   4 Input  128 Bit        Muxes := 1     
+	   5 Input  128 Bit        Muxes := 1     
+	   2 Input   72 Bit        Muxes := 2     
+	   2 Input   65 Bit        Muxes := 1     
+	   2 Input   64 Bit        Muxes := 3     
+	   4 Input   64 Bit        Muxes := 2     
+	   2 Input   34 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 198   
+	   3 Input   32 Bit        Muxes := 3     
+	   7 Input   32 Bit        Muxes := 5     
+	  11 Input   32 Bit        Muxes := 5     
+	   5 Input   32 Bit        Muxes := 1     
+	  15 Input   32 Bit        Muxes := 2     
+	   8 Input   32 Bit        Muxes := 7     
+	  32 Input   32 Bit        Muxes := 2     
+	  10 Input   32 Bit        Muxes := 3     
+	  13 Input   32 Bit        Muxes := 14    
+	   6 Input   32 Bit        Muxes := 22    
+	   4 Input   32 Bit        Muxes := 6     
+	   2 Input   28 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 1     
+	   2 Input   21 Bit        Muxes := 3     
+	   7 Input   19 Bit        Muxes := 1     
+	   2 Input   19 Bit        Muxes := 1     
+	  15 Input   19 Bit        Muxes := 1     
+	   2 Input   18 Bit        Muxes := 15    
+	   7 Input   18 Bit        Muxes := 3     
+	  15 Input   18 Bit        Muxes := 3     
+	   8 Input   18 Bit        Muxes := 1     
+	  11 Input   17 Bit        Muxes := 1     
+	  13 Input   17 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 13    
+	  11 Input   16 Bit        Muxes := 1     
+	   6 Input   16 Bit        Muxes := 1     
+	   7 Input   16 Bit        Muxes := 3     
+	  32 Input   16 Bit        Muxes := 2     
+	  13 Input   16 Bit        Muxes := 1     
+	   3 Input   11 Bit        Muxes := 1     
+	   3 Input    9 Bit        Muxes := 2     
+	   2 Input    8 Bit        Muxes := 1012  
+	   5 Input    8 Bit        Muxes := 64    
+	   4 Input    8 Bit        Muxes := 32    
+	   3 Input    8 Bit        Muxes := 64    
+	   7 Input    8 Bit        Muxes := 33    
+	   6 Input    8 Bit        Muxes := 32    
+	  32 Input    8 Bit        Muxes := 1     
+	   7 Input    7 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 3     
+	   2 Input    6 Bit        Muxes := 24    
+	  10 Input    6 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 42    
+	   3 Input    5 Bit        Muxes := 6     
+	  13 Input    5 Bit        Muxes := 2     
+	  10 Input    5 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 128   
+	  12 Input    4 Bit        Muxes := 2     
+	  11 Input    4 Bit        Muxes := 2     
+	   3 Input    4 Bit        Muxes := 3     
+	   5 Input    4 Bit        Muxes := 3     
+	  32 Input    4 Bit        Muxes := 8     
+	  10 Input    4 Bit        Muxes := 7     
+	   8 Input    4 Bit        Muxes := 2     
+	  13 Input    4 Bit        Muxes := 6     
+	   6 Input    4 Bit        Muxes := 8     
+	   4 Input    4 Bit        Muxes := 15    
+	  21 Input    4 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 5     
+	   2 Input    3 Bit        Muxes := 117   
+	   3 Input    3 Bit        Muxes := 38    
+	  13 Input    3 Bit        Muxes := 6     
+	   5 Input    3 Bit        Muxes := 12    
+	   6 Input    3 Bit        Muxes := 6     
+	   7 Input    3 Bit        Muxes := 3     
+	  15 Input    3 Bit        Muxes := 1     
+	   8 Input    3 Bit        Muxes := 2     
+	  29 Input    3 Bit        Muxes := 1     
+	  21 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 520   
+	   6 Input    2 Bit        Muxes := 1     
+	  11 Input    2 Bit        Muxes := 128   
+	   7 Input    2 Bit        Muxes := 34    
+	   3 Input    2 Bit        Muxes := 40    
+	  10 Input    2 Bit        Muxes := 2     
+	   5 Input    2 Bit        Muxes := 2     
+	   4 Input    2 Bit        Muxes := 3     
+	  13 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 1385  
+	   5 Input    1 Bit        Muxes := 15    
+	   3 Input    1 Bit        Muxes := 54    
+	   7 Input    1 Bit        Muxes := 123   
+	   6 Input    1 Bit        Muxes := 90    
+	  11 Input    1 Bit        Muxes := 49    
+	  15 Input    1 Bit        Muxes := 49    
+	   4 Input    1 Bit        Muxes := 60    
+	   8 Input    1 Bit        Muxes := 26    
+	  32 Input    1 Bit        Muxes := 9     
+	  13 Input    1 Bit        Muxes := 99    
+	  10 Input    1 Bit        Muxes := 94    
+	  14 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 9024 (col length:94)
+BRAMs: 4032 (col length: RAMB18 288 RAMB36 144)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6904] The RAM "node_expansion_engine/requests/memory_reg" of size (depth=4 x width=268) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "node_expansion_engine/work/memory_reg" of size (depth=4 x width=268) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "node_expansion_engine/responses/memory_reg" of size (depth=4 x width=181) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "node_expansion_engine/fence_requests/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "node_expansion_engine/fence_acks/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+DSP Report: Generating DSP p_1_out, operation Mode is: A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 5 because memory depth for RAM "\memory_service/directory/owners_reg " is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 5 and width 1 for RAM "\memory_service/directory/owners_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 2 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 2 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 1 for RAM "\memory_service/directory/frame_index_reg "
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[0]' (FDRE) to 'memory_service/directory/bucket_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[1]' (FDRE) to 'memory_service/directory/bucket_reg[1]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[2]' (FDRE) to 'memory_service/directory/bucket_reg[2]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[3]' (FDRE) to 'memory_service/directory/bucket_reg[3]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[4]' (FDRE) to 'memory_service/directory/bucket_reg[4]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[5]' (FDRE) to 'memory_service/directory/bucket_reg[5]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[6]' (FDRE) to 'memory_service/directory/bucket_reg[6]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[7]' (FDRE) to 'memory_service/directory/bucket_reg[7]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[8]' (FDRE) to 'memory_service/directory/bucket_reg[8]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[9]' (FDRE) to 'memory_service/directory/bucket_reg[9]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[10]' (FDRE) to 'memory_service/directory/bucket_reg[10]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[11]' (FDRE) to 'memory_service/directory/bucket_reg[11]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[12]' (FDRE) to 'memory_service/directory/bucket_reg[12]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[16]' (FDRE) to 'memory_service/directory/bucket_reg[16]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[17]' (FDRE) to 'memory_service/directory/bucket_reg[17]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[13]' (FDRE) to 'memory_service/directory/bucket_reg[13]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[14]' (FDRE) to 'memory_service/directory/bucket_reg[14]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/bucket_reg_rep[15]' (FDRE) to 'memory_service/directory/bucket_reg[15]'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_2' (FDE) to 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_2__0'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_1' (FDE) to 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_1__1'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_0' (FDE) to 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_0__2'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_0__2' (FDE) to 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_0__1'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_1__0' (FDE) to 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_1__1'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_0__0' (FDE) to 'memory_service/directory/i_1/frame_index_reg_mux_sel_b_pos_0__1'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_3__0' (FDE) to 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_3'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_2__0' (FDE) to 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_2'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_1__0' (FDE) to 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_1'
+INFO: [Synth 8-3886] merging instance 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_0__0' (FDE) to 'memory_service/directory/i_0/owners_reg_mux_sel_b_pos_0'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[0]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[1]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[2]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[3]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[4]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[5]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[26]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[27]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[28]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[29]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3886] merging instance 'memory_service/rsp_address_reg[30]' (FDRE) to 'memory_service/rsp_address_reg[31]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memory_service/rsp_address_reg[31] )
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[26]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[27]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[28]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[29]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[30]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[31]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[1]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[2]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[3]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[4]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3886] merging instance 'memory_service/address_reg[5]' (FDRE) to 'memory_service/address_reg[0]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memory_service/address_reg[0] )
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_arlen_reg[6]' (FDRE) to 'memory_service/dma/m_arlen_reg[7]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awlen_reg[6]' (FDRE) to 'memory_service/dma/m_awlen_reg[7]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[0]' (FDRE) to 'memory_service/dma/base_reg[1]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[1]' (FDRE) to 'memory_service/dma/base_reg[2]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[2]' (FDRE) to 'memory_service/dma/base_reg[3]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[3]' (FDRE) to 'memory_service/dma/base_reg[4]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[4]' (FDRE) to 'memory_service/dma/base_reg[5]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[31]' (FDRE) to 'memory_service/dma/base_reg[5]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[5]' (FDRE) to 'memory_service/dma/base_reg[26]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[26]' (FDRE) to 'memory_service/dma/base_reg[27]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[27]' (FDRE) to 'memory_service/dma/base_reg[28]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[28]' (FDRE) to 'memory_service/dma/base_reg[29]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/base_reg[29]' (FDRE) to 'memory_service/dma/base_reg[30]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memory_service/dma/base_reg[30] )
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[0]' (FDRE) to 'rsp_address_reg[1]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[1]' (FDRE) to 'rsp_address_reg[2]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[2]' (FDRE) to 'rsp_address_reg[3]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[3]' (FDRE) to 'rsp_address_reg[4]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[4]' (FDRE) to 'rsp_address_reg[5]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[5]' (FDRE) to 'rsp_address_reg[26]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[26]' (FDRE) to 'rsp_address_reg[27]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[27]' (FDRE) to 'rsp_address_reg[28]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[28]' (FDRE) to 'rsp_address_reg[29]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[29]' (FDRE) to 'rsp_address_reg[30]'
+INFO: [Synth 8-3886] merging instance 'rsp_address_reg[30]' (FDRE) to 'rsp_address_reg[31]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\rsp_address_reg[31] )
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[0]' (FDRE) to 'memory_service/dma/m_araddr_reg[1]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[1]' (FDRE) to 'memory_service/dma/m_araddr_reg[2]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[2]' (FDRE) to 'memory_service/dma/m_araddr_reg[3]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[3]' (FDRE) to 'memory_service/dma/m_araddr_reg[4]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[4]' (FDRE) to 'memory_service/dma/m_araddr_reg[5]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[5]' (FDRE) to 'memory_service/dma/m_araddr_reg[27]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[27]' (FDRE) to 'memory_service/dma/m_araddr_reg[28]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[28]' (FDRE) to 'memory_service/dma/m_araddr_reg[29]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[29]' (FDRE) to 'memory_service/dma/m_araddr_reg[30]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_araddr_reg[30]' (FDRE) to 'memory_service/dma/m_araddr_reg[31]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memory_service/dma/m_araddr_reg[31] )
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[0]' (FDRE) to 'memory_service/dma/m_awaddr_reg[1]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[1]' (FDRE) to 'memory_service/dma/m_awaddr_reg[2]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[2]' (FDRE) to 'memory_service/dma/m_awaddr_reg[3]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[3]' (FDRE) to 'memory_service/dma/m_awaddr_reg[4]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[4]' (FDRE) to 'memory_service/dma/m_awaddr_reg[5]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[5]' (FDRE) to 'memory_service/dma/m_awaddr_reg[27]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[27]' (FDRE) to 'memory_service/dma/m_awaddr_reg[28]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[28]' (FDRE) to 'memory_service/dma/m_awaddr_reg[29]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[29]' (FDRE) to 'memory_service/dma/m_awaddr_reg[30]'
+INFO: [Synth 8-3886] merging instance 'memory_service/dma/m_awaddr_reg[30]' (FDRE) to 'memory_service/dma/m_awaddr_reg[31]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\memory_service/dma/m_awaddr_reg[31] )
+WARNING: [Synth 8-7129] Port native_rsp_payload[159] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[158] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[157] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[156] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[155] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[154] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[153] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[152] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[151] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[150] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[149] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[148] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[147] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[146] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[145] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[144] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[143] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[142] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[141] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[140] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[139] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[138] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[137] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[136] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[135] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[134] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[133] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[132] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[131] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[130] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[129] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port native_rsp_payload[128] in module exclusion_label_adapter is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_store_output is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port commands_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_num_data_valid[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[1] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+WARNING: [Synth 8-7129] Port replies_fifo_cap[0] in module exclusion_step_p_anonymous_namespace_compute is either unconnected or has no load
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/controller/\call_command_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_compute_U0/grp_step_fu_89/ap_return_0_preg_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_compute_U0/ap_done_reg_reg )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/labels/\rsp_status_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/controller/\result_status_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_load_input_U0/ap_done_reg_reg )
+INFO: [Synth 8-3333] propagating constant 1 across sequential element (engine/hls/\p_anonymous_namespace_store_output_U0/ap_CS_fsm_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_store_output_U0/ap_done_reg_reg )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/calls/\hls_command_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\replies_U/U_exclusion_step_fifo_w160_d2_S_ShiftReg/SRL_SIG_reg[0][67] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\commands_U/U_exclusion_step_fifo_w288_d2_S_ShiftReg/SRL_SIG_reg[0][11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\replies_U/U_exclusion_step_fifo_w160_d2_S_ShiftReg/SRL_SIG_reg[1][4] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\commands_U/U_exclusion_step_fifo_w288_d2_S_ShiftReg/SRL_SIG_reg[1][5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_compute_U0/command_op_reg_250_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_compute_U0/grp_step_fu_89/icmp_ln28_reg_696_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_compute_U0/grp_step_fu_89/ap_CS_fsm_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/controller/\label_phase_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\commands_U/U_exclusion_step_fifo_w288_d2_S_ShiftReg/SRL_SIG_reg[0][255] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (pager/\phase_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\commands_U/U_exclusion_step_fifo_w288_d2_S_ShiftReg/SRL_SIG_reg[1][227] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (engine/hls/\p_anonymous_namespace_compute_U0/command_phase_reg_255_reg[31] )
+INFO: [Synth 8-4471] merging register 'lane_reg[1:0]' into 'lane_reg[1:0]' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/design/design_state_store.sv:42]
+INFO: [Synth 8-4471] merging register 'lane_reg[1:0]' into 'lane_reg[1:0]' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/sources/design/design_state_store.sv:42]
+INFO: [Synth 8-3886] merging instance 'design_store/node_reg[0]' (FDRE) to 'design_store/lane_reg[0]'
+INFO: [Synth 8-3886] merging instance 'design_store/node_reg[1]' (FDRE) to 'design_store/lane_reg[1]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (design_store/\rsp_status_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (graph/\rsp_status_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (controller/\g_req_op_reg[1] )
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[8]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[9]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[10]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[11]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[12]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[13]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[14]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[15]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[16]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[17]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[18]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[19]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[20]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[21]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[22]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[23]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[24]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[25]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[26]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[27]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[28]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[29]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3886] merging instance 'controller/p_edge_flags_reg[30]' (FDRE) to 'controller/p_edge_flags_reg[31]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (controller/\p_edge_flags_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (controller/\result_status_reg[3] )
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[0]' (FDRE) to 'design_store/m_wstrb_reg[1]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[1]' (FDRE) to 'design_store/m_wstrb_reg[2]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[2]' (FDRE) to 'design_store/m_wstrb_reg[3]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[3]' (FDRE) to 'design_store/m_wstrb_reg[4]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[4]' (FDRE) to 'design_store/m_wstrb_reg[5]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[5]' (FDRE) to 'design_store/m_wstrb_reg[6]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[6]' (FDRE) to 'design_store/m_wstrb_reg[7]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[7]' (FDRE) to 'design_store/m_wstrb_reg[8]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[8]' (FDRE) to 'design_store/m_wstrb_reg[9]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[9]' (FDRE) to 'design_store/m_wstrb_reg[10]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[10]' (FDRE) to 'design_store/m_wstrb_reg[11]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[11]' (FDRE) to 'design_store/m_wstrb_reg[12]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[12]' (FDRE) to 'design_store/m_wstrb_reg[13]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[13]' (FDRE) to 'design_store/m_wstrb_reg[14]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[14]' (FDRE) to 'design_store/m_wstrb_reg[15]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[16]' (FDRE) to 'design_store/m_wstrb_reg[17]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[17]' (FDRE) to 'design_store/m_wstrb_reg[18]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[18]' (FDRE) to 'design_store/m_wstrb_reg[19]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[19]' (FDRE) to 'design_store/m_wstrb_reg[20]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[20]' (FDRE) to 'design_store/m_wstrb_reg[21]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[21]' (FDRE) to 'design_store/m_wstrb_reg[22]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[22]' (FDRE) to 'design_store/m_wstrb_reg[23]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[23]' (FDRE) to 'design_store/m_wstrb_reg[24]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[24]' (FDRE) to 'design_store/m_wstrb_reg[25]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[25]' (FDRE) to 'design_store/m_wstrb_reg[26]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[26]' (FDRE) to 'design_store/m_wstrb_reg[27]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[27]' (FDRE) to 'design_store/m_wstrb_reg[28]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[28]' (FDRE) to 'design_store/m_wstrb_reg[29]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[29]' (FDRE) to 'design_store/m_wstrb_reg[30]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[30]' (FDRE) to 'design_store/m_wstrb_reg[31]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[32]' (FDRE) to 'design_store/m_wstrb_reg[33]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[33]' (FDRE) to 'design_store/m_wstrb_reg[34]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[34]' (FDRE) to 'design_store/m_wstrb_reg[35]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[35]' (FDRE) to 'design_store/m_wstrb_reg[36]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[36]' (FDRE) to 'design_store/m_wstrb_reg[37]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[37]' (FDRE) to 'design_store/m_wstrb_reg[38]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[38]' (FDRE) to 'design_store/m_wstrb_reg[39]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[39]' (FDRE) to 'design_store/m_wstrb_reg[40]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[40]' (FDRE) to 'design_store/m_wstrb_reg[41]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[41]' (FDRE) to 'design_store/m_wstrb_reg[42]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[42]' (FDRE) to 'design_store/m_wstrb_reg[43]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[43]' (FDRE) to 'design_store/m_wstrb_reg[44]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[44]' (FDRE) to 'design_store/m_wstrb_reg[45]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[45]' (FDRE) to 'design_store/m_wstrb_reg[46]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[46]' (FDRE) to 'design_store/m_wstrb_reg[47]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[48]' (FDRE) to 'design_store/m_wstrb_reg[49]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[49]' (FDRE) to 'design_store/m_wstrb_reg[50]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[50]' (FDRE) to 'design_store/m_wstrb_reg[51]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[51]' (FDRE) to 'design_store/m_wstrb_reg[52]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[52]' (FDRE) to 'design_store/m_wstrb_reg[53]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[53]' (FDRE) to 'design_store/m_wstrb_reg[54]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[54]' (FDRE) to 'design_store/m_wstrb_reg[55]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[55]' (FDRE) to 'design_store/m_wstrb_reg[56]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[56]' (FDRE) to 'design_store/m_wstrb_reg[57]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[57]' (FDRE) to 'design_store/m_wstrb_reg[58]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[58]' (FDRE) to 'design_store/m_wstrb_reg[59]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[59]' (FDRE) to 'design_store/m_wstrb_reg[60]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[60]' (FDRE) to 'design_store/m_wstrb_reg[61]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[61]' (FDRE) to 'design_store/m_wstrb_reg[62]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wstrb_reg[62]' (FDRE) to 'design_store/m_wstrb_reg[63]'
+INFO: [Synth 8-3886] merging instance 'design_store/m_wdata_reg[96]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[96]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[97]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[98]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[99]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[100]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[101]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[102]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[103]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[104]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[105]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[106]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[107]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[108]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Synth 8-3886] merging instance 'design_store/write_record_reg[109]' (FDRE) to 'design_store/m_wdata_reg[97]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (design_store/\m_wdata_reg[511] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (design_store/\cfg_status_reg[2] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (graph/\m_araddr_reg[5] )
+INFO: [Synth 8-3886] merging instance 'builder/controller/call_command_reg[190]' (FDRE) to 'builder/controller/call_command_reg[191]'
+INFO: [Synth 8-3886] merging instance 'builder/controller/call_command_reg[191]' (FDRE) to 'builder/controller/call_command_reg[189]'
+INFO: [Synth 8-3886] merging instance 'builder/controller/call_command_reg[187]' (FDRE) to 'builder/controller/call_command_reg[189]'
+INFO: [Synth 8-3886] merging instance 'builder/controller/call_command_reg[188]' (FDRE) to 'builder/controller/call_command_reg[189]'
+INFO: [Synth 8-3886] merging instance 'builder/controller/call_command_reg[189]' (FDRE) to 'builder/controller/call_command_reg[186]'
+INFO: [Synth 8-3886] merging instance 'builder/controller/call_command_reg[184]' (FDRE) to 'builder/controller/call_command_reg[186]'
+INFO: [Common 17-14] Message 'Synth 8-3886' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/controller/\call_command_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/\hls/grp_step_fu_253 /\ap_return_0_preg_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/controller/\expected_phase_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/controller/\result_status_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/\calls/hls_command_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/\calls/reply_data_reg[95] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/\hls/grp_step_fu_253 /\controller_price_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/controller/\svc_phase_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/controller/\call_command_reg[267] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/\hls/grp_step_fu_253 /\controller_query_loc_0_reg_484_reg[31] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (builder/\calls/hls_command_reg[267] )
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:39 ; elapsed = 00:02:13 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 609061 ; free virtual = 1329772
+Synthesis current peak Physical Memory [PSS] (MB): peak = 10478.019; parent = 5344.655; children = 5452.085
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 17061.719; parent = 8531.469; children = 8530.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++---------------------------+-----------------+------------------------+---+---+-------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------+
+|Module Name                | RTL Object      | PORT A (Depth x Width) | W | R | PORT B (Depth x Width)  | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights                                               | 
++---------------------------+-----------------+------------------------+---+---+-------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------+
+|storage                    | data_reg        | 256 x 136(READ_FIRST)  | W |   | 256 x 136(WRITE_FIRST)  |   | R | Port A and B     | 0      | 2      |                                                               | 
+|\memory_service/directory  | owners_reg      | 160 K x 28(READ_FIRST) | W |   | 160 K x 28(WRITE_FIRST) |   | R | Port A and B     | 0      | 125    | 8,8,8,8,8,8,8,8,8,8,4,4,4,4,4,4,4,4,4,4,5                     | 
+|\memory_service/directory  | frame_index_reg | 256 K x 34(READ_FIRST) | W |   | 256 K x 34(WRITE_FIRST) |   | R | Port A and B     | 0      | 248    | 8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8 | 
++---------------------------+-----------------+------------------------+---+---+-------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++----------------------+---------------------------+-----------+----------------------+----------------+
+|Module Name           | RTL Object                | Inference | Size (Depth x Width) | Primitives     | 
++----------------------+---------------------------+-----------+----------------------+----------------+
+|node_expansion_engine | requests/memory_reg       | Implied   | 4 x 268              | RAM32M16 x 20  | 
+|node_expansion_engine | work/memory_reg           | Implied   | 4 x 268              | RAM32M16 x 20  | 
+|node_expansion_engine | responses/memory_reg      | Implied   | 4 x 181              | RAM32M16 x 13  | 
+|node_expansion_engine | fence_requests/memory_reg | Implied   | 2 x 24               | RAM32M16 x 2   | 
+|node_expansion_engine | fence_acks/memory_reg     | Implied   | 2 x 24               | RAM32M16 x 2   | 
++----------------------+---------------------------+-----------+----------------------+----------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------------------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name                   | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------------------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|backing_frame_directory_small | A*B            | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_small | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_small | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------------------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:42 ; elapsed = 00:02:16 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 612727 ; free virtual = 1333439
+Synthesis current peak Physical Memory [PSS] (MB): peak = 10485.235; parent = 5344.655; children = 5452.085
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 17061.719; parent = 8531.469; children = 8530.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5556] The block RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg" may be mapped as a cascade chain, because it is not timing critical.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 4 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5800] Cascade chain of height 8 reduced to 5 because memory depth for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg" is not power of 2. 
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 5 and width 1 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /owners_reg"
+INFO: [Synth 8-5556] The block RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg" may be mapped as a cascade chain, because it is not timing critical.
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 18 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 9 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 4 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 2 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 2 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+INFO: [Synth 8-5555] Implemented Block Ram Cascade chain of height 8 and width 1 for RAM "i_1/\pager/endpoint/memory/memory_service/directory /frame_index_reg"
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:04:08 ; elapsed = 00:04:56 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 614185 ; free virtual = 1334889
+Synthesis current peak Physical Memory [PSS] (MB): peak = 10902.854; parent = 5500.516; children = 5452.085
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 17125.719; parent = 8595.465; children = 8530.254
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-----------------------------------------------------+-----------------+------------------------+---+---+-------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------+
+|Module Name                                          | RTL Object      | PORT A (Depth x Width) | W | R | PORT B (Depth x Width)  | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights                                               | 
++-----------------------------------------------------+-----------------+------------------------+---+---+-------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------+
+|storage                                              | data_reg        | 256 x 136(READ_FIRST)  | W |   | 256 x 136(WRITE_FIRST)  |   | R | Port A and B     | 0      | 2      |                                                               | 
+|i_1/\pager/endpoint/memory/memory_service/directory  | owners_reg      | 160 K x 28(READ_FIRST) | W |   | 160 K x 28(WRITE_FIRST) |   | R | Port A and B     | 0      | 125    | 8,8,8,8,8,8,8,8,8,8,4,4,4,4,4,4,4,4,4,4,5                     | 
+|i_1/\pager/endpoint/memory/memory_service/directory  | frame_index_reg | 256 K x 34(READ_FIRST) | W |   | 256 K x 34(WRITE_FIRST) |   | R | Port A and B     | 0      | 248    | 8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8 | 
++-----------------------------------------------------+-----------------+------------------------+---+---+-------------------------+---+---+------------------+--------+--------+---------------------------------------------------------------+
+
+
+Distributed RAM: Final Mapping Report
++----------------------+---------------------------+-----------+----------------------+----------------+
+|Module Name           | RTL Object                | Inference | Size (Depth x Width) | Primitives     | 
++----------------------+---------------------------+-----------+----------------------+----------------+
+|node_expansion_engine | requests/memory_reg       | Implied   | 4 x 268              | RAM32M16 x 20  | 
+|node_expansion_engine | work/memory_reg           | Implied   | 4 x 268              | RAM32M16 x 20  | 
+|node_expansion_engine | responses/memory_reg      | Implied   | 4 x 181              | RAM32M16 x 13  | 
+|node_expansion_engine | fence_requests/memory_reg | Implied   | 2 x 24               | RAM32M16 x 2   | 
+|node_expansion_engine | fence_acks/memory_reg     | Implied   | 2 x 24               | RAM32M16 x 2   | 
++----------------------+---------------------------+-----------+----------------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance endpointi_2/pager/endpoint/pages/endpoint/storage/data_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance endpointi_2/pager/endpoint/pages/endpoint/storage/data_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_39 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_47 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_55 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_63 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_71 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_79 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_83 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_87 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_91 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_95 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_99 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_103 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_107 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_111 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_115 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_119 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/owners_reg_bram_124 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_39 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_47 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_55 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_63 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_71 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_79 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_87 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_95 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_103 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_111 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_119 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_127 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_135 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_143 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_151 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_159 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_167 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_175 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_183 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_191 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_199 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_207 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_215 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_223 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_231 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_239 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance i_1/pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_247 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:04:30 ; elapsed = 00:05:34 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 639559 ; free virtual = 1360263
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/pages/endpoint/storage/data_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/pages/endpoint/storage/data_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_39 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_47 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_55 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_63 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_71 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_79 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_83 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_87 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_91 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_95 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_99 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_103 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_107 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_111 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_115 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_119 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/owners_reg_bram_124 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_7 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_15 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_23 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_31 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_39 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_47 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_55 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_63 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_71 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_79 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_87 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_95 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_103 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_111 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_119 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_127 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_135 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_143 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_151 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_159 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_167 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_175 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_183 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_191 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_199 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_207 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_215 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_223 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_231 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_239 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance pager/endpoint/memory/memory_service/directory/frame_index_reg_bram_247 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:04:39 ; elapsed = 00:05:45 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 638360 ; free virtual = 1359064
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:04:40 ; elapsed = 00:05:46 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637671 ; free virtual = 1358376
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:04:44 ; elapsed = 00:05:50 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637840 ; free virtual = 1358545
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:04:44 ; elapsed = 00:05:51 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637769 ; free virtual = 1358474
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:04:46 ; elapsed = 00:05:54 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637368 ; free virtual = 1358073
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:04:46 ; elapsed = 00:05:54 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637331 ; free virtual = 1358035
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++------------------------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name                   | DSP Mapping  | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------------------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|backing_frame_directory_small | A*B          | 15     | 18     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_small | A*B          | 17     | 17     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|backing_frame_directory_small | PCIN>>17+A*B | 15     | 15     | -      | -      | 15     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++------------------------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |CARRY8          |   546|
+|2     |DSP_ALU         |     3|
+|3     |DSP_A_B_DATA    |     3|
+|4     |DSP_C_DATA      |     3|
+|5     |DSP_MULTIPLIER  |     3|
+|6     |DSP_M_DATA      |     3|
+|7     |DSP_OUTPUT      |     3|
+|8     |DSP_PREADD      |     3|
+|9     |DSP_PREADD_DATA |     3|
+|10    |LUT1            |   139|
+|11    |LUT2            |  3567|
+|12    |LUT3            |  2037|
+|13    |LUT4            |  4831|
+|14    |LUT5            |  3817|
+|15    |LUT6            | 11355|
+|16    |MUXF7           |  1332|
+|17    |MUXF8           |   154|
+|18    |RAM32M16        |    54|
+|19    |RAM32X1D        |     4|
+|20    |RAMB36E2        |   375|
+|36    |FDRE            | 20237|
+|37    |FDSE            |    62|
++------+----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:04:46 ; elapsed = 00:05:54 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 637317 ; free virtual = 1358021
+Synthesis current peak Physical Memory [PSS] (MB): peak = 12163.468; parent = 5500.616; children = 6980.113
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 18847.426; parent = 8603.473; children = 10243.957
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 44 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:04:36 ; elapsed = 00:05:48 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 643064 ; free virtual = 1363769
+Synthesis Optimization Complete : Time (s): cpu = 00:04:49 ; elapsed = 00:06:01 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 643042 ; free virtual = 1363747
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.43 ; elapsed = 00:00:00.42 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 641349 ; free virtual = 1362053
+INFO: [Netlist 29-17] Analyzing 2093 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/research_clock.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/research_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 641659 ; free virtual = 1362364
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 61 instances were transformed.
+  DSP48E2 => DSP48E2 (DSP_ALU, DSP_A_B_DATA, DSP_C_DATA, DSP_MULTIPLIER, DSP_M_DATA, DSP_OUTPUT, DSP_PREADD, DSP_PREADD_DATA): 3 instances
+  RAM32M16 => RAM32M16 (RAMD32(x14), RAMS32(x2)): 54 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 4 instances
+
+Synth Design complete, checksum: d460cd60
+INFO: [Common 17-83] Releasing license: Synthesis
+641 Infos, 161 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:05:03 ; elapsed = 00:06:15 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 641751 ; free virtual = 1362456
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# report_utilization -file [file join $b_out utilization.rpt]
+# report_drc -checks [get_drc_checks LUTLP-1] -file [file join $b_out combinational_loops.rpt]
+Command: report_drc -checks LUTLP-1 -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/combinational_loops.rpt
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/combinational_loops.rpt.
+report_drc completed successfully
+# check_timing -verbose -file [file join $b_out check_timing.rpt]
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "clk" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+check_timing: Time (s): cpu = 00:00:10 ; elapsed = 00:00:07 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 640577 ; free virtual = 1361282
+# write_checkpoint [file join $b_out node_expansion_engine.dcp]
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/expansion_synthesis_20261024/node_expansion_engine.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:12 ; elapsed = 00:00:11 . Memory (MB): peak = 8699.418 ; gain = 0.000 ; free physical = 639235 ; free virtual = 1359940
+# close_project
+# puts "EXPANSION_SYNTH_DONE"
+EXPANSION_SYNTH_DONE

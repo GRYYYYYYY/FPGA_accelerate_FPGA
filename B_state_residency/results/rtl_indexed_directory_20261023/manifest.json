@@ -1,0 +1,163 @@
+{
+  "status": "passed",
+  "sources": {
+    "hardware/rtl/backing_frame_directory_lookup.sv": "f9eba4f006e3221059b161a5e71bfffe108d01c3b92b8e3338239e830bb15e7f",
+    "hardware/rtl/backing_frame_directory_indexed.sv": "c8e93fe6c39d5ef915701d0941a650c6f34ee0318cfc68f2393257a3385cd6b2",
+    "hardware/tb/tb_indexed_directory.sv": "ffa17f9c4c355c3bc94a51439e4cb569c5350a5100f9151d18763d2d682ddef8",
+    "hardware/scripts/make_indexed_directory.py": "cd2cd5632c354a6ed58cab7e49fb7b228e6cce15499a4b2ea915f115be51d411",
+    "hardware/scripts/make_indexed_directory_vectors.py": "197a3bdb08861307653e63853fa4fd202bf2b714351eb12a9060b91f4ba180d8",
+    "hardware/scripts/verify_indexed_directory.py": "5c691ff82a2fe0a5dae829707f87c5d20f0cacc21e8488851a8ac461ba5dd196",
+    "hardware/INDEXED_DIRECTORY_CONTRACT.md": "0c4ad057c1810a7d1c31df6b9bc9f14d5e0d5ad54c36e962ff3e5e05af9f9f5e"
+  },
+  "cases": {
+    "small": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_directory_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_directory_20261023/sources/backing_frame_directory_indexed.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_directory_20261023/sources/tb_indexed_directory.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_indexed_directory_small",
+            "--snapshot",
+            "directory_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "directory_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/indexed_directory_vectors_20261023/small.txt"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "result": "TEST_PASS indexed_directory differential=1 checks=1460 dut_cycles=15910 ref_cycles=15622 holds=6570 initial_clear=16 wraps=3 overflow=46 scans=3446 empty_fallbacks=48 hits=459",
+      "counters": {
+        "differential": 1,
+        "checks": 1460,
+        "dut_cycles": 15910,
+        "ref_cycles": 15622,
+        "holds": 6570,
+        "initial_clear": 16,
+        "wraps": 3,
+        "overflow": 46,
+        "scans": 3446,
+        "empty_fallbacks": 48,
+        "hits": 459
+      }
+    },
+    "large": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_directory_20261023/sources/backing_frame_directory_lookup.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_directory_20261023/sources/backing_frame_directory_indexed.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_indexed_directory_20261023/sources/tb_indexed_directory.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_indexed_directory_large",
+            "--snapshot",
+            "directory_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "directory_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/indexed_directory_vectors_20261023/large.txt"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "result": "TEST_PASS indexed_directory differential=0 checks=66261 dut_cycles=946545 ref_cycles=946545 holds=298173 initial_clear=32768 wraps=0 overflow=75 scans=37412 empty_fallbacks=42 hits=44000",
+      "counters": {
+        "differential": 0,
+        "checks": 66261,
+        "dut_cycles": 946545,
+        "ref_cycles": 946545,
+        "holds": 298173,
+        "initial_clear": 32768,
+        "wraps": 0,
+        "overflow": 75,
+        "scans": 37412,
+        "empty_fallbacks": 42,
+        "hits": 44000
+      }
+    }
+  },
+  "board_performance": null,
+  "full_transport_replay": false,
+  "vector_manifest": {
+    "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/indexed_directory_vectors_20261023/manifest.json",
+    "sha256": "0d6d14c5febafc934e0c66a3769f96465fd74f2c5c9df5ed4c34692b26f6b594"
+  },
+  "artifacts": {
+    "large/simulate.log": "c8045eb896c76b67a67985c156fd70bcc9c5cab6390b593f58c755ff9445ff2c",
+    "large/simulate.console.log": "d1b50d4af650e22d558ea1c3c903dda5109642015bd7eb3f23bc05a2a014cd45",
+    "large/xvlog.log": "3a4f973a4b5f5fc621c0e02693124472b2a59e5c5d4161892302de8a64f58f95",
+    "large/compile.console.log": "3a4f973a4b5f5fc621c0e02693124472b2a59e5c5d4161892302de8a64f58f95",
+    "large/xelab.log": "b5b9f15babb9426259094bdbf5014ed6ea68ea4fb7a9ea945210494f09b2e083",
+    "large/simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+    "large/elaborate.console.log": "b5b9f15babb9426259094bdbf5014ed6ea68ea4fb7a9ea945210494f09b2e083",
+    "small/simulate.log": "9fbada1fecdf27f6a64823c35878842227384e8c289eea66f7729af117a5bb6c",
+    "small/simulate.console.log": "2ec977a988a4edf9dfe06e63d05aefbb5cfff239617a8009c0fd0a75cddd1986",
+    "small/xvlog.log": "3a4f973a4b5f5fc621c0e02693124472b2a59e5c5d4161892302de8a64f58f95",
+    "small/compile.console.log": "3a4f973a4b5f5fc621c0e02693124472b2a59e5c5d4161892302de8a64f58f95",
+    "small/xelab.log": "8c20ea2f5be8a59bf9a490053ee9b5216c345b8dd282f224581789697b27e83b",
+    "small/simulate.tcl": "b3123b5289f95f868dd2bfdfd5fb82a9c2427e8e205ec23a0d932c1797e3289d",
+    "small/elaborate.console.log": "8c20ea2f5be8a59bf9a490053ee9b5216c345b8dd282f224581789697b27e83b",
+    "sources/backing_frame_directory_indexed.sv": "c8e93fe6c39d5ef915701d0941a650c6f34ee0318cfc68f2393257a3385cd6b2",
+    "sources/tb_indexed_directory.sv": "ffa17f9c4c355c3bc94a51439e4cb569c5350a5100f9151d18763d2d682ddef8",
+    "sources/make_indexed_directory.py": "cd2cd5632c354a6ed58cab7e49fb7b228e6cce15499a4b2ea915f115be51d411",
+    "sources/INDEXED_DIRECTORY_CONTRACT.md": "0c4ad057c1810a7d1c31df6b9bc9f14d5e0d5ad54c36e962ff3e5e05af9f9f5e",
+    "sources/backing_frame_directory_lookup.sv": "f9eba4f006e3221059b161a5e71bfffe108d01c3b92b8e3338239e830bb15e7f",
+    "sources/make_indexed_directory_vectors.py": "197a3bdb08861307653e63853fa4fd202bf2b714351eb12a9060b91f4ba180d8",
+    "sources/verify_indexed_directory.py": "5c691ff82a2fe0a5dae829707f87c5d20f0cacc21e8488851a8ac461ba5dd196"
+  }
+}

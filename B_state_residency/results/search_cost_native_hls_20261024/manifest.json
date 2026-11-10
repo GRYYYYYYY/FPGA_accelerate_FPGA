@@ -1,0 +1,114 @@
+{
+  "status": "characterized",
+  "pid": 3889206,
+  "gates": {
+    "search_cost_unit_20261024": "a864c1952a0b2ff9fd564d88d96718e66e17f3dd77aa9c620a218e20d4bb60fa",
+    "search_cost_real_20261024": "8a702dffce1f0401701a9e7f7b082c60e986ec52b540e24e8e1432a1ebad326d"
+  },
+  "sources": {
+    "hls_config.cfg": "359d498653b8c27c5c267bec0a808325db2e66ee8b7e2ca17fe49104d6112a4f",
+    "search_cost.hpp": "d277ad8207433a6520bff50971d86e7d7317ef64dc2017959c6804ae4e85deff",
+    "make_vectors.cpp": "f931aa60c119b56308ac6eefedbc53963733bd74567360db66e7fe4f5547a103",
+    "testbench.cpp": "f5800152970c4ce9a8c9743f1a1af4c774c7bfea177be10ea404d452032d2d91",
+    "cost_api.hpp": "1ba8c0bcbca6816ed1ea5e9b5cf48661eb8babf617bcf3f137f1880e86422128",
+    "kernel.cpp": "54d3b9244ed6c4b5fb3ad55b8e240c84b05dc1e512cc12b6805f2a9763cba912"
+  },
+  "runner_sha256": "4d4ea746187e1c636ed43004284e0f438970dcebfa0e07f1503ecc9b1df5ecd1",
+  "commands": [
+    {
+      "stage": "vector_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/sources/make_vectors.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/make_vectors"
+      ],
+      "pid": 3889323,
+      "exit_code": 0,
+      "elapsed_s": 0.3672767635434866
+    },
+    {
+      "stage": "vectors",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/make_vectors",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/vectors.txt"
+      ],
+      "pid": 3889815,
+      "exit_code": 0,
+      "elapsed_s": 0.03382296673953533
+    },
+    {
+      "stage": "hls",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+        "-f",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_native_hls_20261024/run_hls.tcl"
+      ],
+      "pid": 3889872,
+      "exit_code": 0,
+      "elapsed_s": 202.61588339693844
+    }
+  ],
+  "part": "xcu280-fsvh2892-2L-e",
+  "clock_ns": 10,
+  "cosim_argv_preflight": {
+    "csim_argv": "",
+    "cosim_argv": "",
+    "both_empty_allowed": true
+  },
+  "scope": "Numerical characterization only. Cosim completion may contain exact-bit differences; independent audit decides compatibility.",
+  "vectors_sha256": "dfb1b8cb3124789d8b1a6434094ecee8f02a69c30545e6a7a4cd3cb2bf0a97d8",
+  "tcl_sha256": "22e8f92ad3eee80a7964693a1c08d502bc0d8776af9572895b4fe85cddb4d93e",
+  "flow_log_sha256": "f0bee08b5fc873157eb7d9915571729f31bfc97be0bc222c86739ccf77769bea",
+  "cosim_report_sha256": "d994f139c98f858c2b2a2c40493b0393782a75ff0568d8c4a7ed2b28a46df3c7",
+  "observations": {
+    "csim_observed.txt": "5c915cdbd80a2bd1cbf5faff20f5de4257f818c36873f0c85c6d5f9b73371022",
+    "cost_step/solution1/sim/wrapc_pc/observed.txt": "8f34a51876883d6245ce1806fa6c1db94db73902a60afad3cd2f195845edf613",
+    "cost_step/solution1/sim/wrapc/observed.txt": "5c915cdbd80a2bd1cbf5faff20f5de4257f818c36873f0c85c6d5f9b73371022",
+    "cost_step/solution1/csim/build/observed.txt": "5c915cdbd80a2bd1cbf5faff20f5de4257f818c36873f0c85c6d5f9b73371022"
+  },
+  "generated_rtl_artifacts": {
+    "cost_step/solution1/syn/report/cost_step_csynth.xml": "26e9db0bb2dbe49556640f2f2a82187c0e5c5599cd24356877fde27faf261432",
+    "cost_step/solution1/syn/report/cost_step_Pipeline_VITIS_LOOP_25_1_csynth.rpt": "381d2e40104fda1996a16ee233e0d20a45613479ca9fe5f12a681a9849be126c",
+    "cost_step/solution1/syn/report/cost_step_Pipeline_VITIS_LOOP_11_1_csynth.rpt": "d5c8c054b05777918816fccac2c9cd52aa198b07ede4ef5fc6876a8ea78a8243",
+    "cost_step/solution1/syn/report/csynth.rpt": "a418606a314149eac09e53e519ba888d459fa845a6ff36cab88aab65971d48ae",
+    "cost_step/solution1/syn/report/cost_step_Pipeline_VITIS_LOOP_11_1_csynth.xml": "aaf8ba7e58da7f47f24985a3714cafc8ddf59df3824d84fb647e7975faec5e48",
+    "cost_step/solution1/syn/report/cost_step_csynth.rpt": "2d9f3a11e92274ebb2c758aed9d3193d34bb4ab6cf92979175f00290decf6783",
+    "cost_step/solution1/syn/report/cost_step_Pipeline_VITIS_LOOP_25_1_csynth.xml": "6948513beec27d5cdd2b7faa88bee2413ebf2a8cc5a09cab596575b59ac9779a",
+    "cost_step/solution1/syn/report/csynth.xml": "7463f604b3c1f89132dc2a426eff638ae3579a40108238d0265d240e8a0412a1",
+    "cost_step/solution1/syn/vhdl/cost_step_fadd_32ns_32ns_32_3_full_dsp_1_ip.tcl": "2121b1345307ce2838f909e92b421ff830ce7924e3d2dbb1586a8bcd911e1009",
+    "cost_step/solution1/syn/vhdl/cost_step_flow_control_loop_pipe_sequential_init.vhd": "69f1922c7c29046fd7d0ac5da8501e7726740a890e0a61d2a562ccf39d1bd19e",
+    "cost_step/solution1/syn/vhdl/cost_step_fmul_32ns_32ns_32_2_max_dsp_1.vhd": "6a31999cd58ac51e152e00fd96ece0a2de62c68e62c9082edd75828c5be8515a",
+    "cost_step/solution1/syn/vhdl/cost_step_fadd_32ns_32ns_32_3_full_dsp_1.vhd": "c230cb4bdf9fbf772f0e627c2b5845b9d07729c42fa566706f641f6330e5fb23",
+    "cost_step/solution1/syn/vhdl/cost_step_fcmp_32ns_32ns_1_1_no_dsp_1.vhd": "afb34d81a1dc180553626a6287ba404fcf64e5da53e85ccf4329e6830bed287f",
+    "cost_step/solution1/syn/vhdl/cost_step_fdiv_32ns_32ns_32_6_no_dsp_1.vhd": "126a284313d4a73c0dad26b1541df2d735fc4403c1ba2728b4905d9c81b22705",
+    "cost_step/solution1/syn/vhdl/cost_step.vhd": "3926d664bc59371f99587b407260dddba3f115628862df57c3456498fcfca247",
+    "cost_step/solution1/syn/vhdl/cost_step_fcmp_32ns_32ns_1_1_no_dsp_1_ip.tcl": "71b5d50a43e851fa5dad5996c66a4da6b3b6ffa123f03865dfed7761d7053725",
+    "cost_step/solution1/syn/vhdl/cost_step_cost_step_Pipeline_VITIS_LOOP_25_1.vhd": "9d06bb3b498f94e7d5e1cb7b3be14d852bf5f7225e780f90e4de0c856d981ac7",
+    "cost_step/solution1/syn/vhdl/cost_step_fmul_32ns_32ns_32_2_max_dsp_1_ip.tcl": "229af04c7d751d87efdab4831f9fc72ca539ea19dd880ff6298d6279ff0dc61e",
+    "cost_step/solution1/syn/vhdl/cost_step_sitofp_32ns_32_2_no_dsp_1.vhd": "39374940e7a7619ffda18bc56add0d395adb0b79a65fe19dc9134e9a6c11bded",
+    "cost_step/solution1/syn/vhdl/cost_step_target_RAM_AUTO_1R1W.vhd": "feeb080465c851d3b1bf33435738fc3047193db63065b7cc8864c1a8e67c9813",
+    "cost_step/solution1/syn/vhdl/cost_step_fdiv_32ns_32ns_32_6_no_dsp_1_ip.tcl": "804489e945681ef45d5a98c437501df03429fb79f09bd392103f6cb158f97ac8",
+    "cost_step/solution1/syn/vhdl/cost_step_sitofp_32ns_32_2_no_dsp_1_ip.tcl": "3f472746294c2348b46d50f8ebd3cf475ddbe862ac6e8a13071aaa5f05b161a1",
+    "cost_step/solution1/syn/vhdl/cost_step_cost_step_Pipeline_VITIS_LOOP_11_1.vhd": "ace2c08a5f1b5ec93bb4ca38e0170817300880a87d184e8374f6318b51bef0c0",
+    "cost_step/solution1/syn/verilog/cost_step_fadd_32ns_32ns_32_3_full_dsp_1_ip.tcl": "2121b1345307ce2838f909e92b421ff830ce7924e3d2dbb1586a8bcd911e1009",
+    "cost_step/solution1/syn/verilog/cost_step_fdiv_32ns_32ns_32_6_no_dsp_1.v": "0c48c6cf73a4d6fba723f519aaff8cfe59bd889ec5b23f9dc0d3cff3c915d840",
+    "cost_step/solution1/syn/verilog/cost_step_fmul_32ns_32ns_32_2_max_dsp_1.v": "b6e24c17d948b6efb1cbc921aae409fe020df8817e1195757683ec13f1b1956f",
+    "cost_step/solution1/syn/verilog/cost_step_cost_step_Pipeline_VITIS_LOOP_25_1.v": "d4f572dffc36a74a612155aae01c9c963e04cf43f50962482554db287c875710",
+    "cost_step/solution1/syn/verilog/cost_step_target_RAM_AUTO_1R1W.v": "cf2bcfa32b54b48d5cf94a492d6776711742f3baf38f1a3d584fe542688001f3",
+    "cost_step/solution1/syn/verilog/cost_step_fcmp_32ns_32ns_1_1_no_dsp_1_ip.tcl": "71b5d50a43e851fa5dad5996c66a4da6b3b6ffa123f03865dfed7761d7053725",
+    "cost_step/solution1/syn/verilog/cost_step.v": "c19f69d05fe76ab77f3dbdaa5ac544b0bc2ee298b229a6169e97b086c8778d7e",
+    "cost_step/solution1/syn/verilog/cost_step_fmul_32ns_32ns_32_2_max_dsp_1_ip.tcl": "229af04c7d751d87efdab4831f9fc72ca539ea19dd880ff6298d6279ff0dc61e",
+    "cost_step/solution1/syn/verilog/cost_step_sitofp_32ns_32_2_no_dsp_1.v": "f1e024f4ed1f20806c205ff1044e6fe91e23fdc6665045c4f7083b0f1f5001b7",
+    "cost_step/solution1/syn/verilog/cost_step_fcmp_32ns_32ns_1_1_no_dsp_1.v": "9fff403773719426a9da71f4b5d2d40c2ef172ddfc431e009ddeedeee851c95b",
+    "cost_step/solution1/syn/verilog/cost_step_fdiv_32ns_32ns_32_6_no_dsp_1_ip.tcl": "804489e945681ef45d5a98c437501df03429fb79f09bd392103f6cb158f97ac8",
+    "cost_step/solution1/syn/verilog/cost_step_fadd_32ns_32ns_32_3_full_dsp_1.v": "381bc1704b20dbbd2cb7b4bdadeb8ade834d4067311d0dc66ee339268fce1a2a",
+    "cost_step/solution1/syn/verilog/cost_step_sitofp_32ns_32_2_no_dsp_1_ip.tcl": "3f472746294c2348b46d50f8ebd3cf475ddbe862ac6e8a13071aaa5f05b161a1",
+    "cost_step/solution1/syn/verilog/cost_step_flow_control_loop_pipe_sequential_init.v": "f79df7384c3eb8bf0032dd57e5c54473291563f930dba2d53090e0fe66511299",
+    "cost_step/solution1/syn/verilog/cost_step_cost_step_Pipeline_VITIS_LOOP_11_1.v": "e551aeacc92781e990c92b55ab82b215297d49c1a652c6dd0815006e04cfaa24"
+  }
+}

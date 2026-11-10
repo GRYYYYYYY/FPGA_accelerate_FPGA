@@ -1,0 +1,17 @@
+# 查询checkpoint接入系统租约
+
+派生自已冻结 authority_query_v4。只改变 query_residency_system 与 query_lifecycle；后者与已审计 query_checkpoint_v6 原生组件完全相同。新增 qc_cp_* 流接口，图像格式保持10字/40字节，generation取当前authority绑定值，普通命令/后端仍走真实query/search/residency和八路AXI。
+
+qc_cp仅在pc_owned持有既有系统checkpoint lease时接受，cp_safe来自该lease真实健康/排空条件。pc_quiet允许独占的qc_cp_busy，不把checkpoint自身busy误认成外部未退休；lease release仍要求完整退休。path cp与query cp互斥，query命令优先；ready与实际valid门控一致，不能只门控valid而让外部误判握手。
+
+生产逻辑在接受任意query restore命令时设置qc_restore_pending。CRC、generation等错误后保持；只在成功导入的完成回复被消费时清除。guard.command_busy包含pending和qc_cp_busy，所以部分导入、错误回复、成功但尚未消费的回复都不能释放lease。普通query admission也明确要求!pending。不能通过导出图像或放弃失败导入解除pending；调用方须重放完整正确图像。
+
+ENABLE_TEST_INJECTION默认0。诊断qc_cp_test_reset仅在已有lease、健康、query/path全空闲且没有命令时注册置位，仅复位query controller，设置pending；无force。不改变path slots、owner、labels、design backing、journal、配置或authority绑定。它是局部状态丢失测试，不是冷启动。
+
+测试在真实owner B故障、328标签恢复/读取核验和完整CPU查询重跑后执行。两容量32/1slots：诊断loss + CRC错误 +正确CRC但generation高32位错误 +正确导入 + free-slot/合法上下文中的重复sequence1拒绝；另以诊断默认关闭执行同样生产导入流程，及接口闲置回归。pending分别104/88周期，三组每组两容量，既有8AXI/4图像全字节保持，新增拒绝query无prepare/commit或服务副作用。
+
+范围：所有其他易失/持久状态保留，本轮只恢复query ledger。frame绑定的是当前authority基线代；该基线owner图像早于当前working owner变更，后者及journal在诊断期间保留。不能把该frame与初始owner图像单独配对冷恢复，更不能把generation相同当作同一时间点的完整快照。完整bundle必须捕获同一健康边界的全部状态并给出新的提交身份。
+
+冷启动没有被本接口自动封锁：k_cold_rst清query ledger、pending和lease。尚需外层持久化boot描述，在全部owner/path/labels/目录/design/history/price/config/journal/query ledger及恢复下限恢复前关闭业务。不得把测试的局部pending门控说成全系统启动门控。当前query上下文相等校验也不是持久化attempt_version/query下限。未知页、warm非零owner冷恢复、snapshot轮换、frontier/旧prev、实际价格/回绕/容量、耐掉电/认证和板卡仍缺。
+
+下一步必须处理捕获代与提交代：现有绑定authority不可换绑，而working状态已前进；需pending bundle generation、同边界owner实际图像、query/path流与标签目录枚举，以及真实完成receipt集合和原子发布。不能用测试台常量done或模拟冷复位仅丢一个模块代替完整冷恢复验证。

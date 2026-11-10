@@ -1,0 +1,58 @@
+{
+  "analyzer_sha256": "8f703342583d036e70efefc6f76153c43cee8af556a7197f986e4c4a2bb2c3ab",
+  "conclusion": "In synthesized netlist, measured bank CE = cp_s_ready & cp_s_valid & ~B & ~C; B and C remain additional literal gate inputs, not removed or relabeled.",
+  "enable_valuations_checked": 8,
+  "handshake_valuations_checked": 32,
+  "implications": [
+    "This CE requires the import-stream handshake at the optimized module boundary.",
+    "It is not justified to describe this measured net as an export-capture enable.",
+    "Complete routed CE loads were independently observed, but export storage/data mapping is a separate question."
+  ],
+  "limitations": [
+    "Two-state local synthesized LUT identity, not four-state RTL equivalence.",
+    "Synthesized and routed netlists are distinct; no claim all control aliases are unchanged.",
+    "No RTL guard deletion, cycle change, or timing benefit demonstrated."
+  ],
+  "literal_luts": {
+    "enable": {
+      "init": 2,
+      "literal": "LUT3 #(\n    .INIT(8'h02)) \n    \\cp_stage[154][31]_i_1 \n       (.I0(\\cp_stage[154][31]_i_3_n_9 ),\n        .I1(cp_state1),\n        .I2(cp_dup_pos1),\n        .O(\\cp_stage[154][31]_i_1_n_9 ));",
+      "pins": {
+        "I0": "\\cp_stage[154][31]_i_3_n_9",
+        "I1": "cp_state1",
+        "I2": "cp_dup_pos1",
+        "O": "\\cp_stage[154][31]_i_1_n_9"
+      },
+      "width": 3
+    },
+    "handshake": {
+      "init": 268435456,
+      "literal": "LUT5 #(\n    .INIT(32'h10000000)) \n    \\cp_stage[154][31]_i_3 \n       (.I0(cp_s_ready_INST_0_i_1_n_9),\n        .I1(\\cp_state_reg_n_9_[2] ),\n        .I2(\\cp_state_reg_n_9_[1] ),\n        .I3(cp_s_ready_INST_0_i_2_n_9),\n        .I4(cp_s_valid),\n        .O(\\cp_stage[154][31]_i_3_n_9 ));",
+      "pins": {
+        "I0": "cp_s_ready_INST_0_i_1_n_9",
+        "I1": "\\cp_state_reg_n_9_[2]",
+        "I2": "\\cp_state_reg_n_9_[1]",
+        "I3": "cp_s_ready_INST_0_i_2_n_9",
+        "I4": "cp_s_valid",
+        "O": "\\cp_stage[154][31]_i_3_n_9"
+      },
+      "width": 5
+    },
+    "ready": {
+      "init": 4096,
+      "literal": "LUT4 #(\n    .INIT(16'h1000)) \n    cp_s_ready_INST_0\n       (.I0(cp_s_ready_INST_0_i_1_n_9),\n        .I1(\\cp_state_reg_n_9_[2] ),\n        .I2(\\cp_state_reg_n_9_[1] ),\n        .I3(cp_s_ready_INST_0_i_2_n_9),\n        .O(cp_s_ready));",
+      "pins": {
+        "I0": "cp_s_ready_INST_0_i_1_n_9",
+        "I1": "\\cp_state_reg_n_9_[2]",
+        "I2": "\\cp_state_reg_n_9_[1]",
+        "I3": "cp_s_ready_INST_0_i_2_n_9",
+        "O": "cp_s_ready"
+      },
+      "width": 4
+    }
+  },
+  "source": "/tmp/B_state_residency_offer_20261025/config_native_publication_synth_v1/synth.v",
+  "source_sha256": "b3ff5d0ff1d7e82411ee42d5d4e3d948ec8c25a9f8debf5687a131e157531cc0",
+  "status": "source_bound_two_state_netlist_handshake_factor_verified",
+  "synthesized_audit_sha256": "f40d7953e2b017d761f9daadc2792c1ce86e1d32647488c6d5e3d7d366a334ae"
+}

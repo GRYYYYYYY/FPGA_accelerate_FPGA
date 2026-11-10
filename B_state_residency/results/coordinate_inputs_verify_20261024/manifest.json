@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "input_manifest_sha256": "ce631edf256e282331588b9fc572c90a7a4bfe025d710549231ec954b3734d71",
+  "sources": {
+    "verify.cpp": "b65d3dd73f5ffe2f185ba3a9836cd6be6343e446ae74fff5717024549fe254b3",
+    "reference/trace.cpp": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+    "reference/real_trace.hpp": "d76ace3cdc74ebe93d25249c5065cda3948bd1f737488e9912d1798997f9f46e",
+    "reference/real_router_hooks.inc": "aa44a7cca13856af257e0c1fae47dedc872f29ddff910d72733624c14781cc56",
+    "reference/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "reference/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "reference/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "reference/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "reference/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "reference/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  },
+  "runner_sha256": "04ea5add0de1dae78dbc6cbe0fb6a5b8dd583a8d357d0dc256cb283811125e09",
+  "commands": [
+    {
+      "stage": "build",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fno-fast-math",
+        "-pthread",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_verify_20261024/sources/reference",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_verify_20261024/sources/reference/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_verify_20261024/sources/verify.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_verify_20261024/verify"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 9.032431107014418
+    },
+    {
+      "stage": "verify",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_verify_20261024/verify",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_20261024"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 2.2189793922007084
+    }
+  ],
+  "artifacts": {
+    "verify.log": "2c71ec5ad1ae231469f675798e5b2892650ebd30c36f176607e36ee9a0b61209",
+    "verify": "67ecf6e43d83870c0aa3c21a31f51471a6d917b1e3b0f7a230c0052c1b075f5c",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner.py": "04ea5add0de1dae78dbc6cbe0fb6a5b8dd583a8d357d0dc256cb283811125e09",
+    "sources/verify.cpp": "b65d3dd73f5ffe2f185ba3a9836cd6be6343e446ae74fff5717024549fe254b3",
+    "sources/reference/trace.cpp": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+    "sources/reference/real_trace.hpp": "d76ace3cdc74ebe93d25249c5065cda3948bd1f737488e9912d1798997f9f46e",
+    "sources/reference/real_router_hooks.inc": "aa44a7cca13856af257e0c1fae47dedc872f29ddff910d72733624c14781cc56",
+    "sources/reference/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "sources/reference/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "sources/reference/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "sources/reference/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "sources/reference/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "sources/reference/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  }
+}

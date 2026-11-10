@@ -1,0 +1,109 @@
+{
+  "status": "all21_audited_cpu_measurements_visualized_with_actual_execution_order",
+  "summaries": [
+    {
+      "condition": "csr/direct",
+      "n": 7,
+      "application_median_seconds": 1084.8712327647954,
+      "application_min_seconds": 1076.9256186969578,
+      "application_max_seconds": 1096.4478122014552,
+      "application_mean_seconds": 1084.1867158269245,
+      "cpu_router_subprocess_mean_seconds": 1034.6333476267755,
+      "outside_cpu_router_subprocess_mean_seconds": 49.55336820014885,
+      "training_load_fit_freeze_median_seconds": 0.0
+    },
+    {
+      "condition": "compact/direct",
+      "n": 7,
+      "application_median_seconds": 1547.8977191112936,
+      "application_min_seconds": 1544.1390396654606,
+      "application_max_seconds": 1596.701797772199,
+      "application_mean_seconds": 1555.911091373701,
+      "cpu_router_subprocess_mean_seconds": 1485.9213909959155,
+      "outside_cpu_router_subprocess_mean_seconds": 69.98970037778574,
+      "training_load_fit_freeze_median_seconds": 2.064576517790556
+    },
+    {
+      "condition": "compact/expanded",
+      "n": 7,
+      "application_median_seconds": 988.3553074970841,
+      "application_min_seconds": 964.2327338531613,
+      "application_max_seconds": 1073.1590236239135,
+      "application_mean_seconds": 996.3738203759173,
+      "cpu_router_subprocess_mean_seconds": 926.0122724390988,
+      "outside_cpu_router_subprocess_mean_seconds": 70.36154793681843,
+      "training_load_fit_freeze_median_seconds": 2.0747535582631826
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "denominator": "csr/direct",
+      "median_paired_ratio": 1.4338400097992048,
+      "metric": "application_wall_ms",
+      "numerator": "compact/direct",
+      "ratios_by_repeat": [
+        1.4356669960542208,
+        1.4149597212188603,
+        1.4357464443486683,
+        1.471789231338546,
+        1.4256398485343458,
+        1.4282260674261613,
+        1.4338400097992048
+      ]
+    },
+    {
+      "denominator": "csr/direct",
+      "median_paired_ratio": 0.9096898965230018,
+      "metric": "application_wall_ms",
+      "numerator": "compact/expanded",
+      "ratios_by_repeat": [
+        0.9170202762999075,
+        0.9096898965230018,
+        0.9018118033792412,
+        0.921066172395798,
+        0.8880745747409697,
+        0.9913325591435593,
+        0.9042051425399483
+      ]
+    }
+  ],
+  "execution_order_audit": {
+    "position_counts": {
+      "csr/direct": {
+        "1": 2,
+        "3": 5
+      },
+      "compact/direct": {
+        "1": 5,
+        "2": 2
+      },
+      "compact/expanded": {
+        "2": 5,
+        "3": 2
+      }
+    },
+    "compact_direct_before_expanded_blocks": 7,
+    "blocks": 7,
+    "cpu": 121,
+    "seed": 20261023
+  },
+  "experiment_complete": false,
+  "board_or_fpga_speedup_claimed": false,
+  "source_semantics_reexecuted": false,
+  "limitations": [
+    "Application timer covers fresh template training for compact representations, complete captured-TSV conversion and two routing batches, including validation and exports. CSR requires no template training.",
+    "Excludes Vivado acquisition, board transfer and physical readback; these remain separate requirements. Training is rebuilt from the original3761 captured sources and must reproduce the frozen440-template bank exactly before reading the evaluation graph.",
+    "Preflight integrity checks and post-route semantic audit are outside application timer but inside process wall.",
+    "Parent conversion peak and native child peak are distinct process measurements; do not sum them as simultaneous memory.",
+    "Parent drops graph/adapter objects before native launch. Shared host, page cache and buffered disk writes remain uncontrolled.",
+    "Seven fresh processes per condition, randomized within each repeat block.",
+    "Each application wall measures regeneration and TWO batches, not single-batch latency.",
+    "All blocks run sequentially on one CPU; unrelated host workloads remain uncontrolled.",
+    "native_child_peak_kib is inherited RUSAGE_CHILDREN accounting; identical parent values do not establish native-only post-exec VmHWM.",
+    "This does not complete the original nine-requirement/eight-variant experiment.",
+    "The actual fixed-seed schedule is unbalanced: compact/direct precedes compact/expanded in all seven blocks; CSR is first twice and last five times. Order/cache carryover is not isolated.",
+    "Stage chart uses additive means. No sum of stage medians is presented as an application total.",
+    "No significance test or confidence interval is claimed from seven shared-host blocks. Every paired observation is retained.",
+    "Plots rehash bound artifacts and recompute summary/paired/order arithmetic; they do not rerun the full routing semantic oracle."
+  ]
+}

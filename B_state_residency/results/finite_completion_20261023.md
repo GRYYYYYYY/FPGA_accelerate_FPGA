@@ -1,0 +1,13 @@
+# 有限位宽完成标识与排空约束：独立CPU事件模型
+
+src/finite_completion.py新增有限query/price/transaction/slot-generation/page字段，Descriptor按值匹配，不使用Python对象身份或隐藏无界incarnation。事务完成后ID仍隔离，不在同一排空区间复用；查询号和槽代次耗尽都阻塞。新查询使旧查询完成返回无效，但旧槽保持绑定直到全部完成/固定引用确认。
+
+传输与pin在同槽互斥，多个pin可以并存，释放槽前需全部确认。request_fence停止新query/bind/issue，已有完成仍可消费且均作无效；本地pending与binding全部清空后，还需peer_quiescent及completion_queue_empty两个可信外部条件才重置有限编号。这两个条件目前为调用者提供的模型前提，未实现真实设备握手/队列排空。peer静止必须同时保证旧生产者不再发包/重发，主机也不再用旧query/binding发起请求。单个terminal ACK、超时或本地outstanding=0都不足以替代。
+
+8项新增检查通过，全套48项Python检查通过。覆盖按字段重建完成包、重复/字段不符包、旧query乱序完成、pin/IO互斥、本地未排空阻塞、事务/查询/槽代次穷尽、100次小位宽排空周期随机乱序确认。随机场景采用4位事务号覆盖每周期最多12个描述符，1位强制耗尽另有确定性用例。首次随机测试以3位事务号时触发预期配额阻塞，未发现数据错误；测试容量边界已分开明确。
+
+明确的负向边界检查test_false_fence_has_identical_packet_aba：故意在旧包仍可能出现时谎报静止，重用后新旧描述符完全相同，旧包可完成新事务。模型刻意保留并验证这一事实，不能宣称有限标签本身能抵抗无限迟到。也不提供对可信peer猜中有效完整描述符的认证能力。
+
+尚未集成src/page_residency.py的数据值/dirty/backing模型，未替换真实C++路由接口，无DMA、并发执行或RTL。独立ledger证明只在排空契约成立时隔离有限标识与槽所有权，不能当作完整设备协议已验证。下一步实现可执行传输队列模拟，将请求/完成/重复包及排空响应纳入状态机，拒绝在队列仍含旧包时返回静止；再与页值模型组合检查迟到writeback/refill不会污染新query。
+
+证据目录：`finite_completion_20261023T012808Z/`，保存源码与测试快照和SHA；性能为空。

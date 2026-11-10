@@ -1,0 +1,158 @@
+{
+  "status": "actual_retirement_contract_preparation_reviewed_bmc10_passed_induction_cover_pending",
+  "sources": {
+    "checkpoint_authority_rotator.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_rotator.sv",
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032"
+    },
+    "checkpoint_authority_reader.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+    },
+    "owner_state_store.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/access_owner_v3_20261024/owners/owner_state_store.sv",
+      "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c"
+    }
+  },
+  "observation_only_aliases_verified": true,
+  "observation_ports": {
+    "f_bank0_configured": "bank0.configured",
+    "f_bank0_bound_valid": "bank0.bound_valid",
+    "f_bank0_bound_generation": "bank0.bound_generation",
+    "f_bank0_busy": "bank0.busy",
+    "f_bank0_fault": "bank0.fault",
+    "f_bank0_state": "bank0.state",
+    "f_bank0_stopped": "bank0.stopped",
+    "f_bank1_configured": "bank1.configured",
+    "f_bank1_bound_valid": "bank1.bound_valid",
+    "f_bank1_bound_generation": "bank1.bound_generation",
+    "f_bank1_busy": "bank1.busy",
+    "f_bank1_fault": "bank1.fault",
+    "f_bank1_state": "bank1.state",
+    "f_bank1_stopped": "bank1.stopped"
+  },
+  "original_core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+  "exposed_json_sha256": "d5bb23781fd2472e003210608488e9e434a4567858da5d02c074daa2cc1475db",
+  "harness_sha256": "abdbe1306477c86bf16d56f6b6c3764e4f7f4f6d7fbb923dce607957986c6cac",
+  "runner_sha256": "3066799674ad1bc30e67080a01fa81e955de8e92e8a47d72a0d5cf1cad7d183c",
+  "terminal_helper_sha256": "68f0d42ad371343e18bd6ec902cba7638b8cc3cb046d072ea929b4100879e357",
+  "smt_constraints": {
+    "assert": 7,
+    "assume": 1,
+    "cover": 1
+  },
+  "bmc_steps_passed": 10,
+  "proofs": {
+    "statement": "nonzero bound generation and retired/fault-free authority implies active configured",
+    "status": "pending"
+  },
+  "live_jobs": {
+    "ka_active_configured_formal_v1": {
+      "status": "running",
+      "session": 20887,
+      "completed_commands": [
+        [
+          "core",
+          0
+        ],
+        [
+          "prepare",
+          0
+        ],
+        [
+          "bmc",
+          0
+        ],
+        [
+          "induction",
+          0
+        ]
+      ],
+      "active_process": {
+        "stage": "cover",
+        "pid": 2565237,
+        "start_ticks": "1663666178",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-c",
+          "-t",
+          "35",
+          "--dump-vcd",
+          "cover%.vcd",
+          "design.smt2"
+        ]
+      },
+      "children": [
+        {
+          "pid": 2565424,
+          "start_ticks": "1663666192",
+          "cpu_ticks": 157979,
+          "state": "R",
+          "rss": "VmRSS:\t 2466936 kB"
+        }
+      ],
+      "identity_verified": true,
+      "progress": [
+        "##   0:00:11  Checking cover reachability in step 7..",
+        "##   0:00:12  Checking cover reachability in step 8..",
+        "##   0:00:17  Checking cover reachability in step 9..",
+        "##   0:00:22  Checking cover reachability in step 10..",
+        "##   0:00:28  Checking cover reachability in step 11..",
+        "##   0:00:37  Checking cover reachability in step 12.."
+      ]
+    },
+    "ka_retired_configured_formal_v1": {
+      "status": "running",
+      "session": 92270,
+      "completed_commands": [
+        [
+          "prepare",
+          0
+        ],
+        [
+          "bmc",
+          0
+        ]
+      ],
+      "active_process": {
+        "stage": "induction",
+        "pid": 3013257,
+        "start_ticks": "1663807254",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-i",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "induction_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "children": [
+        {
+          "pid": 3013336,
+          "start_ticks": "1663807268",
+          "cpu_ticks": 16905,
+          "state": "R",
+          "rss": "VmRSS:\t  578792 kB"
+        }
+      ],
+      "identity_verified": true,
+      "progress": [
+        "##   0:00:00  Solver: z3",
+        "##   0:00:00  Trying induction in step 10..",
+        "##   0:00:00  Trying induction in step 9..",
+        "##   0:01:55  Trying induction in step 8.."
+      ]
+    }
+  },
+  "as_entry_dependency_review_sha256": "6241ca66e95f84028dc1026b3b9afb56bd4834917d33906cb00f7635ee4753bb",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

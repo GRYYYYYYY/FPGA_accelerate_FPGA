@@ -1,0 +1,161 @@
+{
+  "status": "actual_coordinator_two_state_hold_induction_and_nonvacuous_cover_with_mutation_control_evidence_restored",
+  "scope": "Unit producer hold property only. Arbitrary external inputs, initial cold reset, single synchronous clock, two-state SMT semantics. Not full-system KA-stall reachability, receiver composition, X/Z proof, full shadow acceptance or physical result.",
+  "rtl_sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+  "harness_sha256": "20f147b7169621e6eb41f7b90bbbe58b9135a686d550f77e2570c27f9e911fb8",
+  "properties": [
+    "valid persists after stalled request absent reset",
+    "complete request payload persists after stalled request absent reset"
+  ],
+  "assumptions": [
+    "cold_rst at initial state"
+  ],
+  "parameters": {
+    "ENTRIES": 32,
+    "RESET_HOLD": 5,
+    "EXCLUSIVE_BACKEND_RESPONSES": 1,
+    "MAX_CYCLES": 1048576,
+    "MAX_CORRECTIONS": 1024
+  },
+  "bmc_steps": 20,
+  "temporal_induction_successful": true,
+  "nonvacuous_stall_cover_step": 13,
+  "mutation_counterexample": {
+    "change": "AS transition ignores a_ready",
+    "stalled_step": 12,
+    "valid_dropped_without_reset_step": 13,
+    "assertion_failure_reported_step": 14
+  },
+  "frontend_preparation_failures_preserved": [
+    "v1 unsupported $check",
+    "v2 edge-triggered $check needs clock conversion"
+  ],
+  "successful_frontend_passes": [
+    "prep",
+    "async2sync",
+    "chformal -lower",
+    "dffunmap",
+    "write_smt2"
+  ],
+  "package_versions": {
+    "yowasp-yosys": "0.70.0.0.post1259",
+    "yowasp-runtime": "1.96",
+    "platformdirs": "4.12.4",
+    "wasmtime": "47.0.1",
+    "z3-solver": "5.3.3.0",
+    "click": "8.5.0"
+  },
+  "package_download_digests_in_inventory": true,
+  "evidence_inventory": {
+    "ka_producer_hold_formal_v3/manifest.json": {
+      "sha256": "2c18e17fbff4e18529071abab643a8ac9cf1189d5708990490fc97138bcdad42",
+      "bytes": 2164
+    },
+    "ka_producer_hold_formal_v3/recovery_coordinator.sv": {
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+      "bytes": 12673
+    },
+    "ka_producer_hold_formal_v3/harness.sv": {
+      "sha256": "20f147b7169621e6eb41f7b90bbbe58b9135a686d550f77e2570c27f9e911fb8",
+      "bytes": 5489
+    },
+    "ka_producer_hold_formal_v3/prepare.ys": {
+      "sha256": "2238c7511c2fb16d1a463efbc363eb90b6eb90a7e309040498a18d4d08e45990",
+      "bytes": 160
+    },
+    "ka_producer_hold_formal_v3/prepare.log": {
+      "sha256": "f9462cbc1538f9e4ee7502eb00bafc0ed66068cafad7962d3049dd425bb99767",
+      "bytes": 72703
+    },
+    "ka_producer_hold_formal_v3/design.smt2": {
+      "sha256": "f9f3a65f2f65fb285dd96005f3a02f054c4a367b6752cc7eddb09138fd793289",
+      "bytes": 591371
+    },
+    "ka_producer_hold_formal_v3/bmc.log": {
+      "sha256": "08e895dc47369754996d7bddbacef4a4d8b07d2169f46f570e8f9bea58f6a8b6",
+      "bytes": 4830
+    },
+    "ka_producer_hold_formal_bad_ready_v1/manifest.json": {
+      "sha256": "fff3f7d83bbb294194baedb7510e2e5c91133c5c2875de4c966fae1f90a5e38f",
+      "bytes": 1345
+    },
+    "ka_producer_hold_formal_bad_ready_v1/recovery_coordinator.sv": {
+      "sha256": "a387db2e9d413eb0155315891dd98ce5227f55be90f5ad1f0ac7a878442a3cea",
+      "bytes": 12670
+    },
+    "ka_producer_hold_formal_bad_ready_v1/harness.sv": {
+      "sha256": "20f147b7169621e6eb41f7b90bbbe58b9135a686d550f77e2570c27f9e911fb8",
+      "bytes": 5489
+    },
+    "ka_producer_hold_formal_bad_ready_v1/prepare.ys": {
+      "sha256": "2238c7511c2fb16d1a463efbc363eb90b6eb90a7e309040498a18d4d08e45990",
+      "bytes": 160
+    },
+    "ka_producer_hold_formal_bad_ready_v1/prepare.log": {
+      "sha256": "c38f910e25e2a7999a49bef304850226459954e244d0a1be6ca716bd966a2dc8",
+      "bytes": 72852
+    },
+    "ka_producer_hold_formal_bad_ready_v1/design.smt2": {
+      "sha256": "fe8ade2b61c4debb0add487d27084e3efdad1d046b1789540ad977ced92180b2",
+      "bytes": 590906
+    },
+    "ka_producer_hold_formal_bad_ready_v1/bmc.log": {
+      "sha256": "68a3ba4d676fffd7e6faf14467430ba62af083101b42a9a0ed505176bb9d9a77",
+      "bytes": 1678
+    },
+    "ka_producer_hold_formal_v3/induction.log": {
+      "sha256": "dea7d7ba0eff25e639d7ef4d0e5b07f7b1970f18a4b718ecbdb765949aefd91c",
+      "bytes": 231
+    },
+    "ka_producer_hold_formal_v3/cover.log": {
+      "sha256": "3aacbbdf08cdf605ae91be70c4443b16542c178297e34b04f60a797f6b3c750f",
+      "bytes": 1194
+    },
+    "ka_producer_hold_formal_v3/cover.vcd": {
+      "sha256": "d00661ce6aa83e969f49e464636d9acca7a52d84ec99b805ff7a80733e443d7a",
+      "bytes": 112497
+    },
+    "ka_producer_hold_formal_bad_ready_v1/counterexample.vcd": {
+      "sha256": "74eb2d39c3623b73d2fc12e7ce0ecb607712c6f93375a326f4d7908bcdd32863",
+      "bytes": 119838
+    },
+    "ka_producer_hold_formal_v1/manifest.json": {
+      "sha256": "1dafc7079f720d70394b0d637d0eb876b342dc6b17f174445912dafefca4581f",
+      "bytes": 750
+    },
+    "ka_producer_hold_formal_v1/prepare.ys": {
+      "sha256": "3242e6b3b618104efeb107ee41e9839c19038ec2d56b5db4cc86f79c649b412b",
+      "bytes": 124
+    },
+    "ka_producer_hold_formal_v1/prepare.log": {
+      "sha256": "07deebb096ae30aae8e7fde542eea78ddfb833cffe7462d49c2946f7c65c18ed",
+      "bytes": 72466
+    },
+    "ka_producer_hold_formal_v2/manifest.json": {
+      "sha256": "c76265596dd828ff9307ba0b0b460ca7ae318c9f728b07d6bdde8846d1ab4526",
+      "bytes": 781
+    },
+    "ka_producer_hold_formal_v2/prepare.ys": {
+      "sha256": "73796a5656268969908aed2478328a1cbe74521e904c4cfb941711e2a9bc7e8d",
+      "bytes": 140
+    },
+    "ka_producer_hold_formal_v2/prepare.log": {
+      "sha256": "c4938dddab0e16f25abf8aab9d4001ebea707962ec22506d8686849484134a89",
+      "bytes": 72143
+    },
+    "ka_formal_bootstrap_v1/download.json": {
+      "sha256": "e86bb1e90b4136edca70136d0eda755b693d0259bc98f35d6248737166fc6710",
+      "bytes": 298
+    },
+    "ka_formal_bootstrap_v1/install_report.json": {
+      "sha256": "33d43f62374e2e6513f170e258a051fade199251fa0a88ae15d3ab436a69d7f1",
+      "bytes": 24985
+    }
+  },
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_producer_hold_formal_evidence_v1/evidence.tar",
+  "archive_sha256": "3b47645caec2ad4e054a64c85846df0bb0b492ab57e10dda7173972c36776cda",
+  "actual_restore": "/tmp/B_state_residency_offer_20261025/ka_producer_hold_formal_evidence_v1/restored",
+  "actual_restore_files": 26,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

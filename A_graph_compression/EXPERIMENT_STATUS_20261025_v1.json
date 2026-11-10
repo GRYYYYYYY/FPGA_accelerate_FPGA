@@ -1,0 +1,337 @@
+{
+  "goal": "实现完整实验",
+  "status": "active",
+  "completion_proven": false,
+  "observed_utc": "2026-10-25T04:07:03.585130+00:00",
+  "scope": "Requirements and evidence snapshot, not a replacement semantic audit or a completion claim",
+  "requirements": [
+    {
+      "id": "semantics",
+      "requirement": "Canonical nodes, aliases, pip identity/direction/attributes and independent oracle validation",
+      "status": "regional_graph_equivalence_verified_full_special_resource_model_incomplete",
+      "evidence_keys": [
+        "compressed_real_batches"
+      ],
+      "remaining": "Only 14 physically evidenced site instances; clock semantics and broader resource ownership/configuration remain incomplete.",
+      "complete": false
+    },
+    {
+      "id": "coverage",
+      "requirement": "Independent traversal-based training and new held-out data",
+      "status": "bounded_training_holdout_and_region_verified_full_device_coverage_unproven",
+      "evidence_keys": [],
+      "remaining": "Existing bounded capture/holdout evidence cannot establish full-device or all-family coverage.",
+      "complete": false
+    },
+    {
+      "id": "packed",
+      "requirement": "Executable binary CSR/templates with full capacity accounting and strict equivalence",
+      "status": "regional_binary_representations_and_full_workload_cpu_equivalence_verified",
+      "evidence_keys": [
+        "compressed_real_batches"
+      ],
+      "remaining": "Graph image compression is separate from diagnostic trace encoding; platform transfer/capacity still unmeasured.",
+      "complete": false
+    },
+    {
+      "id": "native",
+      "requirement": "Same native search, initialization/first/resident/end-to-end timings, cache/granularity ablations",
+      "status": "completed_repeat_statistics_under_partial_site_model",
+      "evidence_keys": [
+        "native_statistics",
+        "template_scope_statistics"
+      ],
+      "remaining": "Seven repeats per condition completed, but shared-host/cache and partial site-model limitations remain.",
+      "complete": false
+    },
+    {
+      "id": "netlist",
+      "requirement": "Placed real design queries, resource occupancy/protection, complete router and quality validation",
+      "status": "regional_full_query_physical_pass_under_partial_model_full_semantics_incomplete",
+      "evidence_keys": [
+        "compressed_real_batches"
+      ],
+      "remaining": "Prior physical readback is scoped to partial model; complete special-resource semantics and external IO remain.",
+      "complete": false
+    },
+    {
+      "id": "hardware",
+      "requirement": "Matching FPGA CSR/compact implementation, self-checking simulation, synthesis and routed timing/resources",
+      "status": "component_rtl_and_boundary_evidence_partial_integrated_rtl_running_resource_budget_unmet",
+      "evidence_keys": [
+        "search_boundary_rtl",
+        "compressed_csr_synthesis",
+        "compact_full44_csim",
+        "width64_full44_csim"
+      ],
+      "remaining": "Integrated CSR RTL not terminal; compact RTL missing; original integrated HLS LUT estimate exceeds whole-device reference, physical/platform fit unproven.",
+      "complete": false
+    },
+    {
+      "id": "ddr_hbm",
+      "requirement": "Same-board DDR/HBM memory-backend measurements with actual platform/clock",
+      "status": "incomplete_no_visible_xrt_device_and_no_same_board_measurements",
+      "evidence_keys": [],
+      "remaining": "Latest local XRT observation finds zero devices; actual platform, allocation, calibrated DDR/HBM and power measurements absent.",
+      "complete": false
+    },
+    {
+      "id": "end_to_end",
+      "requirement": "Full placement/routing comparison, legality/success/iterations/quality and end-to-end accounting",
+      "status": "captured_source_to_two_cpu_batches_repeat_statistics_complete_full_acquisition_training_board_chain_incomplete",
+      "evidence_keys": [
+        "source_to_route_statistics",
+        "conversion_statistics"
+      ],
+      "remaining": "21 workers complete captured-TSV to two-batch CPU chain; Vivado acquisition, training, transfer, physical readback and board runtime remain outside that timer.",
+      "complete": false
+    },
+    {
+      "id": "reproducibility",
+      "requirement": "One entrypoint, immutable manifests, hashes, versions, commands, regressions and research report",
+      "status": "immutable_stage_evidence_and_durable_backup_partial_complete_experiment_incomplete",
+      "evidence_keys": [
+        "durable_backup"
+      ],
+      "remaining": "New active artifacts not yet durably archived; final experiment commands, complete matrix and final research report remain.",
+      "complete": false
+    }
+  ],
+  "configured_variants": [
+    {
+      "id": "reference",
+      "configured_description": "两个相邻 tile 共享一个规范节点；同一个局部连接模板展开后加一条例外边，与显式图逐项比较。",
+      "status": "synthetic_reference_available"
+    },
+    {
+      "id": "cpu_explicit_graph",
+      "configured_description": "现有显式图/CSR 软件基线",
+      "status": "partial_site_model_cpu_comparison_available"
+    },
+    {
+      "id": "cpu_existing_templates",
+      "configured_description": "已有模板展开后搜索",
+      "status": "partial_site_model_cpu_comparison_available"
+    },
+    {
+      "id": "cpu_direct_decode",
+      "configured_description": "新表示直接译码的软件原型",
+      "status": "partial_site_model_cpu_comparison_available"
+    },
+    {
+      "id": "fpga_csr_ddr",
+      "configured_description": "FPGA 显式图 + DDR",
+      "status": "incomplete_same_board_backend_measurement_absent"
+    },
+    {
+      "id": "fpga_compact_ddr",
+      "configured_description": "FPGA 压缩表示 + DDR",
+      "status": "incomplete_same_board_backend_measurement_absent"
+    },
+    {
+      "id": "fpga_csr_hbm",
+      "configured_description": "FPGA 显式图 + HBM",
+      "status": "incomplete_same_board_backend_measurement_absent"
+    },
+    {
+      "id": "fpga_compact_hbm",
+      "configured_description": "FPGA 压缩表示 + HBM",
+      "status": "incomplete_same_board_backend_measurement_absent"
+    }
+  ],
+  "evidence": {
+    "native_statistics": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/native_site_runtime_statistics_audit_20261023_v1.json",
+      "sha256": "1e01f27fe321ae8d7d82503f07fac1b482948d10f0bd27a813d20dc05c396051",
+      "status": "complete_site_runtime_matrix_independently_audited",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "source_to_route_statistics": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/source_to_route_statistics_audit_20261023_v1.json",
+      "sha256": "b661a32d6e9c1011276b288daba60465616b438105b578c559fd7b6dcc8d5f95",
+      "status": "complete_source_to_route_statistics_audited",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "template_scope_statistics": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/template_scope_runtime_statistics_audit_20261023_v1.json",
+      "sha256": "3e735b14ddd82d9255cfc9926076bf72fd6575ab1e576c49093d6e632de4a93c",
+      "status": "complete_scope_runtime_matrix_independently_audited",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "conversion_statistics": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/packed_conversion_statistics_audit_20261023_v1.json",
+      "sha256": "9c650cfb0fdd4b5d20b74ac7c9a3a17191463a27911ff0e449732ce93707b63e",
+      "status": "complete_conversion_matrix_independently_audited",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "compressed_real_batches": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_real_audit_20261025_v1.json",
+      "sha256": "635f03e951a657d7aff53bc9f8bddf180643fdf4d2056a655ea3eb01e66c7d1b",
+      "status": "compressed_batch_two_modes_two_full_batches_raw_and_exact_trace_independently_verified_cpu_only",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "search_boundary_rtl": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_kernel_boundary_rtl_revalidation_20261025_v1.json",
+      "sha256": "af652989706cb829e38e63bb9d3cc22a19b2a85263dbe37729387580355866c8",
+      "status": "boundary_rtl_existing_independent_audit_952_bindings_revalidated",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "compressed_csr_synthesis": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_synthesis_review_20261025_v1.json",
+      "sha256": "abeae31528f65ff52514b403cfdd548f25b015efb5a821c57d475d91b33bacf1",
+      "status": "compressed_batch_trace_integrated_control_csim_synthesis_verified_rtl_pending",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "compact_full44_csim": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_compact_full44_csim_20261025_v1.json",
+      "sha256": "a22052b585e087060de9e586c236e6e62267dd8378eb6eb8e57a2484bbb60306",
+      "status": "compact_csim_four_full44_snapshots_and_exact_traces_independently_verified_synthesis_pending",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "width64_full44_csim": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_width64_full44_csim_20261025_v1.json",
+      "sha256": "39925d5486465413fc6c00b0a1b78b1a3fb9e1858ee001121643cdfad7b3239d",
+      "status": "width64_csr_csim_four_full44_snapshots_and_exact_traces_independently_verified_synthesis_pending",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    },
+    "durable_backup": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/frozen_local_evidence_archive_audit_20261025_v1.json",
+      "sha256": "c2242f5b8fd3c816fc3870627836a7c266b0fb45d47e47f6a8a94c741f4088b6",
+      "status": "completed_local_evidence_durable_backup_verified_and_critical_report_bindings_covered",
+      "scope": "Existing report metadata reviewed; this status snapshot does not re-execute its semantic auditor"
+    }
+  },
+  "active_process_observations": [
+    {
+      "bundle": "compressed_batch_rtl_guarded_v1",
+      "state": {
+        "owner_pid": 334627,
+        "status": "running",
+        "stage": "elaborate",
+        "child_pid": 342047
+      },
+      "owner_live": true,
+      "actual_command": "python3 scripts/run_compressed_batch_rtl_guarded.py "
+    },
+    {
+      "bundle": "compressed_batch_rtl_guarded_execution_v1",
+      "state": {
+        "owner_pid": 397193,
+        "status": "running",
+        "stage": "waiting_existing_elaboration"
+      },
+      "owner_live": true,
+      "actual_command": "python3 scripts/supervise_compressed_batch_rtl_guarded.py "
+    },
+    {
+      "bundle": "compressed_batch_guarded_final_audit_v1",
+      "state": {
+        "owner_pid": 779628,
+        "observed_owner": 397193,
+        "status": "running",
+        "stage": "wait_existing_execution"
+      },
+      "owner_live": true,
+      "actual_command": "python3 scripts/supervise_compressed_batch_guarded_audit.py "
+    },
+    {
+      "bundle": "snapshot_rtl_local_recovery",
+      "state": {
+        "owner_pid": 2508987,
+        "status": "running",
+        "stage": "elaborate",
+        "child_pid": 2516421
+      },
+      "owner_live": true,
+      "actual_command": "python3 scripts/resident_snapshot_rtl_local_recovery.py "
+    },
+    {
+      "bundle": "compressed_batch_compact_hls",
+      "state": {
+        "owner_pid": 581295,
+        "status": "running",
+        "stage": "csim_and_synthesis",
+        "child_pid": 582574
+      },
+      "owner_live": true,
+      "actual_command": "python3 scripts/compressed_batch_compact_hls.py "
+    },
+    {
+      "bundle": "compressed_batch_width64_hls",
+      "state": {
+        "owner_pid": 673564,
+        "status": "running",
+        "stage": "csim_and_synthesis",
+        "child_pid": 673660
+      },
+      "owner_live": true,
+      "actual_command": "python3 scripts/compressed_batch_width64_hls.py "
+    }
+  ],
+  "findings": {
+    "native_workers": 63,
+    "source_to_route_workers": 21,
+    "template_scope_workers": 35,
+    "conversion_workers": 14,
+    "source_to_route_paired_ratios": [
+      {
+        "denominator": "csr/direct",
+        "median_paired_ratio": 1.4239737605261278,
+        "metric": "application_wall_ms",
+        "numerator": "compact/direct",
+        "ratios_by_repeat": [
+          1.420295818780824,
+          1.7224739915222056,
+          1.4560540135692857,
+          1.4349805889057279,
+          1.4141859673225887,
+          1.4239737605261278,
+          1.4111632537915182
+        ]
+      },
+      {
+        "denominator": "csr/direct",
+        "median_paired_ratio": 0.8952030304816067,
+        "metric": "application_wall_ms",
+        "numerator": "compact/expanded",
+        "ratios_by_repeat": [
+          0.8980364926039213,
+          0.8808988986791907,
+          0.9370735568219128,
+          0.9063176928487451,
+          0.8888875968153191,
+          0.8945924286503144,
+          0.8952030304816067
+        ]
+      }
+    ],
+    "csr_integrated_hls_resources": {
+      "BRAM_18K": 69,
+      "DSP": 93,
+      "FF": 723920,
+      "LUT": 1922947,
+      "URAM": 3
+    },
+    "csr_integrated_hls_estimated_clock_ns": 4.509,
+    "board_visible_devices": 0
+  },
+  "bindings": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/EXPERIMENT_STATUS.json": "4ff2875a99a4ed3ef10f8b703ab02d58276ae09281bd5c93106bd89ccc8df96f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/native_site_runtime_statistics_audit_20261023_v1.json": "1e01f27fe321ae8d7d82503f07fac1b482948d10f0bd27a813d20dc05c396051",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/source_to_route_statistics_audit_20261023_v1.json": "b661a32d6e9c1011276b288daba60465616b438105b578c559fd7b6dcc8d5f95",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/template_scope_runtime_statistics_audit_20261023_v1.json": "3e735b14ddd82d9255cfc9926076bf72fd6575ab1e576c49093d6e632de4a93c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/packed_conversion_statistics_audit_20261023_v1.json": "9c650cfb0fdd4b5d20b74ac7c9a3a17191463a27911ff0e449732ce93707b63e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_real_audit_20261025_v1.json": "635f03e951a657d7aff53bc9f8bddf180643fdf4d2056a655ea3eb01e66c7d1b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_kernel_boundary_rtl_revalidation_20261025_v1.json": "af652989706cb829e38e63bb9d3cc22a19b2a85263dbe37729387580355866c8",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_synthesis_review_20261025_v1.json": "abeae31528f65ff52514b403cfdd548f25b015efb5a821c57d475d91b33bacf1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_compact_full44_csim_20261025_v1.json": "a22052b585e087060de9e586c236e6e62267dd8378eb6eb8e57a2484bbb60306",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/compressed_batch_width64_full44_csim_20261025_v1.json": "39925d5486465413fc6c00b0a1b78b1a3fb9e1858ee001121643cdfad7b3239d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/frozen_local_evidence_archive_audit_20261025_v1.json": "c2242f5b8fd3c816fc3870627836a7c266b0fb45d47e47f6a8a94c741f4088b6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/xrt_environment_recheck_20261025_v1/receipt.json": "7fb65908092674dddee24d93502fb1c7d8db1f251a0cd93c0b413e03e63a07d8",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/xrt_environment_recheck_20261025_v1/examine.log": "4c8e422099ee67b5e01d352b5ce3ab0270f07e2870d0e2443d12c66747082b6f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/configs/experiment.json": "80930076945c3506d3877d0bfa372e90e9d77681c0a7893c378a27377c2a4f03",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/EXPERIMENTS.md": "51fad092e2c2c0021889095542e24a6cded4152d001d4060ca14e41320e629ec",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/INTERFACES.md": "ead663a9519c42b9399b73206f38d9844ca597308780542df14d605f7ba8d40d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/snapshot_experiment_completion.py": "9b6f32a36324acd1dc10b7aaf91c55396f45ac7fbdbcb686c57d39e0117d88ae"
+  }
+}

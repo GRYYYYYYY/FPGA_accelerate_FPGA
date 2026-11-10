@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "performance": null,
+  "toolchain": "Vivado/XSim 2022.2",
+  "part": "xcu280-fsvh2892-2L-e",
+  "simulation": {
+    "scratch_page_codec": {
+      "checks": 5645,
+      "encoded": 64,
+      "decoded": 65,
+      "rejected": 7,
+      "aborted": 5,
+      "stalls": 13024
+    },
+    "codec_axi": {
+      "records": 4096,
+      "raw_beats": 2942
+    },
+    "codec_axi_service": {
+      "checks": 910,
+      "write_pages": 73,
+      "read_pages": 64,
+      "error_cases": 8,
+      "aw_bursts": 100,
+      "ar_bursts": 89,
+      "b_responses": 100,
+      "r_beats": 1428
+    }
+  },
+  "fixtures": {
+    "actual_pages": 62,
+    "directed_pages": 2,
+    "records": 4096,
+    "stride": 1344
+  },
+  "synthesis": {
+    "top": "scratch_page_codec",
+    "ram_cells": [
+      "words_reg RAMB18E2"
+    ],
+    "utilization": {
+      "luts": 965,
+      "registers": 1469,
+      "bram_tiles": 0.5,
+      "latches": 0
+    }
+  },
+  "negative_failures": {
+    "bypass_commit": "Fatal: record exposed before successful commit",
+    "ignore_failed_commit": "Fatal: record exposed before successful commit",
+    "ignore_bad_format": "Fatal: malformed page accepted",
+    "ignore_cancel": "Fatal: abort did not terminate page",
+    "reverse_record_words": "Fatal: encoded byte mismatch page=1 beat=0",
+    "drop_presence": "Fatal: encoded byte mismatch page=1 beat=0"
+  },
+  "warnings": [
+    "WARNING: [Synth 8-7080] Parallel synthesis criteria is not met",
+    "WARNING: [Netlist 29-101] Netlist 'scratch_page_codec' is not ideal for floorplanning, since the cellview 'scratch_page_codec' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning."
+  ],
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec.sv": "8d189bf474fada941e45896e4babb99573389e72d05fbdce85acfdbcf542f21f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_page_codec.sv": "0f864ffa6b7f89251b0416d1ecebe3d80d0de979d2b28059dac8ca3e0d43df0b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_codec_axi.sv": "0cb06ef858b7316e44d8521f9156dc67b4b78a9a37b427918afbdf9336c78ab0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_codec_axi_tb.py": "ebe1689dcc4c7e979d64e21c21cea4834abd5438bc88e2a73151969002c7ecec",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_codec_artifacts.py": "08c52b2a256bc1479e4905c65c18019e65a8148f66e37f0338958ec0c626b9b9",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_codec_artifacts_v2.py": "110f0f18e5341b817d80410999dfcc81a3fbeff29702528ea6373616db71833d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc": "a9259339b45b2eef2df30687117b50aed5a9a207d151e14f8538c125057c4459",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi.sv": "27365b16cc997b107a15cae232a5dd3232f2941c0d560e815578cd79ba2b4e69",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory.sv": "616b42670cdd9b487781686348690c46591543237e41f83c857e920088f67ee6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_page_service.sv": "b8eba97c3f3d3c70d385c16c3fe32868f14dbfad4f8faabed8fd8f2b9cab8893",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_backing_page_service.sv": "104311006c9c041a82386c07502fcdcda5f4cf70c29d0c62b0f8b2e9825bf8dd",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/real_field_values_20261023T024250Z/trace.values": "3d3ab69680d6ddd2cb0a1c8253ca11b71c776115ef313cbd1f8c5f8e76a88682",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/real_field_values_20261023T024250Z/trace.queries.jsonl": "7774037d3316c50a7708691dfa658d186872a0189a4639e5d6a185f5859dd694",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_axi_pages.py": "fe7887ec3f2fb3a15cac92c0fed53e620787a865f6f6221c81801f6bad553a6a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/src/scratch_page_values.py": "f048f7bb6b30e97ee679e90ff4502d6a79eeaa8a310e1e130596b2b1f508a0a1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.bin": "a50857ae1c67d5eabf720d13c647e9b409d6045b9cba59634ac9aed56b9aea61",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex": "85ea55fbe11224eb8adac5de8a0573c4208044ecea3444273af53c7814ec15c2",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/PAGE_CODEC_CONTRACT.md": "814856df69f8b27c47303cf0ca8ede33e1a9282b5fc1eaa6f2e7673d1e2e10f5",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/report_page_codec.py": "bbb99470fe473f5772fae778344d1e51ed19358a551e8c75c463b6f669da02dd"
+  },
+  "artifacts": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build_v2/build_manifest.json": "af93c0bca88d78ceb01d624ed2b58ec5f5f03ab7cd0fc0a1fd7f29ed8a912d8a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build/build_manifest.json": "d3ae12dfa6929148d1008d235b98959fc443984369be29bafe45c64cac037d59",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/manifest.json": "89db1f91e32e60307840b66ebf3f08c6b4cfd8f8243fe7ad6989b8acc6347980",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/manifest.json": "707f08d7021db7e8d5bb67cab1e738b15bf36497ae646263d267abda409f41b9",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/records_manifest.json": "455df9cb13643fd18aeef598d7aac04a100c5d65dd92d460eba6b3603a74fa9b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/records.hex": "780227a6965299288b9040229e0f362bb09fe9a903bdb32c42ef5bf05892ce6f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/standalone_final/tb_scratch_page_codec.tcl": "1433a7457e7635befb2634a4fe7f722895939a2f93d39dd15455e8167e6847a4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/standalone_final/session.log": "358d6fe9b30188ef740ad09248971ff961601156c04fc5902074f3f784db45c9",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/standalone_final/elaborate.log": "946e156307c50b5572d30af54aa02a54a685136becd3b570d5b3ececde95222c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/standalone_final/tb_scratch_page_codec_vlog.prj": "fb47ec5709f7357d7e9a6f0881d053a20989ce20d545eec54b49c3470eb076ba",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/standalone_final/xvlog.log": "20fd145610d77bbbb12575a9381a4fd9ae6e14173f88c6d40237a00012b0de3d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/integration_final/tb_codec_axi_vlog.prj": "b68994a3766931930c9b862a97984ee354f22868efc1380c38894e68330a5b71",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/integration_final/session.log": "fefc276f3122d869c2c5fb515555736b503317b6c699b78ee2ba3512774c53a8",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/integration_final/elaborate.log": "222ff7adeaa161b62dbc70afb4bbfe34ddb2748de871730893585c3163f0f40a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/integration_final/xvlog.log": "972d2153a45dc978b13a4e8613f941d8cbfdcb7669b5a941d452daa085dc59b1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/integration_final/tb_codec_axi.tcl": "1433a7457e7635befb2634a4fe7f722895939a2f93d39dd15455e8167e6847a4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build_v2/synthesis/synthesize.tcl": "c33c7c568d11623fc368693cb7d78b470f675bc6cf35f8852c0216aad4294ca9",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build_v2/synthesis/synthesize.log": "5c69e39f5f23e91ac283cae47ec484e12aa06bc926d267bd270e675c7ddc5450",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build_v2/synthesis/utilization.rpt": "3ad8735589aa4a072ae46ff64b1354428b8fccfd7741a9abbf2b85162f1a303a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build_v2/synthesis/ram_cells.txt": "504de4ad25dbdd7b1c33246dfc03b231f4f873ff6f88eb0a95a0a6b634bfed1d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/verified_build_v2/synthesis/scratch_page_codec.dcp": "fdfe92dc12776c07fc4c41343152557705dd9d4e15e684266d89da73c8b6e407"
+  },
+  "scope": "Standalone codec plus AXI-service composition driven by testbench tasks. Commit/abort sequencing is not yet a synthesizable adapter, queued page COMPLETE/RETIRE/fence remain unconnected. Serial word conversion; no post-route timing, board measurement or acceleration claim."
+}

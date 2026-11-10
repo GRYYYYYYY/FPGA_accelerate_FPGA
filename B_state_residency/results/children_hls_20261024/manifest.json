@@ -1,0 +1,133 @@
+{
+  "status": "passed",
+  "pid": 1054521,
+  "runner_sha256": "94b9436cc5529070d70ce2061b72613edb57a923cbf392d31aa653d207853924",
+  "gates": {
+    "real": "f0e77c64df3a9ece127fee8324a9ab5fe3e1b6bd7062542062ab35e1aa1be185",
+    "unit": "6c38e24f227497259aaa0a95d27ee0de32408c0a06d1d96f4af2df82e427b852"
+  },
+  "sources": {
+    "rearchitect/v1/hls_config.cfg": "224146f19bd8ef3cad32b8eb0af2a8a32769d50f99d06b641db2012997f5eb39",
+    "rearchitect/v1/tb/original_exclusion.inc": "6a6ff7f85e7529a983c308eb0b7aff6f2d4ec8db9dc409cc71fbe121c16f7cf0",
+    "rearchitect/v1/tb/testbench.cpp": "8a466f91fd4cbfe14c4c5cf647e3c44f8ee31007597fee4dc8dd2938fb328a7b",
+    "rearchitect/v1/tb/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "rearchitect/v1/tb/original_dead.inc": "65cfc083681fa2ace3f397c708891aa9f52f4eb17e5e74a6bdf680e548539a87",
+    "rearchitect/v1/src/children_machine.hpp": "2c81dcc34cf7ca50eca31354806a3e943517c3a271857590d4b62a4e19782ed3",
+    "rearchitect/v1/src/kernel_hls.cpp": "d45b16e69b76be73f2e84d3fb7416127830340ebb8d773fa96be309f69db379e",
+    "rearchitect/v1/src/children_port.hpp": "fc447df1ba39b25bfd453eb0131bd24cbd7044db5977f2300db5e84d0943a276"
+  },
+  "part": "xcu280-fsvh2892-2L-e",
+  "clock_ns": 10.0,
+  "top": "children_step",
+  "cases": {
+    "32": {
+      "status": "passed",
+      "generation_bits": 32,
+      "commands": [
+        {
+          "stage": "cpp_build",
+          "argv": [
+            "g++",
+            "-O2",
+            "-std=c++14",
+            "-fno-fast-math",
+            "-DCHILDREN_GENERATION_BITS=32",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/kernel_hls.cpp",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb/testbench.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen32/cpp_test"
+          ],
+          "pid": 1054808,
+          "exit_code": 0
+        },
+        {
+          "stage": "cpp_test",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen32/cpp_test"
+          ],
+          "pid": 1055653,
+          "exit_code": 0
+        },
+        {
+          "stage": "hls",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen32/run_hls.tcl"
+          ],
+          "pid": 1055952,
+          "exit_code": 0
+        }
+      ],
+      "expected_pass_line": "CHILDREN_PORT_PASS generation_bits=32 contexts=93728 calls=918795",
+      "checks": 918795,
+      "cpp_binary_sha256": "205a8e7f8fd27bc688118942f0ae31ed80aa236099c657edefe77d17d76793bc",
+      "tcl_sha256": "c78783efc4d68dead42e2eaac8f84f86f98fc191e66817421e37ee9a7d324e51",
+      "argv_preflight": {
+        "csim": "",
+        "cosim": "",
+        "both_empty_allowed": true
+      },
+      "flow_log_sha256": "fcec8e404f8bfdfef1d47bc855a321f7f41f03a7aa0e8f5928f253289d40f5ed",
+      "cosim_report_sha256": "7157b1a0e5d7cc80eef99103d770a2aa243058541c9d51a30e375302a001add7"
+    },
+    "3": {
+      "status": "passed",
+      "generation_bits": 3,
+      "commands": [
+        {
+          "stage": "cpp_build",
+          "argv": [
+            "g++",
+            "-O2",
+            "-std=c++14",
+            "-fno-fast-math",
+            "-DCHILDREN_GENERATION_BITS=3",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/src/kernel_hls.cpp",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/rearchitect/v1/tb/testbench.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/cpp_test"
+          ],
+          "pid": 1165374,
+          "exit_code": 0
+        },
+        {
+          "stage": "cpp_test",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/cpp_test"
+          ],
+          "pid": 1165388,
+          "exit_code": 0
+        },
+        {
+          "stage": "hls",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/children_hls_20261024/gen3/run_hls.tcl"
+          ],
+          "pid": 1165389,
+          "exit_code": 0
+        }
+      ],
+      "expected_pass_line": "CHILDREN_PORT_PASS generation_bits=3 contexts=7 calls=406",
+      "checks": 406,
+      "cpp_binary_sha256": "bacc6b0ee31a3b524f95d43b1760aa6caec4a0909b335ee1e7fcf2c7b2176990",
+      "tcl_sha256": "ccbdb5bfcb5ecd934b3b1574fc7ae94f963a7db509a3f1b0a5bb522ab99f9484",
+      "argv_preflight": {
+        "csim": "",
+        "cosim": "",
+        "both_empty_allowed": true
+      },
+      "flow_log_sha256": "df1004c24749cbb7802f71b634baeeda7107dbd5a2ce1d74e3c1d9dd1dfc381c",
+      "cosim_report_sha256": "46e6fbaa5ae6f829d6e26665d35841c76a24faba14a3608faf4f8010de55fe12"
+    }
+  },
+  "scope": "Standalone first-touch children command protocol; original-function oracle, real gen3 exhaustion; no graph/storage integration or full FPGA search."
+}

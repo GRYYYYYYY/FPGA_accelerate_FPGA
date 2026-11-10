@@ -1,0 +1,24 @@
+{
+  "status": "live_io_window_and_original_progress_reporting_granularity_verified_not_transaction_acceptance",
+  "observed_kernel_pid": 853351,
+  "input_descriptors_observed": 75,
+  "input_positions_advanced": 0,
+  "read_character_delta": 525,
+  "cpu_tick_delta": 2002,
+  "progress_timeout_events": 10000000,
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/compact_native_runtime_io_observation_20261025_v1.json": "95e812d502530b01f7079bae9156f0a98d0ff1d189d42dd59f300990c152d61f",
+    "/tmp/A_graph_compression_recovery_20261025_v1/compact_native_stack_recovery_v2/sim/verilog/search_batch_trace_top_v2.autotb.v": "4db6b358a5404c1c2ec2d95587f0bd8a87749e4759e704023a6e120125649e64",
+    "/tmp/A_graph_compression_recovery_20261025_v1/compact_native_stack_recovery_v2/plan.json": "b4d8d458fc4ffc70041b469963b70a533334e59910f0b60ee2000b3568936c85"
+  },
+  "findings": [
+    "No observed input descriptor advancement during20-second window; little new read traffic",
+    "Original reporting loop prints intermediate progress only after a large event-count threshold or completion",
+    "Neither unchanged0/4 logging nor CPU activity alone establishes simulated-clock progress or deadlock"
+  ],
+  "limits": [
+    "OS positions include buffering/read-ahead and do not establish all input parsing is complete",
+    "Cached-data processing and actual HDL clock advancement are not distinguished by this observation",
+    "No signal, debugger attachment, simulator command or live source modification"
+  ]
+}

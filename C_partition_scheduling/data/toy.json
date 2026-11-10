@@ -1,0 +1,49 @@
+{
+  "dataset_kind": "synthetic_smoke",
+  "fixture_id": "toy_C",
+  "workers": 2,
+  "worker_state_capacity_bytes": 4096,
+  "tasks": [
+    {
+      "id": "a",
+      "predecessors": [],
+      "resource_ids": [
+        10,
+        11
+      ],
+      "work_units": 3,
+      "state_bytes": 1024
+    },
+    {
+      "id": "b",
+      "predecessors": [],
+      "resource_ids": [
+        20
+      ],
+      "work_units": 2,
+      "state_bytes": 2048
+    },
+    {
+      "id": "c",
+      "predecessors": [
+        "a"
+      ],
+      "resource_ids": [
+        11,
+        12
+      ],
+      "work_units": 2,
+      "state_bytes": 1024
+    },
+    {
+      "id": "d",
+      "predecessors": [],
+      "resource_ids": [
+        20,
+        30
+      ],
+      "work_units": 1,
+      "state_bytes": 512
+    }
+  ]
+}

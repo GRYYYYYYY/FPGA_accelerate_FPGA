@@ -1,0 +1,33 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Tue Oct 27 22:43:15 2026
+# Process ID: 1655794
+# Current directory: /tmp/B_state_residency_offer_20261025/recovery_backend_native_v1/exclusive_0
+# Command line: xsim -log simulate.log -mode tcl -source {xsim.dir/test/xsim_script.tcl}
+# Log file: /tmp/B_state_residency_offer_20261025/recovery_backend_native_v1/exclusive_0/simulate.log
+# Journal file: /tmp/B_state_residency_offer_20261025/recovery_backend_native_v1/exclusive_0/xsim.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2100.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source xsim.dir/test/xsim_script.tcl
+# xsim {test} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run 20us
+EVENT 155000 A_REQUEST 208292 4097
+EVENT 165000 A_REPLY 4097
+EVENT 175000 O_REQUEST 0 4097
+EVENT 185000 O_REPLY 0 4097
+EVENT 195000 O_REQUEST 1 4098
+EVENT 205000 O_REPLY 5 4098
+EVENT 225000 A_REQUEST 208292 1073745921
+EVENT 235000 A_REPLY 1073745921
+EVENT 245000 O_REQUEST 0 4099
+EVENT 255000 O_REPLY 0 4099
+EVENT 265000 O_REQUEST 1 4100
+EVENT 275000 O_REPLY 5 4100
+BACKEND_CONTRACT_PASS status=3 refusals=2 gets=2 authority=2 journal=1
+$finish called at time : 370 ns : File "/tmp/B_state_residency_offer_20261025/recovery_backend_native_v1/exclusive_0/tb.sv" Line 46
+## quit
+INFO: [Common 17-206] Exiting xsim at Tue Oct 27 22:43:19 2026...

@@ -1,0 +1,662 @@
+{
+  "artifacts": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_000/audit.json": "518d54744fe3479ebd27678534373b8429144350d0b1210adb7131cae57f132e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_001/audit.json": "425abf5805731ef5cf82cbfc5c0fe6e9cd701e85dc6c7a942e88c79dd5e5b9aa",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_002/audit.json": "a1f77f2ddd7b2359203a1c8777fc1409beb0f005c199fd9275744e59a7e73038",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_003/audit.json": "ed117b72c435c2e7f092006b5c35cc4a3ee878a31f8ec19f2e5740894f82f28a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_004/audit.json": "0f294ea5cb15acd53cad1e88364cad0c60df458dd392c3b4c6f45b41f78492fc",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_005/audit.json": "025c1b22f53da5caebf131145a633bca1a92335e59495e96093746a971ae9f88",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/block_006/audit.json": "85975366c75569d61a5fb4ac8f2dd1496f9ac301174cb945032f81b3c75f610d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/plan.json": "ee98c4f1234203b425abc332be32be0c1ab85a4398dcb944e849403476e32751",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1/report.json": "b0f07c9e674e62670ce2e671d49d47ef983e48a4e053cd3e0ab7385c85b35fb5"
+  },
+  "auditor_sha256": "eb6bc20cd5df90d830ee6f7cc180ba636ad754122859c72e5501bcac84caa5d1",
+  "completed_workers": 21,
+  "limitations": [
+    "Application timer covers existing captured TSV through two complete routing batches, including intermediate validation and exports.",
+    "Excludes Vivado acquisition, bank training, board transfer and physical readback; these remain separate requirements.",
+    "Preflight integrity checks and post-route semantic audit are outside application timer but inside process wall.",
+    "Parent conversion peak and native child peak are distinct process measurements; do not sum them as simultaneous memory.",
+    "Parent drops graph/adapter objects before native launch. Shared host, page cache and buffered disk writes remain uncontrolled.",
+    "Seven fresh processes per condition, randomized within each repeat block.",
+    "Each application wall measures regeneration and TWO batches, not single-batch latency.",
+    "All blocks run sequentially on one CPU; unrelated host workloads remain uncontrolled."
+  ],
+  "paired_comparisons": [
+    {
+      "denominator": "csr/direct",
+      "median_paired_ratio": 1.4239737605261278,
+      "metric": "application_wall_ms",
+      "numerator": "compact/direct",
+      "ratios_by_repeat": [
+        1.420295818780824,
+        1.7224739915222056,
+        1.4560540135692857,
+        1.4349805889057279,
+        1.4141859673225887,
+        1.4239737605261278,
+        1.4111632537915182
+      ]
+    },
+    {
+      "denominator": "csr/direct",
+      "median_paired_ratio": 0.8952030304816067,
+      "metric": "application_wall_ms",
+      "numerator": "compact/expanded",
+      "ratios_by_repeat": [
+        0.8980364926039213,
+        0.8808988986791907,
+        0.9370735568219128,
+        0.9063176928487451,
+        0.8888875968153191,
+        0.8945924286503144,
+        0.8952030304816067
+      ]
+    }
+  ],
+  "status": "complete_source_to_route_statistics_audited",
+  "summaries": [
+    {
+      "execution": "direct",
+      "measurements": {
+        "application_wall_ms": {
+          "max": 2013865.1847839355,
+          "median": 1623146.4289277792,
+          "min": 1603140.0831080973
+        },
+        "native_child_peak_kib": {
+          "max": 7016916,
+          "median": 7016840,
+          "min": 7016728
+        },
+        "parent_pre_native_peak_kib": {
+          "max": 7016916,
+          "median": 7016840,
+          "min": 7016728
+        },
+        "worker_process_wall_ms": {
+          "max": 2111951.760893,
+          "median": 1720882.442134,
+          "min": 1700176.078882
+        }
+      },
+      "mode": "compact",
+      "n": 7,
+      "stage_medians_ms": {
+        "bank_load_ms": 9.574970230460167,
+        "evidence_load_ms": 89.54638242721558,
+        "fixture_build_ms": 2435.626031830907,
+        "fixture_write_ms": 13.378007337450981,
+        "generated_input_validation_ms": 101.07806697487831,
+        "image_adapter_load_ms": 8459.471579641104,
+        "native_process_ms": 1554633.8260415941,
+        "pre_native_cleanup_ms": 1239.3547799438238,
+        "read_export_ms": 15455.291213467717,
+        "serialize_ms": 41119.36586536467
+      }
+    },
+    {
+      "execution": "expanded",
+      "measurements": {
+        "application_wall_ms": {
+          "max": 1057915.6090635806,
+          "median": 1020229.8437599093,
+          "min": 1016987.8338519484
+        },
+        "native_child_peak_kib": {
+          "max": 7016888,
+          "median": 7016732,
+          "min": 6997652
+        },
+        "parent_pre_native_peak_kib": {
+          "max": 7016888,
+          "median": 7016732,
+          "min": 6997652
+        },
+        "worker_process_wall_ms": {
+          "max": 1156378.439147,
+          "median": 1119878.086809,
+          "min": 1114253.067564
+        }
+      },
+      "mode": "compact",
+      "n": 7,
+      "stage_medians_ms": {
+        "bank_load_ms": 9.089775383472443,
+        "evidence_load_ms": 89.38507921993732,
+        "fixture_build_ms": 2485.8893640339375,
+        "fixture_write_ms": 12.73907721042633,
+        "generated_input_validation_ms": 97.64301590621471,
+        "image_adapter_load_ms": 8425.903394818306,
+        "native_process_ms": 951384.6398126334,
+        "pre_native_cleanup_ms": 1214.5470064133406,
+        "read_export_ms": 15452.220343053341,
+        "serialize_ms": 41034.76392291486
+      }
+    },
+    {
+      "execution": "direct",
+      "measurements": {
+        "application_wall_ms": {
+          "max": 1169170.1556574553,
+          "median": 1138353.132436052,
+          "min": 1124847.8771671653
+        },
+        "native_child_peak_kib": {
+          "max": 6221732,
+          "median": 6221576,
+          "min": 6221284
+        },
+        "parent_pre_native_peak_kib": {
+          "max": 6221732,
+          "median": 6221576,
+          "min": 6221284
+        },
+        "worker_process_wall_ms": {
+          "max": 1267367.993731,
+          "median": 1236819.309921,
+          "min": 1223410.236146
+        }
+      },
+      "mode": "csr",
+      "n": 7,
+      "stage_medians_ms": {
+        "bank_load_ms": 0.0019352883100509644,
+        "evidence_load_ms": 91.46581217646599,
+        "fixture_build_ms": 2464.311182498932,
+        "fixture_write_ms": 13.97714763879776,
+        "generated_input_validation_ms": 109.41756889224052,
+        "image_adapter_load_ms": 8179.5109156519175,
+        "native_process_ms": 1086971.7676714063,
+        "pre_native_cleanup_ms": 1252.7826130390167,
+        "read_export_ms": 15561.53535284102,
+        "serialize_ms": 23122.535226866603
+      }
+    }
+  ],
+  "workers": [
+    {
+      "application_wall_ms": 1161332.0451620966,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221588,
+      "parent_pre_native_peak_kib": 6221588,
+      "repeat": 0,
+      "stage_ms": {
+        "bank_load_ms": 0.002771615982055664,
+        "evidence_load_ms": 91.23579412698746,
+        "fixture_build_ms": 2552.8502948582172,
+        "fixture_write_ms": 12.251444160938263,
+        "generated_input_validation_ms": 105.34315928816795,
+        "image_adapter_load_ms": 8590.684378519654,
+        "native_process_ms": 1110178.6256060004,
+        "pre_native_cleanup_ms": 1238.3539732545614,
+        "read_export_ms": 15440.011696889997,
+        "serialize_ms": 23122.535226866603
+      },
+      "worker_process_wall_ms": 1259912.422471
+    },
+    {
+      "application_wall_ms": 1042918.5565859079,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 6997652,
+      "parent_pre_native_peak_kib": 6997652,
+      "repeat": 0,
+      "stage_ms": {
+        "bank_load_ms": 9.69676487147808,
+        "evidence_load_ms": 89.40770104527473,
+        "fixture_build_ms": 2511.755282059312,
+        "fixture_write_ms": 11.365959420800209,
+        "generated_input_validation_ms": 97.44849614799023,
+        "image_adapter_load_ms": 8425.903394818306,
+        "native_process_ms": 973974.2797669023,
+        "pre_native_cleanup_ms": 1221.9045460224152,
+        "read_export_ms": 15572.590917348862,
+        "serialize_ms": 41004.07191552222
+      },
+      "worker_process_wall_ms": 1141503.966001
+    },
+    {
+      "application_wall_ms": 1649435.0479599088,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016808,
+      "parent_pre_native_peak_kib": 7016808,
+      "repeat": 0,
+      "stage_ms": {
+        "bank_load_ms": 9.625822305679321,
+        "evidence_load_ms": 88.83658796548843,
+        "fixture_build_ms": 2429.2042423039675,
+        "fixture_write_ms": 13.719979673624039,
+        "generated_input_validation_ms": 101.07806697487831,
+        "image_adapter_load_ms": 8459.471579641104,
+        "native_process_ms": 1580509.4698667526,
+        "pre_native_cleanup_ms": 1244.2021314054728,
+        "read_export_ms": 15264.876963570714,
+        "serialize_ms": 41314.429592341185
+      },
+      "worker_process_wall_ms": 1747695.465369
+    },
+    {
+      "application_wall_ms": 1169170.1556574553,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221636,
+      "parent_pre_native_peak_kib": 6221636,
+      "repeat": 1,
+      "stage_ms": {
+        "bank_load_ms": 0.0018924474716186523,
+        "evidence_load_ms": 98.518967628479,
+        "fixture_build_ms": 2467.872055247426,
+        "fixture_write_ms": 12.617802247405052,
+        "generated_input_validation_ms": 104.52197678387165,
+        "image_adapter_load_ms": 7843.226294964552,
+        "native_process_ms": 1118648.1558568776,
+        "pre_native_cleanup_ms": 1200.611773878336,
+        "read_export_ms": 15606.96212016046,
+        "serialize_ms": 23187.515877187252
+      },
+      "worker_process_wall_ms": 1267367.993731
+    },
+    {
+      "application_wall_ms": 1029920.7024872303,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016828,
+      "parent_pre_native_peak_kib": 7016828,
+      "repeat": 1,
+      "stage_ms": {
+        "bank_load_ms": 9.089775383472443,
+        "evidence_load_ms": 90.06781317293644,
+        "fixture_build_ms": 2493.824362754822,
+        "fixture_write_ms": 13.907352462410927,
+        "generated_input_validation_ms": 103.7196647375822,
+        "image_adapter_load_ms": 8138.698795810342,
+        "native_process_ms": 961270.6179451197,
+        "pre_native_cleanup_ms": 1212.8851786255836,
+        "read_export_ms": 15381.48789294064,
+        "serialize_ms": 41206.2692604959
+      },
+      "worker_process_wall_ms": 1126526.073966
+    },
+    {
+      "application_wall_ms": 2013865.1847839355,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016828,
+      "parent_pre_native_peak_kib": 7016828,
+      "repeat": 1,
+      "stage_ms": {
+        "bank_load_ms": 9.664943441748619,
+        "evidence_load_ms": 89.25585635006428,
+        "fixture_build_ms": 2439.5055770874023,
+        "fixture_write_ms": 10.901378467679024,
+        "generated_input_validation_ms": 96.62628546357155,
+        "image_adapter_load_ms": 8482.732454314828,
+        "native_process_ms": 1944395.721502602,
+        "pre_native_cleanup_ms": 1248.8111685961485,
+        "read_export_ms": 15502.708276733756,
+        "serialize_ms": 41589.12495151162
+      },
+      "worker_process_wall_ms": 2111951.760893
+    },
+    {
+      "application_wall_ms": 1128956.8480104208,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221284,
+      "parent_pre_native_peak_kib": 6221284,
+      "repeat": 2,
+      "stage_ms": {
+        "bank_load_ms": 0.001648440957069397,
+        "evidence_load_ms": 93.39668415486813,
+        "fixture_build_ms": 2432.6541647315025,
+        "fixture_write_ms": 13.97714763879776,
+        "generated_input_validation_ms": 214.84954841434956,
+        "image_adapter_load_ms": 8024.829043075442,
+        "native_process_ms": 1078233.4687560797,
+        "pre_native_cleanup_ms": 1306.8338744342327,
+        "read_export_ms": 15490.77071994543,
+        "serialize_ms": 23145.921563729644
+      },
+      "worker_process_wall_ms": 1227133.030567
+    },
+    {
+      "application_wall_ms": 1057915.6090635806,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016840,
+      "parent_pre_native_peak_kib": 7016840,
+      "repeat": 2,
+      "stage_ms": {
+        "bank_load_ms": 9.341510012745857,
+        "evidence_load_ms": 88.90282735228539,
+        "fixture_build_ms": 2485.8893640339375,
+        "fixture_write_ms": 11.285755783319473,
+        "generated_input_validation_ms": 96.91292606294155,
+        "image_adapter_load_ms": 8257.548447698355,
+        "native_process_ms": 988819.9751600623,
+        "pre_native_cleanup_ms": 1206.805320456624,
+        "read_export_ms": 15828.56073603034,
+        "serialize_ms": 41110.2337539196
+      },
+      "worker_process_wall_ms": 1156378.439147
+    },
+    {
+      "application_wall_ms": 1643822.1496921033,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016872,
+      "parent_pre_native_peak_kib": 7016872,
+      "repeat": 2,
+      "stage_ms": {
+        "bank_load_ms": 9.086951613426208,
+        "evidence_load_ms": 106.46647773683071,
+        "fixture_build_ms": 2413.3901931345463,
+        "fixture_write_ms": 13.914039358496666,
+        "generated_input_validation_ms": 103.3450048416853,
+        "image_adapter_load_ms": 8851.949019357562,
+        "native_process_ms": 1574327.556539327,
+        "pre_native_cleanup_ms": 1235.8353398740292,
+        "read_export_ms": 15641.102032735944,
+        "serialize_ms": 41119.36586536467
+      },
+      "worker_process_wall_ms": 1741275.425717
+    },
+    {
+      "application_wall_ms": 1124847.8771671653,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221576,
+      "parent_pre_native_peak_kib": 6221576,
+      "repeat": 3,
+      "stage_ms": {
+        "bank_load_ms": 0.0019352883100509644,
+        "evidence_load_ms": 91.9518880546093,
+        "fixture_build_ms": 2431.697852909565,
+        "fixture_write_ms": 53.63044515252113,
+        "generated_input_validation_ms": 174.36652816832066,
+        "image_adapter_load_ms": 8027.617659419775,
+        "native_process_ms": 1074488.0489632487,
+        "pre_native_cleanup_ms": 1252.7826130390167,
+        "read_export_ms": 15465.878902003169,
+        "serialize_ms": 22861.750515177846
+      },
+      "worker_process_wall_ms": 1223410.236146
+    },
+    {
+      "application_wall_ms": 1019469.5328399539,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016732,
+      "parent_pre_native_peak_kib": 7016732,
+      "repeat": 3,
+      "stage_ms": {
+        "bank_load_ms": 9.06340405344963,
+        "evidence_load_ms": 89.89359252154827,
+        "fixture_build_ms": 2505.6842751801014,
+        "fixture_write_ms": 12.839997187256813,
+        "generated_input_validation_ms": 102.69403271377087,
+        "image_adapter_load_ms": 8645.096685737371,
+        "native_process_ms": 950039.4766312093,
+        "pre_native_cleanup_ms": 1276.182072237134,
+        "read_export_ms": 15452.220343053341,
+        "serialize_ms": 41336.247408762574
+      },
+      "worker_process_wall_ms": 1118632.012488
+    },
+    {
+      "application_wall_ms": 1614134.8692066967,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016840,
+      "parent_pre_native_peak_kib": 7016840,
+      "repeat": 3,
+      "stage_ms": {
+        "bank_load_ms": 9.574970230460167,
+        "evidence_load_ms": 89.96022678911686,
+        "fixture_build_ms": 2450.5557157099247,
+        "fixture_write_ms": 11.40301302075386,
+        "generated_input_validation_ms": 140.3666753321886,
+        "image_adapter_load_ms": 8402.642127126455,
+        "native_process_ms": 1545154.7187156975,
+        "pre_native_cleanup_ms": 1239.3547799438238,
+        "read_export_ms": 15665.22534005344,
+        "serialize_ms": 40970.93044966459
+      },
+      "worker_process_wall_ms": 1714380.230247
+    },
+    {
+      "application_wall_ms": 1147760.242594406,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221732,
+      "parent_pre_native_peak_kib": 6221732,
+      "repeat": 4,
+      "stage_ms": {
+        "bank_load_ms": 0.0021997839212417603,
+        "evidence_load_ms": 90.69388918578625,
+        "fixture_build_ms": 2464.311182498932,
+        "fixture_write_ms": 14.222240075469017,
+        "generated_input_validation_ms": 109.41756889224052,
+        "image_adapter_load_ms": 8210.055349394679,
+        "native_process_ms": 1096691.9120382518,
+        "pre_native_cleanup_ms": 1262.4965868890285,
+        "read_export_ms": 15771.199312061071,
+        "serialize_ms": 23145.778877660632
+      },
+      "worker_process_wall_ms": 1246155.081496
+    },
+    {
+      "application_wall_ms": 1020229.8437599093,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 6997820,
+      "parent_pre_native_peak_kib": 6997820,
+      "repeat": 4,
+      "stage_ms": {
+        "bank_load_ms": 9.77570004761219,
+        "evidence_load_ms": 88.20253796875477,
+        "fixture_build_ms": 2437.28013522923,
+        "fixture_write_ms": 28.265751898288727,
+        "generated_input_validation_ms": 97.64301590621471,
+        "image_adapter_load_ms": 8532.880540937185,
+        "native_process_ms": 951384.6398126334,
+        "pre_native_cleanup_ms": 1212.0378278195858,
+        "read_export_ms": 15404.219752177596,
+        "serialize_ms": 41034.76392291486
+      },
+      "worker_process_wall_ms": 1119878.086809
+    },
+    {
+      "application_wall_ms": 1623146.4289277792,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016916,
+      "parent_pre_native_peak_kib": 7016916,
+      "repeat": 4,
+      "stage_ms": {
+        "bank_load_ms": 9.572597220540047,
+        "evidence_load_ms": 90.7008983194828,
+        "fixture_build_ms": 2432.891046628356,
+        "fixture_write_ms": 14.38257284462452,
+        "generated_input_validation_ms": 101.24002769589424,
+        "image_adapter_load_ms": 8521.996930241585,
+        "native_process_ms": 1554633.8260415941,
+        "pre_native_cleanup_ms": 1206.7489512264729,
+        "read_export_ms": 15343.229936435819,
+        "serialize_ms": 40791.70929826796
+      },
+      "worker_process_wall_ms": 1720882.442134
+    },
+    {
+      "application_wall_ms": 1138353.132436052,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221324,
+      "parent_pre_native_peak_kib": 6221324,
+      "repeat": 5,
+      "stage_ms": {
+        "bank_load_ms": 0.001821666955947876,
+        "evidence_load_ms": 90.15720710158348,
+        "fixture_build_ms": 2482.8000385314226,
+        "fixture_write_ms": 202.6505284011364,
+        "generated_input_validation_ms": 612.2311726212502,
+        "image_adapter_load_ms": 8179.5109156519175,
+        "native_process_ms": 1086971.7676714063,
+        "pre_native_cleanup_ms": 1280.0505869090557,
+        "read_export_ms": 15561.53535284102,
+        "serialize_ms": 22972.267363220453
+      },
+      "worker_process_wall_ms": 1236819.309921
+    },
+    {
+      "application_wall_ms": 1018362.0934076607,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016624,
+      "parent_pre_native_peak_kib": 7016624,
+      "repeat": 5,
+      "stage_ms": {
+        "bank_load_ms": 8.963949978351593,
+        "evidence_load_ms": 89.38507921993732,
+        "fixture_build_ms": 2418.000467121601,
+        "fixture_write_ms": 11.124776676297188,
+        "generated_input_validation_ms": 96.37832827866077,
+        "image_adapter_load_ms": 8287.355322390795,
+        "native_process_ms": 949883.8370833546,
+        "pre_native_cleanup_ms": 1239.1650173813105,
+        "read_export_ms": 15569.634752348065,
+        "serialize_ms": 40758.11115093529
+      },
+      "worker_process_wall_ms": 1116246.926286
+    },
+    {
+      "application_wall_ms": 1620984.9908016622,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016728,
+      "parent_pre_native_peak_kib": 7016728,
+      "repeat": 5,
+      "stage_ms": {
+        "bank_load_ms": 11.86402142047882,
+        "evidence_load_ms": 89.54638242721558,
+        "fixture_build_ms": 2454.970508813858,
+        "fixture_write_ms": 11.146949604153633,
+        "generated_input_validation_ms": 96.78876772522926,
+        "image_adapter_load_ms": 8220.22427804768,
+        "native_process_ms": 1552525.865798816,
+        "pre_native_cleanup_ms": 1185.0519478321075,
+        "read_export_ms": 15398.692816495895,
+        "serialize_ms": 40990.6984064728
+      },
+      "worker_process_wall_ms": 1718535.58892
+    },
+    {
+      "application_wall_ms": 1136041.545016691,
+      "condition": {
+        "execution": "direct",
+        "mode": "csr"
+      },
+      "native_child_peak_kib": 6221560,
+      "parent_pre_native_peak_kib": 6221560,
+      "repeat": 6,
+      "stage_ms": {
+        "bank_load_ms": 0.0020638108253479004,
+        "evidence_load_ms": 91.46581217646599,
+        "fixture_build_ms": 2415.549675002694,
+        "fixture_write_ms": 12.189015746116638,
+        "generated_input_validation_ms": 101.5850193798542,
+        "image_adapter_load_ms": 8338.449589908123,
+        "native_process_ms": 1085769.05422844,
+        "pre_native_cleanup_ms": 1247.2286373376846,
+        "read_export_ms": 15583.917176350951,
+        "serialize_ms": 22481.96107149124
+      },
+      "worker_process_wall_ms": 1233152.649014
+    },
+    {
+      "application_wall_ms": 1016987.8338519484,
+      "condition": {
+        "execution": "expanded",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016888,
+      "parent_pre_native_peak_kib": 7016888,
+      "repeat": 6,
+      "stage_ms": {
+        "bank_load_ms": 9.080294519662857,
+        "evidence_load_ms": 88.68328109383583,
+        "fixture_build_ms": 2461.9195740669966,
+        "fixture_write_ms": 12.73907721042633,
+        "generated_input_validation_ms": 98.61245565116405,
+        "image_adapter_load_ms": 8611.196296289563,
+        "native_process_ms": 948783.0412276089,
+        "pre_native_cleanup_ms": 1214.5470064133406,
+        "read_export_ms": 15401.281282305717,
+        "serialize_ms": 40306.59464746714
+      },
+      "worker_process_wall_ms": 1114253.067564
+    },
+    {
+      "application_wall_ms": 1603140.0831080973,
+      "condition": {
+        "execution": "direct",
+        "mode": "compact"
+      },
+      "native_child_peak_kib": 7016916,
+      "parent_pre_native_peak_kib": 7016916,
+      "repeat": 6,
+      "stage_ms": {
+        "bank_load_ms": 9.140623733401299,
+        "evidence_load_ms": 89.44619260728359,
+        "fixture_build_ms": 2435.626031830907,
+        "fixture_write_ms": 13.378007337450981,
+        "generated_input_validation_ms": 99.35724548995495,
+        "image_adapter_load_ms": 8238.279033452272,
+        "native_process_ms": 1534363.288993016,
+        "pre_native_cleanup_ms": 1243.533156812191,
+        "read_export_ms": 15455.291213467717,
+        "serialize_ms": 41192.60790385306
+      },
+      "worker_process_wall_ms": 1700176.078882
+    }
+  ]
+}

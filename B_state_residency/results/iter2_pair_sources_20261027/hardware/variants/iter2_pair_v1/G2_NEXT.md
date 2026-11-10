@@ -1,0 +1,9 @@
+# 相邻查询后的G2接入约束
+
+当前双查询例为正常连续性验证，尚无G2发布。应从 iter2_prepare_continuous 返回（query180327提交+历史路径拆线之后）分支发布，不能从q180328已提交后回装快照。此时工作owner必须等于已审计continuous_prep完整图像，journal四键339193/558358/265324/990179；路径仅slot0三内部节点，query ledger floor180327，storage3/1/3。
+
+发布源标签来自q180327实际final，并清理204279 target；此时67922尚未置target，源点仍sequence180327。不能直接使用q180328 prepared标签作为G2源，否则提前套用了第二query source/target准备。恢复服务显式RESTORE_RECORDS=1024、snapshot_count822，服务末尾821；不能沿用512/328。新attempt需保留G2导出的真实sequence180327，不能复用G1初始seq0镜像。
+
+原生PC lease下导出真实path/query字节及CRC，再用当前authority/config/coordinator三方共同发布；candidate owner是continuous_prep工作输出，必须与CPU prepared全图一致。发布清journal但保留attempt floor，释放lease后从原生AP接口验证G2含真实overflow与四个变更节点。下一query180328只执行一次原生source/target准备，按本例独立CPU oracle核对。
+
+故障恢复需在G2发布后对下一query owner物理B注错，原生G2两轮GET核对与实际修正，恢复822标签、slot0路径及ledger180327，再使用更高attempt标签重试sequence180328。query/storage/version三者不可混同。价格/history内容不变，不宣称任意变价有效性。完整owner/pool/allocator及其他net必须逐字节比较。

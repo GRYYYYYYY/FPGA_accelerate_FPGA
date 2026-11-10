@@ -1,0 +1,110 @@
+{
+  "audit": {
+    "auditor_sha256": "50d6ec0e1553e5530d6ac00cca0b8d9d4cf2a4182157ddd18cbd161f35d0672e",
+    "builder_sha256": "8d3d8d065937418c80a5b68db04276f5a8f54d694fecb1a1bfb7fef56d80a9f2",
+    "capture_events": 14,
+    "cases": {
+      "baseline": {
+        "check_timing": {
+          "constant_clock": 0,
+          "generated_clocks": 0,
+          "latch_loops": 0,
+          "loops": 1,
+          "multiple_clock": 0,
+          "no_clock": 0,
+          "no_input_delay": 1935,
+          "no_output_delay": 1688,
+          "partial_input_delay": 0,
+          "partial_output_delay": 0,
+          "pulse_width_clock": 0,
+          "unconstrained_internal_endpoints": 0
+        },
+        "facts": {
+          "blackboxes": 0,
+          "latches": 0,
+          "loops": 1,
+          "port_bits": 4272
+        }
+      },
+      "fixed": {
+        "check_timing": {
+          "constant_clock": 0,
+          "generated_clocks": 0,
+          "latch_loops": 0,
+          "loops": 0,
+          "multiple_clock": 0,
+          "no_clock": 0,
+          "no_input_delay": 1935,
+          "no_output_delay": 1688,
+          "partial_input_delay": 0,
+          "partial_output_delay": 0,
+          "pulse_width_clock": 0,
+          "unconstrained_internal_endpoints": 0
+        },
+        "facts": {
+          "blackboxes": 0,
+          "latches": 0,
+          "loops": 0,
+          "port_bits": 4272
+        }
+      }
+    },
+    "existing_event_order_and_finish_times_identical": true,
+    "finish_times": {
+      "baseline": {
+        "controller": [
+          "3786 ns : File \"/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/tb_recursive_candidate_controller.sv\" Line 295"
+        ],
+        "offer": [
+          "236 ns : File \"/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/tb_root_offer.sv\" Line 152"
+        ],
+        "retire": [
+          "2580 ns : File \"/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/tb_expansion_capture_unit.sv\" Line 81"
+        ]
+      },
+      "fixed": {
+        "controller": [
+          "3786 ns : File \"/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/tb_recursive_candidate_controller.sv\" Line 295"
+        ],
+        "offer": [
+          "270 ns : File \"/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/tb_root_offer.sv\" Line 168"
+        ],
+        "retire": [
+          "2580 ns : File \"/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/tb_expansion_capture_unit.sv\" Line 81"
+        ]
+      }
+    },
+    "local_pop_two_state_equivalence_valuations": 128,
+    "manifest_sha256": "46aa6b01ced66b1d4246011ef0cf5c79fd4201478e6a04d67832f5e287f213aa",
+    "recursive_events": 76,
+    "scope": "Native recursive controller, expansion_capture and children_frames; depth16/capacity4 OOC slice with external physical graph/metadata/access ports. Paired mock-producer protocol simulations and valid-dependent receiver test. Not the full query/recovery system, no timing closure or board claim.",
+    "status": "passed",
+    "valid_dependent_receiver": {
+      "baseline_no_progress_cycles": 16,
+      "candidate_acceptances": 1,
+      "candidate_checks": 18,
+      "invalid_rejected_locally": true
+    }
+  },
+  "integration_runs": [
+    "capture_loops_system_on_full_v1",
+    "capture_loops_system_crc_pressure_v1"
+  ],
+  "remaining": [
+    "Full real-system regression including normal on/off and both capacities, cancel/CRC noncold retry",
+    "Recovery REARM/authority/owner and other full-root feedback regions",
+    "Full-root zero-loop DRC/check_timing and physical timing/board validation"
+  ],
+  "restoration": {
+    "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/capture_loops_component_v1.json",
+    "archive_sha256": "7bd16b306a986818dae923b1eb8ec852fa4ff960bf71546ab121c4ab90063a8f",
+    "audit_byte_identical": true,
+    "audit_sha256": "6b26719a232bf724fd377e45e6efbb09867a65cfc2bcbb5056250832c86a3fdf",
+    "auditor": "audit_capture_loop_component.py",
+    "files": 216,
+    "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/capture_loops_component_v1",
+    "restored_root": "/tmp/B_state_residency_offer_20261025/capture_loops_component_v1",
+    "status": "passed"
+  },
+  "status": "component_passed_full_system_pending"
+}

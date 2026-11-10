@@ -1,0 +1,9 @@
+# 自然第三条查询独立代价与过滤 oracle（2026-10-27）
+
+query180329/connection170785/net26422/source66893/sink151354的302个实际cost包已独立重算binary32几何与代价，包含overflow引用查询；6946输入字、1510结果字、1个target包。完整history/prices/net表和180326条CPS1连接记录均校验，九份搜索产物与原CPU采集逐字节相同。cost.bin和connections.bin与第二条查询的工作输入相同，因此连续硬件实验无需更换这两份DDR数据。
+
+过滤重放检查113次展开、600个原始子节点、565个过滤后候选、302次push；保守未来读闭包584标签/285页仅用于oracle审计，没有预装入本轮RTL。实际硬件第三查询继续使用原生按需baseline，新增baseline miss为0。
+
+两份输入已归档实际恢复。cost完整审计与过滤oracle临时重算均重现原始审计字节。首次过滤恢复审计与其cost依赖恢复重叠，因目录暂缺失败；待cost恢复结束后逐成员核验和独立重算通过，详见恢复凭据中的orchestration_note。该失败属于归档编排，不是算法或RTL反例。
+
+input_layout.owner_pool_capacity字段的旧值0不描述真实owner池，真实capacity/live仍53734。证据和恢复凭据见同名JSON；源冻结见path_capacity_sources_20261027/manifest.json。

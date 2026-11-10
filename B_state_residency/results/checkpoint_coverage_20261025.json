@@ -1,0 +1,241 @@
+{
+  "status": "incomplete",
+  "meaning": "Explicit completion obligations; new saved-path component closes one storage-interface gap, not the complete checkpoint objective.",
+  "facts": [
+    {
+      "source": "hardware/variants/route_checkpoint_v1/route_commit_controller.sv",
+      "sha256": "6d41f5ff220be800bfd0e56eef92b734afaa7085fc2074fdd87cbc2d04fe1f63",
+      "evidence": [
+        {
+          "line": 5,
+          "text": "input wire cp_valid,output wire cp_ready,input wire cp_restore,cp_safe,"
+        },
+        {
+          "line": 141,
+          "text": "CP_VERIFY:begin"
+        },
+        {
+          "line": 84,
+          "text": "slot_valid[a]<=cp_stage[a*CP_STRIDE][0];sizes[a]<=cp_stage[a*CP_STRIDE+1];nets[a]<=cp_stage[a*CP_STRIDE+2];sources[a]<=cp_stage[a*CP_STRIDE+3];sinks[a]<=cp_stage[a*CP_STRIDE+4];designs[a]<={cp_stage[a*CP_STRIDE+6],cp_stage[a*CP_STRIDE+5]};"
+        }
+      ]
+    },
+    {
+      "source": "results/recovery_retry_normal_v1/sources/route_commit_controller.sv",
+      "sha256": "b801db4ef1dcdb6d473975612175226e2952deec078226e6895cc0767a95b1c3",
+      "evidence": [
+        {
+          "line": 19,
+          "text": "reg[31:0]path[0:1][0:MAX_PATH-1];reg[31:0]sizes[0:1],nets[0:1],sources[0:1],sinks[0:1];"
+        },
+        {
+          "line": 40,
+          "text": "state<=IDLE;owned<=0;stopped<=0;operation<=0;slot<=0;error_code<=0;slot_valid<=0;"
+        }
+      ]
+    },
+    {
+      "source": "results/recovery_retry_normal_v1/sources/residency_system.sv",
+      "sha256": "7f5389eada0b6422ada357a083a2441ab08dc7df88a4a0d7c30e89d4cac11e8b",
+      "evidence": [
+        {
+          "line": 948,
+          "text": "route_commit_host_adapter #(.MAX_PATH(32)) route_join(.clk(clk),.rst(rst),.abort(ENABLE_TEST_INJECTION?test_route_abort:1'b0),.active(p_active),.backend_drained(f_all_drained),.j_valid(k_j_valid),.j_ready(k_j_ready),.j_node(k_j_node),.j_net(k_j_net),.j_op(k_j_op),.admit(!fault&&!busy),.active_query(p_active_query),.active_price(p_active_price),.active_version(query_version^((ENABLE_TEST_INJECTION&&test_route_version_flip)?32'd1:32'd0)),.active_design(design_id),.req_valid(f_broute_valid),.req_ready(f_broute_ready),.req_op(f_broute_payload[0+:1]),.req_slot(f_broute_payload[1+:1]),.req_cookie(f_broute_payload[2+:32]),.req_source(f_broute_payload[34+:32]),.req_sink(f_broute_payload[66+:32]),.req_net(f_broute_payload[98+:32]),.req_sequence(f_broute_payload[130+:32]),.rsp_valid(f_broute_rsp_valid),.rsp_ready(f_broute_rsp_ready),.rsp_status(rc_rsp_status),.rsp_cookie(rc_rsp_cookie),.rsp_nodes(rc_rsp_nodes),.rsp_acked(rc_rsp_acked),.busy(rc_busy),.fault(rc_fault),.block_external(rc_block),.slot_valid(rc_slots),.h_l_valid(fd_host_io_valid),.b_l_valid(b_l_valid),.h_l_ready(fd_host_io_ready),.b_l_ready(b_l_ready),.h_l_write(fd_host_io_write),.b_l_write(b_l_write),.h_l_node(fd_host_io_node),.b_l_node(b_l_node),.h_l_value(fd_host_io_value),.b_l_value(b_l_value),.h_l_field(fd_host_io_field),.b_l_field(b_l_field),.h_l_rsp_valid(fd_host_io_rsp_valid),.b_l_rsp_valid(b_l_rsp_valid),.h_l_rsp_ready(fd_host_io_rsp_ready),.b_l_rsp_ready(b_l_rsp_ready),.h_l_status(fd_host_io_status),.b_l_status(b_l_status),.h_l_present(fd_host_io_present),.b_l_present(b_l_present),.h_l_payload(fd_host_io_payload),.b_l_payload(b_l_payload),.h_o_valid(fd_host_owner_req_valid),.b_o_valid(b_o_valid),.h_o_ready(fd_host_owner_req_ready),.b_o_ready(b_o_ready),.h_o_op(fd_host_owner_req_op),.b_o_op(b_o_op),.h_o_node(fd_host_owner_req_node),.b_o_node(b_o_node),.h_o_net(fd_host_owner_req_net),.b_o_net(b_o_net),.h_o_cookie(fd_host_owner_req_cookie),.b_o_cookie(b_o_cookie),.h_o_rsp_valid(fd_host_owner_rsp_valid),.b_o_rsp_valid(b_o_rsp_valid),.h_o_rsp_ready(fd_host_owner_rsp_ready),.b_o_rsp_ready(b_o_rsp_ready),.h_o_status(fd_host_owner_rsp_status),.b_o_status(b_o_status),.h_o_rsp_cookie(fd_host_owner_rsp_cookie),.b_o_rsp_cookie(b_o_rsp_cookie),.h_o_count(fd_host_owner_rsp_count),.b_o_count(b_o_count),.h_o_occupancy(fd_host_owner_rsp_occupancy),.b_o_occupancy(b_o_occupancy),.h_o_will_overuse(fd_host_owner_rsp_will_overuse),.b_o_will_overuse(b_o_will_overuse));"
+        },
+        {
+          "line": 632,
+          "text": "reg [31:0] snapshot_cookie_held;"
+        },
+        {
+          "line": 640,
+          "text": "snapshot_cookie_held<=0;"
+        },
+        {
+          "line": 647,
+          "text": "snapshot_cookie_held<=snapshot_cookie;"
+        }
+      ]
+    },
+    {
+      "source": "results/recovery_retry_normal_v1/sources/recovery_coordinator.sv",
+      "sha256": "b76daea8a982c1bb095f4fd255f7bcb9896c0499d19564b6f9d935d715604d68",
+      "evidence": [
+        {
+          "line": 25,
+          "text": "reg[31:0]attempt_version;reg[1:0]attempt_query;"
+        },
+        {
+          "line": 51,
+          "text": "attempt_version<=0;attempt_query<=0;state<=NORMAL;configured<=0;owned<=0;stopped<=0;verify_pass<=0;error_code<=0;journal_count<=0;"
+        },
+        {
+          "line": 64,
+          "text": "else begin configured<=1;saved_design<=cfg_design;saved_checkpoint<=cfg_checkpoint;current_version<=cfg_version;current_query<=cfg_query;current_price<=cfg_price;attempt_version<=cfg_version;attempt_query<=cfg_query;journal_count<=0;end"
+        },
+        {
+          "line": 51,
+          "text": "attempt_version<=0;attempt_query<=0;state<=NORMAL;configured<=0;owned<=0;stopped<=0;verify_pass<=0;error_code<=0;journal_count<=0;"
+        },
+        {
+          "line": 64,
+          "text": "else begin configured<=1;saved_design<=cfg_design;saved_checkpoint<=cfg_checkpoint;current_version<=cfg_version;current_query<=cfg_query;current_price<=cfg_price;attempt_version<=cfg_version;attempt_query<=cfg_query;journal_count<=0;end"
+        },
+        {
+          "line": 123,
+          "text": "else begin current_version<=new_version;current_query<=new_query;current_price<=new_price;journal_count<=0;complete(0);end"
+        }
+      ]
+    },
+    {
+      "source": "results/recovery_retry_normal_v1/sources/config_restore_controller.sv",
+      "sha256": "17631bbf94648f24fb664dbc012346d221682395b2230800b8608f2dd5ce92f9",
+      "evidence": [
+        {
+          "line": 3,
+          "text": "// Cold reset owns the resident descriptor; never connect target_reset here."
+        },
+        {
+          "line": 15,
+          "text": "reg[2:0]state;reg configured,stopped;reg[3:0]error_code;reg[31:0]elapsed,current_version,tx_version;reg[2303:0]descriptor;"
+        },
+        {
+          "line": 22,
+          "text": "assign cfg_payload={descriptor[2303:2272],tx_version,descriptor[2239:0]};"
+        },
+        {
+          "line": 5,
+          "text": "input wire clk,rst,abort,backend_drained,normal_retired,attempt_reset,"
+        },
+        {
+          "line": 18,
+          "text": "assign load_ready=!rst&&!attempt_reset&&!stopped&&state==IDLE&&!load_rsp_valid&&backend_drained&&normal_retired;"
+        },
+        {
+          "line": 19,
+          "text": "assign start_ready=!rst&&!attempt_reset&&!stopped&&configured&&state==IDLE&&!load_rsp_valid&&!load_valid&&backend_drained&&normal_retired;"
+        }
+      ]
+    },
+    {
+      "source": "results/recovery_retry_normal_v1/sources/label_restore_controller.sv",
+      "sha256": "307f44e38cf1443fee64b59a7454855aa0a7de35aaba33a2aee297c41934fd8c",
+      "evidence": [
+        {
+          "line": 37,
+          "text": "if(start_design!=expected_design||start_checkpoint!=expected_checkpoint||start_count==0||start_count>MAX_RECORDS||start_nodes==0||start_probe>=start_nodes||start_price!=start_version[3:0])fail(1);"
+        },
+        {
+          "line": 17,
+          "text": "reg[1:0]query;reg[3:0]price;reg[2:0]field;reg[159:0]payload;reg[191:0]rows[0:MAX_RECORDS-1];reg[191:0]row;"
+        }
+      ]
+    },
+    {
+      "source": "results/recovery_retry_normal_v1/sources/query_lifecycle.sv",
+      "sha256": "fa5b15cd8e8c3bb2883aba4f1116b08b1717ff568627983dccc32e993abb89c3",
+      "evidence": [
+        {
+          "line": 23,
+          "text": "reg[3:0]state;reg[2:0]operation;reg stopped;reg[3:0]error_code;reg[31:0]elapsed,last_sequence;reg sequence_seen,label_state_dirty;"
+        },
+        {
+          "line": 46,
+          "text": "state<=IDLE;operation<=SOURCE_CHECK;stopped<=0;error_code<=0;elapsed<=0;last_sequence<=0;sequence_seen<=0;label_state_dirty<=0;last_design<=0;last_version<=0;last_query<=0;last_price<=0;"
+        },
+        {
+          "line": 60,
+          "text": "(sequence_seen&&(cmd_expand[255:224]<=last_sequence||cmd_design!=last_design||cmd_expand[447:416]!=last_version||cmd_query!=last_query||cmd_price!=last_price)))begin rsp_status<=1;state<=DONE;end"
+        },
+        {
+          "line": 23,
+          "text": "reg[3:0]state;reg[2:0]operation;reg stopped;reg[3:0]error_code;reg[31:0]elapsed,last_sequence;reg sequence_seen,label_state_dirty;"
+        },
+        {
+          "line": 46,
+          "text": "state<=IDLE;operation<=SOURCE_CHECK;stopped<=0;error_code<=0;elapsed<=0;last_sequence<=0;sequence_seen<=0;label_state_dirty<=0;last_design<=0;last_version<=0;last_query<=0;last_price<=0;"
+        },
+        {
+          "line": 51,
+          "text": "if(sequence_seen&&!owned&&host_label_edit)label_state_dirty<=1;"
+        }
+      ]
+    }
+  ],
+  "obligations": [
+    {
+      "state": "saved_connection_paths",
+      "status": "component_verified_not_integrated",
+      "remaining": "Connect atomic capture/restore through route adapter and system checkpoint fence; bind same owner image and checkpoint identity.",
+      "evidence": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "state": "owner_primary_overflow_allocator",
+      "status": "retained_backing_and_route_journal_only",
+      "remaining": "Capture full owner backing/pool/allocator and provide generic checkpoint-bound authority lookup; current real recovery authority has six q1 rows.",
+      "evidence": [
+        2,
+        3
+      ]
+    },
+    {
+      "state": "design_created_and_children_cache",
+      "status": "physical_backing_retained",
+      "remaining": "Consistent full-image backup/restore and graph/layout identity; current recovery does not reconstruct these after backing loss.",
+      "evidence": [
+        2
+      ]
+    },
+    {
+      "state": "history_prices_net_cost_configuration",
+      "status": "retained_same_actual_prices",
+      "remaining": "Capture full cost tables and version-bound descriptor; verify real price change and invalidation rather than renumbering only.",
+      "evidence": [
+        2,
+        4
+      ]
+    },
+    {
+      "state": "labels_and_page_directory",
+      "status": "trusted_external_known328_stream",
+      "remaining": "Hardware snapshot production, dynamic complete workset/directory capture or dense authoritative initialization, unknown-page default/old-prev rules; restore cache512 is not a complete design snapshot.",
+      "evidence": [
+        2,
+        5
+      ]
+    },
+    {
+      "state": "query_sequence_epoch_and_version_floors",
+      "status": "runtime_only",
+      "remaining": "Persist and restore lifecycle last_sequence/label_state_dirty plus successful and attempted recovery versions; prove no stale query admission or version rollback.",
+      "evidence": [
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "state": "frontier_recursive_capture_and_live_queries",
+      "status": "not_checkpointed",
+      "remaining": "Choose and verify drained restart boundary or serialize full live heap/control contexts; ordinary AXI drain alone does not establish algorithmic emptiness.",
+      "evidence": [
+        2
+      ]
+    },
+    {
+      "state": "journal_and_atomic_checkpoint_publication",
+      "status": "runtime_journal_preserved_during_retry",
+      "remaining": "Whole-system freeze, immutable staging generation, data/config/journal binding, commit marker and acknowledgement; cold reset currently clears journal. Power-loss durability needs a separate persistence protocol.",
+      "evidence": [
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "next_experiment": "Integrate saved-path checkpoint with actual two-query/shared-owner AXI fixture and unified fence, then capture consistent owner/design/labels/config under the same checkpoint identity.",
+  "analyzer_sha256": "32777f36c4f3c4e71a319b2ea49b91acfdd0a997c5069929aca0a3d422aa681f"
+}

@@ -1,0 +1,48 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Fri Oct 23 13:08:31 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_drc -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_codec_timing_20261023/libc_batch/wide/drc_routed.rpt
+| Design       : memory_scratch_endpoint_wide
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_memory_scratch_endpoint_wide
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 1
++-----------+----------+-------------------+------------+
+| Rule      | Severity | Description       | Violations |
++-----------+----------+-------------------+------------+
+| RTSTAT-10 | Warning  | No routable loads | 1          |
++-----------+----------+-------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+RTSTAT-10#1 Warning
+No routable loads  
+246 net(s) have no routable loads. The problem bus(es) and/or net(s) are cmd_ready, memory/memory_service/directory/memory_leases[3:0],
+memory/memory_service/dma/m_araddr[20:0],
+memory/memory_service/dma/m_arlen[6:0],
+memory/memory_service/dma/m_awaddr[20:0],
+memory/memory_service/dma/m_awlen[6:0], memory/memory_service/dma/m_bready,
+memory/memory_service/dma/m_rready, memory/memory_service/dma/m_wvalid,
+pages/endpoint/draining, rsp_payload[159:0], rsp_present, rsp_status[3:0]
+rsp_tx[15:0].
+Related violations: <none>
+
+

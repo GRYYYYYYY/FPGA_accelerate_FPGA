@@ -1,0 +1,99 @@
+{
+  "fixtures": [
+    {
+      "WHS_ns": 0.041,
+      "WNS_ns": 2.847,
+      "fixture": "/tmp/B_state_residency_offer_20261025/parent_physical_v2/baseline/timing_routed.rpt",
+      "paths": 20,
+      "primitive_types": [
+        "CARRY8",
+        "LUT2",
+        "LUT3",
+        "LUT4",
+        "LUT5",
+        "LUT6"
+      ],
+      "sha256": "e995006112f65cd480aea2ce69835d21f40a903d72550413abb2ee8e9d9ec034",
+      "zero_logic_paths": 8
+    },
+    {
+      "WHS_ns": 0.042,
+      "WNS_ns": 2.786,
+      "fixture": "/tmp/B_state_residency_offer_20261025/parent_physical_v2/cached/timing_routed.rpt",
+      "paths": 20,
+      "primitive_types": [
+        "CARRY8",
+        "LUT2",
+        "LUT3",
+        "LUT4",
+        "LUT5",
+        "LUT6"
+      ],
+      "sha256": "f049f57815f322232d4c37a07961b1e5c1eacf8b9d464d1210ec6f183fed0e4b",
+      "zero_logic_paths": 9
+    },
+    {
+      "WHS_ns": 0.057,
+      "WNS_ns": -4.948,
+      "fixture": "/tmp/B_state_residency_offer_20261025/checkpoint_edit_synth_v1/timing_synth.rpt",
+      "paths": 20,
+      "primitive_types": [
+        "CARRY8",
+        "LUT2",
+        "LUT3",
+        "LUT4",
+        "LUT5",
+        "LUT6"
+      ],
+      "sha256": "4f82788c7f9245276e7436a0ee9883360a68d4e72e0af941ec0ebe6a066912c0",
+      "zero_logic_paths": 6
+    },
+    {
+      "WHS_ns": 0.057,
+      "WNS_ns": -5.841,
+      "fixture": "/tmp/B_state_residency_offer_20261025/route_path_synth_v1/timing_synth.rpt",
+      "paths": 20,
+      "primitive_types": [
+        "CARRY8",
+        "LUT2",
+        "LUT3",
+        "LUT4",
+        "LUT5",
+        "LUT6"
+      ],
+      "sha256": "d326fb8b35c5f028dad960718e42bea2e449f57b70dc45cec3da7cf28343b3a0",
+      "zero_logic_paths": 6
+    },
+    {
+      "WHS_ns": 0.057,
+      "WNS_ns": -5.614,
+      "fixture": "/tmp/B_state_residency_offer_20261025/route_stage_synth_v1/timing_synth.rpt",
+      "paths": 20,
+      "primitive_types": [
+        "CARRY8",
+        "LUT2",
+        "LUT3",
+        "LUT4",
+        "LUT5",
+        "LUT6",
+        "MUXF7",
+        "MUXF8"
+      ],
+      "sha256": "cfbe8f1eacff68ecf7141100c7d756cdceb7569d704b07f6601dd830bf6955ac",
+      "zero_logic_paths": 6
+    }
+  ],
+  "rejected_corruptions": [
+    "missing_carry",
+    "missing_data_net",
+    "corrupt_data_delay",
+    "missing_clock_group"
+  ],
+  "running_owner_rejection": "Traceback (most recent call last):\n  File \"/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_checkpoint_physical_timing.py\", line 84, in <module>\n    main()\n  File \"/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_checkpoint_physical_timing.py\", line 11, in main\n    assert gate['status']=='observed' and gate['stage']=='complete', 'Wait for existing physical owner, actual restoration and freeze'\nAssertionError: Wait for existing physical owner, actual restoration and freeze\n",
+  "scope": "100 printed setup/hold paths across two historical routed module cases and three restored full-system synthesis reports. No current physical result was read, and no current full-system routed conclusion exists.",
+  "status": "prepared_parser_controls_passed_main_correctly_gated",
+  "tools": {
+    "scripts/analyze_checkpoint_physical_timing.py": "9794ca70697805d6341000bfee4b6d1051068bc0ee890c9375226355a8be9417",
+    "scripts/parse_state_timing_paths.py": "7559e413a33d0e72183e43a3f56646bcfa674b90ec9028760ac9a66e470dfa10"
+  }
+}

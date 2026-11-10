@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "project_id": "B",
+  "title": "驻留状态与稀疏初始化",
+  "research_question": "按器件、设计、net 和 connection 生命周期组织状态，能否减少初始化、重复准备和主机—设备同步？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "稠密清零与有限位宽 epoch 标签执行同一组读写；覆盖搜索切换和 epoch 回绕。只统计逻辑操作。"
+    },
+    {
+      "id": "cpu_dense_init",
+      "status": "planned",
+      "description": "同算法全量初始化"
+    },
+    {
+      "id": "cpu_serial_stamp",
+      "status": "planned",
+      "description": "现有串行 visited 标记策略；合成状态微基准与独立 profile-real 基线已接通，共享变体执行器仍待接入"
+    },
+    {
+      "id": "cpu_existing_paged",
+      "status": "planned",
+      "description": "已有分页/epoch 基线；真实串行和固定批处理已由 benchmark-paged-real 接通"
+    },
+    {
+      "id": "cpu_paged_node_epoch",
+      "status": "planned",
+      "description": "页内逐节点 epoch 初始化；真实串行/批处理消融已完成，共享变体执行器仍待接入"
+    },
+    {
+      "id": "cpu_lifetime_residency",
+      "status": "planned",
+      "description": "按生命周期驻留的软件模型"
+    },
+    {
+      "id": "fpga_per_query",
+      "status": "planned",
+      "description": "每查询准备状态的 FPGA 基线"
+    },
+    {
+      "id": "fpga_resident",
+      "status": "planned",
+      "description": "驻留图与活跃状态"
+    },
+    {
+      "id": "fpga_resident_sparse_init",
+      "status": "planned",
+      "description": "驻留 + 稀疏初始化"
+    },
+    {
+      "id": "fpga_net_tree_reuse",
+      "status": "planned",
+      "description": "同网路由树/工作集复用"
+    }
+  ],
+  "controlled_factors": [
+    "状态驻留开/关",
+    "初始化：稠密 / epoch / 按需页",
+    "页大小、上下文数、同网任务分组"
+  ],
+  "metrics": [
+    {
+      "name": "init_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "state_bytes",
+      "unit": "byte"
+    },
+    {
+      "name": "state_page_hit_rate",
+      "unit": "ratio"
+    },
+    {
+      "name": "sync_bytes",
+      "unit": "byte"
+    },
+    {
+      "name": "reroute_iterations",
+      "unit": "count"
+    },
+    {
+      "name": "routing_ms",
+      "unit": "ms"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": null,
+    "baseline_revision": null,
+    "timing_mode": null,
+    "quality_tolerance": null
+  },
+  "microbenchmark": {
+    "config": "configs/state_microbench.json",
+    "command": "python3 scripts/run.py benchmark",
+    "execution_kind": "synthetic_state_microbenchmark",
+    "status": "implemented",
+    "report": "results/state_microbench_20261022.md"
+  },
+  "notes": "Python smoke, C++ synthetic state microbenchmarks and an independent real serial CPU baseline are executable. Shared variant statuses remain planned; profile-real has a separate frozen configuration. No GPU/FPGA results or post-import Vivado DRC/timing results are available. Null candidate settings are unset, not measured zeros.",
+  "real_baseline": {
+    "status": "measured",
+    "execution_kind": "real_serial_cpu_routing",
+    "config": "configs/real_trace.json",
+    "command": "python3 scripts/run.py profile-real",
+    "report": "results/real_trace_20261022.md",
+    "manifest": "results/real_trace_20261022T165136Z/manifest.json"
+  },
+  "real_paging_ablation": {
+    "status": "measured",
+    "config": "configs/paged_real.json",
+    "command": "python3 scripts/run.py benchmark-paged-real --skip-self-test",
+    "report": "results/paged_real_20261022.md",
+    "manifest": "results/paged_real_20261022T174334Z/manifest.json",
+    "scope": "same-schedule real CPU paging comparisons; not GPU/FPGA speedup"
+  }
+}

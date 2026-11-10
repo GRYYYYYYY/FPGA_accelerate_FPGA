@@ -1,0 +1,27 @@
+test_multinet_configuration_negotiation_and_failure_states (test_native_site_routes.NativeSiteRoutesTests) ... /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/native_site_routes_driver.cpp:5:20: error: ‘Id’ has not been declared
+    5 |     bool neighbors(Id n,std::vector<Edge>& out) {out=rows[n];return true;}
+      |                    ^~
+/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/native_site_routes_driver.cpp: In function ‘int main(int, char**)’:
+/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/native_site_routes_driver.cpp:21:5: error: this ‘if’ clause does not guard... [-Werror=misleading-indentation]
+   21 |     if (argc!=2) throw std::invalid_argument("scenario required");unsigned scenario=std::stoul(argv[1]);
+      |     ^~
+/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/native_site_routes_driver.cpp:21:67: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   21 |     if (argc!=2) throw std::invalid_argument("scenario required");unsigned scenario=std::stoul(argv[1]);
+      |                                                                   ^~~~~~~~
+cc1plus: all warnings being treated as errors
+ERROR
+
+======================================================================
+ERROR: test_multinet_configuration_negotiation_and_failure_states (test_native_site_routes.NativeSiteRoutesTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_native_site_routes.py", line 19, in test_multinet_configuration_negotiation_and_failure_states
+    subprocess.run(['g++','-std=c++17','-O2','-Wall','-Wextra','-Werror',
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['g++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror', '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/native_site_routes_driver.cpp', '-o', '/tmp/tmpn9d4jl8r/routes']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 1 test in 1.217s
+
+FAILED (errors=1)

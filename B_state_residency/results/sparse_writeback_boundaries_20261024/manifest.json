@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "pid": 3819225,
+  "baseline_manifest_sha256": "b1bc47392df732e49c79dbdf4f9d585b3a41b13332aee69a31e380b639b6d795",
+  "cases": {
+    "controller": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/backing_frame_directory_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/backing_page_service_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/memory_scratch_endpoint_small_staticcodec.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/queued_scratch_endpoint_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/record_backing_service_small_staticcodec.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/response_fallthrough_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/scratch_page_axi_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/scratch_page_codec_small_static.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/scratch_page_controller_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/controller/sources/tb_sparse_writeback_boundaries.sv"
+          ],
+          "pid": 3819297,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_sparse_writeback_boundaries",
+            "-s",
+            "sparse",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 3820142,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "sparse",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 3821165,
+          "exit_code": 0
+        }
+      ],
+      "sources": {
+        "backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+        "backing_page_service_small.sv": "039f6d0ec2117c1587b5f0b8be01ebbe51d4a51786926ec68927f1d649896a98",
+        "bounded_sync_fifo.sv": "db0ae12bc80a2b08296b7daa267425e2bfe32df18443b97f6dda2b5ba6ce9c99",
+        "memory_scratch_endpoint_small_staticcodec.sv": "409722629f3b6fa771e1bcfcb24c44c0e6642630c9bbbeca4de944275e156fac",
+        "queued_scratch_endpoint_small.sv": "93e3fa8f7254a5b5070e4029974897245c25218e1102b99ae04fe59921c0ecd3",
+        "record_backing_service_small_staticcodec.sv": "d4da3dc53b1befadd376e3a298040177a185c353961b9987b55cee9ded8c410e",
+        "response_fallthrough_fifo.sv": "5cde4e2303eb5d10636ffb1a53edcff44da0f4a7e87880b26e5db551c1dc4ebe",
+        "scratch_frame_store_bram.sv": "601a4eb4f3437562ce39e21f819f93129b2fc72097ee6e4796dbd2b4dfad25df",
+        "scratch_page_axi_small.sv": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4",
+        "scratch_page_codec_small_static.sv": "fe66bd6bf2ee4d3d058b0de1f23568f87d86f0ef9c4af44e8badd09b00a09eaa",
+        "scratch_page_controller_small.sv": "829fbedd678dcbce58769643639db8fc2700087649a83a37e64754ed8db3712c",
+        "tb_sparse_writeback_boundaries.sv": "549c3a1d35f15e5e829be88b5f13da11268edea342cbe4bd2aeddd6590380f95"
+      },
+      "log_sha256": "2f2b5515c58776f1733cef14f144894aa9b0c087fefb0664b22db27fd9d2007d"
+    },
+    "stalls": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/backing_frame_directory_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/backing_page_service_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/memory_scratch_endpoint_small_staticcodec.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/queued_scratch_endpoint_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/record_backing_service_small_staticcodec.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/response_fallthrough_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/scratch_page_axi_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/scratch_page_codec_small_static.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/scratch_page_controller_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/sparse_writeback_boundaries_20261024/stalls/sources/tb_sparse_writeback_stalls.sv"
+          ],
+          "pid": 3821786,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_sparse_writeback_stalls",
+            "-s",
+            "sparse",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 3822665,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "sparse",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 3825723,
+          "exit_code": 0
+        }
+      ],
+      "sources": {
+        "backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+        "backing_page_service_small.sv": "039f6d0ec2117c1587b5f0b8be01ebbe51d4a51786926ec68927f1d649896a98",
+        "bounded_sync_fifo.sv": "db0ae12bc80a2b08296b7daa267425e2bfe32df18443b97f6dda2b5ba6ce9c99",
+        "memory_scratch_endpoint_small_staticcodec.sv": "409722629f3b6fa771e1bcfcb24c44c0e6642630c9bbbeca4de944275e156fac",
+        "queued_scratch_endpoint_small.sv": "93e3fa8f7254a5b5070e4029974897245c25218e1102b99ae04fe59921c0ecd3",
+        "record_backing_service_small_staticcodec.sv": "d4da3dc53b1befadd376e3a298040177a185c353961b9987b55cee9ded8c410e",
+        "response_fallthrough_fifo.sv": "5cde4e2303eb5d10636ffb1a53edcff44da0f4a7e87880b26e5db551c1dc4ebe",
+        "scratch_frame_store_bram.sv": "601a4eb4f3437562ce39e21f819f93129b2fc72097ee6e4796dbd2b4dfad25df",
+        "scratch_page_axi_small.sv": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4",
+        "scratch_page_codec_small_static.sv": "fe66bd6bf2ee4d3d058b0de1f23568f87d86f0ef9c4af44e8badd09b00a09eaa",
+        "scratch_page_controller_small.sv": "829fbedd678dcbce58769643639db8fc2700087649a83a37e64754ed8db3712c",
+        "tb_sparse_writeback_stalls.sv": "772303d9706a914ad76047e2b7f2974d15eab7ffc4c4c105b405681f8dc429a3"
+      },
+      "log_sha256": "f66346fcc76b3f461ac03f8fa5c2eaf8488c863deef9750aab23db076264853f"
+    }
+  },
+  "scripts": {
+    "hardware/scripts/run_sparse_writeback_boundaries.py": "c8887319c96853b2d7116cb854ac0e2ed3dd0402485f9e3da678269023d86fb5",
+    "hardware/scripts/make_sparse_writeback.py": "72d986ac234ddc5ea1c8fd32527f58240ac4d04f37bb40de92e43113c18e5c64",
+    "hardware/scripts/make_sparse_writeback_tb.py": "5c087abc3a7be0ad54875b65f19dffb172c930398843d23e1184a7cf7f1b4327"
+  },
+  "stalls_original_sha256": "ccf5df6ef13cd788cd14a4fec57a79353a091de1138d31b702131054cdbe132b"
+}

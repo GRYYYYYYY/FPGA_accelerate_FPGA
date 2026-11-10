@@ -1,0 +1,173 @@
+{
+  "time_utc": "2026-11-02T12:34:30.700325+00:00",
+  "hostname": "fpgaacc1--cfc8cd109508-jnnrja5s7q",
+  "boot_id": "295fb9f2-65c8-43b1-8dd8-a299db5a9d35",
+  "pid_namespace": "pid:[4026545790]",
+  "original_processes": [
+    {
+      "pid": 1293430,
+      "missing": true,
+      "expected_start_ticks": "1664575051",
+      "original_identity_present": false
+    },
+    {
+      "pid": 1309736,
+      "missing": true,
+      "expected_start_ticks": "1664579699",
+      "original_identity_present": false
+    },
+    {
+      "pid": 2565424,
+      "missing": true,
+      "expected_start_ticks": "1663666192",
+      "original_identity_present": false
+    },
+    {
+      "pid": 3013336,
+      "missing": true,
+      "expected_start_ticks": "1663807268",
+      "original_identity_present": false
+    },
+    {
+      "pid": 1719618,
+      "missing": true,
+      "expected_start_ticks": "1664702242",
+      "original_identity_present": false
+    }
+  ],
+  "manifests": {
+    "ka_active_configured_formal_v1": {
+      "status": "running",
+      "stage": null,
+      "runner_pid": null,
+      "runner_start_ticks": null,
+      "active_process": {
+        "stage": "cover",
+        "pid": 2565237,
+        "start_ticks": "1663666178",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-c",
+          "-t",
+          "35",
+          "--dump-vcd",
+          "cover%.vcd",
+          "design.smt2"
+        ]
+      },
+      "memory_observation": null,
+      "active_process_now": {
+        "pid": 2565237,
+        "missing": true
+      }
+    },
+    "ka_retired_configured_formal_v1": {
+      "status": "running",
+      "stage": "induction",
+      "runner_pid": 2938847,
+      "runner_start_ticks": "1663783966",
+      "active_process": {
+        "stage": "induction",
+        "pid": 3013257,
+        "start_ticks": "1663807254",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-i",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "induction_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "memory_observation": null,
+      "active_process_now": {
+        "pid": 3013257,
+        "missing": true
+      }
+    },
+    "ka_as_lease_staging_exclusion_formal_v1": {
+      "status": "running",
+      "stage": "bmc",
+      "runner_pid": 1288391,
+      "runner_start_ticks": "1664573241",
+      "active_process": {
+        "stage": "bmc",
+        "pid": 1293429,
+        "start_ticks": "1664575037",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "bmc_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "memory_observation": null,
+      "active_process_now": {
+        "pid": 1293429,
+        "missing": true
+      }
+    },
+    "ka_as_lease_recover_gate_fault_v1": {
+      "status": "running",
+      "stage": "bmc",
+      "runner_pid": 1304205,
+      "runner_start_ticks": "1664577830",
+      "active_process": {
+        "stage": "bmc",
+        "pid": 1309735,
+        "start_ticks": "1664579687",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "bmc_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "memory_observation": null,
+      "active_process_now": {
+        "pid": 1309735,
+        "missing": true
+      }
+    },
+    "ka_publication_release_full_rtl_v2": {
+      "status": "running",
+      "stage": "wait_memory",
+      "runner_pid": 1719618,
+      "runner_start_ticks": "1664702242",
+      "active_process": null,
+      "memory_observation": {
+        "time_utc": "2026-11-01T18:46:45Z",
+        "current_bytes": 320520675328,
+        "limit_bytes": 322122547200,
+        "stable_seconds": 0
+      }
+    }
+  },
+  "matching_original_run_processes": [],
+  "memory_current_bytes": 253217239040,
+  "memory_max": "322122547200",
+  "memory_anon_bytes": 28285177856,
+  "memory_file_bytes": 222251720704,
+  "memory_events": "low 0\nhigh 0\nmax 254\noom 0\noom_kill 2\n",
+  "inspection": "Read-only proc and original manifests; original processes not signalled or modified.",
+  "notebook_id": "24b4a633-9ad2-4133-9174-cfc8cd109508",
+  "temporary_inspection_terminal_closed": true,
+  "transport": "authenticated Jupyter terminal; direct verified TLS; credentials not recorded"
+}

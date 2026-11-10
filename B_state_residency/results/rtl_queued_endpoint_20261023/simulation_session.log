@@ -1,0 +1,308 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 10:13:28 2026
+# Process ID: 2552581
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023
+# Command line: vivado -mode tcl -log .vivado-ai/vivado_50406364_2bfa852b.log -journal .vivado-ai/vivado_50406364_2bfa852b.jou -notrace -source .vivado-ai/init_50406364_2bfa852b.tcl
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/.vivado-ai/vivado_50406364_2bfa852b.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/.vivado-ai/vivado_50406364_2bfa852b.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2700.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source .vivado-ai/init_50406364_2bfa852b.tcl -notrace
+INFO: [Common 17-1674] Started webserver at http://localhost:40317
+set_param -quiet messaging.defaultLimit 10000000
+puts "MCPPROBE:1w9p9eun8gh8:[get_param messaging.defaultLimit]"
+MCPPROBE:1w9p9eun8gh8:10000000
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:aeptcah2cqyf===}
+INFO: [MCP 00-100] ===MCP_CMD_START:aeptcah2cqyf===
+puts "VSCSTART" ; set exitCode [catch {version -short} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+2022.2
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:aeptcah2cqyf:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:aeptcah2cqyf:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:26av5w71m1nb===}
+INFO: [MCP 00-100] ===MCP_CMD_START:26av5w71m1nb===
+puts "VSCSTART" ; set exitCode [catch {create_project b_queued_endpoint ./project -part xcu280-fsvh2892-2L-e; add_files ../../hardware/rtl/bounded_sync_fifo.sv; add_files ../../hardware/rtl/queued_scratch_endpoint.sv; add_files ../../hardware/rtl/scratch_page_controller.sv; add_files ../../hardware/rtl/scratch_frame_store_bram.sv; add_files -fileset constrs_1 ../../hardware/rtl/scratch_frame_store.xdc; add_files -fileset sim_1 ../../hardware/tb/tb_queued_scratch_endpoint.sv; set_property top queued_scratch_endpoint [current_fileset]; set_property top tb_queued_small [get_filesets sim_1]; set_property target_simulator XSim [current_project]; set_property xsim.simulate.runtime 1001ms [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; list [get_property TOP [get_filesets sim_1]] [get_property PART [current_project]] [get_files -of_objects [get_filesets sim_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+tb_queued_small xcu280-fsvh2892-2L-e /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:26av5w71m1nb:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:26av5w71m1nb:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:1vqkj052gj8l===}
+INFO: [MCP 00-100] ===MCP_CMD_START:1vqkj052gj8l===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_queued_small'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_queued_small' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_queued_small_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bounded_sync_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/queued_scratch_endpoint.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module queued_scratch_endpoint
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_page_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module queued_endpoint_test
+INFO: [VRFC 10-311] analyzing module tb_queued_small
+INFO: [VRFC 10-311] analyzing module tb_queued_actual
+INFO: [VRFC 10-2263] Analyzing Verilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_queued_small_behav xil_defaultlib.tb_queued_small xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_queued_small_behav xil_defaultlib.tb_queued_small xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=239)
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=168)
+Compiling module xil_defaultlib.bounded_sync_fifo(DEPTH=2)
+Compiling module xil_defaultlib.scratch_frame_store(GENERATION_B...
+Compiling module xil_defaultlib.scratch_page_controller(TX_BITS=...
+Compiling module xil_defaultlib.queued_scratch_endpoint(TX_BITS=...
+Compiling module xil_defaultlib.queued_endpoint_test(SMALL=1,TAG...
+Compiling module xil_defaultlib.tb_queued_small
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_queued_small_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_queued_small_behav -key {Behavioral:sim_1:Functional:tb_queued_small} -tclbatch {tb_queued_small.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_queued_small.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Simtcl 6-168] No object found for the given pattern.
+WARNING: [Add_Wave-1] No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console.
+# run 1001ms
+TEST_PASS queued_scratch_endpoint small=1 tag_bits=1 checks=2267 actual_commands=0 stalls=1638 retries=0 wraps=24
+$finish called at time : 212960 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv" Line 196
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_queued_small_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1001ms
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:08 . Memory (MB): peak = 1812.102 ; gain = 92.859 ; free physical = 643268 ; free virtual = 1359793
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:1vqkj052gj8l:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:1vqkj052gj8l:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:vslwqeagtb67===}
+INFO: [MCP 00-100] ===MCP_CMD_START:vslwqeagtb67===
+puts "VSCSTART" ; set exitCode [catch {close_sim; set_property top tb_queued_actual [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/actual.txt} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:vslwqeagtb67:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:vslwqeagtb67:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:kbulq1gq8he8===}
+INFO: [MCP 00-100] ===MCP_CMD_START:kbulq1gq8he8===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -mode behavioral -simset sim_1} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_queued_actual'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_queued_actual' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_queued_actual_vlog.prj
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_queued_actual_behav xil_defaultlib.tb_queued_actual xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_queued_actual_behav xil_defaultlib.tb_queued_actual xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=265)
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=181)
+Compiling module xil_defaultlib.bounded_sync_fifo(DEPTH=2)
+Compiling module xil_defaultlib.scratch_frame_store_default
+Compiling module xil_defaultlib.scratch_page_controller
+Compiling module xil_defaultlib.queued_scratch_endpoint_default
+Compiling module xil_defaultlib.queued_endpoint_test_default
+Compiling module xil_defaultlib.tb_queued_actual
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_queued_actual_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_queued_actual_behav -key {Behavioral:sim_1:Functional:tb_queued_actual} -tclbatch {tb_queued_actual.tcl} -log {simulate.log} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/actual.txt"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_queued_actual.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Simtcl 6-168] No object found for the given pattern.
+WARNING: [Add_Wave-1] No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console.
+# run 1001ms
+TEST_PASS queued_scratch_endpoint small=0 tag_bits=2 checks=472689 actual_commands=472689 stalls=145440 retries=0 wraps=4
+$finish called at time : 37356090 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv" Line 196
+run: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:12 . Memory (MB): peak = 1812.102 ; gain = 0.000 ; free physical = 647596 ; free virtual = 1364122
+xsim: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:13 . Memory (MB): peak = 1812.102 ; gain = 0.000 ; free physical = 647595 ; free virtual = 1364121
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_queued_actual_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1001ms
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:19 . Memory (MB): peak = 1812.102 ; gain = 0.000 ; free physical = 647594 ; free virtual = 1364120
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:kbulq1gq8he8:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:kbulq1gq8he8:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:wyi9lajob7cz===}
+INFO: [MCP 00-100] ===MCP_CMD_START:wyi9lajob7cz===
+puts "VSCSTART" ; set exitCode [catch {close_sim} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: xsimkernel Simulation Memory Usage: 111428 KB (Peak: 168700 KB), Simulation CPU Usage: 12300 ms
+INFO: [Simtcl 6-16] Simulation closed
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:wyi9lajob7cz:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:wyi9lajob7cz:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:jcx18erscgzk===}
+INFO: [MCP 00-100] ===MCP_CMD_START:jcx18erscgzk===
+puts "VSCSTART" ; set exitCode [catch {add_files -fileset sim_1 ../../hardware/tb/tb_queued_ordering.sv; set_property top tb_queued_ordering [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:jcx18erscgzk:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:jcx18erscgzk:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:61zm8yodr0lp===}
+INFO: [MCP 00-100] ===MCP_CMD_START:61zm8yodr0lp===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_queued_ordering'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_queued_ordering' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_queued_ordering_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_ordering.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_queued_ordering
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_queued_ordering_behav xil_defaultlib.tb_queued_ordering xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_queued_ordering_behav xil_defaultlib.tb_queued_ordering xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=265)
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=181)
+Compiling module xil_defaultlib.bounded_sync_fifo(DEPTH=2)
+Compiling module xil_defaultlib.scratch_frame_store_default
+Compiling module xil_defaultlib.scratch_page_controller
+Compiling module xil_defaultlib.queued_scratch_endpoint_default
+Compiling module xil_defaultlib.tb_queued_ordering
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_queued_ordering_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/project/b_queued_endpoint.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_queued_ordering_behav -key {Behavioral:sim_1:Functional:tb_queued_ordering} -tclbatch {tb_queued_ordering.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_queued_ordering.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Wavedata 42-489] Can't add object "/tb_queued_ordering/expected_words" to the wave window because it has 983040 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+WARNING: [Wavedata 42-489] Can't add object "/tb_queued_ordering/values" to the wave window because it has 196608 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+# run 1001ms
+TEST_PASS queued_ordering checks=6144 stalled_cycles=46060 request_full=61627 work_full=58328 response_full=34799
+$finish called at time : 681650 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_ordering.sv" Line 107
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_queued_ordering_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1001ms
+launch_simulation: Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 1812.102 ; gain = 0.000 ; free physical = 642944 ; free virtual = 1359485
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:61zm8yodr0lp:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:61zm8yodr0lp:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:wbl7uoyz1vj7===}
+INFO: [MCP 00-100] ===MCP_CMD_START:wbl7uoyz1vj7===
+puts "VSCSTART" ; set exitCode [catch {close_sim} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:wbl7uoyz1vj7:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:wbl7uoyz1vj7:0===

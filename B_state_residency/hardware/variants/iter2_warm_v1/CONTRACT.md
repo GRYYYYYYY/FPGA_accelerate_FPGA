@@ -1,0 +1,21 @@
+# 真实iteration2的G1 warm故障恢复
+
+当前变体沿用multi_owner_capacity_fixed_v1 coordinator，其余生产层级来自iter2_lifecycle_full_v5。仅在query/search/residency三层增加并传递RESTORE_RECORDS参数，默认512；本TB按名称显式1024，叶层label_restore_controller以该参数实例化。同步恢复822条标签、probe204279及末尾821，未改变512默认服务实现。暂存rows每条192bit，1024条为24KiB逻辑容量；不是综合资源或时序结论。
+
+## 原生状态与实际错误
+
+G1/CP17绑定真实iteration2 prepared owner图像，capacity53734且无free槽。存储context3/1/3与算法sequence180327独立。初始PC租约下真实导出empty path78字与query ledger10字：query magic51435031、generation100000001、version3、flags0x0d、last_sequence0，CRC4aaeb774；path CRC4ca00bd5。flags0x0d实际表示尚无已消费sequence；不能手填旧用例的seq1/dirty值。
+
+首次自然查询通过全部171poll/170expand/849candidate/421cost后，路径内部节点339193首写B成功，558358第二写BRESP2且物理内存写已发生。原生owner status9，query status7/detail5/committed0/acked1，journal2保留；未将部分提交当成成功。
+
+恢复attempt4/query2/price4在真实recovery fence内执行：G1两轮GET检查两键，339193从refs1/occ1减回0/0，558358/net26422从4/2减回3/2，pool中另一net23916/ref1保持。实际2次修正，journal在所有恢复回执完成前仍2。恢复822标签并由实际DDR路径验证822条，再导入原empty path与真实query字节/CRC。label/path/query的真实消费回执与服务退休联合完成；最终成功回复保持8周期、消费后才开放业务。无外部cold reset或工作DDR重装。
+
+## 重试与审计
+
+重试仍用完整sequence180327，存储ctx变4/2/4，数值oracle独立核对故障前和重试两轮。成功提交3节点、target清理/flush、原生ripup、foreign-net检查及同version重复sequence拒绝通过。最终822标签/403逻辑页对应全部3MB物理页、146284032B owner完整图像（10次物理record写）均核对；全部8AXI日志重放，唯一错误为首次owner B。source price/history内容不变。
+
+选定iter2_warm_full_v1/pressure_v1。默认512使用原328条标签的完整G2共享恢复进行32槽/单槽回归，共28文件及周期与既有基线精确相同。所有源/归档与实际恢复重审见results/iter2_warm_20261026.json。
+
+## 范围
+
+这是G1 prepared-state的完整硬件回执恢复与自然query重做，不是本数据的G2三方发布或下一query验证。822条仍来自CPU保守未来读闭包；未知页初始化、运行中快照生产器、任意变价距离有效性、全局cache构建、持久化认证/floor、多种并发/取消排列、综合时序/板卡仍待研究。满池分配延后属于前轮真实组件压力测试，本自然路径不新分配overflow条目。

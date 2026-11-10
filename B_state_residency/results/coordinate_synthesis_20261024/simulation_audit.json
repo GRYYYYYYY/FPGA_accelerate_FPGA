@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "manifest_sha256": "775c3a6e2aa11acf2dda82470856f7ba603d97bc1c9a73ce6a88d2f881a2dc09",
+  "auditor_sha256": "31ad1fda41d88d17ce00c2572f05f3f7350ec67b1ee03845a14d6e5e7b49ad5a",
+  "cases": {
+    "synthetic": {
+      "queries": 740,
+      "native_reads": 250,
+      "checkpoints": 8,
+      "host_blocks": 70262,
+      "graph_reads": 1946,
+      "table_reads": 385,
+      "label_reads": 32,
+      "label_writes": 29,
+      "cycles": 79252,
+      "sll_nodes": 16,
+      "absent_prev": 144,
+      "present_prev": 106,
+      "explicit_minus_one": 31,
+      "absent_zero_changes_static_y": 18,
+      "graph_meta_requests": 955
+    },
+    "real": {
+      "queries": 23957,
+      "native_reads": 23292,
+      "checkpoints": 13,
+      "host_blocks": 2217554,
+      "graph_reads": 95820,
+      "table_reads": 11660,
+      "label_reads": 32,
+      "label_writes": 29,
+      "cycles": 2272678,
+      "sll_nodes": 11520,
+      "absent_prev": 23120,
+      "present_prev": 172,
+      "explicit_minus_one": 58,
+      "absent_zero_changes_static_y": 0,
+      "graph_meta_requests": 47186
+    },
+    "pressure": {
+      "queries": 740,
+      "native_reads": 250,
+      "checkpoints": 17,
+      "host_blocks": 71382,
+      "graph_reads": 1946,
+      "table_reads": 385,
+      "label_reads": 48,
+      "label_writes": 29,
+      "cycles": 79147,
+      "sll_nodes": 16,
+      "absent_prev": 144,
+      "present_prev": 106,
+      "explicit_minus_one": 31,
+      "absent_zero_changes_static_y": 18,
+      "graph_meta_requests": 955
+    }
+  },
+  "scope": "Actual graph reader + row/column table reader + paged labels + coordinate controller. resident_zero defaults; selected real nodes and synthetic Laguna; not dense routing equivalence or board.",
+  "limitations": [
+    "Functional directory FRAMES16384/INDEX14/HASH15; defaults not synthesized in this run.",
+    "Synthetic Laguna tables; real image has no Laguna columns.",
+    "Scripted labels, not full dense/sparse routing equivalence.",
+    "No fault-injection coverage in this functional suite."
+  ]
+}

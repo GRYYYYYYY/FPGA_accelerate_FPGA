@@ -1,0 +1,71 @@
+{
+  "status": "matched_sampled_rtl_cycle_comparison",
+  "variants": {
+    "csr": {
+      "matched": {
+        "cycles": 20820,
+        "requests": 8,
+        "edge_records": 664,
+        "expected_status_failures": 2,
+        "request_ids_sha256": "88bfc74e1e66a6cf6d8c9f9ac418056a386226c02c4810739c23d765e42915e2"
+      },
+      "capacity": {
+        "cycles": 11071,
+        "requests": 4,
+        "edge_records": 0,
+        "expected_status_failures": 3,
+        "request_ids_sha256": "b9bbd7451fee62b41f0ac982dc803dc85ead35e400b9c7bf63d3c6b171bcb923"
+      },
+      "wrong_mode": {
+        "cycles": 552,
+        "requests": 2,
+        "edge_records": 0,
+        "expected_status_failures": 2,
+        "request_ids_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d"
+      }
+    },
+    "compact": {
+      "matched": {
+        "cycles": 4682265,
+        "requests": 8,
+        "edge_records": 664,
+        "expected_status_failures": 2,
+        "request_ids_sha256": "88bfc74e1e66a6cf6d8c9f9ac418056a386226c02c4810739c23d765e42915e2"
+      },
+      "capacity": {
+        "cycles": 4545526,
+        "requests": 4,
+        "edge_records": 0,
+        "expected_status_failures": 3,
+        "request_ids_sha256": "b9bbd7451fee62b41f0ac982dc803dc85ead35e400b9c7bf63d3c6b171bcb923"
+      },
+      "wrong_mode": {
+        "cycles": 552,
+        "requests": 2,
+        "edge_records": 0,
+        "expected_status_failures": 2,
+        "request_ids_sha256": "01acecb507abfe1a354aa8064f4af5d3f1acd019e37db3c11c97523b71c76e9d"
+      }
+    }
+  },
+  "artifacts": {
+    "build/hls_region_csr_20261023_v1/solution/sim/report/verilog/result.transaction.rpt": "a29ea28a123fdcbd72bbe4fbee0b277138971dd8f3a502ed2c17d88eb1e61445",
+    "data/derived/hls_region_fixtures_20261023_v1/csr/matched.bin": "eb6f15d4e37f4816ba6f972c53ae5db65b4975bc36b7a9c41e3075f6e6235c17",
+    "data/derived/hls_region_fixtures_20261023_v1/csr/config.bin": "7a42caf86cb4eaa047ac074af2a934402e4be0917668a543838da4658c29091c",
+    "data/derived/hls_region_fixtures_20261023_v1/csr/capacity.bin": "c6b79a25b13e5b50c78a2b26c10fab6a32c3a30caefc9482a53c194a19be9c08",
+    "data/derived/hls_region_fixtures_20261023_v1/csr/wrong_mode.bin": "bac1d23087c9c0209ea2e150b8239c810714bcebcc2f82e0821587f8fd39f429",
+    "data/derived/hls_region_fixtures_20261023_v1/csr/wrong_mode.config.bin": "14dbc16c142f078454dba8660b6ef4c374ddf8138974afd0f2a3c8a88af630aa",
+    "build/hls_region_compact_20261023_v1/solution/sim/report/verilog/result.transaction.rpt": "3419d48adf143dcb40367b5208f408878122690266403796cc144079bb555da8",
+    "data/derived/hls_region_fixtures_20261023_v1/compact/matched.bin": "78eca152dfa9280052b28948e6075d31891b61bf645f1854549a66314af8ac52",
+    "data/derived/hls_region_fixtures_20261023_v1/compact/config.bin": "5798f71ba31335be8119fc6d8eddcada40cd6e2304ab9b8666261321ca9606f7",
+    "data/derived/hls_region_fixtures_20261023_v1/compact/capacity.bin": "c6b79a25b13e5b50c78a2b26c10fab6a32c3a30caefc9482a53c194a19be9c08",
+    "data/derived/hls_region_fixtures_20261023_v1/compact/wrong_mode.bin": "bac1d23087c9c0209ea2e150b8239c810714bcebcc2f82e0821587f8fd39f429",
+    "data/derived/hls_region_fixtures_20261023_v1/compact/wrong_mode.config.bin": "358f7a17540caf02f036fd236bdb269de545dae9cce70aa3a41603f5fd0354d0"
+  },
+  "limitations": [
+    "Eight selected requests, not whole-router latency.",
+    "AXI simulation model, not real DDR/HBM throughput.",
+    "Implementation closure remains a separate gate."
+  ],
+  "compact_over_csr_matched_cycles": 224.89265129682997
+}

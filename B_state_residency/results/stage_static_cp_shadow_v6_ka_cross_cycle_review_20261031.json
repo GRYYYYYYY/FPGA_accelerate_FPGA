@@ -1,0 +1,36 @@
+{
+  "status": "ka_cross_cycle_source_obligations_reviewed_not_full_proof",
+  "sources": {
+    "checkpoint_authority_reader.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+    },
+    "recovery_coordinator.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/recovery_coordinator.sv",
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194"
+    },
+    "query_residency_system.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/query_residency_system.sv",
+      "sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5"
+    },
+    "residency_system.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/residency_system.sv",
+      "sha256": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9"
+    }
+  },
+  "findings": [
+    "Rearm is k_attempt_reset, issued in REARM; the coordinator next enters DRAIN.",
+    "DRAIN requires normal_retired, instantiated with as_retired; as_retired requires !as_busy && !as_core_cfg_valid.",
+    "Reader rearm goes CORE_RESET -> CFG_SEND -> CFG_WAIT -> CFG_REPLY -> IDLE. Pending cfg_rsp_valid contributes to busy/retired gating until consumed.",
+    "Normal successful request goes OWNER_SEND -> OWNER_WAIT -> REPLY; codec response is consumed only when drained. KA source waits in AW for the authority response, then processes the owner before its next AS.",
+    "Reader fault suppresses request ready; authority fault feeds coordinator abort. Faulted and simultaneous-transition paths require executable checking before asserting global stall unreachability.",
+    "Reconfiguration completion k_rcfg_done is cf_rsp_valid from config_restore, not directly an authority-ready signal; do not replace this distinction with an assumed equality."
+  ],
+  "remaining": [
+    "machine-checked sequential invariants over actual RTL and all request-ready blockers",
+    "reachable full-system KA-stall stimulus or justified formal reachability evidence",
+    "future runner integration of calibrated terminal helper with fresh source binding"
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

@@ -1,0 +1,104 @@
+{
+  "created_utc": "2026-10-23T13:45:31.925300+00:00",
+  "status": "mixed_matched_rtl_results_preserve_variant_do_not_promote_default",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_merge_comparison_20261023_v1.json": "c7f530b9927b54ed42377307918cbb4e06e34a1f3ede1286f517a97de34efbf1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_merge_synthesis_review_20261023_v1.json": "74d0732519b74884e8f693919b268117f778965103be158e13ae869698b62439",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_stratified_audit_20261023_v1.json": "b87a445ee83f4f8935ff1e9657dcd5b7517edb5c2642083958045d5be865faae",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_merge_cosim_audit_20261023_v1.json": "aa263be97f98334401134b477a612f0cd3bf08e2ebada18202e5d573995f7093"
+  },
+  "comparisons": [
+    {
+      "label": "empty",
+      "baseline_cycles": 1255,
+      "merge_cycles": 1269,
+      "merge_over_baseline": 1.0111553784860559,
+      "reduction_fraction": -0.011155378486055856
+    },
+    {
+      "label": "degree_1_2",
+      "baseline_cycles": 23866,
+      "merge_cycles": 23880,
+      "merge_over_baseline": 1.000586608564485,
+      "reduction_fraction": -0.0005866085644850028
+    },
+    {
+      "label": "degree_3_4",
+      "baseline_cycles": 45986,
+      "merge_cycles": 46168,
+      "merge_over_baseline": 1.0039577262645152,
+      "reduction_fraction": -0.003957726264515182
+    },
+    {
+      "label": "degree_5_8",
+      "baseline_cycles": 79684,
+      "merge_cycles": 80034,
+      "merge_over_baseline": 1.0043923497816374,
+      "reduction_fraction": -0.0043923497816373835
+    },
+    {
+      "label": "degree_9_63",
+      "baseline_cycles": 136412,
+      "merge_cycles": 137308,
+      "merge_over_baseline": 1.006568337096443,
+      "reduction_fraction": -0.006568337096443111
+    },
+    {
+      "label": "degree_64_127",
+      "baseline_cycles": 1486572,
+      "merge_cycles": 1358514,
+      "merge_over_baseline": 0.9138568464897765,
+      "reduction_fraction": 0.0861431535102235
+    },
+    {
+      "label": "degree_128_255",
+      "baseline_cycles": 1647096,
+      "merge_cycles": 1649644,
+      "merge_over_baseline": 1.0015469650827882,
+      "reduction_fraction": -0.0015469650827881765
+    },
+    {
+      "label": "degree_512_1024",
+      "baseline_cycles": 9136018,
+      "merge_cycles": 7311608,
+      "merge_over_baseline": 0.8003057787320471,
+      "reduction_fraction": 0.1996942212679529
+    },
+    {
+      "label": "unknown",
+      "baseline_cycles": 738,
+      "merge_cycles": 738,
+      "merge_over_baseline": 1.0,
+      "reduction_fraction": 0.0
+    },
+    {
+      "label": "uniform_64",
+      "baseline_cycles": 2108498,
+      "merge_cycles": 2115442,
+      "merge_over_baseline": 1.0032933396190085,
+      "reduction_fraction": -0.003293339619008462
+    },
+    {
+      "label": "capacity",
+      "baseline_cycles": 4545566,
+      "merge_cycles": 3633354,
+      "merge_over_baseline": 0.7993182807157568,
+      "reduction_fraction": 0.20068171928424317
+    },
+    {
+      "label": "wrong_mode",
+      "baseline_cycles": 588,
+      "merge_cycles": 588,
+      "merge_over_baseline": 1.0,
+      "reduction_fraction": 0.0
+    }
+  ],
+  "decision": [
+    "High642-degree sample improves19.969%; degree120 sample improves8.614%.",
+    "Degree146 sample regresses0.155%; low-degree samples regress; uniform64 regresses0.329%.",
+    "Synthesis BRAM_18K doubles16to32; no candidate routed timing/resources or board measurement.",
+    "Retain exact variant and failed-to-generalize hypothesis; do not replace the original default kernel or claim full-router speedup.",
+    "Do not automatically implement a candidate without a demonstrated workload-level benefit; prioritize a separate lookup experiment after inspecting actual access characteristics."
+  ],
+  "scope": "Matched sampled RTL only; degree is not a sufficient predictor of sorting benefit."
+}

@@ -1,0 +1,69 @@
+{
+  "status": "original_two_module_publication_start_and_lease_release_overlap_counterexample_preserved",
+  "witness": [
+    {
+      "previous_step": 2,
+      "result_step": 3,
+      "previous": {
+        "smt_step": 2,
+        "clk": 0,
+        "acquire_ready": 0,
+        "acquire_valid": 1,
+        "jp_owned": 0,
+        "past_valid": 1,
+        "pc_owned": 1,
+        "prepare_allowed": 0,
+        "release_ready": 1,
+        "release_valid": 1,
+        "rst": 0,
+        "start_ready": 1,
+        "start_valid": 1
+      },
+      "result": {
+        "smt_step": 3,
+        "clk": 0,
+        "acquire_ready": 0,
+        "acquire_valid": 1,
+        "jp_owned": 1,
+        "past_valid": 1,
+        "pc_owned": 0,
+        "prepare_allowed": 0,
+        "release_ready": 0,
+        "release_valid": 0,
+        "rst": 0,
+        "start_ready": 0,
+        "start_valid": 0
+      }
+    }
+  ],
+  "query_lease_instance": "checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));",
+  "query_publication_instance": ".clk(clk),.rst(rst||k_cold_rst),.lease_owned(pc_owned),\n.retired(pc_retired&&pc_route_retired&&as_drained&&as_retired&&!cp_busy&&!qc_cp_busy&&!qc_restore_pending),\n.stage_busy(as_busy||as_cfg_lease||k_busy||(|jp_reply)),.fault(abort||as_fault||fault||rc_fault||k_fault||cf_fault||lr_fault||f_fault||ss_fault||qc_fault),.manifest_ready(jp_manifest_ready),\n.start_valid(jp_start&&jp_start_open),.start_ready(jp_core_start_ready),.start_design(jp_design),.start_generation(jp_generation),.start_checkpoint(jp_checkpoint),.start_version(jp_version),.start_query(jp_query),.start_price(jp_price),\n.commit_valid(jp_commit),.commit_ready(jp_commit_ready),.cancel_valid(jp_cancel),.cancel_ready(jp_cancel_ready),.owned(jp_owned),.prepare_allowed(jp_prepare),.done_valid(jp_done),.done_ready(jp_done_ready),.done_status(jp_result),\n.prepared({jp_prepared,jp_ap}),.publish_ready({jp_pubready,jp_apr}),.discard_ready({jp_dropready,jp_adr}),.publish_valid(jp_pv),.discard_valid(jp_dv),\n.a_design(as_bound_design),.a_generation(as_bound_generation),.a_checkpoint(as_bound_checkpoint),.k_design(jp_kdesign),.c_design(jp_cdesign),.k_checkpoint(jp_kcp),.c_checkpoint(jp_ccp),.k_version(jp_kver),.c_version(jp_cver),.k_query(jp_kquery),.k_price(jp_kprice),.journal_count(k_count),\n.sa_design(jp_ad),.sa_generation(jp_ag),.sa_checkpoint(jp_ac),.sk_design(jp_skdesign),.sc_design(jp_scdesign),.sk_checkpoint(jp_skcp),.sc_checkpoint(jp_sccp),.sk_version(jp_skver),.sc_version(jp_scver),.sk_query(jp_skquery),.sk_price(jp_skprice))",
+  "quiet_input_domain": "healthy/retired/route_retired/no_offers true; remaining command terms zero; valid baseline and proposed generation/checkpoint metadata constants. Only acquire/release/start/reset are arbitrary.",
+  "finding": "Same-clock publication start and lease release are simultaneously accepted; next cycle publication owned is true while lease owned is false. Therefore publication-owned implies lease-owned cannot be assumed unconditionally for discard proof.",
+  "scope": "Original two modules with all internal state retained, initial reset. This is an initialized unit composition witness; full-query initial-state reachability and caller protocol legality have not been established. No production RTL edited.",
+  "archive_sha256": "5daa2e5f3dce0e918a3557bcf0990b230f6891a8eabebc49f7c7b54a0fd1da7b",
+  "file_sha256": {
+    "ka_publication_release_overlap_unit_v1/harness.sv": "becf1d1e535b3c2a842600c2079b017573baada74123082ad3e74f7dfd8d6435",
+    "ka_publication_release_overlap_unit_v1/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "ka_publication_release_overlap_unit_v1/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "ka_publication_release_overlap_unit_v1/projection.json": "e87c0a566b35fbd622366e373e4d13581dd1fe403764f506e0a44530b958c79e",
+    "ka_publication_release_overlap_unit_v1/prepare.ys": "8005628852235bb6fa7a3a993a9e1bb8719512f414090109c6a4989e164c970e",
+    "ka_publication_release_overlap_unit_v1/manifest.json": "de92b8b726063331aac3c99921e8a650f7abad4caf406ecd3f137598d6e0e2a5",
+    "ka_publication_release_overlap_unit_v1/prepare.log": "09df5884c9cf3d4d65146d953fe4d7c3d4edfa8515fc938b1aedba67abddba85",
+    "ka_publication_release_overlap_unit_v1/design.smt2": "8e7555c784a5af9ad6226a19ef765fc6417ee654702da569aaa32c341e66cab4",
+    "ka_publication_release_overlap_unit_v1/bmc.log": "359bf39434cc8c6d03c6d80d120daa8373fbae6ae96a4f269ef43e622d5db4e9",
+    "ka_publication_release_overlap_unit_v1/bmc_failure.vcd": "402f336f4c710f2f300044ea4b59f11a5322e6478f07371419fe873c1f2d51c9",
+    "repo/scripts/research_checks/audit_publication_release_overlap_unit_v1.py": "b563df7eec25f562a4259f8da51328d723e7bee5b65bd8d8ec414354132d7b83",
+    "repo/scripts/research_checks/run_publication_release_overlap_unit_v1.py": "ea9c76ff0a99ec13de36896c675fc9afcb39213b03b332ce79e2b47bf2ffc364",
+    "repo/hardware/variants/ka_publication_release_overlap_unit_v1/harness.sv": "becf1d1e535b3c2a842600c2079b017573baada74123082ad3e74f7dfd8d6435",
+    "bound_sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5"
+  },
+  "reviewer_sha256": "b563df7eec25f562a4259f8da51328d723e7bee5b65bd8d8ec414354132d7b83",
+  "next": [
+    "Inspect documented caller contract for simultaneous release/new publication commands.",
+    "Confirm the unit input predicates in an actual full-system initialized scenario before classifying system defect or implementing repair.",
+    "Continue existing lease/fence/coordinator proofs; do not infer their AS exclusion from this separate witness."
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

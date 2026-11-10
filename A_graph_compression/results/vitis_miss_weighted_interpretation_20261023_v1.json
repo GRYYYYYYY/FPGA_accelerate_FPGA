@@ -1,0 +1,80 @@
+{
+  "status": "weighted_rtl_terminal_rehashed_and_interpreted",
+  "created_utc": "2026-10-23T15:33:14.069554+00:00",
+  "rehashed_files": 68,
+  "sample_totals": {
+    "csr_cycles": 516421,
+    "compact_cycles": 19916263,
+    "tile_cache_cycles": 16030283
+  },
+  "sample_total_tile_cache_over_csr": 31.041113742469808,
+  "sample_total_reduction_from_compact": 0.19511592109423337,
+  "comparisons": [
+    {
+      "label": "batch_0_replicate_0",
+      "csr_cycles": 88279,
+      "compact_cycles": 3521849,
+      "tile_cache_cycles": 2837669,
+      "tile_cache_over_csr": 32.14432651026858,
+      "tile_cache_reduction_from_compact": 0.19426727267409816
+    },
+    {
+      "label": "batch_0_replicate_1",
+      "csr_cycles": 86124,
+      "compact_cycles": 3302610,
+      "tile_cache_cycles": 2655180,
+      "tile_cache_over_csr": 30.829733872091403,
+      "tile_cache_reduction_from_compact": 0.196035862545078
+    },
+    {
+      "label": "batch_0_replicate_2",
+      "csr_cycles": 85508,
+      "compact_cycles": 3290486,
+      "tile_cache_cycles": 2640494,
+      "tile_cache_over_csr": 30.88008139589278,
+      "tile_cache_reduction_from_compact": 0.19753677724202445
+    },
+    {
+      "label": "batch_1_replicate_0",
+      "csr_cycles": 84654,
+      "compact_cycles": 3189182,
+      "tile_cache_cycles": 2583654,
+      "tile_cache_over_csr": 30.52016443404919,
+      "tile_cache_reduction_from_compact": 0.1898693771631722
+    },
+    {
+      "label": "batch_1_replicate_1",
+      "csr_cycles": 87468,
+      "compact_cycles": 3466032,
+      "tile_cache_cycles": 2782398,
+      "tile_cache_over_csr": 31.810467828234327,
+      "tile_cache_reduction_from_compact": 0.1972382251519894
+    },
+    {
+      "label": "batch_1_replicate_2",
+      "csr_cycles": 84388,
+      "compact_cycles": 3146104,
+      "tile_cache_cycles": 2530888,
+      "tile_cache_over_csr": 29.991088780395316,
+      "tile_cache_reduction_from_compact": 0.19554852604999706
+    }
+  ],
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vitis_miss_weighted_audit_20261023_v1.json": "473b0d60735c7e3762db0096172d754733178137ce672dd0e22d4f71c55fc5e7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/vitis_miss_weighted_cosim_20261023_v1/audit_receipt.json": "251ee48d013f1296cc4bae83d730a26ebc348081595cb915fa2e8ab66d8c6abb",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/vitis_miss_weighted_cosim_20261023_v1/audit.log": "26a8c3f44f78e067f292e83d17e53c4dd74b93ac64db510beb5d8e0e7d0dc565"
+  },
+  "conclusion": "Tile cache reduces sampled compact decode cycles but remains much slower than CSR; do not promote default or claim full-router speedup.",
+  "limitations": [
+    "Samples exclude cache hits and unknown accesses; they are conditional on known misses.",
+    "Counts do not preserve chronological access order. These are resampled requests, not a trace.",
+    "Small samples can omit rare degrees. No full-router timing or board traffic inference.",
+    "Batch kernel calls differ from current direct provider single-row calls; no host-launch cost inference.",
+    "HLS AXI simulation only; no physical DDR/HBM or host launch measurement."
+  ],
+  "next_evidence_needed": [
+    "Formal CPU repeated-statistics terminal audits.",
+    "Platform/card execution for transport and memory costs.",
+    "Any further decoder optimization needs measured lookup-path bottleneck evidence and unchanged canonical semantics."
+  ]
+}

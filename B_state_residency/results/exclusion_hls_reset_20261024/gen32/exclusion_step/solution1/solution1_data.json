@@ -1,0 +1,942 @@
+{
+  "Top": "exclusion_step",
+  "RtlTop": "exclusion_step",
+  "RtlPrefix": "",
+  "RtlSubPrefix": "exclusion_step_",
+  "SourceLanguage": "cpp",
+  "HostMachineBits": "64",
+  "FunctionProtocol": "ap_ctrl_hs",
+  "ResetStyle": "state",
+  "Target": {
+    "Family": "virtexuplushbm",
+    "Device": "xcu280",
+    "Package": "-fsvh2892",
+    "Speed": "-2L-e",
+    "Triple": "fpga64-xilinx-none"
+  },
+  "Args": {
+    "op": {
+      "index": "0",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "op",
+          "name": "op",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "parent": {
+      "index": "1",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "parent",
+          "name": "parent",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "child": {
+      "index": "2",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "child",
+          "name": "child",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "flags": {
+      "index": "3",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "flags",
+          "name": "flags",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "created": {
+      "index": "4",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "created",
+          "name": "created",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "has_laguna": {
+      "index": "5",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "has_laguna",
+          "name": "has_laguna",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "generation": {
+      "index": "6",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "generation",
+          "name": "generation",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "phase": {
+      "index": "7",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "phase",
+          "name": "phase",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "value": {
+      "index": "8",
+      "direction": "in",
+      "srcType": "unsigned int",
+      "srcSize": "32",
+      "hwRefs": [{
+          "type": "port",
+          "interface": "value_r",
+          "name": "value_r",
+          "usage": "data",
+          "direction": "in"
+        }]
+    },
+    "status": {
+      "index": "9",
+      "direction": "out",
+      "srcType": "unsigned int&",
+      "srcSize": "32",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "status",
+          "name": "status",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "status_ap_vld",
+          "name": "status_ap_vld",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    },
+    "result_generation": {
+      "index": "10",
+      "direction": "out",
+      "srcType": "unsigned int&",
+      "srcSize": "32",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "result_generation",
+          "name": "result_generation",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "result_generation_ap_vld",
+          "name": "result_generation_ap_vld",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    },
+    "request": {
+      "index": "11",
+      "direction": "out",
+      "srcType": "unsigned int&",
+      "srcSize": "32",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "request",
+          "name": "request",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "request_ap_vld",
+          "name": "request_ap_vld",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    },
+    "node": {
+      "index": "12",
+      "direction": "out",
+      "srcType": "unsigned int&",
+      "srcSize": "32",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "node",
+          "name": "node",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "node_ap_vld",
+          "name": "node_ap_vld",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    },
+    "excluded": {
+      "index": "13",
+      "direction": "out",
+      "srcType": "unsigned int&",
+      "srcSize": "32",
+      "hwRefs": [
+        {
+          "type": "port",
+          "interface": "excluded",
+          "name": "excluded",
+          "usage": "data",
+          "direction": "out"
+        },
+        {
+          "type": "port",
+          "interface": "excluded_ap_vld",
+          "name": "excluded_ap_vld",
+          "usage": "control",
+          "direction": "out"
+        }
+      ]
+    }
+  },
+  "HlsSolution": {
+    "FlowTarget": "vivado",
+    "ConfigTcl": [
+      "config_interface -m_axi_latency=0",
+      "config_rtl -reset=state"
+    ],
+    "DirectiveTcl": ["set_directive_top exclusion_step -name exclusion_step"],
+    "ProfileOption": "0",
+    "ProfileType": "none",
+    "KernelName": "exclusion_step"
+  },
+  "ClockInfo": {
+    "ClockName": "ap_clk",
+    "ClockPeriod": "10",
+    "Uncertainty": "2.7",
+    "IsCombinational": "0",
+    "II": "3 ~ 4",
+    "Latency": "3"
+  },
+  "Xdc": {"OocClocks": ["create_clock -name ap_clk -period 10.000 [get_ports ap_clk]"]},
+  "Ipx": {
+    "Vendor": "xilinx.com",
+    "Library": "hls",
+    "Name": "exclusion_step",
+    "Version": "1.0",
+    "DisplayName": "Exclusion_step",
+    "Revision": "2114843460",
+    "Description": "An IP generated by Vitis HLS",
+    "Taxonomy": "\/VITIS_HLS_IP",
+    "AutoFamilySupport": "",
+    "ZipFile": "xilinx_com_hls_exclusion_step_1_0.zip"
+  },
+  "Files": {
+    "CSource": ["\/inspire\/hdd\/global_user\/guoruiyuan-253208540291\/FPGA_routing_acceleration\/FPGA_accelerate_FPGA\/B_state_residency\/results\/exclusion_hls_reset_20261024\/rearchitect\/v1\/src\/kernel_hls.cpp"],
+    "Vhdl": [
+      "impl\/vhdl\/exclusion_step_accept.vhd",
+      "impl\/vhdl\/exclusion_step_fifo_w160_d2_S.vhd",
+      "impl\/vhdl\/exclusion_step_fifo_w288_d2_S.vhd",
+      "impl\/vhdl\/exclusion_step_p_anonymous_namespace_compute.vhd",
+      "impl\/vhdl\/exclusion_step_p_anonymous_namespace_load_input.vhd",
+      "impl\/vhdl\/exclusion_step_p_anonymous_namespace_store_output.vhd",
+      "impl\/vhdl\/exclusion_step_start_for_p_anonymous_namespace_compute_U0.vhd",
+      "impl\/vhdl\/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.vhd",
+      "impl\/vhdl\/exclusion_step_step.vhd",
+      "impl\/vhdl\/exclusion_step.vhd"
+    ],
+    "Verilog": [
+      "impl\/verilog\/exclusion_step_accept.v",
+      "impl\/verilog\/exclusion_step_fifo_w160_d2_S.v",
+      "impl\/verilog\/exclusion_step_fifo_w288_d2_S.v",
+      "impl\/verilog\/exclusion_step_p_anonymous_namespace_compute.v",
+      "impl\/verilog\/exclusion_step_p_anonymous_namespace_load_input.v",
+      "impl\/verilog\/exclusion_step_p_anonymous_namespace_store_output.v",
+      "impl\/verilog\/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v",
+      "impl\/verilog\/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v",
+      "impl\/verilog\/exclusion_step_step.v",
+      "impl\/verilog\/exclusion_step.v"
+    ],
+    "IpMisc": ["impl\/misc\/logo.png"],
+    "CsynthXml": "syn\/report\/csynth.xml",
+    "DebugDir": ".debug",
+    "KernelXml": ".autopilot\/db\/kernel.internal.xml",
+    "Xo": "",
+    "XoHlsDir": "",
+    "ProtoInst": [".debug\/exclusion_step.protoinst"]
+  },
+  "SubcoreInfo": {
+    "HasXpmMemory": false,
+    "HasClockedDsp": false,
+    "Ip": []
+  },
+  "Interfaces": {
+    "op": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"op": "DATA"},
+      "ports": ["op"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "op"
+        }]
+    },
+    "parent": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"parent": "DATA"},
+      "ports": ["parent"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "parent"
+        }]
+    },
+    "child": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"child": "DATA"},
+      "ports": ["child"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "child"
+        }]
+    },
+    "flags": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"flags": "DATA"},
+      "ports": ["flags"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "flags"
+        }]
+    },
+    "created": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"created": "DATA"},
+      "ports": ["created"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "created"
+        }]
+    },
+    "has_laguna": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"has_laguna": "DATA"},
+      "ports": ["has_laguna"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "has_laguna"
+        }]
+    },
+    "generation": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"generation": "DATA"},
+      "ports": ["generation"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "generation"
+        }]
+    },
+    "phase": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"phase": "DATA"},
+      "ports": ["phase"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "phase"
+        }]
+    },
+    "value_r": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_none",
+      "mode": "slave",
+      "dataWidth": "32",
+      "portMap": {"value_r": "DATA"},
+      "ports": ["value_r"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "value"
+        }]
+    },
+    "status": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_vld",
+      "mode": "master",
+      "dataWidth": "32",
+      "portMap": {"status": "DATA"},
+      "ports": ["status"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "status"
+        }]
+    },
+    "result_generation": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_vld",
+      "mode": "master",
+      "dataWidth": "32",
+      "portMap": {"result_generation": "DATA"},
+      "ports": ["result_generation"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "result_generation"
+        }]
+    },
+    "request": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_vld",
+      "mode": "master",
+      "dataWidth": "32",
+      "portMap": {"request": "DATA"},
+      "ports": ["request"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "request"
+        }]
+    },
+    "node": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_vld",
+      "mode": "master",
+      "dataWidth": "32",
+      "portMap": {"node": "DATA"},
+      "ports": ["node"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "node"
+        }]
+    },
+    "excluded": {
+      "type": "data",
+      "busTypeName": "data",
+      "protocol": "ap_vld",
+      "mode": "master",
+      "dataWidth": "32",
+      "portMap": {"excluded": "DATA"},
+      "ports": ["excluded"],
+      "constraints": [{
+          "constraint_type": "pragma interface",
+          "mode": "ap_none",
+          "register_option": "0",
+          "argName": "excluded"
+        }]
+    },
+    "ap_clk": {
+      "type": "clock",
+      "busTypeName": "clock",
+      "mode": "slave",
+      "busParams": {"ASSOCIATED_RESET": "ap_rst"},
+      "portMap": {"ap_clk": "CLK"},
+      "ports": ["ap_clk"]
+    },
+    "ap_rst": {
+      "type": "reset",
+      "busTypeName": "reset",
+      "mode": "slave",
+      "busParams": {"POLARITY": "ACTIVE_HIGH"},
+      "portMap": {"ap_rst": "RST"},
+      "ports": ["ap_rst"]
+    },
+    "ap_ctrl": {
+      "type": "ap_ctrl",
+      "busTypeName": "acc_handshake",
+      "mode": "slave",
+      "portMap": {
+        "ap_start": "start",
+        "ap_done": "done",
+        "ap_ready": "ready",
+        "ap_idle": "idle"
+      },
+      "ports": [
+        "ap_done",
+        "ap_idle",
+        "ap_ready",
+        "ap_start"
+      ]
+    }
+  },
+  "RtlPorts": {
+    "op": {
+      "dir": "in",
+      "width": "32"
+    },
+    "parent": {
+      "dir": "in",
+      "width": "32"
+    },
+    "child": {
+      "dir": "in",
+      "width": "32"
+    },
+    "flags": {
+      "dir": "in",
+      "width": "32"
+    },
+    "created": {
+      "dir": "in",
+      "width": "32"
+    },
+    "has_laguna": {
+      "dir": "in",
+      "width": "32"
+    },
+    "generation": {
+      "dir": "in",
+      "width": "32"
+    },
+    "phase": {
+      "dir": "in",
+      "width": "32"
+    },
+    "value_r": {
+      "dir": "in",
+      "width": "32"
+    },
+    "status": {
+      "dir": "out",
+      "width": "32"
+    },
+    "status_ap_vld": {
+      "dir": "out",
+      "width": "1"
+    },
+    "result_generation": {
+      "dir": "out",
+      "width": "32"
+    },
+    "result_generation_ap_vld": {
+      "dir": "out",
+      "width": "1"
+    },
+    "request": {
+      "dir": "out",
+      "width": "32"
+    },
+    "request_ap_vld": {
+      "dir": "out",
+      "width": "1"
+    },
+    "node": {
+      "dir": "out",
+      "width": "32"
+    },
+    "node_ap_vld": {
+      "dir": "out",
+      "width": "1"
+    },
+    "excluded": {
+      "dir": "out",
+      "width": "32"
+    },
+    "excluded_ap_vld": {
+      "dir": "out",
+      "width": "1"
+    },
+    "ap_clk": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_rst": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_start": {
+      "dir": "in",
+      "width": "1"
+    },
+    "ap_done": {
+      "dir": "out",
+      "width": "1"
+    },
+    "ap_ready": {
+      "dir": "out",
+      "width": "1"
+    },
+    "ap_idle": {
+      "dir": "out",
+      "width": "1"
+    }
+  },
+  "ModuleInfo": {
+    "Hierarchy": {
+      "ModuleName": "exclusion_step",
+      "Instances": [
+        {
+          "ModuleName": "p_anonymous_namespace_load_input",
+          "InstanceName": "p_anonymous_namespace_load_input_U0"
+        },
+        {
+          "ModuleName": "p_anonymous_namespace_compute",
+          "InstanceName": "p_anonymous_namespace_compute_U0",
+          "Instances": [{
+              "ModuleName": "step",
+              "InstanceName": "grp_step_fu_89",
+              "Instances": [{
+                  "ModuleName": "accept",
+                  "InstanceName": "call_ln27_accept_fu_221"
+                }]
+            }]
+        },
+        {
+          "ModuleName": "p_anonymous_namespace_store_output",
+          "InstanceName": "p_anonymous_namespace_store_output_U0"
+        }
+      ]
+    },
+    "Info": {
+      "p_anonymous_namespace_load_input": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "1"
+      },
+      "accept": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "1",
+        "isOneStateSeq": "0"
+      },
+      "step": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "p_anonymous_namespace_compute": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      },
+      "p_anonymous_namespace_store_output": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "0",
+        "isCombinational": "0",
+        "isOneStateSeq": "1"
+      },
+      "exclusion_step": {
+        "FunctionProtocol": "ap_ctrl_hs",
+        "isTaskLevelControl": "0",
+        "isPipelined": "1",
+        "isCombinational": "0",
+        "isOneStateSeq": "0"
+      }
+    },
+    "Metrics": {
+      "p_anonymous_namespace_load_input": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "0",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "1.412"
+        },
+        "Area": {
+          "FF": "3",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "29",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "accept": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "0",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "1.523"
+        },
+        "Area": {
+          "FF": "0",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "0",
+          "LUT": "248",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "step": {
+        "Latency": {
+          "LatencyBest": "1",
+          "LatencyAvg": "1",
+          "LatencyWorst": "2",
+          "PipelineIIMin": "1",
+          "PipelineIIMax": "2",
+          "PipelineII": "1 ~ 2",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "1.523"
+        },
+        "Area": {
+          "FF": "328",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "894",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "p_anonymous_namespace_compute": {
+        "Latency": {
+          "LatencyBest": "2",
+          "LatencyAvg": "2",
+          "LatencyWorst": "3",
+          "PipelineIIMin": "2",
+          "PipelineIIMax": "3",
+          "PipelineII": "2 ~ 3",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "2.911"
+        },
+        "Area": {
+          "FF": "621",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "946",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "p_anonymous_namespace_store_output": {
+        "Latency": {
+          "LatencyBest": "0",
+          "LatencyAvg": "0",
+          "LatencyWorst": "0",
+          "PipelineII": "0",
+          "PipelineDepth": "",
+          "PipelineType": "no"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "1.428"
+        },
+        "Area": {
+          "FF": "162",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "65",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      },
+      "exclusion_step": {
+        "Latency": {
+          "LatencyBest": "3",
+          "LatencyAvg": "3",
+          "LatencyWorst": "4",
+          "PipelineIIMin": "3",
+          "PipelineIIMax": "4",
+          "PipelineII": "3 ~ 4",
+          "PipelineDepth": "",
+          "PipelineType": "dataflow"
+        },
+        "Timing": {
+          "Target": "10.00",
+          "Uncertainty": "2.70",
+          "Estimate": "2.911"
+        },
+        "Area": {
+          "FF": "2330",
+          "AVAIL_FF": "2607360",
+          "UTIL_FF": "~0",
+          "LUT": "1825",
+          "AVAIL_LUT": "1303680",
+          "UTIL_LUT": "~0",
+          "BRAM_18K": "0",
+          "AVAIL_BRAM": "4032",
+          "UTIL_BRAM": "0",
+          "DSP": "0",
+          "AVAIL_DSP": "9024",
+          "UTIL_DSP": "0",
+          "URAM": "0",
+          "AVAIL_URAM": "960",
+          "UTIL_URAM": "0"
+        }
+      }
+    }
+  },
+  "GenerateBdFiles": "0",
+  "GenData": {
+    "DataVersion": "0.2",
+    "Time": "2026-10-24 17:00:56 UTC",
+    "ToolName": "vitis_hls",
+    "ToolVersion": "2022.2"
+  }
+}

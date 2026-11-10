@@ -1,0 +1,25 @@
+
+****** xsim v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/stream_tb/xsim_script.tcl
+# xsim {stream_tb} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/streaming_vectors_large_20261023/actual.txt -testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/streaming_vectors_large_20261023/pages.hex -autoloadwcfg -tclbatch {simulate.tcl}
+Time resolution is 1 ps
+source simulate.tcl
+## run 501s
+STREAM_QUERY_DONE queries=1 commands=541120 transfers=64590 time_ps=684664700000
+STREAM_QUERY_DONE queries=2 commands=1078473 transfers=129818 time_ps=1378179410000
+STREAM_QUERY_DONE queries=3 commands=1529078 transfers=186631 time_ps=1968978030000
+STREAM_QUERY_DONE queries=4 commands=1964039 transfers=243632 time_ps=2559770310000
+STREAM_QUERY_DONE queries=5 commands=2452178 transfers=305915 time_ps=3208626630000
+STREAM_QUERY_DONE queries=6 commands=2862323 transfers=357743 time_ps=3747718960000
+STREAM_QUERY_DONE queries=7 commands=3286037 transfers=414485 time_ps=4334586150000
+INDEX_ENDPOINT_PASS clear_cycles=32768 wraps=0 overflows=0
+TEST_PASS memory_endpoint small=0 checks=3286037 transfers=414485 fences=7 tag_wraps=1 errors=0 gap_cycles=56 host_stalls=13144148 aw=120793 ar=424127 b=120793 r=6772626
+$finish called at time : 4334586150 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_streaming_large_v2_20261023/sources/hardware/tb/tb_memory_endpoint_stream_v2.sv" Line 334
+run: Time (s): cpu = 00:00:02 ; elapsed = 00:26:26 . Memory (MB): peak = 1509.078 ; gain = 0.000 ; free physical = 617759 ; free virtual = 1334868
+## quit
+INFO: xsimkernel Simulation Memory Usage: 481412 KB (Peak: 481412 KB), Simulation CPU Usage: 1582310 ms
+INFO: [Common 17-206] Exiting xsim at Fri Oct 23 15:31:41 2026...

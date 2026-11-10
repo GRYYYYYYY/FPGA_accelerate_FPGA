@@ -1,0 +1,99 @@
+{
+  "created_utc": "2026-10-24T16:49:34.644234+00:00",
+  "status": "label_index_cpu_component_and_search_integration_passed_full_router_prepared",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_label_index.hpp": "c3d919e6eef4701e8568a395ea028ff15290166bfcabf35c1b1f399db3f18c84",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_site_state.hpp": "bb7ae721b07c42d5306a578cf01fc10f6c03c23a72e5d5d1c74624e03a0a2f25",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/search_label_adapter.hpp": "eea9848ba20d37af86e864a5b25ab8d8f5666a7bcfe87043748e335b08a52a12",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/label_index_transform.py": "f09dbbc12b2163f70cffee323e3c8b156decff45d1952e06ccc85a1977328dc3",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_label_index.cpp": "65a47b75e31021ff6644af493c4dd9c7be36b74b76a60fb2f3fcadafcaa8821c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_label_index_integration.py": "6c5da7ddd1dd201dc28542e9ae17dc2abf3ed000db5a012527e5e2f9e2e100a6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_label_index_component_20261024_v2.log": "de4a33658d6e6e494916f6758c3e7b8f32aa3e7dbaa800f53c2d5fb11a8ef6ff",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/label_index_router_20261024_v1/plan.json": "706c6198ef37b61e98ddd636ac07373a0d7ddc0c4c67ae249b48c05401cf24db",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/label_index_router_20261024_v1/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_heap_router_audit_20261024_v1.json": "ac033729979514d242dc8546b66d87feca61673ff96923a1216a6e029621bc21",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_heap_external_audit_20261024_v1.json": "51b7168c483ff09653b5a17211de2cddc0a6bbf06b95a6ff0b2d0ecfca1f296d"
+  },
+  "component": {
+    "command": [
+      "/tmp/a_search_label_index_20261024_v2"
+    ],
+    "exit_code": 0,
+    "random_cases": 60000,
+    "calls_per_case": [
+      "find",
+      "get_or_insert"
+    ],
+    "slot_label_pairs": [
+      [
+        8,
+        4
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        128,
+        64
+      ]
+    ],
+    "inserted": 1440,
+    "found": 20705,
+    "capacity_rejections": 37417,
+    "invalid_rejections": 438,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "boundaries": [
+      "same-bucket wraparound probes",
+      "same node different complete state",
+      "distinct nodes shared state",
+      "zero-mask field presence",
+      "lookup when capacity full",
+      "invalid normalized state",
+      "invalid epoch/count",
+      "normal epoch reset",
+      "epoch rollover clears tags",
+      "invalid live tag"
+    ]
+  },
+  "search_integration": {
+    "command": "python3 -m unittest discover -s tests -p test_label_index_integration.py -v",
+    "exit_code": 0,
+    "reference_cases": 12,
+    "capacity_failure_cases": 2,
+    "observed_duration_seconds": 34.622,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ]
+  },
+  "cxx14": {
+    "compile": "g++ -std=c++14 -Wall -Wextra -Werror /tmp/a_label_index_cxx14_20261024.cpp -o /tmp/a_label_index_cxx14_20261024",
+    "exit_code": 0,
+    "host_key_32_16_8_bytes": 608
+  },
+  "limits": {
+    "key_state": [
+      32,
+      16,
+      8
+    ],
+    "label_capacity": 524288,
+    "slots": 1048576,
+    "fixture_union": [
+      18,
+      11,
+      7
+    ]
+  },
+  "full_router_launched": false,
+  "limitations": [
+    "No HLS top or RTL validation of label index yet.",
+    "Full real workload index capacity and probe distribution unmeasured.",
+    "Key array host size is not an AXI packing contract or complete router footprint.",
+    "Native label cost/parent, site merge, occupancy and negotiation remain CPU code."
+  ]
+}

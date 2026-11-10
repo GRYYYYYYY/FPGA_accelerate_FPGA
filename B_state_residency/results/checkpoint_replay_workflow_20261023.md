@@ -1,0 +1,9 @@
+# 完整查询回放自动衔接
+
+活动控制器：checkpoint_replay_workflow_v2_20261023。它观察已经在运行的make_checkpoint_vectors.py进程，按PID和/proc命令行确认身份；不重新启动生成器。生成manifest及completion收据齐全后执行完整逐查询/文件哈希审计，然后启动唯一目录的全38 RTL回放，最后执行逐查询和checkpoint终态审计。控制器与子命令的PID、argv、退出码和状态均写入原子更新的manifest，各阶段完整日志分开保存。
+
+来源脚本被冻结哈希。输入未完成、源变化、阶段失败或RTL结果目录已存在时停止，避免重复提交或掩盖失败。v1控制器尚未提交任何子命令时被v2替换，仅补上passed manifest早于completion收据落盘的间隙处理；原生成进程保持不变，替换原因保存在v1 superseded.json。
+
+当前仍在等待全量生成；30个已完成query的累计计数逐项符合独立planner，包含查询543648的9次checkpoint。完整RTL尚未开始，最终审计尚未执行。未来状态以workflow和子任务的live manifest/进程为准。
+
+最终审计要求38查询全部完成、31个checkpoint逐次编号/计数/时间范围正确，每query累计命令及传输匹配生成输入和独立planner；总21662794命令、2743929传输、14047736字段，最后ps时间与finish ns一致。行为仿真通过也不能据此声称实卡、物理时序或完整路由加速。

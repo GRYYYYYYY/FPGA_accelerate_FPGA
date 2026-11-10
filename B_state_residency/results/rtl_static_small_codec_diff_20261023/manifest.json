@@ -1,0 +1,65 @@
+{
+  "status": "passed",
+  "pid": 415305,
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec_small_static.sv": "fe66bd6bf2ee4d3d058b0de1f23568f87d86f0ef9c4af44e8badd09b00a09eaa",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_page_codec_small_static_diff.sv": "66892faf4859d63b13c249f9b66ef8a076c9488b9ea0bd5f640071a5a8c535d5",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_static_small_codec_diff.py": "948c6907296ff504e5cea42e66a1e79683abc3320c2e1ad39407f9402fa9c912",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_static_small_codec_diff_20261023/sources/scratch_page_codec_small_static.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_static_small_codec_diff_20261023/sources/tb_scratch_page_codec_small_static_diff.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_static_small_codec_diff_20261023/sources/scratch_page_codec_small.sv"
+      ],
+      "pid": 415307,
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_scratch_page_codec_small_static_diff",
+        "-s",
+        "small_codec",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "pid": 415341,
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "small_codec",
+        "--tclbatch",
+        "simulate.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "pid": 415640,
+      "exit_code": 0
+    }
+  ],
+  "scope": "8-node codec directed behavioral simulation, not AXI integration or timing",
+  "results": [
+    "SMALL_CODEC_EDGES_PASS cases=99 checks=286"
+  ],
+  "artifacts": {
+    "simulate.log": "f8acec3830e8e88a1a471cfb9febbfa82da9a2572466395369bfabe9a040a4bb",
+    "compile.stdout.log": "3e6295d396d8e7d48fd8075e9c509154f0069bc20b03c2549e66c1b271a7a6d8",
+    "xvlog.log": "3e6295d396d8e7d48fd8075e9c509154f0069bc20b03c2549e66c1b271a7a6d8",
+    "simulate.stdout.log": "6327ed4fecbd0247a6f0a1f1a5f5ff5862328cdabac6ceb9929c0ac6275565c5",
+    "xelab.log": "f9978e520e07278cd7c44ab61a120b41addf838ccacd05b49b763b3c274214ca",
+    "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "elaborate.stdout.log": "f9978e520e07278cd7c44ab61a120b41addf838ccacd05b49b763b3c274214ca"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "script_sha256": "5664527177495b16fc169d896bf40d8b1ceb88bcfdff69b6935dc50992752cb4",
+  "inputs": {
+    "results/record_epoch16_full_20261024/manifest.json": "f21cc68690e77c7b32f94d7f68ed36dd40921f9cf4d40d68f4cff2963338c8cd",
+    "results/record_epoch16_full_20261024/source_bound_audit.json": "49c82f680fff2879053e589bef051ff8ea180ad69ac31a4a816376b39f8a3878",
+    "results/record_epoch16_full_20261024/pilot/simulate.log": "d5d88de04a12250baa91d6b53e256dc7e1f7464d34fe73f1540f9565bd3c3ec3",
+    "results/record_epoch16_timing_20261024/final_audit.json": "fd60401ad53e2afed546ef774a6ec5b956ecff8a5f8c50e96d2d781b619ff6a7",
+    "results/sparse_writeback_cycle64_full_20261024/manifest.json": "be6f5324953c1ef53725fc056138d6043d2cc0eb38154ce484ba28604259a8db",
+    "results/sparse_writeback_cycle64_full_20261024/source_bound_audit.json": "57b473ec6c9948baddd5b58803d428f2ca4609b64aa2f1f9a7cf82c5657d1f26",
+    "results/sparse_writeback_cycle64_full_20261024/simulate.log": "94b2c6abd1dfb84c8a225c9eaab54187deefbfa9c2c53eb79b4d63a83a933197",
+    "results/sparse_writeback_timing_20261024/final_audit.json": "1063945f60a7ce077affea55f7481bc01418c107588a0cb8edee50cf5afc4b2c",
+    "results/sparse_records_full_20261024/manifest.json": "bef87379ff6d7dd170d46be9769b9fe96c08d4aae6e5c1e99c34a695fc3fe010",
+    "results/sparse_records_full_20261024/source_bound_audit.json": "af8a158543cd9e6d8d28d3fa8823509c5c78b2d1fe5140bc26752100dc35e65b",
+    "results/sparse_records_full_20261024/simulate.log": "8a9d41f08dd88ae8fef50d891014ea4e671ed97a742e79c0bc1d06ec072b9d70",
+    "results/sparse_records_timing_20261024/final_audit.json": "83ae5815a35e5869b6db42afdaa8c6bdf6bd36b6bf6aafeaa8544a51bc8c9e17"
+  },
+  "rows": [
+    {
+      "variant": "native16",
+      "end_ns": 6140213280,
+      "time_seconds": 6.14021328,
+      "reduction_vs_native16_percent": 0.0,
+      "axi_page_payload_bytes": 474636672,
+      "postroute_lut": 12750.0,
+      "postroute_ff": 11161.0,
+      "postroute_bram36_tiles": 375.0,
+      "postroute_wns_ns": 1.24,
+      "postroute_whs_ns": 0.037
+    },
+    {
+      "variant": "sparse_wb",
+      "end_ns": 5936429820,
+      "time_seconds": 5.93642982,
+      "reduction_vs_native16_percent": 3.3188335764128385,
+      "axi_page_payload_bytes": 474636672,
+      "postroute_lut": 12860.0,
+      "postroute_ff": 11172.0,
+      "postroute_bram36_tiles": 375.0,
+      "postroute_wns_ns": 1.726,
+      "postroute_whs_ns": 0.039
+    },
+    {
+      "variant": "sparse_wb_rf",
+      "end_ns": 5555584670,
+      "time_seconds": 5.55558467,
+      "reduction_vs_native16_percent": 9.521307865709838,
+      "axi_page_payload_bytes": 474636672,
+      "postroute_lut": 12624.0,
+      "postroute_ff": 11208.0,
+      "postroute_bram36_tiles": 375.0,
+      "postroute_wns_ns": 1.1,
+      "postroute_whs_ns": 0.035
+    }
+  ],
+  "conserved_counts": {
+    "transfers": 2472066,
+    "fences": 38,
+    "aw": 641255,
+    "ar": 1908649,
+    "b": 641255,
+    "r": 5551326
+  },
+  "csv_sha256": "51fec553be5780adcec1d1c4024a1f5f51545932501fb995e50339523897864d",
+  "scope": "Three full38 state-endpoint access replays under existing testbench. OOC resource/timing evidence listed separately; not full routing or board speedup."
+}

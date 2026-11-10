@@ -1,0 +1,526 @@
+{
+  "status": "passed",
+  "audits": {
+    "warm_cancel_unfixed_v1": {
+      "status": "passed",
+      "expected_failure": true,
+      "manifest_sha256": "dc8f820af77fdf80b4190b09c20909c3dc9051490f61f7575b31a2b308482b28",
+      "auditor_sha256": "883da69f6d9a241f2992d8bdf6053160d16f0499e0d983d1a8061e4e2050c8cc",
+      "cases": {
+        "full_5": {
+          "expected_failure": "successful-only LABELS callback leaves canceled coordinator stuck after query reply retired",
+          "held_rows": [
+            [
+              "CANCEL_HELD",
+              "1147960",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147961",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147962",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147963",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147964",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147965",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147966",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147967",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ]
+          ]
+        }
+      },
+      "limits": [
+        "Query9/10 cancellation after successful label/path restoration; not AXI-inflight cancellation, late-success abort or non-cold retry.",
+        "Failure remains quarantined in join HALT; target reset/attempt floor is not rearmed in this test."
+      ]
+    },
+    "warm_cancel_transition_v1": {
+      "status": "passed",
+      "expected_failure": true,
+      "manifest_sha256": "3b004a9ae3bea406b3007cedb2e786941ddb2bde49caf44f74ecd046f12f0963",
+      "auditor_sha256": "883da69f6d9a241f2992d8bdf6053160d16f0499e0d983d1a8061e4e2050c8cc",
+      "cases": {
+        "full_5": {
+          "expected_failure": "premature failure before accepted query response retired",
+          "held_rows": [
+            [
+              "CANCEL_HELD",
+              "1147960",
+              "2",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "CANCEL_HELD",
+              "1147961",
+              "2",
+              "1",
+              "6",
+              "1",
+              "1"
+            ]
+          ]
+        }
+      },
+      "limits": [
+        "Query9/10 cancellation after successful label/path restoration; not AXI-inflight cancellation, late-success abort or non-cold retry.",
+        "Failure remains quarantined in join HALT; target reset/attempt floor is not rearmed in this test."
+      ]
+    },
+    "warm_cancel_fixed_v2": {
+      "status": "passed",
+      "expected_failure": false,
+      "manifest_sha256": "e991e058daef6b04338a3c574c383a9f6e86e43ea2f1bced915a31c0fa5aab98",
+      "auditor_sha256": "883da69f6d9a241f2992d8bdf6053160d16f0499e0d983d1a8061e4e2050c8cc",
+      "cases": {
+        "full_5": {
+          "held_cycles": 8,
+          "query_words": 9,
+          "cancel_status": 2,
+          "recovery_error": 6,
+          "retained_journal": 6,
+          "checkpoint": 18,
+          "final_owner_equals_G2": true,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 10623,
+              "read_beats": 10623,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 10623
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1707,
+              "read_beats": 1707,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1707
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1392,
+              "read_beats": 1392,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1392
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1214,
+              "read_beats": 1214,
+              "write_beats": 20,
+              "write_replies": 20,
+              "read_burst_lengths": {
+                "1": 1214
+              },
+              "write_burst_lengths": {
+                "1": 20
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 764,
+              "read_beats": 2205,
+              "write_beats": 1719,
+              "write_replies": 594,
+              "read_burst_lengths": {
+                "3": 706,
+                "1": 29,
+                "2": 29
+              },
+              "write_burst_lengths": {
+                "3": 552,
+                "1": 21,
+                "2": 21
+              },
+              "logical_192B_reads": 735,
+              "logical_192B_writes": 573,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 186,
+              "read_beats": 186,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 186
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 42,
+              "read_beats": 42,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 42
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        },
+        "pressure_5": {
+          "held_cycles": 8,
+          "query_words": 9,
+          "cancel_status": 2,
+          "recovery_error": 6,
+          "retained_journal": 6,
+          "checkpoint": 18,
+          "final_owner_equals_G2": true,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 10623,
+              "read_beats": 10623,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 10623
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1707,
+              "read_beats": 1707,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1707
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1392,
+              "read_beats": 1392,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1392
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1214,
+              "read_beats": 1214,
+              "write_beats": 20,
+              "write_replies": 20,
+              "read_burst_lengths": {
+                "1": 1214
+              },
+              "write_burst_lengths": {
+                "1": 20
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 2159,
+              "read_beats": 6132,
+              "write_beats": 3294,
+              "write_replies": 1151,
+              "read_burst_lengths": {
+                "3": 1929,
+                "2": 115,
+                "1": 115
+              },
+              "write_burst_lengths": {
+                "3": 1045,
+                "1": 53,
+                "2": 53
+              },
+              "logical_192B_reads": 2044,
+              "logical_192B_writes": 1098,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 186,
+              "read_beats": 186,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 186
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 42,
+              "read_beats": 42,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 42
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Query9/10 cancellation after successful label/path restoration; not AXI-inflight cancellation, late-success abort or non-cold retry.",
+        "Failure remains quarantined in join HALT; target reset/attempt floor is not rearmed in this test."
+      ]
+    },
+    "warm_cancel_normal_v2": {
+      "status": "passed",
+      "manifest_sha256": "a53e57d215a1c2fc6be168b30c9e33829dda3795cbbeb99fba41a27ae5a669e4",
+      "auditor_sha256": "c59eb4938b4eb612a83bb3e6f8db30d4cd991cf3eb3880ba77ef93d89fdf185e",
+      "cases": {
+        "full_5": {
+          "exact_files": {
+            "graph_axi.txt": "d45359efa6a101c63545153e3e133bfc0f54bd2796b59833fa0adfaaecacf5d6",
+            "cost_axi.txt": "3e0ada9fd94364119c8862685619fdf74664df006128c81a882b7baf2c17e6f1",
+            "design_axi.txt": "086fd87bff0ae5aad75b8034915c0bfcf4403c9892ec10c69a91e163baf7ed6c",
+            "owner_axi.txt": "e21c0ec855be7dab5806099220ffb248a9f332ef016ebfaf460dd3319e5b8479",
+            "label_axi.txt": "000baa89cdafa8571d071cfcbb97bb21d6b5cb3ec8837e331fe03afa1e21e93d",
+            "qstate_axi.txt": "91166a4692befdf7ac9b0981003e253648158ad704abe4bc124ed610e2085659",
+            "table_axi.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "snapshot_axi.txt": "25cf8c89115d2e2b3de4612dd2ded9a4e9b9ab0935d23cd830e85321028bd6fa",
+            "owners.bin": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+            "labels.bin": "614a2c28297996f5334c53e1e153defb38753bc1a372f07b68afc1be4776bfcd",
+            "cost.bin": "1b8e7a1e9dc945f1e8328d3d2c57c04c043e38feaedef7aff0612e422e6dc682",
+            "design.bin": "7fff9a9a5126a34b6871862245adf3dc8dc6e579598d134c1b6afc69f9e366d9",
+            "natural_trace.txt": "3b77997d08f0fe6a5a536bdc5a936550a3c0511cc4b11b177a73766fad5597c6",
+            "directory.txt": "d515d925144fe50d945c241e8f882fcab04dc24488fc8f606a53e19883c02abe"
+          },
+          "result": "QUERY_FAULT_OBSERVED case=5 outcome=recovered_retry cycles=1354736 repairs=6"
+        },
+        "pressure_5": {
+          "exact_files": {
+            "graph_axi.txt": "d45359efa6a101c63545153e3e133bfc0f54bd2796b59833fa0adfaaecacf5d6",
+            "cost_axi.txt": "3e0ada9fd94364119c8862685619fdf74664df006128c81a882b7baf2c17e6f1",
+            "design_axi.txt": "086fd87bff0ae5aad75b8034915c0bfcf4403c9892ec10c69a91e163baf7ed6c",
+            "owner_axi.txt": "e21c0ec855be7dab5806099220ffb248a9f332ef016ebfaf460dd3319e5b8479",
+            "label_axi.txt": "a0df1234bb4316d559a60be15ad1fa0b8c482c98e7f1bd4e5353f5c14978cab5",
+            "qstate_axi.txt": "91166a4692befdf7ac9b0981003e253648158ad704abe4bc124ed610e2085659",
+            "table_axi.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "snapshot_axi.txt": "25cf8c89115d2e2b3de4612dd2ded9a4e9b9ab0935d23cd830e85321028bd6fa",
+            "owners.bin": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+            "labels.bin": "07993479c3ba470ec47c55398e387ca1deee3b06233ef9114b0b750e8e83310f",
+            "cost.bin": "1b8e7a1e9dc945f1e8328d3d2c57c04c043e38feaedef7aff0612e422e6dc682",
+            "design.bin": "7fff9a9a5126a34b6871862245adf3dc8dc6e579598d134c1b6afc69f9e366d9",
+            "natural_trace.txt": "0d31d9167adce18080680d389ead46de9521d0d2dd6cfc9816481434ee5974d6",
+            "directory.txt": "f2d6dd695aaea82a52b0a23203760fec65a291c893262d8902e7296312062cd5"
+          },
+          "result": "QUERY_FAULT_OBSERVED case=5 outcome=recovered_retry cycles=1451611 repairs=6"
+        }
+      }
+    }
+  },
+  "restores": {
+    "warm_cancel_unfixed_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_cancel_unfixed_v1.json",
+      "archive_sha256": "6d37162c4e02f604fef9b4bfa0b4d1b09fd9d7cd3faec6b2bf337101706305b4",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_cancel_unfixed_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_cancel_unfixed_v1",
+      "files": 324,
+      "audit_byte_identical": true,
+      "audit_sha256": "947564457e2af604b50223542023e604a94c6719df38342ee0eafed60754c3d4",
+      "auditor": "audit_warm_cancel.py"
+    },
+    "warm_cancel_transition_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_cancel_transition_v1.json",
+      "archive_sha256": "f6e6976374019bfd6112223c78bed70ac9eaa2ce7341031c5a9de930a8b3d2e6",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_cancel_transition_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_cancel_transition_v1",
+      "files": 325,
+      "audit_byte_identical": true,
+      "audit_sha256": "ee575ac9d56e4c4b79a58b20b3a1977555b2ef197d159ca75dac328f15bfa577",
+      "auditor": "audit_warm_cancel.py"
+    },
+    "warm_cancel_fixed_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_cancel_fixed_v2.json",
+      "archive_sha256": "6bfdd37f6bd8c16afcb70b6e02c40bb3dc538de3e9645dd3a1db7dc07dc9a504",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_cancel_fixed_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_cancel_fixed_v2",
+      "files": 510,
+      "audit_byte_identical": true,
+      "audit_sha256": "d4c98fa13263cd6c78de440c0cfc57119acb6a8e63f0196fc468322c2b070003",
+      "auditor": "audit_warm_cancel.py"
+    },
+    "warm_cancel_normal_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_cancel_normal_v2.json",
+      "archive_sha256": "649bcbea1fc1657e105e3e9fd58d41ebfc908664a5b2c9497b3b4c2f66521f88",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_cancel_normal_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_cancel_normal_v2",
+      "files": 509,
+      "audit_byte_identical": true,
+      "audit_sha256": "4ed43e84d539d8156681d58c56b2fa78505b0cb1ddc9a63997a2c3d39692ae89",
+      "auditor": "audit_warm_cancel_normal.py"
+    }
+  },
+  "sources": {
+    "hardware/variants/warm_cancel_v1/build.py": "551fa0436ca08eb715796f55f5a33b7c706e4bc222d46ac567563a87135254f4",
+    "hardware/variants/warm_cancel_v1/build_tb.py": "31a7fe886ddf2f9a1b5312a3ace90c21b32ec6ec3dfe7880d3b8dc2007e507fc",
+    "hardware/variants/warm_cancel_v1/query_residency_system.sv": "bc8c131c14f25e628fc802079b8957a3f1074cf8af7eea888852b2d58003cbd4",
+    "hardware/variants/warm_cancel_v1/search_residency_system.sv": "eeb75886164fa9aaea8cf4f1402d55baffeeddfb443b8c0ee663a8da82ad557e",
+    "hardware/variants/warm_cancel_v1/residency_system.sv": "395b4d119965e004545d98f3153774c13217e3749bc9fdd4b17a03866b0bb40b",
+    "hardware/variants/warm_cancel_v1/recovery_coordinator.sv": "ffef35c93e88e883f4594b29a9ea872321bbdf6e603a2dd21b2f801bd16c515e",
+    "hardware/variants/warm_cancel_v1/tb_cancel.sv": "41e91e5d05fa60b50bd29ed82290999c9a98f0c47ef584cd426b0492b08da19a",
+    "hardware/variants/warm_cancel_v1/CONTRACT.md": "da398c183f0baea4ac29e321495fe6413d96c646432fb84ecc5fce41630dbd7d",
+    "hardware/variants/warm_cancel_v1/HALT_REARM_NOTES.md": "236471173d17c77d63170d8087b6b2d7da85dd28678ad0e182c8ac9766f367c6",
+    "scripts/run_warm_cancel.py": "c59cff2bcbf050294ab1b3a118fa520b83384a3a25ea3b40dc1cfc377bf4088c",
+    "scripts/audit_warm_cancel.py": "883da69f6d9a241f2992d8bdf6053160d16f0499e0d983d1a8061e4e2050c8cc",
+    "scripts/run_warm_cancel_regression.py": "d5ebc8e2cf357f888588c0d4cc5a2e58566fecb8172e8a7a87ded06d303a27b9",
+    "scripts/audit_warm_cancel_normal.py": "c59eb4938b4eb612a83bb3e6f8db30d4cd991cf3eb3880ba77ef93d89fdf185e",
+    "scripts/report_warm_cancel.py": "8b28282b2f3ee768b62428e6fe7449f7b9401b721e827e4ad20365b47f289942"
+  }
+}

@@ -1,0 +1,12 @@
+# CRC失败后非冷复位重试通过（2026-10-27）
+
+32槽与单槽均从真实G2第二owner-B故障开始：首次两键修复后，错误源CRC使原生label返回status8/written821/verified0，coordinator返回status6，journal2保留，失败回复消费后仍owned/fault且业务关闭。部分标签已写，不是回滚。
+
+改正CRC后，相同attempt4以新cookie c0020000被原生status1拒绝，无新owner或标签访问。再以cookie c0020001、attempt5/query3/price5非冷复位重试；两轮G2 authority及工作owner GET重新核对两键，corrected0、无再次DEC。重新写入并实际回读验证全部822条标签，恢复原始path78/query10及sequence floor180327；三类真实回执、服务退休和最终成功回复消费后才放行。
+
+随后query180328完整重试114poll/113expand/564candidate/302cost与原CPU数值oracle一致，两路径共存，最终ledger180328/storage5/3/5。首次自然query仍171/170/849/421。全部10AXI、43个authority读beat、13次owner记录写、完整146284032B owner及822标签/3MB backing独立重放通过。初次CRC失败与新恢复共1644条输入、821+822条标签字段写，只有第二次执行822项回读验证。
+
+本轮只增加TB、运行和独立审计脚本，生产RTL逐文件SHA等于已审计label_source_crc_full_v2。两份归档实际移走原目录后恢复并重审，audit字节一致。详见results/label_crc_retry_20261027.json；源冻结results/label_crc_retry_sources_20261027。
+
+CRC仅用于完整性检查。初始CPU未来读闭包、历史路径及准确G1 clone仍为前提；价格/history内容不变，price5是版本标签。owner增量writer的错误epoch尚无轮转/rearm；未知页初始化、真实overflow新分配/回收、持久化认证、任意变价、综合时序与板卡收益仍缺。研究继续，goal active。
+

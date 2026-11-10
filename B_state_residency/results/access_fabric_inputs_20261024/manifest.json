@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "gates": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_access_unit_v3_20261024/manifest.json": "e98a4da117709e9d2db398087e2fc59f5893ae754143a47c4ecbfde4c5fec7c0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_access_unit_v3_20261024/source_bound_audit.json": "5c8aabb49861e43d8e08060e3910668aaa41f9d8305e9007ceadb9cfa0ce2c96",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/manifest.json": "78a531decd3f39c5f2c74a97c0d33ab946cbcfdeab70463e35c493bfeecaf7b0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_20261024/manifest.json": "ce631edf256e282331588b9fc572c90a7a4bfe025d710549231ec954b3734d71"
+  },
+  "sources": {
+    "candidate_access.inc": "74174c235d5486adff28aafd7ddf1486c9856360743efccb679bfc15c5dfbbce",
+    "coordinates.inc": "e75bc401ebeee61cfaa116820c943e537be25972ebac24b591fb86fab90ba465",
+    "test_access_machine.cpp": "a9a5bc4c4793141bd34ba0ffd5245b866387518bd2b9f31bc4107709899e0058",
+    "RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "access_machine.hpp": "f4ac51c6d1fe26effaecde2577c3db5e37be35de404f1ac501e6c4f8f18e812a",
+    "original_access.inc": "d1163327761da0d3bda0ee1f0976084b8a02bdd40097cf3f9de86db32f55d5ff",
+    "kernel.cpp": "bfeda84445a98e58cf2dad99f54fba34d644b4298e6f7ef01a406b280bbef5fa",
+    "fixture.cpp": "d5d787540c8d79715b727af8913aee4df745ced1dd9ddd4ca8ac1ac09561ae23"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/sources",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/sources/fixture.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/fixture"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.5866904892027378
+    },
+    {
+      "stage": "oracle",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/fixture",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic/nodes.rrt32",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic/rows.bin",
+        "64",
+        "128",
+        "0"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.178859943524003
+    },
+    {
+      "stage": "oracle",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/fixture",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/nodes.rrt32",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_20261024/real/rows.bin",
+        "9089009",
+        "311",
+        "1"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 0.5878153685480356
+    }
+  ],
+  "cases": {
+    "synthetic": {
+      "nodes": 64,
+      "edges": 0,
+      "rows": 128,
+      "columns": 64,
+      "graph": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic",
+      "tables": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic",
+      "result": "REQUEST 1 11664\nREQUEST 2 10611\nREQUEST 3 4900\nREQUEST 4 2990\nREQUEST 5 1980\nREQUEST 6 1980\nREQUEST 7 2434\nREQUEST 8 2434\nREQUEST 9 38\nREQUEST 10 13\nREQUEST 11 841\nFABRIC_ORACLE_PASS cases=11664 steps=51549 allowed=5731 lookahead=1511 early=481 pruned=384"
+    },
+    "real": {
+      "nodes": 9089009,
+      "edges": 40469536,
+      "rows": 311,
+      "columns": 0,
+      "graph": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+      "tables": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/coordinate_inputs_20261024/real",
+      "result": "REQUEST 1 512\nREQUEST 2 458\nREQUEST 3 205\nREQUEST 4 50\nREQUEST 5 9\nREQUEST 6 9\nREQUEST 7 0\nREQUEST 8 0\nREQUEST 9 0\nREQUEST 10 0\nREQUEST 11 1\nFABRIC_ORACLE_PASS cases=512 steps=1756 allowed=275 lookahead=2 early=20 pruned=18"
+    }
+  },
+  "artifacts": {
+    "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixture": "6b9d2bf2e161a735cbddb348f5045ab4fa1af671125b31c8d3947ad2bd4e7095",
+    "runner.py": "b344c65c8589fcd498b983008e076a9d1893611ca457050fd66ec4f8b9cf5c1a",
+    "real/oracle.log": "8c2f14befb1d3e1f36cef9a957487c6b28134538be9f03181486319f3114fbf6",
+    "real/vectors.txt": "dbad9684e36f4f35a39af5ac58455d86790c4513eb983d07aef6afdacb9eb6b6",
+    "real/contexts.txt": "ce7f8f14822855354f7cdf7908de33f3893baf45550ec0e02e1de5ce9699e80b",
+    "synthetic/rows.bin": "927f94f51c1228d64e871aa2dec0619fe779729ce249694d7bd663df936c599b",
+    "synthetic/oracle.log": "578de1953e13b24d5f210e32ab677f016fb098c3439e211691e3434ed0e647df",
+    "synthetic/vectors.txt": "b45d15b776a64b36aaeed4bed588198457010ab89dd3f9e082fb19ef3d84a6fa",
+    "synthetic/nodes.rrt32": "ac520f3a5315f5ce361f242885e72fa055fdaa545537773a81e89d794a33c94b",
+    "synthetic/offsets.u32le": "9c0095c04ef53d9df41602f3783c90ef3c3e27cc9d0b38262d23930db6313f5a",
+    "synthetic/edges.u32le": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "synthetic/contexts.txt": "c2f9b8b613d3a802f7d3c1b895e9c88e8e4abc136fbd56a2ffc7c87fedd0aa8e",
+    "synthetic/columns.bin": "b3703c0150850b01cfb59d322c28fbc41dda3c07fe85d4815288155365df3eec",
+    "sources/candidate_access.inc": "74174c235d5486adff28aafd7ddf1486c9856360743efccb679bfc15c5dfbbce",
+    "sources/coordinates.inc": "e75bc401ebeee61cfaa116820c943e537be25972ebac24b591fb86fab90ba465",
+    "sources/test_access_machine.cpp": "a9a5bc4c4793141bd34ba0ffd5245b866387518bd2b9f31bc4107709899e0058",
+    "sources/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "sources/access_machine.hpp": "f4ac51c6d1fe26effaecde2577c3db5e37be35de404f1ac501e6c4f8f18e812a",
+    "sources/original_access.inc": "d1163327761da0d3bda0ee1f0976084b8a02bdd40097cf3f9de86db32f55d5ff",
+    "sources/kernel.cpp": "bfeda84445a98e58cf2dad99f54fba34d644b4298e6f7ef01a406b280bbef5fa",
+    "sources/fixture.cpp": "d5d787540c8d79715b727af8913aee4df745ced1dd9ddd4ca8ac1ac09561ae23"
+  }
+}

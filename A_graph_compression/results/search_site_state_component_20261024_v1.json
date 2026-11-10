@@ -1,0 +1,73 @@
+{
+  "created_utc": "2026-10-24T16:15:19.304198+00:00",
+  "status": "bounded_site_state_cpu_differential_and_real_fixture_checks_passed",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_site_state.hpp": "bb7ae721b07c42d5306a578cf01fc10f6c03c23a72e5d5d1c74624e03a0a2f25",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_site_state.cpp": "571b3e7aabf508de49a20b97ccbfa2865b53faa186766e2304d646cd1a1ab19d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_site_state_component_20261024_v1.log": "7c5dfe0b5438805f84c804c1435d5908769f3a4403fee7f888cd9fdf6a68ba89",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/site_inputs.hpp": "83c6b12810bf9946918a150321af3b38942f2a4ea28b30cada66a60ea6e2debe",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/site_state.hpp": "aa260c7aedf32c294a7f17f5e3cd2fa6b11899e0c8af004f1c9f7cedde124843",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/site_search.hpp": "dec21878f20dda8c9bcbc49a0fb9b7eb95ed7e50c9f1917a0d04f9adad456adf",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_csr_inputs_20261023_v1/sites.txt": "bf7bfaa7ad6f3bb4f15d0555ce3937eb609862e95e777c545b76f9dbda04a6e0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt": "ea95df406cff9133142f1fbc53a5f64bfbcf759103fe63def8f45224853e22ab",
+    "/tmp/a_search_site_state_20261024": "2fa9484b065a87e47bf74c9e7cce89a07440b40ae35088854a583432e1aa4298",
+    "/tmp/a_search_site_state_cxx14_20261024.cpp": "4f47a16fdefc914e9c7b0e22e21e22997756ca20b65f665d81db4b3bd2dda5ce",
+    "/tmp/a_search_site_state_cxx14_20261024": "c8923e010320f11decb65943af7980c14f3147a43d7734246edc3d51f6861d35"
+  },
+  "compile_command": [
+    "g++",
+    "-std=c++17",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "tests/test_search_site_state.cpp",
+    "-o",
+    "/tmp/a_search_site_state_20261024"
+  ],
+  "test_command": [
+    "/tmp/a_search_site_state_20261024",
+    "data/derived/native_site_csr_inputs_20261023_v1/sites.txt",
+    "data/derived/native_site_compact_inputs_20261023_v1/sites.txt"
+  ],
+  "exit_code": 0,
+  "random_cases": 40000,
+  "capacities": [
+    1,
+    2,
+    8,
+    32
+  ],
+  "normalized_successes": 25214,
+  "rejected_normalizations": 14786,
+  "successful_merges": 11696,
+  "real_inputs": {
+    "modes": [
+      "csr",
+      "compact"
+    ],
+    "requirements_per_mode": 14,
+    "normalized_fixed_bit_fields_per_mode": 954,
+    "raw_fixed_bit_entries_per_mode": 1100
+  },
+  "cxx14_compile_command": [
+    "g++",
+    "-std=c++14",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "/tmp/a_search_site_state_cxx14_20261024.cpp",
+    "-o",
+    "/tmp/a_search_site_state_cxx14_20261024"
+  ],
+  "cxx14_exit_code": 0,
+  "limitations": [
+    "Component CPU verification only; no HLS top/synthesis/cosim for site state yet.",
+    "Not integrated into full router; full workload state capacity unknown.",
+    "Fixed state fixture has 954 normalized bit fields; 32-entry random-test capacity is not a global fixed-state bound.",
+    "Signal ownership, negotiation, label indexing and complete special-resource semantics remain outside this component.",
+    "Caller supplies buffers covering raw counts; invalid pointer/length contracts are not supported."
+  ]
+}

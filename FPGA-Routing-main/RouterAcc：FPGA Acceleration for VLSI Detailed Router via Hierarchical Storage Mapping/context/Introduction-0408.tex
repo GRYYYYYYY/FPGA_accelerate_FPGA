@@ -1,0 +1,133 @@
+%\documentclass[twocolumn]{IEEEtran}
+\documentclass[sigconf]{acmart}
+%\IEEEoverridecommandlockouts{}
+\usepackage{multirow}
+\usepackage{nopageno}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage{algorithmic}
+%\usepackage[noend]{algpseudocode}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{cases}
+\usepackage{amsthm}
+
+
+\newtheorem{Theorem}{\bf{Theorem}}
+\newtheorem{Corollary}{\bf{Corollary}}
+\newtheorem{Proposition}{\bf{Proposition}}
+
+\newtheorem{Remark}{Remark}
+\newtheorem{Lemma}{Lemma}
+
+%\newtheorem{Corollary}{Corollary}
+\newtheorem{Proof}{Proof}               %\newtheorem*{Pf}{Proof}
+\newtheorem{Problem}{\bf Problem}
+\newtheorem{Definition}{\bf Definition}
+
+
+
+%\setlength{\textwidth}{7.3in}            % pattern from Ziran Zhu: original 7.6
+%\setlength{\textheight}{9.60in}            % 9.9   original is 10.29 20190314
+%\setlength{\columnsep}{1.5pc}           % 1.35
+%\setlength{\oddsidemargin}{-.43in}       % 55
+%\setlength{\evensidemargin}{-.43in}      % 55
+%\setlength{\topmargin}{-0.6in}           % 0.7
+
+\setlength{\textwidth}{7.66in}            % pattern from Ziran Zhu: original 7.6
+\setlength{\textheight}{9.90in}            % 9.9   original is 10.29 20190314
+\setlength{\columnsep}{1.5pc}           % 1.35
+\setlength{\oddsidemargin}{-.58in}       % 55
+\setlength{\evensidemargin}{-.58in}      % 55
+\setlength{\topmargin}{-0.70in}           % 0.7
+
+
+
+%\usepackage[top=0.37in,bottom=0.37in,left=0.32in,right=0.32in]{geometry}
+
+\begin{document}
+\title{\Huge\bf }
+
+
+
+\baselineskip=10.62pt   % 11
+%\small
+%\thispagestyle{empty}\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+
+
+\end{abstract}
+
+\maketitle
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}\label{sec:introduction}
+
+To the escalating challenges posed by exponential growth in System-on-Chip (SoC) design complexity under post-Moore's law paradigms, the open-source EDA flow ''OpenROAD'' has emerged as a cutting-edge solution for complete RTL-to-GDSII implementation.   Throughout the design flow, detailed routing is the critical step in determining the connection paths for all netlists, and its solution directly impacts chip performance, power consumption, and manufacturing costs. Under extreme scaling to nanometer dimensions and the exponential expansion of circuit scale, the computational overhead of detailed routing closure increases substantially, particularly for those CPU-parallelized routing engines.
+
+
+Modern CPU-parallelized routing engines (e.g., TritonRoute [], Dr.CU 2.0 []) have achieved competitive performance on industrial benchmarks. For the tool ''TritonRoute'' that integrated in the ''OpenROAD'', it adopts a parallel mixed integer linear programming (MILP)-based routing framework, combined with rip-up and reroute strategies to emerge a clean design rule solution. Significantly, it can support 28nm standard process specification documents (e.g. LEF,DEF) and can be applied to industrial flow sheet design, which has been adopted by several industrial projects. To further address the trade-off between computational efficiency and solution quality, Dr.CU [4] proposes a batch-based parallelization framework that group topology-independent nets into processing batches, and performs concurrent maze routing operations for improving efficienty. This method offers academic insights into improving optimization efficient strategies. However, its application on the ISPD 2019 contest demonstrates that a large number remaining design violations requiring further elimination, let alone for industry application.
+
+
+As the CPU-driven routing engine '' TritonRoute'' delivers design-rule-clean routing solutions for advanced technology nodes.  While this methodology demonstrates robust capability in resolving complex multi-constrained routing problems with high solution quality, its inherent computational inefficiency presents a significant bottleneck that markedly impacts turnaround time. In this paper, we present a parallelized iterative routing hardware framework integrated with FPGA accelerators. The key contributions are summarized as follows:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preliminaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminaries}\label{sec:problem_statement}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Placement Model
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithm} \label{sec:algorithm}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Experimental Results
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental Results} \label{sec:experimental results}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Conclusions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions} \label{sec:conclusion}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{abbrv}
+\tiny
+\bibliography{FPGA_ICCAD}
+
+%\bibliography{sigproc}
+
+
+\end{document}

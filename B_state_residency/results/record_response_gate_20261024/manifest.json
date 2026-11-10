@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "pid": 3663107,
+  "cases": {
+    "fifo": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/record_response_gate_20261024/fifo/sources/response_fallthrough_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/record_response_gate_20261024/fifo/sources/tb_record_response_gate.sv"
+          ],
+          "pid": 3663153,
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_record_response_gate",
+            "-s",
+            "ablation",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 3663191,
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "ablation",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "pid": 3663237,
+          "exit_code": 0
+        }
+      ],
+      "sources": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/record_response_fallthrough/response_fallthrough_fifo.sv": "5cde4e2303eb5d10636ffb1a53edcff44da0f4a7e87880b26e5db551c1dc4ebe",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_record_response_gate.sv": "771c7bc4cf45fcab670c472cd134c724ad39b5a0c043a6ea52de385e2df7202a"
+      },
+      "baseline_sha256": "f1c08741a5bdd2cbefbe6cba99c3cd14185ae4976112764551e9f94847003368",
+      "log_sha256": "d563175302a8f6f52d3e305c5504712c6331f7e15066bca5973bf4edea9f3715"
+    }
+  }
+}

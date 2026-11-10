@@ -1,0 +1,73 @@
+{
+  "analyzer_sha256": "148a36f8112e719cf13bc0f204315a89b70752f70c49b71a34b1d218568d77a4",
+  "existing_module_flow": {
+    "audit_sha256": "1f7df34293398d1d2addcd8b943108b638616607f8636230d66b08b446204830",
+    "current_template_matches_executed_script": true,
+    "part": "xcu280-fsvh2892-2L-e",
+    "period_ns": 10.0,
+    "routed_observations": {
+      "baseline": {
+        "unconstrained_IO": {
+          "no_input_delay": 939,
+          "no_output_delay": 771
+        },
+        "whs_ns": 0.041,
+        "wns_ns": 2.847
+      },
+      "cached": {
+        "unconstrained_IO": {
+          "no_input_delay": 939,
+          "no_output_delay": 771
+        },
+        "whs_ns": 0.042,
+        "wns_ns": 2.786
+      }
+    },
+    "summary_sha256": "5b4f25108592eb32e234ef99523e22004d8ce5e3ff07b492395866b88b13568d",
+    "template_sha256": "6db5af97cff7dc0e978e2e7a892a2f2d8b6d432ac2640d70bed74805f62e002c",
+    "top": "postprev_inputs"
+  },
+  "full_system_anchor": {
+    "audit_sha256": "8966eb1a8a82578bd0d16b19ba6aa81b2e1987c6b99c1819d9fecfb8cf3b3369",
+    "clock_period_ns": 10,
+    "dcp_sha256": "f9ae3b18f99805f46f98899466b7b2d3c6be1e81009469d470ebb4576c08e4bc",
+    "manifest_sha256": "2b391accc255068ffd5b45ed18acff67d9d261faa485c9d4085c795c5de51f2d",
+    "name": "checkpoint_edit_synth_v1",
+    "part": "xcu280-fsvh2892-2L-e",
+    "port_bits": 63637,
+    "preplacement_wns_ns": -4.948,
+    "production_sources": 133,
+    "restoration_sha256": "0c67bf4cd5eb6919fec6fe98e53b4086a7d6cc9ffaacb464b56f81a08adf2f1e",
+    "timing_checks": {
+      "constant_clock": 0,
+      "generated_clocks": 0,
+      "latch_loops": 0,
+      "loops": 0,
+      "multiple_clock": 0,
+      "no_clock": 0,
+      "no_input_delay": 46802,
+      "no_output_delay": 10419,
+      "partial_input_delay": 0,
+      "partial_output_delay": 0,
+      "pulse_width_clock": 0,
+      "unconstrained_internal_endpoints": 0
+    },
+    "xdc_sha256": "bb7bedc455949270403d2c05da3b2db12bb6e714b452e7cf6bd48fd13f1baabf"
+  },
+  "limitations": [
+    "Existing postprev/center physical results do not establish full-system place/route feasibility or quality.",
+    "No external I/O budget or physical clock-source location is supplied; do not invent constraints or waive warnings.",
+    "Internal OOC measurements cannot establish board frequency, whole-accelerator speedup or the missing new behavior matrix.",
+    "No full-system physical tools or jobs were created by this analysis."
+  ],
+  "proposed_measurement_scope": "Isolated full-system OOC internal placement/routing under the existing research clock; not platform timing closure.",
+  "required_before_execution": [
+    "Finish the current stage synthesis/audit/actual restoration and compare candidates; preserve the CP timing anchor.",
+    "Create a new full-system implementation root from the audited DCP without changing its RTL or XDC.",
+    "Prepare independent runner/auditor/freezer for synthesized, placed and routed checkpoints and report hashes.",
+    "Check memory admission and serialize the physical run with the current synthesis/inspection owner.",
+    "Record full route completion/errors, DRC, methodology, setup/hold/pulse minima and unconstrained paths; preserve failures.",
+    "Archive, actually restore and independently re-audit before freezing physical observations."
+  ],
+  "status": "source_bound_readiness_observation_no_full_system_physical_run"
+}

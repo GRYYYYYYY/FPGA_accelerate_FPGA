@@ -1,0 +1,222 @@
+
+
+================================================================
+== Synthesis Summary Report of 'cost_step'
+================================================================
++ General Information: 
+    * Date:           Sat Oct 24 20:05:16 2026
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        cost_step
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: virtexuplus
+    * Target device:  xcu280-fsvh2892-2L-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +---------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+----------+------------+------------+-----+
+    |                Modules                | Issue|      | Latency |  Latency  | Iteration|         | Trip |          |      |          |            |            |     |
+    |                & Loops                | Type | Slack| (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined| BRAM |    DSP   |     FF     |     LUT    | URAM|
+    +---------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+----------+------------+------------+-----+
+    |+ cost_step                            |     -|  0.09|      711|  7.110e+03|         -|      712|     -|        no|     -|  20 (~0%)|  6946 (~0%)|  21024 (1%)|    -|
+    | + from_int                            |     -|  1.53|       37|    370.000|         -|       37|     -|        no|     -|         -|   276 (~0%)|  2676 (~0%)|    -|
+    |  + from_int_Pipeline_VITIS_LOOP_63_1  |     -|  5.63|       33|    330.000|         -|       33|     -|        no|     -|         -|    73 (~0%)|   294 (~0%)|    -|
+    |   o VITIS_LOOP_63_1                   |     -|  7.30|       31|    310.000|         1|        1|    31|       yes|     -|         -|           -|           -|    -|
+    | + from_int                            |     -|  1.53|       37|    370.000|         -|       37|     -|        no|     -|         -|   276 (~0%)|  2676 (~0%)|    -|
+    |  + from_int_Pipeline_VITIS_LOOP_63_1  |     -|  5.63|       33|    330.000|         -|       33|     -|        no|     -|         -|    73 (~0%)|   294 (~0%)|    -|
+    |   o VITIS_LOOP_63_1                   |     -|  7.30|       31|    310.000|         1|        1|    31|       yes|     -|         -|           -|           -|    -|
+    | + mul                                 |     -|  0.17|       30|    300.000|         -|       30|     -|        no|     -|  10 (~0%)|   529 (~0%)|  2275 (~0%)|    -|
+    |  + mul_Pipeline_VITIS_LOOP_42_1       |     -|  5.45|       25|    250.000|         -|       25|     -|        no|     -|         -|   200 (~0%)|   396 (~0%)|    -|
+    |   o VITIS_LOOP_42_1                   |     -|  7.30|       23|    230.000|         1|        1|    23|       yes|     -|         -|           -|           -|    -|
+    | + mul                                 |     -|  0.17|       30|    300.000|         -|       30|     -|        no|     -|  10 (~0%)|   529 (~0%)|  2275 (~0%)|    -|
+    |  + mul_Pipeline_VITIS_LOOP_42_1       |     -|  5.45|       25|    250.000|         -|       25|     -|        no|     -|         -|   200 (~0%)|   396 (~0%)|    -|
+    |   o VITIS_LOOP_42_1                   |     -|  7.30|       23|    230.000|         1|        1|    23|       yes|     -|         -|           -|           -|    -|
+    | + add                                 |     -|  0.38|       31|    310.000|         -|       31|     -|        no|     -|         -|   524 (~0%)|  2950 (~0%)|    -|
+    |  + add_Pipeline_VITIS_LOOP_30_1       |     -|  5.37|       28|    280.000|         -|       28|     -|        no|     -|         -|   104 (~0%)|   243 (~0%)|    -|
+    |   o VITIS_LOOP_30_1                   |     -|  7.30|       26|    260.000|         1|        1|    26|       yes|     -|         -|           -|           -|    -|
+    | + div                                 |     -|  2.04|       96|    960.000|         -|       96|     -|        no|     -|         -|  2067 (~0%)|  3545 (~0%)|    -|
+    |  + div_Pipeline_VITIS_LOOP_56_1       |     -|  5.45|       25|    250.000|         -|       25|     -|        no|     -|         -|   200 (~0%)|   396 (~0%)|    -|
+    |   o VITIS_LOOP_56_1                   |     -|  7.30|       23|    230.000|         1|        1|    23|       yes|     -|         -|           -|           -|    -|
+    | + div                                 |     -|  2.04|       96|    960.000|         -|       96|     -|        no|     -|         -|  2067 (~0%)|  3545 (~0%)|    -|
+    |  + div_Pipeline_VITIS_LOOP_56_1       |     -|  5.45|       25|    250.000|         -|       25|     -|        no|     -|         -|   200 (~0%)|   396 (~0%)|    -|
+    |   o VITIS_LOOP_56_1                   |     -|  7.30|       23|    230.000|         1|        1|    23|       yes|     -|         -|           -|           -|    -|
+    | + cost_step_Pipeline_VITIS_LOOP_18_1  |     -|  4.45|       10|    100.000|         -|       10|     -|        no|     -|         -|    39 (~0%)|   168 (~0%)|    -|
+    |  o VITIS_LOOP_18_1                    |     -|  7.30|        8|     80.000|         2|        1|     8|       yes|     -|         -|           -|           -|    -|
+    +---------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+----------+------------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* AP_MEMORY
++-------------------+----------+
+| Interface         | Bitwidth |
++-------------------+----------+
+| input_r_address0  | 5        |
+| input_r_address1  | 5        |
+| input_r_q0        | 32       |
+| input_r_q1        | 32       |
+| output_r_address0 | 3        |
+| output_r_address1 | 3        |
+| output_r_d0       | 32       |
+| output_r_d1       | 32       |
++-------------------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+----------------------+
+| Argument | Direction | Datatype             |
++----------+-----------+----------------------+
+| input    | in        | unsigned int const * |
+| output   | out       | unsigned int*        |
++----------+-----------+----------------------+
+
+* SW-to-HW Mapping
++----------+-------------------+---------+----------+
+| Argument | HW Interface      | HW Type | HW Usage |
++----------+-------------------+---------+----------+
+| input    | input_r_address0  | port    | offset   |
+| input    | input_r_ce0       | port    |          |
+| input    | input_r_q0        | port    |          |
+| input    | input_r_address1  | port    | offset   |
+| input    | input_r_ce1       | port    |          |
+| input    | input_r_q1        | port    |          |
+| output   | output_r_address0 | port    | offset   |
+| output   | output_r_ce0      | port    |          |
+| output   | output_r_we0      | port    |          |
+| output   | output_r_d0       | port    |          |
+| output   | output_r_address1 | port    | offset   |
+| output   | output_r_ce1      | port    |          |
+| output   | output_r_we1      | port    |          |
+| output   | output_r_d1       | port    |          |
++----------+-------------------+---------+----------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++--------------------------------------------------------------------------------------+-----+--------+------------+-----+--------+---------+
+| Name                                                                                 | DSP | Pragma | Variable   | Op  | Impl   | Latency |
++--------------------------------------------------------------------------------------+-----+--------+------------+-----+--------+---------+
+| + cost_step                                                                          | 20  |        |            |     |        |         |
+|  + from_int (grp_from_int_fu_295)                                                    | 0   |        |            |     |        |         |
+|    sub_ln62_fu_131_p2                                                                | -   |        | sub_ln62   | sub | fabric | 0       |
+|    add_ln64_fu_173_p2                                                                | -   |        | add_ln64   | add | fabric | 0       |
+|    sub_ln64_fu_195_p2                                                                | -   |        | sub_ln64   | sub | fabric | 0       |
+|    add_ln9_fu_231_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    add_ln65_fu_302_p2                                                                | -   |        | add_ln65   | add | fabric | 0       |
+|    add_ln11_fu_308_p2                                                                | -   |        | add_ln11   | add | fabric | 0       |
+|    sub_ln13_fu_326_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_1_fu_370_p2                                                               | -   |        | add_ln9_1  | add | fabric | 0       |
+|    main_fu_512_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_562_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + from_int_Pipeline_VITIS_LOOP_63_1 (grp_from_int_Pipeline_VITIS_LOOP_63_1_fu_111) | 0   |        |            |     |        |         |
+|     add_ln63_fu_114_p2                                                               | -   |        | add_ln63   | add | fabric | 0       |
+|  + mul (grp_mul_fu_307)                                                              | 10  |        |            |     |        |         |
+|    mul_64s_64s_64_1_1_U12                                                            | 10  |        | prod       | mul | auto   | 0       |
+|    sub_ln13_fu_529_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_fu_575_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    main_fu_714_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_764_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + mul_Pipeline_VITIS_LOOP_42_1 (grp_mul_Pipeline_VITIS_LOOP_42_1_fu_165)           | 0   |        |            |     |        |         |
+|     i_2_fu_180_p2                                                                    | -   |        | i_2        | add | fabric | 0       |
+|     ea_1_fu_220_p2                                                                   | -   |        | ea_1       | add | fabric | 0       |
+|     eb_1_fu_264_p2                                                                   | -   |        | eb_1       | add | fabric | 0       |
+|  + add                                                                               | 0   |        |            |     |        |         |
+|    sub_ln28_fu_444_p2                                                                | -   |        | sub_ln28   | sub | fabric | 0       |
+|    add_ln9_fu_506_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    s_7_fu_586_p2                                                                     | -   |        | s_7        | sub | fabric | 0       |
+|    s_6_fu_611_p2                                                                     | -   |        | s_6        | add | fabric | 0       |
+|    add_ln28_fu_617_p2                                                                | -   |        | add_ln28   | add | fabric | 0       |
+|    ea_13_fu_812_p2                                                                   | -   |        | ea_13      | add | fabric | 0       |
+|    sub_ln13_fu_669_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_2_fu_713_p2                                                               | -   |        | add_ln9_2  | add | fabric | 0       |
+|    main_fu_897_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_947_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + add_Pipeline_VITIS_LOOP_30_1                                                     | 0   |        |            |     |        |         |
+|     i_8_fu_122_p2                                                                    | -   |        | i_8        | add | fabric | 0       |
+|     ea_7_fu_178_p2                                                                   | -   |        | ea_7       | add | fabric | 0       |
+|  + div (grp_div_fu_333)                                                              | 0   |        |            |     |        |         |
+|    sub_ln57_fu_405_p2                                                                | -   |        | sub_ln57   | sub | fabric | 0       |
+|    e_fu_429_p2                                                                       | -   |        | e          | add | fabric | 0       |
+|    add_ln57_1_fu_435_p2                                                              | -   |        | add_ln57_1 | add | fabric | 0       |
+|    sub_ln13_fu_487_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_fu_531_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    main_fu_673_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_723_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + div_Pipeline_VITIS_LOOP_56_1 (grp_div_Pipeline_VITIS_LOOP_56_1_fu_153)           | 0   |        |            |     |        |         |
+|     i_5_fu_180_p2                                                                    | -   |        | i_5        | add | fabric | 0       |
+|     ea_4_fu_220_p2                                                                   | -   |        | ea_4       | add | fabric | 0       |
+|     eb_4_fu_264_p2                                                                   | -   |        | eb_4       | add | fabric | 0       |
+|  + from_int (grp_from_int_fu_301)                                                    | 0   |        |            |     |        |         |
+|    sub_ln62_fu_131_p2                                                                | -   |        | sub_ln62   | sub | fabric | 0       |
+|    add_ln64_fu_173_p2                                                                | -   |        | add_ln64   | add | fabric | 0       |
+|    sub_ln64_fu_195_p2                                                                | -   |        | sub_ln64   | sub | fabric | 0       |
+|    add_ln9_fu_231_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    add_ln65_fu_302_p2                                                                | -   |        | add_ln65   | add | fabric | 0       |
+|    add_ln11_fu_308_p2                                                                | -   |        | add_ln11   | add | fabric | 0       |
+|    sub_ln13_fu_326_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_1_fu_370_p2                                                               | -   |        | add_ln9_1  | add | fabric | 0       |
+|    main_fu_512_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_562_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + from_int_Pipeline_VITIS_LOOP_63_1 (grp_from_int_Pipeline_VITIS_LOOP_63_1_fu_111) | 0   |        |            |     |        |         |
+|     add_ln63_fu_114_p2                                                               | -   |        | add_ln63   | add | fabric | 0       |
+|  + mul (grp_mul_fu_315)                                                              | 10  |        |            |     |        |         |
+|    mul_64s_64s_64_1_1_U12                                                            | 10  |        | prod       | mul | auto   | 0       |
+|    sub_ln13_fu_529_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_fu_575_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    main_fu_714_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_764_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + mul_Pipeline_VITIS_LOOP_42_1 (grp_mul_Pipeline_VITIS_LOOP_42_1_fu_165)           | 0   |        |            |     |        |         |
+|     i_2_fu_180_p2                                                                    | -   |        | i_2        | add | fabric | 0       |
+|     ea_1_fu_220_p2                                                                   | -   |        | ea_1       | add | fabric | 0       |
+|     eb_1_fu_264_p2                                                                   | -   |        | eb_1       | add | fabric | 0       |
+|  + div (grp_div_fu_340)                                                              | 0   |        |            |     |        |         |
+|    sub_ln57_fu_405_p2                                                                | -   |        | sub_ln57   | sub | fabric | 0       |
+|    e_fu_429_p2                                                                       | -   |        | e          | add | fabric | 0       |
+|    add_ln57_1_fu_435_p2                                                              | -   |        | add_ln57_1 | add | fabric | 0       |
+|    sub_ln13_fu_487_p2                                                                | -   |        | sub_ln13   | sub | fabric | 0       |
+|    add_ln9_fu_531_p2                                                                 | -   |        | add_ln9    | add | fabric | 0       |
+|    main_fu_673_p2                                                                    | -   |        | main       | add | fabric | 0       |
+|    add_ln16_fu_723_p2                                                                | -   |        | add_ln16   | add | fabric | 0       |
+|   + div_Pipeline_VITIS_LOOP_56_1 (grp_div_Pipeline_VITIS_LOOP_56_1_fu_153)           | 0   |        |            |     |        |         |
+|     i_5_fu_180_p2                                                                    | -   |        | i_5        | add | fabric | 0       |
+|     ea_4_fu_220_p2                                                                   | -   |        | ea_4       | add | fabric | 0       |
+|     eb_4_fu_264_p2                                                                   | -   |        | eb_4       | add | fabric | 0       |
+|  + cost_step_Pipeline_VITIS_LOOP_18_1                                                | 0   |        |            |     |        |         |
+|    add_ln18_1_fu_105_p2                                                              | -   |        | add_ln18_1 | add | fabric | 0       |
+|    add_ln18_fu_127_p2                                                                | -   |        | add_ln18   | add | fabric | 0       |
++--------------------------------------------------------------------------------------+-----+--------+------------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+-------------------------------+-------------------------------------------+
+| Type      | Options                       | Location                                  |
++-----------+-------------------------------+-------------------------------------------+
+| interface | ap_ctrl_hs port=return        | sources/kernel.cpp:4 in cost_step, return |
+| interface | ap_memory port=input depth=23 | sources/kernel.cpp:5 in cost_step, input  |
+| interface | ap_memory port=output depth=5 | sources/kernel.cpp:6 in cost_step, output |
++-----------+-------------------------------+-------------------------------------------+
+
+

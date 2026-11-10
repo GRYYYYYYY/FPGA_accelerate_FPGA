@@ -1,0 +1,14 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../../../hardware/rtl/backing_frame_directory_lookup.sv" \
+"../../../../../../../hardware/rtl/backing_page_service_lookup.sv" \
+"../../../../../../../hardware/rtl/record_backing_service.sv" \
+"../../../../../../../hardware/rtl/scratch_page_axi.sv" \
+"../../../../../../../hardware/rtl/scratch_page_codec.sv" \
+"../../../../../../../hardware/tb/tb_record_backing_service.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

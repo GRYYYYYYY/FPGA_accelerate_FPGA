@@ -1,0 +1,33 @@
+{
+  "analyzer_sha256": "fae0a104e03720b3bed3e19a34718fafdecff620a41e4ede771cddf2a63b3066",
+  "checked_expressions": [
+    "if(!cp_busy)case(state)",
+    "wire cp_drift=!active||!lease||!cp_safe||active_design!=cp_context;",
+    "if(cp_check_slot==PATH_SLOTS-1&&cp_check_field+1==CP_STRIDE)begin",
+    "if(cp_importing&&~cp_running!=cp_wanted)begin cp_status<=1;cp_state<=CP_DONE;end",
+    "else if(!cp_importing)begin cp_pos<=0;cp_state<=CP_EXPORT;end",
+    "for(b=0;b<MAX_PATH;b=b+1)path[a][b]<=cp_stage[a*CP_STRIDE+7+b];",
+    "if(cp_failed||abort||fault||cp_drift)begin cp_status<=2;cp_state<=CP_DONE;end",
+    "else if(cp_bad)begin cp_status<=1;cp_state<=CP_DONE;end",
+    "else if(cp_stage[cp_check_slot*CP_STRIDE]==1&&cp_check_field>7&&cp_check_field-7<cp_stage[cp_check_slot*CP_STRIDE+1])begin cp_dup_pos<=0;cp_state<=CP_DUP;end",
+    "else if(cp_stage[cp_check_slot*CP_STRIDE+cp_check_field]==cp_stage[cp_check_slot*CP_STRIDE+7+cp_dup_pos])begin cp_status<=1;cp_state<=CP_DONE;end",
+    "else if(cp_dup_pos+1==cp_check_field-7)cp_advance;",
+    "if(stopped||fail_now)finish(stopped?error_code:(bad_l?4:6));",
+    "else if((current==sink&&(l_payload[128]!=1||l_payload[127:96]!=sequence_id))||duplicate)fatal_finish(2);",
+    "else if(l_payload[95:64]==32'hffffffff||l_payload[95:64]==sink||current==32'hffffffff)fatal_finish(2);",
+    "else if(current!=sink&&length==MAX_PATH)fatal_finish(3);",
+    "if(current!=sink)begin path[slot][length]<=current;length<=length+1'b1;end"
+  ],
+  "proposal": "Factor path bank into explicit static per-word write processes with the same-cycle checkpoint publication and ordinary indexed-write predicates. No added register or cycle. Keep original generic/default implementation available for direct comparison.",
+  "reference_audit_sha256": "8966eb1a8a82578bd0d16b19ba6aa81b2e1987c6b99c1819d9fecfb8cf3b3369",
+  "restore_receipt_sha256": "0c67bf4cd5eb6919fec6fe98e53b4086a7d6cc9ffaacb464b56f81a08adf2f1e",
+  "scope": "Boolean control model, not RTL formal, X/Z equivalence, data/index proof or synthesis benefit. CRC, cancellation, drift and final verification qualifiers must all remain. Candidate must branch from the preferred CP baseline, not rejected label-exclusion mapping.",
+  "source_sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+  "status": "source_bound_two_state_write_predicates_not_RTL_validation",
+  "valuations": {
+    "checkpoint": 65536,
+    "checkpoint_writes": 8,
+    "normal": 65536,
+    "normal_writes": 2
+  }
+}

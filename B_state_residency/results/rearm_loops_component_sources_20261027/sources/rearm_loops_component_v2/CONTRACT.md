@@ -1,0 +1,9 @@
+# 真实退休条件与REARM反馈隔离候选
+
+由restore_seed_synth_on_v1的已审计生产源派生三个候选文件：label_restore_controller新增rearm_retired，直接从FSM IDLE且无待消费回复生成，不受其授权的同步复位引脚掩盖；residency_system使用该信号替换retry_safe中的!lr_busy；coordinator仅在REARM状态将!unexpected等价化为无authority/owner回复，消除与此状态无关的READY反馈。其余安全、floor、journal和恢复行为不改。
+
+综合切片使用真实coordinator和label服务，4 journal项/4标签容量；工作正常退休额外包含实际label busy/回复，REARM以真实退休标志和外部safe为条件。baseline保留旧busy掩码连接，须复现环；fixed须LUTLP-1和check_timing无环且无latch/blackbox。residency_system候选仅供后续完整接入，未在本切片编译。
+
+三个原生J0恢复生命周期：均先实际末记录CRC失败，保持label错误回执8周期、真实消费退休后coordinator失败，旧attempt拒绝；分别直接合法重试、REARM前撤销safe、REARM时突发unexpected authority valid。后两者不得清服务，保留消耗的attempt floor，再拒绝旧attempt并用更高attempt非冷重试。每次最终恢复真实五字段写、一条读回，保持成功回执并消费后才放行。RAM/config/物理退休和异常authority回复均为明确模型，没有AXI或原生authority读取，journal为0。三场景之间cold reset，场景内部失败到成功不cold reset。
+
+尚无运行通过结论。不能把该两组件无环当作完整恢复系统无环，其他ready/fault链与多项journal仍需接入检查。不得加waiver/false path或删除安全资格。

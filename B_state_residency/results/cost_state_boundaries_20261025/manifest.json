@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "sources": {
+    "cost_state_store.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/cost_state_v1/cost_state_store.sv",
+      "sha256": "2a66bad196192e306a7fa54a627fa0dd67cc228e92279a8694a2950e444ac300"
+    },
+    "tb_cost_state_boundaries.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/cost_state_v1/tb_cost_state_boundaries.sv",
+      "sha256": "36b9372e082ed04c69c2ea2c754edc6313fd812861ff63318980f589dfe6395b"
+    },
+    "axi_file_memory.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_owner_v3_20261024/sources/coordinate/axi_file_memory.sv",
+      "sha256": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_boundaries_20261025/sources/cost_state_store.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_boundaries_20261025/sources/tb_cost_state_boundaries.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_boundaries_20261025/sources/axi_file_memory.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_cost_state_boundaries",
+        "-s",
+        "state",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "state",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "state0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_boundaries_20261025/state.bin",
+        "--testplusarg",
+        "statelog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_boundaries_20261025/axi.txt",
+        "--testplusarg",
+        "initial=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/synthetic/initial.bin"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "initial_sha256": "ce07c93e357d63c7cf27e49fd9a7b954665457237597cefa7c531b1d98187d99",
+  "result": "COST_STATE_BOUNDARY_PASS checks=99 errors=9 reloads=10 reads=5 writes=3 bs=3 cycles=306",
+  "artifacts": {
+    "xsim.jou": "42dba6aad37ea6b3a17e8ca815ed4ed564dce1cbe8291694abfdadbd42854d57",
+    "simulate.log": "34b50b0c1bbd022ad2049b4965c92b567ee7e3acf0a20b784ae96a50ef2b0a17",
+    "axi.txt": "fa3bcbc6e2374b289133e858d68637bdc0cef9c72383c38a5c5164c11adc926a",
+    "run.tcl": "1745567fec852c4696897340e8f9967eba962f9894cddee3564638c920b66c3c",
+    "compile.stdout.log": "3bf86163c33d60052c0ce505ab500d4085ecbe20a26958180ad21d29c5666d3c",
+    "xvlog.pb": "7e933758e4a931f037cac3f10ac88d34ebcbeeb6663beae4aa0b6c52da46341e",
+    "xelab.pb": "78d2895f0ef315db66ce6043671803d45dbc4b36a0446ce9bd538843014bf71a",
+    "xvlog.log": "3bf86163c33d60052c0ce505ab500d4085ecbe20a26958180ad21d29c5666d3c",
+    "simulate.stdout.log": "fea01fdba18831f8035f31d21759014c091089c95e8ed72e565493d955fdb7f4",
+    "xelab.log": "ffdd5be076c521d88a4439569c930b8ee2f0310a7bb98d929e97ce3dc9152ee0",
+    "elaborate.stdout.log": "ffdd5be076c521d88a4439569c930b8ee2f0310a7bb98d929e97ce3dc9152ee0",
+    "state.bin": "ce07c93e357d63c7cf27e49fd9a7b954665457237597cefa7c531b1d98187d99",
+    "state.wdb": "6226bf7c2039aef2fb85c47e8b8bac60b802503e827654b0e0e29f9f3c772b5f"
+  }
+}

@@ -1,0 +1,227 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 09:50:32 2026
+# Process ID: 1998871
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023
+# Command line: vivado -mode tcl -log .vivado-ai/vivado_49030331_2cea8af7.log -journal .vivado-ai/vivado_49030331_2cea8af7.jou -notrace -source .vivado-ai/init_49030331_2cea8af7.tcl
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/.vivado-ai/vivado_49030331_2cea8af7.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/.vivado-ai/vivado_49030331_2cea8af7.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2700.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source .vivado-ai/init_49030331_2cea8af7.tcl -notrace
+INFO: [Common 17-1674] Started webserver at http://localhost:53681
+set_param -quiet messaging.defaultLimit 10000000
+puts "MCPPROBE:gbsy5qlgs1zo:[get_param messaging.defaultLimit]"
+MCPPROBE:gbsy5qlgs1zo:10000000
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:x51n13vl4wh5===}
+INFO: [MCP 00-100] ===MCP_CMD_START:x51n13vl4wh5===
+puts "VSCSTART" ; set exitCode [catch {version -short; get_parts xcu280-fsvh2892-2L-e} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+xcu280-fsvh2892-2L-e
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:x51n13vl4wh5:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:x51n13vl4wh5:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:69jxib6ra54t===}
+INFO: [MCP 00-100] ===MCP_CMD_START:69jxib6ra54t===
+puts "VSCSTART" ; set exitCode [catch {version -short} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+2022.2
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:69jxib6ra54t:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:69jxib6ra54t:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:b5dugkq08zvw===}
+INFO: [MCP 00-100] ===MCP_CMD_START:b5dugkq08zvw===
+puts "VSCSTART" ; set exitCode [catch {create_project b_page_controller ./project -part xcu280-fsvh2892-2L-e; add_files ./sources/hardware/rtl/scratch_frame_store_bram.sv; add_files ./sources/hardware/rtl/scratch_page_controller.sv; add_files -fileset constrs_1 ./sources/hardware/rtl/scratch_frame_store.xdc; add_files -fileset sim_1 ./sources/hardware/tb/tb_scratch_page_controller.sv; set_property top scratch_page_controller [current_fileset]; set_property top tb_controller_small [get_filesets sim_1]; set_property target_simulator XSim [current_project]; set_property xsim.simulate.runtime 1001ms [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/boundaries.txt} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; list [get_property TOP [get_filesets sim_1]] [get_property target_simulator [current_project]] [get_files -of_objects [get_filesets sim_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+tb_controller_small XSim /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/sources/hardware/tb/tb_scratch_page_controller.sv
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:b5dugkq08zvw:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:b5dugkq08zvw:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:zedb3udy9qps===}
+INFO: [MCP 00-100] ===MCP_CMD_START:zedb3udy9qps===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_controller_small'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_controller_small' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_controller_small_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/sources/hardware/rtl/scratch_frame_store_bram.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/sources/hardware/rtl/scratch_page_controller.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_page_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/sources/hardware/tb/tb_scratch_page_controller.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module controller_test
+INFO: [VRFC 10-311] analyzing module tb_controller_small
+INFO: [VRFC 10-311] analyzing module tb_controller_actual
+INFO: [VRFC 10-2263] Analyzing Verilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_controller_small_behav xil_defaultlib.tb_controller_small xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_controller_small_behav xil_defaultlib.tb_controller_small xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.scratch_frame_store(GENERATION_B...
+Compiling module xil_defaultlib.scratch_page_controller(TX_BITS=...
+Compiling module xil_defaultlib.controller_test(TX_BITS=3,GENERA...
+Compiling module xil_defaultlib.tb_controller_small
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_controller_small_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_controller_small_behav -key {Behavioral:sim_1:Functional:tb_controller_small} -tclbatch {tb_controller_small.tcl} -log {simulate.log} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/boundaries.txt"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_controller_small.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Simtcl 6-168] No object found for the given pattern.
+WARNING: [Add_Wave-1] No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console.
+# run 1001ms
+TEST_PASS scratch_page_controller tx_bits=3 gen_bits=3 checks=29774 stalls=9164
+$finish called at time : 1303510 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/sources/hardware/tb/tb_scratch_page_controller.sv" Line 73
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_controller_small_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1001ms
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:08 . Memory (MB): peak = 1809.367 ; gain = 90.891 ; free physical = 650291 ; free virtual = 1366815
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:zedb3udy9qps:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:zedb3udy9qps:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:qqw7nrgznboj===}
+INFO: [MCP 00-100] ===MCP_CMD_START:qqw7nrgznboj===
+puts "VSCSTART" ; set exitCode [catch {close_sim; set_property top tb_controller_actual [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/actual.txt} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:qqw7nrgznboj:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:qqw7nrgznboj:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:gy33gg7hd8s7===}
+INFO: [MCP 00-100] ===MCP_CMD_START:gy33gg7hd8s7===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -mode behavioral -simset sim_1} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_controller_actual'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_controller_actual' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_controller_actual_vlog.prj
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_controller_actual_behav xil_defaultlib.tb_controller_actual xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_controller_actual_behav xil_defaultlib.tb_controller_actual xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.scratch_frame_store_default
+Compiling module xil_defaultlib.scratch_page_controller
+Compiling module xil_defaultlib.controller_test
+Compiling module xil_defaultlib.tb_controller_actual
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_controller_actual_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/project/b_page_controller.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_controller_actual_behav -key {Behavioral:sim_1:Functional:tb_controller_actual} -tclbatch {tb_controller_actual.tcl} -log {simulate.log} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/actual.txt"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_controller_actual.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Simtcl 6-168] No object found for the given pattern.
+WARNING: [Add_Wave-1] No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console.
+# run 1001ms
+TEST_PASS scratch_page_controller tx_bits=16 gen_bits=16 checks=472689 stalls=145444
+$finish called at time : 23175460 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/sources/hardware/tb/tb_scratch_page_controller.sv" Line 73
+run: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:07 . Memory (MB): peak = 1809.367 ; gain = 0.000 ; free physical = 662849 ; free virtual = 1379375
+xsim: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:08 . Memory (MB): peak = 1809.367 ; gain = 0.000 ; free physical = 662848 ; free virtual = 1379374
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_controller_actual_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1001ms
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:13 . Memory (MB): peak = 1809.367 ; gain = 0.000 ; free physical = 662846 ; free virtual = 1379372
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:gy33gg7hd8s7:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:gy33gg7hd8s7:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:861a56n0l2qb===}
+INFO: [MCP 00-100] ===MCP_CMD_START:861a56n0l2qb===
+puts "VSCSTART" ; set exitCode [catch {close_sim; set_param general.maxThreads 2; list [get_property PART [current_project]] [list_property [get_runs synth_1]]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+xcu280-fsvh2892-2L-e {CURRENT_STEP CLASS CONSTRSET DESCRIPTION DIRECTORY ELAPSED STATS.ELAPSED STATS.TNS STATS.THS STATS.WNS STATS.WHS STATS.TPWS STATS.TOTAL_POWER STATS.FAILED_NETS FLOW IS_IMPLEMENTATION IS_SYNTHESIS IS_INITIALIZED NAME NEEDS_REFRESH PARENT PART PROGRESS SRCSET STATUS INCREMENTAL_CHECKPOINT AUTO_INCREMENTAL_CHECKPOINT RQS_FILES AUTO_RQS.SUGGESTION_RUN INCREMENTAL_CHECKPOINT.MORE_OPTIONS INCLUDE_IN_ARCHIVE GEN_FULL_BITSTREAM WRITE_INCREMENTAL_SYNTH_CHECKPOINT JOB_ID AUTO_INCREMENTAL_CHECKPOINT.DIRECTORY MIN_RQA_SCORE REPORT_STRATEGY STRATEGY STEPS.SYNTH_DESIGN.TCL.PRE STEPS.SYNTH_DESIGN.TCL.POST STEPS.SYNTH_DESIGN.REPORTS STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY STEPS.SYNTH_DESIGN.ARGS.GATED_CLOCK_CONVERSION STEPS.SYNTH_DESIGN.ARGS.BUFG STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE STEPS.SYNTH_DESIGN.ARGS.RETIMING STEPS.SYNTH_DESIGN.ARGS.NO_RETIMING STEPS.SYNTH_DESIGN.ARGS.FSM_EXTRACTION STEPS.SYNTH_DESIGN.ARGS.KEEP_EQUIVALENT_REGISTERS STEPS.SYNTH_DESIGN.ARGS.RESOURCE_SHARING STEPS.SYNTH_DESIGN.ARGS.CONTROL_SET_OPT_THRESHOLD STEPS.SYNTH_DESIGN.ARGS.NO_LC STEPS.SYNTH_DESIGN.ARGS.NO_SRLEXTRACT STEPS.SYNTH_DESIGN.ARGS.SHREG_MIN_SIZE STEPS.SYNTH_DESIGN.ARGS.MAX_BRAM STEPS.SYNTH_DESIGN.ARGS.MAX_URAM STEPS.SYNTH_DESIGN.ARGS.MAX_DSP STEPS.SYNTH_DESIGN.ARGS.MAX_BRAM_CASCADE_HEIGHT STEPS.SYNTH_DESIGN.ARGS.MAX_URAM_CASCADE_HEIGHT STEPS.SYNTH_DESIGN.ARGS.CASCADE_DSP STEPS.SYNTH_DESIGN.ARGS.ASSERT STEPS.SYNTH_DESIGN.ARGS.INCREMENTAL_MODE {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS}}
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:861a56n0l2qb:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:861a56n0l2qb:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:6tdv2l6ea65p===}
+INFO: [MCP 00-100] ===MCP_CMD_START:6tdv2l6ea65p===
+puts "VSCSTART" ; set exitCode [catch {set_property -name {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} -value {-mode out_of_context} -objects [get_runs synth_1]; get_property {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} [get_runs synth_1]} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+-mode out_of_context
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:6tdv2l6ea65p:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:6tdv2l6ea65p:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:x6znio29uvce===}
+INFO: [MCP 00-100] ===MCP_CMD_START:x6znio29uvce===
+puts "VSCSTART" ; set exitCode [catch {launch_runs synth_1 -jobs 2} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+WARNING: [Vivado 12-7122] Auto Incremental Compile:: No reference checkpoint was found in run synth_1. Auto-incremental flow will not be run, the standard flow will be run instead.

@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "manifest_sha256": "26b1678947ca7881e6dd85494a05113b47ae5d49aa21b8222bc74915a9073056",
+  "auditor_sha256": "56d43fe98b916bb3207d6e874978cd5d3f507a5d130837588f138ba8bd5f114e",
+  "coverage": {
+    "nodes": 9089009,
+    "backing_bytes": 145424192,
+    "real_parents": 4523,
+    "synthetic_degree32_parent": 128,
+    "commands": 98893,
+    "reads": 68287,
+    "writes": 17821,
+    "cache_hits": 4524,
+    "empty_published": 890,
+    "owner_rejections": 9049,
+    "records_touched": 23833
+  },
+  "cases": {
+    "pilot": {
+      "commands": 200,
+      "checks": 201,
+      "configurations": 6,
+      "faults": 0,
+      "AR": 112,
+      "R": 112,
+      "AW": 24,
+      "W": 24,
+      "B": 24,
+      "awfirst": 7,
+      "wfirst": 7,
+      "simultaneous": 10,
+      "cycles": 2865,
+      "audited_reads": 112,
+      "audited_writes": 24,
+      "cache_hits": 19,
+      "publishes": 19,
+      "empty_published": 18,
+      "entire_backing_sha256": "dc10105aa244c2c59c76f686a32e0cd0a23820facb8d07ca7881051356332ee0"
+    },
+    "full": {
+      "commands": 98893,
+      "checks": 98895,
+      "configurations": 7,
+      "faults": 0,
+      "AR": 68288,
+      "R": 68288,
+      "AW": 17821,
+      "W": 17821,
+      "B": 17821,
+      "awfirst": 4449,
+      "wfirst": 8883,
+      "simultaneous": 4489,
+      "cycles": 1608029,
+      "audited_reads": 68287,
+      "audited_writes": 17821,
+      "cache_hits": 4524,
+      "publishes": 4524,
+      "empty_published": 890,
+      "entire_backing_sha256": "61ea6e5da3854af1df7d3a81f0855d21b135ebdaf6e21335067589eb3afc42f3"
+    },
+    "faults": {
+      "commands": 0,
+      "checks": 35,
+      "configurations": 24,
+      "faults": 17,
+      "AR": 31,
+      "R": 31,
+      "AW": 5,
+      "W": 5,
+      "B": 5,
+      "awfirst": 2,
+      "wfirst": 2,
+      "simultaneous": 1,
+      "cycles": 909,
+      "entire_backing_sha256": "a48d816a3ab0acd203a55828aebdaa23f64a6f6e22d4a53826417aa711f5d384"
+    }
+  },
+  "prior_evidence": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_20261024/manifest.json": "02cdfb9f69ed572411e8c0c54f3167bc9bbf0a2791dd197fb8b62ef0650c756b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_20261024/pilot/compile.stdout.log": "f01c02d6cdbf03dcda3d9e722ba1293a6ea3a5e33cd3811c40af42ee1575daf7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/manifest.json": "8d6fea054cdb27dd415910428046518e18fd15f2b12b3cb99fc99ce64d56c617"
+  },
+  "scope": "Actual RTL persistent design records and claim/keep-mask/publish service over file-backed AXI. Real graph node IDs/counts/children drive most store commands; keep decisions are synthetic, not complete getChildren or graph/pager integration.",
+  "limitations": [
+    "Backing starts zero once per design, not per query. No device uploader yet.",
+    "32 raw positions maximum; larger degree rejected, exact real graph max18.",
+    "External exclusive writer and immutable raw graph required. Cold reset during failed claim cannot safely retry filtering in place.",
+    "No whole-route, graph/children/pager integration, or board performance result."
+  ]
+}

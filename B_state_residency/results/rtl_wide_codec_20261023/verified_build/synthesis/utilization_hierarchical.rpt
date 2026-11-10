@@ -1,0 +1,46 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Fri Oct 23 12:21:21 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_utilization -hierarchical -file utilization_hierarchical.rpt
+| Design       : memory_scratch_endpoint_wide
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : Synthesized
+-------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------------------+-------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+|             Instance             |                Module               | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs | RAMB36 | RAMB18 | URAM | DSP Blocks |
++----------------------------------+-------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+| memory_scratch_endpoint_wide     |                               (top) |       5684 |       5252 |     432 |    0 | 5185 |     22 |      0 |    0 |          0 |
+|   (memory_scratch_endpoint_wide) |                               (top) |         66 |         66 |       0 |    0 |  491 |      0 |      0 |    0 |          0 |
+|   memory                         |         record_backing_service_wide |       2537 |       2537 |       0 |    0 | 3036 |     20 |      0 |    0 |          0 |
+|     (memory)                     |         record_backing_service_wide |        142 |        142 |       0 |    0 |  126 |      0 |      0 |    0 |          0 |
+|     codec                        |             scratch_page_codec_wide |       1414 |       1414 |       0 |    0 | 1552 |      2 |      0 |    0 |          0 |
+|     memory_service               |         backing_page_service_lookup |        981 |        981 |       0 |    0 | 1358 |     18 |      0 |    0 |          0 |
+|       (memory_service)           |         backing_page_service_lookup |         47 |         47 |       0 |    0 |  207 |      0 |      0 |    0 |          0 |
+|       directory                  |      backing_frame_directory_lookup |        514 |        514 |       0 |    0 |  475 |     18 |      0 |    0 |          0 |
+|       dma                        |                    scratch_page_axi |        420 |        420 |       0 |    0 |  676 |      0 |      0 |    0 |          0 |
+|   pages                          |             queued_scratch_endpoint |       3081 |       2649 |     432 |    0 | 1658 |      2 |      0 |    0 |          0 |
+|     (pages)                      |             queued_scratch_endpoint |          9 |          9 |       0 |    0 |   19 |      0 |      0 |    0 |          0 |
+|     endpoint                     |             scratch_page_controller |       2031 |       2031 |       0 |    0 | 1610 |      2 |      0 |    0 |          0 |
+|       (endpoint)                 |             scratch_page_controller |        376 |        376 |       0 |    0 |  972 |      0 |      0 |    0 |          0 |
+|       storage                    |                 scratch_frame_store |       1655 |       1655 |       0 |    0 |  638 |      2 |      0 |    0 |          0 |
+|     fence_acks                   |   bounded_sync_fifo__parameterized1 |         45 |         29 |      16 |    0 |    4 |      0 |      0 |    0 |          0 |
+|     fence_requests               | bounded_sync_fifo__parameterized1_0 |         12 |          4 |       8 |    0 |    4 |      0 |      0 |    0 |          0 |
+|     requests                     |                   bounded_sync_fifo |        177 |         25 |     152 |    0 |    7 |      0 |      0 |    0 |          0 |
+|     responses                    |   bounded_sync_fifo__parameterized0 |        311 |        207 |     104 |    0 |    7 |      0 |      0 |    0 |          0 |
+|     work                         |                 bounded_sync_fifo_1 |        504 |        352 |     152 |    0 |    7 |      0 |      0 |    0 |          0 |
++----------------------------------+-------------------------------------+------------+------------+---------+------+------+--------+--------+------+------------+
+
+

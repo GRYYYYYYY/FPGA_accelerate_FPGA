@@ -1,0 +1,40 @@
+{
+  "status": "cpu_component_differential_and_sanitizers_passed",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_heap.hpp": "92561b7ca4cb328727b544bce359e816fdfcf6f0a054a08530b2fe46e8c744be",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_heap.cpp": "b391a4eaa041ec05dabf7070990d4e455ac09a82cde2cc44ced4bd039bb3be8c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/site_search.hpp": "dec21878f20dda8c9bcbc49a0fb9b7eb95ed7e50c9f1917a0d04f9adad456adf"
+  },
+  "compile_command": [
+    "g++",
+    "-std=c++17",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "tests/test_search_heap.cpp",
+    "-o",
+    "/tmp/a_graph_search_heap_test_20261024"
+  ],
+  "test_exit_code": 0,
+  "test_stdout": "SEARCH_HEAP_PASS randomized_operations=600000 capacities=6 ordering=cost_serial_label overflow_atomic=pass",
+  "coverage": [
+    "600000 deterministic randomized push/pop operations versus independent std::priority_queue tuple ordering",
+    "capacities 1,2,3,17,256,1023",
+    "ties, maximum uint64 cost, empty pop, full push, invalid count, guard words",
+    "failed operations preserve count and storage; empty/invalid pop preserves output"
+  ],
+  "limitations": [
+    "No HLS synthesis or RTL proof yet",
+    "Not connected to full router yet",
+    "Priority queue only; label/state storage, site compatibility, routing occupancy and negotiation still require hardware implementation",
+    "No FPGA throughput or board measurement"
+  ],
+  "next": [
+    "Build a synthesizable top and run C simulation/synthesis using existing 2022.2 flow",
+    "Integrate in isolated full native search copy and compare all query results",
+    "Implement bounded label/state storage without merging distinct physical ownership or site configurations"
+  ]
+}

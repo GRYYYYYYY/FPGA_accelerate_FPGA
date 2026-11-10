@@ -1,0 +1,335 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+  **** SW Build 3670227 on Oct 13 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'root' on host 'fpgaacc1--cfc8cd109508-jnnrja5s7q' (Linux_x86_64 version 5.15.0-119-generic) on Sat Oct 24 17:02:33 UTC 2026
+INFO: [HLS 200-10] On os Ubuntu 22.04.4 LTS
+INFO: [HLS 200-10] In directory '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3'
+Sourcing Tcl script '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/run_hls.tcl'
+EXCLUSION_HLS_BEGIN generation_bits=3 version=2022.2
+INFO: [HLS 200-1510] Running: open_project -reset exclusion_step 
+INFO: [HLS 200-10] Creating and opening project '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step'.
+INFO: [HLS 200-1510] Running: set_top exclusion_step 
+INFO: [HLS 200-1510] Running: add_files /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/kernel_hls.cpp -cflags -std=c++14 -fno-fast-math -DEXCLUSION_GENERATION_BITS=3 -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/tb 
+INFO: [HLS 200-10] Adding design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/kernel_hls.cpp' to the project
+INFO: [HLS 200-1510] Running: add_files -tb /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/tb/testbench.cpp -cflags -std=c++14 -fno-fast-math -DEXCLUSION_GENERATION_BITS=3 -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src -I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/tb 
+INFO: [HLS 200-10] Adding test bench file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/tb/testbench.cpp' to the project
+INFO: [HLS 200-1510] Running: open_solution -reset solution1 -flow_target vivado 
+INFO: [HLS 200-10] Creating and opening solution '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1'.
+INFO: [HLS 200-10] Cleaning up the solution database.
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+Resolution: For help on HLS 200-1505 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-1505.html
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10.000 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: config_rtl -reset state 
+INFO: [HLS 200-1510] Running: csim_design -clean 
+Running Dispatch Server on port: 45747
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+   Compiling ../../../../../rearchitect/v1/tb/testbench.cpp in debug mode
+   Compiling ../../../../../rearchitect/v1/src/kernel_hls.cpp in debug mode
+   Generating csim.exe
+EXCLUSION_PORT_PASS generation_bits=3 contexts=7 checks=12
+INFO [HLS SIM]: The maximum depth reached by any hls::stream() instance in the design is 1
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 1.1 seconds. CPU system time: 0.9 seconds. Elapsed time: 1.99 seconds; current allocated memory: 16.000 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.02 seconds; current allocated memory: 765.367 MB.
+INFO: [HLS 200-10] Analyzing design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/kernel_hls.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.48 seconds. CPU system time: 1.17 seconds. Elapsed time: 1.7 seconds; current allocated memory: 767.156 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-178] Inlining function 'search_filter::Machine::finish(bool) (.7)' into 'search_filter::Machine::ordinary()' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_machine.hpp:16:0)
+INFO: [HLS 214-178] Inlining function 'search_filter::Machine::ordinary()' into 'search_filter::Machine::Machine(int, unsigned char, bool, bool)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_machine.hpp:12:0)
+INFO: [HLS 214-178] Inlining function 'search_filter::Machine::ordinary()' into 'search_filter::Machine::accept(unsigned int)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_machine.hpp:24:0)
+INFO: [HLS 214-178] Inlining function 'search_filter::Machine::finish(bool) (.7)' into 'search_filter::Machine::accept(unsigned int)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_machine.hpp:24:0)
+INFO: [HLS 214-178] Inlining function 'search_filter::Machine::Machine(int, unsigned char, bool, bool)' into 'exclusion_port::Controller<3u>::step(exclusion_port::Command const&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_port.hpp:16:0)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 'replies' with compact=bit mode in 160-bits (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/kernel_hls.cpp:19:40)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 'commands' with compact=bit mode in 288-bits (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/kernel_hls.cpp:18:39)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 3 seconds. CPU system time: 1.12 seconds. Elapsed time: 4.15 seconds; current allocated memory: 768.023 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 768.023 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.07 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.09 seconds; current allocated memory: 768.742 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 769.238 MB.
+INFO: [XFORM 203-712] Applying dataflow to function 'exclusion_step' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/kernel_hls.cpp:15), detected/extracted 3 process function(s): 
+	 '(anonymous namespace)::load_input'
+	 '(anonymous namespace)::compute'
+	 '(anonymous namespace)::store_output'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_port.hpp:17:23) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_port.hpp:32:5) in function 'exclusion_port::Controller<3u>::step'... converting 4 basic blocks.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/rearchitect/v1/src/exclusion_port.hpp:22:19) in function 'exclusion_port::Controller<3u>::step'... converting 6 basic blocks.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.14 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.15 seconds; current allocated memory: 775.578 MB.
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.08 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.1 seconds; current allocated memory: 831.117 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'exclusion_step' ...
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)load_input' to 'p_anonymous_namespace_load_input'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)compute' to 'p_anonymous_namespace_compute'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)store_output' to 'p_anonymous_namespace_store_output'.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_load_input' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.06 seconds. CPU system time: 0.07 seconds. Elapsed time: 0.13 seconds; current allocated memory: 831.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.02 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.03 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'accept' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 847.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.18 seconds. CPU system time: 0 seconds. Elapsed time: 0.22 seconds; current allocated memory: 847.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.1 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.1 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_compute' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.17 seconds. CPU system time: 0 seconds. Elapsed time: 0.18 seconds; current allocated memory: 847.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.05 seconds. CPU system time: 0 seconds. Elapsed time: 0.06 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_store_output' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.12 seconds. CPU system time: 0 seconds. Elapsed time: 0.12 seconds; current allocated memory: 847.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'exclusion_step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.03 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.03 seconds; current allocated memory: 847.117 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.07 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_load_input' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_load_input'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.13 seconds. CPU system time: 0 seconds. Elapsed time: 0.13 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'accept' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'accept'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.03 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'step'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.22 seconds. CPU system time: 0 seconds. Elapsed time: 0.23 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_compute' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_compute'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.29 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.31 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_store_output' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_store_output'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.13 seconds. CPU system time: 0 seconds. Elapsed time: 0.14 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'exclusion_step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/op' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/parent' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/child' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/flags' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/created' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/has_laguna' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/generation' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/phase' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/value_r' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/status' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/result_generation' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/request' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/node' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'exclusion_step/excluded' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'exclusion_step' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'exclusion_step'.
+INFO: [RTMG 210-285] Implementing FIFO 'commands_U(exclusion_step_fifo_w288_d2_S)' using Shift Registers.
+INFO: [RTMG 210-285] Implementing FIFO 'replies_U(exclusion_step_fifo_w160_d2_S)' using Shift Registers.
+INFO: [RTMG 210-285] Implementing FIFO 'start_for_p_anonymous_namespace_compute_U0_U(exclusion_step_start_for_p_anonymous_namespace_compute_U0)' using Shift Registers.
+INFO: [RTMG 210-285] Implementing FIFO 'start_for_p_anonymous_namespace_store_output_U0_U(exclusion_step_start_for_p_anonymous_namespace_store_output_U0)' using Shift Registers.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.06 seconds. CPU system time: 0 seconds. Elapsed time: 0.08 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-111] Finished Generating all RTL models: CPU user time: 0.41 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.47 seconds; current allocated memory: 847.117 MB.
+INFO: [HLS 200-111] Finished Updating report files: CPU user time: 0.33 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.37 seconds; current allocated memory: 847.117 MB.
+INFO: [VHDL 208-304] Generating VHDL RTL for exclusion_step.
+INFO: [VLOG 209-307] Generating Verilog RTL for exclusion_step.
+INFO: [HLS 200-789] **** Estimated Fmax: 343.47 MHz
+INFO: [HLS 200-111] Finished Command csynth_design CPU user time: 6.42 seconds. CPU system time: 2.54 seconds. Elapsed time: 9.22 seconds; current allocated memory: 81.750 MB.
+INFO: [HLS 200-1510] Running: cosim_design -rtl verilog -tool xsim -trace_level none 
+INFO: [COSIM 212-47] Using XSIM for RTL simulation.
+INFO: [COSIM 212-14] Instrumenting C test bench ...
+   Build using "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/tps/lnx64/gcc-8.3.0/bin/g++"
+   Compiling apatb_exclusion_step.cpp
+   Compiling kernel_hls.cpp_pre.cpp.tb.cpp
+   Compiling testbench.cpp_pre.cpp.tb.cpp
+   Compiling apatb_exclusion_step_ir.ll
+   Generating cosim.tv.exe
+INFO: [COSIM 212-302] Starting C TB testing ... 
+EXCLUSION_PORT_PASS generation_bits=3 contexts=7 checks=12
+INFO [HLS SIM]: The maximum depth reached by any hls::stream() instance in the design is 1
+INFO: [COSIM 212-333] Generating C post check test bench ...
+INFO: [COSIM 212-12] Generating RTL test bench ...
+INFO: [COSIM 212-1] *** C/RTL co-simulation file generation completed. ***
+INFO: [COSIM 212-323] Starting verilog simulation. 
+INFO: [COSIM 212-15] Starting XSIM ...
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab xil_defaultlib.apatb_exclusion_step_top glbl -Oenable_linking_all_libraries -prj exclusion_step.prj -L smartconnect_v1_0 -L axi_protocol_checker_v1_1_12 -L axi_protocol_checker_v1_1_13 -L axis_protocol_checker_v1_1_11 -L axis_protocol_checker_v1_1_12 -L xil_defaultlib -L unisims_ver -L xpm -L floating_point_v7_0_20 -L floating_point_v7_1_15 --lib ieee_proposed=./ieee_proposed -s exclusion_step 
+Multi-threading is on. Using 126 slave threads.
+WARNING: [XSIM 43-3431] One or more environment variables have been detected which affect the operation of the C compiler. These are typically not set in standard installations and are not tested by Xilinx, however they may be appropriate for your system, so the flow will attempt to continue.  If errors occur, try running xelab with the "-mt off -v 1" switches to see more information from the C compiler. The following environment variables have been detected:
+    LIBRARY_PATH
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/glbl.v" into library work
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_start_for_p_anonymous_namespace_store_output_U0
+INFO: [VRFC 10-311] analyzing module exclusion_step_start_for_p_anonymous_namespace_store_output_U0_ShiftReg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_p_anonymous_namespace_compute.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_p_anonymous_namespace_compute
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_step.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_step
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_accept.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_accept
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_p_anonymous_namespace_load_input.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_p_anonymous_namespace_load_input
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/AESL_deadlock_detector.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AESL_deadlock_detector
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/AESL_deadlock_report_unit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AESL_deadlock_report_unit
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_fifo_w160_d2_S.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_fifo_w160_d2_S
+INFO: [VRFC 10-311] analyzing module exclusion_step_fifo_w160_d2_S_ShiftReg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_p_anonymous_namespace_store_output.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_p_anonymous_namespace_store_output
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/AESL_deadlock_detection_unit.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AESL_deadlock_detect_unit
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_fifo_w288_d2_S.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_fifo_w288_d2_S
+INFO: [VRFC 10-311] analyzing module exclusion_step_fifo_w288_d2_S_ShiftReg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step.autotb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module apatb_exclusion_step_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module exclusion_step_start_for_p_anonymous_namespace_compute_U0
+INFO: [VRFC 10-311] analyzing module exclusion_step_start_for_p_anonymous_namespace_compute_U0_ShiftReg
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/dataflow_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dataflow_monitor
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_dataflow_monitor_sv
+Compiling module xil_defaultlib.exclusion_step_p_anonymous_names...
+Compiling module xil_defaultlib.exclusion_step_accept
+Compiling module xil_defaultlib.exclusion_step_step
+Compiling module xil_defaultlib.exclusion_step_p_anonymous_names...
+Compiling module xil_defaultlib.exclusion_step_p_anonymous_names...
+Compiling module xil_defaultlib.exclusion_step_fifo_w288_d2_S_Sh...
+Compiling module xil_defaultlib.exclusion_step_fifo_w288_d2_S
+Compiling module xil_defaultlib.exclusion_step_fifo_w160_d2_S_Sh...
+Compiling module xil_defaultlib.exclusion_step_fifo_w160_d2_S
+Compiling module xil_defaultlib.exclusion_step_start_for_p_anony...
+Compiling module xil_defaultlib.exclusion_step_start_for_p_anony...
+Compiling module xil_defaultlib.exclusion_step_start_for_p_anony...
+Compiling module xil_defaultlib.exclusion_step_start_for_p_anony...
+Compiling module xil_defaultlib.exclusion_step
+Compiling module xil_defaultlib.AESL_deadlock_detect_unit(PROC_N...
+Compiling module xil_defaultlib.AESL_deadlock_detect_unit(PROC_N...
+Compiling module xil_defaultlib.AESL_deadlock_detect_unit(PROC_N...
+Compiling module xil_defaultlib.AESL_deadlock_report_unit(PROC_N...
+Compiling module xil_defaultlib.AESL_deadlock_detector_1
+Compiling module xil_defaultlib.df_fifo_intf
+Compiling module xil_defaultlib.df_process_intf
+Compiling module xil_defaultlib.nodf_module_intf
+Compiling module xil_defaultlib.dataflow_monitor_1
+Compiling module xil_defaultlib.apatb_exclusion_step_top
+Compiling module work.glbl
+Built simulation snapshot exclusion_step
+
+****** xsim v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/exclusion_step/xsim_script.tcl
+# xsim {exclusion_step} -autoloadwcfg -tclbatch {exclusion_step.tcl}
+Time resolution is 1 ps
+source exclusion_step.tcl
+## run all
+////////////////////////////////////////////////////////////////////////////////////
+// Inter-Transaction Progress: Completed Transaction / Total Transaction
+// Intra-Transaction Progress: Measured Latency / Latency Estimation * 100%
+//
+// RTL Simulation : "Inter-Transaction Progress" ["Intra-Transaction Progress"] @ "Simulation Time"
+////////////////////////////////////////////////////////////////////////////////////
+// RTL Simulation : 0 / 12 [0.00%] @ "125000"
+// RTL Simulation : 1 / 12 [100.00%] @ "195000"
+// RTL Simulation : 2 / 12 [150.00%] @ "225000"
+// RTL Simulation : 3 / 12 [150.00%] @ "265000"
+// RTL Simulation : 4 / 12 [175.00%] @ "305000"
+// RTL Simulation : 5 / 12 [175.00%] @ "345000"
+// RTL Simulation : 6 / 12 [175.00%] @ "385000"
+// RTL Simulation : 7 / 12 [175.00%] @ "425000"
+// RTL Simulation : 8 / 12 [175.00%] @ "465000"
+// RTL Simulation : 9 / 12 [175.00%] @ "505000"
+// RTL Simulation : 10 / 12 [150.00%] @ "535000"
+// RTL Simulation : 11 / 12 [125.00%] @ "565000"
+// RTL Simulation : 12 / 12 [100.00%] @ "605000"
+////////////////////////////////////////////////////////////////////////////////////
+$finish called at time : 665 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_20261024/gen3/exclusion_step/solution1/sim/verilog/exclusion_step.autotb.v" Line 1005
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 24 17:03:16 2026...
+INFO: [COSIM 212-316] Starting C post checking ...
+EXCLUSION_PORT_PASS generation_bits=3 contexts=7 checks=12
+INFO: [COSIM 212-1000] *** C/RTL co-simulation finished: PASS ***
+INFO: [HLS 200-111] Finished Command cosim_design CPU user time: 16.9 seconds. CPU system time: 4.77 seconds. Elapsed time: 20.02 seconds; current allocated memory: 13.031 MB.
+INFO: [HLS 200-1510] Running: close_project 
+EXCLUSION_HLS_DONE generation_bits=3
+INFO: [HLS 200-112] Total CPU user time: 26.95 seconds. Total CPU system time: 8.96 seconds. Total elapsed time: 44.19 seconds; peak allocated memory: 860.148 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Sat Oct 24 17:03:17 2026...

@@ -1,0 +1,59 @@
+{
+  "status": "conditional_hypothesis_not_implemented",
+  "source_root": "/tmp/B_state_residency_offer_20261025/native_retirement_synth_v1/sources",
+  "source_sha256": {
+    "query_lifecycle.sv": "00cc25d44eb43bcac08c22c1e41cf8f0856f9a315b493407f4d04131630d9792",
+    "query_residency_system.sv": "4013db12b0220dc5c469942ca535214e946bf1114610fa6a8e3d2244b0d1c053",
+    "search_residency_system.sv": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63",
+    "search_host_fence.sv": "71e7ece610e84fa8cde6f1492608cf2d663241b4ad19008a280d66dcd6b8aae4",
+    "search_scheduler.sv": "8e4def6d1ebda52d4dd4b1996f6910a354281c476cdff869c66da8b72fe0bbbf",
+    "transaction_fence.sv": "9ba4f1cbc642ddcc1c5d83c0b28a7eb6d4411c6ecfe0a86cbdb5f7e876804a47"
+  },
+  "predicate": "wire unexpected=(service_rsp_valid&&state!=SW&&!(state==SS&&service_ready))||(search_rsp_valid&&state!=QW&&!(state==QS&&search_ready))||(route_rsp_valid&&state!=RW&&!(state==RS&&route_ready));",
+  "candidate_predicate": "(service_rsp_valid && state!=SW) || (search_rsp_valid && state!=QW) || (route_rsp_valid && state!=RW)",
+  "two_state_cases_under_pairwise_exclusion": 432,
+  "generic_counterexamples": [
+    {
+      "state": 1,
+      "service_valid": true,
+      "service_ready": true,
+      "search_valid": false,
+      "search_ready": false,
+      "route_valid": false,
+      "route_ready": false,
+      "original": false,
+      "candidate": true
+    },
+    {
+      "state": 1,
+      "service_valid": true,
+      "service_ready": true,
+      "search_valid": false,
+      "search_ready": false,
+      "route_valid": false,
+      "route_ready": true,
+      "original": false,
+      "candidate": true
+    },
+    {
+      "state": 1,
+      "service_valid": true,
+      "service_ready": true,
+      "search_valid": false,
+      "search_ready": true,
+      "route_valid": false,
+      "route_ready": false,
+      "original": false,
+      "candidate": true
+    }
+  ],
+  "required_contract": "Each of three request READY / reply VALID pairs must be mutually exclusive at actual query_lifecycle ports, including retirement/reset/abort and dependent-lane cases.",
+  "remaining": [
+    "Prove all actual wiring and native interface exclusion, especially fence dependent lanes 6/8 and route path.",
+    "Default generic controller must preserve legal same-cycle request/reply behavior.",
+    "Create independent parameterized RTL variant only after contract proof.",
+    "Add native legal/overlap negative tests and full cycle-exact traces with three-port monitors.",
+    "Matched OOC measurement required; deleting predicate dependence does not prove timing closure."
+  ],
+  "scope": "Conditional 2-state Boolean identity only; no RTL change, no native integration proof, no X/Z or sequential formal proof, no timing improvement claimed."
+}

@@ -1,0 +1,11 @@
+# NORMAL准入特化的原生恢复生命周期回归通过
+
+选定recovery_normal_loops_v2，仅改coordinator五个原有NORMAL/!cold_rst门控输出staged_valid、permit_work、j_ready、recover_ready、cfg_ready。normal_unexpected使用两个回复VALID，normal_fault使用stopped/abort/timeout/normal_unexpected，避免在NORMAL阶段引入AS/OS的READY资格。完整fault、unexpected、fail_now、attempt_reset和所有时序逻辑不变；失败后重试的safe/drained/retired覆盖条件保持。
+
+独立source-bound分析枚举65536组二态输入，证明普通准入与recover_ready内核等价，以及普通许可蕴含原完整fault为假。这不授权替换任意其他fault消费者，不是X/Z、可达性或时序证明。
+
+原生回归复用已实际恢复审计的rearm_loops_component_v2固定标签服务、wrapper和TB，只替换coordinator。三场景、179检查、31条RESET/WRITE/RESULT事件及3836ns结束时刻与参考一致：实际CRC失败、错误回复保持与退休、旧attempt拒绝、撤销safe或迟到authority回复不清状态、更高attempt非冷重试；共15字段写、3条实际回读、10失败/拒绝结果和3成功结果。J0、无owner/authority请求，标签RAM/config/外部退休是模型，非完整AXI系统。
+
+初版recovery_normal_native_v1因normal_fault在timeout声明前使用而被VRFC 10-3380拒绝，未展开或仿真。v2先声明normal_fault，保留原timeout定义，再连续赋值；原始失败源码与日志保留。失败14文件和成功40文件归档均实际恢复重审audit字节一致；失败audit通过仅表示证据完整。
+
+源码、工具与报告另行冻结。该候选尚未综合、未接入当前route_block完整实验；不能把这三个小场景当完整系统或消环证明。下一结合route_block终态DCP残余路径决定接入并运行完整结构与行为矩阵。固定价格、外部可信快照、持久化floor/认证、自然overflow分配回收、物理时序和板卡缺口保留。

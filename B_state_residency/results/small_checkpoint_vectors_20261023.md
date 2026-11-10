@@ -1,0 +1,7 @@
+# 小页实际值轨迹向量
+
+先导19查询、56588字段访问生成完成，75194公开命令、5183页传输；独立小页checkpoint参考的读/写、bind/release、WB/RF和checkpoint计数一致。manifest cce7cdbeb73b7bd1ca696940bffb8d7413e947557d271d795533c97a5f8c06fe。每次传输输出3个512bit预期拍，8位bitmap及8记录与31B零尾，最大池163840页。
+
+生成器由冻结controller oracle及stream projection派生，page64→8、slots4→32、checkpoint预留6→34；不修改原生成器或原64节点输入。完整38查询生成另行启动。向量尚未完成小页RTL流式回放，不能称真实轨迹RTL通过。
+
+完整小页端点三变异已检出，manifest 896d73c376700427dd9b6f4c7d38768499dc62cda2151b58c3905315e521d686：带绑定回收错误地进入协议后返回fail-closed而非BUSY；跳过drain造成提前FINISH失败；跳过QUERY恢复令下一次BIND报STALE。均来自同--debug typical和冻结32槽测试，分类保留实际最早断言。

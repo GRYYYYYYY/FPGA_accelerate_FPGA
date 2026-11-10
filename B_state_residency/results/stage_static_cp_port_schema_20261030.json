@@ -1,0 +1,3992 @@
+{
+  "counts": {
+    "input": {
+      "bits": 49253,
+      "omitted": [],
+      "ports": 217
+    },
+    "output": {
+      "bits": 14384,
+      "omitted": [
+        "boot_cfg_ready",
+        "boot_pending",
+        "boot_rsp_valid",
+        "boot_status",
+        "boot_verify_ready",
+        "boot_verified_count",
+        "boot_verify_status",
+        "boot_receipts",
+        "boot_config_receipts",
+        "cp_s_ready",
+        "pc_route_retired"
+      ],
+      "ports": 346
+    }
+  },
+  "full_system_functional_netlist_validated": false,
+  "generator_sha256": "a00c5adcab3ae3733af4b22c32efdc50688bc13af506f7f84b0d4935033b0f5c",
+  "host_tb": "/tmp/B_state_residency_offer_20261025/checkpoint_host_edit_system_v1/sources/tb_query_fault.sv",
+  "host_tb_sha256": "854428f75647c007b129cf14e6b8e029663b5c946f3fd178873b6f51b1e04db0",
+  "parameters": {
+    "CHECK_LABEL_CRC": 1,
+    "ENABLE_BASELINE": 1,
+    "ENABLE_FRAME_SCAN": 1,
+    "ENABLE_RESTORE_SEED_BYPASS": 1,
+    "ENABLE_TEST_INJECTION": 0,
+    "ENABLE_WARM_RECOVERY": 1,
+    "FRAMES": 16384,
+    "HASH_BITS": 15,
+    "INDEX_BITS": 14,
+    "PATH_SLOTS": 4,
+    "PATH_SLOT_BITS": 2,
+    "RESTORE_RECORDS": 1024,
+    "SLOTS": 32
+  },
+  "ports": [
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_retired",
+      "name": "baseline_retired",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "seed_enable",
+      "name": "restore_seed_enable",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b1",
+      "name": "baseline_permit",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "64'h300010003",
+      "name": "baseline_epoch",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "baseline_req_valid",
+      "name": "baseline_req_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_req_ready",
+      "name": "baseline_req_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "baseline_req_node",
+      "name": "baseline_req_node",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "baseline_req_epoch",
+      "name": "baseline_req_epoch",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_rsp_valid",
+      "name": "baseline_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "baseline_rsp_ready",
+      "name": "baseline_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_rsp_status",
+      "name": "baseline_rsp_status",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_rsp_node",
+      "name": "baseline_rsp_node",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_rsp_epoch",
+      "name": "baseline_rsp_epoch",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "baseline_rsp_payload",
+      "name": "baseline_rsp_payload",
+      "width": 160
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "wm_enable",
+      "name": "wm_enable",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_warm_mode?32'd6:(g3_warm_mode?32'd5:32'd3)",
+      "name": "wm_source_version",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_warm_mode?2'd0:(g3_warm_mode?2'd3:2'd1)",
+      "name": "wm_source_query",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_warm_mode?4'd6:(g3_warm_mode?4'd5:4'd3)",
+      "name": "wm_source_price",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_pcrc",
+      "name": "wm_path_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_qcrc",
+      "name": "wm_query_crc",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "wm_owned",
+      "name": "wm_owned",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "wm_fault",
+      "name": "wm_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "wm_joined",
+      "name": "wm_joined",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "wm_receipts",
+      "name": "wm_receipts",
+      "width": 3
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ap_valid",
+      "name": "ap_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ap_rsp_ready",
+      "name": "ap_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_ready",
+      "name": "ap_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_rsp_valid",
+      "name": "ap_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "ap_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ap_generation",
+      "name": "ap_generation",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "k_saved_checkpoint",
+      "name": "ap_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ap_node",
+      "name": "ap_node",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ap_net",
+      "name": "ap_net",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ap_cookie",
+      "name": "ap_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_rsp_design",
+      "name": "ap_rsp_design",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_rsp_generation",
+      "name": "ap_rsp_generation",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_rsp_checkpoint",
+      "name": "ap_rsp_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_rsp_cookie",
+      "name": "ap_rsp_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_refs",
+      "name": "ap_refs",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_occ",
+      "name": "ap_occ",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ap_status",
+      "name": "ap_status",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_start",
+      "name": "jp_start",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_start_ready",
+      "name": "jp_start_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_commit",
+      "name": "jp_commit",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_commit_ready",
+      "name": "jp_commit_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_cancel",
+      "name": "jp_cancel",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_cancel_ready",
+      "name": "jp_cancel_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_owned",
+      "name": "jp_owned",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_done",
+      "name": "jp_done",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_done_ready",
+      "name": "jp_done_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_result",
+      "name": "jp_result",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g3_phase ? g3_bundle_manifest : snap_manifest&&label_manifest",
+      "name": "jp_manifest_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_phase ? 64'h100000004 : (g3_phase ? 64'h100000003 : 64'h100000002)",
+      "name": "jp_generation",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "jp_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_phase ? 32'd20 : (g3_phase ? 32'd19 : 32'd18)",
+      "name": "jp_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "query_version",
+      "name": "jp_version",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_active_query",
+      "name": "jp_query",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_active_price",
+      "name": "jp_price",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_load",
+      "name": "jp_load",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_ack",
+      "name": "jp_ack",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_ready",
+      "name": "jp_ready",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_reply",
+      "name": "jp_reply",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "jp_status",
+      "name": "jp_status",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_authority_stage",
+      "name": "jp_authority_stage",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b0",
+      "name": "boot_required",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b0",
+      "name": "boot_cfg_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_cfg_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "64'd0",
+      "name": "boot_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "64'd0",
+      "name": "boot_generation",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_version",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_nodes",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_label_count",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_label_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_path_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd0",
+      "name": "boot_query_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "2'd0",
+      "name": "boot_query",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "4'd0",
+      "name": "boot_slots",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "4'd0",
+      "name": "boot_price",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "2304'd0",
+      "name": "boot_payload",
+      "width": 2304
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_pending",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b0",
+      "name": "boot_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_status",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b0",
+      "name": "boot_verify_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_verify_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_verified_count",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_verify_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_receipts",
+      "width": 5
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "boot_config_receipts",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_generation",
+      "name": "qc_cp_generation",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_valid",
+      "name": "qc_cp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_restore",
+      "name": "qc_cp_restore",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_rsp_ready",
+      "name": "qc_cp_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_s_valid",
+      "name": "qc_cp_s_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_s_last",
+      "name": "qc_cp_s_last",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_m_ready",
+      "name": "qc_cp_m_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_test_reset",
+      "name": "qc_cp_test_reset",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_ready",
+      "name": "qc_cp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_busy",
+      "name": "qc_cp_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_rsp_valid",
+      "name": "qc_cp_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_s_ready",
+      "name": "qc_cp_s_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_m_valid",
+      "name": "qc_cp_m_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_m_last",
+      "name": "qc_cp_m_last",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_restore_pending",
+      "name": "qc_restore_pending",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_expected_crc",
+      "name": "qc_cp_expected_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_s_index",
+      "name": "qc_cp_s_index",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cp_s_data",
+      "name": "qc_cp_s_data",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_crc",
+      "name": "qc_cp_crc",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_m_index",
+      "name": "qc_cp_m_index",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_m_data",
+      "name": "qc_cp_m_data",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cp_status",
+      "name": "qc_cp_status",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "authority_bind",
+      "name": "as_cfg_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_cfg_ready",
+      "name": "as_cfg_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "as_cfg_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_authority_stage ? (g4_phase ? 64'h100000004 : (g3_phase ? 64'h100000003 : 64'h100000002)) : 64'h100000001",
+      "name": "as_cfg_generation",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_authority_stage ? (g3_phase&&!g4_phase ? 64'hc000000000 : 64'ha000000000) : 64'h91fffff000",
+      "name": "as_cfg_primary",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_authority_stage ? (g3_phase&&!g4_phase ? 64'hc008aaff40 : 64'ha008aaff40) : 64'h9208aaef40",
+      "name": "as_cfg_pool",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_authority_stage ? (g3_phase&&!g4_phase ? 64'hc008b81dc0 : 64'ha008b81dc0) : 64'h9208b80dc0",
+      "name": "as_cfg_allocator",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "jp_authority_stage ? (g4_phase ? 32'd20 : (g3_phase ? 32'd19 : 32'd18)) : 32'd17",
+      "name": "as_cfg_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd9089009",
+      "name": "as_cfg_nodes",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd27960",
+      "name": "as_cfg_nets",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd53734",
+      "name": "as_cfg_capacity",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_configured",
+      "name": "as_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_bound_design",
+      "name": "as_bound_design",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_bound_generation",
+      "name": "as_bound_generation",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_bound_checkpoint",
+      "name": "as_bound_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_araddr",
+      "name": "as_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_arlen",
+      "name": "as_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_arsize",
+      "name": "as_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_arburst",
+      "name": "as_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_arid",
+      "name": "as_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_arvalid",
+      "name": "as_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_arready",
+      "name": "as_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_rdata",
+      "name": "as_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_rid",
+      "name": "as_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_rresp",
+      "name": "as_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_rlast",
+      "name": "as_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_rvalid",
+      "name": "as_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_rready",
+      "name": "as_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_awaddr",
+      "name": "as_m_awaddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_awlen",
+      "name": "as_m_awlen",
+      "width": 8
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_awsize",
+      "name": "as_m_awsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_awburst",
+      "name": "as_m_awburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_awid",
+      "name": "as_m_awid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_awvalid",
+      "name": "as_m_awvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_awready",
+      "name": "as_m_awready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_wdata",
+      "name": "as_m_wdata",
+      "width": 512
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_wstrb",
+      "name": "as_m_wstrb",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_wlast",
+      "name": "as_m_wlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_wvalid",
+      "name": "as_m_wvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_wready",
+      "name": "as_m_wready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_bid",
+      "name": "as_m_bid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_bresp",
+      "name": "as_m_bresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_m_bvalid",
+      "name": "as_m_bvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_m_bready",
+      "name": "as_m_bready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_cfg_rsp_valid",
+      "name": "as_cfg_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "authority_ack",
+      "name": "as_cfg_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_cfg_status",
+      "name": "as_cfg_status",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_busy",
+      "name": "as_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_fault",
+      "name": "as_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_drained",
+      "name": "as_drained",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_retired",
+      "name": "as_retired",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "as_rsp_generation",
+      "name": "as_rsp_generation",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cap_path_valid",
+      "name": "cp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cap_path_restore",
+      "name": "cp_restore",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_ready",
+      "name": "cp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_busy",
+      "name": "cp_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_rsp_valid",
+      "name": "cp_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cap_path_rsp_ready",
+      "name": "cp_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_status",
+      "name": "cp_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_crc",
+      "name": "cp_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "cp_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd9089009",
+      "name": "cp_nodes",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd27960",
+      "name": "cp_nets",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_pcrc",
+      "name": "cp_expected_crc",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_psv",
+      "name": "cp_s_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "cp_s_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_pi",
+      "name": "cp_s_index",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_pd",
+      "name": "cp_s_data",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "warm_plast",
+      "name": "cp_s_last",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_m_valid",
+      "name": "cp_m_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cap_path_m_ready",
+      "name": "cp_m_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_m_index",
+      "name": "cp_m_index",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_m_data",
+      "name": "cp_m_data",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cap_path_m_last",
+      "name": "cp_m_last",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b0",
+      "name": "cp_test_reset",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": false,
+      "host_expression": null,
+      "name": "pc_route_retired",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "pc_acquire_valid",
+      "name": "pc_acquire_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "pc_acquire_ready",
+      "name": "pc_acquire_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "pc_owned",
+      "name": "pc_owned",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "label_root_release",
+      "name": "pc_release_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "raw_pc_release_ready",
+      "name": "pc_release_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "abort",
+      "name": "abort",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "busy",
+      "name": "busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cc_busy",
+      "name": "cc_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cc_fault",
+      "name": "cc_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cf_fault",
+      "name": "cf_fault",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "clk",
+      "name": "clk",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cost_lease",
+      "name": "cost_lease",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_busy",
+      "name": "cs_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_configured",
+      "name": "cs_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_design_id",
+      "name": "cs_design_id",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_editing",
+      "name": "cs_editing",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_fault",
+      "name": "cs_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_araddr",
+      "name": "cs_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_arburst",
+      "name": "cs_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_arid",
+      "name": "cs_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_arlen",
+      "name": "cs_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_arready",
+      "name": "cs_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_arsize",
+      "name": "cs_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_arvalid",
+      "name": "cs_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_awaddr",
+      "name": "cs_m_awaddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_awburst",
+      "name": "cs_m_awburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_awid",
+      "name": "cs_m_awid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_awlen",
+      "name": "cs_m_awlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_awready",
+      "name": "cs_m_awready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_awsize",
+      "name": "cs_m_awsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_awvalid",
+      "name": "cs_m_awvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_bid",
+      "name": "cs_m_bid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_bready",
+      "name": "cs_m_bready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_bresp",
+      "name": "cs_m_bresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_bvalid",
+      "name": "cs_m_bvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_rdata",
+      "name": "cs_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_rid",
+      "name": "cs_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_rlast",
+      "name": "cs_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_rready",
+      "name": "cs_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_rresp",
+      "name": "cs_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_rvalid",
+      "name": "cs_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_wdata",
+      "name": "cs_m_wdata",
+      "width": 512
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_wlast",
+      "name": "cs_m_wlast",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "cs_m_wready",
+      "name": "cs_m_wready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_wstrb",
+      "name": "cs_m_wstrb",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_m_wvalid",
+      "name": "cs_m_wvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_published_version",
+      "name": "cs_published_version",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "cs_ready_for_query",
+      "name": "cs_ready_for_query",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_configured",
+      "name": "d_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_araddr",
+      "name": "d_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_arburst",
+      "name": "d_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_arid",
+      "name": "d_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_arlen",
+      "name": "d_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_arready",
+      "name": "d_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_arsize",
+      "name": "d_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_arvalid",
+      "name": "d_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_awaddr",
+      "name": "d_m_awaddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_awburst",
+      "name": "d_m_awburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_awid",
+      "name": "d_m_awid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_awlen",
+      "name": "d_m_awlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_awready",
+      "name": "d_m_awready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_awsize",
+      "name": "d_m_awsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_awvalid",
+      "name": "d_m_awvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_bid",
+      "name": "d_m_bid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_bready",
+      "name": "d_m_bready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_bresp",
+      "name": "d_m_bresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_bvalid",
+      "name": "d_m_bvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_rdata",
+      "name": "d_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_rid",
+      "name": "d_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_rlast",
+      "name": "d_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_rready",
+      "name": "d_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_rresp",
+      "name": "d_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_rvalid",
+      "name": "d_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_wdata",
+      "name": "d_m_wdata",
+      "width": 512
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_wlast",
+      "name": "d_m_wlast",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "d_m_wready",
+      "name": "d_m_wready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_wstrb",
+      "name": "d_m_wstrb",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "d_m_wvalid",
+      "name": "d_m_wvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "design_id",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_all_drained",
+      "name": "f_all_drained",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_backend_idle",
+      "name": "f_backend_idle",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_fault",
+      "name": "f_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_normal_retired",
+      "name": "f_normal_retired",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_phase",
+      "name": "f_phase",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_recovery_owned",
+      "name": "f_recovery_owned",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "f_route_payload",
+      "name": "f_route_payload",
+      "width": 192
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "f_sp",
+      "name": "f_sp",
+      "width": 38912
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_sr",
+      "name": "f_sr",
+      "width": 16
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_srp",
+      "name": "f_srp",
+      "width": 4096
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "f_srr",
+      "name": "f_srr",
+      "width": 16
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "f_srv",
+      "name": "f_srv",
+      "width": 16
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "f_sv",
+      "name": "f_sv",
+      "width": 16
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "fault",
+      "name": "fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_configured",
+      "name": "g_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_araddr",
+      "name": "g_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_arburst",
+      "name": "g_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_arid",
+      "name": "g_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_arlen",
+      "name": "g_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g_m_arready",
+      "name": "g_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_arsize",
+      "name": "g_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_arvalid",
+      "name": "g_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g_m_rdata",
+      "name": "g_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g_m_rid",
+      "name": "g_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g_m_rlast",
+      "name": "g_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "g_m_rready",
+      "name": "g_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g_m_rresp",
+      "name": "g_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g_m_rvalid",
+      "name": "g_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_checkpoint",
+      "name": "k_a_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_cookie",
+      "name": "k_a_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_design",
+      "name": "k_a_design",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_net",
+      "name": "k_a_net",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_node",
+      "name": "k_a_node",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_occ",
+      "name": "k_a_occ",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_ready",
+      "name": "k_a_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_refs",
+      "name": "k_a_refs",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_rsp_checkpoint",
+      "name": "k_a_rsp_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_rsp_cookie",
+      "name": "k_a_rsp_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_rsp_design",
+      "name": "k_a_rsp_design",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_rsp_ready",
+      "name": "k_a_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_rsp_valid",
+      "name": "k_a_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_status",
+      "name": "k_a_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_a_valid",
+      "name": "k_a_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_busy",
+      "name": "k_busy",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "k_cold_rst",
+      "name": "k_cold_rst",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_corrected",
+      "name": "k_corrected",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_count",
+      "name": "k_count",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_fault",
+      "name": "k_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_full",
+      "name": "k_full",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_permit",
+      "name": "k_permit",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_rec_ready",
+      "name": "k_rec_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "k_rec_valid",
+      "name": "k_rec_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_rsp_cookie",
+      "name": "k_rsp_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "k_rsp_ready",
+      "name": "k_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_rsp_status",
+      "name": "k_rsp_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_rsp_valid",
+      "name": "k_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_saved_checkpoint",
+      "name": "k_saved_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_saved_design",
+      "name": "k_saved_design",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "k_target_reset",
+      "name": "k_target_reset",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "lr_fault",
+      "name": "lr_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "lr_rsp_status",
+      "name": "lr_rsp_status",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'he0010001",
+      "name": "lr_s_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "lr_s_last",
+      "name": "lr_s_last",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "lr_s_node",
+      "name": "lr_s_node",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "lr_s_payload",
+      "name": "lr_s_payload",
+      "width": 160
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "lr_s_ready",
+      "name": "lr_s_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "lr_s_valid",
+      "name": "lr_s_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "lr_verified",
+      "name": "lr_verified",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "lr_written",
+      "name": "lr_written",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "operation_pending",
+      "name": "operation_pending",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_action",
+      "name": "out_action",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_attrs",
+      "name": "out_attrs",
+      "width": 256
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_bits",
+      "name": "out_bits",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_commit_acked",
+      "name": "out_commit_acked",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_commit_payload",
+      "name": "out_commit_payload",
+      "width": 160
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_commit_status",
+      "name": "out_commit_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_commit_valid",
+      "name": "out_commit_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_config",
+      "name": "out_config",
+      "width": 448
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_connection",
+      "name": "out_connection",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cookie",
+      "name": "out_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cost_geometry",
+      "name": "out_cost_geometry",
+      "width": 416
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cost_geometry_result",
+      "name": "out_cost_geometry_result",
+      "width": 128
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cost_packet",
+      "name": "out_cost_packet",
+      "width": 736
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cost_status",
+      "name": "out_cost_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cost_valid",
+      "name": "out_cost_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_cost_words",
+      "name": "out_cost_words",
+      "width": 160
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_node",
+      "name": "out_node",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_offer_before",
+      "name": "out_offer_before",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_offer_key",
+      "name": "out_offer_key",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_offer_node",
+      "name": "out_offer_node",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_offer_size",
+      "name": "out_offer_size",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_offer_status",
+      "name": "out_offer_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_offer_valid",
+      "name": "out_offer_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_params",
+      "name": "out_params",
+      "width": 512
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_params_valid",
+      "name": "out_params_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_position",
+      "name": "out_position",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_attrs",
+      "name": "out_post_attrs",
+      "width": 256
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_distance",
+      "name": "out_post_distance",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_prev_read",
+      "name": "out_post_prev_read",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_status",
+      "name": "out_post_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_upstream",
+      "name": "out_post_upstream",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_valid",
+      "name": "out_post_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_x",
+      "name": "out_post_x",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_post_y",
+      "name": "out_post_y",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_count",
+      "name": "out_prep_count",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_history",
+      "name": "out_prep_history",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_net_data",
+      "name": "out_prep_net_data",
+      "width": 128
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_occupancy",
+      "name": "out_prep_occupancy",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_price_index",
+      "name": "out_prep_price_index",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_price_value",
+      "name": "out_prep_price_value",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_status",
+      "name": "out_prep_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_prep_valid",
+      "name": "out_prep_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_profile_revision",
+      "name": "out_profile_revision",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "out_ready",
+      "name": "out_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_sequence",
+      "name": "out_sequence",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_services",
+      "name": "out_services",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_steps",
+      "name": "out_steps",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "out_valid",
+      "name": "out_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_configured",
+      "name": "owner_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_araddr",
+      "name": "owner_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_arburst",
+      "name": "owner_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_arid",
+      "name": "owner_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_arlen",
+      "name": "owner_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_arready",
+      "name": "owner_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_arsize",
+      "name": "owner_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_arvalid",
+      "name": "owner_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_awaddr",
+      "name": "owner_m_awaddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_awburst",
+      "name": "owner_m_awburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_awid",
+      "name": "owner_m_awid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_awlen",
+      "name": "owner_m_awlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_awready",
+      "name": "owner_m_awready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_awsize",
+      "name": "owner_m_awsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_awvalid",
+      "name": "owner_m_awvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_bid",
+      "name": "owner_m_bid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_bready",
+      "name": "owner_m_bready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_bresp",
+      "name": "owner_m_bresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_bvalid",
+      "name": "owner_m_bvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_rdata",
+      "name": "owner_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_rid",
+      "name": "owner_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_rlast",
+      "name": "owner_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_rready",
+      "name": "owner_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_rresp",
+      "name": "owner_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_rvalid",
+      "name": "owner_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_wdata",
+      "name": "owner_m_wdata",
+      "width": 512
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_wlast",
+      "name": "owner_m_wlast",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "owner_m_wready",
+      "name": "owner_m_wready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_wstrb",
+      "name": "owner_m_wstrb",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "owner_m_wvalid",
+      "name": "owner_m_wvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_active",
+      "name": "p_active",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_active_price",
+      "name": "p_active_price",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_active_query",
+      "name": "p_active_query",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_araddr",
+      "name": "p_m_araddr",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_arburst",
+      "name": "p_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_arid",
+      "name": "p_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_arlen",
+      "name": "p_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_arready",
+      "name": "p_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_arsize",
+      "name": "p_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_arvalid",
+      "name": "p_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_awaddr",
+      "name": "p_m_awaddr",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_awburst",
+      "name": "p_m_awburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_awid",
+      "name": "p_m_awid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_awlen",
+      "name": "p_m_awlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_awready",
+      "name": "p_m_awready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_awsize",
+      "name": "p_m_awsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_awvalid",
+      "name": "p_m_awvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_bid",
+      "name": "p_m_bid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_bready",
+      "name": "p_m_bready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_bresp",
+      "name": "p_m_bresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_bvalid",
+      "name": "p_m_bvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_rdata",
+      "name": "p_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_rid",
+      "name": "p_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_rlast",
+      "name": "p_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_rready",
+      "name": "p_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_rresp",
+      "name": "p_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_rvalid",
+      "name": "p_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_wdata",
+      "name": "p_m_wdata",
+      "width": 512
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_wlast",
+      "name": "p_m_wlast",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "p_m_wready",
+      "name": "p_m_wready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_wstrb",
+      "name": "p_m_wstrb",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "p_m_wvalid",
+      "name": "p_m_wvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_busy",
+      "name": "q_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_configured",
+      "name": "q_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_fault",
+      "name": "q_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_araddr",
+      "name": "q_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_arburst",
+      "name": "q_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_arid",
+      "name": "q_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_arlen",
+      "name": "q_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "q_m_arready",
+      "name": "q_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_arsize",
+      "name": "q_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_arvalid",
+      "name": "q_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "q_m_rdata",
+      "name": "q_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "q_m_rid",
+      "name": "q_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "q_m_rlast",
+      "name": "q_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "q_m_rready",
+      "name": "q_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "q_m_rresp",
+      "name": "q_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "q_m_rvalid",
+      "name": "q_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "query_ready",
+      "name": "query_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "query_version",
+      "name": "query_version",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_block",
+      "name": "rc_block",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_busy",
+      "name": "rc_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_fault",
+      "name": "rc_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_req_ready",
+      "name": "rc_req_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "rc_req_valid",
+      "name": "rc_req_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_rsp_acked",
+      "name": "rc_rsp_acked",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_rsp_cookie",
+      "name": "rc_rsp_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_rsp_nodes",
+      "name": "rc_rsp_nodes",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "rc_rsp_ready",
+      "name": "rc_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_rsp_status",
+      "name": "rc_rsp_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_rsp_valid",
+      "name": "rc_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rc_slots",
+      "name": "rc_slots",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_warm_mode?32'd20:(g3_warm_mode?32'd19:(wm_enable?32'd18:32'd17))",
+      "name": "recover_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "retry_cookie",
+      "name": "recover_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "recover_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_recover_version[3:0]",
+      "name": "recover_price",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_recover_query",
+      "name": "recover_query",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "as_recover_version",
+      "name": "recover_version",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "rst",
+      "name": "rst",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "g4_warm_mode?32'd20:(g3_warm_mode?32'd19:(wm_enable?32'd18:32'd17))",
+      "name": "snapshot_checkpoint",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'he0010001",
+      "name": "snapshot_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "ls_count",
+      "name": "snapshot_count",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "design_id",
+      "name": "snapshot_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd9089009",
+      "name": "snapshot_nodes",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "32'd204279",
+      "name": "snapshot_probe",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_configured",
+      "name": "t_configured",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_araddr",
+      "name": "t_m_araddr",
+      "width": 64
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_arburst",
+      "name": "t_m_arburst",
+      "width": 2
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_arid",
+      "name": "t_m_arid",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_arlen",
+      "name": "t_m_arlen",
+      "width": 8
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "t_m_arready",
+      "name": "t_m_arready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_arsize",
+      "name": "t_m_arsize",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_arvalid",
+      "name": "t_m_arvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "t_m_rdata",
+      "name": "t_m_rdata",
+      "width": 512
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "t_m_rid",
+      "name": "t_m_rid",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "t_m_rlast",
+      "name": "t_m_rlast",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "t_m_rready",
+      "name": "t_m_rready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "t_m_rresp",
+      "name": "t_m_rresp",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "t_m_rvalid",
+      "name": "t_m_rvalid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "injected_abort",
+      "name": "test_route_abort",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "injected_drift",
+      "name": "test_route_version_flip",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_start_ready",
+      "name": "ss_start_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_rsp_valid",
+      "name": "ss_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_rsp_status",
+      "name": "ss_rsp_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_rsp_cookie",
+      "name": "ss_rsp_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_polls",
+      "name": "ss_polls",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_expands",
+      "name": "ss_expands",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_candidates",
+      "name": "ss_candidates",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_result_node",
+      "name": "ss_result_node",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_result_key",
+      "name": "ss_result_key",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_busy",
+      "name": "ss_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_fault",
+      "name": "ss_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_phase",
+      "name": "ss_phase",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_poll_event",
+      "name": "ss_poll_event",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_poll_node",
+      "name": "ss_poll_node",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_poll_key",
+      "name": "ss_poll_key",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "ss_poll_size",
+      "name": "ss_poll_size",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_valid",
+      "name": "qc_cmd_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cmd_ready",
+      "name": "qc_cmd_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_slot",
+      "name": "qc_cmd_slot",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_cookie",
+      "name": "qc_cmd_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_route_cookie",
+      "name": "qc_cmd_route_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_source",
+      "name": "qc_cmd_source",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_key",
+      "name": "qc_cmd_key",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_nodes",
+      "name": "qc_cmd_nodes",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_max_polls",
+      "name": "qc_cmd_max_polls",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_poll_cookie",
+      "name": "qc_cmd_poll_cookie",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_design",
+      "name": "qc_cmd_design",
+      "width": 64
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_query",
+      "name": "qc_cmd_query",
+      "width": 2
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_price",
+      "name": "qc_cmd_price",
+      "width": 4
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_cmd_expand",
+      "name": "qc_cmd_expand",
+      "width": 448
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_valid",
+      "name": "qc_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_rsp_ready",
+      "name": "qc_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_status",
+      "name": "qc_rsp_status",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_detail",
+      "name": "qc_rsp_detail",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_cookie",
+      "name": "qc_rsp_cookie",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_nodes",
+      "name": "qc_rsp_nodes",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_acked",
+      "name": "qc_rsp_acked",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_rsp_committed",
+      "name": "qc_rsp_committed",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "qc_abort",
+      "name": "qc_abort",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_busy",
+      "name": "qc_busy",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_fault",
+      "name": "qc_fault",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_phase",
+      "name": "qc_phase",
+      "width": 4
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_prepared_event",
+      "name": "qc_prepared_event",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_prepare_acked",
+      "name": "qc_prepare_acked",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "qc_cleanup_acked",
+      "name": "qc_cleanup_acked",
+      "width": 32
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "scan_v",
+      "name": "scan_valid",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "scan_r",
+      "name": "scan_ready",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "1'b1",
+      "name": "scan_permit",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "scan_f",
+      "name": "scan_frame",
+      "width": 14
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "scan_rv",
+      "name": "scan_rsp_valid",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "scan_rr",
+      "name": "scan_rsp_ready",
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "scan_st",
+      "name": "scan_status",
+      "width": 3
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "scan_rf",
+      "name": "scan_result_frame",
+      "width": 14
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "scan_o",
+      "name": "scan_owner",
+      "width": 27
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "scan_pub",
+      "name": "scan_published",
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "host_connected": true,
+      "host_expression": "crc_input",
+      "name": "snapshot_label_crc",
+      "width": 32
+    },
+    {
+      "direction": "output",
+      "host_connected": true,
+      "host_expression": "lr_source_crc",
+      "name": "lr_source_crc",
+      "width": 32
+    }
+  ],
+  "scope": "Interface inventory only. Omitted input pins require preserving original unconnected semantics; no forced defaults or removed monitors.",
+  "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_synth_v1/sources/query_residency_system.sv",
+  "source_sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+  "status": "fixed_top_port_schema_prepared_not_simulated"
+}

@@ -1,0 +1,131 @@
+{
+  "status": "passed",
+  "pid": 2669585,
+  "runner_sha256": "4516743ed8946ad43b1dfa7bf8a365ffce03fb537352bad0971486de2424940b",
+  "gates": {
+    "real": "fa00e5829156d4fa0c4f4c5b18ec1bf0195a3e66e988a46054bdf701870722c6",
+    "unit": "465174bc83a614705fc6cff4896a90b0e3d964567587c6c7eb8214378f71d134"
+  },
+  "sources": {
+    "rearchitect/v1/hls_config.cfg": "ce15e856bed39bda5a53c3722f55f99f28cf89edb95e27ce184372af76fd4c7d",
+    "rearchitect/v1/tb/original_functions.inc": "6a6ff7f85e7529a983c308eb0b7aff6f2d4ec8db9dc409cc71fbe121c16f7cf0",
+    "rearchitect/v1/tb/testbench.cpp": "5647e875efa0e34df840ed241835a4f70ee1dd1a0c87e8d511376f3245053d51",
+    "rearchitect/v1/src/kernel_hls.cpp": "cc7a2489ef1b9a770dae34cd40a814bed513e7f975844635688c2cb93310ced7",
+    "rearchitect/v1/src/exclusion_port.hpp": "be00b4d2e45e14dce2f6a7de18dd927e32b4c57853e3be25081e0416296426d1",
+    "rearchitect/v1/src/exclusion_machine.hpp": "73a77287774192a36412bfa31164a4e5d9441cb62a86ba76b13887c105eef00d"
+  },
+  "part": "xcu280-fsvh2892-2L-e",
+  "clock_ns": 10.0,
+  "top": "exclusion_step",
+  "cases": {
+    "32": {
+      "status": "passed",
+      "generation_bits": 32,
+      "commands": [
+        {
+          "stage": "cpp_build",
+          "argv": [
+            "g++",
+            "-O2",
+            "-std=c++14",
+            "-fno-fast-math",
+            "-DEXCLUSION_GENERATION_BITS=32",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/src",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/tb",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/src/kernel_hls.cpp",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/tb/testbench.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/gen32/cpp_test"
+          ],
+          "pid": 2669587,
+          "exit_code": 0
+        },
+        {
+          "stage": "cpp_test",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/gen32/cpp_test"
+          ],
+          "pid": 2669594,
+          "exit_code": 0
+        },
+        {
+          "stage": "hls",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/gen32/run_hls.tcl"
+          ],
+          "pid": 2669744,
+          "exit_code": 0
+        }
+      ],
+      "expected_pass_line": "EXCLUSION_PORT_PASS generation_bits=32 contexts=27648 checks=354530",
+      "checks": 354530,
+      "cpp_binary_sha256": "b9515b0aab09a10cf99fa0a940b694abf1eb3a96be621bfaa19c85c31c339a2e",
+      "tcl_sha256": "08259866b812f3f3e35483ff4a36e5e9bcdf5f283309a78253833deddb6a4dac",
+      "argv_preflight": {
+        "csim": "",
+        "cosim": "",
+        "both_empty_allowed": true
+      },
+      "flow_log_sha256": "6723711da36b5faf5f14e878ef688471a7b9003bdded8db1abbce3b7dab6418f",
+      "cosim_report_sha256": "6ea8a047d6ceb6cff30a98ff08b6eda4f9dcf9192db0773fb0aa7447c51cf7e9"
+    },
+    "3": {
+      "status": "passed",
+      "generation_bits": 3,
+      "commands": [
+        {
+          "stage": "cpp_build",
+          "argv": [
+            "g++",
+            "-O2",
+            "-std=c++14",
+            "-fno-fast-math",
+            "-DEXCLUSION_GENERATION_BITS=3",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/src",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/tb",
+            "-I/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/src/kernel_hls.cpp",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/rearchitect/v1/tb/testbench.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/gen3/cpp_test"
+          ],
+          "pid": 2724420,
+          "exit_code": 0
+        },
+        {
+          "stage": "cpp_test",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/gen3/cpp_test"
+          ],
+          "pid": 2724427,
+          "exit_code": 0
+        },
+        {
+          "stage": "hls",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_20261024/gen3/run_hls.tcl"
+          ],
+          "pid": 2724428,
+          "exit_code": 0
+        }
+      ],
+      "expected_pass_line": "EXCLUSION_PORT_PASS generation_bits=3 contexts=7 checks=12",
+      "checks": 12,
+      "cpp_binary_sha256": "2beabde4554f6685058a8a1f3990d28f71234dea8895574ca6a5beca41be1b8f",
+      "tcl_sha256": "278576171018775b7162f1698358d83cd7898dcc17e586b94910001b13022956",
+      "argv_preflight": {
+        "csim": "",
+        "cosim": "",
+        "both_empty_allowed": true
+      },
+      "flow_log_sha256": "be2134bfd81b5621aa065e791a8cbd6e10623e2f6a4631c1b97b5caf582230ca",
+      "cosim_report_sha256": "bfc14d14d3a6b908f82d9d1e54a504ee22d134dfcfb7b8b96486f5d23049cb52"
+    }
+  },
+  "scope": "Standalone edge exclusion command protocol; generation32 branch cases plus real generation3 exhaustion; not native label integration or full FPGA search."
+}

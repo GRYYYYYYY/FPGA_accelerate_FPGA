@@ -1,0 +1,155 @@
+
+
+================================================================
+== Vitis HLS Report for 'exclusion_step'
+================================================================
+* Date:           Sat Oct 24 16:12:09 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        exclusion_step
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  2.911 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+----------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline |
+    |   min   |   max   |    min    |    max    | min | max |   Type   |
+    +---------+---------+-----------+-----------+-----+-----+----------+
+    |        3|        4|  30.000 ns|  40.000 ns|    3|    4|  dataflow|
+    +---------+---------+-----------+-----------+-----+-----+----------+
+
+    + Detail: 
+        * Instance: 
+        +---------------------------------------+------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+        |                                       |                                    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+        |                Instance               |               Module               |   min   |   max   |    min    |    max    | min | max |   Type  |
+        +---------------------------------------+------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+        |p_anonymous_namespace_load_input_U0    |p_anonymous_namespace_load_input    |        0|        0|       0 ns|       0 ns|    0|    0|       no|
+        |p_anonymous_namespace_compute_U0       |p_anonymous_namespace_compute       |        2|        3|  20.000 ns|  30.000 ns|    2|    3|       no|
+        |p_anonymous_namespace_store_output_U0  |p_anonymous_namespace_store_output  |        0|        0|       0 ns|       0 ns|    0|    0|       no|
+        +---------------------------------------+------------------------------------+---------+---------+-----------+-----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|        2|    -|
+|FIFO                 |        -|     -|     1544|      783|    -|
+|Instance             |        -|     -|      786|     1040|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|        -|    -|
+|Register             |        -|     -|        -|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|     2330|     1825|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +---------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+    |                Instance               |               Module               | BRAM_18K| DSP|  FF | LUT | URAM|
+    +---------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+    |p_anonymous_namespace_compute_U0       |p_anonymous_namespace_compute       |        0|   0|  621|  946|    0|
+    |p_anonymous_namespace_load_input_U0    |p_anonymous_namespace_load_input    |        0|   0|    3|   29|    0|
+    |p_anonymous_namespace_store_output_U0  |p_anonymous_namespace_store_output  |        0|   0|  162|   65|    0|
+    +---------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+    |Total                                  |                                    |        0|   0|  786| 1040|    0|
+    +---------------------------------------+------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    +------------+---------+------+----+-----+------+-----+---------+
+    |    Name    | BRAM_18K|  FF  | LUT| URAM| Depth| Bits| Size:D*B|
+    +------------+---------+------+----+-----+------+-----+---------+
+    |commands_U  |        0|  1028|   0|    -|     2|  288|      576|
+    |replies_U   |        0|   516|   0|    -|     2|  160|      320|
+    +------------+---------+------+----+-----+------+-----+---------+
+    |Total       |        0|  1544|   0|    0|     4|  448|      896|
+    +------------+---------+------+----+-----+------+-----+---------+
+
+    * Expression: 
+    +--------------+----------+----+---+----+------------+------------+
+    | Variable Name| Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------+----------+----+---+----+------------+------------+
+    |ap_idle       |       and|   0|  0|   2|           1|           1|
+    +--------------+----------+----+---+----+------------+------------+
+    |Total         |          |   0|  0|   2|           1|           1|
+    +--------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    N/A
+
+    * Register: 
+    N/A
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++--------------------------+-----+-----+------------+-------------------+--------------+
+|         RTL Ports        | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++--------------------------+-----+-----+------------+-------------------+--------------+
+|op                        |   in|   32|     ap_none|                 op|        scalar|
+|parent                    |   in|   32|     ap_none|             parent|        scalar|
+|child                     |   in|   32|     ap_none|              child|        scalar|
+|flags                     |   in|   32|     ap_none|              flags|        scalar|
+|created                   |   in|   32|     ap_none|            created|        scalar|
+|has_laguna                |   in|   32|     ap_none|         has_laguna|        scalar|
+|generation                |   in|   32|     ap_none|         generation|        scalar|
+|phase                     |   in|   32|     ap_none|              phase|        scalar|
+|value_r                   |   in|   32|     ap_none|            value_r|        scalar|
+|status                    |  out|   32|      ap_vld|             status|       pointer|
+|status_ap_vld             |  out|    1|      ap_vld|             status|       pointer|
+|result_generation         |  out|   32|      ap_vld|  result_generation|       pointer|
+|result_generation_ap_vld  |  out|    1|      ap_vld|  result_generation|       pointer|
+|request                   |  out|   32|      ap_vld|            request|       pointer|
+|request_ap_vld            |  out|    1|      ap_vld|            request|       pointer|
+|node                      |  out|   32|      ap_vld|               node|       pointer|
+|node_ap_vld               |  out|    1|      ap_vld|               node|       pointer|
+|excluded                  |  out|   32|      ap_vld|           excluded|       pointer|
+|excluded_ap_vld           |  out|    1|      ap_vld|           excluded|       pointer|
+|ap_clk                    |   in|    1|  ap_ctrl_hs|     exclusion_step|  return value|
+|ap_rst                    |   in|    1|  ap_ctrl_hs|     exclusion_step|  return value|
+|ap_start                  |   in|    1|  ap_ctrl_hs|     exclusion_step|  return value|
+|ap_done                   |  out|    1|  ap_ctrl_hs|     exclusion_step|  return value|
+|ap_ready                  |  out|    1|  ap_ctrl_hs|     exclusion_step|  return value|
+|ap_idle                   |  out|    1|  ap_ctrl_hs|     exclusion_step|  return value|
++--------------------------+-----+-----+------------+-------------------+--------------+
+

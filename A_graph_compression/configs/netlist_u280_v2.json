@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "part": "xcu280-fsvh2892-2L-e",
+  "created_utc": "2026-10-22T17:03:59.652573+00:00",
+  "snapshot": "data/netlist/routeracc_cost_u280_20261022_v1/snapshot.tsv",
+  "snapshot_sha256": "c2641a4aa1ed51d5fee87fb9b4694380b6ab36da929e601cd365bc8f6dd7e8fa",
+  "output_dir": "data/raw/netlist_u280_20261022_v1",
+  "queries": "data/raw/netlist_u280_20261022_v1/queries.json",
+  "reference_sources": "data/raw/netlist_u280_20261022_v1/reference_sources.txt",
+  "training_seeds": [
+    "INT_X2Y90/EE2_E_BEG0",
+    "INT_X3Y120/EE2_E_BEG0",
+    "INT_X2Y90/EE12_BEG0",
+    "INT_X3Y120/EE12_BEG0"
+  ],
+  "training_depth": 5,
+  "training_max_sources": 20000,
+  "query_scope": "All initially ROUTED, nonfixed SIGNAL physical net groups with one output canonical terminal and at least one input terminal and inter-site PIPs; clock/constants/OOC dangling nets protected",
+  "domain_stage": "Reference-route source rows plus full outgoing neighbors. Integration domain; not an independent full-device routing-performance benchmark. Expand unknown boundaries in subsequent rounds.",
+  "supersedes_config": "configs/netlist_u280_v1.json",
+  "revision_reason": "Part preflight: VU13P LAGUNA UBUMP0 seed names do not exist on U280; use four verified SLR0 INT seeds. No training/evaluation adjacency loaded yet.",
+  "code_sha256": {
+    "adapters/netlist_snapshot.tcl": "37ad2c17243d942f658744625dd77c643c7f47987e99bc39ebb41744c14c6441",
+    "adapters/export_netlist_domain.tcl": "ea43e200f2a6919c58e64264fbfa1b9afa81fa494e4c934214331960afa83964",
+    "adapters/export_traversal.tcl": "43f3bc201b9a1bc550a96506e45b45d39d5329465f2c1f1767875bdbaea8667f",
+    "adapters/export_regions.tcl": "279e8ad10035109d7e5530a876b5028436d6ceeeb7e7667888e0971c36d4d873",
+    "adapters/export_vivado.tcl": "20439ace8db31d2be6132ef6eade38d06bde5e4eb15dcdb52755aac0987b2fec"
+  }
+}

@@ -1,0 +1,357 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Thu Oct 22 16:51:27 2026
+# Process ID: 1835996
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression
+# Command line: vivado -mode batch -source adapters/resume_netlist_u280.tcl -log results/vivado/resume_u280_20261022_preload.log -journal results/vivado/resume_u280_20261022_preload.jou
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/resume_u280_20261022_preload.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/resume_u280_20261022_preload.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2100.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source adapters/resume_netlist_u280.tcl
+# set task_root [file normalize [file join [file dirname [info script]] ..]]
+# set workload_output [file join $task_root data netlist routeracc_cost_u280_20261022_v1]
+# if {[file exists [file join $workload_output routed.dcp]]} {error "Routed checkpoint already exists"}
+# set_param general.maxThreads 4
+# open_checkpoint [file join $workload_output placed.dcp]
+Command: open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/placed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1678.574 ; gain = 0.000 ; free physical = 734731 ; free virtual = 1406596
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3047.223 ; gain = 0.000 ; free physical = 731359 ; free virtual = 1403224
+INFO: [Netlist 29-17] Analyzing 120 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'routeracc_cost_registered' is not ideal for floorplanning, since the cellview 'cost_calculator' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF Files: Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.16 . Memory (MB): peak = 3561.738 ; gain = 11.906 ; free physical = 730968 ; free virtual = 1402834
+Restored from archive | CPU: 0.160000 secs | Memory: 2.523209 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.14 ; elapsed = 00:00:00.16 . Memory (MB): peak = 3561.738 ; gain = 11.906 ; free physical = 730968 ; free virtual = 1402834
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3810.566 ; gain = 0.000 ; free physical = 731706 ; free virtual = 1403572
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 1c7553bca
+----- Checksum: PlaceDB: 83c3825b ShapeSum: 90fc7e35 RouteDB: b2953b3a 
+open_checkpoint: Time (s): cpu = 00:00:27 ; elapsed = 00:00:30 . Memory (MB): peak = 3810.566 ; gain = 2131.992 ; free physical = 731677 ; free virtual = 1403543
+# set route_start [clock milliseconds]
+# route_design
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcu280'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 4 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 4 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: 83c3825b ConstDB: 0 ShapeSum: 90fc7e35 RouteDB: b2953b3a
+Nodegraph reading from file.  Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 4289.066 ; gain = 337.391 ; free physical = 730244 ; free virtual = 1402110
+WARNING: [Route 35-197] Clock port "clk" does not have an associated HD.CLK_SRC. Without this constraint, timing analysis may not be accurate and upstream checks cannot be done to ensure correct clock placement.
+WARNING: [Route 35-198] Port "per_z[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_z[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_z[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_z[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[12]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[12]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[14]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[14]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[15]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[15]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_x[5]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_x[5]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_y[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_y[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[31]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[31]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[26]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[26]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "reset" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "reset". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[32]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[32]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_z[14]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_z[14]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[37]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[37]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[38]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[38]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[39]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[39]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_z[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_z[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_z[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_z[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_z[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_z[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_y[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_y[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[26]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[26]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[30]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[30]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[4]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[4]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[5]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[5]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[6]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[6]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[25]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[25]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[29]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[29]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[30]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[30]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[8]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[8]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[27]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[27]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[28]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[28]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[12]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[12]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_x[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_x[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[14]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[14]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_x[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_x[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_y[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_y[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[37]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[37]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[38]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[38]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_z[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_z[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_z[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_z[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[24]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[24]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[25]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[25]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[29]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[29]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_z[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_z[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_y[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_y[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[8]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[8]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_y[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_y[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_x[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_x[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "valid" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "valid". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[33]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[33]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[34]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[34]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[40]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[40]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[16]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[16]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[24]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[24]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[19]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[19]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[20]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[20]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[27]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[27]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[28]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[28]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[8]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[8]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_z[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_z[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_y[5]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_y[5]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[12]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[12]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[15]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[15]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_g[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_g[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_x[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_x[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_y[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_y[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_y[4]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_y[4]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_y[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_y[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_x[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_x[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_y[6]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_y[6]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_y[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_y[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "end_y[6]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "end_y[6]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[35]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[35]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[36]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[36]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[43]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[43]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[44]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[44]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[39]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[39]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[47]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[47]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[45]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[45]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_y[46]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_y[46]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_x[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_x[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[35]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[35]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "cen_x[4]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "cen_x[4]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[32]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[32]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "per_x[33]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "per_x[33]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+INFO: [Common 17-14] Message 'Route 35-198' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+Post Restoration Checksum: NetGraph: a84aa0a3 NumContArr: f8742107 Constraints: 6ea3346b Timing: 0
+Phase 1 Build RT Design | Checksum: 20f61f615
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:26 . Memory (MB): peak = 5265.211 ; gain = 1313.535 ; free physical = 728879 ; free virtual = 1400745
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 20f61f615
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:26 . Memory (MB): peak = 5265.211 ; gain = 1313.535 ; free physical = 729483 ; free virtual = 1401349
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 20f61f615
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:26 . Memory (MB): peak = 5265.211 ; gain = 1313.535 ; free physical = 729482 ; free virtual = 1401349
+
+Phase 2.3 Global Clock Net Routing
+ Number of Nodes with overlaps = 0
+Phase 2.3 Global Clock Net Routing | Checksum: 19b00a85f
+
+Time (s): cpu = 00:00:39 ; elapsed = 00:00:28 . Memory (MB): peak = 5821.594 ; gain = 1869.918 ; free physical = 729466 ; free virtual = 1401332
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 1cd63600c
+
+Time (s): cpu = 00:00:39 ; elapsed = 00:00:29 . Memory (MB): peak = 5821.594 ; gain = 1869.918 ; free physical = 729486 ; free virtual = 1401353
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=7.131  | TNS=0.000  | WHS=0.017  | THS=0.000  |
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 1276
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 1064
+  Number of Partially Routed Nets     = 212
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 1a13c6920
+
+Time (s): cpu = 00:00:46 ; elapsed = 00:00:31 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729462 ; free virtual = 1401329
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 1a13c6920
+
+Time (s): cpu = 00:00:46 ; elapsed = 00:00:32 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729450 ; free virtual = 1401316
+Phase 3 Initial Routing | Checksum: 1e2a9d05f
+
+Time (s): cpu = 00:00:54 ; elapsed = 00:00:34 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729446 ; free virtual = 1401312
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 248
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=6.530  | TNS=0.000  | WHS=0.020  | THS=0.000  |
+
+Phase 4.1 Global Iteration 0 | Checksum: 2c24ee7f5
+
+Time (s): cpu = 00:00:58 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729471 ; free virtual = 1401338
+
+Phase 4.2 Additional Iteration for Hold
+Phase 4.2 Additional Iteration for Hold | Checksum: 2529f53de
+
+Time (s): cpu = 00:00:58 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729470 ; free virtual = 1401337
+Phase 4 Rip-up And Reroute | Checksum: 2529f53de
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729469 ; free virtual = 1401335
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 2529f53de
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729468 ; free virtual = 1401335
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 2529f53de
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729468 ; free virtual = 1401335
+Phase 5 Delay and Skew Optimization | Checksum: 2529f53de
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729483 ; free virtual = 1401350
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 249cf13db
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729482 ; free virtual = 1401349
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=6.530  | TNS=0.000  | WHS=0.020  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 249cf13db
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729482 ; free virtual = 1401349
+Phase 6 Post Hold Fix | Checksum: 249cf13db
+
+Time (s): cpu = 00:00:59 ; elapsed = 00:00:37 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729482 ; free virtual = 1401349
+
+Phase 7 Leaf Clock Prog Delay Opt
+Phase 7 Leaf Clock Prog Delay Opt | Checksum: 269d49596
+
+Time (s): cpu = 00:01:00 ; elapsed = 00:00:38 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729484 ; free virtual = 1401351
+
+Phase 8 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.00858563 %
+  Global Horizontal Routing Utilization  = 0.00931119 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 8 Route finalize | Checksum: 2a362c8fa
+
+Time (s): cpu = 00:01:02 ; elapsed = 00:00:38 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729474 ; free virtual = 1401340
+
+Phase 9 Verifying routed nets
+
+ Verification completed successfully
+Phase 9 Verifying routed nets | Checksum: 2a362c8fa
+
+Time (s): cpu = 00:01:02 ; elapsed = 00:00:38 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729466 ; free virtual = 1401333
+
+Phase 10 Depositing Routes
+Phase 10 Depositing Routes | Checksum: 2a362c8fa
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:39 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729467 ; free virtual = 1401334
+
+Phase 11 Resolve XTalk
+Phase 11 Resolve XTalk | Checksum: 2a362c8fa
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:39 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729478 ; free virtual = 1401345
+
+Phase 12 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.530  | TNS=0.000  | WHS=0.020  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 12 Post Router Timing | Checksum: 2a362c8fa
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:39 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729465 ; free virtual = 1401332
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:01:03 ; elapsed = 00:00:39 . Memory (MB): peak = 5831.000 ; gain = 1879.324 ; free physical = 729618 ; free virtual = 1401485
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+13 Infos, 101 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:01:07 ; elapsed = 00:00:41 . Memory (MB): peak = 5831.039 ; gain = 2020.473 ; free physical = 729582 ; free virtual = 1401448
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# set baseline_route_ms [expr {[clock milliseconds]-$route_start}]
+# write_checkpoint [file join $workload_output routed.dcp]
+INFO: [Timing 38-480] Writing timing data to binary archive.
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.61 ; elapsed = 00:00:00.25 . Memory (MB): peak = 5879.023 ; gain = 40.020 ; free physical = 729572 ; free virtual = 1401438
+INFO: [Common 17-1381] The checkpoint '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp' has been generated.
+# report_route_status -file [file join $workload_output route_status.rpt]
+# report_timing_summary -file [file join $workload_output timing_summary.rpt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 4 CPUs
+# set meta [open [file join $workload_output build.tsv] {WRONLY CREAT EXCL}]
+# puts $meta "tool\t[version -short]"
+# puts $meta "part\t[get_property PART [current_design]]"
+# puts $meta "baseline_route_ms\t$baseline_route_ms"
+# puts $meta "cells\t[llength [get_cells -hier -filter {IS_PRIMITIVE}]]"
+# puts $meta "nets\t[llength [get_nets -hier]]"
+# puts $meta "scope\tOOC registered wrapper of unchanged RouterAcc cost_calculator; external IO paths are unplaced/unconstrained"
+# puts $meta "recovery\tresumed from placed.dcp after MCP process disappearance"
+# close $meta
+# puts "NETLIST_BASELINE_COMPLETE $workload_output"
+NETLIST_BASELINE_COMPLETE /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 22 16:52:45 2026...

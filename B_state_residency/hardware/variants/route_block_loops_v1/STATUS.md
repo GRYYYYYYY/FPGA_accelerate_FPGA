@@ -1,0 +1,1 @@
+Full CRC behavior passed, archived and actually restored. Complete OOC and independent DCP diagnosis now terminal and actually restored: check_timing five loops, LUTLP-1 one29-LUT region, WNS-9.340ns; design rejected. See results/route_block_synth_20261027.json and its 178-file source freeze. Native backend/capture retirement candidates are separate later experiments.

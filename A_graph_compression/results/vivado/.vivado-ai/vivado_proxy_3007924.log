@@ -1,0 +1,54 @@
+2026/10/22 14:30:01.057343 vivado-proxy: starting PID=3007924 host=fpgaacc1--cfc8cd109508-jnnrja5s7q go=go1.25.11 GOARCH=amd64 GOOS=linux
+2026/10/22 14:30:01.057983 vivado-proxy: listening on 127.0.0.1:43565
+2026/10/22 14:30:01.058053 vivado-proxy: MCP_PROXY_PORT_DIR unset — running without connection authentication (loopback only)
+2026/10/22 14:30:01.059868 vivado-proxy: spawning: [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado -mode tcl -log .vivado-ai/vivado_79401023_83c1b6e3.log -journal .vivado-ai/vivado_79401023_83c1b6e3.jou -notrace -source .vivado-ai/init_79401023_83c1b6e3.tcl]
+2026/10/22 14:30:01.061112 vivado-proxy: child PID 3007954
+2026/10/22 14:30:01.061722 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:30:01.061869 vivado-proxy: output stream client connected from 127.0.0.1:41296
+2026/10/22 14:30:01.061956 vivado-proxy: output stream resuming from stdout=0 stderr=0
+2026/10/22 14:30:16.072134 vivado-proxy: WARNING message-limit probe got no reply in 5s — cannot confirm command markers will keep being emitted
+2026/10/22 14:30:26.096768 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:30:26.096920 vivado-proxy: config webserver_url = http://localhost:60327
+2026/10/22 14:30:26.096981 vivado-proxy: config log_file_path = /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/.vivado-ai/vivado_79401023_83c1b6e3.log
+2026/10/22 14:30:35.054746 vivado-proxy: exec [gzrk8w4w6cke] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-1 version -short; get_parts xcvu13p*; help get_pips; help get_nodes; help get_wires
+2026/10/22 14:30:39.575673 vivado-proxy: exec [v2amf4snkfmr] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-2 puts [version -short]; puts [get_parts xcvu13p*]; puts [help get_pips -return_string]; puts [help get_nodes -return_string]
+2026/10/22 14:30:44.884932 vivado-proxy: exec [kxhlwgrt71wv] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-3 create_project -in_memory graph_sample -part xcvu13p-fhgb2104-2-e; link_design -part xcvu13p-fhgb2104-2-e -top graph_sample
+2026/10/22 14:30:48.607261 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:30:48.608581 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:30:58.606566 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:30:58.608209 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:31:08.607204 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:31:08.608100 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:31:23.301953 vivado-proxy: exec [8nno0k0jlpv7] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-4 puts [get_tiles INT_X0Y0]; report_property [get_tiles INT_X0Y0]; set p [lindex [get_pips -of_objects [get_tiles INT_X0Y0]] 0]; puts $p; report_property $p; puts "up [get_wires -uphill -of_objects $p] down [get_wires -downhill -of_objects $p]"; report_property [lindex [get_nodes -of_objects $p] 0]; puts "laguna [lrange [get_tiles -filter {TYPE =~ LAG*}] 0 5]"; puts "bram [lrange [get_tiles -filter {TYPE =~ BRAM*}] 0 3]"; puts "dsp [lrange [get_tiles -filter {TYPE =~ DSP*}] 0 3]"
+2026/10/22 14:31:28.606852 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:31:28.607863 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:32:30.259244 vivado-proxy: exec [cgbgzfdfkrps] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-5 puts "lagtypes [lsort -unique [get_property TYPE [get_tiles -filter {TYPE =~ LAG*}]]]"; puts "bramtypes [lsort -unique [get_property TYPE [get_tiles -filter {TYPE =~ BRAM*}]]]"; puts "dsptypes [lsort -unique [get_property TYPE [get_tiles -filter {TYPE =~ DSP*}]]]"; puts "bidir [lrange [get_pips -of_objects [get_tiles INT_X0Y1] -filter {IS_DIRECTIONAL == 0}] 0 3]"; set ns [get_nodes -of_objects [get_tiles INT_X0Y1]]; puts "nodes [llength $ns] [lrange $ns 0 30]"; puts "intent [lsort -unique [get_property INTENT_CODE_NAME $ns]]"; puts [help get_pips]
+2026/10/22 14:32:48.604169 vivado-proxy: exec [cmbygsdv3zaz] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-6 set p [lindex [get_pips -of_objects [get_tiles INT_X0Y1] -filter {IS_DIRECTIONAL == 0}] 0]; puts "pip $p up [get_wires -uphill -of_objects $p] down [get_wires -downhill -of_objects $p] nodes [get_nodes -of_objects $p]"; foreach w [get_wires -of_objects $p] {set n [get_nodes -of_objects $w]; puts "$w node $n pips-down [llength [get_pips -downhill -of_objects $n]] has-pip [expr {[lsearch -exact [get_pips -downhill -of_objects $n] $p]>=0}] nodes-down [get_nodes -downhill -of_objects $n]"}; puts "lags [lrange [get_tiles -filter {TYPE == LAG_LAG}] 0 5]"; puts "brams [lrange [get_tiles -filter {TYPE == BRAM}] 0 2]"; puts "dsps [lrange [get_tiles -filter {TYPE == DSP}] 0 2]"; puts "rclk [lrange [get_tiles -filter {TYPE == RCLK_INT_L}] 0 2]"
+2026/10/22 14:32:48.607215 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:32:48.608278 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:34:31.943611 vivado-proxy: exec [5mbr00i1gijt] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-7 set graph_export_path {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022.tsv}
+2026/10/22 14:34:34.250269 vivado-proxy: exec [wdgkbduk7rcp] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-8 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_vivado.tcl
+2026/10/22 14:34:47.523884 vivado-proxy: exec [aubuu7yl7ria] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-9 close $graph_export::out; set graph_export_path {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/xcvu13p_sample_20261022_v2.tsv}
+2026/10/22 14:34:48.607689 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:34:48.608790 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:34:49.831140 vivado-proxy: exec [c65r381j2k9j] req=vivado-20261022-143001-413d7844-a855d8d2-cmd-10 source -notrace /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_vivado.tcl
+2026/10/22 14:34:58.607547 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:34:58.608641 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:08.606868 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:08.607970 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:18.611255 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:18.613818 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:28.607444 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:28.608552 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:38.606960 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:38.608081 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:48.606784 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:48.607845 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:58.607335 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:35:58.608494 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:36:08.607301 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:36:08.608466 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:36:18.606813 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:36:18.609028 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:36:28.606540 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 14:36:28.607596 vivado-proxy: HELLO handshake complete, protocol v3

@@ -1,0 +1,151 @@
+{
+  "status": "coordinator_proof_receipts_verified_actual_archive_restore_complete",
+  "time_utc": "2026-10-31T23:07:21.797333+00:00",
+  "positive_manifest_sha256": "cff110ea5ca7e0300691cc35fcc0240151ec87b2ce0a6caa53c1f91cca3ae03b",
+  "proof_commands": [
+    {
+      "stage": "prepare",
+      "argv": [
+        "/usr/bin/python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "prepare.ys"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 0.44453044421970844,
+      "log_sha256": "d9ed593b1ff0781a4b3b5f587b8cd5ba08f1bb05af940797be9d410300c9b217"
+    },
+    {
+      "stage": "bmc",
+      "argv": [
+        "/usr/bin/python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+        "-s",
+        "z3",
+        "-t",
+        "10",
+        "--dump-vcd",
+        "bmc_failure.vcd",
+        "design.smt2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 0.6219825241714716,
+      "log_sha256": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0"
+    },
+    {
+      "stage": "induction",
+      "argv": [
+        "/usr/bin/python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+        "-s",
+        "z3",
+        "-i",
+        "-t",
+        "10",
+        "--dump-vcd",
+        "induction_failure.vcd",
+        "design.smt2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 0.31685036420822144,
+      "log_sha256": "ce792594b30627c28ad6bbf735070d79648815f5681c4df9685eb3bc2c7187c2"
+    },
+    {
+      "stage": "cover",
+      "argv": [
+        "/usr/bin/python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+        "-s",
+        "z3",
+        "-c",
+        "-t",
+        "20",
+        "--dump-vcd",
+        "cover.vcd",
+        "design.smt2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 0.7862781826406717,
+      "log_sha256": "8895c4f4f25fe662dc625ff0402ba6cd6c6e6e6eff0a117677c39997f53ea9c4"
+    }
+  ],
+  "negative_controls": [
+    {
+      "root": "/tmp/B_state_residency_offer_20261025/ka_coordinator_config_generation_no_native_contract_v1",
+      "failed_logs": {
+        "bmc.log": "99ca99bf86d315abb09ff3517a7e1a91eb0d919670c90e1fa75f3ac6a7e42b86"
+      },
+      "scope": "dependency ablation, not an actual RTL counterexample"
+    },
+    {
+      "root": "/tmp/B_state_residency_offer_20261025/ka_coordinator_config_generation_no_persistence_contract_v1",
+      "failed_logs": {
+        "bmc.log": "99ca99bf86d315abb09ff3517a7e1a91eb0d919670c90e1fa75f3ac6a7e42b86"
+      },
+      "scope": "dependency ablation, not an actual RTL counterexample"
+    }
+  ],
+  "contracts": {
+    "native_authoritative_contract": {
+      "meaning": "While not cold reset, !cfg_stage && cfg_authoritative implies authority generation nonzero.",
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/residency_system.sv",
+      "source_sha256": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+      "binding": "cfg_stage=jp_permit; authoritative native branch explicitly includes as_bound_generation!=0"
+    },
+    "generation_persistence_contract": {
+      "meaning": "Authority generation stays nonzero across cycles without cold reset.",
+      "review": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_generation_persistence_formal_v1_review_20261031.json",
+      "review_sha256": "357a040f0de4f7434bdf48ffd5937b6b68bab367a461162fd2f26edec4566e93"
+    },
+    "reset_clock_binding": "coordinator cold_rst and authority rst both k_cold_rst, both clk; exact source mapping must be reviewed."
+  },
+  "archive_sha256": "f8b1a3534b83b42532cefec3613fbca0c04f3cd1b5296cd2b3a17230fc4bdbbf",
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_coordinator_config_generation_receipt_evidence_v1/evidence.tar",
+  "restored_file_count": 37,
+  "restored_sha256": {
+    "ka_coordinator_config_generation_formal_v1/bmc.log": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0",
+    "ka_coordinator_config_generation_formal_v1/contracts.json": "086c585f572350b0d70ead6cc9f0671ed6f65e4c0fe181501fa6c8acb292ca34",
+    "ka_coordinator_config_generation_formal_v1/cover.log": "8895c4f4f25fe662dc625ff0402ba6cd6c6e6e6eff0a117677c39997f53ea9c4",
+    "ka_coordinator_config_generation_formal_v1/cover.vcd": "cec401e7955316a29eea84b3c26d0f619a43430c33e6069e1b9823dc2c16ee95",
+    "ka_coordinator_config_generation_formal_v1/design.smt2": "0a20b135d8900650033302b8fe81e18c106a17943f4fde59e06f402f2c4c6274",
+    "ka_coordinator_config_generation_formal_v1/harness.sv": "5c2e07f7503e94f1493df9320925a889c839e5cffd58c6af024402bbff383c93",
+    "ka_coordinator_config_generation_formal_v1/induction.log": "ce792594b30627c28ad6bbf735070d79648815f5681c4df9685eb3bc2c7187c2",
+    "ka_coordinator_config_generation_formal_v1/kernel.json": "33e7c11f64cc7e154b1fada0cc91ae3349e123a1f6c8be11112bd49e03ac080d",
+    "ka_coordinator_config_generation_formal_v1/manifest.json": "cff110ea5ca7e0300691cc35fcc0240151ec87b2ce0a6caa53c1f91cca3ae03b",
+    "ka_coordinator_config_generation_formal_v1/preparation.json": "26301c34cb6396b4b08d89780d74bf2628018e50ee0b2cf92e410861e7569fdb",
+    "ka_coordinator_config_generation_formal_v1/prepare.log": "d9ed593b1ff0781a4b3b5f587b8cd5ba08f1bb05af940797be9d410300c9b217",
+    "ka_coordinator_config_generation_formal_v1/prepare.ys": "b344dfdccd08ab7106ee3bbe7870850a413d6f1b418f233c977741df2a3142be",
+    "ka_coordinator_config_generation_no_native_contract_v1/bmc.log": "99ca99bf86d315abb09ff3517a7e1a91eb0d919670c90e1fa75f3ac6a7e42b86",
+    "ka_coordinator_config_generation_no_native_contract_v1/counterexample.vcd": "463a06718b82da9ee018cd3ec08a531d1a81204d8939e364b54f76d285e85bd2",
+    "ka_coordinator_config_generation_no_native_contract_v1/design.smt2": "501d1e5f3d0ada88156a6a4e01fabcd13b844340350c6c0a2d5c1916ce535484",
+    "ka_coordinator_config_generation_no_native_contract_v1/harness.sv": "f8d4e34c1fd399cc726e50946f3c5bee7ef9932f3d35305da5c41b97b6439d8c",
+    "ka_coordinator_config_generation_no_native_contract_v1/kernel.json": "33e7c11f64cc7e154b1fada0cc91ae3349e123a1f6c8be11112bd49e03ac080d",
+    "ka_coordinator_config_generation_no_native_contract_v1/manifest.json": "0173e1182ddc27701f060db58549570a3292b503815e8a051c89250c93f9d30e",
+    "ka_coordinator_config_generation_no_native_contract_v1/prepare.log": "65b3180ff130892470f9ae87c26a0f45e498f46cc32c7405d702ba5c84a4b22b",
+    "ka_coordinator_config_generation_no_native_contract_v1/prepare.ys": "b344dfdccd08ab7106ee3bbe7870850a413d6f1b418f233c977741df2a3142be",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/bmc.log": "99ca99bf86d315abb09ff3517a7e1a91eb0d919670c90e1fa75f3ac6a7e42b86",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/counterexample.vcd": "c78d9e2a63b610bd4a09f97f221065d8244e76d95f39cf4554662e4fd2d320e8",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/design.smt2": "7edd333ea125a1d383fa9740a964b4de255eef4eb4820e863ec52d129009d697",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/harness.sv": "ad4d2966c858ed0f8f63e4d8dbcf3e661d56d5dac7e5579482a8c595a6a2c2ee",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/kernel.json": "33e7c11f64cc7e154b1fada0cc91ae3349e123a1f6c8be11112bd49e03ac080d",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/manifest.json": "faef22e06f0fc1b4cb9866a54d2227140b6ad83cf8f711fa420812d240efb15e",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/prepare.log": "3326c321b20479ead0dd2a8c237784c3a741f31dc39ec37e0e425386fcf05246",
+    "ka_coordinator_config_generation_no_persistence_contract_v1/prepare.ys": "b344dfdccd08ab7106ee3bbe7870850a413d6f1b418f233c977741df2a3142be",
+    "ka_coordinator_contract_core_v1/core.json": "9c4d144ee1a45da7d1a2b004603cfd3559d67bd6a63b80d4bca734f8a31d79c0",
+    "ka_coordinator_contract_core_v1/manifest.json": "bd5d4c8d2a5dcba5a95bd84600fab5f24d3f6f16ec8361faee043c64b44357f0",
+    "ka_coordinator_contract_core_v1/prepare.log": "fb10ddc9910cdf35dccd264cd5b8922d72a878518497330e3f2752a439ff799f",
+    "ka_coordinator_contract_core_v1/prepare.ys": "a5110b8a4d34eb619a1ede8e340d5c355b11d65cf3cd293e95f3b2bb308c3583",
+    "ka_coordinator_contract_core_v1/recovery_coordinator.sv": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+    "repository/hardware/variants/ka_coordinator_config_generation_formal_v1/harness.sv": "5c2e07f7503e94f1493df9320925a889c839e5cffd58c6af024402bbff383c93",
+    "repository/hardware/variants/ka_coordinator_config_generation_formal_v1/selection.json": "734a17324af74f9e25950876f64bf4c7511b9fb4b8ed22c0fe5f9350bc1b38cc",
+    "repository/results/ka_generation_persistence_formal_v1_review_20261031.json": "357a040f0de4f7434bdf48ffd5937b6b68bab367a461162fd2f26edec4566e93",
+    "repository/scripts/research_checks/run_coordinator_config_generation_formal_v1.py": "78e91e7f91c21a5bf6206e6ff7b4f66d17834e9c2b6118fb4355e47b23a37b79"
+  },
+  "limits": [
+    "Receipt and restore verification only; independent selected-cell and full integration audit remains pending.",
+    "Conditional composition does not prove authority configured at AS or KA stall unreachable.",
+    "Native-only first configuration source interpretation still requires recorded integration review."
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

@@ -1,0 +1,114 @@
+{
+  "cases": {
+    "negedge_nba": {
+      "checker_reported_match": true,
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=checker_stub_gate",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "d5513924c998b0c84b01254de920c580d907a9b852ef0accb85e83d2294c26ba"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "eb2b715e6a4dfc995186c875de9af4e38d89989b340aad85bef11f3784f119c0"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "888ac946117067275b8c576de904f9f24a6eccf6e62085b38c4cd1608e420b6e"
+        }
+      ],
+      "inputs": {
+        "control.sv": "a0d2777566af5b6beb7b9d7dca795493f49fd72a291cf5949ef2064f2cafb340",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "1b0a2c640445612ffb36f2e26056b419ad177a76c04c4309b39fb5593ca60fa6"
+      },
+      "status": "observed"
+    },
+    "posedge_nba": {
+      "checker_reported_match": true,
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=checker_stub_gate",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "bac1576cb98cd404765b04482e68be68819fcd07eeb59e5d16cad6a2fd03231f"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "dc70d09662b841a5f15f713010a4f82b41baff3ce4491d0d2e9737decdd56d8e"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "fd6588a9a2ef717fd451c0053edef02c1a63dba30670109be800b185a5a4a3b3"
+        }
+      ],
+      "inputs": {
+        "control.sv": "1e843477e750940678556f2c9197bf674f44e90d10f452c82d2bacfae051984c",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "1b0a2c640445612ffb36f2e26056b419ad177a76c04c4309b39fb5593ca60fa6"
+      },
+      "status": "observed"
+    }
+  },
+  "full_system_functional_netlist_validated": false,
+  "identical_models_except_names": true,
+  "runner_pid": 2968991,
+  "runner_sha256": "6db909422641da76028c04702d78b0c1a8e7116f7c797a1f002c606b8e823cde",
+  "runner_start_ticks": "1651180103",
+  "scope": "Bounded replay-driver control with identical fake clocked models. No FPGA DUT, checker alteration, masking or physical timing claim.",
+  "shadow_sha256": "1b0a2c640445612ffb36f2e26056b419ad177a76c04c4309b39fb5593ca60fa6",
+  "stage": "complete",
+  "status": "observed",
+  "stub_generator_sha256": "96926a8a344d25e4b4989a32222f6b81d5f70a8573191132d7095189f943d727"
+}

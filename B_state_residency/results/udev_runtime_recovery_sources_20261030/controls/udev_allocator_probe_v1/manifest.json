@@ -1,0 +1,79 @@
+{
+  "binary_sha256": "e79cf98053d2c3d09ef17eb69e64c15d398e1602e57eb2793943503a76dbe187",
+  "cases": [
+    {
+      "exit_code": 0,
+      "label": "system_allocator",
+      "log": "system_allocator_0.log",
+      "preload": "",
+      "repeat": 0,
+      "sha256": "2090dfefda634fc899d80b08b4f3ea4a124b356ed2f89c1e0bd4b5fc897b9625"
+    },
+    {
+      "exit_code": 0,
+      "label": "system_allocator",
+      "log": "system_allocator_1.log",
+      "preload": "",
+      "repeat": 1,
+      "sha256": "2090dfefda634fc899d80b08b4f3ea4a124b356ed2f89c1e0bd4b5fc897b9625"
+    },
+    {
+      "exit_code": -6,
+      "label": "tcmalloc_deepbind",
+      "log": "tcmalloc_deepbind_0.log",
+      "preload": "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/lib/lnx64.o/libtcmalloc.so.4",
+      "repeat": 0,
+      "sha256": "e6c3822a4826fcb60bff8c71f492f5fef2cb8d6d1f678346e405cc95a5b53195"
+    },
+    {
+      "exit_code": -6,
+      "label": "tcmalloc_deepbind",
+      "log": "tcmalloc_deepbind_1.log",
+      "preload": "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/lib/lnx64.o/libtcmalloc.so.4",
+      "repeat": 1,
+      "sha256": "e6c3822a4826fcb60bff8c71f492f5fef2cb8d6d1f678346e405cc95a5b53195"
+    },
+    {
+      "exit_code": 0,
+      "label": "tcmalloc_preloaded_udev",
+      "log": "tcmalloc_preloaded_udev_0.log",
+      "preload": "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/lib/lnx64.o/libtcmalloc.so.4:/lib/x86_64-linux-gnu/libudev.so.1",
+      "repeat": 0,
+      "sha256": "3efd915dfff30f3e3827fc38d62eb108898981585ffe673326f60369fc986a5f"
+    },
+    {
+      "exit_code": 0,
+      "label": "tcmalloc_preloaded_udev",
+      "log": "tcmalloc_preloaded_udev_1.log",
+      "preload": "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/lib/lnx64.o/libtcmalloc.so.4:/lib/x86_64-linux-gnu/libudev.so.1",
+      "repeat": 1,
+      "sha256": "3efd915dfff30f3e3827fc38d62eb108898981585ffe673326f60369fc986a5f"
+    }
+  ],
+  "compile_command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-O2",
+    "/tmp/B_state_residency_offer_20261025/udev_allocator_probe_v1/probe_udev_allocator_v1.c",
+    "-ldl",
+    "-o",
+    "/tmp/B_state_residency_offer_20261025/udev_allocator_probe_v1/probe"
+  ],
+  "libraries": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/lib/lnx64.o/libtcmalloc.so.4": {
+      "realpath": "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/lib/lnx64.o/libtcmalloc.so.4",
+      "sha256": "04e57b32637d645365813934c5b5fc24aae13da3a66dc09217e40306b9769925"
+    },
+    "/lib/x86_64-linux-gnu/libudev.so.1": {
+      "realpath": "/usr/lib/x86_64-linux-gnu/libudev.so.1.7.2",
+      "sha256": "1f47ab3bd9929605e30935503e339b6f5dcceb71595f0716377be1318962561d"
+    }
+  },
+  "runner_sha256": "8242a15f30931602255d29ec48a12b9260d1d591e5bdd84c68a6a2ba36392b2f",
+  "scope": "Real libudev enumeration; no license API or host identifier spoofing; only subprocess loader environment changes.",
+  "source_sha256": "e43c11580711e5673a6cfeb4b4e20931d26663367e909c0932228e38537d372a",
+  "status": "observed"
+}

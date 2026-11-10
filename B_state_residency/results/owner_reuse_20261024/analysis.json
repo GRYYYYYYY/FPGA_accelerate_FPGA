@@ -1,0 +1,47 @@
+{
+  "status": "measured",
+  "functional_gate_sha256": "1c1fd18cafc4166273630ed6be1f37a01ddccaf6546f4a64fc77b358de05027e",
+  "original_source_sha256": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+  "analyzer_sha256": "46a4c1bc5c8534b81db5f1841d1cd1872c868c869cb57160075c9e9aae77dde0",
+  "cases": {
+    "synthetic": {
+      "owner_service_requests": 4970,
+      "within_child_duplicate_gets": 0,
+      "allowed_children_with_prior_owner_snapshot": 2232,
+      "allowed_prior_kind_counts": {
+        "4": 2020,
+        "6": 212
+      },
+      "conditional_cost_get_read_transactions": 6796,
+      "conditional_cost_get_axi_read_bytes": 434944
+    },
+    "real": {
+      "owner_service_requests": 59,
+      "within_child_duplicate_gets": 0,
+      "allowed_children_with_prior_owner_snapshot": 51,
+      "allowed_prior_kind_counts": {
+        "4": 50,
+        "6": 1
+      },
+      "conditional_cost_get_read_transactions": 161,
+      "conditional_cost_get_axi_read_bytes": 10304
+    },
+    "pressure": {
+      "owner_service_requests": 249,
+      "within_child_duplicate_gets": 0,
+      "allowed_children_with_prior_owner_snapshot": 113,
+      "allowed_prior_kind_counts": {
+        "4": 102,
+        "6": 11
+      },
+      "conditional_cost_get_read_transactions": 350,
+      "conditional_cost_get_axi_read_bytes": 22400
+    }
+  },
+  "conclusion": "No same-child repeated kind4/6 lookup in these fixtures. A duplicate-read cache confined to access cannot save reads here. Original evaluateCostAndPush reads count again for every allowed child, so retaining count/occupancy into cost may avoid a future GET only if the owner read lock spans both stages.",
+  "limitations": [
+    "Cost is not integrated; conditional transaction/byte counts are not observed cost traffic or speedup.",
+    "Current lock ends at access response retirement; retaining a snapshot afterward requires extending ownership or version validation.",
+    "No assumption that repeated query2/price4 identifies a unique design occupancy version."
+  ]
+}

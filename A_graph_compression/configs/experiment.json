@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "project_id": "A",
+  "title": "资源图压缩与直接执行",
+  "research_question": "压缩资源图能否在保持规范节点、边和资源属性一致的前提下，降低真实搜索的访问成本或扩大可处理规模？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "两个相邻 tile 共享一个规范节点；同一个局部连接模板展开后加一条例外边，与显式图逐项比较。"
+    },
+    {
+      "id": "cpu_explicit_graph",
+      "status": "planned",
+      "description": "现有显式图/CSR 软件基线"
+    },
+    {
+      "id": "cpu_existing_templates",
+      "status": "planned",
+      "description": "已有模板展开后搜索"
+    },
+    {
+      "id": "cpu_direct_decode",
+      "status": "planned",
+      "description": "新表示直接译码的软件原型"
+    },
+    {
+      "id": "fpga_csr_ddr",
+      "status": "planned",
+      "description": "FPGA 显式图 + DDR"
+    },
+    {
+      "id": "fpga_compact_ddr",
+      "status": "planned",
+      "description": "FPGA 压缩表示 + DDR"
+    },
+    {
+      "id": "fpga_csr_hbm",
+      "status": "planned",
+      "description": "FPGA 显式图 + HBM"
+    },
+    {
+      "id": "fpga_compact_hbm",
+      "status": "planned",
+      "description": "FPGA 压缩表示 + HBM"
+    }
+  ],
+  "controlled_factors": [
+    "图表示：显式 / 已有模板 / 新直接执行表示",
+    "内存后端：同卡 DDR / HBM",
+    "译码缓存容量与模板粒度"
+  ],
+  "metrics": [
+    {
+      "name": "graph_bytes",
+      "unit": "byte"
+    },
+    {
+      "name": "bytes_per_relaxation",
+      "unit": "byte/relaxation"
+    },
+    {
+      "name": "decode_cycles",
+      "unit": "cycle"
+    },
+    {
+      "name": "cache_hit_rate",
+      "unit": "ratio"
+    },
+    {
+      "name": "routing_ms",
+      "unit": "ms"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": null,
+    "baseline_revision": null,
+    "timing_mode": null,
+    "quality_tolerance": null
+  },
+  "notes": "Synthetic smoke, real-device semantic validation and bounded real-resource CPU BFS microbenchmarks are executable. Complete netlist-routing CPU/GPU/FPGA variants remain planned; no hardware compression or acceleration claim.",
+  "semantic_validation": {
+    "command": "python3 scripts/run.py real-check",
+    "status": "implemented",
+    "dataset_id": "real_A_vivado_semantics_1",
+    "scope": "sampled one-hop static graph equivalence; no routing benchmark"
+  },
+  "resource_query_microbenchmark": {
+    "command": "python3 scripts/run.py region-check",
+    "status": "implemented",
+    "scope": "SLR0 frozen templates -> SLR1–3 semantic validation; same unit-hop BFS on a four-hop actual device domain",
+    "backends": [
+      "python_explicit_csr",
+      "python_lazy_templates",
+      "python_prepared_templates"
+    ],
+    "netlist_routing_benchmark": false
+  }
+}

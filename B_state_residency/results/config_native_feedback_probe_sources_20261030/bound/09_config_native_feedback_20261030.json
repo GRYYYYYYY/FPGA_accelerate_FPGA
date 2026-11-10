@@ -1,0 +1,73 @@
+{
+  "binary_control_origin": "After a real reset, state/prepared/configured are assigned only constants; data registers may retain X/Z.",
+  "bound": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_edit_route_recovery_timing_20261030.json": "42c5688a67e6c5fb93c4a8c05215fd58d32cec8f2b6a95128a97e44c748f2d0d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/checkpoint_edit_route_recovery_v1_restore_20261025.json": "b7447e2f4c67a0a8bb1e6e4d6d333d78adc381ab7ada9fcb16d26035ba30ad5b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/config_publication_retention_20261030.json": "1a24e7f9af1706140020dc4ffcbec55a650c4edad995824799c11c36453c01f9",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_config_native_feedback_v1.py": "d9f2b098bf2af2cbe2752a68a9a928c25eeada0338e2fc62cab45efe8acb9de9",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/manifest.json": "dacf74bd3c4ebb4b83a26e1a462aeec43afaa5785c8ab2148403b3f868eef8df",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/sources/config_restore_controller.sv": "7f2407faf05bcacfac10173033e2c1c6347d3d360825bf406c594bfe4f55b3f1",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_route_recovery_v1/sources/residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9"
+  },
+  "candidate_selected": false,
+  "capture_reject_values": {
+    "0": 1,
+    "x": 242
+  },
+  "generic_counterexample_retained": {
+    "configured": "1",
+    "correct_feedback_bit": "0",
+    "descriptor_bit": "0",
+    "generic_capture": true,
+    "generic_full_publish": "x",
+    "host_payload_bit": "x",
+    "original_generic_reject_condition": "x",
+    "permit": "1",
+    "retained_publish": "0",
+    "wrongly_selected_host_bit": "x"
+  },
+  "implication": "A separately flagged controller specialization could retain the non-version descriptor bits under the native self-feedback contract without assuming all payload bits are known. Generic interface behavior must remain the default.",
+  "invariant_argument": [
+    "A successful stage branch requires load_stage to evaluate exactly 1; load_stage and the payload mux selector are the same jp_permit wire.",
+    "With jp_permit=1, load_payload is the exact active_payload of this same controller, including X/Z, and authoritative is 1.",
+    "Stage rejection cannot be bypassed with configured=0 because !configured is a known true rejection term; prepared=1 rejects all loads even if stage is X/Z.",
+    "While prepared stays asserted, start_ready is known 0, the IDLE state cannot transition to recovery, initial/shadow loads are rejected, and no descriptor write can occur before publication.",
+    "Reset/cancel/discard/attempt reset clear preparation; publication copies the 32 version bits but all 2272 other bits already match the shadow bit-for-bit, including X/Z."
+  ],
+  "jp_effective_occurrences": 3,
+  "limits": [
+    "This is source-bound four-value Python projection plus an induction argument, not RTL formal or simulation.",
+    "Do not remove saved_design/saved_checkpoint/current_version updates: those are not established as the same native feedback bits.",
+    "No arbitrary unreset state, hierarchical force, or register upset equivalence.",
+    "No measured area or timing benefit; initial load may retain the deep write-enable cone."
+  ],
+  "next_steps": [
+    "First execute the already prepared original-controller generic X/Z probe after the CP matrix is released.",
+    "Create an isolated default-off specialization only with explicit native feedback wiring and exact actual-port alias monitors.",
+    "Cover binary and X/Z initial descriptors, generic counterexamples, version advancement, cancellation and every-cycle full descriptor equality in native/default/baseline RTL.",
+    "Require complete-system output/cycle comparison, actual restore, and matched physical measurement before selecting the variant."
+  ],
+  "prepared_stability_projections": 16,
+  "production_rtl_changed": false,
+  "publication_bit_values": {
+    "0": 32,
+    "1": 32,
+    "x": 32,
+    "z": 32
+  },
+  "status": "native_feedback_four_value_projection_passed_not_rtl_equivalence",
+  "timing_benefit_measured": false,
+  "topology_expressions": [
+    "wire[2303:0]jp_effective;",
+    "config_restore_controller #(.MAX_CYCLES(1048576))config_restore(",
+    ".load_stage(jp_permit)",
+    ".publish_permit(jp_permit)",
+    ".active_payload(jp_effective)",
+    ".load_payload(jp_permit?jp_effective:(fd_fc_payload))",
+    ".load_authoritative(jp_permit?1'b1:(fd_fc_authoritative))"
+  ],
+  "valuations": {
+    "feedback_bit_projections": 1024,
+    "guard_projections": 65536
+  }
+}

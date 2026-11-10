@@ -1,0 +1,19 @@
+# 常驻配置快照与硬件重新配置
+
+新增config_restore_controller，2304位描述符驻留独立cold reset域。六lane分别保存connection、graph、design、tables、owner、cost字段；可信load绑定64位design/checkpoint、节点/net一致性和零padding，相同design的checkpoint严格推进且version不回退。非法装载保留旧快照。初始正常route前安装checkpoint17，目标服务reset不会清驻留描述符；恢复只替换cost的完整version字段，其他配置值来自驻留快照。成功重提交后再次安装checkpoint18。
+
+恢复先发connection配置并退休，再并行暴露另外五个配置。独立sent/retired掩码避免各端口READY不同拍时重复接受；所有已暴露请求即使取消/超时/别的lane失败也不撤VALID，并等待相应回复和物理/逻辑排空。第一lane失败不启动后五lane。结果直接回到recovery_coordinator；cf_fault/错误cookie驱动abort，非零状态不得变为成功。测试台configure_all任务已从新恢复路径移除，TB仍负责初始可信描述符装载与启动前的初始设备配置。
+
+原configure_all任务等待五个READY同时为高，依赖后端共同就绪，不能推广到各自握手的服务；本轮真实原基线未观察到该假设导致失败，也未修改旧基线。新模型使用不同周期的READY和不同回复延迟，验证六端口各只接受一次。
+
+27次恢复响应和37次load检查通过独立审计：同实例checkpoint推进后再恢复；不可信/错误design、节点/net不一致、非零padding、零节点、旧checkpoint和回退version；错误start身份/版本/price；第一或后续lane错误；一个lane错误但另一个尚未接受时仍保持VALID；取消/超时、迟到回复、持有结果稳定、physical drain及normal retirement；驻留快照不受load输入漂移影响、在途覆盖阻止、同拍load优先且响应退休后再start。失败锁定模块，不提供rollback或热重试。
+
+真实32槽/单槽各五个正常route故障，共10例全部通过（MCP332.414s）。独立audit从手工字段表重建六组384位payload，逐字节检查实际CQ，检查每lane仅一次接受、回复状态与退休、connection回复先于其他请求、target reset之前load17和恢复成功后load18。后续实际owner两遍修复、硬件标签恢复1969个请求、6内点重提交和checkpoint17→18均保持通过；110份原RTL/dat逐SHA不改。七类AXI全字节、完整design/cost/owner、全部16384标签帧独立核对；最终owner含allocator SHA256全部为373fd2e819992032677936aaab7ce9add321f8cae702ed94892b7be9c0dc13ba，与CPU q2准备态一致。
+
+Vivado2022.2 U280 OOC组件综合683 LUT、2520 FF、0 BRAM、0 DSP、0 latch。2条warning保留：Synth8-7080并行综合门槛、Netlist29-101扁平网表提示。未place/route、时钟约束/Fmax或完整系统资源/加速证明。
+
+仍由外部可信来源安装初始配置快照、CPU owner authority并生产328条标签snapshot流；没有完整持久化快照读取器。真实故障仍注入正常route阶段，配置恢复自身错误/取消/超时只有独立mock证据，不能外推所有实际服务失败。统一生产top/全入口围栏、完整warm/design-created/frontier/path恢复、unknown-page、价格更新/回绕、journal容量预约及板卡仍待推进。下一个优先任务是统一生产围栏与真实恢复期fault，再补正常共享/ripup和完整checkpoint/search外层。研究goal保持active。
+
+源冻结config_restore_sources_20261025；运行/审计为scripts/run_config_restore_join_rtl.py与audit_config_restore_join_rtl.py，模型和综合有对应config_restore脚本；接口见hardware/variants/config_restore_v1/CONTRACT.md。本轮仿真/综合没有功能失败，19响应首轮模型冻结在config_restore_unit_v1，扩展27响应使用v2；真实组合首轮10例通过。
+
+三份结果已实际归档/解压后复审，全部审计逐字节一致：unit34文件101188B、OOC11文件387627B、真实链573文件19710576B；收据config_restore_restore_20261025.json。模型首轮19响应的11份源码/日志冻结在config_restore_development_20261025。run.py check与Python语法检查通过。

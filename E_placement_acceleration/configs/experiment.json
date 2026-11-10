@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "project_id": "E",
+  "title": "异构约束布局加速",
+  "research_question": "批量候选评估或解析布局热点能否通过数据复用和流式执行降低完整布局时间，并保持布后质量？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "对多个位置移动候选检查资源类型、位置占用、区域、固定单元和简单级联关系，并计算加权 HPWL。"
+    },
+    {
+      "id": "cpu_candidate_eval",
+      "status": "planned",
+      "description": "相同候选集合的 CPU 评估"
+    },
+    {
+      "id": "fpga_candidate_eval",
+      "status": "planned",
+      "description": "相同算法 FPGA 批量评估"
+    },
+    {
+      "id": "cpu_existing_placer",
+      "status": "planned",
+      "description": "原布局器完整流程"
+    },
+    {
+      "id": "placer_with_fpga",
+      "status": "planned",
+      "description": "替换热点后的布局器"
+    },
+    {
+      "id": "analytic_kernel_optional",
+      "status": "planned",
+      "description": "解析布局数值内核：可选独立分支"
+    }
+  ],
+  "controlled_factors": [
+    "候选批量大小",
+    "网表/位置驻留开/关",
+    "约束类型与宏规模",
+    "数值精度与算子融合"
+  ],
+  "metrics": [
+    {
+      "name": "candidate_eval_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "placement_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "place_route_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "weighted_hpwl",
+      "unit": "model_unit"
+    },
+    {
+      "name": "routed_wirelength",
+      "unit": "tool_unit"
+    },
+    {
+      "name": "critical_path_delay",
+      "unit": "ns"
+    },
+    {
+      "name": "legal_placement",
+      "unit": "boolean"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": null,
+    "baseline_revision": null,
+    "timing_mode": null,
+    "quality_tolerance": null
+  },
+  "notes": "Only the synthetic reference is executable. Real variants need implementation and validation; null settings are unset, not measured zeros."
+}

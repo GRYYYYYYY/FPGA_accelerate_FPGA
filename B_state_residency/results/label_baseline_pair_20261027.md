@@ -1,0 +1,14 @@
+# 两条完整自然查询零标签预加载/原生按需基线通过（2026-10-27）
+
+详见results/label_baseline_pair_20261027.json与hardware/variants/label_baseline_system_v1/CONTRACT.md。新增默认关闭ENABLE_BASELINE及12个请求/回复/身份端口贯穿query/search/residency/candidate engine/core/paged exclusion六层，接入已审计manager为第七层。真实label_baseline_reader通过第九路AXI从全部9089009节点的只读prepared基线取记录；工作3MB backing初始全零。没有822条imports预加载，不留下source/sink隐含种子，启用实验命令行也不传imports。正常lifecycle source/target写保留，首次写由原生probe/五字段seed再重放完成。
+
+同时移除两次按未来列表执行的final host标签读，避免中间审计操作提前填充第二query。q180327成功提交后，原生PC lease导入真实CPU观察的q2旧路径并ripup，再连续执行q180328。两容量第一query171poll/170expand/849candidate/421cost，第二114/113/564/302，逐POLL/候选/cost匹配原CPU oracle；两条原生路径提交/共享多net owner保留、最终ledger180328/store3/1/3成立。
+
+选定full_v2/pressure_v2：q1实际777记录/389逻辑页，q2仅新增648770、125130、84955、84114四条；共781记录/393页/781实际基线R，无重复基线加载，旧822闭包的41条未加载。每个真实源回执后五字段原生seed写逐条核对；总6807字段写。独立CPU记录模型核对每个原生命令/回复、present/绑定、每页写回与refill；32槽591WB/555RF，单槽1386WB/2202RF。最终781标签与原CPU第二查询全节点状态逐位相符，target清理后全部3MB物理页（包括空页）完全匹配；9个owner物理写、完整146284032B owner和全部9AXI独立重放。
+
+默认关闭新七层通道的完整32槽回归16文件（8AXI、7DDR、完整native trace）与旧iter2_pair_full_v1逐字节/周期相等，结束1651923周期。启用两例结束1358227/1538154周期，但测试移除了预加载和额外host审计读，不能用这些周期差当作板卡加速比。三个归档均实际移走原目录后恢复重审，audit字节一致；源冻结results/label_baseline_pair_sources_20261027。
+
+首个启用开发例仅TB声明顺序编译失败，v2修正位置。首个disabled开发例因旧TB所需imports参数被统一删除而在0ps失败；v2仅为disabled恢复该参数。disabled结果的旧runner描述文字误写为零预加载，归档前仅更正scope并保留原描述/metadata_note，命令、数据、源SHA和仿真输出未改。
+
+结论限于本固定价格/完整prepared基线的两条自然正常查询；初始未来标签闭包依赖在这两例确已去除，完整G2 warm启用路径尚未接入。新第九路AXI尚未纳入旧8路physical-drained/target-reset协议，下一优先真实在途退休/fence联锁，再runtime导出777标签/动态CRC/G2发布及故障恢复后q2新增四记录。不能套旧822 warm结论。baseline描述符/epoch与G1 owner clone仍外部可信，历史路径由CPU观察给出，FRAMES16384为有界目录；任意变价、owner epoch轮转、真实overflow新增/回收、持久化认证、综合时序和板卡收益仍缺。研究继续，goal active。
+

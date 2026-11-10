@@ -1,0 +1,686 @@
+{
+  "status": "passed",
+  "config": {
+    "dataset_kind": "real_placed_netlist",
+    "input": "data/derived/logicnets_jscl.rrt",
+    "input_sha256": "d03de37af1a4a0b10f8bb29812b0048c4d2dd57ba6dadb70f61853225e39b6f4",
+    "build": "build/paged_real_v2/build.json",
+    "serial_cpu": "8",
+    "batch_cpus": "8-12",
+    "page_bits": 9,
+    "repetitions": 1,
+    "seed": 291,
+    "timeout_seconds": 600,
+    "batch_environment": {
+      "RW_MAX_THREADS": "5",
+      "RW_PAR_PART": "1",
+      "RW_PAR_PIN": "0",
+      "RW_PAR_NUMA": "0",
+      "RW_PAR_ITER1": "0",
+      "RW_OVERLAP": "0",
+      "RW_GPU_FLOOD": "0",
+      "RW_BATCH_MIN": "1000",
+      "RW_BATCH_T": "4",
+      "RW_BATCH_B": "8",
+      "RW_BATCH_ITER_MIN": "3",
+      "RW_BATCH_ITER_MAX": "8",
+      "RW_BATCH_OVER_MIN": "128",
+      "RW_BATCH_SPARSE": "1",
+      "RW_BATCH_PAGED": "1",
+      "RW_BATCH_ROLLBACK": "1",
+      "RW_BATCH_BOUNCE": "0",
+      "RW_BATCH_BUDGET": "1048576",
+      "RW_PF_RAMP1": "0"
+    }
+  },
+  "build": {
+    "diagnostic": false,
+    "variants": {
+      "paged": {
+        "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+        "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+        "command": [
+          "g++",
+          "-std=c++17",
+          "-O3",
+          "-g",
+          "-fno-fast-math",
+          "-fno-omit-frame-pointer",
+          "-no-pie",
+          "-pthread",
+          "-I",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+          "-o",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router"
+        ],
+        "source_sha256": "906bf3b4b0d6f96be4cb0c0e723cb24305f8ea766a57c3e9bd3a1c05bc736ae4",
+        "binary_sha256": "997a5b47435878b8874ec0a46f7c7b769f75fb3ab253e9bccb8fe9c1931d1bad"
+      },
+      "node_epoch": {
+        "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+        "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+        "command": [
+          "g++",
+          "-std=c++17",
+          "-O3",
+          "-g",
+          "-fno-fast-math",
+          "-fno-omit-frame-pointer",
+          "-no-pie",
+          "-pthread",
+          "-I",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+          "-o",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router"
+        ],
+        "source_sha256": "b5d92849fa26b47cff085348ad3d0568d1d58d2c94a677dd614fc13cc846388c",
+        "binary_sha256": "e5f52d360e7d655f5eaef1e44bfab964126e8928d5e8d072f6a4a30b663922cd"
+      }
+    },
+    "inputs": {
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+    }
+  },
+  "mode": "serial",
+  "pilot": true,
+  "host": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+  "reference_result_sha256": "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84",
+  "runs": [
+    {
+      "name": "serial_original_0",
+      "mode": "serial",
+      "variant": "original",
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_original_0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/real_trace/router_original",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_original_0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "9"
+      },
+      "exit_code": 0,
+      "process_wall_seconds": 27.212530087679625,
+      "metrics": {
+        "load_ms": 1920,
+        "route_ms": 24620,
+        "write_ms": 595,
+        "total_ms": 27136,
+        "iterations": 12,
+        "overused": 0,
+        "pushes": 130334832,
+        "used_nodes": 722477,
+        "wire_length": 268901,
+        "convergence": [
+          [
+            1,
+            50416,
+            53734,
+            0,
+            180326
+          ],
+          [
+            2,
+            27950,
+            28300,
+            0,
+            123806
+          ],
+          [
+            3,
+            12160,
+            12193,
+            0,
+            95357
+          ],
+          [
+            4,
+            3497,
+            3501,
+            0,
+            64447
+          ],
+          [
+            5,
+            706,
+            708,
+            0,
+            40470
+          ],
+          [
+            6,
+            292,
+            294,
+            0,
+            27230
+          ],
+          [
+            7,
+            150,
+            151,
+            0,
+            19646
+          ],
+          [
+            8,
+            49,
+            49,
+            0,
+            11977
+          ],
+          [
+            9,
+            14,
+            14,
+            0,
+            5302
+          ],
+          [
+            10,
+            3,
+            3,
+            0,
+            1217
+          ],
+          [
+            11,
+            1,
+            1,
+            0,
+            324
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            184
+          ]
+        ],
+        "bbox_ms": 4600.0
+      },
+      "result_sha256": "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84",
+      "max_rss_kib": 2669904,
+      "verified": true
+    },
+    {
+      "name": "serial_paged_0",
+      "mode": "serial",
+      "variant": "paged",
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_paged_0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_paged_0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_paged_0.labels.json"
+      },
+      "exit_code": 0,
+      "process_wall_seconds": 60.02351222187281,
+      "metrics": {
+        "load_ms": 1957,
+        "route_ms": 57349,
+        "write_ms": 595,
+        "total_ms": 59902,
+        "iterations": 12,
+        "overused": 0,
+        "pushes": 130334832,
+        "used_nodes": 722477,
+        "wire_length": 268901,
+        "convergence": [
+          [
+            1,
+            50416,
+            53734,
+            0,
+            180326
+          ],
+          [
+            2,
+            27950,
+            28300,
+            0,
+            123806
+          ],
+          [
+            3,
+            12160,
+            12193,
+            0,
+            95357
+          ],
+          [
+            4,
+            3497,
+            3501,
+            0,
+            64447
+          ],
+          [
+            5,
+            706,
+            708,
+            0,
+            40470
+          ],
+          [
+            6,
+            292,
+            294,
+            0,
+            27230
+          ],
+          [
+            7,
+            150,
+            151,
+            0,
+            19646
+          ],
+          [
+            8,
+            49,
+            49,
+            0,
+            11977
+          ],
+          [
+            9,
+            14,
+            14,
+            0,
+            5302
+          ],
+          [
+            10,
+            3,
+            3,
+            0,
+            1217
+          ],
+          [
+            11,
+            1,
+            1,
+            0,
+            324
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            184
+          ]
+        ],
+        "bbox_ms": 4640.0
+      },
+      "result_sha256": "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84",
+      "max_rss_kib": 2669768,
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 218136216,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 8388608,
+            "pool_capacity_bytes": 201326592,
+            "node_epoch_bytes": 0,
+            "page_table_bytes": 142024,
+            "peak_pool_nodes": 8388608,
+            "growth_events": 3,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    },
+    {
+      "name": "serial_node_epoch_0",
+      "mode": "serial",
+      "variant": "node_epoch",
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_node_epoch_0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_node_epoch_0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_node_epoch_0.labels.json"
+      },
+      "exit_code": 0,
+      "process_wall_seconds": 36.37986907362938,
+      "metrics": {
+        "load_ms": 1969,
+        "route_ms": 33715,
+        "write_ms": 592,
+        "total_ms": 36278,
+        "iterations": 12,
+        "overused": 0,
+        "pushes": 130334832,
+        "used_nodes": 722477,
+        "wire_length": 268901,
+        "convergence": [
+          [
+            1,
+            50416,
+            53734,
+            0,
+            180326
+          ],
+          [
+            2,
+            27950,
+            28300,
+            0,
+            123806
+          ],
+          [
+            3,
+            12160,
+            12193,
+            0,
+            95357
+          ],
+          [
+            4,
+            3497,
+            3501,
+            0,
+            64447
+          ],
+          [
+            5,
+            706,
+            708,
+            0,
+            40470
+          ],
+          [
+            6,
+            292,
+            294,
+            0,
+            27230
+          ],
+          [
+            7,
+            150,
+            151,
+            0,
+            19646
+          ],
+          [
+            8,
+            49,
+            49,
+            0,
+            11977
+          ],
+          [
+            9,
+            14,
+            14,
+            0,
+            5302
+          ],
+          [
+            10,
+            3,
+            3,
+            0,
+            1217
+          ],
+          [
+            11,
+            1,
+            1,
+            0,
+            324
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            184
+          ]
+        ],
+        "bbox_ms": 4439.999999999999
+      },
+      "result_sha256": "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84",
+      "max_rss_kib": 2669868,
+      "labels": {
+        "node_epoch": true,
+        "diagnostic": false,
+        "global_dyn_bytes": 218136216,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 8388608,
+            "pool_capacity_bytes": 201326592,
+            "node_epoch_bytes": 33554432,
+            "page_table_bytes": 142024,
+            "peak_pool_nodes": 8388608,
+            "growth_events": 3,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    }
+  ],
+  "started_utc": "2026-10-22T17:36:06.769746+00:00",
+  "tool_sha256": "0d5511542122a75ce98dceee4a15222b53be8a1518ba4e01119a86461462ca1e",
+  "cpu_model": "model name\t: INTEL(R) XEON(R) GOLD 6530",
+  "semantic_tests": {
+    "status": "passed",
+    "build": {
+      "diagnostic": false,
+      "variants": {
+        "paged": {
+          "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+          "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+          "command": [
+            "g++",
+            "-std=c++17",
+            "-O3",
+            "-g",
+            "-fno-fast-math",
+            "-fno-omit-frame-pointer",
+            "-no-pie",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router"
+          ],
+          "source_sha256": "906bf3b4b0d6f96be4cb0c0e723cb24305f8ea766a57c3e9bd3a1c05bc736ae4",
+          "binary_sha256": "997a5b47435878b8874ec0a46f7c7b769f75fb3ab253e9bccb8fe9c1931d1bad"
+        },
+        "node_epoch": {
+          "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+          "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+          "command": [
+            "g++",
+            "-std=c++17",
+            "-O3",
+            "-g",
+            "-fno-fast-math",
+            "-fno-omit-frame-pointer",
+            "-no-pie",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router"
+          ],
+          "source_sha256": "b5d92849fa26b47cff085348ad3d0568d1d58d2c94a677dd614fc13cc846388c",
+          "binary_sha256": "e5f52d360e7d655f5eaef1e44bfab964126e8928d5e8d072f6a4a30b663922cd"
+        }
+      },
+      "inputs": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+      }
+    },
+    "source_sha256": "2cceae6078f9543789cf03a8aa406f42712e108f97cb5a14ba49dba444362034",
+    "checks": {
+      "paged": {
+        "build_command": [
+          "g++",
+          "-std=c++17",
+          "-O1",
+          "-g",
+          "-fsanitize=address,undefined",
+          "-fno-omit-frame-pointer",
+          "-pthread",
+          "-I",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged",
+          "-I",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/tests/paged_semantics.cpp",
+          "-o",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/test_labels"
+        ],
+        "binary_sha256": "d6902f596d215148df02489bc5ca8a1692025026c3f1d7240c075f6b0a5e19ac",
+        "result": {
+          "status": "passed",
+          "node_epoch": 0
+        }
+      },
+      "node_epoch": {
+        "build_command": [
+          "g++",
+          "-std=c++17",
+          "-O1",
+          "-g",
+          "-fsanitize=address,undefined",
+          "-fno-omit-frame-pointer",
+          "-pthread",
+          "-I",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch",
+          "-I",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/tests/paged_semantics.cpp",
+          "-o",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/test_labels"
+        ],
+        "binary_sha256": "31f19b3b679b2cceba45ff4c43efe46fdc5e456cded9883fbec7057b32025f55",
+        "result": {
+          "status": "passed",
+          "node_epoch": 1
+        }
+      }
+    }
+  },
+  "verification": {
+    "428fa84ffa9e9839965c5000a32a4078f2fc7ea3f787a50cd4f7aff57447aa84": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/real_trace/verify_real",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/paged_real_20261022T173606Z/serial_original_0.result"
+      ],
+      "result": {
+        "connections": 180326,
+        "segments": 3092250,
+        "bad_edges": 0,
+        "bad_endpoints": 0,
+        "cycles": 0,
+        "cross_net_resource_conflicts": 0,
+        "unrouted": 0
+      }
+    }
+  },
+  "summary": {
+    "serial_original": {
+      "repetitions": 1,
+      "route_ms": 24620,
+      "total_ms": 27136,
+      "max_rss_kib": 2669904
+    },
+    "serial_paged": {
+      "repetitions": 1,
+      "route_ms": 57349,
+      "total_ms": 59902,
+      "max_rss_kib": 2669768
+    },
+    "serial_node_epoch": {
+      "repetitions": 1,
+      "route_ms": 33715,
+      "total_ms": 36278,
+      "max_rss_kib": 2669868
+    }
+  },
+  "finished_utc": "2026-10-22T17:40:41.605900+00:00"
+}

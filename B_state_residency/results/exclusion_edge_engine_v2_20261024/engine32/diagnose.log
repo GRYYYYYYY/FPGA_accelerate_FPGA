@@ -1,0 +1,50 @@
+#-----------------------------------------------------------
+# xsim v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Sat Oct 24 16:57:04 2026
+# Process ID: 3761389
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_edge_engine_v2_20261024/engine32
+# Command line: xsim -log diagnose.log -mode tcl -source {xsim.dir/engine/xsim_script.tcl}
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_edge_engine_v2_20261024/engine32/diagnose.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_edge_engine_v2_20261024/engine32/xsim.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2100.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source xsim.dir/engine/xsim_script.tcl
+# xsim {engine} -testplusarg fixture=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_edge_engine_v2_20261024/vectors.txt -wdb {diagnose.wdb} -autoloadwcfg -tclbatch {diagnose.tcl}
+Time resolution is 1 ps
+source diagnose.tcl
+## run 60ms
+run: Time (s): cpu = 00:00:00.28 ; elapsed = 00:00:41 . Memory (MB): peak = 1448.594 ; gain = 0.000 ; free physical = 659819 ; free virtual = 1378336
+## foreach n {edges error_mode errors_tested checks hls_calls responses edge_index k rst bridge_mode hold_native hold_reply ep_valid ep_ready fault result_valid edge_valid edge_ready resolve_valid map_valid active_edge} {puts "STATE $n=[get_value -radix unsigned /tb_exclusion_edge_engine/$n]"}
+STATE edges=27680
+STATE error_mode=1
+STATE errors_tested=5
+STATE checks=110638
+STATE hls_calls=62579
+STATE responses=34898
+STATE edge_index=27680
+STATE k=1
+STATE rst=0
+STATE bridge_mode=1
+STATE hold_native=0
+STATE hold_reply=0
+STATE ep_valid=0
+STATE ep_ready=0
+STATE fault=1
+STATE result_valid=1
+STATE edge_valid=1
+STATE edge_ready=0
+STATE resolve_valid=0
+STATE map_valid=0
+STATE active_edge=1
+## foreach n {controller/state controller/stopped calls/state calls/stopped labels/state labels/stopped} {puts "STATE dut/$n=[get_value -radix unsigned /tb_exclusion_edge_engine/dut/$n]"}
+STATE dut/controller/state=5
+STATE dut/controller/stopped=1
+STATE dut/calls/state=0
+STATE dut/calls/stopped=0
+STATE dut/labels/state=0
+STATE dut/labels/stopped=0
+## quit
+INFO: xsimkernel Simulation Memory Usage: 116824 KB (Peak: 169996 KB), Simulation CPU Usage: 41230 ms
+INFO: [Common 17-206] Exiting xsim at Sat Oct 24 16:57:49 2026...

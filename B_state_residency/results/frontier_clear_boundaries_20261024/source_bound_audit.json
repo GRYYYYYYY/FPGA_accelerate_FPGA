@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "manifest_sha256": "0f7d938659953ee2be261d647c47bf8cd4c99a6cbfcc1f90e9ef9d2ee7b6fe40",
+  "normal_gate_sha256": "09af2119886ecbcfd6e909c633d60348e17abb6fba460bb35a7ef01115849e9c",
+  "auditor_sha256": "7195b7297f0cd5b2e6c1dff4906775b659450c8c24dc33e5bd2fafda15fc41f5",
+  "fault_cases": [
+    "boot_idle_timeout",
+    "missing_completion_timeout",
+    "bad_status",
+    "bad_size",
+    "bad_nonpoll_payload",
+    "abort_inflight",
+    "bad_clear_size"
+  ],
+  "cold_recoveries": 7,
+  "normal_responses": 10,
+  "scope": "Stop admission without committing mirrored size on timeout/bad HLS reply/abort; coordinated reset plus boot CLEAR recovers. Failed physical heap writes are not rolled back."
+}

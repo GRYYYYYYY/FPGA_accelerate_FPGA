@@ -1,0 +1,171 @@
+{
+  "input_sha256": "1983d8a58826e72623326b289f50fca0471e6ae91b0039215fed13c2c5ae9632",
+  "budget_pops": 8,
+  "budget_policy": {
+    "mode": "diagnostic",
+    "requested_budget": 8,
+    "effective_budget": 8,
+    "optimization_enabled": false,
+    "diagnostics_available": true,
+    "reason": "explicit_diagnostic_only"
+  },
+  "scheduler": "serial",
+  "runs": {
+    "traced": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate_b8_p0_1/traced.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.316585,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0",
+        "C_TRACE_PATH": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate_b8_p0_1/trace.jsonl",
+        "C_CPU_BUDGET": "8",
+        "C_TRACE_LIMIT": "2000",
+        "C_TRACE_CAP": "200000"
+      }
+    },
+    "original_cpu_compat": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_original",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate_b8_p0_1/original_cpu_compat.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.083168,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0"
+      }
+    }
+  },
+  "analysis": {
+    "scope": "Observed label accesses/writes and paths; serial execution mapped to original DAG. Potential concurrency hazards, not an observed parallel race or proof of physical legality.",
+    "coverage": {
+      "all_attempts_and_instrumented_sets_recorded": true,
+      "unobserved_attempts": 0,
+      "truncated_attempts": 0,
+      "full_memory_access_coverage": false
+    },
+    "verification": {
+      "record": "verification",
+      "connections": 8,
+      "unrouted": 0,
+      "bad_paths": 0,
+      "final_overused_nodes": 0,
+      "attempts_total": 10,
+      "attempts_recorded": 10,
+      "budget_aborts_total": 2
+    },
+    "search": {
+      "attempts": 10,
+      "pops": 82,
+      "budget_aborts_recorded": 2,
+      "successful_budget_retries_recorded": 2,
+      "attempt_p50_ms_instrumented": 0.01626,
+      "attempt_p95_ms_instrumented": 0.04834,
+      "attempt_max_ms_instrumented": 0.04834,
+      "attempt_sum_ms_instrumented": 0.205685
+    },
+    "partition_tasks": 2,
+    "partition_edges": 0,
+    "unordered_label_access": {
+      "iteration_task_pairs": 1,
+      "bbox_disjoint_pairs": 1,
+      "examples": [
+        {
+          "iteration": 1,
+          "tasks": [
+            0,
+            1
+          ],
+          "bbox_disjoint": true,
+          "resources": 1,
+          "examples": [
+            "2097152"
+          ]
+        }
+      ]
+    },
+    "unordered_label_read_write": {
+      "iteration_task_pairs": 1,
+      "bbox_disjoint_pairs": 1,
+      "examples": [
+        {
+          "iteration": 1,
+          "tasks": [
+            0,
+            1
+          ],
+          "bbox_disjoint": true,
+          "resources": 1,
+          "examples": [
+            "2097152"
+          ]
+        }
+      ]
+    },
+    "unordered_path_sharing": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "dense_label_page_counts": [
+      {
+        "iteration": 1,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 1,
+        "task": 1,
+        "pages": 1
+      }
+    ]
+  },
+  "checks": {
+    "all_connections_routed": true,
+    "paths_valid_in_exported_graph": true,
+    "final_path_capacity_legal": true,
+    "output_equal_to_cpu_compat_baseline": true
+  },
+  "status": "passed",
+  "artifacts_sha256": {
+    "traced.stderr.log": "032e97fecb63df189deac548a17553cfe556b662b68987f857d16422b012fcce",
+    "original_cpu_compat.stdout.log": "ea35a0f9cef9f5468951964b90f9d627d19afd2bb2d26a9bb17929ac8ce71501",
+    "trace.jsonl": "d58016fad03549060711d39f54fb3270c9136bb4f809d2bb946be59296c8d718",
+    "traced.stdout.log": "9515b16d93d077dc3ed0bce68186e3f4f5bce1cd0d2e91148f3d10e1aa67edbc",
+    "traced.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+    "original_cpu_compat.stderr.log": "798286ec2048732f857c04fd8de20beb98d08f747d5f7207dff3adff579b587d",
+    "original_cpu_compat.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+  }
+}

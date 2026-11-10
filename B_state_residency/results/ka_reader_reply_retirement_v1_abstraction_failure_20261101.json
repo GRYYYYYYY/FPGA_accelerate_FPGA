@@ -1,0 +1,37 @@
+{
+  "status": "failed_reply_retirement_abstraction_missing_codec_sticky_stop_preserved",
+  "kernel_sha256": "be92d511f207c53bf7b5e4a04e17d28c50a54e4e600614f061316dcb1ca57d2d",
+  "witness_sha256": "eb8184e1a49b19296bb7dc13069f13ea4e5a2f6cb9c1811fe3eb672b222877f7",
+  "stopped_anyseq_cell": "$flatten\\bank0.\\store.$procdff$28950",
+  "stopped_bits": [
+    20589
+  ],
+  "observed_vcd_steps": {
+    "4": {
+      "elapsed": 1048576,
+      "stop_now": 1,
+      "stopped": 0,
+      "rsp_valid": 0,
+      "store_state": 2
+    },
+    "5": {
+      "elapsed": 0,
+      "stop_now": 0,
+      "stopped": 0,
+      "rsp_valid": 1,
+      "store_state": 2
+    },
+    "6": {
+      "rsp_valid": 1,
+      "store_state": 3
+    },
+    "7": {
+      "reader_state": 7,
+      "store_state": 1,
+      "rsp_valid": 0
+    }
+  },
+  "interpretation": "A timeout produces an early codec response, but arbitrary stopped fails to latch, allowing execution to continue after read completion. This is an initialized abstraction counterexample, not an actual RTL bug. v2 retains both original stopped DFFs and adds only auxiliary assertions; target assertions unchanged.",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

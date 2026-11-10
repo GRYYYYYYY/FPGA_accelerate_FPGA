@@ -1,0 +1,25 @@
+# 健康静止边界的新代参考bundle
+
+本变体从冻结的query_checkpoint_join_v3派生，生产功能只新增qc_cp_generation：0表示当前authority代，非零表示导出目标代；低于当前代的导出以状态1拒绝。命令握手锁存实际采用的代，之后引脚可改变。导入始终采用当前已绑定authority代，不能通过未来代frame偷偷激活新namespace。测试在G1运行中导出G2后，合法CRC的G2导入仍拒绝；再导出/导入G1使失败导入退休。未修改原生query_lifecycle。
+
+在同一实际pc_owned租约下，query40B、path312B从硬件接口导出，配置/active上下文/恢复attempt下限/journal键从仿真观察输出记录。全部实际CPU参考查询、328标签读回和8AXI流在捕获前完成。捕获结束仍持有租约，所有请求/回复/AXI/lease已退休，frontier大小0；$finish后host参考工具复制实际working DDR文件。不是持续运行FPGA上的DMA快照。
+
+BUNDLE_TRACE仅为仿真宏。在既有directory模块内添加只读端口观察器，记录实际已接受cmd/rsp、reset、memory_success和fence状态；没有读取owners数组制造答案。独立协议状态机重建120个authoritative frame owner及publication/lease/cookie信息，再解析实际192B页，枚举全部328个present记录并与真实Z读回及CPU核验。生产综合不定义该宏，观察器数量必须为0。协议跟踪重建不是生产目录导出接口，后续仍需实现。
+
+主机参考bundle包括working owner_primary/pool/allocator、完整labels/design/cost图像、逻辑labels.records、directory元数据、query/path帧、原始和effective配置、被吸收的journal键。immutable graph/table/connection通过文件长度和SHA256引用绑定，不重复复制。原恢复描述中保存的CS版本为3，而当前active/attempt版本为4；effective配置只按已存在RTL cfg_payload规则覆盖word70，并记录实际上下文，不能直接拿旧描述当当前配置。
+
+新checkpoint18/G2把实际working owner中的6项ref1纳入新基线，因此新基线restore_journal为空；旧运行实例仍保持checkpoint17/G1和journal6，未声称已经运行中换代。CRC与SHA256只提供完整性，在此可信host模型中不是签名认证。目录索引非authoritative，冷重建应以owner映射/逻辑记录重建；旧事务cookie guard与端点计数必须在全退休的冷会话内协调重启。
+
+package_rtl_bundle.py使用单写者的bundle.staging，逐文件fsync、写manifest及COMMIT摘要、fsync目录后rename为bundle并fsync父目录。verify_rtl_bundle.py拒绝staging、缺COMMIT、摘要/身份错、CRC/格式错、路径端点混入、目录与物理页/逻辑记录不一致、active配置或attempt下限不一致。私有clone的24项测试不更改原始bundle；不等于断电或恶意重放测试。
+
+仍未完成：硬件目录导出、全状态恢复consumer、cold boot业务门控/真实receipt集合、运行中authority切换、持久化防回放下限、真实价格变化/回绕/容量、板卡与耐掉电。不能把本机COMMIT文件当成硬件namespace已经发布。
+
+下一次实际冷恢复实验的明确顺序：
+
+1. 新XSim实例、cold reset所有工作/恢复服务，加载bundle G2 owner/allocator/design/cost；immutable资源先校验。由effective配置以当前4/query2/price4启动，不能用旧raw版本3。
+2. 业务启动门控从cold reset即关闭query/route/owner业务，允许限定的bootstrap配置/label管理通道；descriptor锁存D/G2/checkpoint18/上下文/各CRC/count。
+3. 通过真实label写入与CHECKPOINT重建目录/标签，完整读回后由硬件累计node+160bit payload CRC与数量，不接受host常量labels_done。路径及query import完成回执也必须来自真实status/CRC/回复消费。
+4. owner/配置/labels/path/query等全部receipt匹配且物理逻辑退休，完成回复被消费后才放开业务/租约；任何未完成组件不能被手工done跳过。
+5. 用空闲slot验证旧sequence1拒绝；恢复后的q1状态应可接已有CPU followup_q2的sequence2分支，验证共享owner refs1→2，并用真实双ripup核对2→1→0。比较逻辑标签/owner/path语义，不能要求重建后的物理frame顺序相同。
+
+此顺序是下一步计划，不是本轮已执行的冷恢复证明。

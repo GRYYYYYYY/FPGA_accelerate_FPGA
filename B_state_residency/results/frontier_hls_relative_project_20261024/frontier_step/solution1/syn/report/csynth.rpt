@@ -1,0 +1,148 @@
+
+
+================================================================
+== Synthesis Summary Report of 'frontier_step'
+================================================================
++ General Information: 
+    * Date:           Sat Oct 24 13:01:34 2026
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        frontier_step
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: virtexuplus
+    * Target device:  xcu280-fsvh2892-2L-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +------------------------------------------------------------+------+------+---------+---------+----------+---------+------+----------+----------+----+------------+------------+-----+
+    |                           Modules                          | Issue|      | Latency | Latency | Iteration|         | Trip |          |          |    |            |            |     |
+    |                           & Loops                          | Type | Slack| (cycles)|   (ns)  |  Latency | Interval| Count| Pipelined|   BRAM   | DSP|     FF     |     LUT    | URAM|
+    +------------------------------------------------------------+------+------+---------+---------+----------+---------+------+----------+----------+----+------------+------------+-----+
+    |+ frontier_step*                                            |     -|  3.08|       73|  730.000|         -|       73|     -|  dataflow|  32 (~0%)|   -|  2273 (~0%)|  5584 (~0%)|    -|
+    | + p_anonymous_namespace_load_input                         |     -|  5.90|        0|    0.000|         -|        0|     -|        no|         -|   -|     3 (~0%)|    29 (~0%)|    -|
+    | + p_anonymous_namespace_compute                            |     -|  3.08|       72|  720.000|         -|       72|     -|        no|  32 (~0%)|   -|  1620 (~0%)|  5227 (~0%)|    -|
+    |  + poll                                                    |     -|  3.08|       70|  700.000|         -|       70|     -|        no|         -|   -|   974 (~0%)|  4176 (~0%)|    -|
+    |   + poll_Pipeline_VITIS_LOOP_38_1                          |     -|  3.08|       65|  650.000|         -|       65|     -|        no|         -|   -|   626 (~0%)|  3797 (~0%)|    -|
+    |    o VITIS_LOOP_38_1                                       |    II|  7.30|       62|  620.000|        17|        9|     6|       yes|         -|   -|           -|           -|    -|
+    |  + p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1  |     -|  3.44|       16|  160.000|         -|       16|     -|        no|         -|   -|   364 (~0%)|   575 (~0%)|    -|
+    |   o VITIS_LOOP_25_1                                        |    II|  7.30|       13|  130.000|         3|        2|     6|       yes|         -|   -|           -|           -|    -|
+    | + p_anonymous_namespace_store_output                       |     -|  5.90|        0|    0.000|         -|        0|     -|        no|         -|   -|   130 (~0%)|    56 (~0%)|    -|
+    +------------------------------------------------------------+------+------+---------+---------+----------+---------+------+----------+----------+----+------------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* Other Ports
++-------------+---------+----------+
+| Interface   | Mode    | Bitwidth |
++-------------+---------+----------+
+| id          | ap_none | 32       |
+| key_bits    | ap_none | 32       |
+| op          | ap_none | 32       |
+| result_bits | ap_vld  | 32       |
+| result_id   | ap_vld  | 32       |
+| size        |         | 32       |
+| status      | ap_vld  | 32       |
++-------------+---------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++-------------+-----------+---------------+
+| Argument    | Direction | Datatype      |
++-------------+-----------+---------------+
+| op          | in        | unsigned int  |
+| key_bits    | in        | unsigned int  |
+| id          | in        | unsigned int  |
+| status      | out       | unsigned int& |
+| result_bits | out       | unsigned int& |
+| result_id   | out       | unsigned int& |
+| size        | out       | unsigned int& |
++-------------+-----------+---------------+
+
+* SW-to-HW Mapping
++-------------+--------------------+---------+
+| Argument    | HW Interface       | HW Type |
++-------------+--------------------+---------+
+| op          | op                 | port    |
+| key_bits    | key_bits           | port    |
+| id          | id                 | port    |
+| status      | status             | port    |
+| status      | status_ap_vld      | port    |
+| result_bits | result_bits        | port    |
+| result_bits | result_bits_ap_vld | port    |
+| result_id   | result_id          | port    |
+| result_id   | result_id_ap_vld   | port    |
+| size        | N/A                | N/A     |
++-------------+--------------------+---------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++------------------------------------------------------------+-----+--------+------------+-----+--------+---------+
+| Name                                                       | DSP | Pragma | Variable   | Op  | Impl   | Latency |
++------------------------------------------------------------+-----+--------+------------+-----+--------+---------+
+| + frontier_step                                            | 0   |        |            |     |        |         |
+|  + p_anonymous_namespace_compute                           | 0   |        |            |     |        |         |
+|    add_ln31_fu_353_p2                                      | -   |        | add_ln31   | add | fabric | 0       |
+|   + poll                                                   | 0   |        |            |     |        |         |
+|     add_ln35_fu_174_p2                                     | -   |        | add_ln35   | add | fabric | 0       |
+|    + poll_Pipeline_VITIS_LOOP_38_1                         | 0   |        |            |     |        |         |
+|      level_2_fu_379_p2                                     | -   |        | level_2    | add | fabric | 0       |
+|      add_ln43_fu_415_p2                                    | -   |        | add_ln43   | add | fabric | 0       |
+|      add_ln44_fu_2230_p2                                   | -   |        | add_ln44   | add | fabric | 0       |
+|      add_ln43_1_fu_934_p2                                  | -   |        | add_ln43_1 | add | fabric | 0       |
+|      add_ln44_1_fu_2256_p2                                 | -   |        | add_ln44_1 | add | fabric | 0       |
+|      add_ln43_2_fu_1448_p2                                 | -   |        | add_ln43_2 | add | fabric | 0       |
+|      add_ln44_2_fu_2282_p2                                 | -   |        | add_ln44_2 | add | fabric | 0       |
+|      add_ln43_3_fu_1962_p2                                 | -   |        | add_ln43_3 | add | fabric | 0       |
+|      add_ln44_3_fu_2308_p2                                 | -   |        | add_ln44_3 | add | fabric | 0       |
+|   + p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1 | 0   |        |            |     |        |         |
+|     level_4_fu_275_p2                                      | -   |        | level_4    | add | fabric | 0       |
+|     add_ln27_fu_291_p2                                     | -   |        | add_ln27   | add | fabric | 0       |
++------------------------------------------------------------+-----+--------+------------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
++----------------------------------+------+------+--------+---------------+---------+------+---------+
+| Name                             | BRAM | URAM | Pragma | Variable      | Storage | Impl | Latency |
++----------------------------------+------+------+--------+---------------+---------+------+---------+
+| + frontier_step                  | 32   | 0    |        |               |         |      |         |
+|   commands_U                     | -    | -    |        | commands      | fifo    | srl  | 0       |
+|   responses_U                    | -    | -    |        | responses     | fifo    | srl  | 0       |
+|  + p_anonymous_namespace_compute | 32   | 0    |        |               |         |      |         |
+|    heap_id_U                     | 16   | -    |        | heap_id       | ram_1p  | auto | 1       |
+|    heap_key_bits_U               | 16   | -    |        | heap_key_bits | ram_s2p | auto | 1       |
++----------------------------------+------+------+--------+---------------+---------+------+---------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+----------------------------+------------------------------------------------------------------+
+| Type      | Options                    | Location                                                         |
++-----------+----------------------------+------------------------------------------------------------------+
+| interface | ap_ctrl_hs port=return     | rearchitect/v1/src/kernel_hls.cpp:34 in frontier_step, return    |
+| dataflow  |                            | rearchitect/v1/src/kernel_hls.cpp:35 in frontier_step            |
+| stream    | variable=commands depth=2  | rearchitect/v1/src/kernel_hls.cpp:38 in frontier_step, commands  |
+| stream    | variable=responses depth=2 | rearchitect/v1/src/kernel_hls.cpp:39 in frontier_step, responses |
++-----------+----------------------------+------------------------------------------------------------------+
+
+

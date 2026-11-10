@@ -1,0 +1,19 @@
+# 硬件标签恢复控制器与真实链接入
+
+新增可综合 label_restore_controller，默认512条(node32,payload160)缓存。由recovery_coordinator的labels_valid直接启动；OPEN、absent探测、每条五字段写、CHECKPOINT、从本地记录缓存完整读回、等待AXI排空后返回均为RTL调度。结果直接回到协调器，模块故障/cookie错误驱动协调器abort，失败不能被误当成功。测试台仅生产328条快照流，不再逐字段发label或手动转发完成信号。配置发包与CPU authority仍为TB模型，完整快照读取器未完成。
+
+start绑定design/checkpoint与预期身份，检查非零容量/节点数/probe范围及price/version；每条stream检查cookie、node、恰好末条last。一个OPEN探针absent不等于全图旧标签不可见证明，仍依赖底层pager冷epoch契约。外部可信快照保证集合完整性/唯一性，模块没有全图枚举或签名。写入部分失败不能由written计数推断物理副作用上界。
+
+注册mock control/label服务30次响应检查及独立事件审计通过：正常与同实例复用、错误design/checkpoint/count/nodes/probe/price、control/label错误、旧标签present、错误cookie/node/last、缺失尾部超时、额外流尾不接受、读回缺失/字节不符、写请求或control请求已暴露后的取消/超时不撤VALID、迟到回复、物理未排空不完成、持有响应稳定、失败后禁止新start。取消/超时等待已暴露请求与回复排空，无热重试或rollback。
+
+真实恢复链在32槽及单槽各五类先前route故障，共10例通过。每例由硬件完成2个control命令、1个absent探测、1640次字段写和328次整记录读回（1969个label请求），随后协调器才放行6内点重提交与checkpoint17→18。独立auditor重建全部原CPU记录、实际端口请求/回复与先后、两遍owner修复、七类AXI全字节及全部16384物理标签帧。所有完整owner（含allocator）等于CPU q2准备态，SHA256为373fd2e819992032677936aaab7ce9add321f8cae702ed94892b7be9c0dc13ba。110份原RTL/dat逐SHA保持；新服务与连接均为隔离变体。
+
+Vivado2022.2 U280默认512条记录OOC综合：LUT 441，FF 534，BRAM tile 3，DSP 0，latch 0。3条warning原文保留并逐项记录在JSON中：Synth 8-7080并行综合门槛；Synth 8-3917仅OPEN/CHECKPOINT两种命令使c_op高位恒0；Netlist 29-101扁平网表提示。未时钟/IO约束、place/route/Fmax或完整恢复系统综合，不能由组件资源推出板卡性能。
+
+开发证据：首版接入只因lr_busy前向声明而编译失败，未改生产逻辑；v2标签硬件执行的10例通过后，v3进一步去掉TB开始/完成转发并全量重跑。v2仿真与v1编译日志保留，不把v2替代为v3证明。unit首轮23例、扩展30例均保留；单元审计首版误把mode0正常用例纳入“无请求”条件，修正为仅非法输入组，硬件/仿真未改。真实审计中的TB AUTH标记在空日志用例与首个硬件control同周期，判据改为允许该标记同周期，实际control→probe→stream及owner退休次序仍严格。
+
+限制：这些五类真实故障仍注入正常route阶段；恢复期间label服务本身的新增错误/取消/超时只有mock证据，未实际AXI注入。完整warm checkpoint还缺design/created/frontier/path状态；正常共享/ripup使用新增journal adapter的回归、未知工作集、价格/epoch回绕、容量预留、耐掉电与板卡仍待完成。下一步迁移配置恢复回调并统一生产围栏，再补真实恢复期fault和完整checkpoint/search外层。
+
+主脚本 run_label_restore_join_rtl.py / audit_label_restore_join_rtl.py，单元 run_label_restore_unit.py / audit_label_restore_unit.py，综合 prepare/run/audit_label_restore_synth.py。接口详见hardware/variants/label_restore_v1/CONTRACT.md；源冻结label_restore_sources_20261025。研究goal保持active。
+
+单元34文件79646B、综合11文件217126B、真实链570文件19579892B均已归档，原scratch移开后实际解压/全成员SHA校验并重跑独立审计。单元和真实链审计逐字节一致；综合审计仅JSON字典顺序不同，语义完全一致，另存重跑JSON并恢复归档原格式。收据label_restore_restore_20261025.json。开发中间版本/失败共289文件另存label_restore_development_20261025；run.py check与Python语法检查通过。

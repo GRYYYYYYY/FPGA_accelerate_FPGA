@@ -1,0 +1,11 @@
+# 空闲host封锁的反馈隔离候选
+
+基线为五源合并combined_loops_synth_v1的实际终态生产源。候选只增加route_commit_controller的idle_fault输出，定义为!rst&&(stopped||abort)，并将host adapter的block_external从held||c_busy||c_fault换成held||c_busy||c_idle_fault。完整fault表达式及所有FSM、回复、数据、journal、checkpoint和在途事务逻辑保持字节不变。idle_fault使用controller实际rst，因此包含adapter的cp_reset_held。
+
+该缩减依赖真实adapter接线：held或c_busy为真时仍封锁；其余非复位分支controller必为IDLE、unowned、无待消费回复/CP操作，两种后端回复又因held0未送给controller。其余fault项均不能贡献结果。results/route_block_identity_20261027.json及source-bound分析器已枚举262144组二态赋值，不能把它推广为任意controller输入的通用错误信号，亦不证明X/Z、时序或完整系统正确性。
+
+完整旧网表的实际闭合pin walk已包含route_join/controller rc_fault经过host门控与dispatch ready返回的路径。候选是否消除该路径、是否还有其他环，必须通过匹配完整结构检查验证，不能由局部恒等式直接宣称无环。新源不覆盖正在诊断或已冻结的五源基线。
+
+后续验证必须保持完整CRC pressure测试台、输入、参数、12AXI/native周期/DDR/恢复流和结束时刻比较标准。该项基线27文件已实际恢复审计通过。新接口只由host adapter命名连接，不能在生产实现引用controller私有状态。完整优化on/off、双容量、cancel/CRC矩阵仍需最终候选统一验证。
+
+本候选尚未编译、仿真或综合；不将预备源或局部布尔检查标记为RTL通过。无waiver、false-path或顶层时钟约束变更。

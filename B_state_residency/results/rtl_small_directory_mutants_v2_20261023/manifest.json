@@ -1,0 +1,113 @@
+{
+  "status": "passed",
+  "pid": 4021035,
+  "source_hashes": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_small_directory.sv": "888c242699fc464a51fde2235032ad13295e77006c29f948c05e72be1f78be14",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/check_small_directory_mutants_v2.py": "5ac59c07bf4447f34089a4d79d99c003876cbf3fbc7c1e618d703b7806160b0a"
+  },
+  "mutants": [
+    {
+      "name": "truncate_owner",
+      "replacement": [
+        "read_word[26:0]==owner",
+        "read_word[23:0]==owner"
+      ],
+      "commands": [
+        {
+          "stage": "compile",
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "exit_code": 0
+        }
+      ],
+      "status": "detected",
+      "fatal": "Fatal: response check=3 got=6 frame=0 pub=0 expected=0/1/0",
+      "artifacts": {
+        "simulate.log": "d131b1aea67b4270b281e5c96e5fc3eda3bf92e9540491842855175e7cd4e168",
+        "compile.stdout.log": "2b205ad5b0e0fdeed2cc3e6e4a3d8131f4ada192723d0964316281f7a8c4c8c4",
+        "xvlog.log": "2b205ad5b0e0fdeed2cc3e6e4a3d8131f4ada192723d0964316281f7a8c4c8c4",
+        "simulate.stdout.log": "bbccc07324ad03a6b6239c76c9c929518915569bb48f6d42ccd129f0a1c110d2",
+        "xelab.log": "96ff41920769d06775bdf5459b10cc351fbcb8f88ea232dfc6d242bad434b5ed",
+        "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+        "elaborate.stdout.log": "96ff41920769d06775bdf5459b10cc351fbcb8f88ea232dfc6d242bad434b5ed",
+        "tb_small_directory.sv": "888c242699fc464a51fde2235032ad13295e77006c29f948c05e72be1f78be14",
+        "backing_frame_directory_small.sv": "6cc71e6d1a0f709bb575bbfad27b5dc9de55c0a91cd020af48d7dd66b2e97eb1"
+      }
+    },
+    {
+      "name": "alias_slot",
+      "replacement": [
+        "wire [4:0] slot=cmd_cookie[4:0]",
+        "wire [4:0] slot={3'b0,cmd_cookie[1:0]}"
+      ],
+      "commands": [
+        {
+          "stage": "compile",
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "exit_code": 0
+        }
+      ],
+      "status": "detected",
+      "fatal": "Fatal: response check=68 got=2 frame=0 pub=0 expected=0/4/0",
+      "artifacts": {
+        "simulate.log": "724cb9b2164c530afd0627c2525ee7506ee210ed27f25b4e925aaa176795e2ac",
+        "compile.stdout.log": "d12c08227bbefbb8c8dd2c7195d468a044bd36649b330bd1fb9306b3e9bb72b6",
+        "xvlog.log": "d12c08227bbefbb8c8dd2c7195d468a044bd36649b330bd1fb9306b3e9bb72b6",
+        "simulate.stdout.log": "1a38d7c7dbcd9545c67a02cce4f6edafa63d38c222292106c9fc1f49dd24931f",
+        "xelab.log": "96ff41920769d06775bdf5459b10cc351fbcb8f88ea232dfc6d242bad434b5ed",
+        "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+        "elaborate.stdout.log": "96ff41920769d06775bdf5459b10cc351fbcb8f88ea232dfc6d242bad434b5ed",
+        "tb_small_directory.sv": "888c242699fc464a51fde2235032ad13295e77006c29f948c05e72be1f78be14",
+        "backing_frame_directory_small.sv": "f642301adcde7049c5d7223e295693cf4311674528eeb97952daf000a30e6ca4"
+      }
+    },
+    {
+      "name": "drop_checkpoint_backing",
+      "replacement": [
+        "else begin tx_used<=0;last_tx<=0;end",
+        "else begin allocated<=0;tx_used<=0;last_tx<=0;end"
+      ],
+      "commands": [
+        {
+          "stage": "compile",
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "exit_code": 0
+        }
+      ],
+      "status": "detected",
+      "fatal": "Fatal: checkpoint lost allocation",
+      "artifacts": {
+        "simulate.log": "4ed18667bf9466f5f1fd7a88eaa22c65903248c27b01e847e40bfa151b5adce1",
+        "compile.stdout.log": "2ff3d23d6693a356fcd100005e0c9b4604ef54c5c951078df2e14e79c788550f",
+        "xvlog.log": "2ff3d23d6693a356fcd100005e0c9b4604ef54c5c951078df2e14e79c788550f",
+        "simulate.stdout.log": "7b2188ab409ed84dc4ae65c07cc1cc9429fa449d36ba067351c8fa9b23bf08da",
+        "xelab.log": "96ff41920769d06775bdf5459b10cc351fbcb8f88ea232dfc6d242bad434b5ed",
+        "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+        "elaborate.stdout.log": "96ff41920769d06775bdf5459b10cc351fbcb8f88ea232dfc6d242bad434b5ed",
+        "tb_small_directory.sv": "888c242699fc464a51fde2235032ad13295e77006c29f948c05e72be1f78be14",
+        "backing_frame_directory_small.sv": "d558a2c9dfc9cc29ae0ab38777531b92fb5cc28ba5cf2ea39bc81c8dc5e6aaf0"
+      }
+    }
+  ]
+}

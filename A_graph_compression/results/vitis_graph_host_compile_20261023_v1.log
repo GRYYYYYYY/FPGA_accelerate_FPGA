@@ -1,0 +1,74 @@
+hardware/vitis/host.cpp: In function ‘int main(int, char**)’:
+hardware/vitis/host.cpp:33:23: error: parentheses were disambiguated as a function declaration [-Werror=vexing-parse]
+   33 |     xrt::device device(std::string(argv[2]));auto uuid=device.load_xclbin(xclbin);xrt::kernel kernel(device,uuid,"graph_accel");
+      |                       ^~~~~~~~~~~~~~~~~~~~~~
+hardware/vitis/host.cpp:33:23: note: replace parentheses with braces to declare a variable
+   33 |     xrt::device device(std::string(argv[2]));auto uuid=device.load_xclbin(xclbin);xrt::kernel kernel(device,uuid,"graph_accel");
+      |                       ^~~~~~~~~~~~~~~~~~~~~~
+      |                       -
+      |                       {                    -
+      |                                            }
+hardware/vitis/host.cpp:33:63: error: request for member ‘load_xclbin’ in ‘device’, which is of non-class type ‘xrt::device(std::string*)’ {aka ‘xrt::device(std::__cxx11::basic_string<char>*)’}
+   33 |     xrt::device device(std::string(argv[2]));auto uuid=device.load_xclbin(xclbin);xrt::kernel kernel(device,uuid,"graph_accel");
+      |                                                               ^~~~~~~~~~~
+hardware/vitis/host.cpp:46:16: error: invalid conversion from ‘xrt::device (*)(std::string*)’ {aka ‘xrt::device (*)(std::__cxx11::basic_string<char>*)’} to ‘xclDeviceHandle’ {aka ‘void*’} [-fpermissive]
+   46 |     xrt::bo bi(device,image.size()*4,groups[0]),bc(device,128,groups[1]),bq(device,bg::request_words*4,groups[2]);
+      |                ^~~~~~
+      |                |
+      |                xrt::device (*)(std::string*) {aka xrt::device (*)(std::__cxx11::basic_string<char>*)}
+In file included from /opt/xilinx/xrt/include/xrt/xrt_kernel.h:11,
+                 from hardware/vitis/host.cpp:3:
+/opt/xilinx/xrt/include/xrt/xrt_bo.h:213:22: note:   initializing argument 1 of ‘xrt::bo::bo(xclDeviceHandle, size_t, xrt::memory_group)’
+  213 |   bo(xclDeviceHandle dhdl, size_t size, memory_group grp)
+      |      ~~~~~~~~~~~~~~~~^~~~
+hardware/vitis/host.cpp:46:52: error: invalid conversion from ‘xrt::device (*)(std::string*)’ {aka ‘xrt::device (*)(std::__cxx11::basic_string<char>*)’} to ‘xclDeviceHandle’ {aka ‘void*’} [-fpermissive]
+   46 |     xrt::bo bi(device,image.size()*4,groups[0]),bc(device,128,groups[1]),bq(device,bg::request_words*4,groups[2]);
+      |                                                    ^~~~~~
+      |                                                    |
+      |                                                    xrt::device (*)(std::string*) {aka xrt::device (*)(std::__cxx11::basic_string<char>*)}
+In file included from /opt/xilinx/xrt/include/xrt/xrt_kernel.h:11,
+                 from hardware/vitis/host.cpp:3:
+/opt/xilinx/xrt/include/xrt/xrt_bo.h:213:22: note:   initializing argument 1 of ‘xrt::bo::bo(xclDeviceHandle, size_t, xrt::memory_group)’
+  213 |   bo(xclDeviceHandle dhdl, size_t size, memory_group grp)
+      |      ~~~~~~~~~~~~~~~~^~~~
+hardware/vitis/host.cpp:46:77: error: invalid conversion from ‘xrt::device (*)(std::string*)’ {aka ‘xrt::device (*)(std::__cxx11::basic_string<char>*)’} to ‘xclDeviceHandle’ {aka ‘void*’} [-fpermissive]
+   46 |     xrt::bo bi(device,image.size()*4,groups[0]),bc(device,128,groups[1]),bq(device,bg::request_words*4,groups[2]);
+      |                                                                             ^~~~~~
+      |                                                                             |
+      |                                                                             xrt::device (*)(std::string*) {aka xrt::device (*)(std::__cxx11::basic_string<char>*)}
+In file included from /opt/xilinx/xrt/include/xrt/xrt_kernel.h:11,
+                 from hardware/vitis/host.cpp:3:
+/opt/xilinx/xrt/include/xrt/xrt_bo.h:213:22: note:   initializing argument 1 of ‘xrt::bo::bo(xclDeviceHandle, size_t, xrt::memory_group)’
+  213 |   bo(xclDeviceHandle dhdl, size_t size, memory_group grp)
+      |      ~~~~~~~~~~~~~~~~^~~~
+hardware/vitis/host.cpp:47:16: error: invalid conversion from ‘xrt::device (*)(std::string*)’ {aka ‘xrt::device (*)(std::__cxx11::basic_string<char>*)’} to ‘xclDeviceHandle’ {aka ‘void*’} [-fpermissive]
+   47 |     xrt::bo bo(device,bg::output_words*4,groups[3]),br(device,bg::result_words*4,groups[4]),bn(device,8,groups[5]);
+      |                ^~~~~~
+      |                |
+      |                xrt::device (*)(std::string*) {aka xrt::device (*)(std::__cxx11::basic_string<char>*)}
+In file included from /opt/xilinx/xrt/include/xrt/xrt_kernel.h:11,
+                 from hardware/vitis/host.cpp:3:
+/opt/xilinx/xrt/include/xrt/xrt_bo.h:213:22: note:   initializing argument 1 of ‘xrt::bo::bo(xclDeviceHandle, size_t, xrt::memory_group)’
+  213 |   bo(xclDeviceHandle dhdl, size_t size, memory_group grp)
+      |      ~~~~~~~~~~~~~~~~^~~~
+hardware/vitis/host.cpp:47:56: error: invalid conversion from ‘xrt::device (*)(std::string*)’ {aka ‘xrt::device (*)(std::__cxx11::basic_string<char>*)’} to ‘xclDeviceHandle’ {aka ‘void*’} [-fpermissive]
+   47 |     xrt::bo bo(device,bg::output_words*4,groups[3]),br(device,bg::result_words*4,groups[4]),bn(device,8,groups[5]);
+      |                                                        ^~~~~~
+      |                                                        |
+      |                                                        xrt::device (*)(std::string*) {aka xrt::device (*)(std::__cxx11::basic_string<char>*)}
+In file included from /opt/xilinx/xrt/include/xrt/xrt_kernel.h:11,
+                 from hardware/vitis/host.cpp:3:
+/opt/xilinx/xrt/include/xrt/xrt_bo.h:213:22: note:   initializing argument 1 of ‘xrt::bo::bo(xclDeviceHandle, size_t, xrt::memory_group)’
+  213 |   bo(xclDeviceHandle dhdl, size_t size, memory_group grp)
+      |      ~~~~~~~~~~~~~~~~^~~~
+hardware/vitis/host.cpp:47:96: error: invalid conversion from ‘xrt::device (*)(std::string*)’ {aka ‘xrt::device (*)(std::__cxx11::basic_string<char>*)’} to ‘xclDeviceHandle’ {aka ‘void*’} [-fpermissive]
+   47 |     xrt::bo bo(device,bg::output_words*4,groups[3]),br(device,bg::result_words*4,groups[4]),bn(device,8,groups[5]);
+      |                                                                                                ^~~~~~
+      |                                                                                                |
+      |                                                                                                xrt::device (*)(std::string*) {aka xrt::device (*)(std::__cxx11::basic_string<char>*)}
+In file included from /opt/xilinx/xrt/include/xrt/xrt_kernel.h:11,
+                 from hardware/vitis/host.cpp:3:
+/opt/xilinx/xrt/include/xrt/xrt_bo.h:213:22: note:   initializing argument 1 of ‘xrt::bo::bo(xclDeviceHandle, size_t, xrt::memory_group)’
+  213 |   bo(xclDeviceHandle dhdl, size_t size, memory_group grp)
+      |      ~~~~~~~~~~~~~~~~^~~~
+cc1plus: all warnings being treated as errors

@@ -1,0 +1,13 @@
+# REARM退休反馈组件修复通过，完整层级待验证
+
+rearm_loops_component_v2使用真实recovery_coordinator和label_restore_controller，ENTRIES4/MAX_RECORDS4，2313端口位。基线LUTLP-1/check_timing各一个环；候选两类检查均零环，零latch/blackbox。没有waiver、false-path或降低实验时钟。residency_system第三份候选只在后续完整root使用，没有在这个两组件切片编译。
+
+label_restore_controller新增rearm_retired，由实际FSM IDLE且无待消费回复产生，不被它授权的同步rst掩盖；residency_system在retry_safe中使用该退休信号替代!lr_busy，其他安全门保留。coordinator只在REARM时把!unexpected等价写成无authority/owner回复，消除该状态不可能使用的READY分支；没有改变其他状态的unexpected/fault处理。
+
+基线与候选各三个场景、179检查，事件顺序和结束时刻3836ns一致。每场景先实际CRC失败，保持标签错误回复8周期并消费退休，再完成协调器失败；旧attempt拒绝。分别直接合法重试、在REARM撤销safe、在REARM提供迟到authority回复。后两者不允许target reset，返回失败并保留已消费floor，再用更高attempt成功。每次成功原生写5字段且回读验证一条记录，成功回复保持8周期。总计15字段写、3记录验证、10个失败/拒绝结果和3个成功结果。场景之间cold reset；每场景内部失败到重试没有cold reset。
+
+独立审计枚举1024组二态赋值证明REARM局部表达式等价，32组赋值核对无reset时退休语义；另明确记录reset掩盖busy可能使旧退休资格为真的布尔反例，不把该布尔赋值称为实际运行反例。此处J0、没有owner/authority请求；标签RAM、config与外部物理退休为模型，没有AXI或完整warm回执联合逻辑。
+
+早期v1失败来自测试台初始化：always @*等待started变化，但初始和reset都为0，使start offer一直0。只读probe记录LABELS/leaf IDLE/ready1/offer0，未force或更改生产RTL。v2仅把该测试台连接改为wire/连续assign；六份基线与候选生产源、两份切片wrapper不变。旧失败与probe均保留并实际归档恢复，其audit通过仅表示证据完整，不表示功能通过。
+
+成功95文件归档及失败55文件、probe38文件归档均已实际恢复重审，audit逐字节相同。源码、工具与报告另行冻结。五源合并的完整query root综合单独运行；本报告不证明完整系统无环、完整恢复回归或物理时序通过。固定价格、外部初始快照、持久化floor/认证、自然overflow新增回收和板卡收益等缺口仍保留。

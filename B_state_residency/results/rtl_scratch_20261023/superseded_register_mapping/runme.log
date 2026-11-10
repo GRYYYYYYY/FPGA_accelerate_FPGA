@@ -1,0 +1,146 @@
+
+*** Running vivado
+    with args -log scratch_frame_store.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source scratch_frame_store.tcl
+
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source scratch_frame_store.tcl -notrace
+Command: synth_design -top scratch_frame_store -part xcu280-fsvh2892-2L-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 783780
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 3406.727 ; gain = 361.801 ; free physical = 674336 ; free virtual = 1390836
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2674.698; parent = 2518.356; children = 156.342
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4372.254; parent = 3406.730; children = 965.523
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'scratch_frame_store' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_frame_store' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:5]
+WARNING: [Synth 8-4767] Trying to implement RAM 'data_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+Reason is one or more of the following :
+	1: RAM has multiple writes via different ports in same process. If RAM inferencing intended, write to one port per process. 
+	2: Unable to determine number of words or word size in RAM. 
+	3: No valid read/write found for RAM. 
+RAM "data_reg" dissolved into registers
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 3720.297 ; gain = 675.371 ; free physical = 674277 ; free virtual = 1390776
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2747.129; parent = 2590.771; children = 156.357
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4685.824; parent = 3720.301; children = 965.523
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 3720.297 ; gain = 675.371 ; free physical = 674245 ; free virtual = 1390745
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2747.129; parent = 2590.771; children = 156.357
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4685.824; parent = 3720.301; children = 965.523
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 3720.297 ; gain = 675.371 ; free physical = 674238 ; free virtual = 1390738
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2747.129; parent = 2590.771; children = 156.357
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4685.824; parent = 3720.301; children = 965.523
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 3736.297 ; gain = 0.000 ; free physical = 674469 ; free virtual = 1390969
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4305.289 ; gain = 0.000 ; free physical = 673865 ; free virtual = 1390365
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:07 ; elapsed = 00:00:01 . Memory (MB): peak = 4313.227 ; gain = 7.938 ; free physical = 673867 ; free virtual = 1390367
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:40 ; elapsed = 00:00:30 . Memory (MB): peak = 4313.227 ; gain = 1268.301 ; free physical = 674566 ; free virtual = 1391066
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3442.329; parent = 3285.986; children = 156.357
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5267.848; parent = 4302.324; children = 965.523
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:55 ; elapsed = 00:00:47 . Memory (MB): peak = 4313.227 ; gain = 1268.301 ; free physical = 671027 ; free virtual = 1387528
+Synthesis current peak Physical Memory [PSS] (MB): peak = 7872.882; parent = 3285.986; children = 5127.245
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 13846.828; parent = 4302.324; children = 9565.613
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	              160 Bit    Registers := 1     
+	              136 Bit    Registers := 257   
+	               64 Bit    Registers := 4     
+	               32 Bit    Registers := 1     
+	               18 Bit    Registers := 4     
+	               16 Bit    Registers := 4     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 6     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 5     
+	                1 Bit    Registers := 6     
++---Muxes : 
+	   2 Input 34816 Bit        Muxes := 7     
+	   4 Input 34816 Bit        Muxes := 1     
+	   2 Input  160 Bit        Muxes := 2     
+	   2 Input  136 Bit        Muxes := 516   
+	   4 Input   64 Bit        Muxes := 9     
+	   2 Input   64 Bit        Muxes := 64    
+	   4 Input   18 Bit        Muxes := 1     
+	   4 Input   16 Bit        Muxes := 1     
+	   4 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 22    
+	   3 Input    4 Bit        Muxes := 2     
+	   2 Input    3 Bit        Muxes := 2     
+	   3 Input    3 Bit        Muxes := 1     
+	   4 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 3     
+	   5 Input    2 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 36    
+	   4 Input    1 Bit        Muxes := 3     
+	   3 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 9024 (col length:94)
+BRAMs: 4032 (col length: RAMB18 288 RAMB36 144)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-4471] merging register 'access_slot_reg[1:0]' into 'access_slot_reg[1:0]' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:82]
+INFO: [Synth 8-4471] merging register 'access_offset_reg[5:0]' into 'access_offset_reg[5:0]' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:82]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:55 ; elapsed = 00:02:04 . Memory (MB): peak = 4313.227 ; gain = 1268.301 ; free physical = 665110 ; free virtual = 1381612
+Synthesis current peak Physical Memory [PSS] (MB): peak = 14029.262; parent = 3285.986; children = 11401.109
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 22508.266; parent = 4302.324; children = 18227.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:11 ; elapsed = 00:02:23 . Memory (MB): peak = 4340.500 ; gain = 1295.574 ; free physical = 664495 ; free virtual = 1380997
+Synthesis current peak Physical Memory [PSS] (MB): peak = 14029.262; parent = 3380.742; children = 11401.109
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 22567.555; parent = 4340.504; children = 18227.051
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------

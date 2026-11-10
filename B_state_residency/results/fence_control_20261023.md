@@ -1,0 +1,11 @@
+# 有限排空控制包：闭合队列模型
+
+src/fence_control.py新增实际bytes控制包，固定3字节：opcode u8与little-endian tag u16，仅使用配置的低tag_bits。请求与ACK队列有界，按字段解码，不使用对象身份或隐藏无界代次。当前fence请求先停止数据发起；peer只有data request/work为空才回ACK。host收到当前tag ACK仍不能复用编号：控制请求/ACK队列、数据完成队列、本地绑定和payload必须全部排空，最后才推进有限tag。
+
+错误tag ACK只作stale，重复ACK只作duplicate；仍排队的旧请求/重复ACK阻塞finish。请求重传在单owner下显式建模，控制ACK背压时不消费请求。1位控制tag与1位数据/query/generation的200周期随机重复包/队列推进检查通过，另检查旧数据重复完成在control ACK后仍阻塞复用，以及页值迟到写回等待ACK。
+
+8项控制专项+1项真实格式回放组合检查，全套83项通过，日志/快照在fence_control_20261023T015957Z。小轨迹强制中途checkpoint，接控制包前后全部数据事件计数相同，实际多次tag回绕。
+
+边界：这是封闭单owner模拟，所有延迟包都必须在已建模队列中；finish时不存在旧生产者/隐藏链路在未来再次注入旧包。控制tag在这项契约下安全复用，不能抵抗无界外部延迟或reset丢失去重状态。相同旧ACK在回绕后与新ACK相同，仍需真实传输提供排空/有序隔离；本模型不声称解决该不可区分问题。无丢包/超时恢复、多生产者、认证或真实DMA/RTL。底层target可被直接调用，组合保证只针对封装API，非权限隔离。
+
+完整真实地址回放正在finite_control_real_addresses_20261023T020009Z运行：1113间隔+19超大查询、16151535访问，2位control tag，每fence注入2个请求/3个ACK（其中2个重复确认）。数据值仍为合成sequence。终态审计scripts/report_finite_control.py要求完整覆盖、源/输入绑定、控制计数和逐组数据事件与此前已完成finite_page_fast一致。完成前不宣称完整轨迹已通过。

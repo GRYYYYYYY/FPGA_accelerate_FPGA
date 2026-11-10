@@ -1,0 +1,13 @@
+# 第二个真实设计MCML：自然查询快照与CPU恢复搜索（2026-10-25）
+
+results/natural_mcml_query_v1与natural_mcml_query_replay_v1通过独立审计；汇总natural_mcml_query_20261025.json。全MCML原串行48轮路由输出与冻结matrix/vtr_mcml_serial_original_p0_r0.result逐字节相同（SHA a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec），overused=0、totalPushes390136023保持。观测源码反向删去增量后逐字节恢复原始源码。运行时间只作收据，不是加速实验。
+
+选择实际attempt/sequence1，connection_index89391/id227074、net28747、source41486、sink41981、fanout391，bbox x[26,33]/y[40,52]，cross=0、landmark=0。快照取在原prepare的rip-up/target setup/source seed之后，结束于search循环之后而不是owner commit之后。全部14991410节点前后11字字段、初始owner溢出、cache、256价格、State、初末heap和完整事件均保存。
+
+实际81扩展、327个完整filtered children、326次候选判定、178次搜索内push（加source为179）、82次POLL；178个label记录变化，217个created变化，1次target CLEAR。自然最后parent2178064处理目标后仍有child124201没有进入判定，因此K比C多1；这个差异是原算法EARLY行为，不是截断。后续RTL应构建/捕获完整children并静态drain剩余项，不能额外访问/提交它或忽略其已经发生的created副作用。
+
+独立恢复驱动使用同一原RRT、保存的真实标签/owner/cache/prices/State和原search循环/Router方法；全部9个采集文件逐字节一致，包括两个全节点快照和所有事件。audit_natural_mcml_query.py还独立重放真实8叉heap与CLEAR、每条候选标签读写顺序、全部节点最终标签以及history/owner/occupancy保持。成本数值在这里仍是原CPU观测，未独立重算，也没有MCML硬件codec、RTL、父值缓存收益或板卡性能结论。
+
+源脚本run_natural_mcml_query.py、run_natural_mcml_query_replay.py与审计/汇总器已固定parent_physical_sources_20261025。CPU8执行，清理RW_/B_和LD环境后使用与冻结串行实验相同的显式环境。capture归档26文件/23085084B，replay归档29文件/16674423B，位于offer_archives_20261025。两根目录实际移开到.preserved后解包核验全部成员，汇总重建逐字节一致，恢复记录与physical对照同在parent_physical_restore_20261025.json。
+
+下一步独立导出这个MCML RRT的全图CSR/属性和设计输入，再重算成本/过滤，基线与父值缓存按同一自然closed-loop TB对照。不能沿用logicnets固定节点数、identity、bbox、271判定/171成本计数或其111页读取范围；MCML必须保持本例327 children/326判定的结束语义。

@@ -1,0 +1,4415 @@
+# 完整架构／EDA论文分析完成（2026-11-04）
+
+用户选择完整架构／EDA研究论文，要求执行论文可行性分析。本轮只重算已有证据、检索一手文献并形成具体实验计划；未启动新硬件实验，未修改生产RTL。报告：[paper_readiness_20261104/report.md](results/paper_readiness_20261104/report.md)，数据与输入SHA在同目录。78次CPU日志/time/result逐SHA复核、26行摘要重新计算一致，38查询模型和恢复分段已重算。
+
+结论：可开始完整论文写作，尚不足以支撑当前完整架构／EDA实证主张或端到端路由加速。建议主线“容量受限路由状态驻留与一致恢复”，新颖性仍需具体机制比较。恢复阶段23.61%／30.34%折算到完整受控测试仅1.940%／1.833%（仍非应用端到端）；4→512槽模型payload扩大128倍、累计传输仅降28.99%，最大5查询占原始传输62.44%；CPU original仍最快。路后LUT下降4.966%，10ns时序失败和互锁完整query未决均保留。
+
+下一优先：完整query隔离互锁与caller仲裁／活性分析；并行准备同接口、同容量、同正确性要求下的普通LRU＋停机保存与语义化机制价值试验，计入常态／checkpoint／恢复总成本。计划E1–E7均未执行，不当作已有结果。不要重复58控制、完整shadow v7或physical v6；源改变须重新建立证据。以下物理／切片接受状态不变。
+
+# physical v6 主审冻结、互锁切片实测及恢复重审完成（2026-11-04）
+
+用户明确继续，已完成原物理链主审及独立互锁切片实验。**不重复58控制、完整shadow v7或physical v6实现。** 当前核对physical runner、监督器、独立inspector、互锁slice runner均不存在且manifest无active_process，MCP无活动会话。[完成快照](results/physical_v6_and_interlock_completion_20261104.json)。下方“运行中/等待主审”均为历史，监督器原awaiting_main_review回执不改写。
+
+- [物理最终冻结报告](results/stage_static_cp_physical_v6_20261104.json)、[主审](results/stage_static_cp_physical_v6_main_review_20261104.json)：实现、独立重开DCP、终态审计、实际恢复重审均真实exit0。主审只读执行原审计证据断言并复核结果一致；212终态文件在archive/原现场/恢复件逐SHA一致，235主审冻结文件也实际解包核验。
+- 180491条网全部布通、路由错误0。原10ns OOC下路后WNS−3.499ns、WHS+0.021ns、TNS−112647.727ns、55118个setup失败端点；hold/pulse-width失败端点0。路后LUT132679/FF87995/BRAM163/DSP23。`physical_artifacts_validated=true`，`physical_gate_open=true`仅表示本次执行已准入；**`timing_qualified=false`、`board_acceptance=false`**，不能把artifact audit passed解释为时序或DRC通过。
+- DRC86：NSTD-1/UCIO-1各1项Critical Warning（cp_m_index[3]）；DPIP-2为6、DPOP-3/4各15、RTSTAT-10为1、CHECK-2为47。执行日志无Critical Warning不代表DRC无Critical Warning。全部保留，无waiver/降级。Methodology报告SYNTH-10为23、TIMING-16/18各1000；未指定I/O预算、HD.CLK_SRC及OOC端口物理位置限制保持。
+- 旧CP物理归档203文件已实际恢复核对。相同2022.2/U280/10ns OOC、同路后阶段相比：LUT−6933、FF−191、WNS+0.560ns；但TNS更负10947.875ns、setup失败端点增加7629。不能宣称总体时序改善或板卡加速。最差报告路径从access arithmetic s_phase到search_ctl req_payload CE，48级逻辑，数据13.394ns=逻辑3.479ns+连线9.915ns；详细原语/连线/层级全保存在主审。
+- 终态归档 `results/recovery_archives_20261102/stage_static_cp_physical_v6_terminal.tar.gz`，SHA `e4b7a30b4d061afe2b3c471a6622aaecc6c0ce6f09e5e0c3344a73bf10f9e842`。主审包 `stage_static_cp_physical_v6_review_20261104.tar.gz`，SHA `64a89c59f2ba31e02769ae0d538560bfb7ad0cd086ba98666aef36657b6f5f35`。冻结目录 `results/stage_static_cp_physical_v6_sources_20261104`。原现场 `.../stage_static_cp_physical_v6_preserved_terminal`，恢复件仍在 `.../stage_static_cp_physical_v6`。
+- [互锁切片主审](results/publication_start_interlock_slice_v1_review_20261104.json)：使用原真实checkpoint_lease_guard与checkpoint_publish_barrier，外部条件由独立TB建模。原接线在121ns命中唯一预期Fatal SIMULTANEOUS_RELEASE_NOT_BLOCKED；加入jp_start的候选766ns完成10类场景/99检查/77周期/27所有权检查，4start与6release传输，保持start未ready3周期、4次done消费、1次未知start样本，独立CSV审计通过。覆盖仅该有界slice，**不是完整query修复通过**。
+- 互锁运行76文件归档已实际restore，原独立审计重跑exit0、audit逐字一致、全SHA保持。归档 `publication_start_interlock_slice_v1_terminal.tar.gz`，SHA `a396250c309d4e66f3eca54167c961731fcc48ce99a5e0ae3468b85326d31ab0`。运行根 `.../publication_start_interlock_slice_v1`；实际恢复根同级 `_actual_restore`。
+- raw jp_start优先仍会在start_open=0且保持VALID时阻塞release；本次观察此行为，不证明caller活性或契约合法性。原完整RTL start/release反例保持，生产RTL未改，原源shadow v7和physical v6不能继承给互锁候选。
+
+下一：为互锁候选建立独立完整query探针、保留原监视器并验证fresh输入/单源差异；继续caller仲裁/活性分类。物理优化先沿已冻结的长控制/ready/fault路径进行源绑定诊断，不盲目重跑place/route或放宽10ns约束；任何生产源改变都需要新综合与功能证据。当前无等待中的实验或需要重启的工具句柄。
+
+以下保留历史。
+
+# physical v6 已准备、独立审计并启动（2026-11-04）
+
+用户已明确沿已有授权继续。当前已验收 shadow v7 不变；**不重跑58组控制或完整v7，不重复提交当前物理作业。** 本条覆盖下方旧“没有物理作业/physical_gate_open=false”的当前状态描述。
+
+- 新 `stage_static_cp_physical_v6` 的 gate/prepare/runner/inspect/auditor 使用新恢复根，绑定 v7主审/冻结/实际恢复、687终态文件、133生产源、13参数、27输出、CP/PW背压和KA ready1/zero-stall。原physical v5与失败full v6未改。
+- [独立准备审查](results/stage_static_cp_physical_v6_preparation_review_20261104.json)：169文件持久归档并实际恢复逐SHA一致；真实runner在缺少审查报告时拒绝；225GiB及cgroup75%边界检查通过。原物理报告parser逐字保持。运行库41文件已恢复核验，见[运行库回执](results/physical_v6_runtime_recovery_20261104.json)。
+- [启动审查](results/stage_static_cp_physical_v6_launch_review_20261104.json)通过。MCP无活动会话，沿原batch工具保持真实child wait/exit所有权。已完成连续60.078s双限准入，版本阶段真实exit0；Vivado2022.2已成功打开fresh综合DCP，器件/唯一10ns时钟检查通过，输入methodology报告命令已实际执行。保留HD.CLK_SRC未指定与外部I/O无预算限制，无新增例外/waiver。
+- 当前物理根 `/tmp/B_state_residency_recovery_20261102/stage_static_cp_physical_v6`；监督根同级 `stage_static_cp_physical_v6_supervision_v1`。唯一runner PID137917/start67091565，监督器PID137742/start67091506，工具句柄42582。**这些是本次快照，恢复观察必须重新检查PID/start_ticks与manifest。** [当前接续快照](results/stage_static_cp_physical_v6_continuation_20261104.json)。
+- `physical_gate_open=true`仅表示该次执行准入；`timing_qualified=false`、`board_acceptance=false`，尚无路后接受。监督器顺序持有实现→独立重开DCP→审计→持久归档→实际恢复重审；失败保留，不自动重试。监督器末尾仍需主审，不能将准备/启动或自动终态当作时序通过。
+- [start/release隔离候选准备](results/publication_start_interlock_preparation_20261104.json)：`hardware/variants/publication_start_interlock_v1`仅向lease.command_valid加入jp_start，逆变换逐字恢复原源。未仿真/综合/接受，生产RTL与物理输入未改。raw start优先会在start未ready但保持VALID时阻塞release；caller契约与活性仍待验证，保留原完整RTL反例及原监视器。候选列出10类待测边界，不能继承v7验收。
+
+下一只观察上述已有物理链；真实失败/阶段完成后分析完整新产物。互锁候选另行验证，不与正在运行的原源物理实验混用。此前交接细节见 [HANDOFF_20261104.md](HANDOFF_20261104.md)，其中“未启动物理作业”现为历史。
+
+以下保留历史。
+
+# 新会话交接入口（2026-11-04）
+
+用户要求在新对话继续，本轮已完成交接。**先读 [HANDOFF_20261104.md](HANDOFF_20261104.md)**，沿已有新机独立执行授权接续，无需重新请求授权。本轮仅交接，没有启动新实验或修改生产RTL。goal工具当前返回null，不把历史paused/active/blocked当当前线程状态。
+
+当前完整shadow v7已完成主审、冻结及实际恢复验收：`full_system_functional_netlist_validated=true`；`physical_gate_open=false`，时序/板卡验收仍false。**不重跑58控制，不重复提交完整v7。**监督器旧awaiting_main_review/false是保留的自动历史回执，接受依据为20261103新主审与最终冻结报告。
+
+2026-11-04T03:22:57Z本机核对四个相关原runner均不存在、无active_process；按研究根/runner名扫描无匹配进程，MCP无活动Vivado会话，恢复根无新物理运行目录。见 [状态快照](results/session_handoff_state_20261104.json)、[关键证据SHA索引](results/session_handoff_artifacts_20261104.json) 和 [MCP回执](results/session_handoff_vivado_sessions_20261104.json)。两份v7终态/主审归档SHA本次重新核对一致。
+
+下一从绑定v7的新物理gate/prepare/runner/auditor及fresh输入准备、独立审计接续；旧physical v5仍绑定失败v6/旧机路径/KA正stall，不能直接执行。保持10ns OOC原约束、连续60s≤225GiB且≤cgroup75%准入。start/release反例、caller仲裁与隔离互锁候选仍独立未决，修改生产源后须建立新证据。详细工具、路径、恢复关系、成果边界和接续顺序见新交接文件。
+
+以下保留历史，旧“运行中/待主审/网表false/暂停”均不代表当前状态。
+
+# 完整 shadow v7 主审、冻结与实际恢复验收完成（2026-11-03）
+
+用户已明确继续，沿用已有新机独立执行授权。当前 `full_system_functional_netlist_validated=true`、`physical_gate_open=false`；时序与板卡验收仍false。以下旧“已启动/待主审/暂停/网表false”均为带日期的历史记录。**不重跑58组控制，不重复提交完整v7。**
+
+- 最终接受报告：[stage_static_cp_shadow_system_v7_20261103.json](results/stage_static_cp_shadow_system_v7_20261103.json)；主审：[stage_static_cp_shadow_system_v7_main_review_20261103.json](results/stage_static_cp_shadow_system_v7_main_review_20261103.json)。compile/elaborate/simulate真实exit0，仿真耗时84746.101s，完整结束于46620182ns。原终态审计与实际恢复重审均exit0且audit逐字相同；本次再次只读执行原审计所有证据断言并复核结果一致，没有重跑仿真。
+- 9323986次shadow检查、5个reset edge、27外部文件逐字/逐SHA匹配、1560 CP词/10帧、26 KA请求、8223 PW beat/2831地址，原全部监视器通过。KA ready严格1/零stall，CP stalled4660、PW stalled15414；342普通输出比较及4个有效资格payload检查、metadata/未知值/pre-edge政策保持。133生产源未改、13参数/SLOTS32保持。
+- 完整日志无Fatal/ERROR/Critical Warning。编译1条与展开12条fixture警告与原RTL参考一致；另外4875条网表警告逐实际实例及本机2022.2原语源核对，均涉及输出端口截短或未连接。完整警告清单及源SHA在主审报告中；不是任意输入或物理检查的豁免。
+- 运行终态687文件：持久archive、原现场、实际恢复件重新逐SHA全部一致。归档 `results/recovery_archives_20261102/stage_static_cp_shadow_v7_terminal.tar.gz`，SHA `d1766e73b7b532298d44e808610c6a2b6002b19b876e25218f6127c81c64f938`。主审冻结包344文件也已实际解包逐SHA核验，归档 `results/recovery_archives_20261102/stage_static_cp_shadow_v7_review_20261103.tar.gz`，SHA `0e8868a45079827cd50181dc4909f5a399ad73ecba1d0d7f8ac40fb150e122f0`；冻结目录 `results/stage_static_cp_shadow_system_v7_sources_20261103`。
+- 2026-11-03T17:33:14Z重新核对runner2950230/start54305789与supervisor2950227/start54305747均不存在，两manifest均complete且无active_process。见 `results/stage_static_cp_shadow_v7_review_completion_20261103.json`。监督器已完成，不再等待后台。自动报告仍保留原awaiting_main_review/false，不能改写；当前接受结论由上述新主审与冻结报告明确补充。
+
+接受范围仅当前完整SLOTS32 host-driven功能shadow：网表共享真实RTL驱动的输入，非独立闭环memory agent，不是无条件全引脚/任意输入形式等价或时序/板卡证明。原full v6失败不变；publication start/release完整RTL v5反例及caller协议仲裁问题仍未解决，不能用本次固定场景通过掩盖该反例。
+
+下一接续已经核对的物理输入前提：[stage_static_cp_shadow_v7_physical_prerequisites_20261103.json](results/stage_static_cp_shadow_v7_physical_prerequisites_20261103.json)。原综合192个恢复文件、133生产源、13参数、synth.dcp/synth.v SHA、xcu280-fsvh2892-2L-e及10ns时钟均与v7绑定一致，无latch/blackbox/loop。**这不是物理准入或实现结果。**旧physical v5脚本仍绑定失败v6、旧机/tmp及KA正stall政策，不可直接运行。准备独立新gate/prepare/runner/auditor与fresh物理输入，独立审计其完整绑定；执行前查询Vivado会话/环境，保持连续60s≤225GiB且≤cgroup75%的准入。保留原10ns OOC约束，无新增I/O预算、例外或waiver。后续opt/place/route与内部时序/DRC尚未执行，外部I/O无延迟约束的限制仍保留。
+
+caller互锁候选应另建隔离版本；如改变生产RTL，必须重新建立对应综合与功能证据，不能沿用本次原源接受。当前没有创建或启动新物理作业。
+
+以下保留此前交接与历史。
+
+# 研究已接续：完整 shadow v7 已启动（2026-11-02）
+
+用户已明确沿已有新机独立执行授权继续；以下旧“暂停/尚未准备”仅是历史。**不要重跑58组控制，不要重复提交v7。**
+
+2026-11-02T16:07:57.229837+00:00 实时快照：fpgaacc2，完整v7为 `running/elaborate`；runner PID 2950230 / start_ticks 54305789，唯一监督器 PID 2950227 / start_ticks 54305747，本会话工具句柄96194。恢复观察时必须重新核对PID/start_ticks和manifest，不能把本快照当实时状态。
+
+- KA依赖30报告/24归档已完整SHA核对，并实际恢复862文件；另恢复已绑定authority core及来源9文件。原20项审计器的只读检查部分全部通过，补充早期状态/core/参数/假设/初始reset/memory环境核对。接受范围仅当前合法fixture二态控制组合。主报告 `results/shadow_ka_dependency_gate_review_20261102.json`；原拒绝、条件证明、结构模型均保持各自范围，没有把status简单相与。
+- 复用已通过并恢复重审的58控制，复核原51项参考/综合/logger/clock门控及全部七组历史归档；未重跑控制或solver。新版本 `hardware/variants/stage_static_cp_shadow_system_v7`：checker逐字等于fixture_ready_v2；完整TB只在原终点插入finish_and_check，逆变换逐字恢复原参考。133生产源/136原编译项/13参数SLOTS32保持；另5个shadow编译文件。
+- 独立准备审查 `results/stage_static_cp_shadow_v7_preparation_review_20261102.json`，324文件归档实际恢复逐SHA一致，归档 `results/recovery_archives_20261102/stage_static_cp_shadow_v7_prepared.tar.gz`，SHA `421aa473a0f802d3c42c25b86aa7a042fb5f80c90950e5b215ad1d28cb2201c9`。主启动审阅 `results/stage_static_cp_shadow_v7_launch_review_20261102.json`。旧审查器因不支持SHADOW_NETLIST_TOP值宏而拒绝，保留记录；revision2仅分离该命名空间宏以解析fixture参数，仍逐字核对完整argv和namespace，无源/刺激/命令变化。
+- 本次内存准入实际连续 60.123s，总memory.current同时≤225GiB及≤cgroup75%；已从原绑定原始区域fresh生成8个可写图像。compile真实exit0，当前后续阶段见manifest。wait期间曾继承参考memory_admission显示字段，真正准入始终按新memory_samples/独立timer双限执行，并在通过后替换；留证 `results/shadow_v7_wait_memory_metadata_review_20261102.json`。不要将旧显示值当新准入。
+- 运行根 `/tmp/B_state_residency_recovery_20261102/stage_static_cp_shadow_system_v7`。监督根 `/tmp/B_state_residency_recovery_20261102/stage_static_cp_shadow_system_v7_supervision_v1`。监督器 `scripts/research_checks/supervise_full_shadow_v7_v1.py` 已真实持有runner，正常结束后执行独立完整审计，再持久归档、实际restore和重审；失败则保存失败现场，无自动重试。成功恢复时原根移到 `stage_static_cp_shadow_v7_preserved_terminal`，恢复件装回原路径以运行严格路径绑定的原审计器，仅重建恢复副本audit，原件/归档保持。最终自动报告仍awaiting_main_review，主模型须审阅后才判定接受。
+
+下一只观察已有链及新产物；若真实失败，先读取完整日志并分类，不能以timeout/日志少重启或降低门控。终态仍要求27外部文件、1560CP词、26KA请求、8223PW beat与全部原监视器；KA ready严格1/zero stall，CP/PW背压、342比较、payload/metadata/未知值/pre-edge均保持。`results/stage_static_cp_shadow_v7_terminal_auditor_delta_review_20261102.json` 证明原终态数据/监视器段仅两处显式marker/KA覆盖政策变化，其余逐字相同。
+
+当前 `full_system_functional_netlist_validated=false`、`physical_gate_open=false`。原v6失败不改写，publication start/release反例与caller协议/修复研究仍独立未决，生产RTL未改。本机无luna委派接口，使用已启动确定性监督链，不声称模型切换。
+
+以下保留此前交接与历史。
+
+# 新会话交接完成，用户已暂停当前目标（2026-11-02）
+
+先读[HANDOFF_20261102.md](HANDOFF_20261102.md)及NEXT_STEPS.md顶部。用户将在新会话继续；当前goal实际paused，不是完成，也不是blocked。新会话收到明确继续请求后沿已有新机独立执行授权推进，无需重新请求该授权。以下历史goal active不代表当前线程状态。
+
+交接实时快照results/session_handoff_state_20261102.json（14:12:29 UTC）：本机fpgaacc2，核对的controls v2/v3及full RTL v4/v5四runner均不存在、无active_process；相关进程扫描未发现本研究运行任务，MCP无活动Vivado会话。内存约12.75/500GiB，项目盘可用约544GiB、tmp约2.07TiB。新完整shadow运行根不存在，未创建或启动新完整shadow版本。本轮只交接，不启动实验、不改生产RTL。
+
+58控制的最终接受证据与关键归档已核对，索引results/session_handoff_artifacts_20261102.json。完整shadow准备尚停在只读检查；KA报告SHA引用链30份/24份含archive SHA的清单已保存为results/session_handoff_ka_dependency_inventory_20261102.json，仅是交接索引，不是新证明或全部接受。六份归档已恢复；其他底层证据仍须完整核对。下一按HANDOFF中的顺序准备新完整shadow，保留所有原验收条件。full_system_functional_netlist_validated=false/physical_gate_open=false。
+
+以下保留历史。
+
+# 新机58组fixture-ready实测、独立审计及实际恢复重审完成（2026-11-02）
+
+当前fpgaacc2。原中断后核查无遗留相关runner；沿用户已有新机独立执行授权，新增controls v2/v3，优先门控绑定已审计新机full RTL v5真实failed终态/源证据/归档及原runner消失，不篡改旧机full v2残留manifest。MCP无活动Vivado会话，沿Ross vivado-simulate-rtl的非工程XSim2022.2已有命令执行；无生产RTL改动。新机准入保持连续60s同时≤225GiB和≤cgroup75%，没有放宽为500GiB容器的375GiB。
+
+首轮shadow_fixture_ready_controls_v2完成35组后，在第36组ka_ready_x真实失败：原刺激在counter12注X之前仍用cp_m_ready，先出现合法fixture不允许的ready0，故首Fatal是KA_FIXTURE_READY_INVARIANT而非目标未知值。原checker正确拒绝，不能把该例当未知值覆盖通过。35组独立日志检查及全失败现场已归档、实际restore，results/shadow_fixture_ready_controls_v2_failure_review_20261102.json；archive SHA3a7c63385fa76fa753b69745b56bbd57877f3cc53ed89e9d2cc28bb631dde5f0。旧失败根/工具保持。
+
+新hardware/variants/stage_static_cp_shadow_fixture_ready_v2仅将control.sv两处KA_READY_X的注入前表达式cp_m_ready改为1'b1；反向替换逐字恢复v1。shadow.sv及cases.json逐字不变，全部58预期不变。run/audit_shadow_fixture_ready_controls_v3.py真实运行全58组，2正例/56预期拒绝均由独立parser接受；ka_ready_x首Fatal KA_READY_UNKNOWN_OR_MISMATCH time366000，显式ka_unexpected_stall首Fatal KA_FIXTURE_READY_INVARIANT time346000。两正例各190checks/5reset，KA15active/0stall/5transfer/5edge/269idle；CP/PW普通30active16stall、NBA33active18stall，各5transfer，实际1202ns finish。
+
+runner235374/start53212081/session59480真实exit0且manifest observed/complete，无active_process。results/shadow_fixture_ready_controls_v3_review_20261102.json：1827文件持久归档37633285字节、SHAa98887d6e7f7a339f737abfa7dbdcf360be3eb295ed54057d90aa6884e29c651；实际解包后以原独立auditor重审exit0，audit逐字相同、全部文件SHA仍相同。这是实际有界fake-model控制例接受，不是完整网表通过；原full shadow v6 failed不变。
+
+同步恢复原stage_static_cp_synth_v1全部192文件，133生产SHA/13参数/SLOTS32与新机完整参考一致，见shadow_synthesis_new_host_recovery_review_20261102.json。七组历史检查器/logger/clock证据全索引恢复，与原接受report/audit/manifest一致，见shadow_control_predecessors_recovery_20261102.json；没有重新跑这些历史实验。另从旧机只读复制六份KA审查归档到共享results/recovery_archives_20261102并在新机实际restore70文件，八依赖report及四关键生产source绑定一致，见ka_review_archives_new_host_restore_20261102.json；不声称所有底层proof core均恢复。
+
+旧机归档复制v1的WebSocket结果解析提前匹配不完整JSON，随后DELETE临时终端TLS超时；六个共享归档实际SHA全部正确，失败记录old_host_ka_review_copy_v1_transport_failure_20261102.json。首次自建临时终端名称未持久记录，清理仍未确认，不可猜测并删除他人终端。v2仅改完整JSON等待及终端身份回执，重新核对归档后自己的终端已确认关闭。未启动旧实验/修改原件/停止其他任务。
+
+新增ka_publication_release_contract_lineage_review_20261102.json绑定早期冻结checkpoint_joint_v7的实际tb_joint.sv：lease.command_valid明确含tx_start_valid；真实完整query仅ap_valid/cp_valid/qc_cp_valid，不含jp_start，而jp_owned只在接受后阻塞。结合已审计full v5反例，支持集成互锁遗漏判断；六份已审阅契约未明确规定空闲start/release同拍仲裁，仍不能宣称所有外部caller都允许。尚未改生产RTL或运行修复候选。
+
+下一准备独立完整shadow新版本：消费已实际restore的58控制，完整核对原参考/综合/参数/输入/全部KA分量与logger依赖，将新candidate marker与KA ready1/zero-stall政策显式绑定，并保持CP/PW背压、342比较、有效载荷/未知值/pre-edge、27外部文件及原所有监视器；不得直接改旧失败checker或运行硬编码旧/tmp的v6。新full尚未提交。继续caller互锁候选与协议分类。full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# 登录恢复后已在旧主机确认原实验后台进程不存在（2026-11-02）
+
+用户完成qz登录后，平台查询确认fpgaacc1实例仍RUNNING。通过平台返回的Jupyter入口、认证及验证TLS，已实际在旧主机fpgaacc1--cfc8cd109508-jnnrja5s7q执行只读检查；不是依据新机PID不可见推断。2026-11-02T12:35:49Z快照见results/old_host_original_jobs_controller_check_20261102.json：四原Z3、四SMT包装进程、四上层runner及full v2 runner共13个原进程均不存在，按原运行根和full runner脚本扫描亦无匹配进程。两轮检查仅创建并关闭自己的临时终端，没有停止其他进程或旧实例。
+
+旧/tmp/B_state_residency_offer_20261025仍可读取；五份旧manifest的running/wait_memory是残留记录，未改写。此次检查没有取得这些任务退出码或退出原因，不能据此认定证明通过、正常结束或OOM。旧机cgroup约235.9/300GiB，其中file约207.0GiB、anon约26.4GiB；实例仍占用资源，不能说旧机已释放。脚本scripts/research_checks/inspect_old_host_jobs_v4.py及两次结果/无凭据的终端记录已保存，认证token未写入报告。
+
+新机独立执行授权仍有效，v4/v5真实终态及v5完整初始化RTL竞争反例结论不变。下一恢复58 fixture-ready controls并将新版本优先门控绑定新机v5真实终态，继续caller协议分类；不得将旧v2残留manifest改成成功或绕过验收。下方“旧后台未知/需要登录”现为历史访问失败记录。full_system_functional_netlist_validated=false/physical_gate_open=false。
+
+以下保留历史。
+
+# 用户已授权新机独立执行；完整RTL同拍start/release反例已由原监视器检出（2026-11-02）
+
+用户明确“允许在新主机独立执行”，不再等待此前执行确认，授权记录results/ka_publication_release_full_rtl_v4_execution_authorization_20261102.json；旧作业不操作。旧机查询已实际尝试DNS、SSH配置、MCP machines/sessions、平台两台命名pod GET、Inspire CLI doctor：旧host不解析/无SSH配置；MCP本地18090连接拒绝；平台GET403；CLI session expired invalid_grant需qz login。results/old_host_backend_access_attempts_20261102.json仅证明访问受限，不能认定旧后台停止。已请求用户恢复登录或提供SSH地址，不阻塞新机独立实验。
+
+v4真实编译/展开/模拟均exit0，但100us watchdog触发，runner实际failed，无竞争marker。独立核验12768字节natural_trace是原参考精确前缀，停在NB118；原参考control(1)于cycle32782返回、首APQ32787，故100us先于原初始化结束。v4完整终态已持久archive并实际restore，SHA0604394b866a974c9f0f68d566bb9bbc1c065683c2ed80d8441b5c06b5eee8df，报告ka_publication_release_full_rtl_v4_watchdog_review_20261102.json及terminal_preservation。不是生产RTL超时故障，未改原失败记录。
+
+新v5仅将加法watchdog100→500us和Tcl200→600us，逐字差异/原133生产源/13参数/竞争刺激/24只读输入/225GiB持续60s准入均核对；初始图像fresh。prepare review通用“path/input recovery only”措辞不完整，以ka_publication_release_full_rtl_v5_window_delta_review_20261102.json明确的两处时窗变化为准。v5真实编译1.97s、展开43.01s、模拟11.54s均exit0，但原未改TB断言于327975ns报Fatal“unexpected publication or lost lease in cancel case”，runner仍failed，绝非PASS。
+
+audit_publication_release_full_failure_v5.py独立核对原源/完整TB逆变换、原监视器逐字保留、初始图像SHA、准入、唯一首Fatal、trace及14对象VCD：327960000ps ready（G1/CP17/version3），327965000ps start/release两ready及两valid在实际posedge前均1、原lease已真实获取，327966000ps publication_owned1/lease_owned0；原monitor在327975000ps检出。计划HALT marker未到达，不宣称HALT输出已观察。results/ka_publication_release_full_rtl_v5_counterexample_review_20261102.json将完整初始化RTL可达性确认为实测反例，但外部caller协议是否禁止同拍仍独立未决。
+
+v5完整失败现场持久archive results/recovery_archives_20261102/ka_publication_release_full_rtl_v5_terminal.tar.gz，28662257字节，SHA8bd9f8c3c95bfd3b6878c55c78248862b42a71a2f218a355ab4a2fcbe46452d0，实际restore全部SHA一致；v4/v5都真实终态，无后台探针继续。未修改生产RTL。下一依据新机真实终态衔接58 fixture-ready controls的恢复/runner门控，并继续caller契约判断；旧主机状态查询仍需可用访问入口。full shadow v6历史失败不变，full_system_functional_netlist_validated=false/physical_gate_open=false。下方blocked/尚未授权/未执行均为历史状态。
+
+以下保留历史。
+
+# 新主机完整RTL定点探针v4准备与独立审计完成，尚未执行（2026-11-02）
+
+最新goal状态：blocked，等待用户对新主机独立执行的明确选择。连续三轮已完成准备审计、环境预检及最终状态核验；当前无v4 manifest、无可见v2/v4 runner，旧主机scratch不可见。用户此前只确认旧Codex停止，未确认后台停止，也尚未授权独立重做；自动goal continuation不能替代该回复。准备工作和证据均已保留，未启动探针。以下“goal active/等待回复”为此前状态记录。
+
+补充新主机环境预检：已实际运行Ross vivado-simulate-rtl的sim_env_doctor.py，exit0/0 failures，XSim版本2022.2、kernel依赖、gcc/g++、工作目录均通过，tmp可用2117.3GiB。Synopsys shell/外部clibs未指定/无GUI提示已按当前XSim行为仿真范围解释；不能替代实际编译/展开。原始输出与工具SHA保存在results/ka_new_host_xsim_environment_20261102，审查见ka_new_host_xsim_environment_review_20261102.json。用户独立执行选择仍待回复，无探针manifest或子仿真。
+
+新根/tmp/B_state_residency_recovery_20261102/ka_publication_release_full_rtl_v4。prepare/review_publication_release_full_preparation_v4及run/audit_publication_release_full_rtl_v4工具已准备；生产133源同时匹配恢复static参考和历史v6失败保存清单，136编译项/13参数原样，TB与持久v2 TB逐字一致且逆变换精确恢复父TB，14对象VCD/100us watchdog/200us模拟窗保持。全部旧/tmp命令已映射新根，24只读输入逐SHA核验，五个fresh-image初始区域与原binding一致；没有创建fresh bin或启动XSim。
+
+v3准备曾发现results/transaction_fence_static_join_rtl_v1/authority.txt其实是旧/tmp的失效软链接而拒绝。v3部分根及failure报告保留，不能消费其中提前写出的preparation.json。已从原归档恢复authority.txt（SHA6d0643e3a6475105f691d701d190d240d7d1d309a5a3c534750f8ff8561260cc）；v4显式映射新路径，且只在全部检查后写preparation。
+
+results/ka_publication_release_full_rtl_v4_preparation_review_20261102.json记录独立准备检查、runner实际默认拒绝（无manifest/child/bin）、持久archive及实际restore逐SHA一致。archive results/recovery_archives_20261102/ka_publication_release_full_rtl_v4_prepared.tar.gz，SHA766a0b4b61a10157437a5877a07fc7c7fa9a59cf08367c9f09a39f3e40c8af00。不是RTL实测或终态接受。
+
+旧fpgaacc1后台仍未知。已向用户请求明确是否允许在fpgaacc2独立执行新实验，目前尚无回复；不得自行添加--execute-independent-attempt运行。若用户明确授权独立新尝试，可使用python3 -B scripts/research_checks/run_publication_release_full_rtl_v4.py --execute-independent-attempt；保持225GiB持续60s准入，记录hostname/boot_id/PID与cgroup namespace，核验原输入后才生成fresh图像。该尝试不会接续旧solver或证明旧任务终止。随后等待真实终态，使用新v4 auditor解析marker/VCD/源/初始图像和内存准入证据，再保存到持久盘。58 controls仍待原探针路径处理后再衔接。
+
+full_system_functional_netlist_validated=false/physical_gate_open=false；goal active，等待上述明确执行选择。
+
+以下保留历史。
+
+# 新主机参考与初始输入恢复、缺失第二轮成本向量重建完成（2026-11-02）
+
+当前主机fpgaacc2--72bfa719011c-3hfvuvkzdl，恢复根/tmp/B_state_residency_recovery_20261102。旧fpgaacc1的/tmp和原PID不可在此观察；用户确认旧Codex已停止，但后台程序是否继续不确定。不能沿用以下历史中的“四原solver存活/full runner wait_memory”作为当前状态，也不能将旧任务改成终态或接受。新主机MCP查询无active Vivado session；没有启动新RTL/形式/物理作业。
+
+recover_probe_inputs_new_host_v2.py从持久归档核验恢复static参考415文件、133生产RTL/136编译文件/13参数及10个原始输入区域。results/new_host_probe_input_recovery_20261102.json保留当时仅缺cost2向量的事实。v1因将third_inputs/fourth_inputs的审计SHA误当manifest SHA而拒绝；v1源码和failure报告保留，v2只更正该校验对象。初始design/owner/cost均来自原绑定归档，没有复制参考仿真的最终图像。
+
+缺失的followup_iter2_next_cost_v1/cost_vectors.txt未找到持久归档。已逐SHA恢复原第二轮CPU查询快照和源码，确认原prepare_followup_cost/make_replay/derive_cost_inputs/export_inputs工具与冻结版本一致，再在新根独立CPU回放（编译16.9s、执行10.38s）。原audit_followup_cost.py通过：九份搜索状态/事件文件逐SHA一致，9089009节点/180326连接数据与302成本包逐binary32独立核验，6946输入字/1510结果字。历史缺失向量SHA未知，不宣称重建文件与历史缺失文件逐字一致。
+
+results/new_host_next_cost_reconstruction_review_20261102.json及new_host_next_cost_restore_reaudit_20261102.json记录42文件持久归档、实际解包重审且全部SHA保持。归档results/recovery_archives_20261102/followup_iter2_next_cost_v1.tar.gz，107197106字节，SHA1108bc80a4d6a3af52b5bb9d48d4de91edffcfe8ce610a689fcabc699797a247。原探针外部只读scratch路径现在均可映射到新根；仍需新版本路径/源/参数/初始图像与并发所有权核验后才运行，不能直接运行硬编码旧/tmp的v2脚本。
+
+第一次实际恢复后的功能审计通过，但普通Python导入重建了两个__pycache__文件，随后42文件全SHA检查拒绝；差异见new_host_next_cost_restore_cache_difference_20261102.json，原恢复根保留。reaudit_next_cost_recovery_v1.py从同一持久归档重新恢复至独立/tmp/B_state_residency_recovery_reaudit_no_bytecode_20261102，用python3 -B执行原审计后全部42文件SHA保持。只禁止缓存写入，不改变审计逻辑或成本计算；最终报告明确绑定该次实际恢复和重审命令。
+
+下一明确旧主机后台任务状态及恢复所有权，准备原full探针的新主机版本；原full探针优先，58 controls仍未运行。CPU输入恢复不等于RTL验证，full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# fixture-ready日志parser校准与实际验收器拒绝测试完成（2026-11-01）
+
+check_shadow_fixture_ready_control_logs_v1.py独立严格检查正例的190 checks/5 reset/完整terminal时间、每组总284观察、KA15active/0stall/5transfer/5edge/269idle及差异，CP/PW保留普通30active16stall、NBA33active18stall与各5transfer。负例必须恰有一个首Fatal且命中预期，不得带新旧PASS；缺流/传输/背压覆盖Fatal还核验计数资格。calibrate_shadow_fixture_ready_log_parser_v1.py仅合成日志3正例/21损坏例全部预期（重复/缺失PASS或组、KA stall/transfer/edge/idle错误、CP/PW无stall、短reset/window、未知数、错误时间、旧marker、fatal/error带PASS等）。这不是实际XSim结果；新计数仍须实际运行独立确认。
+
+scripts/audit_shadow_fixture_ready_controls_v1.py已独立预备：从旧独立59集合推导确切58新集合，核对真实终态/PID、源/宏/输入/阶段日志SHA、内存准入、每例parser。实际CLI在运行根不存在时明确拒绝，无source_bound_audit生成。results/shadow_fixture_ready_parser_preparation_review_20261101.json；4文件archive实际restore逐SHA一致，archive 9508d97c04ae381176f6dc6a356e4c81c1f6de4de9a26f469c736eab90d091ad。
+
+原完整RTL探针仍wait_memory且优先，四原solver继续；没有新控制仿真/full接受/物理作业。下一原探针真实终态后才运行58 controls并独立审计恢复；不能将合成parser校准当实际控制例通过。full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# 独立fixture-ready候选检查器与58控制已准备，原full探针优先门控实测拒绝（2026-11-01）
+
+prepare_shadow_fixture_ready_observer_v1.py独立生成hardware/variants/stage_static_cp_shadow_fixture_ready_v1，不改旧checker/失败full版本。仅三处差异：KA有效数据/metadata检查之后新增actual/expected ready必须严格1的runtime断言（含pre-edge）；终态要求KA stall计数严格0且active/transfer/edge/idle仍非空；候选PASS marker改独立FULL_SHADOW_FIXTURE_READY_CANDIDATE_PASS，旧auditor不会误接收。逆向替换逐字恢复parent；CP/PW task逐字不变、其stall覆盖和所有342比较/未知值/data/metadata检查保留。
+
+基于原59 generic fake controls生成58个候选控制：默认KA ready1，保留显式未知/有效payload/metadata/edge/其他输出/reset/缺流控制；CP/PW无stall仍应拒绝；新增KA_UNEXPECTED_STALL应报runtime invariant。原generic59的KA stalled payload检测继续由旧已接受suite负责，新fixture不是要求合成非法stall payload后还能通过。results/shadow_fixture_ready_observer_preparation_20261101.json仅准备证据，不是控制例通过。
+
+scripts/run_shadow_fixture_ready_controls_v1.py已准备并语法检查；保持原memory admission，另要求原full publication/release v2真实终态且无active_process后才可建控制根。当前实际CLI在原wait_memory时提前拒绝、未建shadow_fixture_ready_controls_v1或启动XSim，results/shadow_fixture_ready_controls_priority_rejection_20261101.json留证。避免与已有唯一full runner同时抢内存。58 controls尚未编译/展开/运行，更无新full运行/接受/物理资格。
+
+下一优先原full probe实际终态，再执行并独立审计58控制；未经实际restore/main review及完整source/参数门控不得消费候选checker。此前二态组合论证不替代四态门网表实际检查。full v6继续failed，full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# 当前fixture二态RTL的KA-ready组合安全论证完成，未接受full shadow（2026-11-01）
+
+review_as_component_parameters_v1.py逐七个分量preparation/core SHA与实际source bindings核对；authority MAX_CYCLES1048576、coordinator ENTRIES32/RESET_HOLD5/MAX_CORRECTIONS1024/MAX_CYCLES1048576/EXCLUSIVE_BACKEND_RESPONSES1精确匹配真实实例，TB初始cold reset已核对。results/ka_as_component_parameters_review_20261101.json，14文件archive实际restore SHAef1cb5a123fd8d2fb36ce39d49fb88e698879db17bf79e0b482c32b70067cccf。
+
+review_as_ready_temporal_composition_v1.py绑定八份分量/连线/参数review及原条件history真实终态日志；核对coordinator全部四处AS赋值仅来自RECONFIG/NEXT。组合顺序：初始NORMAL；成功DRAIN给Q=!as_busy&&as_drained&&!as_fault；无admin/AP及无请求区间保持Q到首次AS；独立configured加Q及原comb sufficient-ready推出KA ready；AS后AW不要求Q；成功AW精确回复握手通过local retirement在OS入口恢复Q；OS/OW/NEXT含correction/deferred/retry路径保持到后续AS。失败不直接跳AS，新attempt重经DRAIN。配置/Q的依赖不使用KA ready，末端充分条件才用它，避免循环。
+
+results/ka_as_ready_temporal_composition_review_20261101.json给出当前参数、初始化二态RTL、合法只读单拍fixture控制环境下采样周期k_a_valid⇒k_a_ready的组合安全论证；不是新单体formal、任意AXI/参数、四态门网表、时序或板卡结论。16文件archive实际restore SHA0444587c4ac70d130f71b7562fb852bff58901ba1c74061dae5245dfbf99c28e。
+
+原full shadow v6仍因KA stalled=0失败，本报告不waive、不接受旧失败、不改bound checker或物理门控。下一评估新验证版本如何用独立控制区分可达背压与已证明当前合法环境下不可达的KA背压，同时保留CP/PW背压、有效payload/pre-edge/未知值检查；新policy尚未准备/接受。full publication/release probe仍需实际运行，caller协议问题独立。full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# configured四契约和quiet到KA-ready真实输出绑定复核完成（2026-11-01）
+
+review_as_configured_contract_bindings_v2.py逐实际coordinator/authority端口核对native cfg_authoritative明确nonzero generation资格；共享clk/k_cold_rst及attempt_reset各级alias；normal_retired含as_retired从而!as_busy、aggregate abort含as_fault从而!abort⇒!as_fault。逐既有接受报告绑定并检查generation persistence、retirement configured、configured persistence原harness断言。无rearm valid比原证明无accepted rearm更强，能适用其结论。该配置依赖不使用KA ready。results/ka_as_configured_contract_bindings_review_20261101.json；12文件archive实际restore SHA0f1b0b03aad6d8566cbc9e7b0f9171f5b25c04e27887e1167dc7211551583078。v1审计因早期报告用evidence_inventory而非file_sha256拒绝，保留；v2仅兼容两种真实清单格式，不改证明/RTL。
+
+另results/ka_as_quiet_ready_output_binding_review_20261101.json核对独立无假设comb property原harness：quiet给!busy/!fault/drained，独立configured及admin排除给其他资格，实际abort0及冷复位适用；authority req_ready直连ap_native_ready，AP offer/owned均0时严格传到k_a_ready。只是充分条件及真实输出关系，不用ready自身证明quiet或configured。
+
+下一把所有分量的完整source/core参数、初始状态及时间归纳资格统一做最终集成审计，不能只将若干report的status相与充当整体验收。当前full shadow v6仍failed，full_system_functional_netlist_validated=false/physical_gate_open=false。四原solver仍存活，full定点1719618仍wait_memory，goal active。
+
+以下保留历史。
+
+# KA quiet分量的实际fixture内存/复位兼容性已复核（2026-11-01）
+
+review_as_quiet_memory_environment_v2.py实际核对full v6原TB authority_memory与局部harness：clk/k_cold_rst一致，READ_ONLY1/MAX_BEATS1/default READ_DELAY0一致。实际hold_r未连接为Z，源控制仅===1才hold，formal anyseq hold_r包含实际不hold轨迹；不是一般XZ证明。实际RRESP注错和文件返回data/ID包含在局部任意m_rdata/rid/rresp/bid/bresp范围，局部唯一assume仍initial rst。局部source-derived memory去除两个只读WP/WEND观测alias后逐字等于已审计control miter来源。生产源binding逐SHA核对。
+
+results/ka_as_quiet_memory_environment_review_20261101.json；9文件archive实际restore逐SHA一致，SHA7dea0d697adee67a151e6eab994ee61103917896f2be02703ac5bf5e0ce81faf。v1最初引用双bank接受报告日期20261101而实际为20261031，在建archive前拒绝；保留失败工具，v2只修报告文件路径后完成。不是RTL或solver失败，未更改任何旧证明。
+
+结论限当前合法非fatal fixture的控制轨迹嵌入，不包含file/address/data或fatal-stop等价，也不宣称任意外部AXI环境。下一完成configured资格和quiet-to-ready最终集成审计；当前完整shadow v6失败与覆盖门控保持，full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# KA阶段1至9控制排除组合已复核，最终ready集成仍待完成（2026-11-01）
+
+review_as_history_phase_exclusion_v1.py核对实际query/residency/coordinator/publication源语句及既有proof harness的原断言。利用已归纳lease owned⇒coordinator NORMAL，得到非NORMAL阶段无lease；initial-safe需要!k_busy，prepare需要lease，publish需要!stage_busy而stage_busy含k_busy，非零discard需要lease，rearm仅12，AP offer需要!k_busy。因此阶段1..9全部排除authority cfg/publish/discard/rearm及AP offer。AP-owned⇒authority busy独立分量保证DRAIN中quiet时AP-owned0；阶段2..9则已有独立排除，quiet时实际authority req_valid等于coordinator a_valid。枚举Boolean组合逐阶段核对，不添加环境假设或修改RTL。
+
+results/ka_as_history_phase_exclusion_review_20261101.json与11文件实际archive restore保存，archive SHA50753f242143751819272b3b5f314d38d27618a32b1f8171b11af3e8d1497be4。补充review_as_history_phase_source_bindings_v1.py通过各接受报告直接源SHA或审计绑定的manifest再核对四项依赖与真实full源一致，结果ka_as_history_phase_exclusion_source_binding_supplement_20261101.json。初始只按直接文件后缀检索AP源因报告间接绑定manifest而拒绝，未生成接受报告；补充明确使用已接受AP v2 manifest，而非失败v1，不改原报告/证明。
+
+剩余配置资格、quiet-to-ready无循环连线及所有分量的memory/reset兼容性最终复核。source_contract_integration_reviewed=false，full shadow v6仍failed，full_system_functional_netlist_validated=false/physical_gate_open=false。四原Z3真实存活推进、唯一full定点1719618仍wait_memory；不重启、不放松准入。goal active。
+
+以下保留历史。
+
+# KA quiet保持与条件AS历史证明已恢复，实际握手连线复核完成（2026-11-01）
+
+103bit/23DFF的ka_reader_quiet_persistence_formal_v1保留实际reader stopped，原42断言不变并增加3项idle/drained/no-fault保持与回复消费后退休性质；45assert/唯一initial reset/6cover全部BMC和归纳通过。真实memory pending之后的fault-free回复覆盖也完成。单reader stopped故障控制被拒绝。results/ka_reader_quiet_persistence_formal_v1_review_20261101.json；37文件archive实际restore SHA4bebed71914a7b1797ba0e40a38257ccd03d60be0c74eb4b4451c66d705fda00。范围仍为当前只读单拍fixture控制模型。
+
+ka_as_ready_history_composition_formal_v1保留实际coordinator两DFF/5bit，以四条显式分量契约加初始冷复位构成5assume，6assert/2cover通过BMC及归纳。四个逐条删除契约控制全部被拒绝，只是依赖性反例。runner单cover.vcd被第二覆盖覆盖，独立解析最终保留波形确有首次AS step6及AW回复后再次AS step11，不能宣称两个独立VCD。results/ka_as_ready_history_composition_receipt_review_20261101.json已保存，source_contract_integration_reviewed=false。
+
+新review_as_history_handshake_bindings_v1.py逐实际端口/源语句核对DRAIN的backend_drained/as_retired/aggregate abort，枚举Boolean consequence证明成功DRAIN条件给出authority !busy/drained/!fault；核对共享clk/k_cold_rst与authority abort固定0。AP-owned不存在这一资格下，AW的两个真实mux保持authority响应握手精确一致。同时逐SHA复核全部条件历史receipt原件及实际恢复件。results/ka_as_history_handshake_bindings_review_20261101.json；7文件archive实际restore SHAabe2fd187f20fd8795d909220e8edf574637214939b133e1b1b76a86c7b20bca。
+
+尚缺逐阶段（包括DRAIN）admin/AP排除、配置资格、quiet-to-ready无循环组合及分量memory/reset环境兼容性复核。不可将条件历史或局部连线验收当完整KA无背压证明，不waive stalled覆盖。full shadow v6仍failed，full_system_functional_netlist_validated=false/physical_gate_open=false。
+
+本次四原Z3 PID1293430/1309736/2565424/3013336均实时R；唯一完整RTL定点runner1719618仍wait_memory、commands空。容器约299/300GiB，项目盘剩922GB、tmp剩2.4TB，等待原因不是磁盘。原作业保留，不改准入、不重启。下一继续全阶段契约集成及原任务，goal active。
+
+以下保留历史。
+
+# reader回复及消费后idle/drained实际局部归纳通过，AS历史组合仍缺（2026-11-01）
+
+ka_reader_reply_retirement_formal_v1从既有双bank/memory控制模型保留codec continuation/op/inflight/rsp_valid，99bit。原GET req_op固定0，状态转移/内存源控制不变。v1 BMC反例来自未保留store stopped：step4任意elapsed触发超时/早回复，step5 stopped任意回0，允许读完成后继续执行，故为过近似缺口非生产RTL故障。v2保留两实际stopped DFF至101bit；之后各版本只增加只读alias或实际不变量断言，无新增环境假设、无删除原退休目标。全部失败终态/波形保留。
+
+v2-v6各10步BMC通过但归纳失败，分别揭示需建立cfg_rsp_valid与CFG_REPLY关系、配置阶段非目标/HELD/RESET/SEND的reader IDLE关系、GET不进入ALLOC/WRITE状态及continuation限制、codec AR/R与bank pending对应关系。v7在同101bit实际状态上全部42assert/唯一initial rst/5cover通过BMC和时序归纳。证明rsp_valid时两codec不busy且drained/no memory rp；外部rsp_valid&&rsp_ready握手后的下一非reset周期authority !busy且drained。覆盖两bank真实pending、HELD→IDLE selector返回、实际读pending之后的回复传输、消费后空闲排空，五份独立VCD保留。
+
+ka_reader_reply_no_clear_rsp_control_v1仅使bank0 codec rsp_valid一旦置位在core reset前不清除，同完整harness/内存。BMC工具step5拒绝，独立波形确认reader REPLY/rsp_valid1而codec rsp_valid/busy仍1，命中目标回复空闲性质；不是实际生产RTL故障。
+
+scripts/research_checks/audit_reader_reply_retirement_formal_v1.py独立逐原cell/cut/Q/CLK/ports/netnames/101bit21DFF、源/日志/内存review SHA、逐版本assert表达式多重集保持、单DFF+3gate fault、五cover/反例波形核对。results/ka_reader_reply_retirement_formal_v7_review_20261101.json保存；122文件archive实际restore逐SHA一致，SHA393ca098a1b253c8e84b247468a0be55080f7c92df7f6aeab05407221945050a。局部范围为当前source-derived单拍只读fixture控制及任意数据/状态输入过近似；不是完整AS-ready或全系统4态门网表接受。
+
+下一把首次AS的DRAIN退休、后续AS的AW回复退休，以及间隔期间无AP/配置/发布/discard/rearm同局部idle/drained保持性质组合；配置/故障/ready全部资格仍需全量复核。原full publication/release定点v2 runner1719618/session35063仍wait_memory；四个早先solver保留，无新full仿真/物理作业。full shadow v6的KA stalled失败不变，full_system_functional_netlist_validated=false/physical_gate_open=false；goal active。
+
+以下保留历史。
+
+# AS期间authority配置/发布/discard/rearm排除的分量安全组合已核验（2026-11-01）
+
+新增ka_publication_discard_lease_unit_v1使用完整原lease/publication两模块，除共享clk/reset、lease_owned连线及command_busy包含jp_owned外，其余健康/退休/元数据/请求/回复输入均任意。2assert/唯一initial reset/2cover：BMC/归纳及discard非零、orphan publication两个覆盖均通过，证明discard_valid非零⇒lease owned且publication owned。全局publication owned⇒lease owned仍然有反例，本证明不借用它。去除command_busy中jp_owned项的单连线控制，同原模块/断言BMC拒绝。results/ka_publication_discard_lease_unit_v1_review_20261101.json独立核对源码/连接/波形与29文件实际restore，archive bca704d48d7690814f39548f7a56eb72f57e7ffac5a357126aa226ed73ead448。
+
+独立ka_as_lease_staging_boundary_formal_v1保持实际lease/fence/coordinator 3DFF/9bit，原8assert/唯一initial k_cold_rst/2cover和harness逐字不变；只将20个单bit健康/退休等组合producer替换为相同bit/alias的无约束anyseq，并裁剪不可达旧fanin，5526 cells。无新互斥假设。BMC/归纳/AS及lease-owned/prepare非空cover通过：lease owned⇒fence不在恢复态、coordinator NORMAL；AS⇒!lease owned、!initial_safe、!prepare_allowed、!authority.cfg_valid。原uncut正负作业继续，未将其状态改为接受。
+
+scripts/research_checks/audit_lease_temporal_boundary_v1.py独立从原full.json核对parent cells/cuts、原9bit DFF/CLK、20个原scalar producer完整输出宽度/bit、所有ports/netnames不变，重建完整backward traversal及无悬空使用bit；每条原轨迹可选择原producer值嵌入该更宽模型。单query恢复准入gate fault同harness BMC拒绝（首错可为中间不变量，不宣称实际AS故障）。results/ka_lease_temporal_boundary_v1_review_20261101.json，32文件archive实际restore SHA0ebfa9c3b04a50b8068331a6b220f66aab8d1988e30470dda488d966cf64d31c。
+
+compose_as_authority_admin_exclusion_v1.py逐SHA绑定上述两证明与已接受组合publish/rearm排除，核对原query两module共同rst||k_cold_rst/clk、jp_dv[0]实际连authority discard及coordinator cold gate；枚举冷复位/全局复位两种情况的Boolean consequence。results/ka_as_authority_admin_composition_20261101.json得到当前参数/初始化二态安全结论AS⇒authority cfg/publish/discard/rearm全部0；10文件实际restore SHA53e9904dc81959ec1bd56593eff2d4068b597637162d8bae72225a719861b9e9。不是新的单体formal/full fixture/XZ通过，也没有waive KA stalled。
+
+另review_full_probe_file_mapping_v1.py检查实际TB的12个AXI file memory实例，所有可写图像路径仅落新full目录design/cost/owners/pool/g3/labels，日志亦全独立；没有参考最终图像路径泄漏。只读外部文件仅查存在未重hash，结果ka_publication_release_full_rtl_v2_file_mapping_review_20261101.json。完整full定点runner1719618/session35063仍wait_memory，未建大bin或启动编译；四原solver持续，当前真实身份见ka_formal_live_after_admin_safety_composition_20261101.json。
+
+下一集中每个AS的reader IDLE、codec busy/响应退休及drained保持，再与已有configured/AP排除/控制互斥组装ready。完整同拍start/release实际query复现及caller协议仍待内存/核验。full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# full定点测试VCD路径缺陷已独立确认修正，v2继续等内存，验收器已校准（2026-11-01）
+
+本机XSim2022.2独立复制已终态unit snapshot，仅0ns查询：/tb/publication/owned匹配1对象，/tb/publication.owned匹配0并警告。由此确认full v1的最后VCD对象点路径错误。核对v1 runner1619232/start_ticks1664672496仍wait_memory、commands空且无child后，仅对该idle waiter发送SIGINT，真实exit130/manifest failed保留；不是仿真超时重启，不停止任何solver或FPGA作业。
+
+新prepare/run_publication_release_full_rtl_v2.py只变独立版本路径和VCD层次斜线（/tb_candidate_offer/system/publication/start_ok）；生产133源、13参数、TB完整刺激、输入plan及225GiB持续60s策略全不变。唯一v2 runner1719618/start_ticks1664702242/session35063仍wait_memory，未编译/展开/仿真、未建大bin。v1不再是active。results/ka_publication_release_full_rtl_v2_preparation_review_20261101.json独立逐SHA及v1/v2精确差异复核通过。
+
+check_publication_release_full_probe_v1.py严格解析四个事件的顺序、握手/所有权已知值、G1/CP17/version3、冷启动cycle≥73、10ns clock/#1观察时间及正常finish；1合成正例和18个缺失/重复/格式/X值/事件次序/上下文/时间/周期/fatal/finish负例均预期。仅parser校准，不是full运行通过。audit_publication_release_full_rtl_v2.py已准备，终态时还要求133源、TB逆变换、初始binding/拼接图像SHA、14对象VCD及真实冷启动marker。实际调用当前wait_memory时明确拒绝，无接受报告/运行根archive；拒绝证据保留。
+
+results/ka_full_probe_verification_preparation_evidence_20261101.json将工具/18控制/路径query/旧idle终态/拒绝报告37文件archive实际restore逐SHA一致，SHA392b69a82d7e360490fba55a8d89a39eaf7df6cedd32fe0168403f9640aa5c4c。未归档或接受活动v2根。内存仍约299/300GiB（file cache约235、anon约61）；没有清cache或放松准入。
+
+下一沿v2/session35063内存等待和四原solver继续；待真实终态由主模型审核，禁止将工具校准当full可达反例、full gate PASS或物理资格。caller协议合法性也仍缺。full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# 完整RTL早期同拍start/release定点测试已准备，轻量runner等内存准入（2026-11-01）
+
+没有找到可恢复的原仿真checkpoint，已有iter2.wdb仅是波形，不能当状态恢复。读取已接受full static natural_trace确认原冷启动BASELINE_NO_PRELOAD在cycle73，原TB紧接着control(1)及首次真实lease获取，故可在查询工作前做有界定点验证，而不重跑完整4661993周期。
+
+prepare_publication_release_full_rtl_v1.py从已实际restore/freeze的stage_static_cp_host_full_static_v1（audit f087aaff4c300605867c02d9fadf149b67125ebb6d9e13f6599edc7dbd01c770）独立复制源/scoreboards。133生产源逐SHA与原static参考及v6一致，全部13参数/SLOTS32不变、136编译文件原顺序/宏/顶部保持。TB只在原冷启动和首次pc_acquire握手后追加probe调用、任务及100us watchdog；反向删除精确恢复原TB，原断言及后续源码未删。probe先检查真实publication.start_ok/strict ready，再同时驱动jp_start和pc_release_valid，观察ownership split/HALT并早停。Tcl200us且只记录14个接口/资格对象。不改任何生产RTL，无force/deposit，不是全回归/门网表验收。
+
+ka_publication_release_full_rtl_v1唯一runner1619232/start_ticks1664672496/session72272正在wait_memory，没有子编译/展开/仿真，也尚未创建大bin图像。准入保持total memory.current≤225GiB持续60s，每5s只读取样；未清cache/修改其他作业或放松门控。准入后runner才核验初始binding SHA并创建fresh design/cost/owner/labels/snapshot图像，绝不复制参考full里的最终图像；之后原编译/展开/有限模拟链自动继续，失败保留不重试。
+
+results/ka_publication_release_full_rtl_v1_preparation_review_20261101.json独立核对133生产SHA/13参数/TB精确逆变换/CLI映射/输入plan/当前PID及无heavy child。此次资源核查：容器memory.max=300GiB，current约299GiB，其中anon约61GiB/file cache约235GiB；先前宿主机free的1.3TiB available不能当本容器可分配额度。memory.events的oom_kill2是累计值，无本轮归因证据；当前无清cache或新OOM处理动作。主要full定点测试当前受内存准入等待，不是磁盘不足。
+
+下一沿session72272及当前四个原solver身份，不重复提交/改bound源。现有双模块形式+XSim反例保持，但full query可达/调用协议合法性仍未确认。原lease/fence/coordinator正负任务仍BMC，终态后才能audit；活动根不归档。full static早期probe即使观察到重叠也不替代shadow完整通过或消除KA stalled门控。full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# 原双模块start/release竞争已由XSim四态复现，系统可达性待确认（2026-11-01）
+
+沿用AMD Ross vivado-simulate-rtl技能及xsim/activity参考；实际查询MCP现有两会话仍out of stack space，不复用/停止，采用本机XSim2022.2。技能验证版本较新，但本次只用本机版本确认支持的xvlog/xelab/xsim/Tcl VCD基本命令，未用新覆盖功能。
+
+ka_publication_release_overlap_xsim_v1复制原checkpoint_lease_guard/checkpoint_publish_barrier逐字源码，仅新增验证TB，quiet域输入与形式unit一致，无force/deposit/RTL修改。编译/展开/模拟exit0且自检确认：55ns start/release同时握手，56ns jp_owned1/pc_owned0，66ns publication HALT输出done1/status3。有限200ns Tcl窗、1us watchdog、13个明确对象VCD，实际66ns finish。REPRODUCTION_OBSERVED只表示反例复现，不是设计功能PASS；owned⇒lease_owned在该unit域失败。
+
+已读checkpoint_system_v1/checkpoint_commit_v1契约及CONNECTION_CHECKPOINT_DESIGN，要求已有事务完成回复消费后才释放，未在这些已读文档找到空闲时release与新publication start同拍的显式禁止；不能据有限搜索宣称所有调用契约都允许。实际完整TB iter2_publish_g2先wait(!jp_owned)再拉pc_release_valid，串行场景未覆盖同拍start/release。
+
+scripts/research_checks/audit_publication_release_overlap_xsim_v1.py独立核对源与运行日志SHA、全部日志无Fatal/ERROR、55/56/66ns marker、VCD确切13对象与值及形式unit报告绑定。results/ka_publication_release_overlap_xsim_v1_review_20261031.json以10月31日仿真开始日期命名，报告已不可变；42文件archive实际restore逐SHA一致，SHA2784865a45ceace401d7cacc73ead8a8034fb9462a0fd9719e8561aa8386aadc。
+
+下一在实际完整初始化状态核对同拍竞争可达性与调用协议合法性，再判断是否需要新版本修复；当前不改生产RTL、不把unit反例当full bug。不得将publication owned⇒lease owned当无条件事实用于discard证明。原lease/fence/coordinator两任务及早先两solver继续原PID/session，最新真实身份/CPU/RSS与阶段见results/ka_formal_live_after_publication_release_xsim_20261101.json。完整v6 failed/KA stalled门控保持，full_system_functional_netlist_validated=false/physical_gate_open=false；goal active。
+
+以下保留历史。
+
+# 原lease/publication双模块初始化反例确认同拍start/release重叠（2026-10-31）
+
+审查discard的潜在前提publication owned⇒lease owned时发现：query lease release的command_busy只含已有jp_owned，command_valid含ap/cp/qc却不含jp_start；publication start_valid=jp_start&&jp_start_open，后者也不含release排他。不能未经证明把该前提加入AS/discard证明。
+
+ka_publication_release_overlap_unit_v1使用两份原始checkpoint_lease_guard.sv/checkpoint_publish_barrier.sv逐字源码，完整内部状态保留，quiet/retired/route_retired/no_offers固定1、其余command项0及一致合法descriptor常量；仅rst/acquire/release/start任意，initial rst。BMC工具step4拒绝owned⇒lease_owned；独立VCD实际step2 start_valid/start_ready/release_valid/release_ready同为1，step3 jp_owned1/pc_owned0。没有RTL修改、模型fault或目标互斥假设。它是初始化双模块接口反例，不是任意寄存器赋值，但尚未证明full query可达/完整调用协议合法，不能直接宣称系统RTLbug或修复。
+
+scripts/research_checks/audit_publication_release_overlap_unit_v1.py核验原源码/日志/manifest SHA、原query实际两个实例门控、逐拍反例；results/ka_publication_release_overlap_unit_v1_review_20261031.json保存。14文件archive实际restore逐SHA一致，SHA5daa2e5f3dce0e918a3557bcf0990b230f6891a8eabebc49f7c7b54a0fd1da7b。下一优先确认调用契约是否禁止release与新publication start同拍，再在实际完整初始化场景核对quiet输入与该交叠，未作生产修改。
+
+原ka_as_lease_staging_exclusion_formal_v1/session65748及门控fault/session43649继续原BMC；这条独立反例不代替它们终态，也不推翻/接受其AS staging排除。四个solver身份本轮重新核对，取样见results/ka_formal_live_after_publication_release_overlap_20261031.json。只沿原PID/session，不重启/重复，不改bound源，终态后按既定audit处理。完整v6 failed/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；goal active。
+
+以下保留历史。
+
+# lease/fence/coordinator实际9bit时序互斥模型已启动，尚未完成证明（2026-10-31）
+
+追查实际源码确认：query b_k_rec_valid=!boot_pending&&!qc_busy&&!pc_owned&&!as_cfg_lease&&k_rec_valid；checkpoint lease acquire健康条件pc_quiet要求f_phase0、!k_busy、!f_recovery_owned，no_offers另要求!k_rec_valid。故下一不是直接假设publication与AS互斥，而保留checkpoint_lease.owned、inner.backend.fence.state、inner.backend.recovery_ctl.state共3个实际DFF/9bit，其他存储输出任意，6772 selected cells。
+
+ka_as_lease_staging_exclusion_formal_v1：8assert/唯一initial k_cold_rst/2cover，目标为lease owned时fence不在恢复状态且coordinator NORMAL，从而AS既无native初始配置也无prepare_allowed/staging authority cfg。零SCC及prepare成功，当前BMC step2仍求解，没有BMC/归纳/cover接受。原runner1288391/start_ticks1664573241/session65748，smtbmc1293429/start_ticks1664575037，Z3 1293430/start_ticks1664575051，真实存活且CPU/RSS推进。
+
+独立ka_as_lease_recover_gate_fault_v1仅旁路query line604恢复准入!pc_owned gate的单个输入，完整harness不变；原runner1304205/start_ticks1664577830/session43649，smtbmc1309735/start_ticks1664579687，Z3 1309736/start_ticks1664579699。当前也BMC step2求解，尚未得到故障拒绝或可达AS重叠。不能提前当negative control通过；若首反例命中辅助性质，不宣称它就是AS overlap。
+
+results/ka_as_lease_staging_exclusion_preparation_review_20261031.json独立逐cell/cut/Q/CLK/ports/netnames及源/runner/harness SHA、单gate mutation和实际PID/start_ticks取样通过，只是准备复核。新audit_as_lease_staging_exclusion_formal_v1.py已准备但未执行，必须正例完整终态及负例真实证据后由主模型核验，活动根不归档、不修改bound源、不重复提交或据稀少日志重启。新两solver取样约7.2/5.3GiB，原两solver仍保留（2565424/3013336）；不是磁盘阻碍。
+
+下一沿上述四个原作业真实PID/session等待，可并行继续discard/quiet源依赖审查。现有组合probe的AS/staging重叠仅任意状态赋值，仍无full可达故障或完整互斥结论。完整v6 failed/KA stalled门控保持，full_system_functional_netlist_validated=false/physical_gate_open=false；goal active。
+
+以下保留历史。
+
+# AS对native初始配置/publish/rearm组合互斥通过，staging配置需时序链接（2026-10-31）
+
+ka_as_admin_combinational_formal_v1从原full.json保留精确组合cone，0 retained state/0 assume，4assert/1cover：AS(k_a_valid)⇒k_busy、!as_initial_safe、!authority.publish_valid、!authority.rearm_valid。零SCC后BMC/归纳/AS非空cover均通过。源码native initial_safe含!k_busy、publication commit_ready含!stage_busy且stage_busy含k_busy、rearm只在coordinator REARM，均由实际连接支持。
+
+关键未决不能省略：publication prepare_allowed表达式不含stage_busy/k_busy，其OPEN状态允许staging配置。独立ka_as_staging_cfg_combinational_probe_v1同kernel仅新增AS⇒!authority.cfg_valid断言，BMC step1拒绝；波形AS1/cfg_valid1/prepare_allowed1/initial_safe0/k_busy1。所有存储均任意，这只是组合赋值，绝非初始化可达系统反例或RTL故障。它说明不能从上述三条互斥推出staging cfg排除，需要publication/lease/recovery状态历史约束。discard valid尚未接受互斥证明。
+
+scripts/research_checks/audit_as_admin_combinational_formal_v1.py独立逐原cell/cut/Q/ports/netnames、源码/日志SHA、零SCC、同kernel probe单条新断言和两波形核验。results/ka_as_admin_combinational_formal_v1_review_20261031.json保存；33文件archive实际restore逐SHA一致，SHAf507c20d20d345ccb6d57c7adda8defba4832a88d622ca2c7b08751f9c5e6d9b。
+
+下一优先publication OPEN/lease与coordinator恢复进入AS的时序关系，判断staging cfg重叠是否实际可达；继续AS quiet/drained及discard检查。不增加直接互斥假设、不豁免KA stalled覆盖。完整v6 failed、full_system_functional_netlist_validated=false/physical_gate_open=false保持；两个原长solver保留，goal active。
+
+以下保留历史。
+
+# 实际双bank pending与共享memory控制rp一致归纳通过（2026-10-31）
+
+ka_dual_bank_memory_pending_formal_v1/v2保留原23bit bank/reader/store控制状态，实际AR/R握手接入已审查source-derived READ_ONLY1/MAX_BEATS1内存控制。RDATA/RRESP/RID/BRESP/BID仍任意以保持数据状态过近似；仅ARREADY/RVALID/RLAST/AWREADY/WREADY/BVALID由该fixture控制驱动。唯一initial rst假设，不假设无响应或pending等价。
+
+v1 10步BMC成功但归纳在BVALID零断言失败，未接受。v2保持全部旧性质，内存只读新增WP/WEND观察别名及既有RDlen/RDpos观察，增加!wp&&!wend和rp⇒rdlen1/rdpos0辅助断言，不改状态转移/不放宽目标。16assert/1assume/3cover，10步BMC、时序归纳与全部非空cover通过。共享memory rp等于bank0/1 pending并集，pending互斥且只能落在当前axi_bank；RVALID有rp且last1，私有reader rst时memory无未完成读，只读写握手/响应为0。覆盖bank0读、bank1读、配置HELD→IDLE selector返回三项，独立三份VCD。
+
+wrong_rvalid_route_control_v1仅把bank1 RVALID的selector限定误接成bank0限定，原完整harness/内存不变；BMC工具step8拒绝，波形实际共享rp与bank pending分离，命中主一致性性质。不是生产RTL故障。
+
+scripts/research_checks/audit_dual_bank_memory_pending_formal_v1.py独立核对原cell/cut/Q/CLK/ports/netnames、源/日志与内存review SHA、新观察反向删除精确恢复parent memory、唯一路由mutation、三cover及反例。results/ka_dual_bank_memory_pending_formal_v2_review_20261031.json保存；48文件archive实际restore逐SHA一致，SHA708df09ddc7c0799e9c0e2d37848648ee330cbb355b46de2e71799c6490878d5。
+
+严格范围仍为当前source-derived单拍只读fixture控制；不含文件/data/fatal完整等价或任意外部AXI环境。下一集中AS quiet/drained保持及cfg/publication/rearm互斥，再组装native ready；完整shadow v6 failed/KA stalled门控继续保留，full_system_functional_netlist_validated=false/physical_gate_open=false。两个原长solver保留，goal active。
+
+以下保留历史。
+
+# 原memory导出控制与单拍投影逐周期miter归纳通过（2026-10-31）
+
+prepare_memory_control_equivalence_v1/v2/v3.py从原axi_file_memory.sv确定性生成控制版本，逐项记录删除的decode/file initial/文件系统调用/fatal及写文件payload循环。原读控制非阻塞赋值顺序和guard全部保留；READ_ONLY1/MAX_BEATS1/arlen0绑定当前fixture，写请求固定0。v1前端拒绝原ANSI output integer初值语法，v2改为等价initial并移除未用string声明后，又因写文件payload的动态for拒绝；失败根/日志全部保留。v3仅删除不影响read control的文件payload循环，无生产源/读控制转移改动。
+
+ka_memory_control_equivalence_v3将该原memory导出控制与原单拍投影并置同输入/同clk/reset，8assert/唯一initial reset/1cover；10步BMC、时序归纳和响应传输cover通过。逐周期比较ARREADY/RVALID/RLAST/rp/rng/rdpos/rdlen/delay_r。原memory分支rp最终握手不清除的独立故障副本，同wrapper/reference，BMC拒绝且波形a_rp1/b_rp0。
+
+scripts/research_checks/audit_memory_control_equivalence_v1.py独立核对原源码SHA、每个read-control赋值的内容/顺序及关键guard、所有prepared源与日志SHA、正负波形、单点fault及先前两次prepare失败。results/ka_memory_control_equivalence_v3_review_20261031.json保存；47文件archive实际restore逐SHA一致，SHA94eb88d727c9de5c4f46dba7bb2644618d317ab3dc9718c1c3a213ee40811f0f。
+
+严格范围：这是source-derived sanitized read-control miter，不是完整Verilog文件I/O/data/status/fatal语义等价。移除文件错误停止扩展了可继续control轨迹，未接受任何数据或文件正确性结论。它补充原手写投影的控制来源核验，双bank/private reset/shared rp正式组合仍未完成；AS quiet/drained与cfg/publication/rearm互斥继续pending。完整v6 failed/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；两个原长solver保留，goal active。
+
+以下保留历史。
+
+# AXI selector返回/变化前后双pending均零实际归纳通过（2026-10-31）
+
+ka_axi_selector_return_formal_v1/v2保留原rotator state/target/active_bank、两reader state/cfg_rsp_valid/read_pending及两store state，共11DFF/23bit，1038 selected cells，其余存储任意。v1的5assert/唯一initial rst/2cover通过，但原故障pending-switch在10/20步BMC均未反驳仅归纳失败，不计初始化可达故障覆盖。分析发现仅要求selector切换前pending零不排除同一AR接受沿切换，因此v2在原5条断言上新增selector切换后双pending也零，不弱化原性质。
+
+v2共6assert/1assume/2cover，10步BMC、归纳、两独立非空cover通过：配置阶段两store IDLE/reader非runtime/双pending0；非冷复位selector变化前后双pending均0。cover实际包含HELD_CFG→IDLE时axi_bank从target返回active，以及正常bank0 read_pending。不是从任意cfg_rsp切断直接推导配置结束，而保留reader/store实际状态转移。
+
+pending_switch_control_v3沿用原故障kernel（将axi selector S由cfg_busy改cfg_busy||bank0.read_pending），用v2同完整harness；BMC工具step8拒绝。独立VCD确认非cold的selector变化后bank pending1，命中新增加的同拍安全条件；v1/v2故障尝试均保留，不把其归纳反例当初始化证据。
+
+scripts/research_checks/audit_axi_selector_return_formal_v2.py独立逐cell/cut/Q/CLK/ports/netnames、所有源/日志SHA、同harness唯一selector mutation及cover/反例波形核对。results/ka_axi_selector_return_formal_v2_review_20261031.json保存；66文件archive实际restore逐SHA一致，SHAdb8beb45e66b5c5a5750e2cf4a9d53b7e8940223ad06daf6a500c644f07b5d46。
+
+下一仍需将双bank pending同共享memory rp正式组合，尤其私有reset及R路由；当前单拍memory投影尚非自动原memory等价契约。AS quiet/drained与cfg/publication互斥仍未完成。完整v6 failed/KA stalled门控保持，full_system_functional_netlist_validated=false/physical_gate_open=false；两个原长solver保留，goal active。
+
+以下保留历史。
+
+# 双bank selector/私有reset入口quiet前置条件实际归纳通过（2026-10-31）
+
+ka_bank_transition_quiet_formal_v1/v2从真实unit core保留rotator state/target/active_bank及两reader read_pending，共5DFF/7bit。6assert/唯一initial rst/2cover。v1 selector变化断言未区分前周期cold reset，实际BMC step2拒绝，独立波形确认上一周期rst1导致target归零；原失败保留。v2仅给target/active变化断言及active切换cover限定前周期!rst，其他reset入口/quiet检查不变。10步BMC、归纳及两独立cover通过。
+
+非cold的target/active变化必有前周期all_quiet；进入RESET_BANK及私有reader rst前两边read_pending均0。all_quiet→双pending0也单独断言。这里仅证明reset/selector变化的准入条件，不是证明整个配置退出时axi_bank从target返回active也始终无pending，更不是shared memory rp与bank pending等价或AS drained通过。
+
+no_quiet_control_v1只把cfg_ready最后all_quiet gate输入改1，原observer/harness保持；BMC step3拒绝，波形确认reset入口前all_quiet0，但留存见证并未显示此前read_pending非零。独立audit v1曾误要求该负例有非零pending而拒绝，v2只报告真实quiet违例，不宣称pending故障覆盖；失败审计脚本/报告另保存。results/ka_bank_transition_quiet_formal_v2_review_20261031.json独立核对原cell/cut/Q/CLK/ports/netnames、源/日志及正负/首版reset波形；40文件archive实际restore逐SHA一致，SHA4146ec2bb6984045caa90671264a17609019e7f373a365f9912e0fe04436d1c3。
+
+下一仍须配置WAIT/HELD→IDLE的实际AXI selector返回安全、双bank pending与memory rp组合，以及AS前quiet/drained和cfg/publication互斥。单拍memory控制投影不可直接当full等价契约。完整v6 failed/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；原两个长solver保留，goal active。
+
+以下保留历史。
+
+# 单拍fixture读响应/待处理标志控制投影通过，双bank排空仍缺（2026-10-31）
+
+实际tb authority_memory为READ_ONLY1/MAX_BEATS1/READ_DELAY默认0，与authority共k_cold_rst；实际owner_state_store固定m_arlen0。新增prepare_axi_read_pending_control_v1/v2.py逐字绑定memory控制片段及reader read_pending完整过程，显式构造无文件I/O/data/status/shape-fatal语义的控制投影。不是自动full RTL等价提取，不可作为已完成系统接口契约直接放行。v1额外给rdlen加reset0，虽终态通过仍未接受，scope correction报告保存；v2仅删除额外赋值，保留原32bit RNG/整数计数延迟、hold_r、AR/R握手及初始cold reset。
+
+ka_axi_read_pending_control_v2：4assert/唯一initial rst/2cover，10步BMC/归纳/两独立cover均通过，控制投影中rp==read_pending，R valid必伴随rp/read_pending且rlast1。两cover工具step5响应传输、step6清除后空闲，分文件保留。no_clear_control_v1只使reader read_pending不在最终R握手清除，同harness BMC拒绝，波形rp0/read_pending1，非实际RTLbug。
+
+results/ka_axi_read_pending_control_v2_review_20261031.json独立核对所有原源码SHA/片段/reader过程、修正边界、正负日志及三份波形；43文件archive实际restore逐SHA一致，SHA3fad76a1fdb178df3c6421f7cb0dfd1f4a018ab613143807c06cb61e390f4765。严格范围：单reader与memory共同reset且合法单拍请求的source-reviewed控制投影。若后续用作正式full-system契约仍需证明投影对原memory控制的等价/保守关系，不可忽略文件错误、私有bank reset、共享AXI路由或arbitary环境。
+
+下一将研究实际双bank read_pending与共享memory rp的路由/reset关系，及AS前quiet/drained保持；既有AS configured与无AP占用条件证明保留。完整v6 failed/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；两个原长solver保留，goal active。
+
+以下保留历史。
+
+# 实际DRAIN→AS组合已排除历史AP owned及新AP offer（2026-10-31）
+
+ka_as_no_ap_owned_formal_v1从同参数full.json保留ap_owned与inner.backend.recovery_ctl.state，共2个实际DFF/5bit，5563 selected cells；其他存储任意输出。实际AP接受/清除及coordinator DRAIN→RESET/RECONFIG/AS状态转移保留，同clk/cold reset。仅2assume：initial冷复位与已独立证明的非cold时AP owned⇒as_busy；未直接假设AS无AP owned。6assert/2cover，10步BMC、时序归纳及两个独立cover均通过：AS无AP owned且无新AP offer，恢复state2..9均无AP owned；k_busy禁止新AP offer及AP owned上升前非k_busy亦通过。零SCC检查与原组合simplemap流程保留，无RTL修改/环豁免。
+
+no_busy_contract_v1与正例同kernel，harness仅删AP owned⇒busy假设，BMC step4拒绝；独立VCD在RESET state2发现AP owned1。这是移除已证明接口契约后的抽象依赖反例，非实际系统bug。正例cover分别工具step3 AP owned、step6 AS无owned，独立cover0/1保留且按内容复核，不假定文件序号等于语句序号。
+
+scripts/research_checks/audit_as_no_ap_owned_formal_v1.py逐非cut cell/cut Q/原ports/netnames、原DFF经共享CLK/D/Q别名重编号映射、源/日志及上游契约SHA、两正覆盖和负例波形独立核对。results/ka_as_no_ap_owned_formal_v1_review_20261031.json保存；32文件archive实际恢复逐SHA一致，SHAa72d857fde4e15fc91b9ef2400bdf2c197644824e0b170597522d1b65c039e4c。
+
+已排除的是AP仲裁阻塞路径，仍未证明AS的authority/native req_ready。下一研究DRAIN后reader quiet/drained保持及cfg/publication/rearm互斥，特别AXI R/B输入与read_pending，不得把外部无响应直接当无条件假设。完整v6 failed/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；两个原长solver保留，goal active。
+
+以下保留历史。
+
+# AP owned必然authority busy的实际状态过近似归纳通过（2026-10-31）
+
+ka_ap_ownership_busy_formal_v1从参数精确full.json保留ap_owned及authority双reader state/rotator state,target,active_bank，共6DFF/12bit，5511原selected cells/692任意存储cut，唯一initial冷复位假设。首次prepare因word组合环拒绝，失败保留。v2仅添加已校准simplemap组合展开、opt_clean及scc -expect0，零SCC后才生成SMT，未改RTL/原DFF或豁免环。6assert/1assume/2cover：10步BMC、归纳及两项非空cover均通过。证明非冷复位AP owned⇒authority busy、parent IDLE、active reader在请求/回复状态；KA valid⇒无新AP offer。两cover分别AP owned/busy与清除后无owned/无busy，独立cover0/1保留。
+
+no_clear_control_v1模型副本只使ap_owned在非cold时保持1、阻止正常响应清除，原harness不变；BMC拒绝且独立波形核对AP owned1/as_busy0/非cold，命中主性质。不是实际RTLbug或full可达故障。
+
+独立audit v1按raw bit ID比较因write_json重编号拒绝；v2全net映射又因selected cone外无用HLS别名冲突拒绝，均保存失败脚本/报告。v3限定原retained DFF CLK/D/Q的共享网名/bit位置映射，参数/类型/属性和映射连接精确一致；其余原cell/cut/ports/netnames源绑定在转换前逐项核对，零SCC/日志SHA及波形亦核验。results/ka_ap_ownership_busy_formal_v1_review_20261031.json记录接受范围，39文件archive实际restore逐SHA一致，SHA1efbe344274e2ebfc2360c71bc9c0e50754ae387b9c5d8b5dcb3a89d6098d26f。失败审计脚本与失败报告另保留工作区，未宣称全部进入此archive。
+
+下一将本AP owned⇒as_busy事实连接coordinator DRAIN退出（normal_retired含!as_busy）与k_busy期间ap_allow禁止新AP接受，证明AS无历史AP owned；仍需quiet/drained与配置发布互斥。当前无新完整回归/物理任务，两个原solver保留。完整v6 failed/KA stalled门控保持，full_system_functional_netlist_validated=false/physical_gate_open=false；goal active。
+
+以下保留历史。
+
+# 实际KA ready充分条件组合证明通过，drained依赖不能省略（2026-10-31）
+
+ka_ready_combinational_formal_v1从真实rotator/readers/codecs core保留全部所需组合cell，所有存储输出任意值、0 retained state/0 assume。1assert：!rst&&!abort&&configured&&!busy&&!fault&&!cfg_valid&&!publish_valid&&!discard_valid&&!rearm_valid&&drained ⇒ req_ready。BMC/归纳均通过；2个cover分别展示满足quiet_base且drained/ready为1与drained/ready为0的组合赋值，各独立cover0.vcd/cover1.vcd保留，不再覆写单一cover文件。
+
+独立no-drained控制同kernel/harness只删充分条件的drained项，BMC step1拒绝；波形核对quiet_base1/drained0/req_ready0。这是任意状态过近似上的组合见证，不是full可达反例，更不能据此宣称实际AXI协议违例。充分条件也非必要条件，因inactive-bank busy/drained可能比active ready要求更强。
+
+scripts/research_checks/audit_ready_combinational_formal_v1.py独立核对组合cell逐字相同、所有cut保留原Q、原输入/netnames、无存储遗漏、源与日志SHA及三份波形。results/ka_ready_combinational_formal_v1_review_20261031.json记录；27文件archive实际恢复逐SHA一致，SHA10555d96f838f0c9bbaeebaa932b90b68437d9d48f7f590a655dac6b76865f28。
+
+源码实际query仲裁：ap_allow含!k_a_valid，所以KA valid时ap_offer不成立；但这不自动排除历史ap_owned，后者只在AP响应握手清除。reader busy包含非IDLE/cfg_rsp_valid/c_busy，drained还要求无read_pending及AXI AR/R/AW/W/B valid。因此下一必须研究AS前DRAIN退出后的quiet/drained保持、历史AP所有权，以及配置/发布互斥，不能从configured单独推出KA ready。两个原solver仍保留；完整v6失败/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false，goal active。
+
+以下保留历史。
+
+# AS入口authority configured条件组合归纳通过，KA ready仍待证明（2026-10-31）
+
+ka_as_configured_composition_formal_v1保留实际coordinator state/configured共5bit，新增attempt_reset只读输出；10assert/5assume/1cover，10步BMC、时序归纳和AS非空cover均通过。5假设为initial冷复位及四个已独立审查契约：native准入generation非零、generation非零保持、normal_retired且!abort/非零generation推出authority configured、无attempt_reset时configured保持。未直接assume AS configured；实际DRAIN退休→RESET→RECONFIG/AS路径及REARM状态隔离由原状态转移完成组合。
+
+scripts/research_checks/audit_as_configured_composition_formal_v1.py独立核对原cell/cut/Q/CLK/ports/netnames、全部绑定review SHA及实际连接：query as_retired=!as_busy&&!as_core_cfg_valid，coordinator normal_retired含as_retired，abort含as_fault；authority rearm_valid=as_attempt_reset，search端口直通，residency as_attempt_reset=k_attempt_reset=coordinator attempt_reset。同冷复位/时钟连接由已接受integration v3绑定。cover波形实际AS且authority configured/generation非零。
+
+两个同kernel/harness单行契约消融no_retirement_contract与no_configured_persistence_contract均BMC拒绝，波形在RESET阶段authority configured0，非实际系统bug也不宣称该早期trace已经AS。results/ka_as_configured_composition_formal_v1_review_20261031.json记录条件组合范围；46文件archive实际恢复逐SHA一致，SHA f57241ab9c57e9eb34bef507cead0be0185baecead15c69e9428127311adbf15。
+
+剩余关键义务转向active reader IDLE/无未完成response或codec busy，以及KA期间没有cfg/publication/rearm/AP ownership抢占。configured成立本身不能推出req_ready；完整shadow v6 KA stalled=0失败保留，不豁免门控。full_system_functional_netlist_validated=false/physical_gate_open=false。两个原长求解任务保留；整体goal active。
+
+以下保留历史。
+
+# configured在非零active generation后保持的实际状态分解证明通过（2026-10-31）
+
+ka_configured_persistence_formal_v1从原generation模型独立选取同271bit实际DFF，新增configured/rearm_ready观察根；11assert/唯一initial rst假设/2cover，10步BMC、时序归纳及两cover均通过。新主性质：上周期!rst、configured且active bound_generation非零，并且没有rearm_valid&&rearm_ready，则本周期非rst时configured保持。保留generation保持及每bank bound_generation非零→bound_valid辅助性质。未修改原closed任务或生产RTL，不是假设configured在AS成立。
+
+独立故障副本clear_on_request_v1仅对bank0 configured D增加实际req_valid&&req_ready清零；10步BMC未见故障但归纳失败，不能把归纳反例称为已初始化可达。v2同一fault模型、同harness，BMC扩大到20步，在工具step10拒绝；独立VCD核对实际step9发生上周期configured/非零generation/无accepted rearm、本周期configured0，命中新主性质。仅抽象模型故障控制，不是实际RTL故障。
+
+scripts/research_checks/audit_configured_persistence_formal_v1.py独立逐非cut cell、cut Q、原DFF/CLK、全部输入与netnames、源/日志/harness SHA及同harness唯一fault核对；results/ka_configured_persistence_formal_v1_review_20261031.json保存结果。archive实际恢复逐SHA一致，SHA b624cfaa9a03adf46e71bd9ea7b55f0aed194b3ddc60bb1a2c6715e44530d697。单一cover.vcd仍最后cover覆盖早先文件，日志证明两cover命中，不据此宣称两份独立波形保留。
+
+下一将已证DRAIN退休→configured与此保持性质组合到实际coordinator AS路径，核对rearm只在REARM状态以及generation非零条件；随后仍有reader idle/authority并发请求义务。两个原长求解任务仍保留。完整v6 failed/KA stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；整体goal active。
+
+以下保留历史。
+
+# 协调器实际转移及源码连接独立复核通过，AS authority配置链接仍待完成（2026-10-31）
+
+results/ka_coordinator_transition_integration_v3_review_20261031.json逐项复核256个selected cells、2个原DFF/5bit、24个任意存储cut、输入端口、只读别名及所有netnames（仅移除init）。所有非cut cell与原core逐字相同，cut保留原Q bit且仅替换anyseq。核对实际query→search→residency generation直通、EXCLUSIVE_BACKEND_RESPONSES=1传递、ENTRIES32/RESET_HOLD5/MAX_CYCLES1048576、authority rst和coordinator cold_rst同k_cold_rst且同clk。native authoritative表达式显式要求as_bound_generation!=0；staging要求configured且不设置它，唯一configured赋值为reset0/native1。
+
+审计v1误选module声明、v2仅取authority首行遗漏多行generation端口，均实际拒绝并保存源码及失败报告；v3仅修定位，完整实例读至分号，未改生产源/模型/断言。独立集成审核及两次失败、四个实际源共10文件archive实际恢复SHA一致，见results/ka_coordinator_transition_integration_restore_20261031.json。这补齐前一receipt复核的源码/cell审查，但不是全系统或KA stall不可达证明。
+
+下一继续authority在AS时configured的退休/保持链接，以及reader idle与并发authority请求关系；两个原长求解任务保留。完整v6 failed和stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；整体goal active。
+
+以下保留历史。
+
+# 退休/代际保持分解证明已完成，协调器组合证据实际恢复，集成复核待完成（2026-10-31）
+
+本轮新增 ka_retirement_state_kernel_formal_v1_review_20261031.json：140bit 实际状态过近似，7assert，BMC/归纳/cover通过，36文件实际恢复；主性质为非零 active generation 且 !busy&&!fault 推出 configured。局部辅助性质显式限定私有 reader reset；未修改原 closed harness。hide_busy 反例命中主性质，hide_fault 仅命中局部辅助性质，不宣称后者违反顶层契约。
+
+ka_generation_persistence_formal_v1_review_20261031.json：271bit 实际状态过近似，8assert，BMC/归纳及两cover通过，41文件实际恢复；证明冷复位之间 active generation 非零保持，不是数值单调递增。clear_on_rearm v1 准备命名冲突失败保留，v2及unsafe_publication模型故障控制均拒绝；不是实际RTL故障。原始cover.vcd被第二cover覆写，独立报告确认留存最终波形含两个条件，不宣称保存两份独立波形。
+
+ka_coordinator_config_generation_formal_v1：保留实际 coordinator state/configured 共5bit，用native准入及generation非零保持两条接口契约；7assert/3assume/1cover，BMC/归纳/cover通过。两条契约分别移除均拒绝，是依赖消融而非实际系统反例。results/ka_coordinator_config_generation_receipt_review_20261031.json核对终态/日志与绑定SHA，37文件archive实际解包逐SHA一致，archive f8b1a3534b83b42532cefec3613fbca0c04f3cd1b5296cd2b3a17230fc4bdbbf。仅receipt/restore复核，独立selected-cell及完整源码集成审核尚未完成，不存在已完成的 ka_coordinator_config_generation_formal_v1_review_20261031.json，不能假定上一轮大型审核成功。
+
+源码初步阅读纠正：coordinator 的 staging 分支要求 configured 已成立，仅native分支首次设置 configured；下一应在独立集成审核中记录实际参数/端口/clk/cold reset和该解释。仍需完成 AS 时 authority configured、reader idle及重叠配置约束等链接，不能宣布KA stall不可达或豁免覆盖。
+
+原两个作业保持：active_configured controller2456124，cover2565237/Z3 2565424；retired_configured induction3013257/Z3 3013336。本次逐 /proc start_ticks 确认均为原进程且真实存活，见 results/ka_formal_live_after_coordinator_receipt_20261031.json。原cover和归纳尚无完整终态接受，不重启、不重复提交、不提前归档活动根。
+
+完整v6仍 failed（KA stalled=0），full_system_functional_netlist_validated=false/physical_gate_open=false。本轮为证据恢复与verified wait进展，整体goal active。
+
+以下保留历史。
+
+# 描述符design/generation实际状态过近似归纳通过，AS入口完整链接仍缺（2026-10-31）
+
+新增通用prepare_selected_state_cone_v1.py，配置hardware/variants/ka_descriptor_metadata_formal_v1/selection.json：从v6匹配rotator/readers/codecs实际core保留两reader的state/bound_valid/saved_generation/bound_design/bound_generation，共10个实际dff/392bit，其他50个存储输出任意值，584 cells；输入、原Dff转移、同clk和所有bit别名不变。不是改生产RTL、完整系统模型或物理结果。
+
+ka_descriptor_metadata_formal_v1实际10步BMC、归纳、非空cover均PASSED（cover工具step6、VCD实际条件step5）；9assert/唯一initial rst假设/1cover。证明非零active bound_design必伴随非零active bound_generation。辅助性质包含两bank已bound/初始化阶段saved_generation非零、generation非零→bound_valid及每bank design→generation关系。新run_descriptor_metadata_formal_v1.py从已用退休runner独立生成，继续校准终态helper，未改原runner或旧bound源。抽象cover非空不代表完整系统可达刺激。
+
+两个独立模型副本负例用同一完整harness：accept_zero_generation只将bank0零generation拒绝逻辑的输入改全1，工具step3拒绝，VCD step2初始化state1而savedgen0；zero_bound_generation只把bank0 bound_generation D改全0，工具step6拒绝，VCD step5实际非零bound_design与零bound_generation同现。生产源码不变。results/ka_descriptor_metadata_formal_v1_review_20261031.json独立核验每个原cell/保留Dff/全部cut输出与aliases、源/模型/代码/log SHA和波形；35文件archive实际恢复逐SHA一致，archive2729c7542563da1a9db7e3b6a49f80b29b2565a394475bbb9d184458b019d709。
+
+ka_as_entry_dependency_review_v2_20261031.json把该证明与实际query端口连接、publication.start_ok源码相连：active operation且初始cold reset后，start_ok的非零匹配a_design可由已证descriptor关系推出as_bound_generation非零。不是人为assume，也不是证明OPEN/load期间描述符持续非零；后续仍需active descriptor persistence与coordinator native/publication安装到AS入口的历史关系。原v1依赖报告保留。
+
+两个原证明任务均继续：ka_active_configured_formal_v1/session20887，cover2565237/start_ticks1663666178（Z3 2565424/start_ticks1663666192），原4性质归纳已成功，2个cover尚未接受；ka_retired_configured_formal_v1/session92270，induction3013257/start_ticks1663807254（Z3 3013336/start_ticks1663807268），10步BMC成功，归纳/cover未完整接受。真实CPU/RSS/身份与最新进度见results/ka_formal_live_after_metadata_20261031.json；不得因少量刷盘日志停止/重启或重复提交。沿原controller链等待，终态后主模型全部审阅再归档恢复。
+
+所有metadata正负例已终态；当前没有新完整回归或物理作业。v6 failed与stalled门控保持，full_system_functional_netlist_validated=false/physical_gate_open=false。下一主任务为描述符在bank切换/rearm中的持续性与AS入口历史链接，同时监督两原作业；整体goal active。
+
+以下保留历史。
+
+# AS入口依赖已分解，实际退休契约10步PASS，两个原证明作业继续（2026-10-31）
+
+新增ka_as_entry_dependency_review_20261031.json逐SHA绑定reader/rotator调用链、residency_system与publication barrier实际源码：native coordinator配置authoritative显式要求as_configured及bound_generation非零；publication分支jp_permit时authoritative为1，但jp_load经jp_prepare限定。特别注意start_ok仅检查非零匹配design及start_generation>a_generation，未直接检查旧a_generation非零。必须另外证明reader描述符design/generation关系、active generation持续性及publication load准入，不能把旧generation非零当作现成assume。该报告不是可达反例或AS通过。
+
+ka_retired_configured_formal_v1在同一真实rotator/readers/codecs closed unit core上只新增14个只读alias输出，原cells/netnames/全部其他字段独立比对未变，MAX_CYCLES1048576。harness外部输入anyseq、唯一initial rst；7个assert检查两bank generation非零→bound_valid、bound_valid且退休无fault→configured、未configured未stopped但已bound时必须在初始化状态，以及顶层bound_generation非零且!busy&&!fault→configured；1个同条件非空cover。不是全系统AS入口不变量，仍需上面的跨层链接。
+
+scripts/research_checks/run_retired_configured_formal_v1.py作为新的研究runner，实际集成已8项校准shadow_terminal_receipt_v1 helper，校验helper冻结SHA后使用；正常child返回时清旧等待状态、异常仍存活时保留。没有改旧v6 runner或声称完整full runner已修复。所有新runner/harness/models一经执行均按manifest SHA保持不变。
+
+新研究session92270/controller2938847/start_ticks1663783966已prepare0/10步BMC PASSED，当前induction PID3013257/start_ticks1663807254，最近日志induction step10→9→8。尚未完整归纳或cover接受；原链归纳后自动cover -t20，不重复运行。独立准备复核results/ka_retired_configured_formal_v1_preparation_review_20261031.json含实际约束数/只读alias与源工具SHA及两个实际存活进程取样。
+
+原ka_active_configured_formal_v1/session20887/controller2456124/start_ticks1663631491，12步BMC与4性质归纳已经成功；唯一原cover smtbmc2565237/start_ticks1663666178、Z3 2565424/start_ticks1663666192仍持续CPU，最近检查step12。不得据暂少日志停机/重启，归纳已通过不代替2个cover非空。新退休契约Z3取样3013336/start_ticks1663807268持续CPU；两solver合计约2.9GiB，未新起完整仿真或物理。终态后再完整VCD/所有SHA及性质复核/保全实际restore，不提前写接受。
+
+下一沿上述两个原session/PID；可并行继续AS入口的descriptor generation与publication/native配置来源关系。先前ka_reset_state_kernel_v1_review_20261031.json的9bit实际转移过近似排除KA期间active bank reset证据保持。v6 failed、原stalled门控不变，full_system_functional_netlist_validated=false/physical_gate_open=false；整体goal active。
+
+以下保留历史。
+
+# 真实状态转移过近似已归纳排除KA期间活跃bank复位，原unit覆盖继续（2026-10-31）
+
+scripts/research_checks/prepare_ka_reset_state_kernel_v1.py从参数精确full.json保留实际4个dff/9bit：inner.backend.recovery_ctl.state与authority.state/target/active_bank，其他709个存储/读输出任意值；保留全部实际组合与Dff转移/共享bit/同clk，唯一环境假设initial k_cold_rst。独立逐单元和无悬空used bit复核完成。这是时序过近似，非完整top仿真或全参数/XZ证明。
+
+粗粒度v1 SMT因逻辑环拒绝，失败保留。diagnostic_v1确认原word SCC1，经仅组合simplemap+opt_clean为0；v2必须scc -expect0后生成SMT，无waiver/改RTL/弱化断言。v2实际8步BMC PASS、时序归纳成功；证明KA valid与active-bank RESET_BANK phase互斥，以及非busy周期后不能立即KA valid。两个cover工具第3/6步命中，VCD实际条件第2步active reset、第5步KA valid，均仅是过近似非空覆盖，不能当full可达刺激。
+
+独立no_busy_guard_v1只把原as_initial_safe中!k_busy反相门输入替换0（模型副本，生产源不动），同harness工具第6步拒绝；VCD第5步实际KA valid与active reset同为1。results/ka_reset_state_kernel_v1_review_20261031.json主模型复核提取、属性、所有SHA/日志/VCD及唯一mutation；34文件208199680字节证据archive实际恢复逐SHA一致，archive fc26dc4d26e1eedf4231a8c53a57b752c21e432ab248c46b5394b061d41a368a。所有kernel/diagnostic/mutant当前终态，不重复执行。
+
+原ka_active_configured_formal_v1：12步BMC PASS、4项actual rotator/readers/codecs性质归纳已于5分24秒成功；原controller 2456124/start_ticks1663631491/session20887继续cover -t35，当前smtbmc 2565237/start_ticks1663666178真实存活，Z3子PID及CPU/RSS见results/ka_active_configured_formal_v1_cover_live_20261031.json。覆盖日志最新step12，不能因暂未输出而停止/重启；没有完整unit非空接受、archive/freeze。原归纳PID2463077已终态，不再按旧PID等待。接下来沿同一session20887和实际cover PID；真实终态后主模型核对两cover/全部SHA/源与只读alias/VCD，失败保留分析。
+
+下一主研究义务是KA首次AS入口active bank configured及rearm/retirement关联；不能仅靠reset排除或unit性质相加宣布KA stall不可达。所有v6失败与stalled门控保留；full_system_functional_netlist_validated=false/physical_gate_open=false，不启动physical v5。当前无完整重仿真或物理任务，仅原unit cover仍运行；整体goal active。
+
+以下保留历史。
+
+# 活跃bank配置状态真实时序模型已通过12步检查，原归纳作业仍运行（2026-10-31）
+
+ka_active_configured_formal_v1直接读取v6绑定rotator、两个reader及codec真实RTL（3源），无状态切断/RTL修改；外部unit输入anyseq，唯一假设initial rst。通过展开JSON新增7个只读观察输出，逐cell/net比对完全不变、端口bit别名精确，无隐式未驱动层次引用。harness检查两bank configured→bound_valid、publish handshake后active configured、active configured下降必须对应前周期active bank reset或rearm handshake。SMT实际4assert/1assume/2cover。
+
+prepare exit0、12步BMC PASSED；归纳仍运行，不能宣布时序不变量已证明，发布/rearm两cover尚由原控制器后续执行。独立准备复核results/ka_active_configured_formal_v1_preparation_review_20261031.json，真实存活取样results/ka_active_configured_formal_v1_live_20261031.json。原controller 2456124/start_ticks1663631491/session20887；当前smtbmc 2463077/start_ticks1663633745，Z3子进程见live报告，最近持续CPU/约568MiB，induction已见step12→11→10。不是挂死或观察超时终态。
+
+继续原session20887/原实际PID，不重复提交或更改已绑定harness/源/模型。正常原链归纳成功后自动cover -t35；任何反例保留并主模型分析，不能放宽断言或靠12步PASS替代归纳/非空覆盖。待真实终态后完整源/只读观察/SMT属性/所有logs/VCD逐项主核验，再保全restore。此仍是unit接收端状态规律，不是完整top KA AS配置不变量；后续还需真实准入与KA AS入口关联。v6继续failed，physical v5关闭，整体goal active。
+
+以下保留历史。
+
+# KA真实组合条件4项SAT证明完成，下一聚焦活跃bank已配置不变量（2026-10-31）
+
+scripts/research_checks/prepare_ka_comb_cut_v1.py从已SHA复核full.json及真实ready锥提取4485个原组合单元，580个dff输出与97个memrd输出替换任意值；保持原Q/读输出bit ID和全部共享别名，不改组合单元或实际生产RTL，去除init属性放宽状态。ka_actual_comb_cut_v1是二态组合过近似，不是系统时序模型。
+
+7项真实Yosys SAT查询均终态符合预期：在k_a_valid1下证明k_busy1、ap_offer0、as_initial_safe0、as_attempt_reset0；任意状态下valid1/ready0及valid1/ready1均SAT，另valid0/ap_offer1非空控制SAT。因此不能把组合证明当背压不可达。stall见证active_bank0且bank0.configured0，而accept见证其configured1；这只是切断后的任意状态，不是完整RTL可达故障。下一优先从reset/真实配置准入与rearm流程建立KA AS入口active bank configured不变量，再处理state/fault/drained等条件。
+
+results/ka_actual_comb_cut_v1_review_20261031.json独立逐单元比对所有保留逻辑与原JSON、所有cut输出/别名/input ports、脚本/日志SHA及4 SUCCESS/3 SAT见证。21份证据archive实际restore逐SHA一致，archive86db2b96273069e138fec537d0975e823735fae297099f626a9ca9813051a03f。原真实模型及v6全保持；没有weakening原stalled检查、full shadow验收或物理运行。全部当前SAT任务终态，无owned重作业，goal active；v6仍failed，physical v5关闭。
+
+以下保留历史。
+
+# 完整133生产RTL已参数精确展开并提取KA真实结构依赖（2026-10-31）
+
+ka_full_rtl_frontend_v1真实读取v6绑定133生产源码（去掉3个验证文件），逐SHA一致。ka_full_rtl_elaboration_v1首次因遗漏两个相对路径HLS RAM .dat初始化文件失败保留；v2复制原始两个.dat并逐SHA核对与原full工作目录一致后，以原13参数SLOTS32成功hierarchy -check，48 memories/1571 processes。不是修改生产RTL或初始化内容。
+
+ka_full_rtl_lowering_v1实际read_rtlil→proc→opt_clean→flatten→opt_clean→check→write_json完成，约200s，实际CPU进程结束。最终query_residency_system为563 ports/217 inputs/107067 cells/50 memories，check0问题；13参数直接从JSON核验与v6逐值一致。9条transaction_fence局部for循环integer临时变量latch警告经源码核对；最终模型无latch cell及fordecl_block nets，不据此声称其他工具推断/等价/物理结论。
+
+scripts/research_checks/inspect_ka_control_cone_v1.py在真实模型上自动追踪含MEMID读写隐式弧的结构fanin：valid组合4 cells/1状态边界，ready组合5162 cells/677状态边界/57输入；两者跨状态依赖均94649 cells/216输入，接近完整设计。这改变后续策略：不能仅拼接几个unit的结论来证明完整KA背压可达/不可达，必须在实际逻辑上基于状态条件缩减并明确合法AXI环境。该脚本只给结构过近似，不是抽象soundness或可达性证明。
+
+results/ka_full_actual_rtl_control_cone_20261031.json与ka_full_actual_rtl_model_v1_review_20261031.json主模型独立复核源码/参数/日志/模型SHA；145文件、306821120字节证据archive实际解出逐SHA一致，archive e157188f9358977c52a85c422b564d80e157ba83d22e1c831c073918520da0d9。实际图在BASE/ka_full_rtl_lowering_v1/full.json（217MB），层次RTLIL在BASE/ka_full_rtl_elaboration_v2/elaborated.il（49MB），不要重复预处理；复核绑定后复用。当前所有新任务终态，没有完整重仿真/物理任务。v6仍failed/full_system_functional_netlist_validated=false/physical_gate_open=false，整体goal active。
+
+下一优先基于真实ready组合锥做条件化SAT/SMT分析，保留实际state共享关系，列出需跨周期建立的reader/rotator/仲裁不变量及协议假设；抽象cover必须全RTL重放才能当可达证据。不得降低原v6 stalled门控或将unit保持归纳证明当作full覆盖。
+
+以下保留历史。
+
+# 真实KA producer请求保持属性归纳通过，系统背压覆盖仍未完成（2026-10-31）
+
+在独立 /tmp/B_state_residency_offer_20261025/ka_formal_packages_v1 安装yowasp-yosys0.70.0.0.post1259及z3-solver5.3.3.0（系统无pip/ensurepip，先下载官方PyPI pip wheel并校验SHA，仅用于target安装，系统解释器未改）。当前 PATH应加入该目录/bin、PYTHONPATH指该目录、XDG_CACHE_HOME指同BASE/ka_formal_cache_v1。安装报告含全部包URL/版本/下载摘要；未启动完整系统重仿真或物理任务。
+
+hardware/variants/ka_producer_hold_formal_v1/harness.sv直接实例化真实v6 coordinator，全部外部输入anyseq，ENTRIES32/RESET_HOLD5/EXCLUSIVE_BACKEND_RESPONSES1，其余默认MAX_CYCLES1048576/MAX_CORRECTIONS1024；唯一环境假设initial cold_rst。二态单时钟检查：背压后无reset时valid与全部a_design/checkpoint/node/net/cookie保持。ka_producer_hold_formal_v3实际20步BMC PASS、temporal induction成功，非空stall cover第13步命中。前端v1/v2因新版时钟$check转换失败保留；v3按工具诊断prep→async2sync→chformal -lower→dffunmap→SMT成功，未移除/弱化断言。
+
+独立bad_ready_v1仅将生产副本AS:if(a_ready)改if(1'b1)，同一harness在第14步BMC拒绝；独立VCD读取确认第12步valid1/ready0、无reset而第13步valid0。未修改原生产RTL。results/ka_producer_hold_formal_v1_review_20261031.json独立核验全部SHA、SMT2含2assert/1assume/1cover、真实日志与反例；26文件证据archive实际恢复逐SHA一致，archive3b47645caec2ad4e054a64c85846df0bb0b492ab57e10dda7173972c36776cda。
+
+该结论仅为真实producer单元二态请求保持证明，不是full-system KA背压可达性、reader组合/XZ/全系统gate或物理通过。FORMAL_SCOPE.md列明完整系统后续义务（真实仲裁/lease/rotator/readers/AXI协议、正常恢复非空覆盖、有限stall后成功恢复、fault分流、抽象soundness）。下一应将实际接收端与准入控制纳入性质，而非相加unit结论代替full。v6仍failed/physical v5关闭，无owned重作业，整体goal active。
+
+以下保留历史。
+
+# 真实v6 KA producer背压单元实验及错误cookie负例完成（2026-10-31）
+
+本机XSim2022.2真实执行ka_real_producer_stall_v1：使用v6绑定recovery_coordinator.sv逐SHA相同RTL（2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194），SLOTS对应ENTRIES32/RESET_HOLD5/EXCLUSIVE_BACKEND_RESPONSES1，单元MAX_CYCLES1024，外部行为backend施加有限ready背压。350ns正例终态stalled6/authority2/owner2，已知及held-payload检查、cookie与状态0/修正0检查通过。backend等待对应合法单元端口刺激，未force/deposit或修改生产RTL。
+
+独立bad_cookie_v1仅将backend响应cookie XOR1，265ns首Fatal KA_UNIT_DUT_FAULT，无正例标志；实际DUT拒绝错误回复。两例compile/elaborate/simulate命令均exit0，负例仍按Fatal识别为预期拒绝，不能用命令exit0作为通过。MCP查询原两会话仍out of stack space，未操作原会话。
+
+results/ka_real_producer_stall_v1_review_20261031.json主模型独立核对真实日志、全部SHA/唯一mutation及计数；14份源/manifest/命令日志证据打包实际解出逐字/SHA一致，archive b8e5ede61b0e89c6821ed94fd633b4d111bc72658224673eab41a26c25961651。只是证据capsule，不声称完整编译snapshot归档或全系统等价通过。证明真实producer能承受单元端口背压，但不能替代真实接收端组成的full-system RTL/gate KA背压覆盖。v6保留failed、physical v5关闭；下一仍需完整实际RTL跨周期不变量/合法full-system刺激，不重复相同26小时回归。当前两小任务均终态，无owned重作业；整体goal active。
+
+以下保留历史。
+
+# Shadow v6终态KA背压覆盖失败，现场实际恢复及完整数据复核完成（2026-10-31）
+
+原v6在46620182ns终态Fatal KA_PROTOCOL_COVERAGE_MISSING active=78 stalled=0 transfers=26 edges=26 idle=13985900。原RTL参考4661993周期及host/query/backend/capture/CP/path/stage标志已输出，但KA覆盖门控拒绝，后续PW组/最终shadow检查未执行完，不能验收。CP_TRANSFER_MONITOR_END1560、KA26、PW8223/AW2831不是独立通过证明。
+
+results/stage_static_cp_shadow_v6_failed_run_data_review_20261031.json独立实际核对27完整输出文件与已恢复static参考字节/SHA完全一致，CP1560字/10帧、KA26请求checkpoint/node/net/cookie/design、PW8223拍/2831AW展开地址/data/strobes/last及时间严格通过。仍full_system_functional_netlist_validated=false，physical_gate_open=false；不得把失败改通过或放宽stalled门控。
+
+原runner1487337退出1、XSim kernel1596444已退出（命令exit0不代表无Fatal），唯一followup1509620与lifecycle1487299均退出1/failed。runner异常处理因既有observation_timeout未写failed，manifest保持过期simulate；真实日志和lifecycle退出码证明终态，不能继续按manifest等待或重启。followup在Runner gone without terminal receipt后停止，commands为空，没有audit/archive/restore/freeze接受链执行。所有原bound工具保持不变。
+
+新preserve_stage_static_cp_shadow_v6_failure_v1.py保全原full/followup/lifecycle三根674文件；failed_scene.tar实际解出逐文件SHA完全一致且原根不变，archive SHA abbcb9185cd0389edd07a799d111ce21c53441fca91cad16af26409ff8599744，1943603200字节。results/stage_static_cp_shadow_v6_failure_preservation_20261031.json留存完整inventory，terminal_failure_observation报告绑定真实退出与首Fatal。此为失败现场保全，不是功能接受或完整freeze。
+
+下一：基于真实绑定reader/authority producer状态分析KA为何无背压；在独立新版本设计真实backpressure覆盖及正负校准，保留v6全部失败证据与原检查。还需针对runner timeout异常终态状态另建修复版本，不能修改bound旧工具。当前无owned重作业，不启动physical v5，不重复跑相同26小时完整回归；整体goal active。
+
+以下保留历史。
+
+# Shadow v6首4条KA请求逐项精确一致，完整回归继续（2026-10-31）
+
+results/stage_static_cp_shadow_v6_first_ka_requests_20261031.json及.log保存实际v6首4/26条KA请求。既有严格check_shadow_payload_transfer_logs_v1.py.check_ka校验checkpoint/node/net/cookie/design与已接受full static参考的有序前缀完全一致，时间单调且符合pre-edge相位；首/末13766565000/13770355000ps。快照SHA 033e6cc52d3eee9f3cb66ea7bac6b915e44d58e37374f9df10c742ce64dd032d；parser及参考audit/file SHA绑定并实际复核。此为新的非空KA局部证据，不是完整26请求或三流完整覆盖通过。
+
+此前CP首156字完整帧与PW690拍/237完整突发快照仍保留；CP随后312字/2帧已只读逐项比较，首帧报告仍仅包含156字。当前三组均有非空局部证据，但完整1560 CP/26 KA/8223 PW、27文件、4661993周期及全组active/stall/edge等覆盖仍待终态审计；full_system_functional_netlist_validated=false。
+
+本次实际核验runner1487337/start_ticks1653605981、kernel1596444/start_ticks1653644560、唯一followup1509620/start_ticks1653613790及生命周期1487299/start_ticks1653605972均存活。原runner/followup的observation_timeout仍对应实际simulate/wait_existing；可见周期下界至少1376632。01:00 UTC容器内存约256.6/300GiB，events max254/oom0/oom_kill2，无新增OOM kill，原日志无Fatal/ERROR。
+
+继续同一作业，不重启或重复提交、不改28 bound工具。正常终态后原链独占audit→archive→实际restore→freeze，restore期间不读目标根；主模型完整SHA/27输出/周期/三流复核后才能放行已预备physical v5。当前没有完整网表接受或静态物理结论，整体goal active。
+
+以下保留历史。
+
+# Shadow v6首个CP完整帧及690拍PW前缀精确一致，原完整作业继续（2026-10-30）
+
+results/stage_static_cp_shadow_v6_first_cp_frames_20261030.json及.log保存实际v6首帧156字：索引/data/last逐项等于已恢复full static的BPATH前缀；首/末传输8328995000/8332095000ps，单调且符合pre-edge相位。参考natural_trace.txt SHA aab5645a08a6a52a6bb0bf492ea82e4f8cf017a0700634eed50e29d26983854e匹配已接受audit.outputs；快照SHA 6e3a4df078adcf20fa29bda4d6291a990ebde4ff45f9a3368718fbebc2a19b1a。
+
+results/stage_static_cp_shadow_v6_pw_prefix_500k_20261030.json及.log保存237个完整AW突发/690个W拍，既有严格parser重建地址/data/strobes/last逐项等于已恢复static参考前690/8223拍，时间相位与单调检查通过。快照SHA 09e9dde392eae34b94e2f9273e3ef1c3ffa2697a9539784c8b6e0575bb695f70；parser及参考audit/file SHA均绑定。两份均仅局部覆盖，不是完整1560 CP/26 KA/8223 PW、27文件或4661993周期通过，full_system_functional_netlist_validated=false，KA仍无记录。
+
+最新只读核验原runner1487337/start_ticks1653605981、kernel1596444/start_ticks1653644560、唯一followup1509620/start_ticks1653613790与生命周期1487299/start_ticks1653605972均存活。runner及followup记录observation_timeout但实际仍simulate/wait_existing，不能据此重启；可见周期下界至少834140，轨迹持续增长。容器内存约252.5/300GiB，events max254/oom0/oom_kill2（OOM kill与启动前相同，max相对启动前249增加5）。暂无Fatal/ERROR或新OOM。
+
+继续同一作业，不改28 bound工具；正常终态后原链独占audit→archive→实际restore→freeze，restore期间不读目标根。主模型完整SHA/27输出/周期/三流复核后才可放行已预备physical v5；当前没有完整网表接受或静态物理结论。整体goal active。
+
+以下保留历史。
+
+# 同容器A任务展开触及300GiB，v6仍存活；已保存资源现场（2026-10-30）
+
+本次实时发现容器memory.current从约280GiB升至300GiB，memory.pressure首次出现some/full avg10=4.40（取样值），memory.events仍max249/oom0/oom_kill2，尚无本次新增OOM。同容器PID2268851 xelab，cwd=/tmp/A_graph_compression_recovery_20261025_v1/collision_safe_native_rtl_v1/sim/verilog，RSS从64507376kB增长至77567932kB（约74GiB）；这是另一A任务，不属本B任务，不对其发信号或修改。v6 kernel1596444 RSS仍1524580kB（约1.45GiB）；不能将容器全部300GiB归为v6占用。当前证据不能解释旧v5中断原因，旧原因仍未知。
+
+results/stage_static_cp_shadow_v6_memory_surge_observation_20261030.json保存时间、cgroup原始统计、上述PID身份/cwd/cmdline/RSS及本v6三层进程身份。未清全局缓存、未杀进程、未重启v6。原v6 runner1487337、kernel1596444、唯一followup1509620、外围生命周期1487299再次核验存活；followup仍wait_existing。继续监测同一作业与OOM增量，若实际退出，核验退出码及资源记录后再诊断，不能据300GiB或观察超时直接重启。此前可见轨迹至少171213周期，PW日志继续增长，CP/KA仍空，无完整验收。既定audit→archive→实际restore→freeze及主模型review/physical v5门控不变。整体goal active。
+
+以下保留历史。
+
+# Shadow v6首个真实PW写突发逐字比较通过，完整仿真继续（2026-10-30）
+
+原完整v6已出现首个AW和3个W拍。既有check_shadow_payload_transfer_logs_v1.py重建地址0/64/128，逐项检查data/strobes/last，与已恢复full static的label_axi.txt首3个写完全一致。AW长度2、size6/burst1/id0；首/末W时间1057065000/1057125000ps。results/stage_static_cp_shadow_v6_first_pw_20261030.json及.log保存不可变首突发快照、parser和参考audit/文件SHA。该快照为本v6实际日志读取，未复用旧v5日志冒充新结果。
+
+这仅是1个PW突发的有效局部覆盖，不是完整8223拍/27文件/4661993周期通过。CP/KA日志仍为空，尚无其有效覆盖；full_system_functional_netlist_validated=false。不要将首次局部比较当作完整网表、物理时序或板卡结论。
+
+原runner1487337/start_ticks1653605981和kernel1596444/start_ticks1653644560继续simulate，唯一followup1509620/start_ticks1653613790仍wait_existing，外围生命周期1487299/start_ticks1653605972记录资源与退出状态；真实PID均核验存活，暂无Fatal/ERROR或新增OOM计数。保留同一作业与28 bound工具，终态后仍由原链独占audit→archive→实际restore→freeze，主模型全量复核后才可运行已预备physical v5。整体goal active。
+
+以下保留历史。
+
+# 完整shadow v6可见轨迹达到1ms窗口，尚无三流传输验收（2026-10-30）
+
+原v6可见FS/FB/FD轨迹下界100035周期，超过1ms源时钟窗口；目标完整4661993周期。runner1487337/start_ticks1653605981、kernel1596444/start_ticks1653644560、唯一followup1509620/start_ticks1653613790、外围生命周期1487299/start_ticks1653605972均再次核验存活。原任务simulate，followup wait_existing，尚无终态。simulate.log暂无Fatal/ERROR，CP/KA/PW目标日志仍0字节；不是有效流覆盖或完整通过。
+
+最新资源记录约214/300GiB，memory.events仍max249/oom0/oom_kill2，与本次启动前相同。继续同一任务与唯一审计归档恢复冻结链，不重复提交、不改28 bound工具、不在restore阶段读目标根。已准备physical v5仍须真正完整v6接受、实际restore/freeze及主模型逐SHA/全部27文件/三流全量复核才能放行，当前不运行物理实现。整体goal active。
+
+以下保留历史。
+
+# Shadow v6轨迹已推进至至少33304周期，参考前缀逐字一致（2026-10-30）
+
+原v6完整仿真已刷出新natural_trace轨迹。独立读取不可变快照24605字节，与已接受full static参考同长度前缀逐字一致，可见FS/FB/FD周期下界33304；不是精确当前时间、完整4661993周期通过或三流覆盖。results/stage_static_cp_shadow_v6_first_trace_growth_20261030.json及.log记录参考audit/输出SHA和快照SHA。三条CP/KA/PW目标日志仍为空，不能当有效传输通过。
+
+runner1487337/start_ticks1653605981、kernel1596444/start_ticks1653644560、followup1509620/start_ticks1653613790、外围生命周期1487299/start_ticks1653605972均核验存活；完整任务simulate，唯一followup wait_existing。当前日志无Fatal/ERROR，资源约211/300GiB，OOM计数与启动前相同。保留同一任务及28 bound工具，正常终态继续原链独占audit→archive→实际restore→freeze；主模型完整复核后才可放行已预备physical v5。整体goal active。
+
+以下保留历史。
+
+# 指向shadow v6的physical v5入口已准备，缺验收时六入口均拒绝（2026-10-30）
+
+新check_stage_static_cp_physical_inputs_v5.py/prepare_stage_static_cp_physical_v5.py及run/inspect/audit/freeze_stage_static_cp_physical_v3.py已另建版本。FULL明确为stage_static_cp_shadow_system_v6，TARGET保持已恢复stage_static_cp_synth_v1，未来物理根stage_static_cp_physical_v5。六文件仅改版本及绑定路径，反向替换逐字等于前版；report_evidence AST完全相同。18工具/原Tcl模板逐SHA绑定results/stage_static_cp_physical_tools_v3_preparation_20261030.json。六个实际CLI均在缺v6接受报告时拒绝，未建physical根，无物理作业或positive candidate执行。旧物理版本保持不变，不能运行旧指向中断v5的physical v4。
+
+新门控要求results/stage_static_cp_shadow_system_v6_20261030.json真实接受、actual restore/完整freeze，再要求results/stage_static_cp_shadow_system_v6_main_review_20261030.json，status=full_shadow_v6_actual_restore_freeze_main_reviewed，audit_sha256精确绑定full根source_bound_audit.json，full_system_functional_netlist_validated=true/all_pin_strict_equivalence=false。主模型仍须实际核验所有SHA、27文件/完整周期/133生产源/141编译文件以及1560CP/26KA/8223PW含AW/last/strobes与三组非空覆盖，不能只写flag。fresh opt→Default place→Default route与DCP独立重开原模板保持，无旧placement、新IO预算、clock位置、exception或waiver。
+
+原完整v6 runner1487337/start_ticks1653605981、kernel1596444/start_ticks1653644560、唯一followup1509620/start_ticks1653613790及生命周期1487299/start_ticks1653605972均再次核验存活。原任务simulate，followup wait_existing；两次资源取样kernel CPU持续增长，OOM计数未新增。当前仅早期初始化日志，暂无完整或有效三流通过。保留同一任务/唯一链；不改28 bound工具，不重复提交，不抢audit/restore。整体goal active。
+
+以下保留历史。
+
+# 完整shadow v6已进入仿真，资源与后续链正常（2026-10-30）
+
+v6 runner1487337/start_ticks1653605981已compile exit0（9.0s）、elaborate exit0（234.5s），当前simulate。实际XSim shell1594461/start_ticks1653644159、kernel1596444/start_ticks1653644560已核对存活；当前simulate.log无Fatal/ERROR，已执行原run100ms。此为启动进展，不是全周期或有效流通过。不要根据初始化缓冲日志判挂死或重复启动。
+
+唯一followup1509620/start_ticks1653613790真实存活、wait_existing，外围生命周期1487299/start_ticks1653605972真实存活、observing_children。resources.jsonl持续记录进程身份/CPU/RSS、cgroup anon/file/events和磁盘；最新约197/300GiB，memory.events仍max249/oom0/oom_kill2，与启动前相同，本次无新增计数。旧v5退出原因保持未知。观察期间展开CPU持续增长，未重启、改源或另起重作业。
+
+继续同一完整v6及唯一链，正常终态后独占audit→archive→实际restore→freeze，再由主模型全量复核。restore期间不读target根。28 bound工具与全部141编译输入保持冻结；后续要求27文件/4661993周期/1560CP/26KA/8223PW及所有资格、背压、pre-edge覆盖不变。尚未验收，不运行仍指向v5的physical v4。整体goal active。
+
+以下保留历史。
+
+# 完整shadow v6重新编译通过，现展开；唯一后续链与资源记录已启动（2026-10-30）
+
+原v5中断650文件已独立归档/实际恢复逐SHA一致，退出原因仍未知。未改旧源、manifest或21 bound工具。新完整目标stage_static_cp_shadow_system_v6已通过49份前置证据、28工具及13参数正向门控；run/audit/freeze/continue四份新程序只改版本/路径，反向替换逐字等于v5。RTL/host刺激/342比较、4有效payload资格、clock1ps、1560CP/26KA/8223PW、27文件和完整周期等所有标准不变。results/stage_static_cp_shadow_system_v6_tools_preparation_20261030.json、positive_preflight及fresh_inputs_review报告已保存。实际复制的所有RTL/验证源（除runner）、5 shadow输入、namespace、run.tcl逐项与v5相同。新common额外要求旧中断保存证据，不把旧任务当通过。
+
+当前runner1487337/start_ticks1653605981真实存活，连续60s≤225/300GiB准入已通过，compile exit0，现elaborate；实际子PID1528820/start_ticks1653620693。唯一followup1509620/start_ticks1653613790真实存活、wait_existing，后续独占audit→archive→实际restore→freeze。无完整v6通过结论，不进入物理实现。
+
+新外围生命周期记录launch_stage_static_cp_shadow_system_v6.py已实际启动，PID1487299/start_ticks1653605972，目录stage_static_cp_shadow_system_v6_lifecycle_v1；独立session后台启动，无exec会话句柄。每30s只读写resources.jsonl（cgroup anon/file/events、磁盘可用、后代PID/start_ticks/CPU/RSS），记录父子退出码；不重试、不发终止信号。启动前已用自有短子进程验证PID/退出码7/SIGTERM返回-15及离开进程过滤，未对任何真实仿真发信号。baseline oom_kill2/max249，最新仍同值；不能据累计值归因旧任务。首launch收据results/stage_static_cp_shadow_system_v6_launch_20261030.json。外围在followup启动后不再读取target根，避免restore竞争。
+
+两个旧Vivado MCP会话仍version out of stack space，保留不碰，使用本机XSim2022.2既有批处理命令。继续按long-run-supervision轻量复核三个真实PID及followup阶段；现无可用luna切换接口，沿用唯一确定性链。不得重复提交，不改28 bound工具。后续终态必须主模型全量复核全周期/全部SHA/27文件及三流记录才能接受；缺失任何项仍不通过。当前physical v4仍硬编码v5，不能在v6通过后直接运行；届时另建指向真正接受v6且要求主模型review的物理输入版本。整体goal active。
+
+以下保留历史。
+
+# Shadow v5中断现场已实际恢复核对；磁盘仍有余量（2026-10-30）
+
+当前状态取代下方历史“仍运行”：原runner100527、kernel216051和followup128968均已消失，原session75136/40383不可用。旧manifest仍为observation_timeout/simulate及wait_existing，但没有完整终态；followup commands为空，未执行原接受链。不得再将旧任务报为运行或据陈旧manifest继续等待。退出原因未知，累计oom_kill=2不能归因本任务。
+
+results/stage_static_cp_shadow_v5_interruption_observation_20261030.json记录可见913636周期下界，437 AW/1269 PW拍、312 CP字与已接受参考前缀一致，KA0，无Fatal/ERROR；距完整4661993周期、1560 CP、26 KA、8223 PW仍不足。全系统功能未验收，physical v4门控继续关闭。
+
+新preserve_stage_static_cp_shadow_v5_interruption_v1.py只保存现场，不改旧manifest或bound源。原任务和followup共650文件已归档（1813678080字节）并在独立目录实际解包，全部SHA逐项相同，原目录前后清单相同；results/stage_static_cp_shadow_v5_interruption_preservation_20261030.json记录归档SHA、全部文件清单和资源取样，主模型另行复核归档及650恢复文件SHA。此为中断证据保存，不是原完整功能audit/restore/freeze通过。
+
+资源取样：项目GPFS总10T/使用8.8T/可用1.3T（88%），实验/tmp所在overlay总7T/使用4.6T/可用2.5T（65%）；inode使用65%/3%。本v5现场约1.7G，日志未发现No space left/Disk quota exceeded/ENOSPC/EDQUOT。cgroup内存约180/300GiB，其中file约166.5GiB、anon约11.6GiB；不能将全部cgroup内存称作仿真RSS，不能从当前值推断此前峰值或退出原因。不清全局缓存、不删其他任务文件。
+
+下一处理独立完整重跑版本：复用已接受参数/RTL/observer/logger及全部门控，不修改旧21工具或旧失败现场；必须重新完成全周期/27文件/三流核对及独立审计→归档→实际恢复→freeze→主模型复核。没有可恢复的模拟器内存状态，不能将重跑说成从913636周期断点续跑。当前无本任务重仿真，新版本尚未启动；物理工具若随后改接新版本，亦另建版本，不伪造v5接受报告。整体goal active。
+
+以下保留历史。
+
+# Shadow v5首个真实PW写突发逐字前缀比较通过，完整回归仍运行（2026-10-30）
+
+原完整v5的只读shadow_pw_beats.log出现首个AW及3个W拍。独立check_shadow_payload_transfer_logs_v1.py重建地址0/64/128、三拍data/strobes/last，与已恢复full static的label_axi.txt首3个写逐项精确一致。首/末W时间1057065000/1057125000ps，AW长度2（3拍）、size6/burst1/id0。results/stage_static_cp_shadow_v5_first_pw_20261030.json及.log保存不可变快照、parser与参考audit/文件SHA。这只是一批有效gate PW局部覆盖，不是完整8223拍/27文件/全周期通过，也没有CP/KA有效覆盖或物理结论。
+
+原runner100527/start_ticks1651623675/session75136与kernel216051/start_ticks1651661803继续simulate，唯一followup128968/start_ticks1651633330/session40383仍wait_existing且真实PID存活；原日志暂无Fatal/ERROR。保留同一作业和所有21 bound工具，完整终态后仍由原链独占audit→archive→实际restore→freeze；主模型全量复核后才能放行physical v4。整体goal active。
+
+以下保留历史。
+
+# 完整shadow v5可见轨迹达到1ms窗口，尚未验收（2026-10-30）
+
+本次实时核查原runner100527/start_ticks1651623675、XSim kernel216051/start_ticks1651661803及唯一followup128968/start_ticks1651633330均存活。原完整仿真仍simulate，followup仍wait_existing；可见轨迹下界100035周期（至少1ms源时钟窗口），目标完整参考4661993周期。日志暂无Fatal/ERROR，CP/KA/PW目标传输日志仍0字节，不是有效流覆盖或完整PASS。工作线程持续CPU推进，不重启、改源或重复提交。
+
+下一仍只沿session75136与唯一session40383：原完整终态后独立audit→archive→实际restore→freeze归原链所有，主模型再逐SHA/完整27文件/全周期/三流计数与数据复核。物理v4门控及主模型review要求保持，不能抢跑。此为verified wait，不是研究完成或blocked。
+
+以下保留历史。
+
+# 正确指向shadow v5的physical v4工具已预备，尚未运行（2026-10-30）
+
+check_stage_static_cp_physical_inputs_v4.py/prepare_stage_static_cp_physical_v4.py及run/inspect/audit/freeze_stage_static_cp_physical_v2.py已独立生成，不修改旧physical v3或bound工具。TARGET仍为较优静态stage已恢复OOC，FULL明确为stage_static_cp_shadow_system_v5，未来物理根stage_static_cp_physical_v4。18工具/原Tcl模板逐SHA绑定results/stage_static_cp_physical_tools_v2_preparation_20261030.json，六个真实CLI缺v5接受报告时全部拒绝且未建输出；无物理作业或positive candidate执行。
+
+门控只在results/stage_static_cp_shadow_system_v5_20261030.json真实接受（full_capacity_three_payload_protocol_shadow_actual_restored）、actual restore/完整freeze之后才读full根；另必须有主模型review results/stage_static_cp_shadow_system_v5_main_review_20261030.json，status=full_shadow_v5_actual_restore_freeze_main_reviewed，audit_sha256精确绑定full根source_bound_audit.json，full_system_functional_netlist_validated=true/all_pin_strict_equivalence=false。主模型要先实际核验全部SHA/27输出/完整周期/133生产源/141编译文件及1560 CP、26 KA、8223 PW含AW/last/strobes，不能只写此flag。资格342+4与所有三组非空监视、13参数SLOTS32、U280、10ns、无环/锁存/黑盒、DCP/网表SHA都保留。此处没有伪造接受报告或替代完整验证。
+
+fresh opt→Default place→Default route与独立DCP重开模板原样，无旧placement、新IO预算/clock位置/exception/waiver。新physical auditor的report_evidence AST与已接受旧版本逐项完全相同，parser逻辑未改；新runner/import/ROOT/TARGET/FULL/报告/工具列表全部指向static正确版本，原full21工具SHA复核不变。旧physical v3指向失败shadow v4不可使用。物理执行与时序结论仍完全pending。
+
+原完整shadow v5现simulate，runner100527/start_ticks1651623675/session75136，kernel216051/start_ticks1651661803；唯一followup128968/start_ticks1651633330/session40383保持running/wait_existing且真实PID存活。最新可见轨迹下界62636周期，原日志无Fatal/ERROR，未完整验收。继续同一任务，不重复提交、不改bound源、不抢audit/restore。physical v4正向门控必须等当前完整证据及主模型复核，不能抢跑。整体goal active。
+
+以下保留历史。
+
+# 完整shadow v5已仿真推进，早期运行诊断实际恢复冻结（2026-10-30）
+
+原stage_static_cp_shadow_system_v5/runner100527/start_ticks1651623675/session75136已compile exit0（9.3s）、elaborate exit0（230.6s），当前simulate；实际XSim shell214578、frontend214727、kernel216051/start_ticks1651661803，worker216054持续CPU推进。唯一followup128968/start_ticks1651633330/session40383仍running/wait_existing，真实PID均复核存活。没有停止/重启原任务或修改bound源。最新可见natural_trace事件下界53761周期（完整参考4661993周期），原日志无Fatal/ERROR，尚无CP/KA/PW目标传输日志，不是完整通过。
+
+最初可见初始化日志停在cycle51且worker满载，不能据缓冲输出判挂死。独立短诊断probe_stage_static_cp_shadow_runtime_v1.py只复制完全相同已编译snapshot并重新建立全新原输入图像，未改RTL/checker/force，仅增加本机-help和官方UG900确认的--maxdeltaid10000、100次run10ns只读查询（最多1us）。它不是第二个完整回归。原完整作业一直保留；短探针已终态，当前只剩原full作业。
+
+短探针实际current_time逐步到1us、cycles1..100精确，reset5/比较149，三组transfer0；无Fatal/ERROR或delta上限触发。只能说明此早期窗口及步进方式可推进，不能排除后续调度问题、宣称整段更快或替代完整通过。与此同时原full自然推进到35737/39037/45128周期，证明先前少量刷盘日志不是终止证据。results/stage_static_cp_shadow_v5_early_progress_20261030.json保存一次live取样：natural/graph/owner/cost非空前缀与已恢复RTL参考精确一致，label前缀0字节不算非空覆盖；仅partial fixture证据而非精确当前时间或有效gate传输证明。
+
+短诊断385文件archive实际restore/audit字节一致，archive fbd694887490b7dc065039b88c1d786ad06b36d5a329572eb19066a2f46eef2e，audit 53267a4b5806ae8023815d1b2a95f122a4234e76bc22aa7fca02f154afb0d9d1。独立auditor/freezer及results/stage_static_cp_shadow_runtime_probe_20261030.json、13文件freeze已主模型逐SHA复核。官方option来源在报告；旧ISIM AR41339未作为XSim修复应用。不更改原run100ms命令、snapshot、检查/断言、任何severity或目标周期。
+
+下一继续原full kernel216051/session75136及唯一后续链40383；不要重复完整运行、抢审计/restore或修改21 bound工具。正常终态后仍由原链独占audit→archive→实际restore→freeze。观察超时保留原作业，不据超时重启；若runner消失而无完整终态必须核对实际PID、日志及后续错误后由主模型判断。原完整1ms/46.6ms等后续行为尚未完成，不进物理实现。所有既有59控制/两logger控制接受证据不变；旧shadow v3/v4失败保留。整体goal active。
+
+以下保留历史。
+
+# 三流logger实际恢复通过，完整shadow v5及唯一后续链已启动（2026-10-30）
+
+shadow_payload_monitor_controls_v1/session3085两例终态observed；独立gold验证普通与NBA ready下三个流各5传输及405000/415000ps开始的逐拍时间，KA checkpoint/node/net/cookie/design、PW AW地址/长度/size/burst/id及W数据/strobes/last、CP index/data/last全部精确一致。78文件archive实际restore/audit字节一致，archive 8f70cf29f9ab97481a37c207caf864871ba3fea99fd0b09c5aa09971c10ae927，audit 735eefeae3a4c91aa259a26a201d0d23a8cd427bd6ecdba24e3104f0a034a523。results/shadow_payload_monitor_controls_20261030.json与12文件freeze/main_review主模型逐SHA复核。parser另有14个合成日志差异/缺漏/未知/时间/地址/末拍负例均拒绝；这些都不是实际DUT通过。
+
+59 observer controls及logger前置真实满足后，stage_static_cp_shadow_common_v5.evidence()正向门控通过：45份前置文件、21工具逐SHA、完整SLOTS32/13参数与133生产源匹配已恢复static OOC/full RTL。positive preflight已保存results/stage_static_cp_shadow_system_v5_positive_preflight_20261030.json。两个旧MCP会话version仍out of stack space，继续本机XSim2022.2，不复用或停止旧会话。
+
+当前唯一完整重作业stage_static_cp_shadow_system_v5，runner100527/start_ticks1651623675/session75136，namespace及60s内存准入已完成，compile exit0，现elaborate，xelab shell143919/start_ticks1651638301，core144067持续CPU推进。141编译文件=原136+5shadow/monitor；DUT/host刺激/所有原断言不改，342原输出比较逐字保持，CP task body不变，4 payload显式已知valid限定且有效/背压/pre-edge数据metadata严格已知相同。独立logs要求1560 CP字、26 KA请求及8223 PW写拍连同AW地址/last/strobes重建精确匹配已恢复full参考；不得只看PASS或终值。旧v3/v4失败保留，all_pin_strict_equivalence=false。
+
+唯一followup128968/start_ticks1651633330/session40383，绑定24项工具/报告/自身，真实父PID已核对，现wait_existing。正常终态后独占audit_stage_static_cp_shadow_system_v5.py→archive→verify_search_retire_restore.py stage_static_cp_shadow_system_v5 audit_stage_static_cp_shadow_system_v5.py→freeze_stage_static_cp_shadow_system_v5.py；失败停止不自动修补/重试，观察超时保留原子任务。不要重复提交或抢审计/restore，不改bound源工具；restore时不读目标根。当前没有实际v5功能通过结论，物理输入旧v3仍指向失败v4不能使用，只有v5真正审计恢复冻结后另建正确物理门控版本。整体goal active，物理时序/板卡/新矩阵等仍缺。
+
+以下保留历史。
+
+# 三组payload观察器59控制例已实际恢复冻结，logger校准已启动（2026-10-30）
+
+prepare_stage_static_cp_shadow_protocol_v5.py从已冻结CP observer v4生成新版本：CP task body逐字不变，仅另外k_a_node/k_a_net由严格已知k_a_valid限定、p_m_wdata由严格已知p_m_wvalid限定；包含背压与pre-edge、data/metadata未知及ready未知/不一致检查。其他342比较块逐字不变，反向替换精确还原parent，DUT/原host TB未改。旧v3/v4失败保留；all_pin_strict_equivalence=false。
+
+shadow_payload_contract_controls_v1/runner4032024/session6295与唯一followup v2/4095096/session88791均observed complete终态。59例：2正例×CP/KA/PW三组各5传输，普通active30/stall16/edge10，NBA-readyactive33/stall18/edge11；57负例覆盖各组active/stall/pre-edge数据错误、data/valid/metadata XZ、valid drop/ready X、其他输出错误/XZ、短reset和无流/无传输/无stall。KA node与net单独错误各自拒绝。独立audit校验全部首Fatal、宏/源及计数。1831文件archive实际restore/audit字节一致，archive f925b8945a56d3636e03d9a71d720b99ea38b434a4864a911bd1ac2c0d44dd6b，audit d4fb32b00d8367ee421c6f8e383384449308cd25f239cbf389aece2cfbb3f62c。results/shadow_payload_contract_controls_20261030.json、23文件freeze及main_review已逐SHA/语义复核。仅fake模型observer控制，不是实际网表通过。
+
+首次followup v1在建owner目录前因拷贝CLI断言要求root参数而拒绝（此runner无CLI参数、硬编码root），失败源码/receipt保留；v2仅修身份检查且绑定17项源/报告，未重启原solver。其audit→archive→实际restore→freeze链已完成，不再重复执行或修改bound工具。
+
+当前唯一小型XSim任务shadow_payload_monitor_controls_v1，runner52870/start_ticks1651607763/session3085，现wait_memory，无自动followup。仅2正例，同clock/NBA ready+3独立5-beat streams；原CP logger不变，新只读KA及PW W/AW logger，gold要求KA字段/设计、PW地址/长度/size/burst/id、data/strobes/last及全部时间精确一致。scripts/run/audit/freeze_shadow_payload_monitor_controls_v1.py与check_shadow_payload_transfer_logs_v1.py已准备，工具prep及独立合成gold的14负例拒绝通过；真实logger尚未完成，不能当校准通过。终态后main仅执行audit→archive→verify_search_retire_restore.py shadow_payload_monitor_controls_v1 audit_shadow_payload_monitor_controls_v1.py→freeze_shadow_payload_monitor_controls_v1.py，失败先保留证据，不修旧源。
+
+完整shadow_system_v5的common/run/audit/freezer/唯一supervisor已独立预备并21工具绑定，results/stage_static_cp_shadow_system_v5_tools_preparation_20261030.json；缺59+logger实际恢复时明确拒绝且无full根/任务。新版本要求原27文件/周期/所有旧监视、342原比较与4显式payload资格、独立1560 CP字/26 KA请求/8223 PW写拍及AW地址映射精确一致，共141编译文件。positive preflight尚未创建。必须等logger实际恢复冻结/主模型复核后，重新全部SHA及evidence()正向门控再实际启动唯一v5/full runner；namespace准备期间manifest延迟，不误判重启；随后原CLI supervisor绑定原PID，不能复用controls supervisor。
+
+目前没有新真实DUT/gate或物理作业，physical旧v3输入仍指向失败shadow v4，不能使用/修改；若v5真正接受再另建门控版本。整体goal active，完整时序/板卡及新矩阵等仍缺。
+
+以下保留历史。
+
+# Shadow v4首次k_a_net失败已恢复冻结，全端口盘点完成（2026-10-30）
+
+stage_static_cp_shadow_system_v4/runner3720115/session13299及唯一followup3748462/session69511均failed终态。compile/elaborate/simulate命令exit0，但实际255999ps（诊断round到256000ps）Fatal FULL_SHADOW_MISMATCH port=k_a_net actual00000000 expectedxxxxxxxx；CP logger0字，无有效传输结论。原v4源码/checker/全部检查保持，不重启、不改失败为通过。audit_stage_static_cp_shadow_failure_v2.py的passed仅失败证据完整性。
+
+probe_stage_static_cp_shadow_failure_v2.py复制原完整编译snapshot，重新建立全新原图像，未改RTL/checker/force/deposit；60s内存准入后只读Tcl在255ns和故障后观察全部346输出（actual/expected）、217输入及9计数，共每点918对象/1836行。复现同一Fatal；两点仅cp_m_data、k_a_net、k_a_node、p_m_wdata四数据为actual0/expectedX，其他342输出相同，actual无未知。cp_m_valid/k_a_valid/k_a_ready/p_m_wvalid两侧均0，AXI WREADY1，CP transfer0。只证明这两采样点，不证明后续或允许任意掩码。
+
+probe381文件archive实际restore/audit字节一致，archivefc22e38e21d70943c82e40ce49e6ee56f94834ceb4f6f82a02e7aa9782ecbcc7，audit90e539e9e77322a61680ad698fa971359bba903375d111a0fe0eb4ffce02389b。v4失败605文件实际restore字节一致，archive96f88158ee0c20fbc42765b85726cb594f42e51bfad75a5d0461224edb6d0d2d，audita189f885c7d611649cbaf42932d821d1a2472b45454799da69d0c29216c3529b。freeze_stage_static_cp_shadow_failure_v2.py生成results/stage_static_cp_shadow_v4_failure_20261030.json/26文件freeze，主模型逐SHA核对；主复核results/stage_static_cp_shadow_v4_failure_main_review_20261030.json。旧v3/v4均继续failed，全系统网表未验收，physical gate关闭。
+
+analyze_stage_static_cp_shadow_payload_contracts_v1.py执行并绑定实际源：recovery nodes/nets未reset、a_valid仅AS；authority mux的selected K字段被采纳必然k_a_valid1，16种二态owned/offer/valid/ready穷举，无额外排他假设；reader在req_valid&&req_ready才捕获。pager buffer_data未reset，WVALID需WRITE_DATA&&buffer_valid，AXI consumer仅WVALID&&WREADY捕获。真实已恢复full static参考有26条KA、8223条label AXI W、1560条BPATH，为后续独立传输oracle。results/stage_static_cp_shadow_payload_contracts_20261030.json及2文件freeze逐SHA核对。这只是源码/二态分析，不是RTL formal或新仿真通过。
+
+下一先基于明确三个组CP(data)、authority(node/net)、pager W(data)审查完整接口契约并生成独立新observer/正负控制：valid即使idle也必须已知且两侧严格一致；valid1含ready0背压及pre-edge时payload/必要metadata必须已知且严格相同；其他342比较保持。注入active/stall/pre-edge/data XZ/valid XZ或不一致、非限定输出故障并验证拒绝；各组非空覆盖与独立26 KA/8223 W/1560 CP传输日志逐项比对不能省。不能按名称批量忽略X，不能用两点盘点证明以后无差异。新observer/controls/full run尚未创建或启动。physical v3工具仅预备且仍要求已失败v4的接受报告，后续若新版本真正通过必须另建对应输入版本，不修改bound旧工具。当前无owned FPGA任务，整体goal active，物理时序/板卡等仍缺。
+
+以下保留历史。
+
+# 完整CP协议shadow v4与唯一后续链已启动（2026-10-30）
+
+已重新逐SHA核对19工具与29份前置证据，完整SLOTS32/13参数、133生产源与已恢复static OOC/full RTL精确匹配。只读CP传输logger两控制例各5字逐字/索引/last/时间精确通过，70文件archive实际restore audit字节一致，archive dcef31be44d5ae9b5b7c04bd9792bcf613fe9af57707b621eadff29f1311be7d/audit fa89bb82209b29c0b9cff809fe415835ef0f432d81613b854d3fbab6a921f633；results/shadow_cp_transfer_monitor_controls_20261030.json及9文件freeze逐SHA通过。17协议控制与clock校准证据保持原样。
+
+当前唯一重作业stage_static_cp_shadow_system_v4，runner3720115/start_ticks1651433713/session13299；namespace已完成，≤225GiB持续60s准入通过；compile已exit0，当前elaborate，实际xelab shell3763673/start_ticks1651448528，core3763810；最近core持续CPU且继续编译BRAM primitives，无ERROR，未进入sim。原136文件+4shadow文件共140，保留原host/CP/query/backend/capture/path/stage刺激断言。345输出比较原样，仅cp_m_data按已知且严格一致valid限定，背压及pre-edge仍逐位检查；时钟仅按独立控制校准提前1ps。独立logger要求实际1560字/10帧与已接受原BPATH逐字相同，不是仅终值比较。旧v3严格全pin失败保留，all_pin_strict_equivalence=false。
+
+唯一followup3748462/start_ticks1651443683/session69511，现wait_existing，绑定22项工具/报告/自身并核对真实runner身份。终态后独占audit→archive→实际restore/audit字节一致→freeze；失败停止不修补重试，观察超时不杀原任务。不重复提交、不修改bound源/工具、不抢审计或读restore根。此时没有v4完整gate通过结论。两个旧MCP会话version仍out of stack space，沿用本机XSim2022.2，无luna切换接口。
+
+新physical输入v3（check_stage_static_cp_physical_inputs_v3.py/prepare_stage_static_cp_physical_v3.py）仅预备，要求v4实际restore、完整1560字与27比较；缺接受报告时实际拒绝且未建physical根，results/stage_static_cp_physical_inputs_v3_preparation_20261030.json。模板fresh opt/default place/default route不变，无新IO/clock位置/例外/waiver；physical runner/inspect/audit/freezer亦已从接受旧流程独立预备（run/inspect/audit/freeze_stage_static_cp_physical_v1.py），17工具绑定results/stage_static_cp_physical_tools_v1_preparation_20261030.json；五个实际入口缺v4接受报告时全部拒绝且未建根，尚无positive candidate/物理运行。不可使用旧指向失败v3的physical输入v2。新physical auditor的report_evidence已在已恢复native physical同布局报告上12字段精确匹配（reference WNS-5.240仅旧native），results/stage_static_cp_physical_parser_crosscheck_20261030.json；最初尝试旧CP route-recovery因缺constraints_input.xdc布局不适用，未改代码/检查。当前只进行真实v4回归，整体goal active，物理时序/板卡等仍缺。
+
+以下保留历史。
+
+# CP导出契约检查器17控制例实际恢复冻结（2026-10-30）
+
+prepare_stage_static_cp_shadow_protocol_v4.py基于已校准clock_v2生成新observer：345原输出comparison blocks逐字不变；仅cp_m_data按二值且严格相同的cp_m_valid限定，有效期间包括ready0背压及传输前沿均要求data/index/last已知且精确一致。记录idle差异，不泛化mask/X忽略；新增非空active/stall/transfer/edge/idle覆盖门控。DUT和原host刺激/断言未改，旧v3全pin失败保留。
+
+控制suite v4前4例符合预期，第5edge故障半周期已被phase0提前检出，未达到单独phase1预期，旧失败保留。v5只把fake producer故障缩到采样前1ps，checker不变；17例全部预期：2正例各5有效传输，普通readyactive30/stall16/edge10，NBA-readyactive33/stall18/edge11；idleX/0差异实际观测，stalled/active/edge-only错误、有效data/valid未知、valid不一致、metadata、其他输出known/X/Z、短reset以及无流/无传输/无stall均被拒。独立auditor v1的JSON键顺序假设、v2的NBA-ready stall预期19错误都保留；v3以精确case集合及独立采样时刻枚举计算18=12post+6pre，未改checker或负例判断。
+
+V4部分157文件archive实际restore字节一致，archive5ab4ee25e05fe364e8db84fc5cfcc865383007a71e5ad58b7c4f026a8d0c1bd5/audit94307b5305c684d0bed4590166d2a05a1eed10fc8f1934f27cd1ecbb6e6ce547；V5完整529文件实际restore字节一致，archive30e7f9764c7807cd9d28b01af2b2ad4cdb3db5f2a65d1d7a076ee3f40a0bcd26/audit0a268c8ab020afb25656c2b4f89e404c3cd6d5edb94cf16b1f1627f815498fbd。results/shadow_cp_protocol_controls_20261030.json及35文件freeze主模型逐SHA复核。仅observer控制，非实际DUT/full gate通过；all_pin_strict_equivalence=false/full_system_functional_netlist_validated=false。
+
+当前无owned FPGA作业。下一先建新完整shadow版本的run/common/audit/freezer，门控真实full baseline/static配对与本17例实际restore，使用新contract checker并保留345比较及pre-edge检查；实际全程/27文件/原覆盖及CP非空通过后再审计归档恢复。旧shadow v3保持failed；物理门控仍关闭，不能直接运行指向v3的physical输入v2。所有已用工具/源冻结不改。整体goal active。
+
+以下保留历史。
+
+# 影子驱动NBA采样缺陷独立复现，1ps修正控制例已恢复冻结（2026-10-30）
+
+shadow_transport_nba_control_v1使用两个字节相同（仅module名不同）的寄存器fake模型、旧checker原样：negedge NBA通过190检查/1202ns，posedge NBA在256ns qc_cp_crc actual1 expected0失败；独立audit/64文件archive实际restore字节一致，archive3ec8b28e00b067897af63263c2288c9f04dbd217fcc5f69073959065ceb7745f，audit22d0f8e921d7073cc29dec1ef4b0f935d1091cd4a036577e8ed44289a5124e93。这是旧重放采样问题证据，非FPGA RTL或Vivado缺陷。
+
+clock_v2仅把两处drive_clk延迟从200ns改199.999ns，使gate时钟在同刻NBA输入更新之前1ps到达；data/expected仍200ns，全输出比较/断言原样。相反替换逐字等于旧checker。NBA control v2双edge均通过190检查，实际restore archive61be0e97cb95e5027fc295db745d039cdfd25d9332b23c86deda2dd650fdfd70/auditc71d931f3cce9563992c596a193e15040da32bec0b76ac0480b675a9bc82bf79；原stateful五例也全预期（known/X/Z差异仍拒、短reset拒），archive0e95c9e90cff605762f02c96114da590e68e8484ad26879096af33b60abf0f77/auditbb4648382b60bd53baf2f75d30ca23a6219a2bd9a547f1fa6fc0de01fe852a17。results/shadow_clock_sampling_controls_20261030.json与20文件freeze主模型逐SHA复核。
+
+当前没有实际DUT/gate新任务，也尚未加入valid限定。下一在已校准clock_v2上建立仅cp_m_data的契约观察：valid必须二值且两侧严格一致；data在valid1时包括ready0背压仍逐位检查、不得忽略X或掩码其他输出；需独立valid/idle/stall/差异/未知控制例及采样验证，再另起新完整影子版本。旧v3的空闲cp数据严格全pin失败继续保留，不能改成passed；物理门控仍关闭。所有已用源与工具冻结不改，整体goal active。
+
+以下保留历史。
+
+# 影子v3严格全pin失败已实际恢复，确认cp有效位为0（2026-10-30）
+
+shadow_system_v3编译/展开exit0，仿真在256ns第一比较Fatal：cp_m_data actual00000000 expectedxxxxxxxx；原runner2523749/session61979与followup2558805/session80676均failed终态，不重启、不改旧checker或DUT。独立失败audit的passed仅证据完整性，strict_pin_verdict=failed/full_system_functional_netlist_validated=false。592文件archive实际restore audit字节一致，archive409e24f244be1c7d7ddfea15ec00ee1c4635d04e0b102835b1d03fc4a4d76632，audit265d7867cd1da20e673918969f399cb32e7c4c27326e9a99e7c88d7686b1ff43。
+
+只读probe复制完全相同编译snapshot与全新原图像，Tcl在255ns/256ns取值，保持旧strict checker不变，复现同一Fatal；两侧cp_m_valid0、ready0、cp_valid0、cold_rst0，armed1/reset_edges5。379文件probe archive实际restore字节一致，archiveba44c91590ab65233c5d37de7aef52b0875956239844beaf6fc8b21df9d2625c，audit15d5c043b033991d83b696d72549750cd4600a86f42deb63bda37d177e54bc7b。源码cp_m_valid只在CP_EXPORT，data直读不复位cp_stage；原consumer等valid才读。当前差异未发生在有效导出，不能据此宣称有效数据错误或完整功能通过，更非Vivado缺陷证明。
+
+results/stage_static_cp_shadow_failure_20261030.json及17文件freeze全SHA核对，保留旧强全pin失败结论。下一先验证契约比较器：cp_m_valid必须严格且已知，data在valid1时（含ready0背压）必须逐位比较，全部其他检查保留；需独立正负例和时钟采样验证，不能泛化掩码或忽略X制造通过。尚未创建新checker/full run。当前无owned FPGA作业，物理门控关闭；已有OOC/RTL容量配对通过不受此工具观察边界取代。整体goal active。
+
+以下保留历史。
+
+# 完整容量static实际配对通过，shadow v3已实际启动（2026-10-30）
+
+static完整容量及唯一followup均终态observed。415文件archive实际restore audit字节一致，archive2c1fc6022c9145eb3c9861e14555df2d343338e3d0c522bed61fe87ee146574e，auditf087aaff4c300605867c02d9fadf149b67125ebb6d9e13f6599edc7dbd01c770。220freeze文件/27完整输出及46619980ns/host atomic270/所有覆盖与银行逐项精确等于full baseline，results/stage_static_cp_host_full_static_main_review_20261030.json主模型已复核。
+
+shadow_system_v2实际准备失败，遗留ref pressure/run.tcl路径，未建manifest或启动模拟器；失败根/工具保留，results/stage_static_cp_shadow_system_v2_preparation_failure_20261030.json。不把它当RTL失败。v3修两处同类路径（runner Tcl与freezer输出目录）及版本绑定，DUT/刺激/断言不变；13工具绑定及实际full13参数正向门控/全路径复核通过。
+
+当前唯一重作业stage_static_cp_shadow_system_v3，runner2523749/start_ticks1651028783/session61979，现elaborate，namespace实际输出SHA与之前static OOC预检一致。唯一followup2558805/start_ticks1651040283/session80676已wait_existing；正常终态后独占audit→archive→实际restore→freeze，失败不重试修补、主模型诊断。不要改bound工具或抢restore。此刻没有full gate通过结论。
+
+物理输入工具另建v2跟随shadow v3接受报告，缺证据时门控拒绝，无physical根/任务；旧physical输入v1跟随已失败shadow v2不能使用。shadow v1仍因参数不匹配禁用，v2因准备失败保留，后续沿v3实际PID/session。整体goal active。
+
+以下保留历史。
+
+# 静态stage后续fresh physical输入门控已预备，未运行（2026-10-30）
+
+check_stage_static_cp_physical_inputs_v1.py/prepare_stage_static_cp_physical_v1.py已Python解析并测试缺完整gate接受报告时实际拒绝。要求已恢复shadow_system_v2的全346输出/27文件、全13参数SLOTS32及网表SHA与OOC一致，才读取DCP或创建physical根；保持原implement_state_ooc.tcl的fresh opt→Default place→Default route，不用旧placement、不新增IO/clock位置/exception/waiver。results/stage_static_cp_physical_inputs_preparation_20261030.json绑定两工具/Tcl；当前physical根不存在、无Vivado子任务，physical runner/auditor/freezer尚未准备。此为后续准备，不是物理收益或板卡结论。
+
+当前static full真实内核2148197/start_ticks1650908954持续CPU推进，唯一followup2118579/session78145仍wait_existing；运行状态未失败，无新PASS。优先原完整容量候选→27输出/完整周期精确配对→实际restore/freeze/主模型核验→shadow v2；仅其实际通过后考虑新物理实现。v1 shadow仍禁用。所有已用源/绑定工具保持冻结，不重复提交或抢restore。整体goal active。
+
+以下保留历史。
+
+# 当前静态OOC实际网表namespace预检通过，static full已仿真（2026-10-30）
+
+namespace_functional_netlist_v1.py已在当前已恢复stage_static_cp_synth_v1/synth.v实际执行，172模块/343处仅type定义/实例重命名，inverse逐字完全还原，输入SHA匹配OOC独立audit，输出SHA/receipt核对通过；results/stage_static_cp_shadow_v2_namespace_preflight_20261030.json及3文件freeze留证。不同于先前旧native网表预检，这是实际static网表格式通过；仍未编译/elab或做任何完整gate仿真，不能宣称functional通过。
+
+static完整容量session46369编译/展开均exit0，实际XSim内核2148197/start_ticks1650908954已确认存活，原runner2115050；唯一followup2118579/session78145仍wait_existing。内存解析期间约176GiB。沿同一任务，不抢audit/restore，不改bound源工具；通过全27文件/周期配对和实际恢复冻结后主模型才可运行shadow v2。当前无新full static PASS。整体goal active。
+
+以下保留历史。
+
+# SLOTS32 host基线实际恢复通过，static候选及唯一链已启动（2026-10-30）
+
+完整容量baseline及唯一followup均终态，独立audit/410文件archive实际restore字节一致；archive9bfc75fdb28b226aae6961aa1f06852c34efeecc95b799a020f8c90051fe007a，audit9058a25c147bf2e2c96f0c24906ba7209e562b6bc25493f63d049c8afe5595a9。215freeze文件/27输出/全部13参数/实际full CRC原prefix与host后缀已主模型复核，results/stage_static_cp_host_full_baseline_main_review_20261030.json。finish46619980ns，host31events/3req3rsp/write1/clean_reject1/dirty_accept1/atomic270，CP15/15+60import90export/edit1；path18writes8publish27checks、stage10captures1248imports1259checks；全4661993周期。不同于压力48292280ns/atomic238，明确不混用。
+
+已实际启动唯一static完整容量候选stage_static_cp_host_full_static_v1，runner2115050/start_ticks1650897955/session46369，现wait_memory。133production逐SHA与已恢复OOC匹配，保留全部host/path/stage刺激与检查。唯一followup2118579/start_ticks1650899356/session78145已wait_existing，终态后独占audit→archive→实际restore→freeze static；不抢审计、不读restore根、不修改bound工具、不重复提交。audit要求27文件/完整finish/host/所有覆盖及银行精确匹配新full baseline。当前尚无static full PASS或全系统gate结论。通过主模型复核后才运行参数一致shadow v2，v1仍禁用。整体goal active。
+
+以下保留历史。
+
+# 静态stage实际最差OOC路径已索引，完整容量基线继续（2026-10-30）
+
+results/stage_static_cp_timing_path_20261030.json源绑定真实已恢复OOC及CP参考，复用全primitive parser并冻结3文件逐SHA通过。最差source仍directory/lease_phase[27][1]/C，destination已变inner/search_ctl/operation_reg[0]/CE；61层=60LUT+1MUXF7、62未布局数据网。14.692ns=2.598logic+12.094估计net；search_ctl12层/label_restore7/fence6等。与CP旧route path CE不同端点，0.152ns WNS改善不能解释为同路径物理收益；仍61层许可/回复链。只做路径导航，不据此删除保护或启动新RTL候选，优先完成当前stage的全系统功能验证。
+
+完整容量baseline实际内核1830438/start_ticks1650806399持续CPU推进，session55789；唯一followup1838728/session79892仍wait_existing，不能抢audit或在restore读根。运行中第一262144字节事件prefix与已恢复full CRC anchor完全一致，results/stage_static_cp_host_full_baseline_partial_observation_20261030.json明确仅局部观察，不是baseline PASS；尚无新完整host/gate结论。整体goal active。
+
+以下保留历史。
+
+# 完整容量host基线已仿真，唯一后续链与shadow v2已预备（2026-10-30）
+
+SLOTS32 baseline1798788/session55789编译/展开已exit0，现simulate，尚无baseline PASS。continue_stage_static_cp_host_full_v1.py已实际启动唯一followup1838728/start_ticks1650809232/session79892，绑定原runner和17工具/来源，wait_existing。正常终态后该链独占audit→archive→实际restore→freeze baseline；Popen非kill wait、不重试修补/不自动启动static。不要手动抢审计或在restore阶段读目标根。先前“无自动followup”过时。
+
+新shadow v2 run/common/audit/freezer已准备并Python解析、13工具绑定results/stage_static_cp_shadow_system_v2_tools_preparation_20261030.json。common v2必须先等已恢复full static/baseline配对27文件，重新从实际compile defines和TB解析13参数逐项匹配OOC/SLOTS32且明确无PRESSURE；完成时间/检查数从实际新full参考计算，不搬压力常数。双组checker控制必须实际restore。实际缺full static接受报告时gate已拒绝，未建v2根/child。仍非完整gate通过。v1 mismatch明确保留禁用，工具全部冻结不改。整体goal active。
+
+以下保留历史。
+
+# CP静态stage OOC实际恢复通过，完整容量host基线已启动（2026-10-30）
+
+stage_static_cp_synth_v1及唯一followup1291236/session19991均正常终态，192文件归档实际restore audit字节一致，archive036bf8db77e6ec91ac044d35ffae98014c3be35654f1133c51a1bb0c7662e1b3，audit80dbfc53e8964fa053e3b3ac4694ff5d50862c56c7f7ec791f2ca235fcabdbde。177freeze文件/143复制源及133production/仅controller+adapter变化/13参数/U280/10ns/Tcl和归档SHA均主模型核验，results/stage_static_cp_synth_main_review_20261030.json。LUT132426(-7055)、FF87968(-80)、BRAM163/DSP23不变，OOC WNS-4.796较CP-4.948改善0.152ns；loops/cuts/critical/latch/blackbox0。仍负slack/缺IO与真实clock位置，timing_qualified=false/candidate_selected=false，不是物理或板卡通过。
+
+完整容量host baseline现唯一重作业stage_static_cp_host_full_baseline_v1：runner1798788/start_ticks1650795633/session55789，wait_memory，SLOTS32及13参数与OOC一致，compile去掉PRESSURE且保留SEED_CRC_FAILURE/RESTORE_SEED_BYPASS/QC_NO_LOSS，136原source及全部原host/path/stage检查保留。勿重复提交或改已用runner/auditor/freezer/14bound工具。当前无自动followup。正常终态后audit_stage_static_cp_host_full_v1.py TARGET→archive→verify_search_retire_restore.py NAME audit_stage_static_cp_host_full_v1.py→freeze_stage_static_cp_host_full_v1.py baseline→主模型复核；成功后才static同容量精确配对。尚无新full host通过或完整gate结论。拒绝的shadow_system_v1仍不能运行（SLOTS1/32 mismatch）。整体goal active。
+
+以下保留历史。
+
+# CP静态stage综合正常终态，唯一链独立DCP检查中（2026-10-30）
+
+stage_static_cp_synth_v1原runner963556/session15295已observed/complete并exit0，日志synth_design successful、0critical/0errors，最终产物均已生成；这些不是独立验收结论。唯一followup1291236/session19991已进入inspect，实际inspector1695602/start_ticks1650761305存活，继续由原链独占walks→audit→archive→实际restore→freeze。不重复提交/手动检查或改bound工具；restore期间不读目标根。尚无主模型确认资源/WNS/loop结论。
+
+下一主模型等待同链终态后核对报告/freeze所有SHA/actual restore与资源时序差值，再按已绑定完整容量host工具顺序baseline→audit/archive/restore/freeze→static配对。完整host SLOTS32两新目标均未启动；拒绝的shadow_system_v1仍不可运行（PRESSURE SLOTS1 vs synth32）。整体goal active。
+
+以下保留历史。
+
+# 完整容量host独立审计/冻结入口已预备（2026-10-30）
+
+audit_stage_static_cp_host_full_v1.py要求精确源码/命令/无PRESSURE/13参数SLOTS32/原输入绑定/完整内存准入及全部非空覆盖。baseline独立核对已恢复checkpoint_matrix_retry_crc_full_v1直到FOURTH_PASS的全事件prefix，再用旧host语义解析器检查编辑/clean拒绝dirty接受/CRC/原子后缀；不搬用压力finish。static必须再与新baseline全部27文件/完整finish/host和银行/覆盖严格相同。freeze_stage_static_cp_host_full_v1.py只有实际archive恢复audit字节一致后接受。14工具绑定results/stage_static_cp_host_full_tools_preparation_20261030.json，Python解析通过，均未实际运行；两个新目标均不存在，当前不可声称完整容量host通过。
+
+原唯一stage OOC已从Timing Optimization转入Technology Mapping，session15295及唯一followup19991仍拥有后续链。保持等待，不另起综合/完整仿真，不改bound文件。待链终态主模型验收后才顺序执行full baseline→审计/实际restore/freeze→static及精确配对→实际restore/freeze，再构建参数一致的新shadow v2。已拒shadow_system_v1不能运行。整体goal active。
+
+以下保留历史。
+
+# SLOTS32完整host runner v2已预备，尚未启动（2026-10-30）
+
+run_stage_static_cp_host_full_v1.py预检在OOC门控前拒绝，静态复核发现机械替换把旧rm场景pressure误写full；保持v1不改，v2仅修两处旧参考键。run_stage_static_cp_host_full_v2.py准备baseline/static两个独立根，保留全原host/path/stage检查，仅从compile删除PRESSURE，实际解析13参数必须与OOC SLOTS32一致，原压力周期不作为新oracle。v2实际前置OOC恢复/freezer缺失时按预期拒绝，未创建根/child；还缺独立完整host auditor/freezer及tools绑定，勿运行。results/stage_static_cp_host_full_runner_preparation_20261030.json留证。
+
+已实际核验checkpoint_matrix_retry_crc_full_v1完整容量CRC anchor的原audit/实际restore与CP八矩阵freeze匹配，results/stage_static_cp_host_full_prefix_anchor_20261030.json绑定。后续新baseline可用其FOURTH_PASS前完整prefix和旧check_host_edit_trace_v1后缀CRC语义作独立oracle；static再与新baseline27输出/周期精确比较。不得把anchor edit0当新host非空，也不得自行假设新finish。当前唯一OOC及followup保持，shadow_system_v1仍因SLOTS1/32不匹配明确拒绝。整体goal active。
+
+以下保留历史。
+
+# 重要：影子system v1参数不匹配，明确拒绝运行（2026-10-30）
+
+check_stage_static_cp_fixture_parameters_v1.py已从原真实compile defines解析TB条件及13个top参数：PRESSURE使host实测SLOTS=1，而当前匹配CP时序OOC SLOTS=32，其他12项一致。results/stage_static_cp_shadow_parameter_rejection_20261030.json及3文件freeze记录证据。此前预备run/audit/freeze_stage_static_cp_shadow_system_v1.py不能用于当前压力fixture与32-slot网表比较，即使OOC接受门控后来满足也不要运行；其准备绑定保留为已拒设计，未创建目标/child，没有实际错误gate结论。检查器control有效，但不解决参数差异。
+
+当前stage_static_cp_synth_v1仍与CP OOC原133源/U280/13参数/10ns匹配，当前综合及唯一followup正常继续，勿修改bound工具。新计划须先基于同host刺激建立不定义PRESSURE的完整容量CP baseline与static候选行为配对（SLOTS32），实际audit/archive/restore后，另建shadow system v2接当前32-slot网表。去掉PRESSURE后实际解析13参数全部匹配，但完整容量host尚未运行，原27压力输出/48292280ns不能照搬为新参考；不能静默删定义或放宽旧比较制造通过。后续压力SLOTS1网表另作匹配实验。完整gate/物理timing/板卡仍缺，整体goal active。
+
+以下保留历史。
+
+影子检查器带状态控制例亦实际恢复冻结（2026-10-30）：stage_static_cp_shadow_stateful_controls_v1/session76162终态，5控制加入时钟计数器及sampled寄存器，全部known输出由真实逐拍状态驱动。matching190全输出比较/5reset/1202ns通过，known/X/Z差异均301ns被拒（known actual0 expected1），short reset拒绝；三个快速transport变化保持。独立audit→157文件archive→实际restore字节一致，archive62f77934f4d52061499723d3c80ca458779e1d10224b29b71723d31c149eca5f，auditcd089cd784d2b214043a117ea0c595d9d3a603d8408d2e3cb3961720f429778c。results/stage_static_cp_shadow_stateful_controls_20261030.json及7freeze文件全SHA核对。仅checker控制证据，不能当实际FPGA gate。原唯一synth963556及followup1291236/session19991均实际存活，仍wait_existing/Timing Optimization，不另起任务或改bound工具。整体goal active。
+
+# CP静态stage OOC唯一后续链已启动（2026-10-30）
+
+continue_stage_static_cp_synth_v1.py已实际启动，followup runner1291236/start_ticks1650638129/session19991，目标stage_static_cp_synth_followup_v1，绑定原runner963556/start_ticks1650538153及17工具/准备来源SHA。当前wait_existing，原综合仍运行，不重起/不停止原作业。工具/来源逐阶段核验，后续链独占inspect→walks→audit→archive→实际restore→freeze；Popen+非kill wait，观察超时保留原child和所有权，任一实质失败留证交主模型，不自动重试修补或新开shadow实验。
+
+不要手动另起inspect/methodology/audit/archive/restore/freezer或改bound工具。main仅在链终态后复核全部真实报告/SHA/完整性与时序结论；restore阶段不得读目标根。先前“无自动followup”已过时。完整shadow工具已预备但未运行，须OOC实际恢复冻结与主模型评估后独立执行。整体goal active。
+
+以下保留历史。
+
+完整shadow工具绑定已准备（2026-10-30）：独立audit_stage_static_cp_shadow_system_v1.py和freeze_stage_static_cp_shadow_system_v1.py已Python解析，results/stage_static_cp_shadow_system_tools_preparation_20261030.json绑定11工具。审计要求namespace重算/全部输入源SHA/原glbl、命令匹配、27原输出精确一致、所有原覆盖和path/stage银行原样匹配，以及全346输出9658446次strict检查、5reset沿、完整202ns排空，成功后仍需archive实际restore字节一致才freeze。所有只是预备未执行，无full gate结论；前置新OOC接受证据实际缺失仍拒绝，未创建shadow目标作业。原唯一synth session15295实际存活，已进入Timing Optimization。整体goal active。
+
+实际完整影子runner已准备并门控拒绝（2026-10-30）：stage_static_cp_shadow_common_v1.py先要求新OOC独立audit/实际restore/freeze，才读取目标synth；run_stage_static_cp_shadow_system_v1.py复用原host初始化图像/136RTL/compile顺序/所有plusargs，新增namespace网表/shadow/original glbl，xelab O0/unisims，原全部检查保留。Python解析通过，实际evidence()因缺OOC接受报告按预期拒绝，无shadow_system目标目录/child。results/stage_static_cp_shadow_system_runner_preparation_20261030.json绑定两工具；独立full auditor/freezer及完整tools绑定尚未准备，不可启动。原唯一synth session15295实际存活继续。整体goal active。
+
+影子检查器五控制例已实际恢复冻结（2026-10-30）：stage_static_cp_shadow_controls_v1/session60614终态observed/complete。相同值（含相同X/Z）通过190次全输出检查，5reset沿、1202ns完整排空；known/X/Z差异均301ns在boot_pending严格Fatal；short_reset2沿在终态INCOMPLETE拒绝。三个1ns快速输入变化transport均保留。独立audit后157文件archive实际restore，audit字节一致；archive31db9a24bf16d82fa5dfbffaf17ca739cb6a1280ad19faf351a8d3bb20776d32，auditf038c9b674b90b3073f78541e4cd6ecdf31c042ead65b6f894719fae2d2af517。results/stage_static_cp_shadow_controls_20261030.json及freeze全部SHA核对通过。仅fake-DUT checker控制，不是实际FPGA gate通过。当前唯一stage synth session15295继续，不重复提交；actual shadow full runner/auditor尚未准备，须等新综合网表终态并独立诊断/审计。整体goal active。
+
+完整port影子检查器已准备并语法通过（2026-10-30）：prepare_stage_static_cp_shadow_v1.py生成hardware/variants/stage_static_cp_shadow_v1，保留原host TB全刺激/断言，仅正常ITER2 terminal前加入排空task；其他负例终止不变。全部217输入与346参考输出用NBA transport整体延迟200ns，vendor GSR100ns之后仍完整接收原50ns冷reset，至少5个reset上升沿才arm；双边沿后1ns全部输出严格!==，无valid/XZ掩码。原正常结束后排空202ns检查观察horizon，100ms watchdog。此为拟议入口，尚需人工控制正负例/实际网表elaboration/full run，不能当功能通过。results/stage_static_cp_shadow_preparation_20261030.json绑定源；xvlog2022.2在独立syntax根exit0，results/stage_static_cp_shadow_syntax_20261030.json，仅语法，未elab/仿真。已用文件保持冻结；原唯一综合session15295实际存活继续。
+
+影子网表namespace工具已实测预检（2026-10-30）：namespace_functional_netlist_v1.py在既有76MB native synth.v上完成172模块/343处仅模块定义与实例类型重命名，逐字inverse完全还原，ports/nets/primitive/string/comment不替换；同名信号控制例通过。results/stage_static_cp_shadow_namespace_preflight_20261030.json绑定全部SHA。此为旧网表格式预检，未编译/仿真，不是当前stage网表通过。shadow同输入比较还须处理vendor glbl startup及全输出XZ/采样，不能掩码制造通过。当前唯一综合session15295保持实际存活。
+
+完整网表端口schema已实际生成（2026-10-30）：prepare_stage_static_cp_port_schema_v1.py严格解析固定参数ANSI header与原host命名连接，results/stage_static_cp_port_schema_20261030.json绑定源/TB/工具SHA。总563 ports：input217/49253bits全部有非空连接，output346/14384bits，原TB未连接11输出（含cp_s_ready、pc_route_retired及9boot输出）。记录完整表达式/方向/固定宽度，无未知表达式或默认tie-off；这是接口准备而非仿真，后续gate入口需处理原层次依赖并保留全部负例/时序。原唯一综合session15295继续实际存活，不重复提交。
+
+综合网表接口清单已实际生成（2026-10-30）：results/stage_static_cp_full_netlist_interface_inventory_20261030.json绑定原host TB SHA，记录552顶层named ports、12显式参数和558唯一system层次引用，无force/release。层次引用涉及原scoreboard/task分支/故障注入，不能删除检查制造gate通过；固定参数综合网表须适配实例，port replay的输入时序/全输出/闭环范围需独立说明。原唯一session15295已version exit0并进入synthesis，继续沿实际PID，不重复提交。
+
+# CP独立stage匹配OOC已启动（2026-10-30）
+
+新run/inspect/audit/freeze/common入口已Python解析及正向133源/完整host实际restore门控通过，tools preparation绑定15工具。现唯一runner963556/start_ticks1650538153/session15295实际存活，stage=wait_memory，目标stage_static_cp_synth_v1；60秒内存准入后原2022.2 version→synth，child-only已验证runtime，观察超时不杀不重启。两MCP会话仍out of stack space，使用local batch；skill2026.1+的JSON功能不用于2022.2。
+
+无自动followup。终态后沿inspect_stage_static_cp_synth_v1.py→analyze_restore_seed_loops.py→audit_stage_static_cp_synth_v1.py→archive→实际restore→freeze_stage_static_cp_synth_v1.py→主模型复核；勿重复提交/改bound源工具。当前无新资源/WNS或完整系统功能网表结论，整体goal active。
+
+以下保留历史。
+
+# CP独立stage匹配OOC输入已准备（2026-10-30）
+
+prepare_stage_static_cp_synth_v1.py已实际验证完整host恢复/freeze及全部133生产源来源，生成/tmp/B_state_residency_offer_20261025/stage_static_cp_synth_v1。仅controller/adapter两源变化，原CP U280/13参数/10ns及Tcl除根路径外逐字一致；全部复制源与bound SHA复核。results/stage_static_cp_synth_preparation_20261030.json留证。当前仅prepared，未启动Vivado；后续需独立runner/inspect/audit/freezer并继续准备完整系统功能网表验证，不能将此当综合或gate通过。已使用prepare及输入保持不改，失败另起版本。整体goal active。
+
+以下保留历史。
+
+# CP独立stage完整host行为已实际恢复冻结（2026-10-30）
+
+stage_static_cp_system_v1/runner463041/session51719及实际XSim内核496595均正常终态observed/complete，勿重启。独立audit27份输出/完整事件/48292280ns与已恢复checkpoint_host_edit_system_v1严格一致；原host/CP/query/backend/capture覆盖行原样匹配。host writes1/replies1、clean_rejected1/dirty_accepted1/238atomic；CP safe65090/edit1/busy423/15req15rsp/60import90export。path旧树银行4829223周期/node_writes18/publications8/checks27；stage旧树同周期/captures10/imports1248/checks1259全部非空，未用新sw事件推导参考。
+
+405文件archive实际restore复审audit字节一致：archive65bf7ce6508de7374e3db9b0fd09c6f4cd4f2ae3b0517be5ba56bf27362b5325，audit7fb16451c97fe29e48b13c3249703bbd26f8364886c5243977375a633b7900a7。freeze_stage_static_cp_system_v1.py已执行，results/stage_static_cp_system_20261030.json和210文件freeze全部SHA/归档/原恢复audit/27完整外部文件及未改生产源已主模型复核，main_review报告记录。source/controller+adapter为CP独立stage，仅2源，136编译(133production+3verification)，不叠加path/native/label。
+
+当前无重作业/自动队列。下一准备同133生产源/原CP参数/U280/10ns的独立OOC、完整系统功能网表验证入口，必须排除TB/axi_file_memory等验证源并保留前置2槽/4槽反例与静态通过证据；完整网表TB需处理参数/层次观察差异，不能直接把RTL监视器当综合网表证明。新的完整system behavioral单例通过不等于八场景矩阵/任意参数XZ/formal/物理时序/平台板卡通过；full_system_functional_netlist_validated=false/timing_qualified=false/candidate_selected=false。所有已用工具/源/准备绑定保持冻结，失败另起版本，restore期间不读目标根。整体goal active。
+
+以下保留历史。
+
+完整host作业已进入仿真（2026-10-30）：stage_static_cp_system_v1/runner463041/session51719实际存活，compile/elaborate均exit0；原XSim494690、真实内核496595实际运行且CPU增加，内存约170.28/300GiB。暂无场景完成标记或系统PASS，不重复提交/不改已用源/工具，无自动followup。下一继续沿原session/实际PID观察；正常终态才独立audit→archive→实际restore→freeze。整体goal active。
+
+# CP独立stage十二单元实际恢复冻结，完整host系统已启动（2026-10-30）
+
+stage_static_cp_units_v2/session58731/runner182374已正常终态，12/12原route/CP8/CP32/generic×baseline/default/static均完成。审计v2因旧sha(Path)收到字符串报接口错误，未改旧版；audit_stage_static_cp_units_v3.py仅加Path转换后全部旧检查通过，八组完整事件/finish/path+stage银行比较一致。413文件归档实际restore/audit字节一致：archiveb2205dc4ae99e5341fbb74848e61a9fd8448570aa563ad6ca61c43aac27a5732，auditfabb1786aafc6da2fde74247f64c62ff92236ef5ee43de87d673ae51471e0f32。results/stage_static_cp_units_20261030.json和93文件freeze全SHA/归档已主模型核验。
+
+14系统工具SHA及正向builder.sources门控实际通过，results/stage_static_cp_system_positive_preflight_20261030.json绑定两个fixed源/监视TB，参考checkpoint_host_edit_system_v1，保持136编译文件(133production+3verification)/165复制来源，除controller/adapter两源和TB/runner外原来源一致。新TB保留原host/CP/query/backend/capture，加入path和stage旧树参考银行，不使用新sw事件推导参考。没有path/native/label生产叠加。
+
+当前唯一完整行为作业/tmp/B_state_residency_offer_20261025/stage_static_cp_system_v1，runner463041/start_ticks1650375391/session51719实际存活，wait_memory。正常准入后compile/elaborate/simulate，XSim不预加载，非kill wait，无自动followup。不要重复提交/修改已用源工具，失败留证新版本。运行器源保留旧template docstring但实际mode isolated_static_stage/两源/无native模型已源核对。
+
+正常终态后audit_stage_static_cp_system_v1.py TARGET→archive_offer_result.py TARGET→verify_search_retire_restore.py stage_static_cp_system_v1 audit_stage_static_cp_system_v1.py→freeze_stage_static_cp_system_v1.py→主模型全SHA/真实27比较/非空覆盖核验。restore时不读目标根。当前没有新完整系统通过结论；这是behavioral非full-system gate sim，局部4槽functional static通过和原版负例范围保持，不证明全系统网表或任意XZ/formal/物理时序/板卡。整体goal active。
+
+以下保留历史。
+
+完整系统工具绑定完成预备更新（2026-10-30）：新audit_stage_static_cp_system_v1.py已Python解析，保持原27输出/finish/host/coverage核对，新增两源/136编译文件来源和path/stage非空监视；freeze_stage_static_cp_system_v1.py要求实际restore/audit字节一致才冻结且明确full_system_functional_netlist_validated=false，实际缺restore拒绝通过。preflight_stage_static_cp_system_v1.py已核对4预备SHA/两源adapter仅1参数/旧监视生成并绑定14工具于results/stage_static_cp_system_tools_preparation_20261030.json。只是工具源码预备，正向完整系统run/audit/restore/freeze均未执行；十二单元最终接受仍为门控，当前不得启动。
+
+完整系统runner预备更新（2026-10-30）：scripts/run_stage_static_cp_system_v1.py已从旧已验证host/native系统运行入口独立改编，保留参考host数据/scoreboard/编译源列表，只覆盖CP静态stage两源并使用path+stage旧树监视TB。不加入native observer、不叠加native生产改动。使用wait_preserving观察超时不kill/不重启；sources()实际缺十二单元报告时已拒绝，根目录/child均未创建。results/stage_static_cp_system_runner_preparation_20261030.json绑定runner/模板。后续还要求stage_static_cp_system_tools_preparation全工具SHA，当前该完整绑定及auditor/freezer尚缺；不能运行或宣称完整链就绪。
+
+完整系统builder预备更新（2026-10-30）：hardware/variants/stage_static_cp_system_v1/build.py已创建并实际生成host参考监视TB，复用旧path及stage独立old-tree银行监视，保留原host/CP/query/backend/capture刺激与检查。sources()先要求stage_static_cp_units_20261030.json状态isolated_stage_twelve_units_actual_restored及全freeze/实际恢复/8比较，再读unit；当前实际缺最终报告被拒绝，未绕门控。results/stage_static_cp_system_builder_preparation_20261030.json绑定builder/参考TB/生成TB SHA。runner/auditor/freezer尚待准备，无新系统作业/目录/功能结论。
+
+原唯一182374/session58731实际存活，十二例已6/12 passed（baseline四例+default route/CP8），现default_checkpoint32_wait_memory。不要重复提交/提前归档恢复或改已用工具。整体goal active。
+
+两源系统覆盖预备更新（2026-10-30）：scripts/prepare_stage_static_cp_system_sources_v1.py已实际生成hardware/variants/stage_static_cp_system_sources_v1。逐SHA验证CP synth与已恢复CP CRC系统原controller/adapter一致；fixed controller为隔离static候选，adapter仅在controller实例插入STATIC_STAGE_WRITES1，其余字节完整相同。manifest绑定已恢复4槽functional矩阵和两份CP审计；status仅sources prepared，unit_acceptance_pending=true/full_system_acceptance=false。未创建完整系统runner/目录或启动作业，十二原单元audit/实际restore/freeze仍为执行门控，不抢跑。
+
+原唯一runner182374/session58731实际存活，baseline route/CP8/CP32已passed，现baseline_generic_overlap_wait_memory；其余默认/静态8例未完。独立units auditor已准备待终态，勿重复提交或改bound工具。整体goal active。
+
+十二单元审计预备更新（2026-10-30）：scripts/audit_stage_static_cp_units_v2.py已准备，results/stage_static_cp_units_auditor_preparation_20261030.json绑定新旧工具/独立builder。旧audit_route_stage_units.py自trace解析至八组完整比较的全部代码逐字保留，仅更新CP独立源/builder/来源布局及真实runner/--O0门控；尚未在12例终态执行，不当PASS。原runner182374/session58731实际存活，baseline_route已passed：ROUTE_STAGE_BANK_PASS checked1479/captures0/imports0、14790ns，现baseline_checkpoint_wait_memory。其余例未完成，无自动followup；不要重复提交/提前归档恢复或改bound工具。
+
+# CP独立stage十二原单元v2已启动（2026-10-30）
+
+hardware/variants/stage_static_cp_units_v1/build_tb.py复用旧stage/path/route/CP/generic全部刺激及path变化字/old-tree stage每周期监视，只移除旧FACTORED_PATH_WRITES1并把开启stage参数改STATIC_STAGE_WRITES1。12个TB已实际生成核验。生产源仍stage_static_cp_v1 CP-only baseline/fixed，不叠加path/native/label。
+
+run_stage_static_cp_units_v1.py在创建根前被通用restored()拒绝：旧route_checkpoint_unit_v8 manifest历史终态为passed而非observed，非功能失败；results/stage_static_cp_units_preflight_rejection_20261030.json记录，无v1目录/child。新run_stage_static_cp_units_v2.py仅修此历史前置格式，逐核对passed/audit/实际restore/原恢复SHA；旧工具不改。
+
+当前唯一job /tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2，runner182374/start_ticks1650281149/session58731，baseline_route_wait_memory。baseline/default/factored×route/CP8/CP32/generic共12例，逐例60秒准入，xelab --O0，XSim无预加载/非kill wait。准备绑定results/stage_static_cp_units_v2_preparation_20261030.json。无自动followup，勿重复启动或修改已用源/工具；失败保留另起版本。
+
+下一沿session58731/实际PID；终态后独立audit完整trace/finish/path+stage银行及非空CP覆盖，archive/实际restore/freezer/主模型SHA再接完整CRC/host系统。专用auditor/freezer尚待准备。当前12例未完成，不能用此前4槽功能矩阵替代旧route单元覆盖，整体goal active。
+
+以下保留历史。
+
+# 4槽综合网表矩阵实际恢复冻结：静态通过，原版/default反例保留（2026-10-30）
+
+stage_bank_functional_matrix_v1/runner3976467/session68667及所有Vivado/XSim均终态observed/complete，不重启。original/default两例均126530ns CRC拒绝后export word7 actual777 expected10失败，已记录事件逐字相同。static4槽/MAX_PATH32功能网表全部12cmd/12rsp/477import/1092export/12case通过，23245cycles/232450ns。独立auditor逐字CRC及整个events与已恢复static RTL严格相同；涵盖满容量/连续export、CRC错、末节点重复、partial safe撤销取消、索引错、失败后完整image原子保留与reset全零。无测试/guard删改。
+
+119文件archive实际restore/audit字节一致：archivec790d67416575388a5bfb4fabccfbb3133fbfe2b71b03e5e4ef6421e08114fa0，audit7823a98e60cde39c1e57cdd8fe2a95e26826874e87ea7eef3a7fe2fe4d51e254。results/stage_bank_functional_matrix_20261030.json及55文件freeze全部SHA、归档/原恢复audit、两反例events/static全RTL trace已主模型核验。audit.status passed是outcome/artifact完整性；all_functional_cases_passed=false，只有static此有界fixture通过，不隐瞒负例。
+
+下一优先把隔离CP stage候选接入已有route/CP原单元/同拍回复/XZ针对边界与完整CRC/host系统，保留原矩阵反例作为综合网表门控；完整系统综合网表行为还需实际验证。候选不能因4槽窄矩阵就宣称任意参数formal、全系统修复或timing/板卡通过。继续从CP较优基线仅stage改动，不叠加path/native/label。当前无新重任务或自动队列；所有已用变体/TB/runner/auditor/freeze保持不改，失败另起版本。整体goal active。
+
+以下保留历史。
+
+功能矩阵进展（2026-10-30）：原版和默认关闭两个4槽功能网表均在126530ns同一Fatal失败：CRC拒绝后export word7实际777而应10；两例完整已记录events.txt逐字相同。默认flag0确实保留原反例，不是只改参数就消失。原唯一runner3976467/session68667仍实际存活，已转static_synth_wait_memory；static尚无结果。不要重复提交/提前最终audit/归档restore，仍由原runner串行完成最后模式。当前只是两例已观察反例，整体矩阵尚未审计冻结。整体goal active。
+
+# 4槽原版网表复现CRC拒绝后导出污染，原矩阵继续（2026-10-30）
+
+stage_bank_functional_matrix_v1原版case已observed functional_passed=false：首轮156字合法import和连续两次export通过；CRC错误frame的命令3回复status1、slots1111，实际CRC5219a7d8，随后命令4 export在word7得到00000309(777)而pristine为0000000a(10)，126530ns Fatal。未改测试或源，原case事件/日志已保留。这是局部4槽功能网表反例，尚非完整系统post-synth复现，也未宣称工具缺陷根因。
+
+原唯一runner3976467/session68667仍实际存活，已转default综合；static还未运行。不要重复提交/停止原队列/提前全矩阵audit或归档restore。原版单例失败不等于整个研究阻塞；计划继续default/static对照，完整终态后由独立auditor区分通过与失败并实际恢复冻结。当前未有default/static4槽结果或新功能接受，整体goal active。
+
+以下保留历史。
+
+功能矩阵审计器预备更新（2026-10-30）：scripts/audit_stage_bank_functional_matrix_v1.py及results/stage_bank_functional_matrix_auditor_preparation_20261030.json已Python解析/绑定。它区分artifact/outcome完整性passed与每例functional_passed；通过例要求旧独立check_trace逐字CRC/命令响应及全部events与已恢复RTL严格一致，失败例保留Fatal/终止时间/common-prefix，不预设哪个模式必须失败。尚未在真实matrix终态执行。原唯一runner3976467/session68667实际存活；原版Vivado3995566已输出STAGE_MATRIX_SYNTH_DONE及Exiting，仍须由原runner确认进程终态后转functional准入，勿重复提交或提前audit。其余模式后续仍归原runner，无新作业。
+
+# 4槽32路径三模式综合网表矩阵已启动（2026-10-30）
+
+scripts/run_stage_bank_functional_matrix_v1.py和results/stage_bank_functional_matrix_preparation_20261030.json绑定同TB/原版与静态源/已恢复RTL矩阵。已实际启动/tmp/B_state_residency_offer_20261025/stage_bank_functional_matrix_v1，runner3976467/start_ticks1650153237/session68667，当前original_synth_wait_memory。original/default/static逐例串行：U280/2022.2/10ns/rebuilt/4槽MAX_PATH32MAX_CYCLES256，default STATIC_STAGE_WRITES0/static1；每例synth及functional分别60秒内存准入。网表compile NETLIST、原版glbl、xelab --O0、相同原TB，XSim不预加载。
+
+本矩阵明确保留设计失败后继续其余模式；case.functional_passed/fatal_messages为实际测试判据，root observed仅代表三例观察完成，不能当全部设计通过。基础工具编译/展开/异常终止仍停止保留现场。预期原版可能复现已知失败但未预设必须失败，不改刺激/检查制造差异。暂无任何4槽functional结果，无自动followup，不另起同名任务或改已用工具。沿session68667/实际PID。
+
+全部正常终态后需新独立auditor核对每例源/参数/命令、全部PASS/失败证据，static若通过须用旧独立check_trace解码所有字/CRC/响应并与已恢复static RTL完整events逐周期一致；default/original若失败保留首个counterexample及trace，不把失败模式混作功能接受。随后archive/实际restore/audit字节一致/freezer/主模型SHA核验。pair2槽和4槽RTL冻结证据不替代本实验。整体goal active，完整系统网表/任意XZ/物理时序/板卡仍缺。
+
+以下保留历史。
+
+# 4槽32路径三模式RTL矩阵已实际恢复冻结（2026-10-30）
+
+stage_bank_matrix_rtl_v2/session3311/runner3842566正常终态observed/complete/exit0，original/default/static三例均12cmd/12rsp/477import/1092export/12case，23245cycles/232450ns；完整EVT/CASE/data/cycle两组比较逐字一致。独立audit_stage_bank_matrix_rtl_v2.py重新构造4×39规范image，逐导入/导出字/last/index/response/status核对、zlib重算CRC、7次完整export含失败/取消后原子保留及最终reset全零。人为破坏export字被拒绝。
+
+92文件归档实际restore复审audit字节一致，archivedb25de5e97b8ed5105f839d71e7a83d8dfcfaa77f25b339f934242e8e8fd89e8，audit3e139da3a65322df8ebfc4fab4de22a3568ed288ff306af41a51d825ee757712。results/stage_bank_matrix_rtl_20261030.json及33文件freeze全SHA/归档/原恢复audit已主模型核验。v1 --O2展开SIGSEGV现场仍保留，v2仅--O0成功，无生产RTL修补。所有已用源/TB/runner/auditor保持不改。
+
+当前无重任务或自动队列。下一在同4槽32路径参数下为原版/default/static建立局部synthesis+functional网表矩阵，使用同一TB、glbl启动及--O0，保留原失败/静态窄通过，不以三模式RTL通过替代网表证明。先源绑定/单一作业/60秒准入/child-only Vivado runtime/非kill wait；XSim不预加载。之后独立audit/archive/实际restore/freeze。4槽原版网表是否复现以及static全场景是否通过尚无结论，完整系统post-synth/任意参数XZ/物理时序/平台板卡仍缺，整体goal active。
+
+以下保留历史。
+
+# 4槽32路径矩阵v1遇xelab崩溃，v2仅关闭展开优化（2026-10-30）
+
+新hardware/tests/tb_stage_bank_matrix_v1.sv为4槽/MAX_PATH32同一端口刺激：满容量4×32合法import/连续export、合法范围数据且CRC错误、末节点重复且CRC正确、5字partial后cp_safe撤销取消、索引错、各失败后完整image导出原子保留、reset后全零export。预期12cmd/12rsp/477输入字/1092输出字/12case，三模式original/default/static完整EVT逐字/周期比较。尚无这些新场景PASS。
+
+stage_bank_matrix_rtl_v1/session4718在original_elaborate收到XSIM43-3316 SIGSEGV，未运行刺激；results/stage_bank_matrix_rtl_v1_failure_20261030.json绑定崩溃日志/源，全部保留不改。AMD官方命令文档已查，本机2022.2 xelab -help实际确认--O0关闭优化；未宣称找到精确AR。新scripts/run_stage_bank_matrix_rtl_v2.py仅在xelab增加--O0、换独立根，其余源/TB/检查不变。
+
+当前唯一job /tmp/B_state_residency_offer_20261025/stage_bank_matrix_rtl_v2，runner3842566/start_ticks1650109453/session3311，60秒内存准入，串行三模式。无新综合或gate sim，无自动followup；不改已用TB/runner或重试v1。下一沿实际session/PID；若仍崩溃，保留v2现场后单独缩小触发，不删除功能检查来通过。正常完成后独立audit/archive实际restore/freezer，再准备相同4槽参数的original/default/static综合后验证，不能拿旧2槽探针替代。整体goal active。
+
+以下保留历史。
+
+# 独立静态stage消除窄综合后反例，实际恢复冻结（2026-10-30）
+
+stage_export_static_cp_synth_v1/session42502及stage_export_static_cp_functional_pair_v1/session57352均正常终态，勿重启。同一v3刺激（仅RTL实例enable flag）、原版glbl/#200、2槽/MAX_PATH8/MAX_CYCLES256：RTL和functional均import30/slots01，reset后inputVALID0下export30全零/CRC395d7a27、2870ns，compile/elaborate/simulate六阶段exit0。原controller在同刺激网表1630ns导出字0=1的失败证据保持，没有改检查制造通过。
+
+独立audit_stage_static_functional_pair_v1.py核对源码/参数/两份TB及glbl SHA/完整PASS行/结束时间，64文件实际archive restore后audit字节一致：archivee7395b47ea704d9ddb7577667af839bf4072369ffa4e1f46062bfb38790b3159，audit7b0119b2efa801e99de666a1dc2b823ca9df2dc115870f88000d1e1c6e72dc1a。results/stage_static_functional_pair_20261030.json及30文件freeze已主模型全SHA/归档/原恢复audit核验。此结果只说明STATIC_STAGE_WRITES隔离改动消除此窄反例；未证明任意参数/XZ/全部CP/完整系统或时序。不是已确认Vivado普遍缺陷，也未选择候选或替换CP源。
+
+下一优先扩展相同失效机制的4槽32路径controller原版/默认/静态RTL+functional对照，以及连续export/import、无reset改槽、部分导入失败/取消/CRC/原子保留，保留周期/完整事件比较。先补覆盖和源完整性，再考虑完整系统综合网表验证/同条件OOC，不能只凭窄probe通过当修复完成。所有已用variant/TB/runner/auditor/freezes保持不改，新增版本；当前无重任务或自动队列。整体goal active。
+
+以下保留历史。
+
+# CP独立stage静态写对照RTL已恢复冻结，局部综合启动（2026-10-30）
+
+hardware/variants/stage_static_cp_v1由已恢复CP原controller生成，仅STATIC_STAGE_WRITES默认0开关；原写保持默认，enabled静态逐字写使用旧stage工具原nested capture/import条件，全部CRC/取消/漂移/顺序/末字guard及周期/无stage reset初始化保留。未叠加path/label/native，未宣称修复。generator/manifest绑定失败基线和旧stage来源。原功能网表失败现场保持。
+
+tb_stage_export_static_cp_v1仅在v3 RTL实例增加STATIC_STAGE_WRITES1，刺激/check/#200完全不变。stage_export_static_cp_rtl_v1/session41298正常终态，imports30/slots01，reset后exports30/CRC395d7a27，2870ns。独立audit、31文件实际restore/audit字节一致及17文件freeze全SHA核验通过：results/stage_export_static_cp_rtl_20261030.json；archive308b81504260ecc76c1327e30dbbfe0c7761d0d33bbdd8d4c928ad0b32983404，audit9431e8002678fa2049a275024edf7b9633f5c130ee4beae82d879cb8795b661e。只有窄RTL结果，无默认模式/四态/完整单元矩阵或网表通过。
+
+当前唯一新job stage_export_static_cp_synth_v1/scripts/run_stage_export_static_cp_synth_v1.py，runner3620885/start_ticks1650036937/session42502，60秒内存准入。原局部synth模板仅input换静态stage源、generic STATIC_STAGE_WRITES1；仍2槽/MAX_PATH8/MAX_CYCLES256/U280/2022.2/10ns/rebuilt。正常终态后核对源/命令/网表，再为此源单独准备同TB的RTL/functional pair（NETLIST下不参数override），当前pair未准备/启动，无自动followup。不得修改已用源工具/重启旧失败pair；失败另起版本。此实验首先检验原import→reset→export签名是否消失，不能删检查改变刺激来通过。整体goal active，根因/全系统网表正确性/优化性能均未解决。
+
+以下保留历史。
+
+# 原controller综合后功能差异已实际恢复冻结，根因待定位（2026-10-30）
+
+stage_export_functional_pair_v1/session62383/runner3452284已终态failed functional_simulate；不是编译展开错误。两边compile/elaborate/simulate工具exit0，RTL在2870ns通过imports30/exports30/CRC395d7a27；functional在1630ns已PROBE_IMPORT_PASS30/slots01，但复位后第0导出字actual00000001、expected00000000，触发Fatal。runner因无PASS正确拒绝，不能把工具exit0当测试通过。v3两边同TB/#200启动和未改glbl，未force/无内部state读取，productionRTL未改。
+
+独立audit_stage_export_functional_failure_v1.py仅确认负结果完整性，audit.status passed不是功能接受。64文件archive实际restore复审byte-identical通过；archive58fb53323c2307a96ec0cda4d1b7a496f006826046de60073036570c403b31a4，audit9bd7a3fc93782a8f221b905838f422e43226155a591983ed7c534a02e4590d38。results/stage_export_functional_mismatch_20261030.json与22文件freeze全部SHA已主模型核验，functional_acceptance=false/root_cause=unresolved/tool_defect_claimed=false。AMD官方资料检索未发现精确匹配AR；不得宣称已证Vivado缺陷。原pair/TB/synth/工具保留不改，无重任务运行或自动队列。
+
+下一优先缩小原controller复现或建立仅stage写入口的单项结构对照，保留同一import→reset→export失败签名/相同刺激/CRC，明确比较RTL与functional；不要删除失败检查/跳导出/改变复位语义来通过。当前局部2槽8路径反例不是已复现完整系统post-synth失败，但阻止泛称现有RTL测试证明综合网表正确性。旧物理面积/时序只保留测量含义。整体goal active，先解决功能差异再声称优化。
+
+以下保留历史。
+
+# 控制器局部综合终态，RTL/功能网表pair已启动（2026-10-30）
+
+stage_export_reset_synth_v1/session33823原runner3396056正常终态observed/complete/exit0，输出synth.dcp/functional.v。它是原controller2槽/MAX_PATH8局部综合，不是完整native网表行为证明。未修改任何生产RTL。发现原版glbl默认GSR100ns，故新TB v3仅在v2基础上为两个模式共同增加200ns启动等待，不修改vendor库/不force；v2通过证据保持原样。
+
+scripts/run_stage_export_functional_pair_v1.py及hardware/tests/tb_stage_export_after_reset_v3.sv在results/stage_export_functional_pair_preparation_20261030.json绑定，已实际启动/tmp/B_state_residency_offer_20261025/stage_export_functional_pair_v1，runner3452284/start_ticks1649980235/session62383。已核验局部综合源/全部artifact SHA、原runner终态；当前rtl_wait_memory，依次RTL和functional两个模式每次60秒准入。两者同v3刺激和原版glbl，功能模式仅定义NETLIST取消参数override、xelab unisims_ver；XSim不使用Vivado预加载，保留非kill wait。不要重复启动/修改bound工具TB，失败留证另起版本，无自动后续。当前尚无v3pair PASS或综合网表功能结论。
+
+下一沿session62383实际PID完成后独立核对两份端口输出/完成时间/全部phase exit，再audit/archive实际restore/freezer（这些pair专用工具尚待准备）；任何网表行为差异先保留日志诊断，不改源制造一致。整体goal active，仍缺完整系统post-synth/新native八矩阵/时序闭合/平台板卡等。
+
+以下保留历史。
+
+# 导出复位探针RTL恢复冻结，局部综合已启动（2026-10-30）
+
+stage_export_reset_rtl_v1已failed elaborate，原因TB缺idle_fault输出声明；失败记录results/stage_export_reset_rtl_v1_failure_20261030.json绑定源/日志，未改原工具。v2只补1 wire、刺激/检查不变。stage_export_reset_rtl_v2/session80931正常终态：imports30/slots01，复位后cp_s_valid0下exports30全零/CRC395d7a27，2680ns；独立audit及31文件实际restore/audit字节一致通过。archive705443711cddbf3d30e653eb71204f4382c678967e95a8f5ccf88b250259b055，auditd0fb1fb1bda2d938ce4d998fc1888bf3815b7723829fced11c0508b7df803418。results/stage_export_reset_rtl_20261030.json及14文件freeze已主模型核验。
+
+当前唯一新job /tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1，scripts/run_stage_export_reset_synth_v1.py，runner3396056/start_ticks1649961669/session33823实际存活，60秒内存准入。原controller独立OOC，2槽/MAX_PATH8/MAX_CYCLES256匹配端口TB，U280/2022.2/10ns/rebuilt，输出funcsim functional.v及synth.dcp，不是133源新完整系统或native候选面积实验。使用child-only runtime/非kill wait；勿重复启动/修改已用工具。下一真实终态后核验source/Tcl/产物，再独立准备同一TB定义NETLIST的XSim功能仿真（unisims_ver/glbl，XSim不预加载），尚未启动gate sim；失败先研究证据新版本，不改旧检查。无自动后续。整体goal active，端口RTL通过不能替代综合网表或全系统证明。
+
+以下保留历史。
+
+# stage导出复位端口探针RTL运行已启动（2026-10-30）
+
+hardware/tests/tb_stage_export_after_reset_v1.sv已准备，来源声明为旧CP TB；不读内部state/不force，2槽/MAX_PATH8。先30字非零合法import（slot0 size1/node4/design匹配，CRC有效）且要求slot_valid01；随后rst清逻辑槽，在cp_s_valid恒0下export30全零字/顺序/last/背压/CRC。用于直接澄清导出数据与局部CE解释，不是全系统或任意参数证明。results/stage_export_after_reset_probe_preparation_20261030.json绑定TB，仅准备时未执行的历史快照。
+
+scripts/run_stage_export_reset_rtl_v1.py已启动/tmp/B_state_residency_offer_20261025/stage_export_reset_rtl_v1，runner3313685/start_ticks1649934157/session8948，当前60秒内存准入；随后xvlog→xelab→xsim，使用已恢复CP原controller。XSim不使用Vivado专用LD_PRELOAD，非kill wait保持child归属。不要重复启动或修改已用TB/runner；失败留证另起版本。当前尚无RTL PASS，尚未创建/启动controller局部综合或post-synth仿真。正常终态后独立audit/归档实际restore，再准备相同端口刺激的独立小controller综合及功能网表验证；不能以窄controller结果替代全系统post-synth。
+
+整体goal active。最新原生物理面积-2150LUT/-2246FF但WNS-5.240比CP-4.059退化仍为冻结结论。
+
+以下保留历史。
+
+# 导出mux与stage D反馈图已追踪，事件对应待证（2026-10-30）
+
+results/native_stage_export_cone_boundary_20261030.json绑定已恢复synth.v，对route_commit_controller内部LUT1-6/MUXF7-8/FDRE/FDSE建有界组合图：cp_m_data[0]访问243 nets，register leaves包含156个stage字位及15其他寄存器，无未解析driver；cp_stage[139][10] D锥访问57 nets，含本字stage Q/1 path位/38其他register，并保留1未解析边界。图依赖不是敏感性/可达性证明，来自preplacement不是routed D。4992 stage寄存器均FDRE同CE，没发现第二组stage命名寄存器，但不能据此排除别名/优化存储。
+
+导出mux仍依赖stage Q，而局部CE公式依赖优化模块cp_s_ready/cp_s_valid；尚未证明这些名字在完整优化层次与RTL逻辑事件的一一对应，不能宣布导出捕获被删除或综合错误，更不能据此删保护。下一需要明确导出刺激的映射信号证据/综合网表行为验证，解决事件对应后再选择独立CP结构改动。当前无新RTL/重作业，整体goal active。
+
+以下保留历史。
+
+# Stage CE握手因子局部真值表核对通过（2026-10-30）
+
+scripts/analyze_native_stage_handshake_v1.py已实际运行，results/native_stage_handshake_factor_20261030.json绑定已恢复synth.v/audit/工具及三个literal LUT。cp_s_ready LUT4与stage_i3 LUT5前4输入逐项同线，第5输入cp_s_valid；全部32二态赋值确认stage_i3=cp_s_ready & cp_s_valid。根LUT3全部8赋值确认CE=stage_i3 & !B & !C。无需假定FSM编码即可证明：在综合网表该银行CE必须依赖流握手；不能继续把它叫导出capture使能。B/C保持额外门，不据此删除ready/漂移/CRC/取消保护。
+
+这是局部二态综合LUT恒等式，不是routed所有别名不变、任意四态RTL等价或导出银行实现证明。已恢复routed 4992完整CE负载证据独立保留；下一单独追导出数据/存储映射，明确是否有拆分银行或优化后的保持mux，再选择CP独立结构实验。没有新RTL或重任务，工具已用于证据保持不改。整体goal active。
+
+以下保留历史。
+
+# Stage CE布尔与D反馈复核，无新RTL（2026-10-30）
+
+results/native_stage_ce_boolean_review_20261030.json绑定已恢复连接记录、audit及synth.v，穷举驱动LUT3/三个一级LUT的全部二态输入，one计数1/1/6/63；根LUT3仅I2:I1:I0=001时输出1。综合网表cp_stage_reg[139][10]使用该共享CE，R接const0，D mux明确读取本字Q，故共享银行CE脉冲不表示所有逻辑字同时改值。D反馈证据来自preplacement synth.v，不能泛称已查询routed D；FSM状态位可能重编码/极性变化，尚不能仅用RTL常量为LUT分支命名。没有修改RTL、无新作业。下一取准确映射状态/端口敏感性或带标记综合网表证据，辨别该全银行使能对应哪些逻辑事件；再决定独立CP上的结构假设。不要默认重复旧stage+path分解或删除嵌套X/Z保护。整体goal active。
+
+以下保留历史。
+
+# Stage CE真实连接已审计、实际恢复并冻结（2026-10-30）
+
+native_stage_ce_connectivity_v1/session90731正常终态；精确net cp_stage[154][31]_i_1_n_9的4993 leaf pins经Tcl-list数据解析核对：1 LUT3输出，4992输入全为FDRE CE，逐项完整覆盖156 word×32 bit无额外/漏引脚。驱动INIT8h02，二态方程I0 & !I1 & !I2；三层上游记录包含cp_s_ready、fault、drift和状态逻辑，但仍有无匹配上游输出警告，不是完整transitive cone或四态RTL等价，也未把整个enable等同某单一capture事件。
+
+独立audit、7文件archive实际restore及byte-identical复审通过；archive16b369ef9b0d573d380e82085d6d880f6b55396e873d37ee9208da1ede30dd4d，auditf1e30cd1bbed8e1f8cad943b18dd338cf235f44e1cfc214a50a5d7d61846a605。results/native_stage_ce_connectivity_20261030.json及12文件freeze已主模型SHA核对。inspect_native_stage_ce_v1.py/audit_native_stage_ce_v1.py保留不改；旧runner3003775终态不重启，无新重任务。下一在此真实driver输入上辨别capture/import的银行总使能及数据mux控制，先建立保留X/Z嵌套if语义的可证结构假设；旧stage+path分解不是独立CP证据，不能默认叠加。物理native面积下降但WNS-5.240比CP-4.059退化结论不变。整体goal active。
+
+以下保留历史。
+
+# 原生stage CE只读连接查询已启动（2026-10-30）
+
+results/config_native_cp_stage_cone_review_20261030.json绑定真实routed路径/两份一致route controller源/旧stage工具。高扇出4992与4×39×32银行位数数值一致，但尚不证明所有load都是stage CE；原树有整银行export捕获与单字import两写入口。旧route_stage_write_v1已分解但叠加path，不能误称新独立实验。不能用二态冗余删除cp_s_ready，X外层if可走else而ready仍阻止写。
+
+MCP两旧会话再次查询仍out of stack space，未复用/停止，回退本机2022.2。新scripts/inspect_native_stage_ce_v1.py及results/native_stage_ce_connectivity_preparation_20261030.json已准备并实际启动/tmp/B_state_residency_offer_20261025/native_stage_ce_connectivity_v1，runner3003775/start_ticks1649830465/session90731，当前60秒内存准入。从已实际恢复冻结routed.dcp只读查询精确net的leaf pins、driver INIT及三层上游LUT，不改RTL/DCP/约束、不综合布局布线。沿原child-only runtime和非kill等待，无自动后续；不要重复启动。输出待实际完成和独立解析/审计/归档恢复后才接受，当前无真实连接结论。已用脚本保持不改，失败留证新版本。整体goal active。
+
+以下保留历史。
+
+# 原生物理结果实际恢复冻结：面积下降，时序退化（2026-10-30）
+
+config_native_publication_physical_v1原runner1318346/主Vivado1339089/session83166及独立inspect2801679/session85261均正常终态，勿重启。独立重开、audit、195文件归档实际restore及byte-identical复审通过；archive89cd76c75d3722e919e4abc445e36469189bde42bde5103a83c01395cfea57a7，auditdf6bb462a6088833de33c8a51a9819d434d8299573acfecf5d819cd7cc5b06e3。results/config_native_publication_physical_20261030.json、206文件freeze和main_review已主模型全SHA/归档/原恢复audit核验。全部186217 routable nets布通、routing errors0；LUT137462/FF85940/BRAM163/DSP23/URAM0，较CP物理LUT-2150/FF-2246。WNS -5.240ns比CP -4.059退化1.181ns，WHS .011/hold0，setup失败41889；不能因面积减少选为时序优化。candidate_selected/timing_qualified/board_acceptance均false。保留CP较优时序基线与native面积候选，不覆盖已冻结源/工具。
+
+真实最差routed setup为route_join/controller/slot_reg[1]_replica_3/C→cp_stage_reg[139][10]/CE，34层、15.135ns=2.340logic+12.795net。见results/config_native_publication_physical_main_review_20261030.json，包含完整literal解析及报告SHA。CP参考最差到config descriptor CE，端点改变不能把差值归因为某个RTL条件。下一优先核对该route cp_stage写使能/实际fanout及既有CP最差cone，形成可证结构假设再新候选，不盲加pipeline/删CRC取消保护，也不默认叠加未选route_label/path/stage/native。无新重任务或自动队列。
+
+native功能证据为五定向单元+单一扩展host完整例；仍不是native八矩阵或formal。原CP八矩阵/host非空已完成但不能替代native矩阵。物理IO预算/真实时钟位置/平台集成/板卡/任意变价与持久化认证等仍缺。整体goal active。
+
+以下保留历史。
+
+# 原生fresh物理实现终态，独立重开启动（2026-10-30）
+
+config_native_publication_physical_v1/runner1318346及主Vivado1339089均已退出；manifest observed/implementation_complete_pending_independent_inspection/exit0，STATE_FULL_PHYSICAL_DONE已写，routed.dcp及完整报告已生成。原session83166不重启。现独立inspect_config_native_physical_v1.py已启动session85261，inspector2801679/start_ticks1649763383实际存活，当前60秒内存准入。不要重复inspect/启动新重任务，无自动followup。当前报告尚未经独立核对/归档恢复，不宣称物理接受。
+
+下一沿session85261实际PID等待正常终态；随后audit_config_native_physical_v1.py TARGET→archive_offer_result.py TARGET→verify_search_retire_restore.py config_native_publication_physical_v1 audit_config_native_physical_v1.py→freeze_config_native_physical_v1.py→主模型所有freeze/restore SHA及真实路径复核。已用18工具绑定保持不改；若失败保留证据另起版本，不改检查制造通过。restore期间不读目标根。整体goal active，时序/新native矩阵/平台IO/板卡等仍缺。
+
+以下保留历史。
+
+# 原生候选fresh物理布局进行中（2026-10-30）
+
+当前唯一config_native_publication_physical_v1/runner1318346/session83166已通过60秒内存准入和2022.2实际version。外层Vivado1338995，真实主Vivado1339089/start_ticks1649296174实际存活，CPU增加；opt_design成功，已进入place_design的Phase3.3.3 Slice Area Swap。原OOC/独立inspect均终态，勿重启或另起物理实现。尚未placed完整报告、route或物理WNS，无自动followup。
+
+results/config_native_publication_ooc_path_comparison_20261030.json源绑定两份实际恢复OOC报告：最差setup起终点均lease_phase[27][1]/C→path[0][25][0]/CE、61层、14.844ns=2.519logic+12.325估计net、WNS -4.948；内部logic_cells/data_nets和literal block不完全相同，不能称整条映射逐项相同。此前面积LUT-2156/FF-2216结论保持；未证明物理收益。
+
+原物理作业正常终态后才inspect_config_native_physical_v1.py TARGET（60秒准入/独立重开）→audit_config_native_physical_v1.py TARGET→archive_offer_result.py TARGET→verify_search_retire_restore.py config_native_publication_physical_v1 audit_config_native_physical_v1.py→freeze_config_native_physical_v1.py→主模型逐SHA及真实报告核验。继续遵守18工具绑定不改/失败另起版本、child-only验证runtime/非kill wait，restore时不读目标根。整体goal active，native新矩阵/平台IO/板卡尚缺。
+
+以下保留历史。
+
+# 原生OOC已恢复冻结，fresh物理实现已启动（2026-10-30）
+
+config_native_publication_synth_v1及独立inspect均正常终态，组合环0/critical0/latch0/blackbox0。独立audit、208文件归档实际restore及byte-identical复审通过；archive e10fe5ed45f873d0be4aecea43b24e51bdccc4663e28111706726c5b6809f424，audit f40d7953e2b017d761f9daadc2792c1ce86e1d32647488c6d5e3d7d366a334ae。results/config_native_publication_synth_20261030.json与192文件freeze已主模型逐SHA/归档SHA/原恢复audit核验。LUT137325/FF85832/BRAM163/DSP23，较CP LUT-2156/FF-2216，WNS -4.948ns差0；只有面积减少，没有OOC时序改善或选择结论。旧runner496831/517917、inspect1199340/session25754均终态，不重启。
+
+18物理工具/模板及6预备记录SHA再次核验不变，物理门控首次实际正向通过。prepare_config_native_physical_v1.py已生成133源/150inputs，主模型逐SHA核验source/全部bound/参数/原Tcl及候选自身synth.dcp，无旧placed输入。见results/config_native_publication_physical_input_main_review_20261030.json。
+
+当前唯一重任务config_native_publication_physical_v1，runner1318346/start_ticks1649289646/session83166，正在60秒内存准入，随后version→fresh opt/place/route。沿原2022.2/U280/10ns/Default命令，child-only恢复验证runtime/非kill wait，未改变约束，无自动followup。不要重复提交或改已用工具；原综合终态已确认。物理尚无布局/route/WNS结果。实际终态后inspect_config_native_physical_v1.py同根→audit_config_native_physical_v1.py→archive_offer_result.py→verify_search_retire_restore.py config_native_publication_physical_v1 audit_config_native_physical_v1.py→freeze_config_native_physical_v1.py→主模型全SHA/真实报告核验。restore时不读目标根，失败保留另起版本。candidate_selected/timing_qualified/board_acceptance均false，native新八矩阵/平台IO/板卡仍缺，整体goal active。
+
+以下保留历史。
+
+# 原生OOC已正常终态，独立DCP检查已启动（2026-10-30）
+
+config_native_publication_synth_v1原runner496831/主Vivado517917均退出，manifest observed/complete/exit0，RESTORE_SEED_OOC_DONE已写出。综合优化日志0 error/0 critical、264普通warning；这不是独立audit或最终时序接受。当前唯一独立inspect_config_native_publication_synth_v1.py已启动session25754，runner1199340/start_ticks1649254438，输出results/methodology_v1，现处60秒内存准入。勿重复inspect或改已绑定工具，原session31486不重启。无自动followup。
+
+下一沿session25754实际PID观察终态，再analyze_restore_seed_loops.py→audit_config_native_publication_synth_v1.py→archive_offer_result.py→verify_search_retire_restore.py config_native_publication_synth_v1 audit_config_native_publication_synth_v1.py→freeze_config_native_publication_synth_v1.py→主模型全SHA/报告核验。之后才核对18物理工具绑定并准备fresh physical，暂未提交。当前尚无候选审计/实际恢复/OOC收益结论；整体goal active。
+
+以下保留历史。
+
+# 原生物理工具链源码预备完成，未执行（2026-10-30）
+
+新增freeze_config_native_physical_v1.py/preflight_config_native_physical_v1.py；freezer实际缺OOC验收时拒绝且未创建报告或freeze。preflight已核对6份工具预备记录全部SHA、16 Python工具解析及2 Tcl模板，共18工具/模板绑定在results/config_native_physical_tools_preparation_20261030.json。准备/运行/独立重开/审计/freezer源码入口现齐备，但候选正向实际prepare/run/inspect/audit/restore/freeze均未执行，不是物理结果或性能结论。已有工具/准备记录绑定后不改，任何失败保留另起版本。
+
+当前仍由原runner496831/session31486拥有综合；主Vivado517917实际存活、CPU增加，Timing Optimization，无最终资源/WNS，无自动followup。先执行下文原OOC完整验收/实际恢复/freezer并主模型全SHA复核；随后核对18工具绑定，再调用prepare_config_native_physical_v1.py /tmp/B_state_residency_offer_20261025/config_native_publication_physical_v1。实际prepare后必须主模型核对133生产源/参数/模板/全部inputs与bound，才用run_config_native_physical_v1.py同根，终态后inspect_config_native_physical_v1.py→audit_config_native_physical_v1.py→archive_offer_result.py→verify_search_retire_restore.py config_native_publication_physical_v1 audit_config_native_physical_v1.py→freeze_config_native_physical_v1.py→全SHA主模型复核。不得与原综合并行或提前提交，无自动后续队列。每个新Vivado60秒内存准入、恢复验证child-only runtime、非kill wait；物理输入为新candidate synth.dcp重新opt/place/route，绝非旧placed恢复。负WNS/DRC未检查项必须保留，timing_qualified/board_acceptance/selection均false。整体goal active，新native矩阵/平台IO/板卡等范围仍缺。
+
+以下保留历史。
+
+物理审计预备更新（2026-10-30）：新增audit_config_native_physical_v1.py，绑定旧utilization/timing/route/parser，仅适配fresh input/placed/routed和独立inspection来源。实际缺候选OOC验收时拒绝；使用已恢复CP物理报告副本完成route/checks/methodology/DRC/最差setup/hold跨旧audit核对，WNS -4.059及未闭合结论保留；人为修改独立重开constraints加入falsepath被拒绝。见results/config_native_physical_auditor_preparation_20261030.json。未运行候选物理审计，未提交物理作业；freezer/完整工具绑定preflight仍缺，正向候选OOC接受/实际物理测量仍待执行。所有新增已绑定工具保持不改，失败另起版本。原综合517917实际运行，仍Timing Optimization，CPU增加，无新WNS。整体goal active。
+
+物理工具预备更新（2026-10-30）：run_config_native_physical_v1.py与inspect_config_native_physical_v1.py已新增并Python解析，两个实际缺OOC验收拒绝检查均在物理根访问/child前通过；对应results/config_native_physical_runner_preparation_20261030.json及config_native_physical_inspector_preparation_20261030.json绑定SHA。runner沿用既有60秒内存准入、child-only恢复验证runtime和非kill wait_preserving；inspect独立重开候选routed.dcp，模板为已有2022.2 inspect_state_route_v1.tcl并核对重开前后DCP/实现manifest不变。尚未实际正向运行，独立auditor/freezer与完整工具绑定preflight尚缺，不能宣布实现链就绪或启动。原OOC517917实际存活，继续Timing Optimization，无最终结果；勿重复提交。
+
+# 原生候选物理入口预备，尚未执行（2026-10-30）
+
+新增只读check_config_native_physical_inputs_v1.py与prepare_config_native_physical_v1.py；准备记录为results/config_native_physical_input_gate_preparation_20261030.json和config_native_physical_preparer_preparation_20261030.json。实际缺OOC最终接受报告时，二者均拒绝，且未创建config_native_publication_physical_v1目录或child。正向实际准备未测试，runner/独立inspect/audit/freezer尚待补齐，不能称完整实现链就绪。模板沿用implement_state_ooc.tcl的fresh synth.dcp→opt→Default place→Default route，不拷贝旧placed DCP；source-bound差异检查见config_native_publication_physical_flow_review_20261030.json。已绑定工具保留不改，失败另起版本。
+
+原OOC runner496831/session31486及主Vivado517917仍实际存活，CPU继续增加，日志Timing Optimization；无新资源/WNS结果，无自动followup，不重复提交。后续先沿下文原综合独立inspect→audit→archive→实际restore→freeze链完成，再正向核验物理门控和补齐工具，不跳验收。整体goal active。
+
+以下保留历史。
+
+# 原生描述符完整系统已恢复冻结，同条件OOC正在综合（2026-10-30）
+
+config_native_publication_system_v1/session14009、runner3903623/kernel3940734均已observed正常终态并退出。独立audit核对完整27输出/事件/48292280ns与已恢复CP host参考精确一致，旧host/CP/query/backend/capture覆盖原样匹配。被动原controller自身stage反馈比较4829223个非cold-reset周期、完整4810 state/7238 output全部通过；真实load/reply4/4、stage/capture/publication3/3/3、prepared30、discard0。host真实write1/238原子检查/dirty1/pending0保持。不是任意输入formal或新八场景矩阵。
+
+410文件归档实际恢复audit字节一致：archive4f570e61fe2f9dcdc598cd491f38c0adbc75fe90edfcef7e44bc11e3e390a01f，auditd11f30053cfdacb660e3318be417f7d02f552175223bed724f5d09f2416267df。freeze_config_native_publication_system_v1.py已执行，results/config_native_publication_system_20261030.json及205文件freeze全部来源/副本SHA、27原始文件与归档已主模型复核，见results/config_native_publication_system_main_review_20261030.json。保留完整builder/model/TB/runner/auditor/freezer及旧unit/host工具冻结不改，勿重启旧XSim。
+
+已创建config_native_publication_synth_common_v1.py、prepare/run/inspect/audit/freeze_config_native_publication_synth_v1.py及preflight。results/config_native_publication_synth_tools_preparation_20261030.json绑定14工具，29前置来源实际检查通过；5种缺源/重复/TB/file-agent/observer混入列表拒绝，人工超时先发生后仍等待fake child真实返回0，未启动任何真实子进程做此测试。inspect的2022.2 Tcl与旧独立重开脚本逐字相同，新版仅加runtime/memory/真实PID及保留child等待；审计复用已验证报告解析尾部并独立验证新source/runtime/命令。时序Ross指南要求2026.1+，实际坚持已验证2022.2命令，未套用新版本专有功能。
+
+prepare已实际生成/tmp/B_state_residency_offer_20261025/config_native_publication_synth_v1，参考checkpoint_edit_synth_v1：133编译生产文件、144复制来源（含数据/准备器，不能混作RTL数），只替换config_restore_controller/residency两源。与已恢复完整系统相同133生产源SHA；137行为编译中的4验证源全部排除。U280/13顶层参数/10ns/XDC和Tcl命令保持匹配，Tcl只替换根路径。当前MCP两旧会话再次实际查询仍out of stack space；未复用/停止，使用local batch回退。
+
+当前唯一新OOC runner496831/start_ticks1649056255/session31486正在synthesis，results/config_native_publication_synth_launch_20261030.json记录来源。60秒内存准入通过，真实vivado -version exit0且2022.2。外层Vivado脚本517695/start_ticks1649062527，实际主Vivado517917/start_ticks1649062566；04:47 UTC存活、CPU推进，内存173.48/300GiB。parallel_synth_helper536864及其Vivado567003/568086是同一原作业内生子进程，不是重复提交；以真实PID/start_ticks继续观察。尚无候选资源/loop/WNS终态，不将旧WNS当新结果。
+
+仅在新的Vivado子环境预加载原版bundled libtcmalloc.so.4和系统libudev.so.1，runtime_controls_restored的实际恢复审计和两库SHA在准备/每阶段重新核验；父会话环境/工具二进制/许可未改，不用于XSim。新版runner/inspector观察超时不kill/terminate，也不推断终态或重试；保留父wait归属并最终记录真实exit code，超时日志交主模型观察。未设置自动followup，不启动第二综合/inspect或修改已用源码/工具/准备绑定。
+
+当前OOC observed且原进程退出后，顺序inspect_config_native_publication_synth_v1.py TARGET（独立重开DCP、另60秒准入）→analyze_restore_seed_loops.py TARGET→audit_config_native_publication_synth_v1.py TARGET→archive_offer_result.py TARGET→verify_search_retire_restore.py config_native_publication_synth_v1 audit_config_native_publication_synth_v1.py→freeze_config_native_publication_synth_v1.py→主模型核验所有freeze/restore SHA及真实报告。任一失败保留现场另起版本，不原地改检查制造通过。然后再选择后续匹配物理实现/新矩阵，不能把旧placed DCP当新网表实现。
+
+候选仅功能单元和单一扩展完整例通过；新候选八场景、OOC结果、新物理时序/平台IO/板卡仍未完成。旧CP矩阵8/8及CPPREF OOC -4.948ns/物理-4.059ns均为独立参考，不能泛称新候选收益。generic X/Z反例与controller默认关闭保留，未叠加未选route_label/path/stage。整体goal active。
+
+以下保留历史。
+
+# 主机写双运行与候选五模式已恢复冻结，候选完整系统运行中（2026-10-30）
+
+checkpoint_host_edit_system_v1/session4225已observed正常终态并退出。独立audit要求全部27输出/事件/周期与已恢复query_host_edit_system_v1完全一致，48292280ns；421文件归档实际恢复后audit字节一致，主模型复核133源、27份完整文件、覆盖及原/恢复audit。archivee55160ebcf0d94c390a56ddb7c427df120e76744adcab9b387bab72cd1fdec25，auditf97cd27aa1184c3b28bf25efa586e7775ea162cc3997b7a6f2ae0d36ad1664da，见results/checkpoint_host_edit_system_milestone_20261030.json。freeze_host_edit_system_v1.py已执行，results/checkpoint_host_edit_system_20261030.json及433文件freeze来源/副本SHA已主模型核验。真实write1、238原子检查、CP15/15/import60/export90/edit1、dirty1/pending0证明现为实际CP双运行范围，不是仅baseline或旧矩阵edit0。
+
+config_native_publication_units_v1/runner3658951/start_ticks1648750434/session28265已observed终态并退出，五例generic original/default及native original/default/enabled均已实际编译/展开/仿真。独立audit三组完整4810位内部状态+7238位输出/事件/结束时间字节精确比较通过。generic两例134边/1340ns、54 prepared边中45个非别名差异边；native三例768边/7680ns、各388 prepared边且全部2272非版本位差异0。X/Z相邻已知位用逐位%b保存，未使用v1%h作为证据。
+
+208文件归档实际恢复audit字节一致，archive24c3c7f18f920a071e0d0edc521920211dd09f9725a8c5cdecf9900ce8f85bf2，auditd1efc37b51a17fe05bf3a9b756ab57e245219e12f5b8ce0d028d5323e6abd4e7。freeze_config_publication_units_v1.py已执行，results/config_native_publication_units_20261030.json及96文件freeze已主模型核验；results/config_native_publication_units_main_review_20261030.json记录三组literal bank/event复核。候选仅这些定向单元已通过，不是任意输入formal或新八场景矩阵；所有候选/单元源、工具、准备记录保持冻结不改。
+
+新完整system builder为hardware/variants/config_native_publication_system_v1/build.py；run/audit/freeze_config_native_publication_system_v1.py及preflight工具已准备。results/config_native_publication_system_tools_preparation_20261030.json绑定10工具，51端口（26输入/25输出）及完整寄存器覆盖静态核验，12个损坏来源/观察器样例拒绝。原控制器仅重命名为config_restore_controller_observer；其暂存使用自身active_payload，其他输入来自真实端口，输出只接观察wire，绝不驱动DUT。每个非cold-reset正沿NBA后100ps逐位case-inequality比较完整4810 state/7238 output，另检查实际stage payload/authority/permit别名、prepared2272银行及非空stage/capture/publication。无全周期巨量文件输出、force或层次写。原host/CP/query/backend/capture监视与刺激全部保留，27外部文件/事件/周期仍须精确匹配CP host参考。
+
+真实前置及29来源绑定通过后，已实际启动/tmp/B_state_residency_offer_20261025/config_native_publication_system_v1：runner3903623/start_ticks1648824051/session14009，results/config_native_publication_system_launch_20261030.json记录来源。已compile/elaborate exit0并进入simulate，04:11 UTC实际XSim3937688/kernel3940734/start_ticks1648834823存活，内存160.68/300GiB；04:13继续存活并约227万周期。133生产源只覆盖CP较优基线config_restore_controller/residency两源，另4验证源（137编译文件）含被动旧控制器model。不要启动第二求解器、重启旧3190459/3226865或旧unit，勿改已使用builder/runner/auditor/freezer/model/TB/准备绑定，失败留证另起版本。尚无候选全系统通过或OOC/物理结论，无自动followup；restore期间不得读取目标根。
+
+下一沿用session14009/真实PID。observed终态后audit_config_native_publication_system_v1.py→archive_offer_result.py→verify_search_retire_restore.py config_native_publication_system_v1 audit_config_native_publication_system_v1.py→freeze_config_native_publication_system_v1.py并主模型核验全SHA。之后才准备匹配CP synth基线的独立OOC/审计/恢复工具（尚未创建），严格取原133生产列表，排除observer/TB，保持U280/参数/10ns及原XDC条件；实际新网表物理比较不得当作旧placed DCP继续布线。保持generic X/Z反例和默认关闭，不叠加未选route_label/path/stage。WNS仍旧-4.059ns，候选无时序收益或选择结论；CP旧8/8仅前置，不是新候选矩阵。整体goal active，平台IO/物理时序/板卡等缺口保持。
+
+以下保留历史。
+
+# 真实主机写参考已恢复复核，CP对照正在运行（2026-10-30）
+
+query_host_edit_system_v1/runner2782716/session2988/kernel2818285已observed正常终态并退出，baseline独立audit通过。418文件归档实际恢复后audit字节一致；主模型核验原/恢复audit、26MB归档SHA、133原query-native生产源、27输出digest及真实事件，见results/query_host_edit_system_milestone_20261030.json。archivebbf46ad040aeca27416ede7698a6171e2117eee2ff6453182ec90e07f6e20f2e，audit7c78735260065c4f9fc95e521e0b2cb7619491fd0ccc758c07e3003d10e31b12。结束48292280ns，旧完整trace前缀逐字保留；相对原fixture只有label_axi.txt/natural_trace.txt改变，其余25输出（含所有最终DDR镜像）相同。
+
+实际host lane8读/同值sequence写/读为3请求3回复，其中write1/reply1；真实controller.host_label_edit非空且cp_safe无重叠。新增408周期、238次完整ledger/保留上下文原子检查、31新事件及33原始CP记录通过独立解析。干净CRC626e163b、脏CRC02a979db；CP_CHECK实际CRC/元数据/漂移/回退等其他拒绝原因均排除，旧干净ledger因清脏策略status1，合法脏ledgerstatus0并清pending。最终dirty1、sequence180330、slots15、lease0；总CP15/15、import60/export90/edit1。仅baseline已实际恢复，不是CP pair或描述符候选证明。
+
+随后唯一run_host_edit_system_v1.py已启动/tmp/B_state_residency_offer_20261025/checkpoint_host_edit_system_v1，runner3190459/start_ticks1648613263/session4225，results/checkpoint_host_edit_system_launch_20261030.json记录来源。已compile/elaborate exit0并进入simulate，03:31 UTC实际XSim3224002/kernel3226865/start_ticks1648624035存活，内存156.87/300GiB；目标须与实际恢复baseline全部27输出/事件/周期精确一致，不改来源或归一化。该job使用已冻结CP两源，不含新descriptor候选。不要重启旧baseline、并行unit/其他行为求解器或修改任何已使用host工具/TB/准备绑定；失败留证另起版本，无自动followup，restore期间不得读取目标根。
+
+描述符候选五模式完整工具现已准备：config_publication_units_common_v1.py、run_config_publication_units_v1.py、audit_config_publication_units_v1.py、freeze_config_publication_units_v1.py。results/config_publication_units_tools_preparation_20261030.json绑定14工具，38来源证据实际准备检查通过。actual unit早调因缺host pair最终接受报告而拒绝，尚无/tmp/.../config_native_publication_units_v1目录/child或候选RTL执行。每例串行60秒内存准入，使用v2逐位4810内部状态/7238输出，不用v1十六进制记录。auditor还逐prepared edge解码2304位descriptor/shadow，native2272非版本位须相等且计数388；generic须保留非别名X/Z差异。6个人工语义损坏例拒绝、2个人工分类通过，无实际候选结果。新工具/准备绑定保持不变。
+
+当前CP counterpart终态后执行audit_host_edit_system_v1.py→archive_offer_result.py→verify_search_retire_restore.py checkpoint_host_edit_system_v1 audit_host_edit_system_v1.py。主模型复核完整27比较及真实恢复后freeze_host_edit_system_v1.py并逐SHA核验。之后核验unit tools preparation全部SHA，run_config_publication_units_v1.py /tmp/B_state_residency_offer_20261025/config_native_publication_units_v1→独立audit→archive→verify_search_retire_restore.py config_native_publication_units_v1 audit_config_publication_units_v1.py→freeze_config_publication_units_v1.py及全SHA核验。再独立descriptor完整系统、同条件OOC/物理实测；不能从已生成候选或模型宣布收益。
+
+CP矩阵8/8、216比较及217文件freeze，原版generic七例138check/27文件freeze与native20例689check/32文件freeze此前均实际恢复并主模型核验。config_native_publication_v1候选仅已生成、未编译/仿真；controller默认关闭/native实例显式开启，保留generic反例，不叠加未选route_label/path/stage。路后WNS仍-4.059ns，时序/平台IO/板卡等缺口不变，整体goal active。以下原baseline running记录已过时。
+
+以下保留历史。
+
+# CP矩阵8/8与原版两probe已恢复冻结，主机写参考运行中（2026-10-30）
+
+checkpoint_edit_matrix_queue_v1/4091205与最后runner2346453/kernel2362410均已observed正常终态并退出。CRC/full的27输出/46615310ns、377文件实际恢复及133条manifest.rtl源已主模型独立核验，见results/checkpoint_matrix_retry_crc_full_milestone_20261030.json。results/checkpoint_edit_matrix_20261030.json状态eight_cp_behavioral_cases_restored，七个新例+原CRC pressure为8/8、216输出比较。freeze_checkpoint_edit_matrix_v1.py已实际执行，results/checkpoint_edit_matrix_sources_20261030的217文件来源/副本SHA全部主模型核验通过。不要重启矩阵或旧kernel；矩阵外部host edit仍全部0，范围不扩大为任意编辑或其他候选矩阵。
+
+config_publication_probe_v1/session25654已正常终态：原版generic七例、17事件/138check、1340ns，真实X/Z暂存及发布传播已观察。47文件归档实际恢复audit字节一致，archive82c5c8dcb4010af19da6cb012c9ce1bda73134287baf6504f2976f9430b11cae，audit2d60843bacaf10dad73bcc979e1a16f6088c834eeda932fc772a3b356544cc1b。results/config_publication_probe_20261030.json及27文件freeze已逐SHA主模型核验。通用接口不能删除原全银行发布，保留该反例。
+
+config_native_feedback_probe_v1/session60723亦已正常终态：原版native20例，21事件/689check、7680ns，60load/20recovery/20capture/4publication/16clear/20blocked overwrite/120cfg request/40alias/388prepared check。0/1/X/Z及raw版本3→发布4、取消保留3/active仍4均实际通过。52文件归档实际恢复字节一致，archive9f7d9fa379f5bcc884c36fdb1b983bceb8be40288edf0c53825f543563a3c032，audit0f8ced7a789496ddd9c39ccf774ffebf87af9d2888bb0db5318dc3db141ec756。results/config_native_feedback_probe_20261030.json与32文件freeze已主模型核验；它不同于早先纯模型config_native_feedback_20261030.json。两probe全部源码/工具/准备记录保持冻结不改。
+
+prepare_config_native_publication_v1.py先曾在矩阵门控拒绝、未生成RTL；现在真实前置通过后已实际生成hardware/variants/config_native_publication_v1/baseline与fixed两源及manifest，24条来源绑定主模型核验通过。参考仍为checkpoint_edit_synth_v1，未叠加未选route_label/path/stage。NATIVE_FEEDBACK_PUBLICATION在controller默认0，真实residency config_restore实例显式1，原jp_effective同源接线保持。开启时发布只写raw descriptor[2240+:32]，其余2272位保持；初始加载/冷复位全写、全部保护、saved_design/checkpoint/current_version/prepared仍保持原沿赋值。只有prepared_not_compiled_or_simulated，未编译或仿真候选、未选择、没有综合/物理收益结论。当前候选/生成器/manifest用于来源绑定，不原地修改。
+
+五个候选单元TB副本已准备：generic original/default与native original/default/enabled，尚无实际候选运行。原v1观察器使用%h会丢失部分未知nibble内已知位差异，文件/准备记录保留但不得当完整四态比较依据。使用hardware/tests/config_native_publication_units_v2及results/config_publication_unit_benches_v2_preparation_20261030.json：每posedge NBA后100ps、原tick#1前，逐位%b记录4810位完整内部寄存器状态及7238位全部输出，native另有实际stage alias及prepared非版本银行前后比较。check_config_publication_bank_trace_v1.py人工9损坏日志均拒绝，含X/Z相邻已知位变动；不是实际RTL比较。results/config_native_publication_tools_preparation_20261030.json为实际前置通过前的准备快照；当前以候选manifest实际绑定为准。
+
+config_publication_units_common_v1.py、run_config_publication_units_v1.py、audit_config_publication_units_v1.py、freeze_config_publication_units_v1.py现已独立准备并Python解析，results/config_publication_units_tools_preparation_20261030.json绑定14新/复用工具，38来源证据实际准备检查通过。unit目标为/tmp/B_state_residency_offer_20261025/config_native_publication_units_v1（TB必须选v2）。runner先要求host pair最终接受报告及完整freeze，再读两恢复根，当前实际调用因缺host最终接受而拒绝，未创建unit目录或子作业。五例串行且每例60秒内存准入，观测超时保留原child、不重试/杀进程。
+
+新unit auditor逐例验证原始已恢复probe的完整事件、解析覆盖、结束时间、真实命令/源/退出和逐位银行；三组全银行/事件/周期比较。还从binary每个prepared edge独立解码2304位descriptor/shadow，检查完整2272非版本位：native必须无差异且prepared边数等于原388，generic必须观察到不别名X/Z反例。6个人工语义损坏例拒绝、2个人工分类通过，不是候选RTL。unit freezer要求实际归档恢复audit字节一致；未执行、无候选unit结论。上述准备绑定文件现在保持不变。
+
+真实主机写扩展baseline已实际启动：run_host_edit_system_v1.py /tmp/B_state_residency_offer_20261025/query_host_edit_system_v1，runner2782716/start_ticks1648493718/session2988，results/query_host_edit_system_launch_20261030.json记录来源。已compile/elaborate exit0并进入simulate，03:11 UTC实际XSim2817100/kernel2818285（start_ticks1648504455）存活，内存157.30/300GiB；原矩阵与两probe均终态且已冻结，只此一行为作业。该完整实验使用已有query-native生产源和扩展TB，不含新描述符候选。不得启动CP counterpart或候选unit求解器并行；不得修改已使用TB/build/runner/auditor/helper/freezer/准备绑定，失败留证另起版本。尚无host edit功能通过或新baseline审计/恢复；不读取正在restore的目标根。
+
+下一沿用session2988/真实PID；observed终态后audit_host_edit_system_v1.py→archive_offer_result.py→verify_search_retire_restore.py query_host_edit_system_v1 audit_host_edit_system_v1.py。baseline真实恢复且退出后同工具run/audit/archive/实际restore checkpoint_host_edit_system_v1，双运行27输出/事件/周期精确比较后freeze_host_edit_system_v1.py及全SHA核验；无自动followup。之后核对unit tools preparation SHA，run_config_publication_units_v1.py /tmp/B_state_residency_offer_20261025/config_native_publication_units_v1→audit_config_publication_units_v1.py→archive_offer_result.py→verify_search_retire_restore.py config_native_publication_units_v1 audit_config_publication_units_v1.py→freeze_config_publication_units_v1.py及全SHA核验。v2逐位三组比较通过后才完整系统/同条件OOC及物理实测。WNS仍-4.059ns，时序/平台IO/板卡等缺口不变，整体goal active。
+
+以下保留历史。
+
+# CP矩阵7/8，真实主机写入完整运行/审计工具已准备（2026-10-30）
+
+checkpoint_matrix_retry_cancel_pressure_v1已observed，27输出/47207980ns与原参考精确一致，377文件归档实际恢复audit字节一致。主模型核验原/恢复audit、归档SHA、27输出、133条manifest.rtl生产源及21队列绑定；results/checkpoint_matrix_retry_cancel_pressure_milestone_20261030.json记录证据。archive560ef9d38f375ecd19f26789ef41305ba11348e4b3d8c1723dfe3e6d7111e510，auditba612b3b098adc2850631cb3630be5b5441a6cdca5d72da3e6acaa117530e69f。CP safe64999/busy339、req/rsp12/12、import40/export80、edit0，原query/backend/capture覆盖保持。现为7/8，尚缺CRC/full与最终矩阵freeze。
+
+唯一queue4091205/start_ticks1647617526/session94223已进入checkpoint_matrix_retry_crc_full_v1_run。主模型实测runner2346453/start_ticks1648368542、XSim2361416/kernel2362410（start_ticks1648373131）存活。旧cancel/pressure kernel2013257正常终态；不再轮询或重启旧例。保持原21绑定、单一行为求解器和restore期间不读目标根。queue正常终态且实际退出后，由主模型执行freeze_checkpoint_edit_matrix_v1.py并核验全部freeze SHA，然后原generic七例→native二十例各自audit/archive/实际restore/freeze；无自动probe followup。
+
+MCP两旧会话再次实测仍version=out of stack space；未复用/停止，继续已验证2022.2本地批处理回退。未启动新Vivado。
+
+scripts/host_edit_system_common_v1.py、run_host_edit_system_v1.py、audit_host_edit_system_v1.py、freeze_host_edit_system_v1.py已准备并Python解析。分别允许query_host_edit_system_v1与checkpoint_host_edit_system_v1，须先完整矩阵/原generic/native probes实际恢复冻结，CP还须baseline实际恢复且owner退出。每次运行先连续60秒<=225/300GiB，再复用原实际2022.2三阶段命令；绑定已有133生产源、生成TB、工具/数据来源，异常保留原进程。baseline仅换回已有CP两源的原始版本，CP保持当前已冻结来源，没有新生产候选。
+
+新独立auditor检查完整来源/实际命令/退出、27输出集合、原trace前缀、独立31事件/33原始CP记录与CRC语义、15请求回复/60导入/90导出/edit1、原监视覆盖及精确结束时间。CP必须与已恢复扩展baseline的全部27输出、周期、覆盖和新事件字节一致。freeze仅在双运行都实际归档恢复、audit字节一致后接受；不是复用旧矩阵审计器放宽比较。实际参考compile.stdout无版本banner，校验VRFC分析消息；elaborate/simulate有2022.2 banner，已据实采用。
+
+results/checkpoint_host_edit_tools_preparation_20261030.json绑定9个新/复用工具，26条来源证据准备检查通过。两个实际提前runner调用均在矩阵门控拒绝、未创建目标目录/子作业；缺native分支仅在人工绕过前两门控的Python负例中检查拒绝，未伪造实际前置证据。尚无扩展SV编译/仿真、双运行审计或验收；工具/准备绑定文件保持不变。原CONTRACT中的“no runner yet”是先前TB准备快照，此记录更新后续工具状态，不原地改已绑定CONTRACT。
+
+下一先完成矩阵及既定两probe；主机写扩展排在其后，先核对tools preparation SHA，顺序run_host_edit_system_v1.py BASE/query_host_edit_system_v1→audit_host_edit_system_v1.py→archive_offer_result.py→verify_search_retire_restore.py query_host_edit_system_v1 audit_host_edit_system_v1.py，再对checkpoint_host_edit_system_v1做同样链，最后freeze_host_edit_system_v1.py并核验freeze。无自动followup。描述符生产候选仍须原版两probe通过后才创建；路后WNS仍-4.059ns，整体goal active，时序/平台IO/板卡等缺口不变。
+
+以下保留历史。
+
+# CP矩阵6/8，真实主机写入覆盖扩展已准备（2026-10-30）
+
+checkpoint_matrix_on_pressure_v1与checkpoint_matrix_retry_cancel_full_v1均已observed、独立审计并完成377文件归档实际恢复，audit字节一致。主模型逐一核对27输出、133条manifest.rtl生产源、归档/原恢复audit SHA及21队列绑定；记录为results/checkpoint_matrix_on_pressure_milestone_20261030.json与results/checkpoint_matrix_retry_cancel_full_milestone_20261030.json。结束时间分别46874800ns、44914260ns，CP safe64999/64485、busy339、req/rsp12/12、import40/export80、edit0；原query/backend/capture覆盖保持。加上前三个新例及CRC pressure anchor为6/8，还缺cancel/pressure、CRC/full及最终矩阵freeze。
+
+唯一queue4091205/start_ticks1647617526/session94223已进入checkpoint_matrix_retry_cancel_pressure_v1_run。02:39 UTC实测runner1998078/start_ticks1648270084、XSim2013149/kernel2013257（start_ticks1648274712）存活，kernel CPU计数推进，共享内存155.27/300GiB。旧cancel/full runner1682716/kernel1696913已正常终态。保持单一行为求解器、原21绑定，不读正在restore的目标根、不重复启动。queue正常终态且退出后，主模型仍须执行freeze_checkpoint_edit_matrix_v1.py并核验全部freeze SHA。
+
+scripts/analyze_cp_host_edit_coverage_v1.py已源绑定执行：七个已恢复矩阵参考及CP CRC anchor的label_write任务均零调用，host_io_write置1只存在于未调用任务；真实wrapper允许合法host_label_edit，并非接口绑零。results/checkpoint_host_edit_coverage_20261030.json及44文件freeze已核对。这是原刺激覆盖缺口证据，不是新功能结论；内部query标签写不能算外部host edit。
+
+hardware/variants/checkpoint_host_edit_system_v1的build.py、declarations.svh、extension.svh、CONTRACT.md及prepared/tb_query_fault.sv已准备，原TB三处插入可逆逐字恢复。扩展在FOURTH_PASS之后，通过真实lane8读66893→同值写sequence字段→读回，再control(1)刷新、实际lease/export/import。要求只置脏标志，正确CRC的旧干净ledger因清脏策略被拒；在实际CP_CHECK排除CRC/元数据/漂移/回退等其他原因，逐拍NBA后检查完整136位ledger及保留上下文。随后导入合法脏ledger清除pending并释放lease，不force或改生产RTL，不用已满route slots的新query拒绝当脏标志证据。
+
+scripts/check_host_edit_trace_v1.py独立核对旧trace前缀、31个新事件与33条原始CP记录的顺序、实际十字输入输出及CRC、整标签同值、拒绝原因和最终pending/dirty/sequence/lease。注意原CP真实端口有12命令，但qcp_result局部日志只有9条；新原始流索引为9/10/11，总端口命令预期15，不能混用两个计数。scripts/preflight_host_edit_extension_v1.py实际拒绝4种错误插入与19种损坏人工日志，生成results/checkpoint_host_edit_testbench_preparation_20261030.json和results/checkpoint_host_edit_preflight_20261030.json，18条来源绑定已主模型核验。全部是Python/人工日志准备，未编译SV或仿真，没有新runner、完整来源审计器、freezer或自动followup；这些已参与准备记录的文件保持不变，失败另起版本。
+
+执行顺序仍为矩阵最终freeze→已准备generic七例→独立audit/archive/实际restore/freeze→已准备native二十例→同样恢复验收。主机写扩展后续需独立baseline/CP完整双运行、完整输出/事件/周期比较及实际恢复验收，不抢占上述已确定顺序。描述符生产候选尚未创建，路后WNS仍-4.059ns，物理时序/平台IO/板卡等缺口不变；整体goal active。
+
+以下保留历史。
+
+# CP矩阵4/8，原生反馈二十例及门控工具已准备（2026-10-30）
+
+checkpoint_matrix_on_full_v1已observed：27输出及44590330ns与原参考精确一致，377文件归档实际恢复audit字节一致。主模型独立核对原/恢复audit、归档SHA、27输出和133条manifest.rtl生产源；archivec333234b3a4456ebb5c9420d7ed7e0663188e7fb65b144613b5f550dd645197a，audit85d49af2c7368a5762177208c3067c7e83ea8a688a15eae2a61dc63af4a22fdb，见results/checkpoint_matrix_on_full_milestone_20261030.json。CP监视safe64485/busy339、req/rsp12/12、import40/export80、edit0，原query/backend/capture观察匹配。加上两例off与原CRC pressure为4/8，尚缺on/pressure、cancel双容量及CRC full四例，最终矩阵freeze未执行。
+
+唯一queue4091205/start_ticks1647617526/session94223已进入checkpoint_matrix_on_pressure_v1_run，runner1372707/start_ticks1648081149，XSim1385382/kernel1386677（start_ticks1648085641）实测存活；原on/full已正常终态，勿再轮询1092146。21绑定未改，保持单一行为求解器；每例restore阶段不得读取目标根。原queue完成并退出后仍由主模型执行freeze_checkpoint_edit_matrix_v1.py，核对其全部freeze SHA，不能提前调用后续probe。
+
+hardware/tests/tb_config_native_feedback_v1.sv已准备，仅实例化原CP controller，真实payload/authority自反馈mux。20例=0/1/X/Z初始描述符×publish/abort/discard/attempt_reset/同时publish-discard后discard；先通过六路真实请求回复把current_version从3推到4，验证raw descriptor仍3、发布才变4而取消保留3。还检查prepared下再次load拒绝、start阻塞、X/Z permit不接受发布、backend/normal退休阻塞、每个prepared周期完整非版本银行及version不变量。无force/层次写入，未生成候选RTL。results/config_native_feedback_testbench_preparation_20261030.json绑定TB及源，期望60load/20recovery/20capture/4publication/16clear/20blocked overwrite/120cfg requests/40alias/689check；目前仅准备，不能当实际覆盖。
+
+run/audit/freeze_config_native_feedback_probe_v1.py已准备Python解析，保持原generic probe三工具不变。新runner须先通过完整矩阵freeze及原config_publication_probe_v1的实际audit/archive/restore/freeze，再连续60秒内存准入。当前实际矩阵门控拒绝、缺generic前置也独立拒绝，无config_native_feedback_probe_v1目录或子作业。审计器要求21事件、20数据/action组合、原始/当前版本差异、精确覆盖和X/Z；9个损坏人工fixture均拒绝。results/config_native_feedback_tools_preparation_20261030.json记录工具SHA及预检，非RTL编译/仿真结果，没有自动followup。
+
+下一顺序保持：原矩阵终态→主模型最终矩阵freeze/SHA→核对generic工具准备记录SHA并运行原版七例→独立audit/archive/实际restore/freezer→核对native工具准备记录SHA并运行原版二十例→同样独立恢复验收。两个probe都通过后，才据实际原版行为创建隔离、默认关闭的native反馈描述符候选，保留generic反例、实际alias监视、逐拍银行比较及后续同条件系统/物理测量。当前只有源绑定四态模型，不是RTL等价或时序收益；CP路后WNS仍-4.059ns，整体goal active，板卡/平台IO及其他候选矩阵等缺口不变。
+
+以下保留历史。
+
+# CP矩阵3/8，原生描述符反馈四态分析与定向测试入口已准备（2026-10-30）
+
+checkpoint_matrix_off_pressure_v1已observed并完成27输出/47750020ns精确比较、377文件归档实际恢复audit字节一致；主模型复核归档SHA、原/恢复audit、27输出与133条manifest.rtl生产源。archive7e33f9260eca137c6865d3321e773e647c98635e0f58a401b3a3cb6168d1637a，audita84d5a46357608f51d18eba0c8806b6030b672e810b5f806d1606fbf9ac00ac1。results/checkpoint_matrix_off_pressure_milestone_20261030.json记录实际证据。CP safe64999/busy339、req/rsp12/12、import40/export80、edit0；原query/backend/capture检查保持。加上off/full与原CRC pressure为3/8，尚缺五例及最终矩阵freeze。
+
+唯一queue4091205/start_ticks1647617526/session94223已进入checkpoint_matrix_on_full_v1_run，runner1078410/start_ticks1647990452、XSim1090236/kernel1092146（start_ticks1647994939）实测存活并运行simulate。原off/pressure已正常终态，不轮询旧774804或重复提交。01:46 UTC共享内存184.39/300GiB。21绑定未改；每例restore阶段不读取目标根。最终freeze_checkpoint_edit_matrix_v1.py仍须主模型在队列observed/complete且退出后执行，不是原queue内阶段。
+
+定向测试三工具run/audit/freeze_config_publication_probe_v1.py已准备并Python解析。runner要求完整CP矩阵实际恢复且最终freeze通过，并验证owner身份退出，随后连续60秒<=225/300GiB才允许唯一新求解器；使用已验证2022.2 xvlog/xelab/xsim、500周期TB watchdog和run10us。当前实际调用在矩阵门控拒绝、未创建config_publication_probe_v1目录或启动子任务。独立auditor对人工日志fixture检查17事件/138检查及X/Z传播/三种取消，六个损坏反例均拒绝；不是RTL证据。results/config_publication_probe_tools_preparation_20261030.json绑定三工具，原TB/prepare记录保持。没有自动followup。矩阵结束并经主模型冻结后才运行原版RTLprobe→独立audit→archive→实际restore→freezer；失败保留另起版本。
+
+原生接线分析获得更强的具体合同：residency_system中jp_effective只有声明、config_restore.active_payload输出和同一实例load_payload三处使用；load_stage与payload mux选择均为jp_permit。真正进入stage分支要求permit==1，因此捕获的payload逐位来自自身active_payload，即使数据含X/Z也保持反馈相等。先前generic接口X/Z反例仍成立，但不能直接套用到这条自反馈接线。prepared/configured/state在真实reset后仅常量赋值；prepared=1时原load拒绝和start_ready=0阻止覆盖/恢复状态迁移，发布时2272非版本位可满足保持不变量，32版本位仍须写入；saved_design/checkpoint等更新不作省略推断。
+
+scripts/analyze_config_native_feedback_v1.py已执行65536四态guard投影、1024反馈bit投影和16 prepared稳定性投影，接受分支包含1个known零拒绝条件及242个X拒绝条件，128个有效发布bit投影中0/1/X/Z各32。results/config_native_feedback_20261030.json及8文件freeze逐SHA验证。它是源绑定拓扑/四态模型与归纳论证，非RTL formal/仿真/物理收益；没有新增或选择生产RTL。下一先实跑已准备的原版generic probe，再独立设计默认关闭的native反馈特化，加入实际端口alias监视、X/Z初始描述符、version advance和全银行逐周期比较；保留通用默认兼容及反例。初始load深cone仍可能限制收益，必须同条件完整系统及物理实测后再决定。
+
+CP路后结果仍为188481/188481可布线网、routing errors0、WNS -4.059ns，10ns及平台IO/时钟集成未完成；不因模型通过声称改进。整体goal active，当前没有第二行为求解器、没有新物理任务，path/stage矩阵及板卡等缺口保持。
+
+以下保留历史。
+
+# CP路后恢复验收完成，矩阵2/8与描述符写入研究（2026-10-30）
+
+checkpoint_edit_route_recovery_v1及唯一followup均已observed/complete并退出，原runner3742125/session62352、Vivado3761140、followup3744909/session12599均终态，旧session已消费，不再轮询或重复提交。route及独立Vivado重开DCP均exit0。203文件归档实际恢复audit字节一致：archive a6d6f62475d6703e5bf6b8e03788acad030ef80cde5e17d6e5e5f6768ecf99bb，audit 74f38fc3e387624bfc1a077526a69aa9930bfb1c460f20c4262fda5465da98bf。results/checkpoint_edit_route_recovery_20261030.json、210文件物理freeze及16文件路径分析freeze均已逐SHA复核；旧physical_v1失败现场保持原状。
+
+同133源/U280/10ns研究约束，188481条可布线网全部完成，routing errors0；LUT139612/FF88186/BRAM163/DSP23/URAM0/latches0。最终WNS -4.059ns、WHS0.007ns、TNS -101699.852ns，setup失败47489端点。loops/latch_loops/no_clock/内部未约束端点均0；缺input_delay46802、output_delay10419。timing_qualified与board_acceptance仍false，不把可布线网完成当外部接口、时钟来源或板卡认证。
+
+results/checkpoint_edit_route_recovery_timing_20261030.json的实际最差路径为directory/lease_phase_reg[2][1]/C到config_restore/descriptor_reg[1177]/CE，共48逻辑层（46 LUT+2 CARRY8）、49条已布线数据网，13.956ns=2.728逻辑+11.228网络。最高延迟网config_restore/saved_checkpoint[31]_i_1_n_9扇出2369、2.275ns；实际路径经过recovery_ctl的12层。端点不同于旧综合route path CE和布局fence request，不能将WNS差值解释为同一路径改善。
+
+新analyze_route_recovery_diagnostics_v1.py对路后与独立重开DRC/methodology逐项内容比较一致，四个损坏报告反例拒绝。results/checkpoint_edit_route_diagnostics_20261030.json及12文件freeze逐SHA核对：DRC84=DPIP-2 Warning6+DPOP-3 Warning15+DPOP-4 Warning15+RTSTAT-10 Warning1+CHECK-2 Advisory47，无报告Error/Critical Warning。RTSTAT一项涉及4344网；47项CHECK-2均因Too many IO ports未执行，不能当检查通过。Methodology有SYNTH-10 23、TIMING-16 1000、TIMING-18 1000条，后两数为打印条目，不是全部影响端点/端口数量。未改约束、豁免或RTL。
+
+CP矩阵首例checkpoint_matrix_off_full_v1已observed，27输出及45472300ns与参考精确一致，377文件归档实际恢复audit字节一致，主模型重新核对27输出/133编译生产源/归档及收据。archive2db5d0f453f2dd97f2e119d9f8849daad4a6cfd445d042608d9c772b8cdb8938，audit0a03d97327339a674030df70994d8d1c85267cdfe07efcaf454542bbe48c6f96；results/checkpoint_matrix_off_full_milestone_20261030.json记录证据。CP监视safe64485/busy339、req/rsp12/12、import40/export80、edit0，原query/backend/capture检查保持。计入原CRC pressure anchor为2/8，仍缺六例；初次主模型只读核验误把143个复制源等同133个编译RTL，按manifest.rtl纠正并在milestone留证，未改任何实验或审计工具。
+
+唯一queue4091205/start_ticks1647617526/session94223已自动转checkpoint_matrix_off_pressure_v1_run，runner760068/start_ticks1647892273、XSim773232/kernel774804（start_ticks1647896861）实际存活并进入simulate。原首例kernel479850已正常退出，不再轮询它。沿用原21绑定队列，禁止并行第二行为求解器、手动运行案例或修改绑定工具；每例restore阶段不要读取目标根。最后主模型仍须等队列observed/complete退出后执行freeze_checkpoint_edit_matrix_v1.py并核验，不提前冻结。
+
+源码研究发现config_restore publication可能存在冗余宽写。analyze_config_publication_retention_v1.py已完成1048576二态控制组合（capture8/initial128/publication128）和9216 bit投影，结合源绑定不变量分析支持已复位、二态合法运行时保留descriptor的2272非版本位，仅写32版本位。但X/Z载荷在原逻辑!=比较中产生X，if(X)可走接受else，发布后原descriptor/active_payload会传播X/Z；省略写会隐藏它，因此不能无条件替换。results/config_publication_retention_20261030.json和9文件freeze逐SHA核对。此为Python投影/源分析与反例，非RTL formal、仿真或收益结论，未创建生产候选。
+
+hardware/tests/tb_config_publication_probe_v1.sv已准备，使用原版CP controller，七例涵盖known匹配/拒绝、X/Z发布、abort/discard/attempt_reset保留及回复/退休阻塞，检查完整descriptor/active_payload和实际发布沿，无force。results/config_publication_probe_preparation_20261030.json记录SHA与期望覆盖14load/6capture/3publication/3clear/1reject；仅准备，未编译/执行，无runner或新作业。下一在现有矩阵释放行为求解器后独立运行/审计/实际恢复，确认真实RTL反例，再决定原生已知输入特化监视或保持四态语义的结构改写；初始load深控制仍可能限制收益。保持CP基线，不叠加未选route_label或把旧矩阵当新结果。整体goal active，path/stage新矩阵、外部接口/时钟集成、板卡等缺口保持。
+
+以下保留历史。
+
+# CP剩余七场景已预检，唯一等待队列已启动（2026-10-30）
+
+hardware/variants/checkpoint_edit_matrix_v1/build.py、run_checkpoint_edit_matrix_case_v1.py及audit_checkpoint_edit_matrix_case_v1.py已准备并Python解析。七个已恢复query_matrix参考逐一完成preflight：每例133生产源对应query参考及已恢复checkpoint_edit_synth_v1/CP CRC anchor；只覆盖已冻结CP两源，生成原CP监视并保留backend/capture/query监视，原容量/故障刺激/命令/27输出与周期比较不放宽。results/checkpoint_edit_matrix_preflight_20261030.json为seven_cases_source_bound_preflight_only，不是七例功能通过。evidence在当前physical owner运行时实际拒绝，无新仿真目录。
+
+唯一scripts/run_checkpoint_edit_matrix_queue_v1.py已实际启动checkpoint_edit_matrix_queue_v1，PID4091205/start_ticks1647617526/session94223，21工具/证据绑定，当前wait_physical_and_analysis；case/command列表均空，七目标目录均不存在。results/checkpoint_edit_matrix_queue_launch_20261030.json记录真实进程。variant CONTRACT是队列提交前的准备快照，实时所有权以此记录及队列manifest为准。不要启动第二条矩阵队列或手动运行其中案例，不改绑定源码/工具。
+
+该队列先等待现有CP物理followup3744909/session12599 observed/complete且退出，再等待主模型执行analyze_state_route_recovery_v1.py与freeze_state_route_recovery_analysis_v1.py并实际SHA复核；不会抢跑或替主模型解释物理结果。随后每例连续60秒<=225/300GiB准入，仅一个行为求解器，按run→audit→archive→实际restore→定向cache依次完成off/full、off/pressure、on/full、on/pressure、retry_cancel/full、retry_cancel/pressure、retry_crc/full。第八项复用已实际恢复CP CRC pressure，不重跑。XSim沿用参考2022.2非工程三阶段与run100ms终止控制，无波形全量日志。任何失败保留诊断，不自动修补或重试；观察超时不杀原child。
+
+七例全部实测并恢复后队列才生成checkpoint_edit_matrix_20261030.json（216输出比较），本轮尚不存在。新freeze_checkpoint_edit_matrix_v1.py仅Python解析，要求矩阵owner完整终态并退出、八例全部审计/恢复/source SHA后由主模型执行；最终矩阵freeze不在运行队列内。最终也只覆盖CP及既定八场景，不扩展到path/stage、普通edit非空、任意价格或板卡。当前完整验证仍为CP十二单元+CRC pressure一例。
+
+原CP物理runner3742125/session62352、Vivado3761140/start_ticks1647510668和唯一followup3744909/session12599均继续。00:44 UTC第0轮重叠降到0，只是中间布线；原输入/约束及15绑定保持，无路后终态结论。优先沿用原物理链，正常完成后由主模型复核和分析/冻结，再由已排队矩阵接续。两个owner的restore阶段均不要读取其目标根。整体goal active。
+
+以下保留历史。
+
+# 恢复进入实际布线，原布局读回一致且路后分析入口已预备（2026-10-30）
+
+checkpoint_edit_route_recovery_v1实际已执行route_design Default，原Vivado3761140/start_ticks1647510668存活；runner3742125/session62352继续运行，唯一followup3744909/session12599保持wait_existing，15绑定不变。results/checkpoint_edit_route_recovery_placement_match_20261030.json记录闭合的读回报告：资源LUT139612/FF88186/BRAM163/DSP23/URAM0、布局WNS-4.010/WHS0.006、20条setup/hold路径的端点/级数/延迟/网络状态和原逻辑约束均精确匹配保存布局。此为只读阶段检查，不是路后验收；中间路由WNS不作最终结论。
+
+新scripts/analyze_state_route_recovery_v1.py与freeze_state_route_recovery_analysis_v1.py已准备。分析器要求唯一followup observed/complete并退出、原审计/实际restore字节一致及全部物理freeze SHA，才读取并比较placed/resume/routed/reopened四份报告及20条内部路径；保留所有数据单元/网线/层级/位置/扇出，区分综合与布局/路后最差端点，不能把差值当同一路径因果或板卡频率。freezer仅在实际分析及完整恢复证据之后生成16文件观察freeze，无候选选择。
+
+22条已有真实路径（原CP布局20条、运行库小例重开2条）通过新observe_report检查；错误摘要、要求已布线时输入估计网络、当前running owner三反例均拒绝。main实际因owner未完成而在目标读取/输出之前退出，未生成checkpoint_edit_route_recovery_timing_20261030.json。预备记录results/state_route_recovery_analysis_preparation_20261030.json绑定两工具与既有解析器/fixture SHA。原CP布局最差为fence/FSM_onehot_state[7]/C到fence/request[717]/D，40逻辑层，与旧综合lease端点不同；仅布局观察，等待真实路后端点再选RTL研究方向。
+
+未把新分析器加入已有15绑定链，亦无新followup/计算任务。下一继续原runner和followup；后者独占audit_state_route_recovery_v2→archive→实际restore→freeze_state_route_recovery_v2。正常终态后主模型核对实际恢复/冻结，再执行新analyze/freezer并逐SHA复核；任一失败保留诊断新版本，勿原地修绑定工具，physical_restore阶段勿读取目标。整体goal active，八场景、平台IO/时钟来源与板卡等缺口仍未完成。
+
+以下保留历史。
+
+# 原版运行库预加载对照通过，CP布线恢复已启动（2026-10-30）
+
+本机config_webtalk -info证实用户与安装设置均已关闭；普通关闭WebTalk不能解决此次崩溃。独立C程序真实调用libudev，系统分配器两次成功、Vivado bundled tcmalloc配合RTLD_DEEPBIND两次SIGABRT，预加载原版tcmalloc+libudev两次成功；成功例均枚举5575设备且顺序指纹一致。没有空枚举stub、二进制补丁、许可或持久设置变更。真实Vivado小例baseline在route完成后同一libudev/WebTalk调用栈崩溃；预加载例exit0、10/10可布线网完成并保存/重开DCP，报告计数/时序一致。小例不是完整系统功能或时序证明。
+
+udev_route_probe_v1因错误文本为invalid old size而非invalid pointer触发过窄harness断言，保留原失败；v2仅复制原baseline留证并执行positive，不重跑baseline。独立audit_udev_route_probe_v3.py使用真实Implementation许可标记（准备中的v2大小写检查已另存不改），41文件归档实际恢复audit字节一致；archive487facbf2733d7ab4a2cd8290facffb4fc71f85b2dbb8cd49e28bf26a3be50ea，auditb466d22eb6da4b520b11d05f55ed3f2198257b701eebca6ac2cbc1870a3ba7ec。results/udev_runtime_recovery_20261030.json与63文件freeze逐SHA验证通过；已使用工具/源保留。
+
+prepare_state_route_recovery_v2.py已创建checkpoint_edit_route_recovery_v1，166复制输入逐SHA核验，原133生产源/U280/参数/10ns保持，起点为失败v1的placed.dcp，SHA acfa971dc6640c9303396c9f84a91869f4ef8c25887aebcf98877f98d9bab7f6。run_state_route_recovery_v2.py实际runner3742125/start_ticks1647504571/session62352，60秒<=225/300GiB准入后，新Vivado3761140/start_ticks1647510668实际存活并打开原布局；其进程LD_PRELOAD已核实等于两份原版库，见results/checkpoint_edit_route_recovery_vivado_launch_20261030.json。只从保存布局恢复route，不重做opt/place，不借此宣称已有完整路后结果。
+
+唯一后续continue_state_route_recovery_v1.py已启动checkpoint_edit_route_recovery_followup_v1，PID3744909/start_ticks1647505450/session12599，15工具/证据绑定，当前wait_existing。原runner独占route及第二个Vivado进程独立重开；终态observed/complete后该followup独占audit_state_route_recovery_v2→archive→实际restore/v2复审→freeze_state_route_recovery_v2。任一失败保留主模型诊断，观察超时不杀原进程、不重试。勿另起任务、抢跑审计/恢复或修改绑定工具；physical_restore阶段勿读取目标根。
+
+下一沿用session62352/12599及真实PID。原analyze_checkpoint_physical_timing.py只认已失败queue_v2/旧目标，不可直接套用；恢复通过后需独立新版本导航真实路后最差路径，再选择RTL候选。READY缩减仍模型阶段，原新八场景/IO与HD.CLK_SRC/板卡等范围缺口保留。整体goal active。此前旧CP物理v1失败仍为失败，不能覆盖为成功。
+
+以下保留历史。
+
+# CP物理任务崩溃终态与磁盘实测（2026-10-30）
+
+2026-10-30 00:06 UTC实测：项目文件系统可用1.384TiB（df约87%已用），/tmp可用2.515TiB（约64%已用）；两处4096字节写入及fsync均成功，探针已删除。当前共享内存177.70/300GiB。此前配额故障不能作为本次失败原因；本次未见磁盘空间不足报错。证据及失败日志副本保存在results/storage_and_physical_failure_20261030T000632Z/status.json，副本逐SHA核对；这是失败现场快照，不是成功实验归档/恢复验收。
+
+checkpoint_edit_physical_queue_v2已failed/stage=physical_run，checkpoint_edit_physical_v1已failed/exit_code134；原queue2146625、runner2164892、Vivado2164928均已退出。日志Router Completed Successfully之后出现realloc(): invalid pointer和SIGABRT，崩溃栈包含libudev、主机信息采集及WebTalk。确切底层原因尚待诊断，不声称RTL错误、磁盘满或本进程OOM。optimized.dcp/placed.dcp已保存，routed.dcp与最终路后报告未生成，故无物理audit/实际restore/freeze结论。日志WNS -4.059ns仅为崩溃前观察，不是独立复审结果。
+
+不要继续轮询或重启已失败queue/session70614，不改原绑定工具/源/约束。下一核实Vivado2022.2是否支持仅对新进程关闭可选WebTalk，保留失败现场后再设计新版本恢复流程；尚未确认绕过方法或启动恢复任务。原路后分析器依赖queue_v2成功，不能绕过其失败门控。以下历史中的running状态已过时；整体研究仍未完成。
+
+以下保留历史。
+
+# 布线中确认OOC外部端口约束缺口（2026-10-29）
+
+原CP物理任务继续：queue2146625/session70614与Vivado2164928/start_ticks1646994665实际存活，当前initial routing，未终态。日志Route35-198说明外部端口未指定HD.PARTPIN_LOCS，无法完整评估/导出这些端口的partial routing；Route35-197说明clk无HD.CLK_SRC，时钟放置的上游检查不可完成且时序可能不准确。保留原研究约束，不猜端口位置或豁免。results/checkpoint_edit_physical_ooc_port_observation_20261029.json是当时运行中日志观察，消息次数受100条抑制，不是受影响端口数量或最终完整警告清单。
+
+后续即使report_route_status中的routable nets全部完成，也只说明可布线网络的计数条件，不能据此把OOC外部端口/平台时钟认证为完成。必须与最终路后check_timing、DRC、methodology及实际日志一起解释。初始布线的未布线网络数和Intermediate Timing Summary不作终态通过/失败结论，沿用原进程及唯一audit/archive/restore/freezer链。
+
+路后分析器仍待唯一queue observed/complete及实际恢复冻结后执行。21绑定源/工具与原约束未变；READY选择仍模型阶段，无新候选RTL或额外计算任务。整体goal active，原新八场景/平台集成/板卡等缺口未缩减。
+
+以下保留历史。
+
+# CP完整布局完成并实际进入布线（2026-10-29）
+
+checkpoint_edit_physical_v1的place_design已成功完成，elapsed00:20:02/cpu00:28:01，布局阶段0 Errors/0 Critical Warnings，placed.dcp已生成。原Vivado2164928/start_ticks1646994665已实际执行route_design -directive Default，日志Starting Routing Task/Phase 1 Build RT Design；布线前DRC为0 Errors/39 Advisories。results/checkpoint_edit_physical_routing_launch_20261029.json记录活进程、原Tcl SHA和阶段。未布局时的WNS不能作为当前路后结论；本轮尚无路由完成、最终DRC/时序、audit或actual restore结果。
+
+唯一队列仍checkpoint_edit_physical_queue_v2/PID2146625/start_ticks1646988487/session70614，stage=physical_run；21工具/证据绑定冻结，原runner2164892继续等待原Vivado。队列独占后续audit_state_ooc_physical_v2→archive→实际restore/v2复审→freeze_state_ooc_physical_v2→cache。不可另开物理任务、停止旧会话、修改源/约束或在physical_restore时读取目标。共享内存当时约176GiB/300GiB，未触发新资源等待。
+
+主模型下一沿用session70614和活PID，正常complete后逐SHA核对physical freeze/restore，再运行已预备analyze_checkpoint_physical_timing.py并冻结分析；它依赖parse_state_timing_paths.py，100真实setup/hold路径与四损坏反例已核对，尚未在本轮输出执行。READY缩减仍只有4096组合模型，未生成候选RTL。完整8场景、平台IO/时钟来源、板卡等缺口仍保留，整体goal active。
+
+以下保留历史。
+
+# 完整物理路径分析工具预备，原布局任务继续（2026-10-29）
+
+scripts/parse_state_timing_paths.py与analyze_checkpoint_physical_timing.py已准备并通过Python解析。前者以报告数据段边界排除时钟网络，计入全部声明逻辑类型、跨行物理单元、launch传播和data net，并按报告三位小数的舍入误差核对延迟和行数；已在parent_physical_v2两份真实路后模块报告及CP/path/stage三份综合报告共100条setup/hold路径核对，覆盖CARRY8/MUX/零逻辑级。缺carry行、缺data net行、损坏delay、错误clock group四反例均拒绝。results/checkpoint_physical_timing_tools_preparation_20261029.json绑定两工具及全部fixture SHA；旧模块fixture仅作解析控制，不当完整系统物理证据。
+
+主分析器当前实际调用被running owner门控拒绝，未读取新物理输出，未生成checkpoint_edit_physical_timing_20261029.json。必须等唯一checkpoint_edit_physical_queue_v2 observed/complete、实际restore/audit字节一致及全部physical freeze SHA后再由主模型调用；它将核对placed/routed最差setup/hold与原审计summary及20条Tcl内部路径，记录完整单元/网线/层级并对照CP综合估计，不能把不同端点或估计net差值当同一路径物理因果或板卡频率。分析观察后仍须独立冻结工具/输出。
+
+尚未将新工具加入现有21绑定队列，也未创建新自动followup；不要改正在运行的物理源/工具/约束或重复任务。原队列2146625/session70614和真实Vivado2164928继续全局布局；后续物理audit/archive/restore/freezer/cache所有权仍唯一。先沿用原句柄，终态失败留证主模型诊断，正常complete后再执行新分析器。READY缩减仍只有源码模型，无新RTL或收益结论；整体goal active。
+
+以下保留历史。
+
+# CP物理进入全局布局，搜索READY选择模型已完成（2026-10-29）
+
+唯一物理队列2146625/session70614及原Vivado2164928仍实际存活；opt_design已成功，place_design预检查DRC为0 Errors/39 Advisories，目前全局布局阶段。不是布局/布线完成，更不是最终DRC或时序通过。目标checkpoint_edit_physical_v1及21项绑定继续由checkpoint_edit_physical_queue_v2独占，后续audit_v2/archive/实际restore/freezer_v2/cache所有权不变。读取目标前先检查队列不在physical_restore，不重启或改绑定工具。
+
+已执行scripts/analyze_search_ready_selection.py，results/search_ready_selection_20261029.json绑定已恢复Stage audit/restore/最差路径与search_host_fence、search_scheduler、search_residency_system三源，并核对它们与CP/path参考字节一致。实际最差路径含host_fence/selected_ready。源码允许的搜索通道仅6/8/11/12，当前selected_ready case覆盖全部16通道；模型考察保留scheduler_lane掩码和完整reply选择，只让12个非搜索case的selected_ready保持原默认0。16路host接口不删、不改周期或状态。
+
+四值Python模型检查4096个投影组合：合法通道64、被屏蔽通道192、未知选择值默认分支3840；输出0/1/X均覆盖，旧/拟议c_ready一致。每个已知case只依赖选中ready位，其余位在该表达式无输入依赖；模型非RTL仿真或formal，也未证明映射mux规模/综合或物理收益。保留删除scheduler_lane掩码会改变lane0输出的反例。分析器/报告2文件freeze search_ready_selection_sources_20261029已逐SHA核对。
+
+尚未生成候选RTL、启动单元/完整测试或额外综合。先完成当前CP物理测量并复审，再决定是否新建独立ready选择实验；若推进，须比较原/默认/缩减模式全部外部输出，含X/Z/非法通道、host16路、取消/回压/故障，再完整系统同周期比较与同条件OOC/物理。旧Stage三者取舍、缺新八场景、未约束IO/时钟来源/板卡等限制继续保留；整体goal active。
+
+以下保留历史。
+
+# Stage综合恢复复审完成，CP完整物理运行已启动（2026-10-29）
+
+route_stage_synth_v1与原队列722546/session79996已observed/complete并退出。独立DCP/audit/179文件归档实际恢复通过，audit字节一致：archive9641661f09eba4bbf04be1b91fe179462887801565e0729625619194a97fc091，audite48f007d79f51f5cb18b90a4ff911cf551fae6f98f25dd80365081ff840f3e4a。results/route_stage_synth_20261029.json与167文件freeze全部SHA核验通过。133生产源/U280/10ns，LUT131318/FF87983/BRAM163/DSP23/URAM0，loops/自动切环/critical/latch/blackbox均0，布局前WNS−5.614ns。相对CP为LUT−8163、FF−65、WNS差0.666ns；相对path为LUT−703、FF+54、WNS改善0.227ns。仍未满足10ns，非物理或板卡结论。
+
+原后续checkpoint_edit_physical_queue_v1/PID1774964/session32843因stage_timing解析器只数LUT而失败，已终态退出，未创建物理根；原源/日志/17绑定保留。results/route_stage_timing_parser_failure_20261029.json绑定失败。新增analyze_route_stage_timing_v2.py支持全声明逻辑类型，三份真实报告及缺MUX行/级数不符/net延迟损坏反例通过；原工具不改。v2分析与原tradeoff、freeze_route_stage_analysis_v2.py已执行，results/route_stage_timing_sources_20261029共9文件SHA核验通过。
+
+实际最差路径为directory lease_phase[27][1]/C→search_ctl/rsp_status[0]/D，66级逻辑=64 LUT+MUXF7/MUXF8各一，67条未布局数据网；15.596ns=2.745逻辑+12.851估计net。search_ctl占13级、recovery_ctl10级；不同于CP/path端点，不能作同一路径因果解释。results/route_stage_tradeoff_20261029.json保留三个非支配点（CP最佳布局前WNS、stage最少LUT、path最少FF），production_selection=null，无自动提升或拒绝。
+
+已实际启动唯一run_checkpoint_edit_physical_queue_v2.py，根checkpoint_edit_physical_queue_v2，PID2146625/start_ticks1646988487/session70614，21工具/证据绑定。它已完成Stage分析/冻结、连续60秒<=225/300GiB内存门控和physical_prepare，当前physical_run：runner2164892、真实Vivado2164928/start_ticks1646994665。目标checkpoint_edit_physical_v1，参考已恢复checkpoint_edit_synth_v1；133源及142复制输入逐SHA核验，原DCP/10ns保持。results/checkpoint_edit_physical_queue_v2_launch_20261029.json和checkpoint_edit_physical_launch_20261029.json记录实际状态。使用既有本机2022.2 batch回退，未修改物理Tcl/runner/audit_v2/freezer_v2或约束。
+
+该唯一v2队列拥有physical_run→audit_state_ooc_physical_v2→archive→实际restore/v2复审→freeze_state_ooc_physical_v2→定向cache释放。不得另起CP物理、重启旧队列或改21绑定文件；读取目标根前确认队列不在physical_restore阶段。任一失败保留交主模型，禁止自动修补/重试；runner原14400s时限保留。当前只成功重开DCP并进行输入检查，无布局布线完成或路后时序结论。实际阶段以队列manifest及活进程为准。
+
+下一沿用session70614/实际PID，终态后核验完整物理审计、实际恢复、冻结及原始报告，再判断候选物理对照/源结构研究。Stage/CP/path均仍缺新完整八场景，未约束IO/HD.CLK_SRC/板卡等缺口保留；整体goal active。此前磁盘配额问题已恢复，10月29日22:51实测项目可用1.403TiB、/tmp可用2.516TiB，两处写入fsync成功；不把历史配额或已解除内存等待当当前阻碍。
+
+以下保留历史。
+
+# 唯一后续队列接管Stage分析与CP完整物理参考（2026-10-29）
+
+原stage综合已observed/exit0，但原队列722546/session79996仍wait_memory_before_inspect，必须继续该队列的独立DCP/audit/archive/实际restore/freeze，不能凭预读结果替代。另一A_graph_compression xelab1138642仍存活时，其CPU/内存变化仅观察，不停止。当前共享内存以实时cgroup为准，近期已从约300GiB回落到约241GiB但仍需<=225GiB连续60秒。
+
+已实际启动唯一后续scripts/run_checkpoint_edit_physical_queue.py /tmp/B_state_residency_offer_20261025/checkpoint_edit_physical_queue_v1，PID1774964/session32843，17工具/证据绑定，RSS约15600 kB，当前wait_stage_chain，尚无checkpoint_edit_physical_v1或新Vivado作业。results/checkpoint_edit_physical_queue_launch_20261029.json记录实际PID/start ticks与所有权；内存准入的边界、回升重置、超时三项虚拟时钟检查通过。
+
+该后续链等待原stage链observed/complete后，独占analyze_route_stage_timing.py→analyze_route_stage_tradeoff.py→freeze_route_stage_analysis.py（9文件观察冻结，无生产选择）；随后内存连续60秒<=75%才prepare_state_ooc_physical.py固定CP参考checkpoint_edit_synth_v1→run_state_ooc_physical.py→audit_state_ooc_physical_v2.py→archive→实际restore/v2复审→freeze_state_ooc_physical_v2.py→定向cache释放。不会自动选择/提升stage候选、改约束、重试或修补，任一失败停交主模型；观察超时不触碰原任务。
+
+CP选作既有已恢复/零环的物理参考，是测量基准，不等于宣布stage候选被拒或已闭合。完整物理仅原DCP/原10ns研究时钟，Default opt/place/route，外部IO/HD.CLK_SRC缺口保留；没有板卡或新八场景证明。不得再手动运行这两个stage分析器/其freezer或另起CP物理任务，也不得启动旧预备continue_route_stage_synth.py观察者；读取任何实验根前先确认拥有它的队列不在restore阶段。
+
+主模型下一先核对两个现有队列/真实PID；stage源/综合25绑定及后续17绑定均保持冻结。后续进入physical_run时可只读复核已冻结stage实际结果与最差路径，再决定之后的候选物理对照/矩阵方向；当前goal active。
+
+以下保留历史。
+
+# cp_stage完整系统恢复复审通过，综合唯一队列已启动（2026-10-29）
+
+Stage综合报告预读（2026-10-29，待独立复审）：results/route_stage_synth_preaudit_20261029.json绑定已observed终态manifest及四份原报告SHA，读取LUT131318/FF87983/BRAM163/DSP23/URAM0，WNS-5.614ns；报告loops0/自动切环0/critical0。相对path为LUT-703、FF+54、WNS+0.227ns；相对CP为LUT-8163、FF-65、WNS-0.666ns。此记录不是独立DCP/audit/archive/restore/freezer通过或候选选择，不能将预读替代原队列。当前内存接近298GiB，原queue722546/session79996仍等待inspect准入；外部xelab1138642仍在运行时不得绕过门槛。
+
+Stage综合已observed，独立检查因内存等待（2026-10-29）：runner737851与Vivado737887已exit0/退出，完整synth/report生成完成；唯一队列722546/session79996转wait_memory_before_inspect，尚无独立DCP/audit/archive/restore/freezer终态。共享内存约272GiB，另一个A_graph_compression xelab1138642 RSS约89GiB；不触碰该任务，队列仍需连续60秒<=225GiB才inspect。results/route_stage_synth_terminal_memory_wait_20261029.json绑定终态manifest/时间和实际资源观察。不得手动另起inspect或绕过准入；尚不能宣布新资源/时序最终结论。
+
+完整物理执行/审计/冻结工具已预备（2026-10-29）：run_state_ooc_physical.py、audit_state_ooc_physical_v2.py、freeze_state_ooc_physical_v2.py已Python解析；v2资源/时序/route解析实测通过旧parent两份路后报告（WNS2.847/2.786）及CP综合负slack -4.948。首版audit_state_ooc_physical.py要求CLB LUTs星号导致路后表头预检失败，原审计/冻结器及results/state_ooc_physical_parser_failure_20261029.json保留；v2仅兼容该footnote有无。results/state_ooc_physical_tools_preparation_20261029.json绑定最终5工具。完整物理主审计、实际执行、归档恢复及freezer均未调用，无新physical根/作业；未来使用v2审计及v2 freezer，不使用原首版。主审计区分artifact integrity、完整routing/DRC/内部setup/hold和未约束IO，board/timing_qualified保持false；必须先当前stage链实际完成及双基线判断，再内存准入串行实施。
+
+完整DCP物理准备入口已预备（2026-10-29）：prepare_state_ooc_physical.py与hardware/scripts/implement_state_ooc.tcl建立独立完整系统入口，只接受已恢复/零环/无自动切环的CP、path或stage综合及匹配27输出完整行为，复制133源/原DCP/原10ns XDC，使用已有2022.2 Default opt/place/route流程。当前仅Python解析、Tcl info complete及running stage owner拒绝门控实际通过，probe未建目录；results/state_ooc_physical_preparation_20261029.json绑定SHA。Tcl语法完整不等于Vivado命令/物理通过，未创建物理实验/runner/auditor/freezer或执行Vivado，后续仍须补这些工具及独立复审恢复；现有综合队列25项绑定未动。
+
+完整系统物理测量入口核对已完成（2026-10-29）：scripts/analyze_state_physical_readiness.py实际校验既有parent_physical_v2审计/报告与原Tcl一致，确认该成果仅postprev+center子模块；已恢复CP完整133源/DCP/10ns与63637端口bit也核对。results/state_full_physical_readiness_20261029.json及2文件freeze记录可复用Default opt/place/route流程和缺口。下一须等当前stage队列完成并双基线比较后，独立准备完整DCP物理runner/auditor/freezer并串行执行；保留原研究时钟及未约束IO/无HD.CLK_SRC限制，不猜预算或waive。当前未建整系统物理工具/根/作业，不能把小模块旧结果当完整系统物理证明；当前综合队列所有权不变。
+
+Stage双基线资源/时序比较工具已预备（2026-10-29）：scripts/analyze_route_stage_tradeoff.py用已恢复CP/path/route_label三组实测验证，正确保留CP时序与path面积两个非支配点并识别label被二者支配；相等指标保留双点、有环候选排除测试通过。当前running队列门控拒绝最终比较，未读取stage未完成的资源或时序，未产生新选择结论。results/route_stage_tradeoff_preparation_20261029.json绑定工具及历史控制证据。原队列complete后先analyze_route_stage_timing.py，再该比较工具，最后由主模型解释真实路径和收益；未修改现有25绑定项或启动额外任务。
+
+Stage同源OOC已实际启动（2026-10-29）：唯一队列722546/session79996已通过连续60秒内存准入，prepare exit0，当前stage=synth；runner737851、真实Vivado737887。133生产源与刚恢复stage完整系统逐SHA匹配，两源覆盖，path面积参考与CP时序参考同时绑定；results/route_stage_synth_launch_20261029.json记录实际PID/start ticks。内存启动后实测约179GiB，尚无新资源/loops/WNS结果。沿用此队列，不另起已预备observer、综合或inspect；源码/工具现已绑定不可原地修改。
+
+route_stage_system_crc_pressure_v1及其full followup已observed/complete，runner227762/session70649、XSim243391、followup252060/session88745均退出。独立audit的27份输出与48288200ns结束时间精确匹配path参考；stage实际观察4828815周期、capture10、import1248、checked_cycles1259，原path node_writes18/publications8/checks27及CP/query/backend/capture覆盖行原样匹配。不是完整新八场景或任意参数等价证明。
+
+379文件归档实际恢复后audit字节一致：archive6e816ecbc61f4d909d34efe547d6f431cc6e81a972109b8d87ce15480e5238c2，audit49345a30ea70d2d99e53c64e1a1b798ce3eb302e40fad379ea0cabe16786f69c。results/route_stage_system_crc_20261029.json与184文件freeze逐SHA验证通过，freeze manifest c73401b3843375598974af3b7a13e2dbc82b58ea61703fa6a5d5398437034b73。full源/工具继续冻结，勿重跑或原地修改。
+
+内存一度超过280GiB，实测主要新增占用来自另一个A_graph_compression的xelab233214（RSS约109GiB并继续增长）。已只对318个实际恢复且当前audit/manifest匹配的本项目终态根作定向clean-cache advice，4726文件、零错误，观测内存净降约27GiB；无删除、全局drop或停止其他任务。inventory/release/memory gate记录均在results/route_stage_synth_memory_*_20261029.json。该外部PID随后已消失，内存观测约176GiB；未推断其退出原因。
+
+已启动唯一scripts/run_route_stage_synth_queue.py /tmp/B_state_residency_offer_20261025/route_stage_synth_followup_v1，PID722546/session79996，25工具/源/实际证据绑定，results/route_stage_synth_queue_launch_20261029.json记录所有权。内存需连续60秒<=75%共享300GiB后才prepare/run一次，在独立DCP inspect前也重新等待；内存门控隔离虚拟时钟三例通过（边界、回升重置、超时）。该队列独占prepare→synth→inspect→walks→audit→archive→实际restore→freeze，失败不自动修补/重试；等待10800s超时不触碰外部任务。不得另起已预备continue_route_stage_synth.py观察者或手动综合/inspect/restore。
+
+主参考route_path_synth_v1面积分支，同时独立核验CP较优时序参考；133生产源/U280/参数/10ns保持匹配。启动时尚无新综合目录或时序结果，当前stage以队列manifest和实际进程为准。MCP旧两会话仍out of stack space，已实查本机Vivado2022.2，使用现有local batch回退；两旧会话未动。队列complete后执行已准备analyze_route_stage_timing.py，再主模型判断与双基线的资源/时序取舍。整体goal active，物理时序/板卡、新完整矩阵等仍缺。
+
+以下保留历史。
+
+# cp_stage完整系统压力回归及唯一后续链已启动（2026-10-29）
+
+Stage综合后续链与时序导航已预备（2026-10-29）：continue_route_stage_synth.py/analyze_route_stage_timing.py已Python解析且14个绑定工具路径存在，results/route_stage_synth_followup_preparation_20261029.json记录SHA。未调用、未启动综合。前者只接管未来已运行的唯一Vivado PID，顺序inspect/walks/audit/archive/实际restore/freeze；后者要求该链真实complete后才读报告，分别对照path面积参考与CP时序参考，保留不同端点及布局前估计限制。当前full runner227762/XSim243391及唯一followup252060仍实际存活，继续原链。
+
+Stage同源OOC三工具已预备（2026-10-29）：prepare_route_stage_synth.py/audit_route_stage_synth.py/freeze_route_stage_synth.py仅Python解析，results/route_stage_synth_tools_preparation_20261029.json绑定SHA，尚未调用或创建综合目录。必须先stage完整系统真实audit/actual restore通过；主参考route_path_synth_v1面积分支，同时独立核验已恢复checkpoint_edit_synth_v1的同133源/part/参数/10ns，输出相对两者的资源及WNS差值。未修改当前full followup绑定工具，现有仿真及唯一检查链继续拥有。
+
+route_stage_system_v1/build.py实际验证path完整参考恢复、stage十二单元恢复与100文件freeze后，覆盖controller/adapter两源。保留原path/CP/query/backend/capture观察；新增真实4槽×39字stage旧控制树参考，实际字变化或期望capture/import置dirty，NBA后检查全部156字，不依赖新sw_*事件。prepare记录results/route_stage_system_preparation_20261029.json只代表生成/门控，不是功能结果。
+
+run_route_stage_system.py已实际启动route_stage_system_crc_pressure_v1，参考route_path_system_crc_pressure_v1，session70649/PID227762；compile/elaborate均exit0，当前行为仿真。MCP旧两会话仍version out of stack space，沿用本地Vivado2022.2 XSim回退。当前无完整PASS或新OOC结论。
+
+唯一continue_route_stage_system.py已启动route_stage_system_followup_v1/session88745/PID252060，绑定实际runner PID/start ticks及14工具/源SHA，当前wait_existing。原链独占audit_route_stage_system→archive→实际restore/audit字节一致→freeze_route_stage_system；任一失败保留交主模型，不自动重试/重启，观察7800s超时不会停止原仿真。results/route_stage_system_launch_20261029.json记录所有权。不要另起full run、手动audit/archive/restore/freezer，勿读取正在restore的实验根或修改已用工具。
+
+独立auditor要求27输出/结束周期精确一致，原path与CP及其他覆盖行原样匹配，新增stage capture/import/checks非空；freezer已准备，须真实restore成功才能执行。之后才准入同源OOC，参考path面积分支并同时比较CP时序基线；新完整八场景、物理时序和板卡等仍缺。整体goal active。
+
+以下保留历史。
+
+# cp_stage静态写入口十二单元及双银行周期比较通过（2026-10-29）
+
+route_stage_write_v1从已恢复route_path_synth_v1面积分支建立，只改controller/adapter两源；FACTORED_STAGE_WRITES默认0，adapter同时显式开启stage/path两项。仅cp_stage写入口改为静态每字进程，保留原嵌套if/else导出/导入控制树、reset无初始化、取消/fault/drift/握手/索引/last保护，原CRC/发布/回复/周期不变。CP仍为时序参考，不能称面积分支为速度优化。该variant/runner/auditor/freezer现已使用并冻结，不原地修改。
+
+源码模型analyze_route_stage_write_factoring_v2.py通过262144控制组合（capture256/import64），21756导出字映射与461导入索引例。v1的源码正则误把两处cp_stage读取后对cp_dup_pos/cp_status的赋值算成写，预检11≠9失败，原文件及results/route_stage_model_preflight_failure_20261029.json保留；v2限定闭合subscript后立即<=，实际九处写不变。不是RTL失败，模型仅二态/有限字索引，非RTL formal或X/Z证明。
+
+route_stage_units_v1/session11483已observed/退出。baseline/default/factored×原route/CP8/CP32/generic overlap共12例均通过；所有模式均保持已验证path factoring开启，只切stage实现。独立audit八组完整事件/结束时间/路径字及stage字变化周期精确一致，generic unexpected0保留。原route25及CP31route/27CP断言保留；新增旧控制树参考在每个posedge NBA后比较全部暂存字，不读取sw_*新事件。factored CP32为10993检查周期、6次export capture、1262次stream import、280条stage变化（202已知、78初始X），结束109930ns；CP8检查4674周期/6capture/494import。不能把这些两槽模型后端例称全系统覆盖。
+
+416文件归档实际恢复后audit字节一致：archive5de5c73c19629e6906fa7cbe90d0599e125f42b25ea0302a5eb8ec6ac11de91e，audit970b42479630ca1f1a6c4ef2c23295d73c6584c61de13ce2a7613eed1f01d279。results/route_stage_units_20261029.json和100文件freeze逐SHA核验通过，定向cache释放receipt results/route_stage_units_cache_release_20261029.json。
+
+下一完整系统参考route_path_system_crc_pressure_v1覆盖两源，保留已有path/CP/query/backend/capture全部监视，追加真实4槽×39字（156字）的原控制树stage参考。为避免每周期遍历156字放慢大仿真，采用实际字变化或期望写触发dirty后NBA检查全银行，确保异常额外变化/漏写均被检查；不依赖sw_*新信号。独立审计27输出/周期与旧全部监视覆盖精确一致，再archive/实际restore/freezer，通过后同133源/U280/10ns OOC，同时对照path面积分支和CP时序基线。
+
+当前尚未创建stage完整system builder/runner/auditor或新OOC，也无新全系统/时序结果；旧path OOC与其followup已终态，不重启。新完整八场景、物理时序/板卡等仍缺，整体goal active。
+
+以下保留历史。
+
+# Path写入口同源OOC复审通过：面积减少、时序退化（2026-10-29）
+
+route_path_synth_v1及唯一followup均observed/complete并已退出：综合session88502/Vivado3434628，followup session85381/PID3444503，独立inspect Vivado4047131均终态。不要重启或重复inspect/archive/restore。178文件归档实际恢复后audit字节一致：archive7d75fca1d4e7f78a248d497a2c42fa87c0e6f86360e69abd40fa00a4388c17e1，audite416196b88c1973d71313e327439ad88f90034113a07be0baa61fe249f048154。results/route_path_synth_20261028.json与165文件freeze全部SHA已核验；原工具、生产源保持冻结。综合约1942.77秒。
+
+同133源/U280/10ns，loops0/自动切环0/critical0/latch0/blackbox0。LUT132021、FF87929、BRAM163、DSP23，相对CP基线减少7460LUT（约5.35%）和119FF；WNS -5.841ns，比CP -4.948退化0.893ns。results/route_path_selection_20261029.json明确保留CP为时序参考，同时保存path面积候选，不称速度改善，也不能直接替换较优时序基线。design_acceptance仍unresolved、timing_qualified=false，IO/真实时钟位置/物理实现/板卡缺口保留。
+
+实际最差路径仍起于directory lease_phase[27][1]/C，终点变为route controller cp_stage[145][0]/CE；66LUT层/67未布局数据网，数据15.737ns=2.709逻辑+13.028估计net。results/route_path_timing_path_20261029.json由analyze_route_path_timing.py实际生成，分析器/报告/选择记录3文件冻结并核验。不同终点不视为同一路径因果证明。定向cache释放receipt results/route_path_synth_cache_release_20261029.json。
+
+下一优先源绑定核对cp_stage两类写：CP_IDLE合法export capture整银行写与CP_IMPORT在取消/漂移/握手/索引/last校验后的流式单字写。可研究独立静态per-word入口，但目前仅从实际新最差端点提出假设，尚无模型/新RTL/新测试。必须保留全部事务保护与原周期、验证暂存银行全部字的数据/索引/周期；若基于面积分支做组合候选，最终同时对照CP时序基线和path面积候选。不得直接删cp_safe/fault或把未知页/价格有效性等范围扩大。新完整8场景矩阵、物理时序及板卡仍缺，整体goal active。
+
+以下保留历史。
+
+# Path同源OOC及唯一后续链已启动（2026-10-29）
+
+Path时序分析入口已预备（2026-10-29）：scripts/analyze_route_path_timing.py从已冻结route_label分析器独立派生，仅改候选名/输出日期，参考仍为checkpoint_edit_timing_path_20261028.json。要求原followup observed/complete、actual restore/audit及loops0/无自动切环后才能读取候选报告，输出实际端点、LUT层、估计net和扇出对比；只Python解析，尚未执行，无新时序结论。results/route_path_timing_preparation_20261029.json绑定SHA。既有Vivado3434628与followup3444503继续运行，分析器未加入或修改已绑定后续链，待链complete后由主模型调用。
+
+route_path_synth_v1已prepare成功，133生产源与完整CRC压力匹配，参考checkpoint_edit_synth_v1；两源覆盖、U280/参数/10ns不变。MCP两个旧会话再次报out of stack space；本机vivado -version实际2022.2，使用已有local batch回退。
+
+run_restore_seed_synth.py已实际启动session88502，真实Vivado3434628；唯一continue_route_path_synth.py已启动session85381、PID3444503，绑定真实PID/start ticks和14个工具/来源SHA，当前wait_existing。results/route_path_synth_launch_20261029.json记录所有权。不要另起综合/inspect或修改已用工具；旧MCP与其他项目任务未动。
+
+该链独占等待原综合observed后inspect→walks→audit_route_path_synth→archive→实际restore/audit字节一致→freeze_route_path_synth。失败保留并交主模型，无自动重试或重启；观察超时不停止原综合。新候选暂无WNS/loop/资源结论，CP -4.948ns仅为参考。整体goal active，物理时序/板卡及新矩阵等仍缺。
+
+以下保留历史。
+
+# 路径写入口完整系统通过，存储恢复并完成冻结入库（2026-10-29）
+
+项目存储从配额满恢复到约1.5TiB可用，已实际小文件fsync成功。route_path_system_crc_pressure_v1早已observed，27份输出及48288200ns与CP参考精确一致；参考银行4828815周期、18次普通写、8次整银行发布、27次全银行检查。379文件归档实际恢复重审，audit字节一致。此处更正下面历史running记录，不重启旧仿真。
+
+原freezer因Errno122产生的0字节报告已保存在results/route_path_storage_recovery_20261029/original_quota_failed_report.empty.json；完整storage_failure及临时freezer/verification保留。/tmp的184文件freeze及报告已逐SHA核验后复制回results/route_path_system_crc_20261028.json和route_path_system_crc_sources_20261028，再次逐SHA通过，publication.json记录实际入库。未修改生产源或已用工具，没有重跑archive/restore。
+
+下一prepare_route_path_synth.py→run_restore_seed_synth.py→独立DCP检查/loop审计→archive/实际restore/freezer，固定参考checkpoint_edit_synth_v1（WNS -4.948ns），133源/U280/10ns，仅覆盖两源，不叠加已拒route_label。此刻新OOC尚未启动，无新时序结论。完整8场景矩阵/物理时序/板卡仍缺，整体goal active。
+
+以下保留历史。
+
+# 路径写入口分解完整系统已启动（2026-10-28）
+
+Path系统freezer及OOC工具已预备（2026-10-28）：freeze_route_path_system.py仅Python解析，要求完整audit/实际restore字节一致、旧CP覆盖及node_writes/publications/checks非空才冻结。prepare/audit/freeze_route_path_synth.py均独立准备并Python解析，参考仍为较优checkpoint_edit_synth_v1，结果路径route_path_synth_v1，必须先完整route_path_system_crc_pressure_v1实际恢复通过；results/route_path_synth_tools_preparation_20261028.json绑定SHA。未调用、无新综合目录或作业。完整runner3790416/session62793已compile/elaborate exit0，继续行为仿真，暂未设置自动followup。
+
+route_path_system_v1/build.py验证已恢复CP完整参考与route_path_units_v1十二例/8比较/83文件freeze，覆盖controller/adapter两源，未叠加已拒route_label。新增旧控制树参考银行：从真实route输入/旧状态分支计算同周期普通写和末字CRC/取消/漂移验证后的整银行发布，不读取新pw_*信号；任何实际路径字变化或预期写触发后，NBA后比较全部4×32路径字，检查额外写/漏写/数据/索引/周期。只观察，不force DUT。保留全部CP/query/backend/capture监视。
+
+run_route_path_system.py已实际启动/tmp/B_state_residency_offer_20261025/route_path_system_crc_pressure_v1，参考checkpoint_edit_system_crc_pressure_v1，session62793。audit_route_path_system.py已准备并Python解析，要求旧CP监视原样匹配、27输出/周期精确一致、参考银行node_writes/publications/checks非空。当前running，尚无全系统通过或OOC结论，不重复提交或修改已使用源/工具。
+
+尚无自动followup和system freezer。下一沿用session62793/实际PID，正常终态后audit→archive→verify_search_retire_restore.py route_path_system_crc_pressure_v1 audit_route_path_system.py→独立freezer；实际恢复后再匹配OOC。参考银行只针对fixture4槽/32路径，不能泛称任意参数形式等价。整体goal active。
+
+以下保留历史。
+
+# 路径写入口分解十二单元及逐字周期比较通过（2026-10-28）
+
+route_path_write_v1从较优CP基线建立，两源controller/adapter；FACTORED_PATH_WRITES在controller默认0，adapter显式1。原动态写保持默认实现，开启时使用静态per-slot/per-word写入口；全部CRC/取消/漂移/重复验证保留，没有新增状态或周期，不叠加已拒route_label。生成工具/源现在用于冻结结果，不原地修改。
+
+route_path_units_v1/session30576已observed终态。baseline/default/factored×原route、CP8、CP32、generic同拍回复共12例；原route25检查、checkpoint31route/27CP，generic全部维持原unexpected0。audit_route_path_units.py独立核对8组完整事件、结束时间和路径银行每个变化字的实际周期/slot/index/data精确一致，覆盖无初始化X的记录及已知数据写。CP32包含32节点满容量、末节点重复、失败原子保留、恢复/ripup等原刺激。不仅比较最终状态。
+
+401文件归档实际恢复后audit字节一致：archive49eba8f7b487662eea202f8193072b0159de264c66781501873627f8ce420d02，audit7aff1a365712008b5db049b6393d3e1e99622171b267f527c94fcbcd4c122602。results/route_path_units_20261028.json与83文件freeze逐SHA验证通过。run/audit/freeze_route_path_units.py与variant工具保持冻结。
+
+下一真实完整系统以checkpoint_edit_system_crc_pressure_v1为参考覆盖两源，保留全部CP/query/backend/capture监视，增加真实path写事件/必要银行对比，27输出/周期精确比较，归档实际恢复后做同条件OOC。当前只有controller+模型后端单元，不是全系统或综合收益，未创建新system builder/runner或新任务。整体goal active。
+
+以下保留历史。
+
+# 回到CP基线研究等周期path写入口分解（2026-10-28）
+
+源码核对确认原route已有if(!cp_busy)隔离，重复添加互斥无价值。下一结构假设是将path银行的checkpoint整银行发布写和普通单节点写拆成显式静态word写入口，保持同周期、原CRC/取消/漂移/重复节点检查，非增加pipeline或删除保护。尚未生成候选RTL。
+
+scripts/analyze_route_path_write_factoring.py已执行，results/route_path_write_factoring_20261028.json源绑定已恢复checkpoint_edit_synth_v1/route_commit_controller；CP/普通写各65536二态组合，写事件等价且非空（8/2），CP发布写与CP_IDLE下普通写互斥。模型保留CP_VERIFY/CP_DUP分支与末slot/field/import/CRC条件，普通写保留LW/reply/fail/duplicate/source/sink/prev/容量条件。不是RTL formal/XZ、索引/数据证明或综合收益。
+
+下一从CP较优基线（绝不叠加已拒route_label）创建默认关闭FACTORED_PATH_WRITES隔离候选；保留原write实现与全保护，用两个明确write事件驱动静态per-slot/per-word路径寄存器。随后原route、CP MAX_PATH8/32及泛化同拍回复检查三模式精确事件/周期比较，原子失败/取消不变；实际完整系统与OOC实测后才选择。尚未RTL/编译/仿真，不将Boolean分析当完成结论。整体goal active。
+
+以下保留历史。
+
+# Route label同源OOC退化，保留CP较优基线（2026-10-28）
+
+route_label_synth_v1及唯一followup均已observed/complete，runner2631179/session29625、Vivado2631217、followup2645576/session71040均终态。独立DCP/audit/178文件归档实际恢复audit字节一致，archive4c44c91177f9695f8867f63d744c1811d54e5f210268e39c02335a7798cde108，audit4d11a7c1a5a19e38d09d6337c64e68db4ac387a7ca38ed5dd128dee244f35ab7。results/route_label_synth_20261028.json与167文件freeze逐SHA验证通过。源码/prepare/audit/freezer/followup均保留冻结，勿原地修改。
+
+同条件133生产源/U280/10ns，loops0/自动切环0/critical0，但LUT142774、FF88075、BRAM163、DSP23，相对CP基线LUT+3293、FF+27。WNS -5.852ns，比CP -4.948退化0.904ns；没有收益，不能因功能通过将候选宣布为优化。results/route_label_selection_20261028.json明确不选此变体，后续新候选从checkpoint_edit_synth_v1较优基线分支，保留route标签反例，不覆盖CP冻结源。
+
+实际最差路径source仍directory lease_phase[27][1]/C，destination改为boot_gate/state_reg[0]/D，66 LUT层/67未布局数据网；15.834ns=2.776逻辑+13.058估计net。results/route_label_timing_path_20261028.json源绑定执行并冻结2文件。不同端点的布局前估计不证明物理变化原因。原标签controller依赖虽删，整体映射重组后变差，不能从RTL少条件推断更快。
+
+下一回到CP较优基线的真实61层route保存使能路径，研究可测量的结构性改动或许可分层，先保留CRC/取消/退休语义；不要默认叠加未选route_label。单元/完整CRC正确性范围保留，但没有新完整8场景矩阵/物理时序/板卡结论。cache释放receipt results/route_label_synth_cache_release_20261028.json。整体goal active。
+
+以下保留历史。
+
+# Route标签同源OOC及唯一后续链已启动（2026-10-28）
+
+prepare_route_label_synth.py实际成功：route_label_synth_v1的133生产源与已恢复完整route CRC压力匹配，参考checkpoint_edit_synth_v1，只覆盖route/controller、adapter及residency三源，part/参数/Tcl/XDC/10ns匹配。旧MCP两会话再次报out of stack space，本机vivado -version实际2022.2；继续已有local batch回退，不复用/停止旧会话。
+
+run_restore_seed_synth.py已启动，session29625，真实Vivado2631217。唯一后续链continue_route_label_synth.py已实际启动route_label_synth_followup_v1/session71040，绑定真实PID/start ticks及14工具/来源SHA（含route analyzer/parent manifest）。当前wait_existing，不新开综合、不停止旧任务。综合observed后原链独占inspect→walks→audit_route_label_synth→archive→实际restore/audit字节一致→freeze_route_label_synth；任一失败停交主模型，不自动重试/修补，7800s观察超时不杀原综合。
+
+不要重复inspect/methodology、手动archive/restore/freezer或修改bound工具/冻结源。当前没有新资源/loop/WNS结果；旧CP -4.948ns为参考而非新结论。整体goal active，物理时序/板卡及新矩阵等仍缺。
+
+以下保留历史。
+
+# Route标签完整CRC压力及实际恢复通过（2026-10-28）
+
+route_label_system_crc_pressure_v1/runner2243702/session57929已observed终态，原XSim2258056退出。audit_route_label_system.py独立核对27份输出与48288200ns结束时间精确一致；CP/query/backend/capture原有覆盖行原样匹配已恢复CP参考。真实route label监视4828815周期，请求/回复30/30且READY/reply未知或重叠均未触发，实际5客户端arbiter→recursive engine→route adapter组合已运行。
+
+379文件归档实际恢复后audit字节一致：archive3ad1b194c024a631e2a7df5367e41c7ae9e09c3c45c246d413e6e43150d01d63，auditde6de1ee3dfde2c37eda1b73fb51921cbce040c04a7d926356e325e054adcec3。results/route_label_system_crc_20261028.json和186文件freeze逐SHA核对通过，builder/runner/auditor/freezer现保留冻结，不原地修改。定向cache释放receipt results/route_label_system_cache_release_20261028.json，无删除或全局drop。
+
+下一执行prepare_route_label_synth.py /tmp/B_state_residency_offer_20261025/route_label_synth_v1，验证同133源/U280/参数/10ns参考checkpoint_edit_synth_v1，继而run_restore_seed_synth→独立inspect/walks/audit_route_label_synth→archive/实际restore→freeze_route_label_synth。三工具先前仅Python解析，尚未创建综合目录/任务或新时序结论；可以在门控满足后使用，失败留证新版本。owner项始终未改，单一CRC压力不等于新八场景矩阵。整体goal active，物理时序/板卡等仍缺。
+
+以下保留历史。
+
+# Route标签候选完整CRC压力回归已启动（2026-10-28）
+
+Route label OOC三工具已预备（2026-10-28）：prepare_route_label_synth.py/audit_route_label_synth.py/freeze_route_label_synth.py仅Python解析，results/route_label_synth_tools_preparation_20261028.json绑定SHA。准备前要求route_label_system_crc_pressure_v1独立audit及实际restore，参考固定为checkpoint_edit_synth_v1；覆盖三源并要求133生产源/参数/part/10ns匹配。未调用，无新综合目录/任务或时序结果。当前完整runner2243702/session57929继续运行，无自动followup；不要跳门控或重复提交。
+
+Route full-system freezer已预备（2026-10-28）：scripts/freeze_route_label_system.py仅Python解析，要求实际audit/restore字节一致、原CP非空覆盖及新route label非空平衡、27比较后才生成验收报告与freeze。尚未执行，不是功能结论。当前完整runner2243702/session57929已compile/elaborate exit0并进入仿真；无自动followup，继续沿用此任务，不改已使用源。后续审计与实际恢复后再freeze；尚无新OOC。
+
+hardware/variants/route_label_system_v1/build.py已验证已恢复CP完整参考、route十二单元audit/restore及72文件freeze，覆盖route controller/adapter/residency三源；保留CP/query/backend/capture全部既有监视，新增system.inner.backend.route_join.controller真实label READY/reply未知或重叠fatal及非空请求/回复平衡。run_route_label_system.py与audit_route_label_system.py已独立准备并Python解析，后者还要求CP覆盖行原样匹配参考和27文件/周期精确比较。
+
+已实际启动python3 scripts/run_route_label_system.py /tmp/B_state_residency_offer_20261025/route_label_system_crc_pressure_v1 /tmp/B_state_residency_offer_20261025/checkpoint_edit_system_crc_pressure_v1，session57929。当前running，不重复提交；现有源/工具用于此实验，不原地修改，失败留证另起版本。尚未设置自动followup，unit结果不能当完整系统通过。
+
+下一沿用session57929/实际PID；终态后audit_route_label_system.py→archive_offer_result.py→verify_search_retire_restore.py route_label_system_crc_pressure_v1 audit_route_label_system.py，再准备/执行独立system freezer（尚未创建）。通过后再同条件新OOC；owner项不变，CP新矩阵未补齐等范围限制保留。整体goal active。
+
+以下保留历史。
+
+# Route标签候选十二单元通过并实际恢复冻结（2026-10-28）
+
+route_label_units_v2/session11777已observed终态，12例baseline/default/exclusive×原route/原checkpoint/native_checkpoint/generic_overlap均完成。独立audit_route_label_units_v2.py检查原route25条、checkpoint31route/27CP、native标签非空平衡，以及7组事件/结束时间精确一致。generic LS/ready/reply重叠时baseline/default unexpected0、exclusive1，明确是不能对任意后端开启的反例。
+
+390文件归档实际恢复复审通过，audit字节一致：archivee5d82bf20ff07835bbc06ebea0d76006516429e8003e1468117d3bb8eec6eaf4，audit243c4a8582670f69e7d3672df89535b4f78f65b9167b2844965f5f5b9c174f94。results/route_label_units_20261028.json与72文件freeze逐SHA核对通过。route_label_exclusion_v2/build_tb与三源、run/audit_route_label_units_v2.py、freeze_route_label_units.py均保留，不原地修改。v1声明顺序编译失败证据继续保留；v2无生产RTL修复。
+
+范围为controller+模型后端；native_checkpoint只是独立ready屏蔽，尚未实际5客户端arbiter/adapter完整组合，不是新全系统或OOC证明。下一真实完整CP CRC压力系统上覆盖三源并监视route controller label READY×reply及请求回复非空，保留原CP/query/backend/capture监视，27输出/周期精确比较，archive/实际restore后再同条件OOC。owner项继续保持，未证明owner_pending假设。整体goal active。
+
+以下保留历史。
+
+# Route标签单元v1编译失败已保留，v2仅修测试台声明位置（2026-10-28）
+
+原route_label_units_v1/session43668已failed：baseline原route和原checkpoint通过，baseline native_checkpoint的xvlog报VRFC10-3380 native_requests先使用后声明。results/route_label_units_compile_failure_20261028.json绑定失败日志。无生产RTL错误证据，原目录/runner/build_tb保留，不原地改通过。
+
+独立route_label_exclusion_v2复制同三源候选，build_tb只将native计数器声明移到module开头，检查和刺激保持；run_route_label_units_v2.py已启动/tmp/B_state_residency_offer_20261025/route_label_units_v2，session11777。auditor audit_route_label_units_v2.py已准备Python解析但未在输出执行。12例为baseline/default/exclusive×原route/原checkpoint/独立native_checkpoint/generic_overlap；默认兼容比较保留，native后端仅在无待回复时给label ready，generic有意LS同拍ready/reply检查差异。尚未12例完成或审计，不可声称通过。
+
+下一沿用session11777/实际PID，失败留证新版本；成功后独立audit→archive→实际restore→freeze（unit freezer尚未准备）。仍无新完整系统或OOC，新CP已冻结结果不变。整体goal active。
+
+以下保留历史。
+
+# Route label互斥分析及默认关闭候选已准备（2026-10-28）
+
+scripts/analyze_route_label_exclusion.py已执行，results/route_label_exclusion_20261028.json绑定真实5客户端service_arbiter lane2→recursive core→engine→route adapter链，4096二态链/96route谓词核对通过。READY只在IDLE，reply VALID只在WAIT_REPLY，后续掩码只收紧；不借用不适用的外层fence证明。泛化LS/ready/reply同拍输入使旧unexpected0、新1，明确保留为合同反例。不是RTL formal/XZ/仿真证明。
+
+hardware/variants/route_label_exclusion_v1已生成baseline/fixed三源、manifest及CONTRACT。LABEL_RESPONSE_EXCLUSIVE在route controller/adapter默认0，residency由已有EXCLUSIVE_BACKEND_RESPONSES默认0 flag传入，只特化label unexpected项；owner项和顺序块不变。owner_pending跨模块不变量尚未证明/应用。当前prepared_not_compiled_or_simulated，无新作业或时序结果，不能替换已冻结CP候选。
+
+下一保留原route/checkpoint兼容测试刺激，建立native合法与generic同拍反例，再实际全系统label端口监视/27输出周期精确比较、归档实际恢复与匹配OOC。完整系统edit0与CP新矩阵未执行等范围限制仍保留。整体goal active。
+
+以下保留历史。
+
+# 新route READY依赖仅为假设，尚未改RTL（2026-10-28）
+
+results/route_ready_path_hypothesis_20261028.json绑定已恢复CP OOC audit/最差路径及5源SHA。route unexpected仍包含LS/l_ready及OS/o_ready的同拍回复例外，路径经过rc_fault和CP safe到path CE。重要区别：adapter b_l_*接candidate_recursive_engine直接host_io，非外层transaction_fence输出，不能复用旧query fence互斥证明。owner o_ready由!owner_pending与journal ready构成，回复直接来自held后的backend，需独立时序owner_pending与后端排他证明。
+
+下一追真实label h_io状态与owner adapter退休/复位不变量，保留通用重叠反例；未证明前不删READY保护，不生成或运行新候选。仅源码分析，不启动Vivado，不修改任何已冻结源。整体goal active；CP候选OOC结果保持WNS-4.948ns/loops0，仍未闭合。
+
+以下保留历史。
+
+# CP同源OOC复审完成：零环，WNS改善但仍未闭合（2026-10-28）
+
+checkpoint_edit_synth_v1与唯一followup均已observed/complete并退出：runner1091523/session49344、原Vivado1091559、followup1111808/session23646、独立inspect1788729均终态。独立DCP检查/audit/177文件归档实际恢复通过且audit字节一致；archive91b8401bd63f2a13d065920d3d867ae07d454deb019882791a81446c7a029d22，audit8966eb1a8a82578bd0d16b19ba6aa81b2e1987c6b99c1819d9fecfb8cf3b3369。results/checkpoint_edit_synth_20261028.json及164文件freeze逐SHA核对通过，prepare/auditor/freezer/followup工具均保留冻结版本。
+
+同133生产源/U280/参数/10ns条件，loops0、自动切环0、critical0、latch/blackbox0。LUT139481/FF88048/BRAM163/DSP23/URAM0；相对query_native_synth_v1为LUT+631、FF-215、BRAM/DSP不变。布局前WNS -4.948ns，相对-5.717改善0.769ns，仍不满足10ns，design_acceptance=unresolved/timing_qualified=false。缺IO/真实时钟位置/物理实现/板卡证明，不能换算板卡频率。
+
+实际最差路径索引results/checkpoint_edit_timing_path_20261028.json已源绑定执行并冻结2文件（checkpoint_edit_timing_sources_20261028）：directory/lease_phase_reg[27][1]/C→route_join/controller/path_reg[0][25][0]/CE，61 LUT层/62未布局数据网，14.844ns数据=2.519逻辑+12.325估计net；旧最差到query cp_crc CE为64层，端点已变化，不能把差值当同一路径证明。route_join/controller占13层，其次pager/recovery各8层，下一优先研究真实最差cone中的route path保存使能和管理许可，不凭BRAM提示盲改。
+
+CP新候选仅有12单元+一完整CRC压力行为例，尚未新八场景矩阵；原十一源8/8为参考而非CP新矩阵。定向cache释放results/checkpoint_edit_synth_cache_release_20261028.json。下一按实际cone源分析形成可证约束/反例，独立候选测试再系统/OOC；整体goal active，任意变价/持久化认证/物理时序/板卡等仍缺。
+
+以下保留历史。
+
+# CP综合唯一后续链已启动（2026-10-28）
+
+checkpoint_edit_synth_v1保持running：runner1091523/session49344，真实Vivado1091559。已启动scripts/continue_checkpoint_edit_synth.py /tmp/B_state_residency_offer_20261025/checkpoint_edit_synth_followup_v1 1091559，session23646。后续链绑定实际PID/start ticks及12个工具SHA并复制留证，每阶段重新核对。当前wait_existing，不新起综合或停旧进程。
+
+综合observed后该链独占inspect→walks→audit_checkpoint_edit_synth→archive→实际restore/audit字节一致→freeze，任一失败停交主模型，不自动重试修补；7800s观察超时不停止原综合。不要另起inspect/methodology、手动archive/restore/freezer或改bound工具。此前“未建自动followup”已过时，现由此链拥有。
+
+新CP OOC尚无最终loop/资源/WNS结果；仍仅有完整CRC行为+CP十二例与旧十一源矩阵证据。下一终态主模型核对全部freeze/restore与真实时序报告，再决定后续瓶颈/矩阵工作。整体goal active。
+
+以下保留历史。
+
+# CP同源OOC已实际启动（2026-10-28）
+
+prepare_checkpoint_edit_synth.py已成功生成checkpoint_edit_synth_v1：133生产源与已恢复CP完整CRC压力逐SHA匹配，参考已恢复query_native_synth_v1，只覆盖两源，参数/part/Tcl/XDC/10ns保持匹配。两条旧MCP会话再次查询仍version=out of stack space，不复用/停止；本机vivado -version实际返回2022.2后，已启动run_restore_seed_synth.py，session49344。当前running，没有新时序/loop/资源结果；勿重复提交。
+
+该综合runner观察终态后，按顺序inspect_restore_seed_synth.py（独立重开DCP）→analyze_restore_seed_loops.py→audit_checkpoint_edit_synth.py→archive_offer_result.py→verify_search_retire_restore.py checkpoint_edit_synth_v1 audit_checkpoint_edit_synth.py→freeze_checkpoint_edit_synth.py；目前未建自动followup，沿用此session/实际PID。prepare/auditor/freezer现在已参与此实验，保留源码，若失败留证另起版本。完整CRC行为结果已冻结，不能因综合尚未完成把旧WNS当新结论。整体goal active。
+
+以下保留历史。
+
+# CP完整CRC压力例及归档实际恢复通过（2026-10-28）
+
+checkpoint_edit_system_crc_pressure_v1/runner730652/session16192已正常终态，独立audit27份输出与48288200ns结束时间精确匹配已恢复十一源query参考。实际CP监视4828815周期，safe64999/busy339、请求回复12/12、导入40/导出80字；safe/edit未知或重叠均未触发。本例edit计数0，不能据此声称完整系统编辑非空；独立native_cp单元有safe/edit非空且互斥，generic重叠反例另存。
+
+379文件归档实际恢复，audit字节一致：archive04d2544cae26aa23c797cc03812b6d2870df20fff26f845a046259ccc67c86a2，audit9cc3b7cec51c12fc9a7a7ff915237817f404404c9b07aa042ae8bb624204904a。results/checkpoint_edit_system_crc_20261028.json与183文件freeze/checkpoint_edit_system_crc_sources_20261028已逐SHA核对。完整builder/runner/auditor/freezer和monitor现在已用于冻结结果，不原地修改。定向cache释放结果results/checkpoint_edit_system_cache_release_20261028.json，无删除或全局drop cache。
+
+下一执行prepare_checkpoint_edit_synth.py /tmp/B_state_residency_offer_20261025/checkpoint_edit_synth_v1，然后同条件run_restore_seed_synth.py、独立inspect/loop分析/audit、archive/实际restore/freezer。新CP综合prepare/auditor/freezer目前仅Python解析，未实际运行；无新时序结论。旧十一源矩阵8/8与旧OOC WNS -5.717ns为独立基线，不证明CP新矩阵/时序。整体goal active，物理实现/板卡等仍缺。
+
+以下保留历史。
+
+# CP十二例完成并冻结，完整CP候选回归已启动（2026-10-28）
+
+CP综合freezer已预备（2026-10-28）：scripts/freeze_checkpoint_edit_synth.py仅Python解析，必须经OOC独立audit与实际restore/audit字节一致才冻结；报告保留资源/WNS差值及不同最差端点限制，timing_qualified始终false。results/checkpoint_edit_synth_freezer_preparation_20261028.json记录SHA。尚无CP新综合目录或任务；后续先完整行为audit/restore，再prepare→run_restore_seed_synth→独立inspect/loop分析/audit→archive/实际restore→freeze，任一失败留证据，不能跳门控。当前完整行为XSim745203/runner730652/session16192继续运行。
+
+CP综合auditor已独立预备（2026-10-28）：scripts/audit_checkpoint_edit_synth.py仅Python解析，绑定query_native_synth_v1同条件参考与已恢复CP完整仿真源，保留133源/参数/时钟/无TB、独立DCP诊断、loops/自动切环和未约束IO等检查。artifact integrity通过不等于设计时序通过。results/checkpoint_edit_synth_auditor_preparation_20261028.json记录SHA；尚无新综合任务/结果，freezer仍待准备。完整行为回归730652/session16192继续运行。
+
+CP OOC准备入口已预备（2026-10-28）：scripts/prepare_checkpoint_edit_synth.py仅Python解析，参考query_native_synth_v1，前置要求checkpoint_edit_system_crc_pressure_v1实际audit/restore；保持133生产源/U280/参数/10ns匹配，仅覆盖原有两源。未调用、无新综合目录/任务/时序结果，独立synth auditor/freezer尚待准备。results/checkpoint_edit_synth_preparation_20261028.json绑定工具。完整回归730652/session16192已compile和elaborate exit0，正在行为仿真，勿重复启动。
+
+checkpoint_edit_after_matrix_v1/PID3180217已observed/complete并退出。CP单元12例、7组完整事件/结束时间兼容比较、显式generic重叠反例均经独立audit及实际restore复审通过；63文件results/checkpoint_edit_units_sources_20261028逐SHA核对通过。CP full-system builder前置门控现真实通过，不能再称仅预检或待单元证据。
+
+已启动唯一新完整回归：python3 scripts/run_checkpoint_edit_system.py /tmp/B_state_residency_offer_20261025/checkpoint_edit_system_crc_pressure_v1 /tmp/B_state_residency_offer_20261025/query_native_system_crc_pressure_v1，session16192。启动内存145.14GiB/300GiB，旧矩阵及CP链均已终态。不要重复启动；后续沿用此session/实际PID。runner完成后必须audit_checkpoint_edit_system.py→archive_offer_result.py→verify_search_retire_restore.py checkpoint_edit_system_crc_pressure_v1 audit_checkpoint_edit_system.py→freeze_checkpoint_edit_system.py；当前尚未设置自动followup，也没有全系统PASS或CP新OOC结论。
+
+新全系统builder/runner/auditor/freezer和monitor已用于此实验，应保留当前源码，失败先留证据、另建版本，勿原地改检查制造通过。下一完整实测后再同源OOC；总体goal active，物理时序/板卡仍缺。
+
+以下保留历史。
+
+# 十一源八场景矩阵完成并冻结，CP十二例已启动（2026-10-28）
+
+query_native_matrix_queue_v1/PID1996430已observed/complete并退出，results/query_native_matrix_20261028.json为eight_behavioral_cases_passed，216份输出比较；7个新例及既有CRC pressure anchor共8例。最后CRC full已实际归档恢复，所有新例restore/audit SHA重新核对且audit字节一致。既有CP链3180217成功执行freeze_query_native_matrix.py；results/query_native_matrix_sources_20261028的211份冻结文件逐SHA核对通过。禁止修改已冻结矩阵工具/源或重启旧queue。
+
+CP链3180217/session98206已由wait转native_tests，唯一执行checkpoint_edit_units_v1十二例；这不代表CP测试通过，后续仍由原链独占audit/archive/实际restore/freezer。新CP全系统builder/runner/auditor/freezer只是准备，必须等CP单元真实通过与冻结后才独立执行，不抢跑或另起同名任务。整体goal active，已有十一源OOC WNS -5.717ns仍未闭合，CP新OOC/物理实现/板卡仍缺。
+
+以下保留历史。
+
+# 十一源矩阵7/8，cancel双容量恢复复审完成（2026-10-28）
+
+query_matrix_retry_cancel_pressure_v1完成27份输出与47207980 ns结束时间精确匹配，归档实际恢复后audit字节一致；results/query_matrix_retry_cancel_pressure_milestone_20261028.json绑定证据。原query/backend/capture实际端口观测通过。取消后重试两容量均完成，不能扩展成任意取消点证明。
+
+唯一queue1996430已转最后query_matrix_retry_crc_full_v1_run。CP等待链3180217继续拥有最终矩阵冻结与CP十二例测试/审计/归档实际恢复，不重复提交或修改bound文件。新CP完整system builder/runner/auditor/freezer均仅准备或Python解析，尚无新功能运行，必须等前置真实证据；整体goal active，物理时序/板卡仍缺。
+
+以下保留历史。
+
+# CP全系统独立auditor已预备（2026-10-28）
+
+CP全系统freezer亦已预备（2026-10-28）：scripts/freeze_checkpoint_edit_system.py仅Python解析，要求实际恢复audit字节一致、独立auditor与monitor SHA、27比较和CP覆盖才创建报告/冻结；results/checkpoint_edit_system_freezer_preparation_20261028.json。尚未执行，没有新功能接受产物。后续完整目标命名checkpoint_edit_system_crc_pressure_v1；仍须先等矩阵/CP十二例链终态，再独立执行完整runner→audit→archive→实际restore→freeze，不能提前启动。
+
+scripts/audit_checkpoint_edit_system.py已创建，仅Python解析通过，未在新全系统输出上执行。除原生参考/恢复/候选源码与前置冻结绑定外，要求27输出及结束时间精确一致，原backend/capture/query覆盖行与参考完整一致，CP actual safe/busy/import/export非零、命令回复平衡、monitor生成器SHA记录。结果不能由runner退出替代。results/checkpoint_edit_system_auditor_preparation_20261028.json绑定此预备工具。
+
+仍缺全系统实验执行/实际审计/归档恢复及freezer；当前不能声称CP候选通过。第7项原仿真88827继续运行，唯一queue1996430和CP等待链3180217保持。整体6/8及goal active。
+
+以下保留历史。
+
+# CP全系统runner已预备，未执行（2026-10-28）
+
+scripts/run_checkpoint_edit_system.py从已冻结query native全系统入口独立改编，参考切为query_native_system_crc_pressure_v1；前置使用checkpoint_edit_system_v1的CP十二例/矩阵/恢复门控，只替换parent候选两源并追加CP实际端口监视，保留已有query/backend/capture标记。仅Python解析，未调用、未编译、未启动仿真。results/checkpoint_edit_system_runner_preparation_20261028.json绑定runner SHA。
+
+后续尚须编写独立audit/freezer，特别绑定monitor生成器SHA、两源候选/原参考、27文件与周期精确比较、CP非空覆盖及原有观察计数；不能凭runner正常退出宣布通过。原矩阵第7项XSim88827仍在运行，整体6/8；等待链3180217保持唯一CP单元执行者。整体goal active。
+
+以下保留历史。
+
+# CP全系统构建器预备，未启动实验（2026-10-28）
+
+hardware/variants/checkpoint_edit_system_v1/build.py已准备：sources(reference)先验证已恢复query CRC压力参考、CP十二例audit/restore、十一源八场景矩阵及两份freeze全部文件SHA，再返回两源候选overlay。monitored_tb与先前独立准备的监视TB字节一致。当前实际调用sources因缺checkpoint_edit_units_v1证据而拒绝，未越过前置门控。报告results/checkpoint_edit_system_preparation_20261028.json。仅Python解析和生成一致性/缺证据门控检查；尚无runner、全系统编译或功能/时序结果。
+
+原queue1996430继续第7项cancel pressure，XSim88827；CP等待链3180217仍等待。不要将新构建器混入当前冻结矩阵或修改bound文件，后续需独立runner/auditor和实际恢复流程。整体仍6/8及goal active。
+
+以下保留历史。
+
+# 十一源矩阵6/8，cancel full恢复复审完成（2026-10-28）
+
+query_matrix_retry_cancel_full_v1完成27份输出与44914260ns结束时间精确匹配，归档实际恢复后audit字节一致；results/query_matrix_retry_cancel_full_milestone_20261028.json绑定证据。实际query端口4491421周期中service43/43、search7/7、route6/6平衡且互斥；backend authority26/owner32，capture非空3131302周期/回复705周期。第三/第四warm及G3/G4发布通过。
+
+唯一queue1996430已转query_matrix_retry_cancel_pressure_v1_run，剩余cancel pressure及CRC full两例。CP等待链3180217继续拥有最终矩阵冻结与CP十二例测试/审计/归档实际恢复，不重复提交或修改bound工具。CP观测仍仅静态准备，整体研究active，物理时序和板卡尚缺。
+
+以下保留历史。
+
+# 十一源矩阵5/8，on双容量完成（2026-10-28）
+
+query_matrix_on_pressure_v1的27份输出与46874800ns结束时间精确匹配，归档实际恢复后audit字节一致；results/query_matrix_on_pressure_milestone_20261028.json绑定证据。实际query端口4687475周期中service43/43、search7/7、route6/6平衡且互斥，backend authority20/owner26，capture非空3560683周期/回复705周期。第三/第四warm及G3/G4发布均通过。
+
+唯一queue1996430已完成该例恢复，继续cancel双容量和CRC full三例；CP链3180217仍等待全部矩阵完成，拥有矩阵冻结及CP十二例后续，不重复提交或修改绑定工具。CP全系统观测代码仍只有静态预备，未编译或验证。整体研究active，尚无物理时序/板卡结论。
+
+以下保留历史。
+
+# CP全系统观测预备：仅静态端口核对（2026-10-28）
+
+scripts/prepare_checkpoint_edit_monitor.py已从已恢复query_native_system_crc_pressure_v1生成独立checkpoint_edit_monitor_preparation_v1/tb_query_fault.sv；11个实际controller端口及root实例名静态核对通过，results/checkpoint_edit_monitor_preparation_20261028.json绑定生成器/源/生成物SHA。检测cp_safe/host_label_edit未知或重叠；统计safe/edit/busy、命令/回复、导入/导出，完成时要求safe/busy/import/export非零及命令回复平衡。edit计数仅报告，不能假定此fixture必有普通host编辑。
+
+尚未编译/展开/功能仿真，不是CP优化通过证据；没有提交新作业，没有改原矩阵或CP等待链bound文件。未来完整接入仍须等CP十二例真实通过和归档实际恢复，再做精确输出/周期对比与同源OOC。当前原queue1996430仍on pressure，XSim3683968持续运行；整体仍4/8，不重复提交。
+
+以下保留历史。
+
+# 十一源矩阵4/8，继续单槽on回归（2026-10-28）
+
+query_matrix_on_full_v1已完成：27份输出与44590330ns结束时间精确匹配已恢复十源参考；归档实际恢复后audit字节一致，证据results/query_matrix_on_full_milestone_20261028.json。实际query端口4459028周期中service43/43、search7/7、route6/6平衡且互斥，backend authority20/owner26，capture非空3131397周期/回复705周期。
+
+已核实现有queue1996430与CP等待链3180217均存活；queue已转query_matrix_on_pressure_v1_run，当前XSim子进程3683968。剩余on pressure、cancel双容量、CRC full四例。CP链继续等待原矩阵完成，拥有最终矩阵冻结与CP十二例功能测试/审计/归档实际恢复；不重复启动、不改绑定文件。当前未新增CP功能或时序结论，整体研究仍active。
+
+以下保留历史。
+
+# CP后续唯一等待链已启动，当前十一源矩阵2/8（2026-10-28）
+
+十一源矩阵3/8（2026-10-28）：新增query_matrix_off_pressure_v1的27份输出/47750020ns结束周期精确匹配，归档实际恢复后audit字节一致，results/query_matrix_off_pressure_milestone_20261028.json。实际query端口service43/43、search7/7、route6/6平衡且互斥，旧backend/capture观测保留。唯一queue1996430/session43855已转query_matrix_on_full_v1_run，剩余on双容量/cancel双容量/CRC full五例；CP后续链3180217/session98206仍等待，负责最终矩阵冻结及CP单元12例/审计/归档恢复。勿重复手动冻结或启动CP功能仿真。
+
+checkpoint_edit_after_matrix_v1已实际启动（PID3180217/session98206），入口scripts/continue_checkpoint_edit_after_matrix.py，stage=wait_existing_matrix，绑定原query_native_matrix_queue_v1/PID1996430/start ticks。它现在只观察，未提交新CP功能仿真；原矩阵仍query_matrix_off_pressure_v1_run，2/8已恢复通过。
+
+只有原十一源矩阵observed/complete后，该链才顺序freeze_query_native_matrix.py→run_checkpoint_edit_units.py（12例）→audit_checkpoint_edit_units.py→archive→实际restore复审→freeze_checkpoint_edit_units.py。最终矩阵冻结现已由此链拥有，不再手动并行执行！任何失败停交主模型，不自动重试/修复；观察超时不停止原矩阵。75%内存准入、最多一个行为仿真保持。
+
+bound保存矩阵freezer、CP runner/auditor/freezer/analyzer、CP variant baseline/fixed/build/build_tb/manifest/CONTRACT、原checkpoint/rebase TB及归档工具，逐阶段查SHA；等待/运行期间不要修改绑定文件。CP12例目前仅compile/elaborate通过，没有功能结果；checkpoint_edit_units_v1尚未创建。若未来检查失败，保留此链证据并使用新版本修复，不改已绑定老脚本来制造通过。
+
+原十源矩阵8/8与十一源CRC压力/零环OOC仍是不同范围；新CP候选也尚无全系统/OOC证据。整体研究goal active，仍缺物理时序闭合/板卡及此前范围事项。
+
+以下保留历史。
+
+# 十一源矩阵2/8；新CP候选12场景编译展开通过（2026-10-28）
+
+query_matrix_off_full_v1已完成27输出/周期精确比较及归档实际恢复复审，audit字节一致。证据results/query_matrix_off_full_milestone_20261028.json；连同CRC pressure anchor，新十一源矩阵2/8。唯一queue1996430/session43855已转query_matrix_off_pressure_v1_run，剩余六例继续按原顺序串行，bound工具/variant不得修改或另起同名实验。旧十源8/8仍为独立历史结果。
+
+新checkpoint_edit_exclusion_v1的12场景已完成compile/elaborate预检（checkpoint_edit_preflight_v1/session70399终态），24命令exit0及日志SHA核对，results/checkpoint_edit_preflight_20261028.json；没有启动xsim。build_tb.py保留原checkpoint/rebase兼容性刺激，另建native_cp（导入半流许可丢失+编辑、成功重试、导出背压/许可丢失+dirty保留）及generic_overlap（cp_safe真仍编辑）反例。baseline/default/exclusive三模式各4场景；通用重叠输入下specialized可接受而default拒绝，这正说明不能给任意接口开启特化。
+
+run_checkpoint_edit_units.py支持--compile-only预检；真正功能运行必须等当前query_native_matrix_queue_v1 observed/complete并通过75%内存准入，不并发行为仿真。audit_checkpoint_edit_units.py独立检查状态/CRC/序号/许可编辑观测及7组兼容trace/结束周期比较，已Python解析但未在功能结果上执行。当前这些测试只是可编译展开，不是功能证明；新CP候选不得替换当前矩阵冻结源，后续需实际运行/独立审计/归档恢复后再做全系统与OOC。
+
+以下保留历史。
+
+# 十一源同源OOC零环并改善，剩余矩阵已开始（2026-10-28）
+
+新CP瓶颈候选已独立准备（2026-10-28）：analyze_checkpoint_edit_exclusion.py按已恢复query_native_synth_v1的实际root接线验证cp_safe⇒!host_label_edit，16384组二态、3072许可true、48编辑true；报告results/checkpoint_edit_exclusion_20261028.json。普通/boot admin两个host mask均受host_base限制，CP许可选择wm_owned或pc_owned时host_base必false，故CP drift中的!cp_safe||host_label_edit在原生接线下可约简为!cp_safe。保留泛化反例cp_safe=true/edit=true，不能无条件改变通用模块。
+
+hardware/variants/checkpoint_edit_exclusion_v1已生成baseline/fixed两源与manifest，CP_SAFE_EXCLUDES_HOST_EDIT默认0、仅native root启用；只改组合CP drift项，顺序always块逐字节不变，label_state_dirty等host edit用途不改。状态prepared_not_compiled_or_simulated，没有新RTL测试或时序结果。下一保留原checkpoint/rebase测试刺激与检查验证默认兼容性，再独立建立满足原生约束的导入/导出/错误/取消/背压测试及泛化重叠反例；不能把故意违反原生互斥的旧单元测试改刺激冒充原始兼容。新候选不可混入当前query_native_matrix_queue_v1冻结源，待独立验证后再提交新全系统和OOC。
+
+详见results/query_native_synth_20261028.json/.md。query_native_synth_v1完成综合、独立重开DCP检查、审计、176文件归档实际恢复及冻结；check_timing loops0、LUTLP-1零违规、自动切环警告0。133生产RTL与已恢复完整query CRC pressure一致，仅相对十源baseline覆盖query_lifecycle/root两源，累计原seed11唯一生产源。U280/10ns/其余参数/Tcl/XDC保持匹配，零latch/blackbox。
+
+候选LUT138850、FF88263、BRAM163、DSP23、URAM0；相对native_retirement_synth_v1减少953 LUT、增加218 FF，BRAM/DSP不变。布局前WNS -5.717ns，参考-7.111ns，改善1.394ns但仍不满足10ns。design_acceptance=unresolved/timing_qualified=false，无IO/物理时钟位置/布局布线或板卡收益结论。
+
+归档archive51a612d3d2a1440077aaab712dcae1b0288a1a31cfced29b2c1e43839f3517b4，audit33342cf1d051b5e97873766486de8ded113b27e4522c8243d3b2883892398b04；实际restore audit字节一致。168文件冻结results/query_native_synth_sources_20261028并逐文件SHA核对；prepare/audit/freeze_query_native_synth.py现冻结，不改写。原综合1842930/session16905、独立检查2709915和后续链1877127/session25101均终态，勿再等待/重启或重复建methodology。定向cache释放receipt results/query_native_synth_cache_release_20261028.json，6文件约492MB实际占用下降，无删除/错误。
+
+新最差路径分析已实际执行并3文件冻结results/query_native_timing_sources_20261028，报告query_native_timing_path_20261028.json/.md。目录lease_phase_reg[27][1]/C→controller/cp_crc_reg[0]/CE，64LUT/65数据net、15.613ns=逻辑2.737+未布局net估计12.876；旧最差终点是error_code_reg[0]/CE、71LUT。起点相同、终点不同，不能把两份各自最差的差值当同一端点路径证明。下一时序研究重点转CP流受理/许可/漂移与退休资格，候选须另建变体，不改当前矩阵绑定源或冻结审计。
+
+唯一query_native_matrix_queue_v1/PID1996430/session43855已通过新结构audit/实际restore/零环门槛并自动启动query_matrix_off_full_v1。当前compile/elaborate已通过、XSim运行，剩余七例尚无新增终态，矩阵仍1/8（query CRC pressure anchor已通过）。队列负责每例run/audit/archive/实际restore/cache释放，工具/variant/preflight SHA绑定，不改写、不重复启动、不在restore时读重建根。最终freeze_query_native_matrix.py仍需全部七例结束后执行。整体研究goal active，物理时序/板卡及既有范围缺口保留。
+
+以下保留历史。
+
+# 十一源剩余矩阵已有唯一队列，等待新OOC门槛（2026-10-28）
+
+最差路径后续分析入口scripts/analyze_query_native_timing.py已准备但未执行（2026-10-28）：只在新OOC followup实际恢复/冻结complete且loops0/无自动切环后读取已绑定timing_synth.rpt，提取首条最差setup的起终点、LUT级数、逻辑delay与未布局net估计，并与旧native_retirement_timing_path_20261027.json绑定比较；显式记录是否相同端点，不能把不同路径的WNS差值说成同一路径证明。当前没有query_native_timing_path_20261028.json输出，待新结构终态后由主模型执行并冻结分析。若新最差路径含旧解析器不支持的非LUT primitive，应保留失败并按实际报告扩展新解析器，不放宽数量核对。
+
+query_native_matrix_queue_v1已实际启动（PID1996430/session43855），入口scripts/run_query_native_matrix_queue.py，stage=wait_structural_chain，绑定现有query_native_synth_followup_v1/PID1877127/start ticks。当前没有提交剩余七例仿真；query_native_synth_v1/Vivado1842930/session16905仍真实综合，独立检查/归档实际恢复尚未终态。勿重复创建新综合或queue。
+
+队列只在新OOC observed/complete、独立audit与实际restore通过、check_timing loops0且无自动切环后启动。顺序query_matrix off full/pressure、on full/pressure、retry_cancel full/pressure、retry_crc full；每例保留对应native_matrix参考、原刺激/CPU oracle/容量/故障方式，仅叠加query两源和实际三接口监视。run→audit→archive→实际restore→定向cache释放严格串行，任一步失败停止交主模型；75%共享内存准入，不增加行为仿真并发、不自动重试/修复。
+
+results/query_native_matrix_crc_anchor_20261028.json记录已审计并实际恢复的query_native_system_crc_pressure_v1作为1/8 anchor，核对其审计比较字典/周期与原十源参考一致及133生产源匹配新OOC输入；不重复CRC pressure仿真。results/query_native_matrix_preflight_20261028.json仅预检，不代表剩余七例通过。queue tools/bound保存run/audit/归档工具、candidate builder/两源及parent builder快照，逐阶段查SHA；队列期间勿修改绑定工具/variant/preflight。
+
+全部七例完成后生成results/query_native_matrix_20261028.json；最终freeze_query_native_matrix.py入口已准备但尚未执行/自动提交，须矩阵终态后实际运行核对全部8归档回执、216比较、133生产源及独立OOC，生成最终md和去重source freeze。已处理136仿真列表=133生产+3验证源，不能复现旧冻结器列表错误。当前新十一源仍只有完整CRC pressure+原生12例通过，其他矩阵与新时序结论待得，goal active。
+
+以下保留历史。
+
+# Query候选完整CRC通过，匹配十一源OOC已启动（2026-10-28）
+
+十一源剩余七项矩阵入口已准备（2026-10-28），未提交任何新仿真或queue：hardware/variants/query_native_matrix_v1/build.py复用冻结的query_native_system_v1两源与只读监视，精确允许原native_matrix off/on/cancel双容量及CRC full七个已恢复参考。results/query_native_matrix_preflight_20261028.json已实际核对每例133生产SHA、候选与运行中OOC源码一致；预检不是行为通过。run_query_native_matrix_case.py及audit_query_native_matrix_case.py已准备并Python解析，逐case生成TB，保留27文件/周期精确比较和三接口实际监视。执行前evidence()必须验证新query_native_synth_v1独立audit/实际restore、loops0且无自动切环，再验证已恢复CRC pressure anchor。当前query_native_synth_v1及原followup仍运行，不绕门槛、不把旧十源8/8当新候选8/8，不重复跑CRC pressure。
+
+results/query_native_system_crc_20261028.json/.md证明完整CRC压力例通过：27份输出/48288200ns结束周期与原native_retirement_system_crc_pressure_v1精确一致；实际query端口4828815周期service43/43、search7/7、route6/6，请求与消费回复非零平衡且三对READY/reply VALID互斥。原backend/capture检查保留，CPU/12AXI/最终DDR观察相同。379文件归档实际恢复audit一致（archive3fd9fb8e8ef6d019530ccb73fd2b2f3b71b20e1482f2cb96db6b5eb149fac2e7，audit7aedf88a6ab31b8cd1a5406fecb364ef0b39732d076929437aa0804a996ae261）。181文件冻结results/query_native_system_crc_sources_20261028并逐文件SHA核对；run/audit/freeze_query_native_system.py、query_native_system_v1 builder/生产层级现在冻结，不修改。原完整runner1506751/session41650和后续链1537821/session3585已终态；无需再等待/重启。缓存回执results/query_native_system_cache_release_20261028.json。
+
+已通过门槛实际准备并启动query_native_synth_v1，入口prepare_query_native_synth.py + run_restore_seed_synth.py，session16905/Vivado1842930。133生产RTL逐文件等于上述完整行为实验，仅在匹配native_retirement_synth_v1上覆盖query_lifecycle/root两源；与原restore_seed_synth_on_v1逐项比较实际11个唯一生产源变更。U280/10ns/其余参数/Tcl/XDC不变。新OOC仍运行，暂无零环或时序改善结论。
+
+新唯一query_native_synth_followup_v1（PID1877127/session25101）已启动wait_existing，绑定Vivado1842930/start ticks。原综合observed后顺序inspect_restore_seed_synth、analyze_restore_seed_loops、audit_query_native_synth、archive、实际restore、freeze_query_native_synth。任何失败停止诊断，不重试原综合、不重复创建methodology目录、不在restore时读重建根。prepare/audit/freeze_query_native_synth.py现与运行源关联，勿修改。既有两个MCP会话重新查询仍out of stack space，使用已验证本机2022.2批处理，未重用/终止旧会话。
+
+下一先核对真实原Vivado及唯一followup；新完整候选只通过CRC pressure/原生12例，剩余矩阵尚未执行。原十源8/8不能自动转作新十一源矩阵结论；物理时序/实现/板卡、任意变价及既有范围缺口保留。goal active。
+
+以下保留历史。
+
+# Query互斥候选完整CRC压力回归与唯一审计链运行中（2026-10-28）
+
+后续匹配OOC入口prepare_query_native_synth.py及audit_query_native_synth.py已准备并通过Python语法解析，未执行/未提交（2026-10-28）。准备器要求query_native_system_crc_pressure_v1终态独立audit及实际restore通过，再覆盖原native_retirement_synth_v1两源，逐项核对133生产源与行为实验一致；保持U280/其余参数/10ns/Tcl/XDC。新OOC目录尚不存在。当前CRC pressure及唯一followup仍运行，先取得实际行为证据再由主模型选择提交，不提前称新综合网表零环或时序改善。
+
+在已恢复native_retirement_system_crc_pressure_v1上新增query_native_system_crc_pressure_v1，入口scripts/run_query_native_system.py，runner1506751/session41650；已compile/elaborate通过，实际XSim仿真中，尚无终态通过。仅覆盖query_lifecycle与query root两源，沿用已冻结query_native_exclusion_v1候选；原十源基线及原CPU/12AXI/DDR/27输出/结束周期不改。全系统累计相对原seed预计11个唯一源（root重叠），最终仍以源比较为准。
+
+新variant hardware/variants/query_native_system_v1/build.py在原TB叠加实际system.controller service/search/route端口只读监视：三对READY/reply VALID不得重叠或未知，请求与消费回复分别计数，终态要求每路非零且平衡。原native backend/capture观测保留。候选必须全部27输出/周期逐字节匹配原CRC pressure参考，禁止归一化或放宽审计。
+
+唯一query_native_system_followup_v1（PID1537821/session3585）已启动wait_existing，绑定原runner PID/start ticks及工具/variant SHA，入口scripts/continue_query_native_system.py。原仿真observed后串行audit_query_native_system、archive、实际restore复审、freeze_query_native_system；任一步失败停止交主模型，不自动重试/修复/新综合。运行中不要修改这些bound工具、builder或variant源码，不另起同名仿真/审计/归档，不在restore时读取重建根。观察超时不等于原进程停止。
+
+同源十源矩阵8/8、query原生12例均已完成并归档实际恢复冻结；本新完整系统候选尚无通过结果或匹配新OOC。下一先核对原runner/后续链真实进程；通过后再测匹配综合的路径改善，仍保留物理时序/板卡及此前固定价格等范围缺口。goal active。
+
+以下保留历史。
+
+# 八项同源矩阵与query原生12例均通过并实际恢复（2026-10-28）
+
+完整十源基线矩阵8/8通过：results/native_retirement_matrix_20261027.json/.md，216项文件/周期比较，八归档实际恢复且audit一致。205文件冻结results/native_retirement_matrix_sources_20261027并逐文件SHA验证。开关两版匹配OOC均零环，但WNS开启-7.111ns/关闭-6.539ns仍未满足10ns；物理时序/板卡证据缺。
+
+新增query_native_exclusion_v1两源候选原生12例已实际完成：baseline/default/exclusive × 正常28结果单元回归及service/search/route三类同拍回复。四组默认模式事件/结束周期与基线一致，exclusive正常例也一致；exclusive三负例status7，route已完成时保留committed1。独立audit_query_native_exclusion.py通过；378文件归档实际恢复audit字节一致（archive65547d9bf6fd9267b471fb5297888132cc0e419c61f00f8250ed9d973ab5b59f，audit80e141df12c50fa0b018fc9d2ad760bad5d68a8d9dc76cd5fd56c7355b397296）。results/query_native_exclusion_20261028.json/.md；55文件冻结results/query_native_exclusion_sources_20261028，含候选/工具/分析/测试/回执并核对全部SHA。相关builder/runner/auditor/analyzer/production候选现在冻结，不改写。
+
+所有旧任务均终态：矩阵2524003/session68909已observed/complete；原后续链3385940/session50941在旧freeze_matrix错误处failed，未提交原生测试；手动唯一原生runner1393023/session2798已完成并归档恢复。旧冻结器误把含3个验证模块的136项列表当纯133生产列表，失败记录保留results/native_matrix_freezer_failure_20261028.json；新freeze_native_retirement_matrix_v2.py严格核对三验证模块及133生产SHA并成功，未放宽审计。不要再等待或重启上述任务。
+
+下一优先把该query候选接入完整十源四查询基线：仅覆盖query_lifecycle与root两源，新增实际service/search/route READY/reply VALID三接口只读监视，跑完整27输出/周期精确比较（首选已恢复CRC pressure），保留原CPU/AXI/故障恢复oracle。原生测试后端是模型，不能替代实际三接口全层级轨迹；本候选尚无完整系统或新OOC结果。完成后再匹配OOC衡量71级控制路径，继续物理实现/板卡及既有研究范围。goal active。
+
+以下保留历史。
+
+# 同源八项矩阵完成冻结，query原生12例运行中（2026-10-28）
+
+results/native_retirement_matrix_20261027.json/.md及native_retirement_matrix_sources_20261027记录完整8/8：216项文件/周期精确比较，八归档均实际恢复且audit一致，133生产RTL与零环开启版OOC相同。最终205文件冻结并逐文件SHA核对。原队列2524003/session68909已observed/complete，不再等待/重启。
+
+原后续链query_native_after_matrix_v1/PID3385940/session50941在freeze_matrix失败，未提交候选测试。原因是仿真rtl列表136项=133生产源+axi_file_memory/tb_directory_observer/tb_query_fault三验证源，旧冻结器错误要求纯133列表；旧工具与失败日志保留，见results/native_matrix_freezer_failure_20261028.json。新freeze_native_retirement_matrix_v2.py检查精确三验证源集合及全部133生产SHA，未放宽矩阵/恢复门槛，已实际冻结成功。原后续链终态失败，不可再等待或重启。
+
+已手动唯一启动scripts/run_query_native_exclusion.py，目标query_native_exclusion_unit_v1/session2798，当前12例串行运行；下一先查manifest及真实runner，不另起同名目标。测试后须audit_query_native_exclusion.py、archive及verify_search_retire_restore.py实际恢复重审，再冻结；当前仅部分case通过，不能称12/12。生产候选仍query_native_exclusion_v1两源，尚无完整系统或综合改善证据。整体研究goal active，物理时序/板卡及既有范围缺口保留。
+
+以下保留历史。
+
+# 修复后开关同源OOC均零环，行为矩阵4/8（2026-10-28）
+
+矩阵7/8（2026-10-28）：新增native_matrix_retry_cancel_pressure_v1的27份输出/47207980ns结束周期匹配，4720793周期backend/capture，authority26/owner32，非零depth3560874周期、结果VALID705周期；实际归档恢复后audit一致，results/native_matrix_cancel_pressure_milestone_20261028.json。唯一队列PID2524003/session68909已转最后native_matrix_retry_crc_full_v1_run。唯一后续链PID3385940/session50941仍等待，全部终态后负责矩阵冻结与query原生12例测试/审计/归档实际恢复；不得提前计8/8或重复执行。新候选仍仅编译展开通过，功能及时序结论未得。
+
+矩阵6/8（2026-10-28）：新增native_matrix_retry_cancel_full_v1的27份输出/44914260ns结束周期匹配，4491421周期backend/capture，authority26/owner32，非零depth3131302周期、结果VALID705周期；实际归档恢复后audit一致，results/native_matrix_cancel_full_milestone_20261028.json。唯一队列PID2524003/session68909已转native_matrix_retry_cancel_pressure_v1_run，之后仅剩CRC full。唯一后续链PID3385940/session50941仍等待，负责矩阵终态冻结及原生12例测试，不要重复执行。整体研究仍未完成时序/板卡等缺口。
+
+矩阵正常开关双容量四例全部完成（2026-10-28）：新增native_matrix_on_pressure_v1，27份输出/46874800ns结束周期精确匹配；4687475周期backend/capture，authority20/owner26，非零depth3560683周期、结果VALID705周期。实际归档恢复后audit一致，证据results/native_matrix_on_pressure_milestone_20261028.json。连同既有CRC pressure anchor，矩阵5/8；唯一队列PID2524003/session68909已转native_matrix_retry_cancel_full_v1_run，剩余cancel full/pressure及CRC full。后续链PID3385940/session50941仍等待，勿重复冻结或启动候选测试。开关OOC已各自零环且恢复冻结，但物理时序/板卡结论仍缺。
+
+关闭版native_retirement_synth_off_v1已完成综合、独立重开DCP检查、审计、归档实际恢复和冻结。详见results/native_retirement_off_synth_20261027.json/.md。133生产RTL与开启版相同，仅ENABLE_RESTORE_SEED_BYPASS=0/1不同；U280/10ns与其余参数/Tcl保持匹配。两版check_timing loops0、LUTLP-1零违规，关闭版自动切环警告0、零latch/blackbox。
+
+关闭版LUT138959/FF88051/BRAM163/DSP23/URAM0；开启版139803/88045/163/23/0。因此开启减关闭为+844 LUT、-6 FF、BRAM/DSP不变。布局前WNS关闭-6.539ns、开启-7.111ns，均不满足10ns，未有IO延迟/物理时钟位置/布局布线证明，不能据此声称频率或板卡收益。design_acceptance=unresolved/timing_qualified=false。
+
+176文件归档已实际恢复复审audit字节一致：archive e55aec9f7c49e119f2fd47e294752043e3e3b650425b5680f413f62ffa3079ae，audit a56be82bc7845c1b20ee864100097dfd05d9e7834d83d9c33d852758a037fc36。190文件冻结results/native_retirement_off_synth_sources_20261027并逐文件核对SHA；prepare/audit/freeze_native_retirement_off_synth.py现在冻结，不改写。原综合2847502、检查3766768与后续链2890099/session77351均终态，勿再等待或重复建methodology。完成根定向缓存释放回执results/native_retirement_off_synth_cache_release_20261028.json，不删除文件、不清全局缓存。
+
+唯一矩阵队列PID2524003/session68909仍native_matrix_on_pressure_v1_run，已4/8；剩余on pressure、cancel双容量、CRC full。唯一query_native_after_matrix_v1/PID3385940/session50941仍等待矩阵，负责终态冻结再原生12例测试/审计/归档实际恢复；绑定工具不可修改，不并行另起仿真。新query两源候选仅预检编译展开，尚无功能或时序改善证据。整体研究goal active，物理实现/板卡及固定价格外等范围缺口保留。
+
+以下保留历史。
+
+# 同源矩阵3/8通过，后续候选测试等待链已启动（2026-10-28）
+
+关闭版综合已终态observed（2026-10-28），原Vivado2847502已退出，不再等待或重启。既有native_retirement_off_synth_followup_v1/PID2890099/session77351已转inspect；实际独立重开DCP的Vivado3766768存活（检查runner3766473）。尚未完成独立审计/归档实际恢复/冻结，不能提前使用关闭版资源或零环结论。勿另建methodology目录或并行审计；后续仍由该唯一链负责。矩阵仍4/8，on pressure运行。
+
+矩阵新增on full终态通过（2026-10-28）：native_matrix_on_full_v1的27份输出/44590330ns结束周期匹配原参考，4459028周期backend/capture观测，authority20/owner26，非零depth3131397周期、结果VALID705周期；实际归档恢复后audit字节一致。证据results/native_matrix_on_full_milestone_20261028.json。现在4/8（off双容量、on full、CRC pressure anchor），原队列已转native_matrix_on_pressure_v1_run；其余on pressure、cancel双容量和CRC full仍待完成。后续链PID3385940/session50941继续等待矩阵，无须另起freeze或原生候选测试。关闭版综合PID2847502已进入技术映射但未终态，仍不能宣称关闭版零环或资源结论。
+
+新增native_matrix_off_pressure_v1完成27份输出及47750020ns周期精确匹配，4774997周期backend/capture观测通过；authority20、owner26，非零depth3559959周期、结果VALID705周期。归档实际恢复后audit一致；results/native_matrix_off_pressure_milestone_20261028.json记录证据。当前已有off full/pressure及CRC pressure anchor，共3/8。唯一矩阵队列PID2524003/session68909已转native_matrix_on_full_v1_run，仍负责剩余五例，勿重复启动。
+
+新唯一后续链query_native_after_matrix_v1（PID3385940/session50941）已实际启动wait_existing_matrix，绑定上述队列PID/start ticks与源码SHA。入口continue_query_native_after_matrix.py在八例observed/complete后顺序freeze_native_retirement_matrix、run_query_native_exclusion、独立audit、archive、实际restore。最多等10800秒，等待超时不重启原任务；任一失败停，回主模型诊断，不自动修复重试。原生目标query_native_exclusion_unit_v1尚未创建/提交，当前不增加行为仿真并发。
+
+该链bound目录保存runner/auditor/freezer/helper/归档工具、候选两源baseline/fixed、builder/manifest及原TB快照；等待或运行期间禁止改绑定文件，否则source drift停止。12场景仅已编译展开，未功能验证。关闭优化OOC及其既有followup仍独立运行，未报告终态；开启版loops0但WNS-7.111ns，物理时序及板卡仍缺。研究goal active。
+
+以下保留历史。
+
+# 同源矩阵2/8通过，关闭优化OOC仍在运行（2026-10-27）
+
+最终矩阵冻结入口scripts/freeze_native_retirement_matrix.py已准备（2026-10-28），未执行。须队列observed/complete、精确七个新增case加CRC anchor、216项比较、每例实际restore/audit字节一致、133份生产RTL与开启版OOC一致才生成native_retirement_matrix_20261027.md及native_retirement_matrix_sources_20261027。它读取终态根并去重复制源码/工具/回执，不改旧报告；未完成矩阵时拒绝运行。实验命名保留原20261027日期。
+
+query_native_preflight_v1已完成12场景Vivado2022.2 compile/elaborate，逐条exit0及日志SHA核对；results/query_native_preflight_20261027.json记录终态。没有启动xsim，不能算功能通过。新增audit_query_native_exclusion.py独立检查正常28结果、3类注入状态/commit、监视计数及5组事件/结束周期精确比较，尚未在实际仿真结果上执行。原run_query_native_exclusion.py未提交，新增命令日志SHA与simulate日志绑定；仍须等现有矩阵释放唯一行为仿真槽。
+
+新候选12例验证脚手架已准备但未提交：query_native_exclusion_v1/build_tb.py复用旧query_lifecycle TB，显式关闭新增CP/rebase端口，baseline/default/exclusive × 正常完整单元回归及service/search/route同拍回复三个负例；不force DUT。run_query_native_exclusion.py要求现有矩阵observed/complete才启动，并检查75%内存准入、PASS/finish、5组事件逐字节比较。仅Python解析与12份TB文本生成通过，尚无RTL编译或仿真结果；详见variant STATUS.md。下一先查现有矩阵与关闭版综合真实进程，测试运行后仍需独立审计及归档实际恢复。
+
+新增独立候选hardware/variants/query_native_exclusion_v1（prepared_not_simulated）：仅query_lifecycle默认关闭参数及root显式开启两源，时序块不改；现有矩阵/综合源码不变。results/query_native_exclusion_20261027.json由analyze_query_native_exclusion.py生成，源码绑定分析包含fence4096、route/search256、服务mux72、query432组二态检查。下一先检查原生仿真技能，复用已有query TB建立默认/开启/非法重叠对照和真实三接口监视；仿真槽由当前矩阵占用，不并发另起完整行为任务。此候选尚未编译/仿真/综合，不可宣称优化有效；后续须精确回归、归档实际恢复与匹配OOC。
+
+时序后续候选线索见results/query_ready_path_hypothesis_20261027.json：query_lifecycle的unexpected检测含service/search/route READY→error_code组合依赖，与最差网表路径末段一致。三组READY/replyVALID互斥前提下，432组二态枚举允许删除unexpected中的READY例外；通用接口存在反例，不能无条件改。仍须证明真实lane6/8依赖请求及route/search接线的互斥，建立默认保留通用协议的独立候选、原生负例/全系统观察与匹配OOC。此时只记录条件假说，未改RTL、未新增仿真或综合，不能称时序优化通过。
+
+补充诊断已记录results/native_methodology_scope_20261027.json/.md，3文件冻结results/native_methodology_scope_sources_20261027。SYNTH-10为宽乘法器，TIMING-16为大setup违例，TIMING-18为缺IO delay。完整timing summary失败端点47416/239469，非告警上限1000；check_timing缺input/output delay为46802/10419。已列1000条setup均从目录lease_phase[27][1]出发，998至authority，但该列表不是完整/代表性样本且未含最差路径，不据此直接改RTL。继续依据实际跨层控制路径建立独立候选，禁止虚构IO约束或放宽回归。
+
+native_matrix_off_full_v1已完成run/audit/archive/实际restore，377文件归档恢复后audit字节一致。27份输出逐字节匹配原restore_seed_off_full_v1，结束45472300ns；backend观测4547225周期、authority20/owner26事务，capture相同周期、3131323非零depth周期与705结果VALID周期。新增里程碑results/native_matrix_off_full_milestone_20261027.json；这是新增一例，加已有CRC pressure anchor为2/8，不是完整矩阵通过。
+
+唯一队列native_retirement_matrix_queue_v1（PID2524003/session68909）已转native_matrix_off_pressure_v1_run。其余on full/pressure、cancel full/pressure、CRC full仍由该队列串行负责run/audit/archive/实际restore/cache释放。工具SHA绑定，勿修改绑定工具、重复启动或在restore时读重建根。全矩阵报告和最终冻结仍待剩余六例完成。
+
+同源关闭版native_retirement_synth_off_v1已实际启动：runner2847463/session16253、Vivado2847502；133生产RTL与已通过零环的开启版相同，仅ENABLE_RESTORE_SEED_BYPASS从1改0。唯一后续链native_retirement_off_synth_followup_v1（PID2890099/session77351）核实仍等待真实进程，负责终态inspect/loops/audit/archive/实际restore/freeze。入口prepare_native_retirement_off_synth.py、audit_native_retirement_off_synth.py、freeze_native_retirement_off_synth.py已绑定，不改写；尚无关闭版零环、资源或时序终态结论。
+
+开启版仍是loops0、WNS-7.111ns@10ns，非物理时序达标。下一核对现有两条链及真实PID，不重启；失败需主模型诊断。75%共享容器内存准入和单行为仿真策略保留。完整研究目标仍含物理实现/板卡及既有数据范围缺口，goal active。
+
+以下保留历史。
+
+# 完整同源OOC零组合环通过，剩余七项矩阵已串行启动（2026-10-27）
+
+详见results/native_retirement_synth_20261027.json/.md。native_retirement_synth_v1完整综合及独立重开DCP检查终态通过产物审计：check_timing loops=0，LUTLP-1零违规，0条闭合walk，Synth8-326环切断警告0、critical warnings0；这是U280/133RTL/原参数/SLOTS32/10ns匹配OOC范围，不是所有参数的形式无环证明。零latch/blackbox/file-agent/observer，63637端口位。LUT139803、FF88045、BRAM163、DSP23、URAM0。WNS-7.111ns仍不满足10ns，design_acceptance=unresolved/timing_qualified=false，不能当物理时序或板卡验收。methodology SYNTH-10=23、TIMING-16/18各1000（非全端点数）；没有新增waiver、false path或虚构IO约束。
+
+175文件归档已实际恢复复审audit逐字节一致，archive0b3486baa30784bb00494fb9ee204b4fa14c966d0a74ce628e2588d7c42dd935，auditdfc2bd37136062ad3f83196b0e0c14511894c3c49d979b4d39fbd287aae58890。189文件冻结results/native_retirement_synth_sources_20261027；prepare/audit/freeze_native_retirement_synth.py、相关variants与局部proofs冻结，不改写。旧综合PID1891113/会话92313和结构链PID2280574/会话37315均已终态，禁止再等待或重复运行diagnostic目录。完成根缓存释放约115.0→114.5GiB，6文件、无错误/删除，receipt见results/native_retirement_synth_cache_release_20261027.json。
+
+最差setup路径已源码/报告绑定提取到results/native_retirement_timing_path_20261027.json/.md，3文件冻结results/native_retirement_timing_sources_20261027。目录lease_phase_reg[27][1]→顶层query controller error_code_reg[0]/CE，71LUT/72数据net，17.007ns中逻辑2.976、未布局net估计14.031。最高数据扇出label_restore/SR[0]653/0.313ns，不能单凭最高扇出解释整个路径；后续核对跨层fault/ready/退休状态资格。分析只是实际首条setup路径导航，不是RTL根因或布局布线证明。不得把未布局delay换算成板卡速度。
+
+唯一矩阵队列native_retirement_matrix_queue_v1（PID2524003/会话68909）已通过同源结构零环、CRC和两类实际恢复门槛，自动启动native_matrix_off_full_v1。目前首例compile/elaborate完成、XSim运行，尚无新例终态通过，矩阵仍1/8（合并CRC压力anchor已通过）。串行顺序off full/pressure、on full/pressure、cancel full/pressure、CRC full，每例run→audit→archive→实际restore→定向cache释放；不重复CRC压力。任何步骤失败即停，准入memory.current≤75%memory.max，工具源码SHA绑定，排队/运行期间不要修改run/audit_native_retirement_matrix_case.py及队列tools中绑定工具。不要手动另起同名case或在restore阶段读取重建根。
+
+下一先查现有queue manifest/日志/真实PID，逐例观察数值/退休与文件比较，失败交回主模型诊断。全七例结束才生成results/native_retirement_matrix_20261027.json（当前未生成）并需最终矩阵冻结。当前十源RTL保持冻结；后续时序候选独立变体且保留已有精确审计。矩阵其余7例、物理时序/实现/板卡、固定价格外有效性、可信快照/持久化floor认证和自然overflow缺口仍在，goal active。
+
+以下保留历史。
+
+# 剩余七项矩阵已有唯一串行队列，等待结构门槛（2026-10-27）
+
+完整合并CRC及其原始参考anchor已通过，仍为行为矩阵1/8。native_retirement_synth_v1实际综合仍运行，最近约30分钟推进到最终网表清理/实例命名，尚无终态无环结论。原Vivado1891113/会话92313；唯一结构链native_retirement_synth_followup_v1（PID2280574/会话37315）仍等待并负责inspect/walks/audit/archive/实际restore/freeze，不可重复创建methodology或重新启动原综合。
+
+现在已实际启动唯一七项串行队列native_retirement_matrix_queue_v1（PID2524003/会话68909），入口scripts/run_native_retirement_matrix_queue.py，stage=wait_structural_chain。它绑定结构链PID/start ticks；只有该链observed/complete、同源综合audit与实际restore通过且check_timing loops=0才启动剩余七例。若仍有环/审计失败则停止，交回主模型诊断，不自动修复/重试/放宽门槛。当前没有任何剩余矩阵例已提交。
+
+顺序采用预检中的off full/pressure、on full/pressure、cancel full/pressure、CRC full；CRC pressure复用已审计anchor，不重复运行。每例唯一执行run→独立audit→archive→实际restore复审→定向干净缓存释放，然后下一例。每次准入须memory.current≤memory.max×75%（本容器约225/300GiB），高于阈值最多等待3600秒，不终止其他进程，不清全局cache。该阈值是启动准入，不是对其他任务的内存硬限制；任何步骤失败停止队列。最多一个矩阵仿真，未加并发GPU/综合。
+
+队列在tools/保存run_native_retirement_matrix_case.py、audit_native_retirement_matrix_case.py及archive/restore/cache工具快照，并在每步核对源码SHA；排队期间不要修改这些工具或已冻结matrix builder。实际target与参考列表见queue manifest和results/native_retirement_matrix_preflight_20261027.json。main session只做必要决策和轻量活进程核验；没有可用luna切换工具，不声称已切换。缺少模型切换不应重启作业。
+
+全七例完成后队列将生成results/native_retirement_matrix_20261027.json，含原anchor和7份实际恢复记录、216项逐case文件比较；当前文件尚未生成，不得提前称8/8。最终矩阵源码/报告冻结仍需终态后进行。下一会话先核对两条既有链与真实进程；任何restore阶段勿读正在重建的根。全目标仍缺矩阵终态、物理时序/板卡及此前列出的研究边界，goal active。
+
+以下保留历史。
+
+# 十源合并完整CRC回归通过，结构诊断链已接入（2026-10-27）
+
+详见results/native_retirement_system_crc_20261027.json/.md。native_retirement_system_crc_pressure_v1已完成真实完整CRC故障重试回归：相对route_block新增backend四源与capture退休一源，累计相对原seed十个唯一生产源；全部27文件/12AXI/native事件与周期/DDR/恢复流逐字节一致，结束48288200ns。非冷attempt8恢复781标签/156path/10query、q4 CPU83/82/402/231及foreign net保留结论由相同字节观察支持。
+
+两类新增TB观测均实际通过：4828815周期backend互斥，authority26请求回复、owner32请求回复；capture同4828815周期逐项比较完整原退休谓词，3560497周期非零depth、705个结果VALID周期，零depth不得有结果。705不是独立事务计数。没有强制DUT/改写输入/归一化日志。时序逻辑保持，证明范围为本完整行为轨迹与局部8192组二态恒等式，不是X/Z形式等价或板卡收益。
+
+379文件归档已实际恢复重审audit一致，archive8e823e32192e7c901035a339cf6911948d30de926bfdff709debb1225b9e8470，audit538975200040ec24b88302ca534363227f7c57a18e20106b99ca2a483e7b0442。192文件冻结results/native_retirement_system_crc_sources_20261027；run/audit_native_retirement_system.py、freeze_native_retirement_system.py、native_retirement_loops_v1与capture_retirement_loops_v1 builders/proofs已冻结，禁止覆盖修改。串行行为链native_retirement_followup_v1/会话46663已observed/complete，所有behavior步骤终态，不再等待旧runner或重复audit/archive/restore。完成根缓存释放约126.54→124.97GiB，无错误/删除，results/native_retirement_system_cache_release_20261027.json。
+
+新增audit_native_matrix_crc_anchor.py已实际执行：直接比对原restore_seed_retry_crc_pressure_v1的133生产源/同十源变更、原TB+只读监视、原命令、四组CPU oracle及全部27文件/48288200ns。results/native_matrix_crc_pressure_anchor_20261027.json为通过证据，该现有例可计最终行为矩阵1/8，不重复仿真。矩阵参考预检/anchor及builder已27文件冻结results/native_matrix_anchor_sources_20261027；其余七项尚未提交。run/audit_native_retirement_matrix_case.py已准备但未执行，仍要求同源结构终态零环并实际恢复后才运行；不要绕过门槛或把preflight当其余七例通过。
+
+native_retirement_synth_v1仍实际综合（会话92313/runner1891074/Vivado1891113）。现在已启动唯一后续结构链native_retirement_synth_followup_v1（会话37315/PID2280574），绑定原Vivado起始ticks1629685647；等待上限5400秒仅停止观察，原进程退出后给manifest写回30秒，不重启综合。原综合observed/exit0后顺序inspect_restore_seed_synth.py、analyze_restore_seed_loops.py、audit_native_retirement_synth.py、archive、实际restore复审、freeze_native_retirement_synth.py。任一步失败停止。下一会话先查这条链/真实进程/manifest，禁止另建同名methodology目录或重复归档；restore阶段勿读取正在重建的根。结构审计和freezer尚未实际运行，当前没有合并版本无环结论；旧route_block基线仍5环/-9.340ns。
+
+当前gate：完整合并CRC已通过并恢复，下一取得同源完整结构终态；若仍有环继续依据DCP修复，否则按预检跑off/on/cancel双容量及CRC full七例。完整矩阵、约束与物理时序、固定价格外有效性、可信快照/持久化floor认证、自然overflow分配回收、板卡缺口保持，goal active。
+
+以下保留历史。
+
+# 原生后端完整CRC回归通过，十源合并回归与综合仍运行（2026-10-27）
+
+recovery_backend_system_crc_pressure_v2已终态通过，原runner1647995/会话86689不再运行。详见results/recovery_backend_system_crc_20261027.json/.md：四源backend互斥候选在route_block参考上累计九源；27文件/12AXI/native周期/DDR/恢复流逐字节匹配，结束48288200ns。只读监视4828815周期，authority26请求/26回复、owner32请求/32回复，两路READY×回复VALID无重叠/未知重叠。原CRC失败、持有回复/退休、旧attempt拒绝、新attempt8非冷恢复781标签/156path/10query、CPU q4 83/82/402/231及foreign net保留仍由相同字节观察支持。此结果尚不包括capture退休第五源。
+
+379文件归档实际恢复复审audit字节一致，archive fd9f4d2253b4cccdcd51034ae4df510529922762bd49324e2044d62dd1a5ab1b，audit2e9a1c160c8eaf3e40e45199aebddfb21f2dd24f3eed1e24cee6591730f5abcb。184文件冻结results/recovery_backend_system_crc_sources_20261027，run/audit_recovery_backend_system_v2.py及freeze_recovery_backend_system.py已冻结，不改写。完成根定向缓存释放126.54→124.97GiB，28文件、无错误/删除，results/recovery_backend_system_cache_release_20261027.json；并发作业可影响总读数。
+
+唯一串行链native_retirement_followup_v1（会话46663/PID1916547）已完成旧backend audit/archive/restore，当前stage=run_combined，实际native_retirement_system_crc_pressure_v1已compile/elaborate并XSim运行。该候选为backend四源+capture零depth退休一源，累计相对原seed十个唯一生产源；尚无完整终态/审计。链负责随后audit_native_retirement_system.py、archive、实际restore复审，任何失败停止。禁止重复启动/审计/归档，restore阶段勿读重建根。native_retirement_synth_v1仍实际综合（会话92313/runner1891074/Vivado1891113），未有终态无环结果，也未另起独立诊断链。下一先查这两个原任务，不重启；综合终态后inspect→analyze_restore_seed_loops→audit_native_retirement_synth，再归档恢复冻结。
+
+八项矩阵新预检已实际完成：results/native_retirement_matrix_preflight_20261027.json及native_retirement_matrix_production_20261027.json核对8个已恢复参考、每例全部133生产源同一原始基线、10源候选、各自输入绑定/命令/scoreboards/27文件名与TB只读监视变换。预检不是新回归通过。native_retirement_matrix_v1只是对同一最终候选做累计10源绑定，不增加RTL修复。
+
+后续七例入口run_native_retirement_matrix_case.py ROOT ORIGINAL_REFERENCE，审计audit_native_retirement_matrix_case.py，均已准备/语法检查，尚未实际执行。工具强制先有合并CRC完整通过及恢复回执、同源OOC终态审计且check_timing loops=0及结构实际恢复；再允许原off/on/cancel双容量和CRC full七个参考，拒绝重复CRC pressure。每例仍保留原参数/输入/oracle/命令，要求27文件/周期精确匹配；新增backend与capture观测。不满足门槛应继续修复，不伪造回执或跳过检查。
+
+现有合并CRC压力例后续以audit_native_matrix_crc_anchor.py直接核对原restore_seed_retry_crc_pressure_v1的133源/同10改动、原TB+监视变换、各自命令/四份oracle组及27输出/48288200ns，产物results/native_matrix_crc_pressure_anchor_20261027.json；该审计尚未执行，必须等链实际恢复完毕。矩阵CRC例不重复跑。其余七例仍未提交，物理实现/板卡、固定价格之外有效性、可信快照/持久化floor认证及自然overflow缺口保持，goal active。
+
+以下保留历史。
+
+# 路由门控结构已归档，原生后端与capture退休合并验证启动（2026-10-27）
+
+route_block_synth_v1完整综合和独立DCP诊断链已结束，旧PID969366/1370396/1705911及会话8503均终态，不再等待或重复启动。详见results/route_block_synth_20261027.json/.md：check_timing5环，文本5条闭合walk；前四共享29个cell，后一条21个cell，LUTLP-1仅报告一个29-LUT区域，不能混同两个计数。LUT139061/FF88019/BRAM163/DSP23/URAM0，63637端口位，零latch/blackbox，WNS-9.340ns（参考combined为21环/-12.538ns），仍拒绝设计验收。174文件归档实际恢复复审audit字节一致，178文件冻结results/route_block_synth_sources_20261027。archive b9874bb430a409765895a365f9d4514d4c4bd8234cc91f9b295ca9ad4c443699，audit5d8ea249efdec4c589e5c14134bbc047fcc9c3a9e996b8a5bb116028fd6c79f1。prepare/audit/freeze_route_block_synth工具已冻结，不改写。完成根缓存释放约110.67→110.21GiB，无错误/删除，receipt见results/route_block_synth_cache_release_20261027.json。
+
+第五条路径经capture result→backend retirement→fence→core admission反馈。新的source-bound results/capture_retirement_identity_20261027.json绑定原生query core、expansion_capture和children_frames：frame_done蕴含level!=0，depth=level，结果VALID蕴含frame_done；故retired_idle既有capture_depth==0已蕴含!e_result_valid。8192二态赋值（56个reply为真）等价检查通过，不依赖可达性，但不是X/Z/形式/RTL验证。capture_retirement_loops_v1仅在priced/candidate_recursive_query_core.sv的退休合取中删除!e_result_valid，其余busy、arbiter、depth、service reply及AXI条件全部保留，时序不改。
+
+native_retirement_loops_v1组合上述一源与已验证原生coordinator九项测试的recovery_backend_loops_v2四源，不叠加NORMAL候选。相对已恢复route_block参考5源，相对原seed参考10个唯一生产源。TB只增加观测：backend互斥及请求回复计数，零depth不得有capture结果，实际retired_idle逐周期等于完整旧谓词；必须看到非零depth与真实结果。仍要求27原文件/CPU轨迹/AXI/结束时刻精确匹配。合并候选本身尚未取得完整行为或结构通过。
+
+已实际启动native_retirement_synth_v1：会话92313、runner1891074、Vivado1891113；入口prepare_native_retirement_synth.py/run_restore_seed_synth.py，133RTL/原参数/U280/10ns匹配已恢复route_block_synth_v1。候选结构审计器audit_native_retirement_synth.py已准备未执行。原综合已结束后才启动这一项综合；禁止覆盖重启。终态须inspect_restore_seed_synth.py→analyze_restore_seed_loops.py→audit_native_retirement_synth.py，再归档/实际恢复/冻结；目前没有为这个新综合另开诊断链。
+
+完整行为保持串行：原recovery_backend_system_crc_pressure_v2仍实际仿真（会话86689/runner1647995）。已启动唯一后续链native_retirement_followup_v1（会话46663/PID1916547），绑定旧runner起始ticks1629614946，只等待已有作业，不重启；原作业observed后顺序audit_recovery_backend_system_v2、archive、实际restore复审，然后run_native_retirement_system.py创建native_retirement_system_crc_pressure_v1（参考route_block_system_crc_pressure_v1），再audit_native_retirement_system.py、archive、实际restore复审。任何一步失败停止；等待1800秒超时只停止观察。下一会话先查此链stage/实际进程，不手动重复审计归档或启动合并仿真，尤其restore期间不要读取正在重建的根。新合并任务是否已创建/启动以链和实际manifest为准。两套完整行为的最终报告/源码冻结仍需链终态后生成。
+
+其余七项最终矩阵尚未提交。固定价格、可信初始快照、持久化floor/认证、自然overflow分配回收、物理实现/板卡缺口保持，goal active。
+
+以下保留历史。
+
+# 原生后端互斥候选九项验证通过，路由门控综合剩五环（2026-10-27）
+
+详见results/recovery_backend_native_20261027.json/.md与recovery_backend_loops_v2/CONTRACT.md。source-bound实际reader/rotator/AP mux与fence lane9接线证明两路READY×回复VALID互斥（32/144/512/144组二态检查）。coordinator新增默认关闭EXCLUSIVE_BACKEND_RESPONSES；residency/search默认关闭，原生query顶层显式开启。仅四源去掉原生不可能的AS/OS READY分支，所有时序/超时/错误/退休不变；通用接口仍允许请求周期出现回复，未叠加独立NORMAL候选。累计相对seed参考九个生产源，不是十一。
+
+recovery_backend_native_v1实际9项XSim测试及独立事件审计通过：baseline/default三类输入逐事件/周期/结束时刻相同；exclusive合法模式同baseline；真实一键journal，模型backend两轮authority/GET/永久CAPACITY各2次，status3/J1、错误回复保持8周期、消费后不放行业务。exclusive故意违反authority/owner互斥的两例status6/J1拒绝。模型后端，不等于真实owner AXI/full system。268文件归档实际恢复复审audit一致，archive8015564d40c6cd728b5169e7f82d48ba304aa58186ca4a1f1a782c0d174683cb，audit55a2e3d815ad54f5415249cac67ff53a6368efd313041a1b8647852a82504c3e。
+
+首轮recovery_backend_system_crc_pressure_v1因TB计数器先使用后声明VRFC10-3380编译失败，未展开/仿真。194文件失败归档实际恢复审计一致，archive d86d8718f744bd440ee5637ae88459719af260b63ad2578c473b17f986144e44；失败audit仅证据完整。V2只移TB声明，四生产源v1/v2逐字节相同。52文件冻结results/recovery_backend_native_sources_20261027，包括两variant/builders、源证明和原生测试/失败工具，不能覆盖修改。已完成失败根定向干净缓存释放116.26→114.83GiB，无删除/错误；记录results/recovery_backend_compile_cache_release_20261027.json。
+
+recovery_backend_system_crc_pressure_v2已完成compile/elaborate，实际XSim运行中，会话86689/runner1647995；入口run_recovery_backend_system_v2.py，终态审计audit_recovery_backend_system_v2.py尚未执行。参考已实际恢复route_block_system_crc_pressure_v1；新增TB只读监视两路互斥（含X检查）并要求真实请求/回复计数非零且退休相等。27原文件和结束时刻仍要求字节精确一致。须先核对live进程/manifest，禁止覆盖重启；当前不是完整系统通过或新候选消环结论。
+
+route_block_synth_v1原综合已observed/exit0、PID969366结束；check_timing终态5环（参考21）、WNS-9.340ns（参考-12.538ns），仍不通过。当前文本列出5条闭合路径，前四涉及authority/恢复/发布，另一涉及capture/退休/fence。不能将数值差解释为修复16个独立故障，也不能当有效频率提升。既有会话8503/Python1370396已自动启动独立DCP诊断（inspect进程1705911）；先查该链，不另起同名methodology目录。链随后自动analyze_restore_seed_loops.py、audit_route_block_synth.py。最终结构归档/实际恢复/冻结待此链终态；freeze_route_block_synth.py已准备但未执行。新backend候选不在这次综合内。
+
+下一：完成route结构终态审计归档恢复；取得backend完整CRC审计，再沿实际残余路径做完整结构验证及最终八项矩阵。其余七项矩阵尚未提交。固定价格/可信初始快照/持久化floor认证/自然overflow/物理实现板卡缺口保持，goal active。
+
+以下保留历史。
+
+# 路由门控完整CRC回归通过，NORMAL准入组件候选通过（2026-10-27）
+
+详见results/route_block_system_crc_20261027.json/.md。route_block_system_crc_pressure_v1仅在已恢复五源combined基线上增加route controller idle_fault与adapter block_external两源变化，累计七源。完整27文件（12AXI/native事件与周期/最终DDR/恢复流）逐字节匹配，结束48288200ns一致；真实CRC失败、保持/退休、旧attempt拒绝、新attempt非冷恢复781标签/156path/10query、CPU q4 83/82/402/231及foreign net保留结论适用于相同观察。379文件归档实际恢复重审audit一致，180文件冻结results/route_block_system_crc_sources_20261027。归档e45678e9bacf7aca586e0338eb09647d2fb4e0f27d5e20d02691a71e2b88f2b2，audit57ac7014644f7a42eeb961db5a71924b66c5009e0522d607594f753257b7820b。运行器/审计器/variant已冻结，不覆盖修改。原仿真PID1005792/会话63725已终态，已完成根缓存释放98.53→96.96GiB，无错误、未删证据。
+
+route_block_synth_v1仍实际综合运行，最近Vivado PID969366/runner969094/会话92622；禁止覆盖重启。已有core can_start、authority rearm/req_ready的Synth8-326警告，results/route_block_synth_observation_20261027保存前缀及活进程，当时7次是发生次数而非唯一/最终环数，也不能由没有route告警认定route环已消失。当前只有完整行为通过，未获完整结构通过。旧combined五源终态仍21环/100-LUT区域/WNS-12.538ns，不能移作新七源的最终计数。
+
+后续诊断链已实际提交：会话8503/Python PID1370396，等待原PID969366且核对start ticks；只在原综合manifest observed/exit0后顺序运行inspect_restore_seed_synth.py、analyze_restore_seed_loops.py、audit_route_block_synth.py，失败即停，不重启综合；等待上限1200秒仅停止观察。下一会话先查现有链/原进程/diagnostic manifest，禁止另起同名诊断。结构审计器尚未实际执行；结构归档/恢复/冻结待终态完成。
+
+独立新候选见results/recovery_normal_native_20261027.json/.md，选定recovery_normal_loops_v2。只将coordinator五个原有NORMAL/!cold_rst门控输出staged_valid/permit_work/j_ready/recover_ready/cfg_ready中的fault/unexpected特化为正常阶段谓词，不再引用AS/OS READY；完整fault/fail_now/unexpected/attempt_reset与全部时序逻辑不变，重试safe/drained/retired覆盖保留。source-bound二态65536组等价检查通过。原生REARM fixed切片仅替换coordinator，3场景179检查、31条事件及3836ns与参考一致，15字段写/3条回读/10失败拒绝/3成功，J0/无owner-authority请求，RAM/config/外部退休模型。不是结构、AXI或完整系统证明。
+
+初版recovery_normal_native_v1因normal_fault在timeout声明前使用而VRFC10-3380编译失败，无展开/仿真；v2先声明wire再在原timeout定义后赋值，单独目录保留失败。失败14文件与成功40文件归档均实际恢复重审audit一致，35文件冻结results/recovery_normal_native_sources_20261027；对应variant/工具/证明已冻结。此NORMAL候选尚未接入route_block两个完整任务；其baseline coordinator与实际运行route源SHA相同。下一须结合新DCP残余路径接入，不替换任意publication/global fault消费者，不将局部恒等式称通用无环。
+
+八项最终矩阵仍只有当前CRC pressure一项通过，其余七例未提交。固定价格、可信初始快照、持久化floor/认证、自然overflow分配回收、物理实现/板卡缺口保留。研究继续，goal active。
+
+以下保留历史。
+
+# 完整五源结构仍拒绝，路由空闲封锁候选开始验证（2026-10-27）
+
+详见results/combined_loops_synth_20261027.json/.md。combined_loops_synth_v1综合与独立重开DCP诊断均终态；173文件归档实际恢复重审audit字节一致，177文件冻结results/combined_loops_synth_sources_20261027。产物完整性审计passed，但design_acceptance=rejected_combinational_loops、timing_qualified=false。check_timing21环，LUTLP-1一个100-LUT区域，文本仅5条闭合pin walk；不能把5当全部21，也不能将原20→21解释成独立故障数增减。原参考区域107LUT。
+
+新LUT139647/FF88310/BRAM163/DSP23/URAM0，端口63637位、零latch/blackbox。相对原开启参考LUT-105/FF+155，布局前WNS -12.538ns（原-9.910ns），最差路径96级/22.434ns，directory lease_phase→search error_code CE。完整设计未获时序改善或无环结论。methodology仍SYNTH-10=23/TIMING-16与18各1000/TIMING-23=1，1000非全端点数量。无人工waiver/false-path；Vivado自动环切断及未定义IO/时钟位置边界均保留。归档cc87ede113697e9f9f66ef5a37b8031b6cdd9689321f8ec3487ea9f44fe1eb28，audit990e14c888ffce7d0f1d943aac88ade9c781e134fcda17d25a98661fde5c4e95。已完成根缓存释放86.19→85.72GiB，无错误。
+
+实际闭合路径包含route_join/controller rc_fault→host请求门控/dispatch→ready→rc_fault。基于results/route_block_identity_20261027.json的262144组二态恒等式，独立route_block_loops_v1只改两个文件：controller新增idle_fault=!rst&&(stopped||abort)；adapter block_external=held||c_busy||c_idle_fault，命名接口接线。完整fault表达式、FSM/回复/journal/checkpoint及在途事务逻辑原字节不变。idle_fault使用实际controller rst，包含cp_reset_held；该约简只在adapter held/busy资格和回复held掩码下成立，不能替代任意controller完整fault，未证明X/Z或时序等价。
+
+两个新实验已实际运行，尚无终态通过：route_block_synth_v1（会话92622，runner969094，Vivado969366）在已恢复五源综合参考上仅再改上述两源，累计七源；同133RTL/参数/器件/10ns/Tcl/XDC。入口prepare_route_block_synth.py/run_restore_seed_synth.py，终态后inspect_restore_seed_synth.py、analyze_restore_seed_loops.py、audit_route_block_synth.py；新审计器已准备未执行。route_block_system_crc_pressure_v1（会话63725，runner991295，XSim1005792）已compile/elaborate并模拟中，参考已恢复combined_loops_system_crc_pressure_v1；TB/输入/参数不变，run_route_block_system.py与待执行audit_route_block_system.py要求27文件/native周期/12AXI/DDR/恢复流及结束时刻字节精确比较。禁止覆盖重启实际运行根。
+
+旧综合PID155768、诊断链758368/会话92483均已终态，不再等待或重复开其diagnostic目录。旧五源CRC pressure27文件/48288200ns通过及172文件冻结保持有效，不能算新两源回归已经通过。新variant和新runner/auditor尚未冻结，运行期间不要修改其绑定源。八项矩阵其余七例仍未提交，待最终候选统一验证；固定价格、可信初始快照、持久化floor/认证、自然overflow分配回收、物理实现/板卡缺口保留。研究继续，goal active。
+
+以下保留历史。
+
+# 五源合并CRC完整重试通过，综合仍有环警告（2026-10-27）
+
+详见results/combined_loops_system_crc_20261027.json/.md。combined_loops_system_crc_pressure_v1将capture两源与REARM三源合并到真实完整query系统；其余RTL/TB/输入/参数与restore_seed_retry_crc_pressure_v1相同。27文件的12AXI、native事件及实际周期、最终DDR与恢复流逐字节一致，结束48288200ns一致。新增父层residency_system的rearm_retired接线已在完整编译仿真中验证，不能仅拿原J0组件替代本系统证据。由相同观察继承原CRC失败/保持退休、旧attempt拒绝、新attempt8非冷恢复781标签/156path/10query、CPU q4 83poll/82expand/402candidate/231cost、owner/foreign net保留结论。
+
+379文件归档已实际恢复重审audit字节一致，172文件冻结results/combined_loops_system_crc_sources_20261027。归档e8ff53ec4a4edccf9508d994cee61a55af7b2333420cc8400de3468ebb1c362a，audit92bc9cb6a7cb3ea7e3a0ec88044251235eaa235852794f00ebae2445662a464e。run_combined_loop_system.py/audit_combined_loop_system.py/freeze_combined_loop_system.py已冻结，不覆盖修改。已完成原根与preserved根干净缓存释放97.71→96.14GiB，无错误、未删除证据。旧仿真PID287696/会话16914已终态，不再运行。
+
+combined_loops_synth_v1仍为实际本机Vivado综合运行（最近PID155768），同133RTL/原参数/10ns；先核对实际进程，禁止覆盖重启。已出现Synth8-326自动打断环警告，涉及route_join host/owner/label、authority rearm/req_ready及publish_valid；results/combined_loops_synth_observation_20261027保存前缀和存活证据，其中11次只是当时发生次数，后续增加，不能当最终或唯一环数。五源修复未获得完整无环结论；终态后顺序inspect_restore_seed_synth.py、analyze_restore_seed_loops.py、audit_combined_loops_synth.py，后者尚未执行。无waiver/false-path或虚造IO约束。
+
+下一诊断见hardware/variants/combined_loops_v1/NEXT_DIAGNOSIS.md。source-bound分析results/route_block_identity_20261027.json验证262144组二态赋值：在实际adapter响应资格下，held||c_busy||c_fault可等价化为held||c_busy||(!controller_rst&&(controller_stopped||controller_abort))，controller_rst含cp_reset_held；full fault本身不能删除错误检测。仅局部布尔恒等式，无RTL修改/结构消环/时序证明；须与最终DCP对应，再用显式接口做隔离候选，不能层次引用私有状态当生产实现。
+
+results/combined_loops_matrix_preflight_20261027.json已核对八项参考的实际恢复审计及五源baseline/candidate绑定，预检不是回归通过。当前仅CRC pressure一项合并回归通过；正常off/on双容量、cancel双容量和CRC full其余七项未提交。原固定价格、外部初始快照、持久化floor/认证、自然overflow分配回收及物理时序/板卡收益缺口保留。研究继续，goal active。
+
+以下保留历史。
+
+# 两项完整回归与REARM组件通过，五源合并综合运行中（2026-10-27）
+
+查询展开修复的capture_loops_system_on_full_v1与capture_loops_system_crc_pressure_v1已完成：各27文件、共54文件的12AXI/native事件与周期/DDR/恢复流逐字节匹配已实际恢复审计参考，结束44590330ns/48288200ns。两个归档实际恢复重审audit一致，177文件冻结results/capture_loops_system_sources_20261027；详见results/capture_loops_system_20261027.json/.md。仅这两配置通过，不等于完整矩阵。
+
+REARM三源候选见results/rearm_loops_component_20261027.json/.md与rearm_loops_v1。原生coordinator+label切片baseline一个环、fixed LUTLP-1/check_timing均零环，2313端口位/零latch/blackbox。新增不被同步rst掩盖的label rearm_retired；父层retry_safe使用它；REARM时attempt_reset用无authority/owner回复等价替换unexpected。父层residency_system未在切片编译。两版各3场景179检查、事件/3836ns一致：实际CRC失败及回复保持退休、旧attempt拒绝、safe撤销或迟到回复不清服务、更高attempt非冷重试。15字段写/3条回读，J0且无AXI；不能替代完整warm系统。局部1024/32二态赋值核对，不是完整形式等价。
+
+早期rearm_loops_component_v1为TB offer初始化错误，probe只读诊断后仅TB两行改连续assign；生产源未变，不能称生产RTL反例。成功95/失败55/probe38文件三归档均实际恢复重审audit一致，61文件冻结results/rearm_loops_component_sources_20261027。已完成根缓存释放无错误，未删除证据。
+
+combined_loops_synth_v1已实际启动本机Vivado2022.2（最近PID155768），合并capture两源与REARM三源；133RTL/原参数/10ns实验clock完全匹配restore_seed_synth_on_v1。须先查真实进程及manifest，禁止覆盖重启。入口prepare_combined_loops_synth.py/run_restore_seed_synth.py；终态后依次inspect_restore_seed_synth.py、analyze_restore_seed_loops.py、audit_combined_loops_synth.py。新合并审计器已准备但尚未执行；旧完整root仍是20环/时序验收失败，不能用组件结果推翻。
+
+完整优化off/on双容量与取消/CRC非冷重试矩阵仍待合并候选统一执行，避免重复对仅部分修复跑剩余六例。combined_loops_system_crc_pressure_v1已实际完成compile/elaborate并进入XSim（最近PID287696，runner273737，会话16914），五生产源均绑定两个已恢复审计组件；参考restore_seed_retry_crc_pressure_v1，TB/输入/参数保持相同。入口run_combined_loop_system.py，终态后audit_combined_loop_system.py要求27文件的native周期/12AXI/DDR/恢复流逐字节匹配；新审计器尚未执行。合并候选尚无完整行为通过结论。下一先取得完整网表残余环，再定位authority/owner/fault反馈。无顶层IO约束/物理实现/板卡收益；固定价格、外部初始快照、持久化floor/认证、自然overflow分配回收缺口保留。研究继续，goal active。
+
+以下保留历史。
+
+# 查询展开组件消环通过，真实完整回归运行中（2026-10-27）
+
+详见results/capture_loops_component_20261027.json/.md。capture_loops_v1仅改recursive_candidate_controller与expansion_capture：root offer独立于ready，invalid本地拒绝；pop intent去掉重复frame_done条件，实际pop_ready仍检查完成。frames原字节。实际三组件DEPTH16/CAPACITY4切片，baseline复现3-LUT/一个环；fixed LUTLP-1/check_timing均零环、零latch/blackbox、4272端口位不变。此结论不覆盖完整query root的20环。
+
+两版各原生递归七场景与capture取消/错误/保持退休回归，独立CPU核对76递归事件及14capture事件，旧事件与结束时刻3786ns/2580ns精确一致。VALID后才给READY的接收端使旧版16周期无受理；fixed稳定offer/一次受理/空结果保持退休/invalid ready0本地拒绝，18检查通过。独立128组二态赋值核对局部pop可观察行为，不声称完整形式等价。216文件归档实际恢复重审audit一致，35文件冻结results/capture_loops_component_sources_20261027。组件已完成根缓存释放无错误。
+
+完整capture_loops_system_on_full_v1与capture_loops_system_crc_pressure_v1已实际编译/展开且XSim运行，尚无终态或审计结论；下一会话须先核对live进程/manifest，不得覆盖重启。只替换上述2生产源，参考分别restore_seed_on_full_v1与restore_seed_retry_crc_pressure_v1；新入口scripts/run_capture_loop_system.py，审计器audit_capture_loop_system.py尚待终态实际执行。要求实际native事件/周期、全部12AXI、DDR/恢复流逐字节对齐已归档恢复审计的参考，不改写日志或放宽比较。会话20549/48643；最近观察xsimk PID3924517/3924525，按实际状态续查。
+
+先收尾两例，再补正常优化off/on双容量及cancel/CRC非冷重试剩余矩阵；继续隔离recovery REARM/authority/owner/fault反馈，之后完整query root重新综合验证全部残余环。不能把本组件通过升级成完整无环或板卡收益。本轮仍有两项仿真运行，内存最近约86.7GiB/300GiB。goal active。
+
+以下保留历史。
+
+# 匹配OOC完成：组合环导致硬件设计验收失败（2026-10-27）
+
+详见results/restore_seed_synth_20261027.json/.md及hardware/variants/timing_loops_v1/PLAN.md。restore_seed_synth_off_v1/on_v1两组综合和串行独立DCP诊断均实际终态；两归档实际恢复复审audit字节一致，186文件冻结results/restore_seed_synth_sources_20261027。产物完整性审计passed，但design_acceptance明确rejected_combinational_loops、timing_qualified=false，不能称硬件通过。
+
+133 RTL源相同、唯一generic差异ENABLE_RESTORE_SEED_BYPASS。关闭/开启LUT140295/139752、FF88213/88155、BRAM163/DSP23不变，零latch/blackbox；10ns布局前WNS -9.941/-9.910ns，均未达标。check_timing各20组合环；独立LUTLP-1各一个103/107-LUT反馈区域，已通过完整对象cells核对。20环与一个区域不是同一计数单位；文本仅列18/9条pin walk，分析器保留不完整性，不伪造剩余路径。最差开启路径84级逻辑；资源差值不能转成板卡收益。
+
+已采用Ross时序方法学流程，本机2022.2文本报告替代新版接口，未加waiver/false-path。方法学每版SYNTH-10=23、TIMING-16=1000、TIMING-18=1000、TIMING-23=1；1000不是完整端点总数。缺IO delay/HD.CLK_SRC属于实验OOC边界未定义，不补造约束。源码候选依赖为attempt_reset→label rst/busy→retry_safe→attempt_reset，以及ready/unexpected/fault和递归expand/capture/frame反馈。尚未应用生产修复；下一优先按PLAN做原生组件结构复现与隔离消环，再完整正常/恢复/cancel/CRC非冷重试及AXI/CPU回归。不能仅删安全门或放宽时钟掩盖环。
+
+此前行为仿真正确性和23.6%/30.3%标签周期节省结论保持原范围。query root外baseline provider/snapshot writers、自然overflow新增回收、任意变价、持久化认证/floor、物理实现/板卡等研究缺口仍保留。两次综合及诊断进程已结束；本轮已完成根缓存释放85.78→84.86GiB，无错误、未删文件。goal active。
+
+以下保留历史。
+
+# 综合发现时序环，正在诊断（2026-10-27）
+
+两组匹配参数的restore_seed_synth_off_v1/on_v1均报告Synth 8-326自动打断时序环。详见results/restore_seed_synth_loop_observation_20261027/observation.json及当时日志前缀；观察时两个真实Vivado进程仍存活，警告数不是终态或唯一环数。现阶段不能用综合退出码或正slack证明时序有效，也不能归因于本轮bypass优化。
+
+源码可疑环为attempt_reset→label_restore.rst→lr_busy→k_retry_safe→attempt_reset；还存在authority/owner/child_capture相关警告，须用最终DCP确认。尚未修改生产RTL或添加waiver/false-path。scripts/inspect_restore_seed_synth.py仅允许终态后重开DCP，按本机Vivado2022.2支持的文本report_methodology、LUTLP-1、check_timing及有效XDC提取证据；串行执行以控制内存。scripts/audit_restore_seed_synth.py将产物完整性与design_acceptance/timing_qualified明确分开，两个新审计/诊断脚本尚待终态实际验证。
+
+下一先查现有综合进程与终态，禁止覆盖重启；取得网表证据后再做隔离修复和协议回归。此前恢复正确性/周期消融结论限于已审计行为仿真，保持该范围。goal active。
+
+以下保留历史。
+
+# 优化后的完整取消／CRC失败与非冷重试通过（2026-10-27）
+
+详见results/restore_seed_retry_20261027.json/.md及hardware/variants/restore_seed_retry_v1/CONTRACT.md。四例cancel/crc×32槽/单槽，生产8文件逐字节等于已审计restore_seed_bypass_v1，无新增生产修复。cancel在第一条第三字段原生写受理且回复在途时abort，实际3字段、written0/verified0、label status7；crc仅篡改最后记录bit0，前780条/3900字段已写、verified0、status8。coordinator等待真实退休后status6，journal3/CP20保持，失败回复保持/消费后业务继续关闭。
+
+旧attempt7被原生status1拒绝，无reset/authority/owner/label/query副作用；新attempt8/query2/price8实际REARM及target reset，无外部cold reset/工作DDR重装。两轮G4核对、6工作GET、corrected0，重新写入且回读781标签，原156path/10query字节CRC与三回执退休联锁通过。旧sequence180329拒绝后q4 CPU83poll/82expand/402candidate/231cost匹配；最终query flags62/floor180330/CRC626e163b、4路径CRC eec36b70、slots15/CP20/journal3。全部12AXI与最终146MB owner/3MB labels逐字节重放，37个owner写不变、其他net/满pool/allocator保留。
+
+两attempt12个authority GET共28beat（每GET读allocator+primary，558358另读foreign overflow），全程113beat；按真实G4链推导地址。cookie每attempt六个不同，跨attempt可能XOR碰撞；REARM前旧回复已退休，不声称全局唯一。新审计器三项旧假设修正及原版本保留results/restore_seed_retry_audit_development*，非生产反例。四归档实际恢复复审audit字节一致，187文件冻结results/restore_seed_retry_sources_20261027。已完成根干净缓存释放108.90→102.58GiB，未删证据。
+
+下一步匹配参数query root OOC资源对照：restore_seed_synth_off_v1/on_v1两组已用本机Vivado2022.2批处理运行（非prepared，需实时核对）。133 RTL，PATH_SLOTS4/RESTORE_RECORDS1024/SLOTS32/FRAMES16384/BASELINE与warm开启/测试注入关闭，唯一参数差异ENABLE_RESTORE_SEED_BYPASS。保留全部runtime输入；外部baseline AXI provider及snapshot writers不在此root边界。10ns为实验约束，synthesis timing仅布局前估计，无IO delays/place/route/板卡结论。两个旧MCP会话版本查询仍报递归错误，未复用/停止；本地版本及安装命令help预检通过。入口scripts/prepare_restore_seed_synth.py与run_restore_seed_synth.py。下一会话先查实际综合进程/终态，再独立审计资源、blackbox/latch/时钟与关键路径，不能只看退出码或PASS。尚无综合结果，禁止重启覆盖既有根。goal active。
+
+以下保留历史。
+
+# 恢复标签重复初始化消融完整通过（2026-10-27）
+
+详见results/restore_seed_20261027.json/.md及hardware/variants/restore_seed_bypass_v1/CONTRACT.md。restore_seed_off/on的32槽/单槽四例通过独立完整审计；默认关闭时原native、12AXI、最终DDR及周期精确匹配fourth_warm基线。开启只作用G4恢复，原生start锁存许可、引脚随后撤销，下游WW受理3905写仍逐字段匹配；原空检查及781条回读、源CRC/三回执/释放边界不变。baseline读781→0、native读4687→782、字段写7810→3905；最终146MB owner/3MB labels及CPU q4 83poll/82expand/402candidate/231cost保持一致。
+
+标签恢复周期32槽374180→285851（-23.6060%），单槽290780→202562（-30.3384%）；故障到释放375301→286972、291900→203682。整例4459033/4687480周期，净少88197/87522；后续测试台握手相位导致重试阶段多92/666，不能等同标签阶段节省。仅行为仿真，不是板卡加速或资源/时序结论。4归档实际恢复复审audit字节一致，180文件冻结results/restore_seed_sources_20261027；已完成根的干净缓存释放93.4→87.14GiB，未删证据。
+
+下一批restore_seed_retry_{cancel,crc}_{full,pressure}_v1四组已通过编译展开并仿真中，尚未注入G4新故障/未通过完整结论；须实际核对进程再接续，禁止覆盖重启。候选生产源与已通过seed bypass完全相同，TB在第三字段原生写受理且回复在途时abort，或篡改最后记录一位触发CRC错误；要求失败业务封锁、保留三键journal、原生拒绝旧attempt7，再新attempt8/query2/price8非冷重试，完整恢复781/156/10和q4。入口scripts/run_restore_seed_retry.py，待执行审计器scripts/audit_restore_seed_retry.py及audit_restore_seed_retry_records.py，详情restore_seed_retry_v1/STATUS.md。新的审计器尚未在终态结果上运行，不能把预期断言当通过证据。goal active。
+
+以下保留历史。
+
+# 恢复写跳过baseline候选组件通过，完整对照运行中（2026-10-27）
+
+详见results/restore_seed_components_20261027.json及hardware/variants/restore_seed_bypass_v1/STATUS.md。8份隔离生产源新增默认关闭、原生start锁存的恢复写许可；只在recovery-owned/k_labels_valid和叶WS/WW下到达manager，真实IO受理锁存，普通读取和原raw_probe写拒绝不变。leaf四场景286检查（许可反转、CRC错误、第三字段在途取消）通过；实际manager/native endpoint的32槽/单槽各157检查，恢复五字段无baseline/预读、三种误用无native事务、随后普通未知记录仍初始化、页AXI独立重放通过。3归档实际恢复复审audit一致，43文件冻结results/restore_seed_components_sources_20261027。
+
+完整restore_seed_{off,on}_{full,pressure}_v1四组已编译展开并运行，尚未完成/审计，须实时查询进程及manifest，禁止覆盖重启；scripts/audit_restore_seed.py是新写待执行审计器。先核对default-off全部原native/12AXI/DDR/周期一致与on的781记录/CPU/完整AXI及实际节省，再补优化后的全系统中途写取消/CRC错误、旧attempt拒绝和非冷重试。当前组件叶用RAM模型、每场景服务reset，不能代替完整系统失败恢复。无资源/时序/板卡收益结论。此前G4 warm正确性基线仍有效，详见下文。goal active。
+
+以下保留历史。
+
+# G4最后primary owner释放后的warm恢复通过（2026-10-27）
+
+详见results/fourth_warm_20261027.json/.md与fourth_warm_phases_20261027.json。选定fourth_warm_full_v2/pressure_v2，全部生产RTL与正常fourth_system SHA一致，仅TB变化。原生q4 ripup清空990178 primary并使558358/265324 refs3/4后，第一个图R发生真实SLVERR；search status8/1poll/1次失败展开/0candidate，query status7/detail8/committed0/route_acked0，三键journal保持，未发生commit写。
+
+原生G4/CP20两轮authority GET、工作6GET+3INC修复：990178从全零重新创建net26422/ref1/occ1，另两refs3→4、4→5，外来net23916/ref1与满pool/allocator不变。恢复实际G4源6/0/6、781标签/393页、156路径字、10query字；source path CRC f00b72b4/query327d3916、full/pressure标签083ee4ad/ae573141。781实际写及回读、原始路径/query字节和三类真实回执/退休/最终成功消费后才放行，target7/1/7，无外部cold reset或工作DDR重装。
+
+失败attempt6在受理时已消费sequence180330。新attempt7由原生target reset/rebase恢复G4源floor180329；空第四槽上的180329被status1拒绝、prepare_acked0且无工作副作用，再重新登记历史路径/ripup及180330重试。这不是“未消费序号重试”，也不是跨attempt全局永不重复或持久化floor证明。
+
+两容量重试83poll/82expand/402candidate/231cost均CPU匹配，全部12AXI/37个owner物理record写/146284032B最终owner/781标签393页及3MB物理页核对。最终四路径CRC eec36b70/query8a39d874/version7/flags5d/floor180330、slots15/CP20/journal3。结束4547230/4775002周期仅行为仿真；owner修复579/578周期、label恢复374180/290780周期，不是板卡收益。
+
+两成功与一个仅TB声明顺序编译失败归档均实际恢复重审audit字节一致；编译失败未运行仿真，不是生产RTL反例。496文件冻结results/fourth_warm_sources_20261027。新阶段统计确认781次baseline读、3905恢复字段写之外另有3905 seed写，下一优先hardware/variants/restore_seed_bypass_v1/PLAN.md的隔离恢复开销消融：默认关闭精确回归、开启后保留普通未知记录baseline语义及CRC/完整回读/取消失败退休边界。优化尚未实现。
+
+任意故障/取消、变价标签有效性、持久化writer/认证/floor、baseline reseed、自然overflow新增回收、综合时序/板卡仍缺；初始clones/full baseline及历史路径元数据外部可信。已审计归档收尾释放本轮干净缓存，不删证据。研究继续，goal active。
+
+以下保留历史。
+
+# 进行中：G4最后owner释放后的图R故障恢复（2026-10-27）
+
+完整候选fourth_warm_full_v2/pressure_v2已启动，继承fourth_system全部生产RTL，仅TB接入G4源6/0/6及target7/1/7。原生q4 ripup清空990178后、commit前图R错误，预期G4两轮authority/三INC恢复全零primary及两共享引用，恢复781标签/156路径字/10query字，再新attempt重试。独立审计器audit_fourth_warm.py已准备，尚无完整通过结论。按真实manifest/进程续查，存活时不重跑。
+
+源码核实query_lifecycle在受理时已消费sequence180330。新attempt7通过target reset/原生G4镜像恢复源floor180329后重试，不能称旧attempt“未消费”。本例增加空第四槽上的180329拒绝检查；没有全局永不重复或持久化floor结论。详见hardware/variants/fourth_warm_v1/CONTRACT.md。
+
+编译开发例full_v1数组声明顺序错误，未执行仿真；已保留独立失败证据，不能算生产RTL反例。上一已完成里程碑如下。goal active。
+
+以下保留历史。
+
+# 四路径G4发布与自然第四查询通过（2026-10-27）
+
+详见results/fourth_system_20261027.json/.md及hardware/variants/four_path_v1/CONTRACT.md。选定fourth_system_full_v2/pressure_v2，沿用全部生产RTL，TB显式PATH_SLOTS4、156字实际导出。先完成已有G3 warm前缀，再原生lease下重arm累计四行owner复制到未使用A区，并用781标签/393页、前三路径加空第四槽156字、query10字/floor180329三方共同发布G4/CP20。authority第72读beat后实际退休轮换，全部85读beat分别按旧A=G2/新A=G4核对；不能拿最终A解释旧读。
+
+自然q4 sequence180330/connection170791/net26422/source66893/sink6954：登记历史路径6954→990178→558358→265324→66893后原生ripup，990178最后primary owner实际写全零，另两refs4/5→3/4；连续搜索提交回1/4/5。两容量83poll/82expand/402candidate/231cost全部CPU匹配，12AXI/31owner物理写/146284032B最终owner/781标签393页及3MB物理页核对通过，新增baseline miss0，旧三路径与外来net23916保留。无外部cold reset/工作DDR重装。
+
+G4源path CRC f00b72b4/query327d3916，full/pressure标签083ee4ad/ae573141（同集合不同顺序）；最终四路径CRC eec36b70/query bcf23ef5、floor180330/slots15/CP20/journal3。结束4165462/4482678周期仅行为仿真，不是板卡速度。最终四路径尚未发布G5。
+
+开发full_v1生成器误把两处查询序号断言写成190328，原生实际导出180329后失败；修正版只改两断言，共有native事件/周期和12AXI前缀逐字节一致，不是生产RTL反例。两成功加一开发失败归档均实际恢复重审audit字节一致，489文件冻结results/fourth_system_sources_20261027。q4独立cost/filter、四槽组件3275/126检查与另外四归档复审、34源文件冻结见results/four_path_inputs_20261027.json。
+
+下一按four_path_v1/NEXT.md，在q4已原生释放最后owner而尚未commit时注入图R故障，验证G4三键原生INC恢复及保存路径/标签/query恢复和未消费序号重试。G4 warm尚未实现。固定价格/history、初始外部可信clones/full baseline、持久化writer/认证/floor、任意变价、baseline reseed、自然overflow新增回收、当前层级综合时序及板卡仍缺。每轮审计归档后释放本轮干净缓存，不删数据。研究继续，goal active。
+
+以下保留历史。
+
+# 进行中：四路径G4发布与自然q4（2026-10-27）
+
+第四查询231个独立cost包及filter重算已通过，cost/CPS1工作表与q3逐字节一致。四槽原生path组件3275检查、export组件126检查通过；四归档已实际恢复重审字节一致，34文件冻结results/four_path_inputs_sources_20261027。详见results/four_path_inputs_20261027.json/.md。组件后端范围与完整系统分开。
+
+完整候选fourth_system_full_v2与fourth_system_pressure_v2正在本机2022.2 XSim执行，入口hardware/variants/four_path_v1/CONTRACT.md和scripts/run_fourth_system.py。PATH_SLOTS4/156字实际导出，沿用生产RTL；先保留G3 warm前缀，再四行累计owner写到未使用A区、G4/CP20三方发布，最后q4历史路径登记/原生ripup最后owner/连续搜索。全系统尚未完成独立审计，不能称G4/q4通过。full_v1为生成器误替换序号断言的开发运行，源与结果保留，不作生产RTL缺陷结论。
+
+按manifest及真实进程续查，不重复启动存活运行。新审计器audit_fourth_system.py必须验证实际A区覆盖边界前后的G2/G4读、全部12AXI、CPU数值与最后owner清零/重提交流程；归档恢复后再更新最终结论。G4故障恢复尚未接入。goal active。
+
+以下保留历史。
+
+# 自然第三查询G3 warm恢复与下一查询最后owner释放采集通过（2026-10-27）
+
+详见results/third_warm_20261027.json/.md、third_warm_phases_20261027.json与iter2_fourth_20261027.json/.md。选定third_warm_full_v2/pressure_v2，生产RTL全部SHA等于前轮正常三槽系统。真实q180329先拆旧路径，三个journal键990179/558358/265324；第二个commit写558358的B错误后工作refs2/4/4，status7/detail5/committed0/acked1。G3/CP19两轮authority核对目标2/4/5，实际6GET+1INC，仅265324补4→5，其他net23916/ref1保留。
+
+原生恢复G3 source5/3/5、781标签/393页、117字q1/q2加空第三槽、10字query及floor180328。原path CRC f4394572/query9493257c，full标签742f5a50/pressure2f1c12da；全部781实际写入/回读，三回执全齐/服务退休/成功回复消费后才放行。无外部cold reset或工作DDR重装；新6/0/6保留floor180328，再登记q3旧路径、原生ripup与重试。失败前和重试均CPU114poll/113expand/565candidate/302cost匹配，全部12AXI/25个owner物理写/146284032B最终owner与G3相等/全部3MB标签页通过。最终三路径CRC437e9a9a/query03650e61、floor180329/CP19/journal3；尚非G4发布。
+
+本轮仅修TB槽号观察：旧slot2日志被最低位截为0并写入旧q1观察数组；v2完整slot2与旧数组范围修正，两版12AXI/所有最终镜像/事件周期完全相同，仅46处槽号日志差异。两个选定v2及两个legacy_stable对照包均实际归档恢复重审字节一致。原v1归档审计曾因目录遍历导致JSON键序变化而字节失败，语义/数据哈希一致，失败记录和旧归档保留；稳定包明确repackaged_from，不冒充新仿真。236文件源冻结results/third_warm_sources_20261027。
+
+结束3760351/4010239周期仅行为仿真。label恢复阶段373309/290752周期，781次baseline读、3905次恢复字段写、总7810次底层字段写，提示后续可研究冗余初始化；尚无该优化或板卡收益结论，不能由两容量不同顺序直接推断缓存优劣。
+
+下一自然q4 query180330/connection170791/net26422/source66893/sink6954已CPU采集；旧/新路径6954→990178→558358→265324→66893。原生准备释放990178唯一owner，refs1→0/occ1→0/owner-1，另外两节点4→3、5→4。独立CPU83poll/82expand/402candidate/231标签更新，全9089009行q3提交→q4准备仅五行变化，overflow/prices不变；两采集10文件相同/全路由原哈希不变，归档实际恢复及prepare/transition复审字节一致，14文件冻结results/iter2_fourth_sources_20261027。231尚非独立cost oracle，q4 RTL尚未接入。
+
+下一按hardware/variants/third_warm_v2/NEXT.md生成q4独立cost/filter、验证四路径槽及156字镜像，再接实际G4发布/连续q4与资源释放生命周期。不能拿q2/q3槽代替q4，也不能把117字CRC当156字G4源。G4、q4 RTL、q3其他故障/取消、任意变价、持久化writer/认证/floor、baseline reseed、实际overflow新增回收、当前层级综合时序和板卡仍缺。每轮审计归档后按目录释放干净文件缓存，不删数据。研究继续，goal active。
+
+以下保留历史。
+
+# 进行中：第三查询G3故障恢复候选（2026-10-27）
+
+third_warm_full_v1开发版已完成真实q3第二owner-B故障、G3两轮authority/一次INC修复、781标签/117路径字/10query字恢复及attempt6/query0/price6重试；development_warm_audit通过，但旧TB只记录slot最低位，不能作为完整槽号证据。third_warm_v2修正TB观察字段及旧数组选择，生产RTL不变，两容量重跑中。最终选定审计、归档恢复复审、源码冻结仍待完成，不能称本候选全部通过。运行根、会话和严格后续顺序见hardware/variants/third_warm_v2/NEXT.md；按实际manifest/进程续查，不重启仍存活的仿真。此前已完成里程碑如下。
+
+# 三路径槽与完整自然q3连续执行通过（2026-10-27）
+
+详见results/path_capacity_20261027.json/.md、results/iter2_third_cost_20261027.json/.md及results/path_capacity_third_20261027.json/.md。PATH_SLOTS默认2、实测3，参数贯通route/host/query/residency/search/boot/export，完整路径镜像78→117字。三槽controller2494检查、export126检查、query29场景通过；默认export114检查与旧事件一致。默认两槽32缓存槽/单缓存槽各28文件（共56文件）、12AXI/native trace/结束周期逐字节匹配原G3基线。组件后端mock与完整系统证据分开。
+
+q3 query180329/connection170785/net26422/source66893/sink151354的独立cost/CPS1/filter oracle通过：114poll/113expand/565candidate/302cost，cost与CPS1工作输入同q2字节一致。584标签保守闭包仅用于审计，未预加载硬件。
+
+选定path_capacity_third_full_v1/pressure_v1。三槽完整系统先实际G3/CP19共同发布，保存source5/3/5、floor180328、781标签、q1/q2及空第三槽117字path。原生lease登记q3历史路径元数据、不加owner引用；实际ripup把990179/558358/265324 refs2/4/5降至1/3/4，再实际搜索提交回2/4/5。q1/q2和其他net23916/ref1保留，无冷复位/工作DDR重装。两例CPU逐项数值、全部12AXI、781标签/393逻辑页/全部3MB物理页通过；q3新增baseline miss0。新增6条owner record写，总19条；最终146284032B owner等于G3图像。结束2857604/3114246周期，仅行为仿真。
+
+G3原始117字path CRC f4394572；最终三路径导出CRC437e9a9a、query CRC583925e2、floor180329，最终槽位图7/CP19/journal3。最终三路径未共同发布G4，不能冒充G3恢复源。六个组件/默认系统、两份CPU输入、两个三槽系统共十份归档已实际恢复重审，audit字节一致；222文件冻结results/path_capacity_sources_20261027。输入恢复曾因并行恢复依赖目录而暂缺文件，按依赖完成后重审通过，原因记入恢复凭据，不是RTL反例。
+
+下一优先按hardware/variants/path_capacity_v1/NEXT.md在隔离候选接q3第二个commit owner-B故障与G3 warm恢复。拆旧路径已产生三个journal键；恢复可能需要INC补回尚未提交的引用，不能套用q2两键DEC假设。G3源CP19/5/3/5/781标签/117字两有效路径/floor180328；attempt>5，实际回执和退休全齐后才放行，重新登记q3旧路径并ripup再重试。
+
+仍无q3故障/G3 warm、G4发布/恢复、任意变价、持久化writer/认证/floor、baseline reseed、实际overflow新增回收、综合时序或板卡收益证明。初始G1与全图baseline外部可信、价格/history不变。已审计实验收尾按目录释放干净文件缓存，不删数据、不做全局drop_caches。研究继续，goal active。
+
+以下保留历史。
+
+# 真实G3/CP19联合发布与自然q3采集通过（2026-10-27）
+
+详见results/owner_g3_publish_20261027.json/.md、results/iter2_third_20261027.json/.md及hardware/variants/owner_g3_publish_v2/CONTRACT.md。选定owner_g3_retired_full_v3/pressure_v3，真实q1/q2、owner-B故障与baseline在途取消/非冷恢复后，累计owner四行copy、原生781标签/393页、两path78字及query10字形成实际回执。原生PC lease下三方一次111共同发布G2/CP18/J3→G3/CP19/J0，保留store5/query3/price5、seq180328。发布前实际receipt/owner manifest/bundle均1、普通k_permit0、publication_retired1；没有固定健康或退休为1。
+
+实际保留旧writer在authority准备busy下永久丢回执的反例，以及第一修复只保留回执却仍依赖prepared关闭的普通permit而自锁的两容量反例。最终候选将copy/rearm开工资格与发布退休分离；KEEP_RECEIPT_ON_BUSY默认0，真实源写/协议覆盖错误/完整性fault/lease丢失仍失效。export_manifest观察原生流/CRC/实际回复消费并绑定身份、上下文、序号与槽位图。此前retired开发v1/v2的隐式未连接信号X属于TB接线错误，当前明确层级/default_nettype none/未知值断言，不把它作为生产RTL反例。
+
+发布后原生authority拒绝旧G2，再从G3读取339193/ref1/occ1、990179/ref2/occ2、558358/net26422/ref4/occ2、该节点另一net23916/ref1、265324/ref5/occ1；新query原始导出保留seq180328。全部12AXI原始前缀字节匹配前轮已归档候选，新增标签1179实际R及全781记录/393页/3MB backing核对，完整146284032B G3 owner等于工作owner、G2图像未变。path CRC977edc59/query9493257c，full标签742f5a50、pressure2f1c12da（顺序不同、集合相同）。结束2331601/2507934周期，仅行为仿真。两个成功、三个反例、五个组件共十归档均实际恢复重审audit字节一致；183文件冻结results/owner_g3_publish_sources_20261027。
+
+自然q3完整seq180329/connection170785/net26422/source66893/sink151354已CPU采集。旧路径和新路径均151354→990179→558358→265324→66893；原生准备把三内部refs2/4/5降至1/3/4、occupancy2/2/1不变。114poll/113expand/565candidate/302标签更新，尚非独立cost oracle。普通与prepare观察两次采集的10文件字节一致、全路由原哈希不变；9089009行完整q2提交→q3准备转换核对，最终只有66893/67922/151354三行标签差异，overflow/prices不变。两归档及prepare/transition审计实际恢复复审一致；12文件冻结results/iter2_third_sources_20261027。
+
+下一必须按owner_g3_publish_v2/NEXT.md推进路径容量及q3接入。当前route_commit_controller固定2槽、slot接口1bit、checkpoint78字，q1/q2均需保留；不可拿q2代替q3旧路径或直接装prepared owner。至少扩到3槽、参数化各层slot及路径序列化/CRC/manifest，验证默认兼容与多槽真实导出/恢复/拆线，再生成q3独立cost/CPS1 oracle及完整连续执行。G3恢复源为本轮5/3/5、CP19、781记录、seq floor180328，attempt必须>5；现TB仍硬接G2恢复字段，尚未接G3 warm。扩大源路径镜像需重新真实导出/发布，不能复用78字CRC。
+
+初始G1 clones/全图baseline仍外部可信，G2仍用旧writer；原生流文件由TB/auditor保存，不是硬件持久化bundle writer。固定价格/history、dirty/路径有界，无G3 warm、q3 RTL、baseline reseed、持久化认证/floor、任意变价、实际overflow新增回收、综合时序或板卡收益结论。内存约300GiB顶满已查明主要是文件页缓存；收尾使用scripts/release_experiment_cache.py ROOT --apply，仅释放审计通过且manifest未变目录的干净文件缓存，不删实验数据。研究继续，goal active。
+
+以下保留历史。
+
+# 真实owner累计脏行重arm与G3候选通过（2026-10-27）
+
+详见results/cumulative_owner_system_20261027.json与hardware/variants/owner_cumulative_system_v1/CONTRACT.md。新增cumulative_owner_snapshot隔离候选，op0在工作前真实PC lease下绑定design/G1 baseline/source/span/A与C两bank，op1仅在健康且事务退休时清已覆盖AW的B错误，op2以单调generation/checkpoint复制累计脏行。覆盖错误不可重arm，dirty不清，不冒充baseline reseed。278检查/46事务组件及真实AXI独立字节重放通过，归档已恢复复审，源冻结147文件。
+
+选定cumulative_owner_system_full_v4/pressure_v4：G2仍由旧writer产生并原生三方发布；新writer从第一个工作owner写前并行观察全部真实AW/B，经历q2第二owner-B SLVERR、两键原生修复、777流baseline在途取消与attempt5非冷恢复/真实q2重试。两路径实际rc_slots位图为3、sequence180328/store5/3/5。再获原生PC lease，实际healthy/owner drained/全局退休全真，data_error1/coverage_error0/dirty4；op1后data_error0，四条累计dirty与G1身份/floor保留。
+
+实际源DDR→C bank 0xc000000000四条64B写→C回读，8 R/4 W/4 B全部独立重放。339192/558356/265324/990176四行均保留，990179即使回到G1 refs2仍复制。完整146284032B G3候选逐字节等于工作owner，SHA256 0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595；现行A bank G2图像仍82b2185a16ee91455844f6d2a5e386268e0efd078bdc5d27b48ba06a1f205a95。回执锁存design/G1 baseline/G3/CP19/C bank，真实回复消费前manifest与lease释放关闭，消费后精确描述符匹配才许可。
+
+全部12AXI、CPU两query数值oracle、最终781标签/393页/3MB backing和146MB owner独立审计通过；原11AXI原始日志与上轮cancel full/pressure逐字节一致。结束2312490/2488944周期，仅行为仿真。归档恢复审计与154文件源冻结见结果JSON。
+
+边界：G3仅为候选，native authority/coordinator/config仍G2/CP18，未将新manifest接入JP；并非一个新writer已取代全部G2路径。接下来在同实例扩展原生781标签/两path/query floor180328导出与G3/CP19三方发布。静态接线已发现当前g3_healthy使用pc_safe、source_drained使用含as_retired的f_backend_idle；authority准备自身busy会撤销当前receipt。必须先保留实际发布反例，再区分开工/重arm许可、临时busy和源失效，不能把健康/退休固定1或直接冒充发布成功。具体见hardware/variants/owner_cumulative_system_v1/G3_NEXT.md。
+
+MAX_DIRTY有界、初始G1 clone/baseline/描述符外部可信，价格/history内容不变。无G3 warm/自然q3 oracle、实际overflow新增回收、全图baseline reseed、持久化认证/floor、任意变价或综合板卡性能结论。研究继续，goal active。
+
+以下保留历史。
+
+# 777标签恢复中的真实baseline R在途取消通过（2026-10-27）
+
+选定label_baseline_cancel_full_v2/pressure_v2。生产RTL逐文件SHA与前轮777 warm恢复一致，仅增加独立内存agent hold_r及TB/审计；hold只延迟真实R生成，不屏蔽DUT握手。
+
+第21条恢复记录node558372触发真实baseline AR（0xb00110a480），R被保持64周期。期间第九路owned1/physical drained0/retired0，恢复完成和target reset均未出现，业务持续封锁。释放后真实R、baseline前端回执及原生标签操作退休，leaf返回status7/written20/verified0，coordinator status6/J2。20条完整写与第21条部分字段没有回滚；失败回复消费后仍owned/fault。
+
+相同attempt4新cookie原生status1拒绝；attempt5/query3/price5以新cookie非冷复位重试，G2两轮authority和工作owner复核corrected0，无重复DEC。再次完整恢复并回读777条、原CRC b539040c、path78/query10及floor180327后才放行。q2故障前和重试均114poll/113expand/564candidate/302cost，最终sequence180328/store5/3/5，两路径保留。
+
+baseline真实1583读分777/4/21/777/4；16015次native字段写，恢复输入798条/字段写3986。全部11AXI、最终781标签/393页/3MB物理页及146284032B owner独立重放通过。32槽结束2312330周期，单槽2488788周期，仅行为仿真。
+
+早期v1因agent hold错误依赖会被撤销的labels_valid而未保持64周期，属于激励问题；v2锁存cancel_active修正，不是生产RTL缺陷证据。本轮仅覆盖一个确定AR/R取消点，不证明任意取消或永久不响应。固定价格/history，外部可信baseline/G1 clone/描述符、持久化认证、G3 writer rearm与综合板卡收益仍未完成。
+
+两份归档恢复复审与源冻结见results/label_baseline_cancel_20261027.json。下一优先G3累计owner generation/bank/receipt及B错误rearm；研究继续，goal active。
+
+以下保留历史。
+
+# 777原生流CRC失败后非冷复位重试通过（2026-10-27）
+
+详见results/label_baseline_crc_retry_20261027.json与hardware/variants/label_baseline_crc_retry_v1/CONTRACT.md。选定full_v1/pressure_v1，全部生产RTL/agent逐文件SHA等于label_baseline_warm_full_v3；只增加真实错误/重试激励和独立审计。仍无初始标签imports/中间host final读，源777/389页/CRC b539040c来自原生runtime导出。
+
+q2第二owner-B故障先真实修复两键；attempt4/query2/price4选错源CRC xor1，native label status8/written776/verified0，最后一行未写。coordinator status6/J2保留，776部分写没有回滚；消费失败后owned/fault与业务封锁保持。正确CRC的新cookie c0020000相同attempt4被原生status1拒绝；c0020001的attempt5/query3/price5非冷重试两轮G2/工作owner复核corrected0，无重复DEC。
+
+两次target reset共10样本均baseline retired1/physical1/owned0，两个RAW探测实际absent0；service/guard不随target reset清归属。再次完整写入并实际回读777，原CRC、path78/query10源CRC1d36e333/79283e8e和floor180327不变，真实三回执/退休/最终成功回复消费后才放行。q2随后完整重试匹配原CPU114poll/113expand/564candidate/302cost，最终sequence180328/store5/3/5，两路径共存。q1仍171/170/849/421且原始trace/cycle前缀精确等于前轮正常例。
+
+第九路2338实际R分777/4/776/777/4阶段；23569 native字段写，restore输入1554记录、字段写7765、只在第二次验证777。32槽1503WB/1304RF，单槽2655WB/3638RF；43 authority读beat、13 owner记录写、全部11AXI和最终781标签/393页/全部3MB backing及146284032B owner独立重放。无外部cold reset或working DDR重装，两份归档实际恢复重审audit字节一致；源冻结results/label_baseline_crc_retry_sources_20261027。2563614/2678084结束周期仅行为仿真。
+
+下一优先在实际777恢复过程验证一个baseline AR/R在途取消与非冷重arm边界，然后必须推进G3 owner generation/bank/receipt与B错误rearm。已记录owner_cumulative_rearm_v1/PLAN.md为设计草案，尚未实现：当前tracking_fault混合B错误与覆盖丢失，不能直接清fault/dirty表。G3可先保持G1累计差分；真正baseline epoch/reseed仍缺，不能混称完成。
+
+CRC不是认证，价格/history内容不变；immutable全节点基线、G1 clone和描述符仍外部可信，目录/路径容量有界。新恢复阶段取消、owner epoch/实际overflow新增回收、任意变价、持久化writer/授权/floor、综合时序和板卡收益仍未完成。研究继续，goal active。
+
+以下保留历史。
+
+# 零预加载777标签的原生G2 warm恢复通过（2026-10-27）
+
+详见results/label_baseline_warm_20261027.json与hardware/variants/label_baseline_warm_v1/CONTRACT.md。七层按需基线与第九路退休guard接入真实runtime目录/标签导出、owner增量copy、G2三方共同发布及完整warm恢复。全程无初始822标签imports、无中间final host标签读，也无CPU构造warm标签文件；777源记录由真实PC lease/control(1)/目录389帧/1167 DDR读产生，CRC b539040c。TB仅捕获原生流保存并原字节回送，尚不是完整硬件持久化bundle writer。
+
+真实集成反例full_v2/pressure_v2：旧恢复器用普通READ检查目标为空，新manager因此从immutable baseline填入node204279，真实present1使leaf正确返回status3/written0/verified0，尚未接收777流；不能删除这个空目标校验。两个反例已归档/独立重审，audit通过指失败原因成立，不是warm成功。
+
+修复只增加受恢复状态限定的RAW presence语义：leaf新增PS/PW期间l_probe输出，保留原l_present拒绝分支；residency仅ENABLE_BASELINE&&f_recovery_owned&&k_labels_valid&&l_probe时经engine/core/paged传baseline_raw_probe。manager在IO受理时锁存，raw read执行实际native READ，不seed、不伪造present；raw write返回status3。普通IO及CLIENT仍按需seed。组件full_v1/single_v1各106检查：空raw读不加载、普通读后raw真实present1、受理后变引脚不改变该请求、raw写拒绝且原记录保留，完整native/DDR字节模型通过。
+
+选定warm full_v3/pressure_v3：q1后实际777记录/389页，owner四行真实AXI copy到G1 clone的G2候选，原生G1/CP17/J4→G2/CP18/J0共同发布。q180328第二owner-B SLVERR产生两键journal；G2 authority两轮读与真实GET/DEC/GET将990179 refs2→1、558358 refs4→3/occ2，另一net23916/ref1保留。真实target reset5周期均baseline retired1/physical1/owned0，service/guard不随target reset清零；原生raw probe实际absent0。
+
+attempt4/query2/price4下777条实际写入/回读/CRC校验全部通过，原生path78/query10的源CRC1d36e333/79283e8e与floor180327恢复；三回执、服务退休和最终成功回复消费后才允许q2重试。无外部cold reset、working DDR重装或标签答案补写。第一query171poll/170expand/849candidate/421cost；故障前和重试第二query各114/113/564/302，逐项原CPU数值oracle通过。最终sequence180328/store4/2/4、两条路径及全部owner图像一致。
+
+第九路1562个真实R分四阶段777/4/777/4，恢复777行的第一次字段写也真实seed原始基线，然后完整五字段restore覆写，未隐藏这些读取。每次真实源回执后的五次seed写、总15809字段写及每个native命令/回复独立建模；32槽1147WB/1304RF，单槽2268WB/3638RF。最终781记录/393页/全部3MB物理页（含空页）、完整146284032B owner、13个物理owner记录写及全部11AXI重放通过。
+
+两种容量q1至LIFECYCLE的原始trace字节/周期分别精确等于前轮零预加载正常query，证明RAW限定不改变普通q1。结束2274789/2449788周期仅行为仿真；本轮不宣称新变体默认关闭的完整回归、板卡收益或任意竞态覆盖。六归档均实际移走原目录后恢复重审audit字节一致；源冻结results/label_baseline_warm_sources_20261027。
+
+初轮旧unflushed-reject调用依赖已删除的额外host读：q1原生flush后已clean，新例删除不再成立的调用但未放宽生产snapshot_clean/lease准入。随后保留真实status3反例再实现RAW修复，没有伪造探测回复或跳过空目标检查。
+
+下一优先新777路径CRC失败后的776部分写、相同attempt拒绝及更高attempt非冷恢复，再实际恢复阶段baseline在途取消的边界；随后必须推进owner snapshot epoch轮转/G3与真实overflow新增回收，避免只扩一个G2的取消点。固定price/history、全节点immutable基线与G1 clone/配置仍外部可信，历史路径仍由CPU观察；容量有界，无任意变价有效性、持久化授权/floor、完整运行时writer、综合时序或板卡结论。研究继续，goal active。
+
+以下保留历史。
+
+# 第九路基线AXI的排空覆盖与取消退休通过（2026-10-27）
+
+详见results/label_baseline_fence_20261027.json与hardware/variants/label_baseline_fence_v1/CONTRACT.md。新增baseline_retirement_guard只观察真实req/rsp/AR/R，保留服务归属直到回复消费，复用真实AXI drain watcher；reader idle、物理排空、无归属/offer/held回复/配置offer且无fault才retired。仅cold初始化复位，不接target_reset或abort，不屏蔽握手/载荷。query/search/residency三层传入baseline_retired，ENABLE_BASELINE启用时合入f_all_drained及f_backend_idle，已有PC/publication/recovery条件因此覆盖第九路。
+
+选定abort_full_v3/pressure_v3：真实q180327的SOURCE_CHECK在node66893 baseline AR受理/R前qc_abort，实际checkpoint acquire争用。agent真实延迟48+随机周期；32槽58、单槽61个检查周期物理drained/retired/f_all_drained/f_backend_idle/PC ready/target reset保持0。真实R、五次原生seed字段写、原生READ回复与服务回执消费后，lifecycle原生status7/prepare_acked0/committed0，保持8周期。RAM中源标签已填充，不是取消回滚；无owner写/DDR label writeback，工作146MB owner不变，完整旧8AXI及第九路R源字节独立审计。
+
+选定negative_v3仅移除两个新门控。33003周期AR已实际受理、R未返回，guard retired0/physical0而旧f_all_drained1，触发预期Fatal；真实A有记录，R/seed均未发生。**此时旧f_backend_idle仍0，因此反例只证明物理排空指标漏计第九路，不证明旧版实际能提前target reset或完成恢复。** negative的audit通过表示真实反例成立，不是正常仿真成功。
+
+guard单元24项检查覆盖配置offer、req/AR/R背压、物理R完成但逻辑回复仍保持、实际回复消费、非法响应/无AR的R错误。normal_full_v1完整正常回归两条零预加载自然查询，9AXI+7DDR+native trace共17文件及周期逐字节等于label_baseline_pair_full_v2，保留777+4实际标签加载、两份CPU oracle与完整最终图像结论。五个选定归档均实际恢复后重审audit字节一致；源冻结results/label_baseline_fence_sources_20261027。
+
+开发失败已保留：初轮TB误期望取消status2/acked1，实际SOURCE_CHECK取消为7/0；次轮未传延迟宏仅10/13等待周期，正式v3显式参数达到58/61。早期negative在同一受理沿触发Fatal导致agent未记录A，正式v3在实际受理后的边沿观察。部分当次runner scope继承通用两query描述，实际模式以命令、abort_case/negative、trace及audit为准；当前模板已修正描述与模式检查，归档源/元数据未改。
+
+当前仍未执行新路径的恢复命令、target-reset后777标签恢复或G2 warm；取消测试也没有消费最终query失败回复/无复位重试。下一优先原生runtime导出777/389页、owner增量copy/G2共同发布、第二q2 owner-B故障及真实恢复。generic restore首次字段写可能触发777次初始baseline seed，应按阶段审计并最终由777恢复流覆写，不得假装仍只有q2新增四条读。baseline身份/固定price内容/G1 clone仍外部前提，容量有界；任意变价、owner epoch轮转、真实overflow新增回收、认证、综合时序和板卡收益仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 两条完整自然查询零标签预加载/原生按需基线通过（2026-10-27）
+
+详见results/label_baseline_pair_20261027.json与hardware/variants/label_baseline_system_v1/CONTRACT.md。新增默认关闭ENABLE_BASELINE及12个请求/回复/身份端口贯穿query/search/residency/candidate engine/core/paged exclusion六层，接入已审计manager为第七层。真实label_baseline_reader通过第九路AXI从全部9089009节点的只读prepared基线取记录；工作3MB backing初始全零。没有822条imports预加载，不留下source/sink隐含种子，启用实验命令行也不传imports。正常lifecycle source/target写保留，首次写由原生probe/五字段seed再重放完成。
+
+同时移除两次按未来列表执行的final host标签读，避免中间审计操作提前填充第二query。q180327成功提交后，原生PC lease导入真实CPU观察的q2旧路径并ripup，再连续执行q180328。两容量第一query171poll/170expand/849candidate/421cost，第二114/113/564/302，逐POLL/候选/cost匹配原CPU oracle；两条原生路径提交/共享多net owner保留、最终ledger180328/store3/1/3成立。
+
+选定full_v2/pressure_v2：q1实际777记录/389逻辑页，q2仅新增648770、125130、84955、84114四条；共781记录/393页/781实际基线R，无重复基线加载，旧822闭包的41条未加载。每个真实源回执后五字段原生seed写逐条核对；总6807字段写。独立CPU记录模型核对每个原生命令/回复、present/绑定、每页写回与refill；32槽591WB/555RF，单槽1386WB/2202RF。最终781标签与原CPU第二查询全节点状态逐位相符，target清理后全部3MB物理页（包括空页）完全匹配；9个owner物理写、完整146284032B owner和全部9AXI独立重放。
+
+默认关闭新七层通道的完整32槽回归16文件（8AXI、7DDR、完整native trace）与旧iter2_pair_full_v1逐字节/周期相等，结束1651923周期。启用两例结束1358227/1538154周期，但测试移除了预加载和额外host审计读，不能用这些周期差当作板卡加速比。三个归档均实际移走原目录后恢复重审，audit字节一致；源冻结results/label_baseline_pair_sources_20261027。
+
+首个启用开发例仅TB声明顺序编译失败，v2修正位置。首个disabled开发例因旧TB所需imports参数被统一删除而在0ps失败；v2仅为disabled恢复该参数。disabled结果的旧runner描述文字误写为零预加载，归档前仅更正scope并保留原描述/metadata_note，命令、数据、源SHA和仿真输出未改。
+
+结论限于本固定价格/完整prepared基线的两条自然正常查询；初始未来标签闭包依赖在这两例确已去除，完整G2 warm启用路径尚未接入。新第九路AXI尚未纳入旧8路physical-drained/target-reset协议，下一优先真实在途退休/fence联锁，再runtime导出777标签/动态CRC/G2发布及故障恢复后q2新增四记录。不能套旧822 warm结论。baseline描述符/epoch与G1 owner clone仍外部可信，历史路径由CPU观察给出，FRAMES16384为有界目录；任意变价、owner epoch轮转、真实overflow新增/回收、持久化认证、综合时序和板卡收益仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 原生manager按需标签填充与dirty写回通过（2026-10-27）
+
+详见results/label_baseline_miss_20261027.json与hardware/variants/label_baseline_miss_v1/CONTRACT.md。新增默认关闭ENABLE_BASELINE，io读/首次字段写及CLIENT读缺失均通过真实只读baseline AXI取得原prepared记录，实际原生五字段WRITE后重放原请求；已有实时记录不被初始基线覆盖。读seed第一次成功写即置dirty_slots，OPEN受外部许可并锁存baseline epoch，事后改引脚不改变绑定。
+
+选定full_v3/single_v3：纯读node0后即独立刷回/释放/重载；首次写同页node1仅改sequence字段，其余历史字节保留；CLIENT读node8后再次刷回/释放/重载。各83检查、4baseline实际R、3个完整seed/15字段写与1次业务字段写、3页WB/3页RF，后续重读不增加baseline请求。全部原生回复、基线AXI、页AXI与3072B最终backing由独立CPU/字节模型重放。最终node16基线SLVERR返回manager status10，业务封锁，无该记录seed。
+
+drain_v2单槽84检查：node16真实baseline AR受理/R前持续置入外部native fault，已暴露baseline事务仍实际退休，R成功消费后才失败；不是掩码回复或伪造退休。仅覆盖此确定边沿，不是任意取消或所有native阶段故障证明。
+
+默认关闭完整32槽回归19文件（10AXI、7DDR、native trace、标签流）及周期逐字节等于旧runtime_label_snapshot_full_v3。首例默认回归在elaboration遇wrapper .* 无新增输出名，v2仅在独立runner中显式空接输出、零绑定未用输入修正接线。四个选定归档实际恢复重审audit字节一致；源码冻结results/label_baseline_miss_sources_20261027。
+
+**完整自然query尚未启用新miss路径，初始CPU822条未来读闭包仍在。** 当前证明是实际manager/endpoint/reader组件与默认关闭的全系统兼容。下一优先把通道贯穿query/search/residency，并关闭所有imports预加载，保持原自然q180327/q180328 CPU oracle，重新审计实际记录/目录数量及G2 warm恢复容量。baseline身份仍由外部授权；任意变价、owner epoch轮转、真实overflow新增/回收、认证、综合时序和板卡收益仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 全节点标签基线与原生只读reader组件通过（2026-10-27）
+
+详见results/label_baseline_20261027.json与hardware/variants/label_baseline_v1/CONTRACT.md。以原CPU已审计prepared初始状态的全部9089009节点构造不可变32B标签记录，不接受未来访问列表。五个标签字段逐位保留，独立审计全部记录与原44B CPU布局一致；总290848320B，SHA256 09e54c07e4c1d5cebfb89b18384c8f0bbb01adb0f87f1cd91b0dcc56f371d63a。
+
+新label_baseline_reader以受外部许可的base/epoch/count配置，实际64B AXI读，按node奇偶取160b并检查padding/flags。锁存请求和配置，背压期间不接受重配；越界/未配置/旧epoch不发AR，错误配置保留原绑定。选定unit_v1对894个真实节点测试（其中72个在旧822闭包外），897个真实R含一次SLVERR和一次注入格式破坏；15010项检查、4528保持周期。独立重放全部AXI字节和业务响应。基线与组件两个归档均实际恢复后重审，audit字节一致；源冻结results/label_baseline_sources_20261027。
+
+**这只是必要reader组件，完整查询尚未去除初始CPU未来读闭包。** 下一步必须接入resident_page_manager的io读/写与CLIENT读缺失：首次字段写前先探测，absent时完整seed五字段后重放原始请求；只读seed也须置dirty_slots，避免clean驱逐丢失记录。要求关闭所有imports预加载并保持原CPU oracle，不能用空值代替真实历史标签；详见该variant的NEXT.md。当前没有manager miss接入、取消、任意变价有效性、认证、综合时序或板卡收益证明。研究继续，goal active。
+
+以下保留历史。
+
+# CRC失败后非冷复位重试通过（2026-10-27）
+
+32槽与单槽均从真实G2第二owner-B故障开始：首次两键修复后，错误源CRC使原生label返回status8/written821/verified0，coordinator返回status6，journal2保留，失败回复消费后仍owned/fault且业务关闭。部分标签已写，不是回滚。
+
+改正CRC后，相同attempt4以新cookie c0020000被原生status1拒绝，无新owner或标签访问。再以cookie c0020001、attempt5/query3/price5非冷复位重试；两轮G2 authority及工作owner GET重新核对两键，corrected0、无再次DEC。重新写入并实际回读验证全部822条标签，恢复原始path78/query10及sequence floor180327；三类真实回执、服务退休和最终成功回复消费后才放行。
+
+随后query180328完整重试114poll/113expand/564candidate/302cost与原CPU数值oracle一致，两路径共存，最终ledger180328/storage5/3/5。首次自然query仍171/170/849/421。全部10AXI、43个authority读beat、13次owner记录写、完整146284032B owner及822标签/3MB backing独立重放通过。初次CRC失败与新恢复共1644条输入、821+822条标签字段写，只有第二次执行822项回读验证。
+
+本轮只增加TB、运行和独立审计脚本，生产RTL逐文件SHA等于已审计label_source_crc_full_v2。两份归档实际移走原目录后恢复并重审，audit字节一致。详见results/label_crc_retry_20261027.json；源冻结results/label_crc_retry_sources_20261027。
+
+CRC仅用于完整性检查。初始CPU未来读闭包、历史路径及准确G1 clone仍为前提；价格/history内容不变，price5是版本标签。owner增量writer的错误epoch尚无轮转/rearm；未知页初始化、真实overflow新分配/回收、持久化认证、任意变价、综合时序与板卡收益仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 原生源标签CRC硬件绑定与错误隔离通过（2026-10-27）
+
+详见results/label_source_crc_20261027.json与hardware/variants/label_source_crc_v1/CONTRACT.md。新增默认关闭CHECK_LABEL_CRC，经query/search/residency传入label_restore_controller的CHECK_SOURCE_CRC。snapshot_label_crc与其他快照描述字段在实际backend recover受理时一起锁存，leaf启动再次锁存；lr_source_crc输出已接收源记录的CRC32。按原生导出顺序累积node32+payload160的24B LE CRC32/IEEE，最后记录CRC不匹配返回native label status8，在该条写入前失败。
+
+选定full_v2/pressure_v2，显式开启后使用原生822条流CRC（32槽a2b92ed0、单槽9ae2e09b）；recover受理后改变外部CRC引脚仍按锁存源成功，实际822写入/回读验证、三类回执与退休、最终成功回复消费后才放行。G2第二owner-B修正、path/query原始CRC/floor180327恢复及query180328重试完整通过；两次第二query各114poll/113expand/564candidate/302cost匹配CPU，最终ledger180328/storage4/2/4，两路径共存。全部10AXI/DDR及822标签独立重放。
+
+选定bad_full_v3：在受理前选错CRC xor1，同一原生822输入实际计算正确源CRC，但label status8/written821/verified0；最后行未写，未进入checkpoint/verify，且没有成功label/path/query回执或重试。原生coordinator返回status6、journal2保留，回复消费后仍owned/fault、业务关闭。两键owner先已正确恢复G2 refs1/3，完整146284032B工作owner等于G2快照；10个物理owner记录写及全部AXI重放通过。部分821标签已写，不是取消回滚。首个负例仅停在把预期wm_fault当意外的旧健康TB断言，正式v3只调整该断言，不掩码DUT握手/载荷。
+
+CRC单元启用32项、默认关闭16项保持检查；独立zlib及实际后端字段写/控制命令/读计数核对正确CRC+改引脚、错误CRC、payload改单bit与记录换序。默认关闭的完整G2 runtime snapshot/warm恢复19文件（10AXI、7DDR、native trace、标签流）及周期逐字节等于上一已审计基线。正式六归档均实际恢复重审audit逐字节一致。源冻结results/label_source_crc_sources_20261027（52文件）。
+
+这是源镜像完整性检查，不是认证或持久化授权；描述符/启动上下文仍可信，初始CPU未来读闭包、历史路径与准确G1 clone仍在。尚未在CRC失败后测试更高attempt非冷重试；owner epoch轮转、未知页初始化、任意变价/回绕、真实overflow新分配/回收、综合时序及板卡收益仍缺。下一优先见hardware/variants/label_source_crc_v1/NEXT.md；不得将821部分写入称作回滚，也不得把CRC当签名。研究继续，goal active。
+
+以下保留历史。
+
+# 原生目录/标签导出接入G2 warm恢复通过（2026-10-27）
+
+详见results/runtime_label_snapshot_20261027.json与hardware/variants/label_frame_export_v1/CONTRACT.md。选定full_v3/pressure_v3、default_full_v2、unit_v4。新增默认关闭的ENABLE_FRAME_SCAN只读端口，经实际层级访问权威owners RAM，不在TB读取DUT数组造答案；新label_snapshot_reader从真实目录帧信息和DDR页产生node/payload记录，label_snapshot_checkpoint_adapter门控lease释放和manifest许可。
+
+实际PC lease下先验证非空驻留槽的导出请求被拒绝；原生control(1)刷回/释放后才导出。新增resident_page_manager.snapshot_clean要求active/idle且valid/dirty槽均零，query root还检查pc_owned/pc_safe、无warm/joint占用，目录要求无memory lease/fault。读取不修改allocation/index/lease/TX floor，保持回复时不接受普通目录操作。11份生产源由确定脚本派生，正常接口为具名参数/端口兼容。
+
+32槽/单槽均枚举403个已发布当前上下文帧、实际读取1209个64B AXI beat，输出822条当前有效标签及CRC。恢复文件由实际记录VALID/READY握手捕获，snapshot_count来自原生完成count，不再由CPU构造本轮warm标签文件。两容量物理帧顺序不同，流CRC分别a2b92ed0/9ae2e09b，独立审计确认逻辑记录集合完全一致且逐条等于q180327真实final（204279 target已清理）。
+
+同一完整实例继续原生owner增量copy、G2/CP18共同发布，q180328第二owner-B故障、G2两键refs1/3修正、原生822标签写入/回读及path/query恢复、attempt4重试。原始path/query CRC仍1d36e333/79283e8e、floor180327；重试最终ledger180328/storage4/2/4，两路径共存。第一query171/170/849/421；故障前及重试第二query各114/113/564/302（poll/expand/candidate/cost），逐项对CPU。全部10路AXI、13次工作owner记录写、31个authority读beat、完整146284032B owner候选/工作图像和全部822标签/3MB backing独立重放通过。
+
+单元102项检查及5个实际流背压周期覆盖原生目录配置/发布、只读/拒绝/保持/TX floor、上下文过滤、未发布页、R错误、在途R取消、扫描offer背压取消、页padding错误，23个真实读beat独立重放（1个R错误）。默认关闭扫描的32槽普通查询/历史ripup回归，8AXI+7DDR+完整native trace共16文件及周期逐字节匹配旧基线。四归档均实际恢复重审audit逐字节一致。源冻结results/runtime_label_snapshot_sources_20261027（36文件）。
+
+边界：初始822条CPU未来读闭包、历史路径元数据、初始准确G1 clone仍是前提；本轮移除了恢复标签文件的CPU构造，不是全图未知页初始化。只输出当前选定query/price的硬件present记录；恢复容量显式1024，本例822。CRC用于独立完整性审计，现有trusted label_restore_controller尚不在硬件强制绑定选定源CRC。快照描述身份、持久化floor/认证、任意变价/回绕、owner epoch rearm、真实overflow新分配/回收及综合时序/板卡收益仍缺；额外DDR主口仍为一致共享文件模型。具体下一步见hardware/variants/label_frame_export_v1/NEXT.md。研究继续，goal active。
+
+以下保留历史。
+
+# 运行中owner增量快照及G2 warm联动通过（2026-10-27）
+
+详见results/runtime_owner_snapshot_20261027.json、hardware/variants/owner_snapshot_writer_v1/CONTRACT.md及hardware/variants/iter2_runtime_owner_v1/CONTRACT.md。选定full_v4/pressure_v4与unit_v3。新增incremental_owner_snapshot及owner_snapshot_checkpoint_adapter；现有路由/恢复生产层级沿用已审计基线。
+
+候选owner只预装原始G1基线副本，不再装前轮prepared G2图像。实际query180327提交和历史路径ripup的6次owner AW被RTL跟踪，去重为4条64B脏行（339193/558358/265324/990179所在行；包含最终回到基线的行）。原生PC lease下，从当前working DDR真实读取4条、写候选4条并回读4条验证，形成真实完成回执；新RTL适配层在命令/复制/回复保持时封锁lease释放和发布许可，回复消费后才提供jp_manifest_ready。之后实际authority/config/coordinator共同发布G2/CP18，继续q180328第二owner-B故障、G2两键refs1/3修正、822标签/path/query恢复及attempt4重试，无工作DDR重装/外部cold reset。
+
+32槽/单槽均通过：新增第9路AXI逐字节核对源4读/目标4写/目标4读（256B写入），完整146284032B候选等于真实CPU prepared态；原有8AXI、13个工作owner记录写、31个snapshot读beat与完整working owner/全部822标签及3MB backing重放通过。故障前/重试q180328各114poll/113expand/564candidate/302cost匹配CPU，第一query仍171/170/849/421，最后两路径共存、ledger180328/storage4/2/4。
+
+单元11事务/66次保持检查覆盖零脏行、去重、命令锁存、无lease、源R/目标B在途取消与真实退休、源R错、目标B错、回读R错、dirty满表、源B错、地址重叠。独立重放10R/5W，含2个R错误与1个B错误；失败不产生有效回执。初始完整层级两次未通过编译仅为TB声明/拼接问题，v3为门控封装前开发例，正式证据为采用独立RTL适配层的v4。三归档均实际恢复重审audit逐字节一致。源冻结results/runtime_owner_snapshot_sources_20261027（22文件）。
+
+限制必须保留：初始准确G1 clone及可信epoch设置仍是外部前提；单一已观察owner写者、dirty表64行满则拒绝、固定G1/G2布局与namespace接线。源B错误会使当前累积epoch失效，尚无恢复后重新arm/基线轮转。复制主口通过共享实际文件模拟第二个一致DDR端口，未实现板卡互连。标签仍依赖CPU保守822未来读闭包和外部历史路径；不是全状态运行中snapshot writer、硬件目录导出、全图未知页初始化、持久化认证/floor、任意变价、综合时序或板卡收益证明。
+
+下一优先补齐实际目录/标签导出以减少CPU闭包前提，并建立owner增量epoch的原生换代/错误后rearm契约；继续真实overflow分配/回收的完整系统验证。不要将本例4条copy行推广成任意全图dirty容量或板卡加速比。研究继续，goal active。
+
+以下保留历史。
+
+# 真实iteration2的G2后822标签warm恢复通过（2026-10-27）
+
+详见results/iter2_g2_warm_20261027.json与hardware/variants/iter2_g2_warm_v1/CONTRACT.md。32槽/单槽均原生执行query180327、拆除下一连接旧路径、实际三方发布G2/CP18/J0，再运行真实query180328（connection170996/net26422/source66893/sink67922）。首owner写990179成功，第二558358物理BRESP2，query status7/detail5/committed0，保留两键journal。
+
+实际G2 authority两轮读取旧refs1/3、occupancy均2；工作owner原生GET/DEC/GET恢复990179 refs2→1、558358 refs4→3，其他net不变。attempt4/query2/price4、target reset后，822条标签实际写入/回读验证。标签源为q180327 final并清理204279 target；没有提前套用q180328 prepared源点序号/target。真实G2 path78字/CRC1d36e333、query10字/CRC79283e8e/flags0x4d/floor180327恢复，slot0保留。三类原生回执联合、服务退休、最终成功回复消费后才放行，无外部cold reset或工作DDR重装。
+
+故障前和重试的第二query各114poll/113expand/564candidate/302cost，逐项匹配独立CPU oracle；最后slot1真实回溯提交、两路径共存、ledger180328/storage4/2/4。第一query仍171/170/849/421。全部822最终标签/所有3MB backing、13次物理owner记录写、31个真实snapshot读beat、完整146284032B owner与8AXI独立重放通过。其他net、overflow池/allocator和价格/history内容保留。
+
+生产层级复用已审计iter2_warm_v1的RESTORE_RECORDS参数接线（默认512，此例1024）与既有multi_owner_capacity_fixed_v1 coordinator，其余warm_retry_system_v2；没有新增生产修复。两归档实际恢复重审audit逐字节一致。源冻结results/iter2_g2_warm_sources_20261027。
+
+范围仍是固定价格/history、CPU保守822标签未来读闭包、自然两query与一个确定B错误点；当前路径不新增overflow槽。候选authority来自前轮已审计图像，历史路径元数据及manifest_ready为外部输入，未实现运行中snapshot writer、全局cache/未知页初始化、通用overflow分配/回收全系统恢复、持久化floor/认证、任意变价、综合时序或板卡收益。下一继续消除外部快照/闭包前提并扩展真实ownership变化与资源回收，不把行为仿真周期称为加速比。研究继续，goal active。
+
+以下保留历史。
+
+# 真实iteration2的G2共同发布与连续query通过（2026-10-27）
+
+详见results/iter2_g2_20261027.json及hardware/variants/iter2_g2_v1/CONTRACT.md。选定full_v2/pressure_v2，两容量均在真实query180327提交、下一连接旧路径原生拆除后，由实际PC lease导出path78字/CRC1d36e333及G2 query10字/CRC79283e8e（storage3/1/3、flags0x4d、floor180327）。未来generation导出不改变当前G1绑定。
+
+候选authority为已审计continuous_prep完整146284032B工作图像。真实authority/config/coordinator准备、保持回复、111唯一共同发布及完成退休：G1/CP17/J4→G2/CP18/J0。保留slot0与序号。原生AP拒绝旧G1请求，再实际读取G2四个变更节点339193/990179/558358/265324，其refs1/1/3/4、occ1/2/2/1；19个snapshot读beat及全部8AXI重放通过。原生导出/导入新G2 query字节/CRC一致、floor180327保留，才释放lease。
+
+发布后正常执行真实query180328，114poll/113expand/564candidate/302cost逐项对CPU；两query共822标签/全部3MB backing、九次owner记录写、完整owner/其他net保留、两路径共存与最终sequence180328/storage3/1/3均通过。第一query仍171/170/849/421。生产RTL未改；v1只因TB将旧请求拒绝回复的身份错要求为G1而停，原生reader按约定回复当前G2，v2修正该断言。
+
+两归档实际恢复重审audit逐字节一致。源冻结results/iter2_g2_sources_20261027。以上仍是行为仿真，候选图像来自已审计先前实验，manifest_ready为外部测试许可，无运行中快照writer。G2后warm故障恢复尚未执行，要求见hardware/variants/iter2_g2_v1/WARM_NEXT.md：q180328第二owner-B故障形成两键，G2需恢复refs1/3、822标签及floor180327/path原字节，再更高attempt重试；不可套用G1空行/seq0。未知页/全局cache、任意变价、持久化认证、综合时序及板卡仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 真实iteration2两条相邻查询连续执行通过（2026-10-27）
+
+详见results/iter2_pair_20261027.json与hardware/variants/iter2_pair_v1/CONTRACT.md。32槽/单槽均先原生query180327，保留提交slot0；按已观察历史路径原生导入slot1并ripup三内部点后，直接执行真实query180328（connection170996/net26422/source66893/sink67922）。无工作DDR重装、标签重新导入或外部cold reset；storage3/1/3不变。
+
+两query数值分别171poll/170expand/849candidate/421cost与114poll/113expand/564candidate/302cost，均逐项对独立CPU oracle。第二query全部822标签（含未更新行）及完整3MB backing通过；源点sequence180328、旧target204279与新target67922清理均由原生lifecycle完成。第二真实previous-pointer路径为67922→990179→558358→265324→66893，实际提交slot1，slot0保留，ledger180328。
+
+完整owner图像146284032B、九次owner记录写、外net23916保留与全部8AXI重放通过。准备中间态全部9089009主owner仍对下一CPU prepared快照逐一核对，overflow不变。生产RTL无修改。源冻结results/iter2_pair_sources_20261027。
+
+本轮仅正常连续查询；历史路径元数据仍来自原CPU观察，并非运行时路径发现。G2三方发布及下一query故障恢复尚未执行，接入边界见hardware/variants/iter2_pair_v1/G2_NEXT.md：在第一提交+历史ripup后捕获真实path/query、ledger180327与822标签，不能提前套用第二query prepared标签。运行中snapshot writer、全局cache/未知页、变价、持久化认证、综合时序及板卡收益仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 真实相邻查询的owner连续准备通过（2026-10-27）
+
+详见results/iter2_continuous_20261027.json与hardware/variants/iter2_continuous_v1/CONTRACT.md。32槽/单槽均原生执行query180327、171poll/170expand/849candidate/421cost，验证822标签，保留已提交slot0与sequence180327。真实PC lease导出原路径镜像，保留slot0原字节，导入由隔离原CPU观察的下一连接旧路径67922→990179→558358→265324→66893到slot1，释放lease后由原生route controller拆线。三个内部DEC为990179 refs2→1/occ2、558358 refs4→3/occ2、265324 refs5→4/occ1。无工作DDR重装/冷复位。
+
+独立审计全部9089009节点主owner与下一CPU prepared状态、overflow保持及完整146284032B图像、六次真实owner记录写、822标签/全部3MB backing及8AXI重放。最终slot0保留、slot1清理、journal四键、storage3/1/3、sequence180327。生产RTL未改。
+
+下一query180328独立cost302项及过滤/闭包584条通过，584为现有822的子集；标签差异仅source序号与两个target标记。原CPU插桩全路由哈希与十份查询文件一致，真实旧路径追踪揭示此前仅看558358/265324会漏掉990179的DEC。
+
+本轮只证明owner准备连续性，历史路径仍由已观察CPU轨迹供给；尚未执行下一source/target准备、query180328搜索、G2三方发布或其故障恢复。无运行中快照writer/全局cache/变价/持久化认证/综合时序/板卡收益结论。源冻结results/iter2_continuous_sources_20261027，研究继续，goal active。
+
+以下保留历史。
+
+# 真实iteration2的822标签G1 warm恢复通过（2026-10-26）
+
+详见results/iter2_warm_20261026.json及hardware/variants/iter2_warm_v1/CONTRACT.md。query/search/residency三层增加RESTORE_RECORDS参数，默认512，本例显式1024；822标签、probe204279及stream末尾821同步接入。32槽/单槽均通过完整warm恢复。G1/CP17初始PC租约实际导出empty path78字/CRC4ca00bd5和query10字/CRC4aaeb774，后者version3/flags0x0d/无已消费sequence，未手填旧seq1。
+
+真实自然query180327的第二个owner写（558358）BRESP2，第一写339193成功，形成两键journal；query status7/detail5/committed0。原生G1两轮authority核对与2次DEC恢复339193至0/0、558358/net26422至refs3/occ2，另一net23916/ref1保留。新attempt4/query2/price4恢复822条标签并实际回读验证822；empty path与初始query原字节/CRC经原生回执消费，三类receipt与服务退休联合完成，最终成功回复消费后才放行，无外部cold reset/工作DDR重装。
+
+故障前和重试的两轮171poll/170expand/849candidate/421cost均与原CPU数值oracle一致。重试成功提交三节点、target清理、原生ripup、重复完整sequence180327拒绝通过。822标签、403逻辑页对应全部3MB物理页、10次owner record写、最终146284032B owner图像及全部8AXI重放通过。source price/history未变。默认512的旧328标签G2共享恢复，两容量28文件及周期精确匹配原基线。
+
+同时采集并审计下一自然sequence180328：connection170996/net26422/source66893/sink67922，113expand/114poll/564candidate/302标签更新；原CPU全路由哈希不变。下一prepared-state在558358/265324上的refs为3/4，而上一提交后为4/5，存在额外准备阶段owner变化，不能直接装新快照冒充连续G2执行。新query的独立cost/CPS1/oracle/闭包及RTL仍未生成或验证，具体接入要求见G2_NEXT.md。
+
+四个RTL实验与一份CPU采集均已归档并实际恢复重审，audit字节一致；源冻结results/iter2_warm_sources_20261026。未完成本数据G2三方发布/连续下一query故障恢复、任意未知页/全局cache构建、运行中硬件快照writer、持久化floor/认证、变价有效性、综合时序或板卡收益。当前822 labels仍依赖CPU保守未来读闭包，本自然路径不新增overflow slot。研究继续，goal active。
+
+以下保留历史。
+
+# 真实iteration2接入当前完整查询生命周期通过（2026-10-26）
+
+详见results/iter2_lifecycle_20261026.json及hardware/variants/iter2_lifecycle_v1/CONTRACT.md。选定full_v5/pressure_v5，真实connection170782/net26422/source66893/sink204279，完整sequence180327与存储version3/query1/price3分离。使用同一CPU prepared-state的design、146284032B owner primary/pool/allocator、history/price/net/CPS1及822条保守标签闭包，不混用原q1/q2 oracle。先通过原生PC租约/只读authority验证真实overflow链，再由当前query_lifecycle、自主search、实际heap POLL、回溯和owner引擎完成整条查询。
+
+两容量均171poll/170expand/849candidate/421cost通过原CPU数值oracle；822标签与403逻辑页对应的全部3MB物理页（含空页）、全部8AXI逐字节重放通过。真实previous-pointer链含三个内部节点339193/558358/265324，提交refs1/4/5、occupancy1/2/1，节点558358另一net23916始终ref1。原生ripup回refs0/3/4，整个146MB owner图像逐字节等于输入，pool/allocator与其他net未破坏。重复sequence180327被status1拒绝且prepare_acked0，最终存储context仍3/1/3。
+
+本轮不新增生产RTL修复，沿用已审计multi_owner_capacity_fixed_v1 coordinator和warm_retry_system_v2其余生产层级。两个归档实际恢复重审audit字节一致，源冻结results/iter2_lifecycle_sources_20261026。以上为行为仿真；本自然路径不新增overflow slot，不能将前轮组件满池修复与本轮正常查询合并为完整多net warm恢复结论。
+
+仍缺本数据的G2三方发布、warm故障恢复、任意未知页/全图cache生成、任意变价、持久化floor/认证、综合时序和板卡收益。822条CPU未来读闭包是当前前提；恢复服务MAX_RECORDS仍512、旧fixture snapshot_count仍328，下一阶段须显式参数化到1024并迁移822流/实际path/query CRC。WARM_NEXT.md记录G1两项真实owner-B故障恢复的接入要求，以及G2后续query须新CPU oracle、不可重用已消费sequence的约束。研究继续，goal active。
+
+以下保留历史。
+
+# 同资源多net与满overflow池的恢复顺序修复（2026-10-26）
+
+详见results/multi_owner_recovery_20261026.json及hardware/variants/multi_owner_recovery_v1/CONTRACT.md。真实iteration2快照的overflow池capacity/live均53734且无free项。节点208292原net6632/ref1、net17601/ref2；基于真实快照构造确定压力变更（非自然路由轨迹），通过实际owner引擎删除主owner、加入net0、两次增加net17601引用，四次mutation产生三个去重journal键。旧生产coordinator先补回net6632，在后续net0释放空间之前遇status5 CAPACITY，恢复status3/J3；negative_v4保留实际反例。
+
+新候选只对匹配cookie/原GET值且无写入的INC CAPACITY拒绝延后一次，继续处理其余journal，再追加一轮修正并最终完整验证。真实组件fixed_v1通过：先释放net0并修正net17601，再补回net6632，4次修正/J0，池大小仍53734、allocator回到满池。追加轮有独立authority cookie；永久CAPACITY模拟单元恰2次拒绝后status3/J1，不能无限循环或放行业务。
+
+独立CPU模型与原CPU快照映射检查修复例21个真实owner操作/全部响应，逐条匹配16个物理record写，比较最终146284032字节；其余节点/池条目不被破坏，live和snapshot AXI全部重放通过。新coordinator用于完整系统正常G2回归，32槽/单槽共28文件及周期精确匹配旧基线。五归档实际恢复重审audit字节一致，源冻结results/multi_owner_recovery_sources_20261026。
+
+范围必须分开：多net满池测试为真实owner/authority/coordinator组件，但reconfigure/labels回调模拟；完整系统回归仍为原capacity0单net两路径。尚未完成完整warm系统的多net快照发布/路径查询恢复，也无通用所有排列、并发回收、任意变价、持久化floor/认证、运行时快照、综合时序或板卡性能结论。
+
+下一优先依NEXT_INTEGRATION.md，将已有真实iteration2 prepared-query、capacity53734布局和数值oracle接到当前query_residency_system/三方发布/保存状态恢复；不要重写已验证owner基本单元或混用原q1/q2单netoracle。新候选coordinator位于multi_owner_capacity_fixed_v1/sources，其余warm层级沿用warm_retry_system_v2。研究继续，goal active。
+
+以下保留历史。
+
+# 成功回复发布后的abort边界与J0重试通过（2026-10-26）
+
+详见results/warm_late_abort_20261026.json与hardware/variants/warm_late_abort_v1/CONTRACT.md。32槽与单槽各覆盖成功回复背压后abort、成功回复消费同沿abort，共四例。真实完成G2/CP18六项修复与三类回执后，原生coordinator已提交5/3/5、journal清零并发布status0/cookie c0010001/corrected6。held场景继续在abort下背压8周期，edge场景于同一实际消费边沿断言abort；成功回复VALID及全部检查的状态/cookie/corrected保持稳定，不能把已经发布的成功改写成取消失败。
+
+消费后仍warm owned/fault、业务关闭，current5与attempt floor5/J0保留，不能称此前成功被回滚。旧回复/fence退休后，相同attempt5原生status1拒绝，更高6/query0/price6以新cookie非冷复位重试成功，不重装工作DDR。J0分支无authority/owner journal访问，不伪造六键GET；重新恢复并验证全部328标签、78路径字和10query字后才允许正常业务。CPU oracle43poll/42expand/176candidate/122cost、最终标签、两路径拆线及共享2→1→0通过，全部8AXI/DDR重放通过。
+
+本轮仅改独立TB，生产RTL逐文件SHA等于warm_retry_system_v2；成功发布前的事件/周期与既有shared-last基线精确匹配。四归档实际恢复后重审audit字节一致，源冻结results/warm_late_abort_sources_20261026。行为仿真不能作为板卡速度、任意竞态或取消回滚证明。
+
+固定价格/history、一个net两路径/capacity0与两个确定边沿仍是本轮范围。晚到abort是否需另设显式状态/确认尚未形成通用接口；持久化floor/认证、运行中快照、多net/overflow、任意变价距离有效性、综合时序及板卡仍缺。下一优先扩展真实多net/overflow与资源回收生命周期，避免只在capacity0单net fixture上得出普遍结论；研究继续，goal active。
+
+以下保留历史。
+
+# 标签写入/校验阶段的AXI在途取消与非冷复位重试通过（2026-10-26）
+
+详见results/warm_axi_cancel_20261026.json与hardware/variants/warm_axi_cancel_v1/CONTRACT.md。32槽、单槽各覆盖R与B两种取消点，共四例。R场景328标签已写完但第一项读回校验未完成，真实AR已受理但R未返回；B场景32槽/单槽分别写完53/36项，AW及完整W已受理但B未返回，此时触发abort；延迟agent真实响应32周期，期间物理drained为false、label busy、owned/fault持续、恢复完成VALID为false且业务封锁。没有DUT握手掩码或伪造回复。
+
+放行后实际R最后一拍/B握手、原生标签status7回执消费、服务退休先于coordinator status6；journal6/CP18保留。相同attempt5被原生拒绝，再以新cookie的attempt6/query0/price6非冷复位重试；不重装工作DDR。原生G2两轮核对保留的六键，工作owner仅12次GET、无DEC、corrected0，全部328标签重新写入并验证，q1路径/原始query重建后成功放行。CPU oracle43poll/42expand/176candidate/122cost、最终标签、两路径拆线和共享2→1→0通过，独立重放全部8AXI与最终DDR。
+
+本轮无新增生产RTL修复：全部生产源逐文件SHA等于已审计warm_retry_system_v2。仅改独立TB与AXI内存agent延迟接口，取消前前缀逐行/周期匹配既有基线。四例归档实际恢复后重审audit字节一致；源冻结results/warm_axi_cancel_sources_20261026。结论为行为仿真正确性，不是板卡速度或加速比。
+
+仍是一个net两路径/capacity0、价格/history内容不变、两个确定在途取消点；不能声称覆盖任意取消、永久不返回、协议违规从设备或晚成功abort。下一优先晚成功abort与提交/回复消费边界，然后持久化floor/认证、运行中快照、多net/overflow、任意变价距离有效性、综合时序及板卡。研究继续，goal active。
+
+以下保留历史。
+
+# Warm取消后非冷复位重试通过（2026-10-26）
+
+详见results/warm_retry_20261026.json与hardware/variants/warm_retry_v1/CONTRACT.md。基于warm_cancel_fixed_v2，隔离变体只改receipt join和顶层命令选择；失败回复消费、旧fence释放、新fence重获且实际服务/物理事务退休后才允许重新arm。HALT至新WAIT始终owned，普通业务持续关闭；真实新backend offer选择新recover字段并同沿锁存，避免再次送旧attempt。
+
+35项门控单元检查通过。真实32槽与单槽两例均在G2共享六项修复、query9/10取消后，保留journal6/CP18；相同attempt5返回原生status1，新cookie的attempt6/query0/price6非冷复位重试成功，不重装工作DDR。原生REARM/target_reset后两轮G2读取再次核对全部六键，仅12次工作GET、无DEC、corrected0，journal只在最终成功清零。重新恢复328标签、78路径字、10query字，source4/2/4映射到6/0/6、sequence1；真实回执与最终成功回复消费后才放行。
+
+q2 CPU数值oracle43poll/42expand/176candidate/122cost、最终标签、原生两路径拆线及共享2→1→0通过；独立审计全部8AXI与最终DDR。健康两容量回归共28文件及周期精确匹配shared-last基线。四归档实际恢复后重审audit字节一致，源冻结results/warm_retry_sources_20261026。以上为行为仿真正确性，不是板卡速度或加速比。
+
+价格/history内容不变；仍为一个net两路径、capacity0。下一优先标签或AXI在途取消、已受理回复退休与重试，以及晚成功abort；通用多net/overflow、运行中快照、持久化认证与floor、任意变价有效性、综合时序和板卡仍未完成。研究继续，goal active。
+
+以下保留历史。
+
+# Warm查询取消的错误出口与退休修复通过（2026-10-26）
+
+详见results/warm_cancel_20261026.json与hardware/variants/warm_cancel_v1/CONTRACT.md。真实G2共享故障修复后，在query原始镜像9/10字取消。两个实际反例：旧LABELS仍等成功joined，原生query错误回复已消费后仍卡住；只修错误出口会在旧query回复尚未消费时提前返回失败。最终LABELS错误独立转FAILWAIT，并以真实warm服务/回复退休约束失败完成，包含CF busy/回复观察。
+
+warm_cancel_fixed_v2的32槽和单槽通过：原生query status2/CRC0保持8周期时恢复完成VALID始终0；消费后才返回status6，journal6/CP18保留，服务均退休。最终失败回复消费后仍HALT/owned/fault，业务关闭，未假装已经允许重试。实际工作owner图像等于G2快照，全部8AXI/DDR重放通过。健康六项共享恢复normal_v2两容量共28文件及周期精确匹配既有baseline。四归档实际恢复重审audit一致，源冻结results/warm_cancel_sources_20261026。
+
+本轮不是AXI在途中断，也未实现失败后非冷复位重试、晚成功abort或任意取消点。下一优先HALT在旧回复/fence全部退休后，为新attempt6/query0/price6重新arm并选择新命令字段；真实G2只读复核保留journal，corrected0，再恢复保存状态/重试，详见HALT_REARM_NOTES.md。标签/AXI取消、通用多net/overflow、运行中快照、持久化认证、综合时序及板卡仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 两共享资源故障与5/6项journal修复通过（2026-10-26）
+
+详见 results/warm_shared_20261026.json 与 hardware/variants/warm_shared_v1/CONTRACT.md。选定 warm_shared_first_v1/last_v1，仅改变TB错误注入时机及观察；所有生产RTL与warm_system_v2逐文件SHA一致，无新增生产修复。
+
+真实q2共享节点554512/263946分别是第5/6次owner写。32槽和单槽共四例通过：前4/5个物理B成功，第5/6个SLVERR，产生5/6项实际journal。G2原生两轮GET返回四个新资源ref0和一/两个共享资源ref1；旧G1对应共享行全零。工作owner实际GET/DEC/GET验证，共享ref2降至1而occupancy保持1，保留q1关系，不能混同旧G1的ref0。第5写场景中未纳入journal的另一共享行也保留。
+
+同实例不中途冷复位/重装工作DDR，完成328标签、q1路径与源查询镜像恢复及新attempt5/3/5下q2重试。CPU数值oracle43poll/42expand/176candidate/122cost、最终标签、两条原生路径拆线、共享2→1→0通过。独立字节/事件审计全部8AXI及最终DDR，核对5/6键、G2两轮地址/返回、15/18工作owner操作和全部回执；其他net状态保留。两归档实际恢复重审audit一致，新增源冻结results/warm_shared_sources_20261026。JSON阶段周期仅行为仿真，不是板卡速度或加速比。
+
+价格/history内容不变，仅attempt标签变化。仍是一个net/两路径、capacity0的两个确定共享写错误点；无任意价格变化距离有效性、通用多net/overflow、运行中工作DDR快照、持久化认证/下限、综合时序或板卡结论。下一优先真实恢复流/AXI在途取消、已受理回复退休及恢复过程失败后非冷复位重试，再回绕/未知页等。研究继续，goal active。
+
+以下保留历史。
+
+# 完整系统换代后 warm 故障恢复通过（2026-10-26）
+
+详见 results/warm_system_20261026.json 与 hardware/variants/warm_system_v1/CONTRACT.md。选定 warm_system_v2，32槽/单槽两例真实G2发布后，q2首个owner写B发生SLVERR；真实fence和coordinator从G2只读窗口两轮GET修复一项journal（node1231788/net2717，目标ref0/occ0），不是TB伪造owner/完成回复。
+
+原生标签模块经实际DDR/pager写入和回读328记录，原生路径恢复q1槽，原生查询以原始G2镜像/CRC转换到新attempt5/query3/price5并保留seq1。实际标签回复可先消费，三种回执全齐/退休、最终恢复回复消费后才放行业务；无需普通checkpoint lease（实际pc_owned0）。q2随后通过CPU独立数值oracle：43poll/42expand/176candidate/122cost及最终标签；两条原生路径可拆线，共享263946/554512引用1→2→1→0。全8AXI/最终DDR、恢复真实标签数据、源查询字节、G2修复地址及全部回执顺序重放通过，其他net状态保留。
+
+修复两处接线/阶段问题：前端ready本身就是后端受理，必须在真实backend offer选择模式并同沿arm；标签恢复自身建立新上下文，不能在启动前要求它已经建立。旧完整实例出现wm_mode0未arm失败；旧上下文join在140ns/check9失败。新上下文原生切片405检查通过，两负例及修复证据均保留。关闭warm的normal_v2两容量共28文件和周期精确匹配前轮。五归档实际恢复重审audit一致，源冻结results/warm_system_sources_20261026。
+
+JSON另列行为RTL仿真阶段周期（owner、label、path、query及故障到重试），不是板卡时间或加速比。价格/history DDR始终不变，attempt标签改变；不能宣称任意价格变化下距离标签有效。
+
+当前只覆盖一个net/两路径、capacity0的首个q2 owner-B故障。共享节点故障、多项journal、恢复流/AXI在途取消、非冷复位失败重试、epoch回绕/未知页、通用多net/overflow、运行中工作DDR快照、持久化认证/下限、综合时序和板卡仍缺。下一优先共享资源写故障（G2应恢复ref1，区别旧G1的ref0）及多项journal，再取消/退休与无冷复位重试。研究继续，goal active。
+
+以下保留历史。
+
+# 原生标签/路径/查询回执联合逻辑通过（2026-10-26）
+
+详见 results/warm_receipt_join_20261026.json 与 hardware/variants/warm_receipt_join_v1/CONTRACT.md。选定 warm_receipt_join_v4：锁存 G2/CP18 快照身份、目标上下文、cookie、标签数量与原始 path/query CRC；只有实际原生受理/消费形成回执。标签回复即使先消费也保留成功记录；路径/查询各只准入一次；已受理导入的 admin_safe 不随自身 busy 关闭。全部回执齐全并退休后才 joined，最终恢复回复消费前保持 owned；abort 同拍不放行。
+
+389次检查、9场景，8轮原生 label_restore 的2624行回读验证/13120字段真实RAM写入；原生路径78字及 ENABLE_REBASE=1 查询40B实际恢复（新上下文5/3/5、seq1）。回复保持、标签持续start offer、部分路径/查询、物理退休暂停、错误cookie/CP/上下文、CRC错误、原生成功但不符选定bundle CRC的镜像均验证。独立逐周期模型核对72个状态观察，标签写入/读回请求和源数据/CRC重放通过。归档实际恢复复审一致，源冻结 results/warm_receipt_join_sources_20261026。
+
+范围仍是原生三控制器切片：标签后端为可变RAM模型；recovery_owned/owner_repaired/活动上下文来自TB，没有完整fence/coordinator、工作owner AXI修复或q2搜索重试。HALT当前只支持退休后的冷复位，不是无复位恢复证明；无距离标签跨价格有效性、持久化授权、综合时序或板卡结论。
+
+接入约束已明确：现有 lr_rsp_ready=!k_labels_valid 必须在warm模式替换，避免与联合完成相互等待；用 label_allow 屏蔽持续 labels_valid 重启。joined 的 retired 不能包含正等待该回调的coordinator busy/recovery-owned。下一优先实际backend recover握手arm、recovery fence管理员和三层接线，再完整G2换代后q2故障/原生GET修复/保存q1状态/新上下文CPU重试。研究继续，goal active。
+
+以下保留历史。
+
+# 查询恢复上下文转换通过，完整 warm 恢复仍待接入（2026-10-26）
+
+详见 results/query_warm_rebase_20261026.json 与 hardware/variants/query_warm_rebase_v1/CONTRACT.md。选定 query_warm_rebase_v3：原生 query_lifecycle 增加默认关闭的 ENABLE_REBASE；开启后以恢复许可与选定 source 上下文验证原始40B镜像及原 CRC，再把 ledger 原子绑定到新 attempt 上下文，保留序号下限。不改输入字节，不伪造原 CRC，也不把距离标签自动视为新价格下有效。
+
+真实 G2 bundle version4/query2/price4/seq1 → version5/query3/price5/seq1。119次检查、12事务和独立事件/字节CRC状态机审计通过：无许可、错误 CRC/generation/source、部分流、完整包后发布前许可撤销、abort、序号回退均不发布；成功后导出新上下文与新CRC，seq1重放被拒绝。此处恢复许可及source descriptor来自TB，尚未接完整恢复fence。
+
+默认 ENABLE_REBASE=0 的完整32槽与单槽回归 query_rebase_normal_v2 通过：每例8 AXI+4 DDR+完整native协议+directory，共28文件逐字节及最终周期一致，保留前轮共同发布/G2原生GET/q2能力。两归档实际恢复后重审audit一致；源码冻结 results/query_warm_rebase_sources_20261026。
+
+尚未实现或验证完整换代后的 warm 故障恢复。下一优先 recovery fence 下管理员资格、label/path/query真实回执联合完成（label回复可先被消费）、上下文转换接线，再G2原生GET修复/恢复q1保存状态/新上下文q2重试。运行中工作DDR快照、多net/overflow、持久化认证、综合时序和板卡仍缺。研究继续，goal active。
+
+以下保留历史。
+
+# 完整系统共同发布及正常 q2 连续性通过（2026-10-26）
+
+详见 results/checkpoint_commit_20261026.json 与 hardware/variants/checkpoint_commit_v1/CONTRACT.md。选定 checkpoint_commit_v6；在已审计 checkpoint_system_v4 的 query root 增加受原生 lease 保护的只读 authority 检查接口，其余生产 RTL 不变。
+
+32 槽与单槽压力两例先完成真实工作写故障/修复/q1重试及取消检查，随后在真实 lease 下准备三个组件。候选 authority 使用已提交 bundle 的完整 owner 图像，与原工作结果逐字节一致。保持准备回复时旧身份不变，每例只有一次 111 共同发布：G1/CP17/journal6 → G2/CP18/journal0；完成消费前 lease 保持。配置仅检查布局、不读 DDR。发布完成后，公开 ap 接口通过原生 reader 拒绝旧 generation 请求，再 GET 六个目标资源及已有 node0/net4754；七次成功 GET 从新窗口读取14个 beat，完整字节重放与回复保持/lease 封锁核验通过。
+
+发布后原 G1 查询镜像导入失败；新 G2 导出40B镜像与 bundle/query.bin 一致，序号下限1保留，成功导入后才释放 lease。真实 q2 正常继续，43 poll/42 expand/176 candidate/122 cost 均对照 CPU oracle；两个共享节点 ref1→2→1→0、42 次 owner probe、两条原生路径拆线通过。全部八路 AXI/最终 DDR 独立重放，原其他 net 状态保留。前缀工作事务与旧已审计完整日志逐字节一致。归档已实际恢复重审，audit 逐字节一致，新增源冻结 results/checkpoint_commit_sources_20261026。
+
+本轮只证明同一上下文 version4/query2/price4 下的正常换代与继续工作。新 authority 节点 GET 已通过公开只读接口验证；普通查询仍访问工作 owner。尚未执行换代后的故障/target reset；保存 path/query/label 与序号下限的 warm 恢复联锁仍待实现和验证。manifest_ready 是外部测试输入，无运行中工作 DDR 快照生产器、通用多 net/overflow、持久化认证/原子提交、综合时序或板卡加速结论。
+
+下一优先完整系统换代后 q2 故障恢复：实际从 G2 authority 修复 owner，target reset 后恢复保存的 q1 路径、查询与标签及下限，再放行业务和重试。研究继续，goal active。
+
+以下保留历史。
+
+# 完整层级元数据准备与取消通过（2026-10-26）
+
+详见 results/checkpoint_system_20261026.json 与 hardware/variants/checkpoint_system_v1/CONTRACT.md。选定 checkpoint_system_v4，将双槽 authority、发布屏障、coordinator/config shadow 通过三个实际层级接入 query_residency_system，沿用原生 checkpoint lease 和真实物理/逻辑退休信号。共同发布许可与新准备请求许可分离，避免 commit 自身关闭 publish_ready。
+
+32 槽和单槽压力两例完成真实查询、owner 写故障、修复及重试，再在实际工作产生的六项 journal 上准备 coordinator/config、保持准备回复、提供路径/查询导入争用、取消、保持完成回复。取消始终保留 checkpoint17、旧 generation 和六项 journal；完成消费后继续成功导出保存路径、查询序号、配置和 journal。两例共 24 文件与既有已审计基线逐字节一致：每例八路 AXI 日志和四份最终 DDR。原生准备/回复/取消/丢弃/完成事件独立核对，保存路径、配置、上下文、journal 与恢复 floor 导出一致。归档已实际恢复重审，audit 逐字节一致；源码冻结 results/checkpoint_system_sources_20261026。
+
+本轮没有准备 authority 候选或在完整层级成功发布；三方同拍提交目前仍只由前轮元数据切片证明。manifest_ready 仍为外部输入。完整换代后故障恢复，尤其 target reset 后保存 path/query/label 与序号下限恢复再放行业务，仍未实现/验证。运行中工作 DDR 快照生产、多 net/overflow、综合/时序/板卡收益仍缺。
+
+下一步在完整层级接入实际 warm authority 图像并验证三方共同提交，再执行换代后故障恢复，完成路径/查询/标签恢复联锁。研究继续，goal active。
+
+以下保留历史。
+
+# Checkpoint 元数据联合发布通过（2026-10-26）
+
+详见 hardware/variants/checkpoint_stage_v1/CONTRACT.md 与 results/checkpoint_joint_20261026.json。选定 checkpoint_joint_v7，真实 lease guard 下，双槽 authority、coordinator checkpoint/journal 和有效配置影子状态由共同发布屏障协调。
+
+205 次检查与独立审计通过。四个事务依次为身份错配、显式取消、配置槽 abort 后部分取消、成功发布，状态 1/2/2/0。前三者保留旧 checkpoint17、generation1 与六项 journal；成功事务只有一次共同发布沿，切至 checkpoint18/generation2 并清 journal。准备回复、旧 GET 回复与完成回复保持时的封锁得到验证。发布后同版本恢复请求被原生 coordinator 拒绝，attempt floor 保留。5 个 GET、8 个 AXI 读 beat 与完整两份 owner 图像独立重放一致。
+
+归档已实际移走原目录后恢复、重新独立审计，audit 逐字节一致。当前源码冻结 results/checkpoint_joint_sources_20261026。
+
+范围仅元数据切片：journal 来自已验证 bundle 六项 delta 的接口输入，没有新执行工作 owner 写；无 route engine，route_retired 固定1，manifest_ready 为测试输入。没有执行真实恢复或原生配置 provider 回调，尚无 path/query/label 联合恢复、运行中工作 DDR 快照生产、多 net/overflow、综合/时序/板卡收益证明。
+
+下一优先将屏障和影子元数据接入完整顶层的真实退休/lease/manifest 条件；验证换代后 q2 故障恢复，在 target reset 后恢复保存的 q1 path/query/label 与序号下限，再放行业务。研究继续，goal active。
+
+以下保留历史。
+
+# 双槽authority组件通过并修复身份回退（2026-10-26，优先历史）
+
+详见 results/authority_rotate_20261026.md/.json 与 hardware/variants/authority_rotate_v1/CONTRACT.md。选定authority_rotate_v6：双原生reader槽、共用串行只读AXI；配置处理阻止GET，准备完成后未publish前仍服务旧槽。发布需两槽退休/无争用/外部许可，单拍切换；held回复、discard和abort行为验证。
+
+真实v5反例：rearm取消使configured=0后，旧包装器允许重初绑，从G2退回G1且无publish。修复首次绑定资格改查保留的bound_generation，服务就绪与身份存续分开。224检查、28GET、7配置+2rearm、45R beat，G1→G2→G4两次publish、原生布局失败/取消/SLVERR、恢复原身份通过。全图像/AXI/独立状态机审核，两归档实际恢复复审一致，源冻结results/authority_rotate_sources_20261026。
+
+初始图像并非空表，其他net已有占用；warm仅新增六个目标资源，所有其他字节不变，已有node0/net4754与六个新资源实际GET验证。G4复用warm图像，仅组件namespace测试。未接全系统，publish_permit为TB输入；无联合journal/config/path/query/label提交/恢复、工作DDR快照生产或新综合/时序/板卡结论。
+
+下一优先coordinator/有效配置影子prepare/publish与真实lease联合提交，再warm换代恢复（target reset后必须恢复路径/序号等才放行）。通用多net/overflow、持久化下限/认证、未知页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# 普通启动回归与新顶层OOC通过（2026-10-26，优先历史）
+
+详见 results/cold_validation_20261026.md/.json。cold_axi_abort_v1明确boot_required=0，与原bundle_capture_v3同TB/输入/CPU/故障：32槽/单槽各14文件（8AXI、4DDR、完整native协议和目录）逐字节一致，28文件；周期836290/893444、repair1一致。
+
+完整U280 OOC 113043LUT/73882FF/160.5BRAM/23DSP；相对bundle_capture增LUT +7588、FF +2840，BRAM/DSP不变。122生产RTL，runtime配置输入保留，零latch/blackbox/file-agent/observer。专用Vivado2022.2 MCP会话关闭；两归档实际恢复复审audit一致，源冻结results/cold_validation_sources_20261026。
+
+本轮仅代表fixture普通启动回归和未约束OOC，不证明形式等价/时序闭合/板卡收益。下一优先运行中authority换代与统一发布，再通用多net/overflow快照。带约束时序/实现、无复位恢复、持久化下限/认证、未知页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# AXI在途取消后的回复退休修复（2026-10-26，优先历史）
+
+详见 results/cold_axi_20261026.md/.json 和 hardware/variants/cold_axi_abort_v1/CONTRACT.md。真实AR受理/R前abort的旧版反例：AXI排空但前端8192周期仍phase2/all_drained1/normal_retired0/backend_idle0。新增16bit已接受host回复归属，abort不清；请求mask继续封锁，回复mask|owned只让旧回复退休，不伪造payload/status。
+
+32槽/单槽各读R、写B在途边界，共四例通过。读数据逐字等于bundle，写cut AW=B+1、退休AW=B；原native读/flush成功完成。旧回复背压8周期，新请求/boot成功仍关闭；完整物理与逻辑退休后才cold reset，同实例不重装外部DDR重建328标签/path/query。旧seq1拒绝、CPU q2 43poll/42expand/176candidate/122cost、42owner probes及refs1→2→1→0通过。全8AXI/最终图像与两归档实际恢复复审一致，源冻结results/cold_axi_sources_20261026。
+
+后续使用cold_axi_abort_v1；旧variant保留历史反例。下一优先普通启动完整回归与新顶层综合/时序，再运行中authority换代。无复位恢复、通用多net/overflow、持久化下限/认证、未知页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# 部分恢复流取消通过（2026-10-26，优先历史）
+
+详见 results/cold_stream_20261026.md/.json、hardware/variants/cold_stream_abort_v1/CONTRACT.md和cold_stream_late_v1/CONTRACT.md。生产root/gate与cold_abort_fixed_v1逐字节不变。path39/78、query5/10与9/10中断，32槽/单槽共六例；第一条path整条与query序号下限分别已送达，仍未发布，真实取消status2，错误回复保持8周期业务/lease释放关闭。
+
+query实际S流逐字与bundle比对，部分前缀后同一实例cold reset、不重装外部DDR，完整10字恢复。各例第二轮328标签/路径/序号导入、旧seq1拒绝、CPU q2 43poll/42expand/176candidate/122cost、42owner probes及refs1→2→1→0通过。全部8AXI/最终图像审核通过，两归档实际恢复复审audit一致；源冻结results/cold_stream_sources_20261026。
+
+尚未AXI在途中断或无复位恢复；下一优先真实R/B在途取消及退休、普通启动回归与新顶层综合。运行中authority换代、通用多net/overflow、持久化下限/认证、未知页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# 启动完成abort反例已修复（2026-10-26，优先历史）
+
+详见 results/cold_abort_20261026.md/.json、hardware/variants/cold_abort_v1/CONTRACT.md。旧cold_boot_v1在恢复完成回复被保持时未接入abort取消，完整系统复现“abort与消费同拍仍输出成功”。唯一生产差异：gate work_rst(rst||abort)。同一stimulus修复后屏蔽成功、清除资格并保持业务/lease释放封锁；不强制释放可能持有事务的lease。
+
+32槽/单槽在同一实例cold reset、不重新装载外部DDR，第二轮328标签重建与path/query导入成功；旧seq1拒绝、seq2 CPU oracle43poll/42expand/176candidate/122cost及共享refs1→2→1→0通过。全部8AXI重放/最终owner和42probes通过。旧失败与新成功两归档实际恢复复审一致，源冻结results/cold_abort_sources_20261026。后续使用cold_abort_v1；旧variant保留为历史反例。
+
+本轮只覆盖已完全退休的完成回复边界。下一优先导入流/AXI中途中断、普通启动回归及新顶层综合，再运行中authority换代。无复位恢复、通用多net/overflow、持久化下限/认证、未知页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# 冷恢复后继续真实查询通过（2026-10-26，优先历史）
+
+详见 results/cold_boot_20261026.md/.json 与 hardware/variants/cold_boot_v1/CONTRACT.md。选定cold_boot_v2：新RTL实例冷复位后从已提交G2/checkpoint18 bundle恢复，真实8配置回执、owner/authority绑定、328标签native重建/CRC/count、path/query导入回执及完成回复消费共同开放业务。修复更新/完成同周期旧资格复活；组件31项检查通过。
+
+32槽/单槽均拒绝合法上下文空闲slot的旧seq1（零prepare/commit），seq2对照独立CPU为43poll/42expand/176candidate/122cost。共享263946/554512 refs1→2，双ripup2→1→0；每例42owner probes，全部8AXI字节重放/最终owner图像通过。周期344879/344954包含恢复/查询/核验/撤销，非加速。两归档527文件实际恢复复审audit一致；当前源冻结results/cold_boot_sources_20261026。
+
+这是capacity0/同网两路径的主机预载参考冷恢复，不是FPGA自主DMA/板卡证明。下一优先：完整系统恢复中断/错误与普通启动回归，补新门控综合；再运行中authority换代与通用多net/overflow快照。持久化下限/认证、未知页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# 新提交代健康边界参考bundle通过（2026-10-25，优先历史）
+
+详见 results/bundle_capture_20261025.md/.json、bundle_capture_coverage_20261025.json 和 hardware/variants/bundle_capture_v1/CONTRACT.md。选定bundle_capture_v3：qc_cp_generation握手锁存目标G2，降低代拒绝，G2导出不激活仍运行G1的authority；合法CRC未来代导入仍拒绝，默认G1重放保持。生产只改query root，目录仅加仿真条件观察器。
+
+同一真实lease下导出query40B/path312B，捕获实际working owner/allocator/design/cost/labels与active/attempt上下文；目录由真实native握手重建120frame/328record，非数组伪造，仍非生产导出端口。新参考checkpoint18/G2吸收6个ref1资源，原实例仍G1/journal6。raw配置3须按实际active4覆盖word70。主机staging/fsync/manifest+COMMIT/rename包校验及24检查通过（2有效、22拒绝），未声称断电或认证/反重放。
+
+两容量各330824322数据字节，13组件11份同字节，目录/标签物理布局不同而328逻辑record相同。完整U280 OOC 105455LUT/71042FF/160.5BRAM/23DSP，增183/88，零latch/blackbox/file-agent/observer；三归档1658文件实际恢复复审一致，23当前源冻结。
+
+本轮是健康静止点/host参考包，尚未冷恢复或运行中换代。下一明确实验：新RTL实例cold reset，按effective4/query2/price4配置G2；真实label IO重建并硬件CRC/count核验；path/query导入实际receipt齐备且完成回复消费后才解除boot业务门控；拒绝旧seq1，再用已有followup_q2 oracle执行seq2并验证warm共享owner1→2、双ripup2→1→0。当前capacity0一路径fixture，不宣称通用多net/overflow快照。生产目录导出、持久化下限/认证、unknown页/价格/回绕/容量/断电/板卡仍缺。goal active。以下保留历史。
+
+# 查询checkpoint已接入真实系统租约（2026-10-25，优先历史）
+
+详见 results/query_checkpoint_join_20261025.md/.json、query_checkpoint_join_coverage_20261025.json 和 hardware/variants/query_checkpoint_join_v1/CONTRACT.md。两生产组件改写，120生产RTL继承。qc_cp复用实际lease，生产导入受理即pending，只在成功导入回复消费后清除；错误/部分导入及 held成功回复不能释放lease。query/path流互斥，诊断默认关闭。
+
+32/单槽共六例：真实owner B恢复及完整CPU重跑后，局部query状态丢失导入、默认关闭诊断的生产导入、接口闲置。前四例40B导出、坏CRC拒绝、CRC正确但generation高32位错误拒绝、正确重放；旧sequence1以空闲slot/合法上下文提交而被拒绝且零prepare/commit。pending104/88周期。全部8AXI+4图像每例字节同旧基线，共72文件比较通过；不是加速。
+
+完整U280 OOC 105272LUT/70954FF/160.5BRAM/23DSP，零latch/blackbox/file-agent；较旧增1128/577。五归档2585文件实际恢复复审一致，17当前源冻结。仍只丢query控制器，其余状态保留，不是冷启动；cold reset会清pending/lease。
+
+frame的generation绑定旧authority基线，不等于当前working owner的新快照；禁止与初始owner图像单独配对冷恢复。下一优先健康边界pending bundle generation/实际全状态捕获与真实receipt boot门控、原子提交/快照轮换，保存实际active配置与attempt下限，再完整warm-owner冷恢复。未知页/旧prev/frontier、价格/回绕/容量/耐掉电/板卡仍缺。goal active。以下保留历史。
+
+# 查询序号checkpoint组件通过（2026-10-25，优先历史）
+
+详见 results/query_checkpoint_20261025.md/.json、query_checkpoint_coverage_20261025.json 和 hardware/variants/query_checkpoint_v1/CONTRACT.md。新增原生query_lifecycle的10字CRC32快照，保存sequence_seen/last_sequence、design/version/query/price与dirty，绑定generation64。14查询/27checkpoint、实际S/M流和独立状态机/zlib审核通过；冷复位未导入会接受旧序号，正确导入后拒绝且无后端请求。
+
+CRC/身份/规范/次序/last、部分导入、权限/漂移、背压取消、空图像/序号耗尽和原子发布验证。真实旧clean导入清dirty反例已修复：同生命周期sequence及dirty不能回退。开发失败/监视编号审计失败保留。原生组件OOC 1695LUT/1734FF，比原573/1133增1122/601，均0BRAM/DSP/latch/blackbox。四归档235文件实际恢复复审一致，12当前源冻结。
+
+本轮后端为注册mock，新接口尚未接完整query/AXI；上一轮完整系统基线保持。version/query/price只做上下文相等，恢复协调器attempt下限仍未序列化；cold-reset本地floor不能阻止更早可信图像重放。恢复前必须外层admit门控到全部同代状态恢复完毕。下一优先统一描述/发布/快照轮换及完整冷恢复集成，再warm非零owner；未知页/旧prev/frontier、价格/回绕/容量/耐掉电/板卡仍缺。goal active。以下保留历史。
+
+# 通用owner authority已接入完整查询（2026-10-25，优先历史）
+
+详见 results/authority_query_20261025.md/.json、authority_query_coverage_20261025.json 和 hardware/variants/authority_query_v1/CONTRACT.md。选定authority_query_v4/retry_v3，三生产层改写+reader新增，118生产RTL继承。六行表只作正常probe期望值，不再生成authority回复；第八路AXI实际读完整初始owner图像，单快照绑定design64/checkpoint32/generation64。
+
+32槽/单槽共四例owner B故障及其后的snapshot R二次SLVERR，全部恢复并完整CPU重跑。首次二次故障status6/journal1保留，显式新query/version重试修复1项、journal清零；真实328标签写回/核验，非mock。普通故障原七AXI+四图像共22文件与旧基线字节一致；周期835704/892858，二次故障836213/892858，不是加速结论。
+
+修复目标rst误清reader绑定，以及私有rearm仅AXI排空却未逻辑退休的过早target reset，实际反例保留。完整U280 OOC 104144LUT/70377FF/160.5BRAM/23DSP，零latch/blackbox/file-agent。六归档2789文件实际恢复复审一致，19当前源冻结。
+
+仍只有一个绑定初始快照与已知328标签；本轮完整query authority key的初始owner为空，warm非零/overflow仅此前组件验证。统一checkpoint同代发布、轮换、query序号/epoch/version下限冷恢复、未知页/旧prev/frontier、实际价格/回绕/容量/耐掉电/板卡仍缺。下一优先统一描述与恢复下限，goal active。以下保留历史。
+
+# 版本化owner快照与恢复子系统通过（2026-10-25，优先历史）
+
+详见 results/checkpoint_authority_20261025.md/.json、checkpoint_authority_coverage_20261025.json 和 hardware/variants/checkpoint_authority_v1/CONTRACT.md。新增design64/checkpoint32/generation64绑定的通用只读owner快照服务；真实完整primary/pool/allocator图像，两份各9089009节点，第二份53734 overflow。728向量+8错误/重启探针共736回复，含58 overflow查询，非全量硬件穷举。
+
+接既有协调器与真实可写owner引擎，journal先于变更；两例首次snapshot R SLVERR保留3/5项，再以新version/query显式重试成功。验证INC/DEC、overflow引用与primary promotion。独立CPU oracle、全部AXI字节、完整owner语义与未涉及字节一致，allocator一致；iter2内部编码顺序不同。旧fault污染重试的真实反例保留，修复仅安全rearm清暂态，身份/journal保留。
+
+读取组件U280 OOC 4537LUT/3973FF/0BRAM/0DSP，零latch/blackbox；不是全系统资源或加速。五归档269文件实际恢复复审一致，14当前源冻结。labels_done仍mock，完整query top尚未接新authority，旧完整query基线保持。
+
+下一优先统一checkpoint描述绑定路径与全状态，真实labels恢复和完整query接入，序号/epoch/version下限恢复。快照真实性/不可变、外部持久化仍调用方保证；未知页/旧prev/frontier、实际价格/回绕/容量/耐掉电/板卡仍缺。goal active。以下保留历史。
+
+# 路径checkpoint接入系统与真实AXI通过（2026-10-25，优先历史）
+
+详见 results/route_checkpoint_join_20261025.md/.json、checkpoint_join_coverage_20261025.json 和 hardware/variants/route_checkpoint_join_v1/CONTRACT.md。硬件q1/q2完成后，在排空且无既有offer时取得显式lease，封锁16host/query/route/recovery。RTL导出78字→诊断仅丢失路径→坏CRC拒绝→原图像重放/再导出→实际AXI共享ripup refs2→1→0；32槽/单槽均通过。其他backing保留，不是全系统checkpoint恢复。
+
+六派生组件（5改写+1新增guard）、117继承RTL/dat保持。全部入口争用1424周期、持有1425周期，无新增AXI访问，journal10/last_sequence2/配置保持，七AXI和四图像与旧基线字节一致。正常24文件字节一致，周期657222/724963；CPP闲置时两例owner B错误完整恢复重跑。lease26单元含退休后错误释放，未证明真实checkpoint持有期AXI错误接管。
+
+完整U280 OOC 99321LUT/66384FF/160.5BRAM/23DSP，387端口57270位，零latch/blackbox/file-agent，默认诊断关闭。较旧版增10659LUT/2859FF，暂存开销仍高，无时序/板卡收益。五归档1632文件实际恢复复审一致，32源冻结，开发失败和scope文案修正证据保留。
+
+下一优先版本化checkpoint描述绑定路径与owner等全部状态，通用authority读取与query序号/epoch/版本下限恢复。外部路径buffer、同代owner可信前提、仅两slot/MAX_PATH32、未知页/旧prev、frontier重启、真实价格/回绕/容量/耐掉电/板卡仍缺。继续优化暂存多读口。goal active。以下保留历史。
+
+# 保存路径checkpoint组件通过，完整checkpoint继续推进（2026-10-25，优先历史）
+
+详见 results/route_checkpoint_20261025.md/.json、checkpoint_coverage_20261025.json 和 hardware/variants/route_checkpoint_v1/CONTRACT.md。新增两slot路径CRC32导出、逐项/逐对语义校验和原子导入；8/32容量各31路由+27checkpoint检查，真实CPU两同网路径在控制器reset后恢复并ripup共享refs2→1→0，未读label。注册mock后端，尚未接真实AXI/统一围栏，cp_safe和同一owner快照由调用方保证。
+
+三组件OOC LUT12897/13825/12061，选逐对扫描5751FF，零latch/blackbox/BRAM/DSP。固定slot选择负结果保留；较首版减836LUT，但较原2144LUT控制器仍增9917，资源开销较高。三版本两容量事件字节一致，另增满长度合成边界检查；非周期等价/系统资源/板卡性能证明。11归档373文件实际恢复复审一致，20源冻结。
+
+下一优先优化暂存多读口开销并接入系统围栏/真实AXI一致保存恢复；完整checkpoint必须覆盖owner/allocator、design/cache、history/价格、labels/目录、配置、journal和query序号/版本下限。last_sequence当前reset清零，不能只恢复路径；frontier重启边界、未知页/旧prev、真实价格/回绕/容量/耐掉电/板卡仍缺。原研究目标保持，goal active。以下保留历史。
+
+# 保留journal的恢复失败后重试通过（2026-10-25，优先历史）
+
+详见 results/recovery_retry_20261025.md/.json 和 hardware/variants/recovery_retry_v1/CONTRACT.md。业务owner B错误后，恢复owner GET R/DEC B、标签eviction B/CHECKPOINT B/核验R二次真实故障，各32槽/单槽共10例全部在显式新命令下成功恢复并完整CPU重跑。保留journal/authority/配置描述，只在旧回复消费、物理和逻辑退休后REARM清理恢复暂态；新version/query身份拒绝旧尝试。DEC B已实际修复时重试不重复扣减。不是自动重试或完整checkpoint。
+
+协调器39/配置32单元检查、真实七AXI/全图像/完整CPU与第一故障基线前缀审计通过。三生产组件改写、119继承RTL/dat保持；正常双查询共享ripup的24文件与旧基线字节一致，周期657222/724963。完整U280 OOC 88662LUT/63525FF/160.5BRAM/23DSP，零latch/blackbox/file-agent。六归档1442文件实际恢复复审一致，29源冻结，开发失败保留。无板卡加速结论。
+
+下一优先完整checkpoint与未知页/一般reroute。仍q1六行authority/328已知标签、design backing保留、snapshot外部新cookie重放；实际价格未变，回绕/容量/耐掉电/板卡仍缺。goal active。以下保留历史。
+
+# 恢复期间真实二次故障验证通过（2026-10-25，优先历史）
+
+详见 results/recovery_fault_20261025.md/.json 和 hardware/variants/recovery_fault_v1/CONTRACT.md。业务owner B错误后，在恢复owner GET R/DEC B、标签写入eviction B/CHECKPOINT B/核验R注入第二次真实SLVERR，各32槽/单槽共10例，全部通过失败关闭契约。恢复返回错误、实际AXI/回调退休、journal=1保留、回复背压及消费后拒绝业务和新恢复接受。不是二次故障后恢复成功/自动重试。
+
+122继承RTL/dat哈希不变；全CPU查询前缀、七AXI字节、完整图像、owner实际副作用和snapshot计数独立审计通过。DEC B错误物理修复已发生但确认数0，标签失败前owner已修复1仍不放行。623文件归档实际恢复复审一致，9源冻结，验证编译失败保留。本轮无需重综合，无板卡性能结论。
+
+下一优先完整checkpoint和保留journal的恢复失败后重启协议。仍依赖q1六行authority/328标签，design backing保留；cold reset会丢日志，不能当恢复算法。未知页/任意reroute/真实价格/回绕/容量/耐掉电/板卡仍缺，goal active。以下保留历史。
+
+# 搜索错误事务退休修复完成（2026-10-25，优先历史）
+
+详见 results/search_fault_retire_20261025.md/.json 和 hardware/variants/search_fault_retire_v1/CONTRACT.md。选择v6冻结版本：原11例真实AXI故障全部恢复并完整CPU重跑，新增深层graph/cost六例及capture九错误场景通过。修复错误帧/候选下游/coordinate请求/connection元数据取消的退休；保持已暴露握手，要求真实HLS/内部回复/AXI排空。目录memory lease为故障后保留锁，不作为在途事务归零条件；开发反例已冻结。
+
+正常32槽/单槽双查询与共享ripup审计通过，周期657222/724963；24份cycle轨迹/七AXI/完整图像与旧正常版本字节一致。十组件改写、112生产RTL/dat保持。完整U280 OOC 88652LUT/63485FF/160.5BRAM/23DSP，零latch/blackbox/file-agent；五归档1841文件实际恢复复审一致，33源冻结。无route/Fmax/板卡加速结论。
+
+下一优先完整checkpoint与恢复期故障。仍只有初始328标签/q1六行authority受信任、design backing保留；真实价格、未知页、任意reroute、回绕/容量/耐掉电仍缺。新入口run_query_fault.py RESULT --search-fix（--deep深层），run_search_retire_join.py正常；原默认基线不变。goal active。以下保留历史。
+
+# 真实查询故障矩阵与路由退休修复（2026-10-25，优先历史）
+
+详见 results/query_fault_20261025.md/.json。原版真实 AXI 故障11例：5例恢复并完整重跑，6例卡住（graph/cost/owner各两种容量）；独立七AXI字节/全owner/CPU重跑审计通过仅表示结论可信，不能说所有故障恢复通过。源标签R、单槽prepare B、cleanup B可恢复；cleanup已提交6项，先修复6项再重跑。
+
+隔离 query_recovery_v2 仅改外层排空谓词，解决route adapter busy包含锁存fault导致的DRAIN死等；仍要求normal_retired、backend_idle、AXI全排空、search退休，额外接受rc_fault且fence BLOCKED。32槽/单槽owner B错误各1例均修复实际副作用1项（ACK=0）后恢复初始328标签并完整重跑，最终全owner与CPU精确一次提交一致。显式入口run_query_fault.py RESULT --route-fix；旧正常入口与原基线不改，新谓词尚未重综合。
+
+下一优先graph错误的capture/frame/递归完成退休、cost错误的候选链失败退休：两者AXI虽空但内部仍owned，不能跳过退休强制reset。原版反例已保留。完整checkpoint仍缺，q1六owner authority/328已知标签受信任、design backing保留；无未知页/任意reroute/真实价格变化/耐掉电/板卡加速结论。以下保留历史。
+
+# 单命令查询生命周期RTL通过（2026-10-25，优先历史）
+
+详见 results/query_lifecycle_20261025.md/.json 和 hardware/variants/query_lifecycle_v1/CONTRACT.md。基于search_sparse_v3新增source根检查→4次prepare写→真实search→自动route commit→清target→CHECKPOINT/排空，主机只需一条查询命令；全生命周期16host+route围栏。28模型、32槽/单槽真实双query及全CPU/1650host标签写/2713请求/七AXI/全状态独立审计通过，四owner阶段和路径数学保持。每query完成后target=0。120旧资产不改，qc_*避免连接服务q_busy/q_fault重名（首版失败已保留）。
+
+完整U280 OOC 86880LUT/62800FF/160.5BRAM/23DSP，零latch/blackbox/file-agent，358端口/56927位；143源冻结、三归档实际恢复复审一致。周期657222/724963不能与旧682354/745363直接解释为加速，因为移除了328条prepared评分读取且增加清理/刷回；未route/Fmax/板卡。
+
+下一优先真实生命周期故障/恢复交接和完整checkpoint。单sink/空saved-slot、严格递增sequence及固定上下文；初始目标集合受信任，初始328标签/authority/snapshot生产、ripup发令仍外部。取消保持已发VALID，route可能已提交；rsp_committed只是native提交报告，status0才表示完整成功；永久后端停顿仍可不返回，无回滚。journal仍仅route-owner；altSink/任意reroute、非空CLEAR实测、unknown-page、价格/序号回绕/容量/耐掉电/板卡仍缺，goal active。以下保留历史。
+
+# 自主搜索接口资源对照完成（2026-10-25，优先历史）
+
+详见 results/search_optimization_20261025.md/.json。回复静态切片v2仍99477LUT/61700FF（负结果保留）；四路搜索注入v3为86129LUT/61699FF/160.5BRAM/23DSP，较v1减少13348LUT（13.418%），下一实验选`search_sparse_v3`。v3只限制私有scheduler为6/8/11/12，主机16路全保留；无效payload可变，有效事务载荷/控制等价，非法私有lane拒绝。FSM/top/TB不改，每个join120源保持。
+
+两变体各20模型、69632/17420组并行接口比较、各32槽/单槽共4真实运行通过；全部cycle轨迹/七AXI/四图像与独立CPU审计v1字节相同，周期682354/745363。八归档实际恢复复审一致、129源冻结；零latch/blackbox/file-agent，未route/Fmax/板卡，无吞吐加速声明。入口run_search_sparse_join.py显式选v3，旧默认仍v1。
+
+下一优先硬件prepare和search→commit编排；search_prepare_analysis_20261025.json确认当前5次prepare写仅3值变化，不能删去任意source仍需的lb/upstream归零。真实search fault/非空CLEAR、完整checkpoint/unknown-page/价格回绕/容量/耐掉电及板卡仍缺；goal active。以下保留历史。
+
+# 设备侧自主搜索循环与完整OOC通过（2026-10-25，优先历史）
+
+详见 results/search_scheduler_20261025.md/.json 和 hardware/variants/search_scheduler_v1/CONTRACT.md。可综合FSM已接管prepared query的实际堆POLL→标签→expand→目标→CHECKPOINT/排空，16host+route全查询围栏与恢复取消交接。20独立FSM+20组合模型、32槽/单槽两次真实双query及CPU/全状态/七AXI独立审计通过；116POLL/114expand/447判定/293cost/879ACK、四共享commit/ripup保持，117旧资产不改。七AXI/四完整图像与旧版本字节一致；43标签read只忽略字段差异显式检查。cycle为682354/745363（旧683640/747471），非板卡收益。
+
+完整U280 OOC：99477 LUT/61700 FF/160.5 BRAM/23 DSP，零URAM/latch/blackbox/file-agent；342端口/56716位，默认32槽/16384帧。四结果实际解压复审、源闭包与开发失败保留。无place-route/Fmax/板卡。
+
+下一优先宽接口静态切片资源对照（本轮LUT增加19666，约24.6%），然后硬件prepare与search→commit编排、真实search故障/非空目标CLEAR和完整checkpoint。取消/超时保持已发VALID，永久后端停顿仍可能不返回；无search回滚。初始import、query间prepare、route发令、authority/snapshot生产仍外部；CPU已知328标签/120页，table闲置。route-only journal、完整warm/frontier/path/created-cache、unknown-page、价格回绕/容量/耐掉电及板卡仍缺，goal active。以下保留历史。
+
+# 独立服务系统顶层抽取与完整组合OOC通过（2026-10-25，优先历史）
+
+详见 results/residency_system_20261025.md/.json，入口 hardware/variants/residency_system_v1/residency_system.sv、interface.json、CONTRACT.md。13个硬件实例从TB迁出，313逻辑端口/55702接口位；原116组件RTL/dat保持。恢复snapshot描述握手时锁存，故障fixture随后反转输入仍恢复成功。正常默认诊断关闭2例、真实续接2例、route故障恢复10例共14运行及逐cycle/七AXI/四完整图像对比通过，均与抽取前相同。
+
+完整32槽/16384帧U280 OOC 79811 LUT/60324 FF/160.5 BRAM Tile/23 DSP，零URAM/latch/blackbox/文件agent实例；原生Tcl535.115s exit0。5026警告分类保留，含counts/cursors数组落寄存器；未约束/未place-route/Fmax/板卡。综合原会话观察超时后继续至成功，没有重启，已关闭临时综合会话。四归档1628文件实际解压复审audit逐字节一致，收据residency_system_restore_20261025.json；87文件源冻结。
+
+下一优先设备侧search/prepare调度（真实POLL→parent/展开→目标/提交）及完整checkpoint；现有服务组合已独立，但外层搜索/authority/snapshot生产仍TB或外部，宽接口尚需总线包装。仅route owner修改journal，legacy写和完整warm/frontier/path/created-cache未覆盖；CPU已知328标签、table闲置、恢复期真实fault、unknown-page、价格回绕/容量/耐掉电及板卡仍缺，goal active。以下保留历史。
+
+# 事务围栏正常搜索与真实续接回归通过（2026-10-25，优先历史）
+
+详见 results/transaction_fence_normal_20261025.md/.json。静态 fence/13 retired_idle 导出/journal 与恢复组件 RTL 不改，两套真实双查询激励各32槽/单槽共4运行及独立CPU/完整图像/AXI审计通过：116POLL/114expand/447判定/293cost/879ACK，四阶段共享refs1→2→1→0、occupancy按net计。3032普通请求逐载荷/退休核对，续接版3036；每query真实center HLS+cost AXI两个子回复背压7周期，前端父回复先消费、后端上下文保留至子回复退休。六AXI实际活跃，table无流量。
+
+相较围栏前，路由语义、四完整图像与七AXI文本逐字节相同；整段仿真周期32槽680767→683640（+0.422%），单槽743652→747471（+0.514%），包含journal/恢复组件整体开销，非板卡结果。两份归档916文件实际解压复审逐字节一致（transaction_fence_normal_restore_20261025.json）；73文件冻结及开发失败日志保留。下一优先完整可综合top与自主search/prepare、legacy写日志/完整snapshot；初始化authority仅q1六行，本轮未恢复，不能推广到第二query或任意写入恢复。恢复期fault、table活跃、unknown-page、实际价格/回绕/容量和板卡仍缺，goal active。以下保留历史。
+
+# 事务围栏与静态切片真实接入通过（2026-10-25，优先历史）
+
+详见results/transaction_fence_20261025.md/.json及transaction_fence_v1/CONTRACT.md。16主机/admin入口+route缓存/回复归属，允许既有expand必要续接排空，恢复回调逐端口pending；七AXI观察器。13隔离retired_idle出口区分故障锁存busy与真实owned/HLS未退休，97旧RTL/dat保持。11模型/5 HLS退休检查、32槽/单槽真实route10故障、16入口竞争94081–129186周期、全图像/AXI独立审计通过。
+
+采用transaction_fence_static_v2：仅将捕获改为常量lane切片，与动态版事件/逐cycle/AXI/全部图像一致；绑定16字段OOC 6908 LUT/3040 FF、零RAM/DSP/latch，Tcl91.061s exit0，无route/Fmax/板卡。旧动态综合启动器超时后实际PID继续监督，静态版验证后主动停止旧变体，未伪报旧综合通过；开发和收据保留。
+
+下一优先完整生产top抽取及新fence正常search/共享ripup回归，并补legacy owner/design/cost写日志与完整snapshot；目前checkpoint仍仅route提交范围，初始快照/CPU authority/标签流外部，不能外推任意入口失败。新五类观察器在本fixture闲置；续接为mock证据。恢复期故障、warm/frontier/path/created、unknown-page、价格回绕、容量与耐掉电/板卡仍缺，goal active。以下保留历史。
+
+# 常驻配置快照与硬件恢复通过（2026-10-25，优先历史）
+
+详见results/config_restore_20261025.md/.json及hardware/variants/config_restore_v1/CONTRACT.md。独立cold域驻留2304位六服务描述符，checkpoint17在正常route前装载；target reset后硬件按独立握手/响应退休重配，connection先于其余五lane，错误/取消不撤已暴露VALID。27恢复响应/37次load模型、32槽/单槽真实route10故障及手工六payload/七类AXI/全图像审计通过，成功重提交后load18，110原RTL/dat保持。U280 OOC 683 LUT/2520 FF、零RAM/DSP/latch，未route/Fmax。
+
+下一优先统一生产top/全入口围栏、真实恢复期fault，再正常共享/ripup回归与完整checkpoint/search。初始可信descriptor安装、CPU authority/标签snapshot生产仍外部；不是完整自主snapshot读取。配置自身错误/超时当前仅mock，完整warm/created/frontier/path、unknown-page、实际价格与回绕、journal容量预约、耐掉电及板卡仍缺，goal active。以下保留历史。
+
+# 硬件标签恢复真实接入通过（2026-10-25，优先历史）
+
+详见results/label_restore_20261025.md/.json与hardware/variants/label_restore_v1/CONTRACT.md。新增512条缓存RTL服务，协调器直接启动/接收完成，OPEN/absent、328×5字段写、CHECKPOINT、328整条读回与排空均由硬件调度；TB只送snapshot流。30次模型响应含同实例复用及错误/取消/超时/流边界通过；32槽/单槽真实route五故障共10例恢复重提交及七类AXI/全owner/标签帧独立审计通过，110旧RTL/dat不改。默认U280 OOC 441 LUT/534 FF/3 BRAM、零latch/DSP，未route/Fmax。
+
+下一优先配置回调硬件化、统一生产围栏与真实恢复期故障注入，再完整checkpoint/prepare/search。CPU authority和配置仍TB，外部快照集合完整性仍可信前提；absent仅单探针，非未知页/全图证明。新label服务错误/取消仅mock证据，完整warm/frontier/path、正常共享ripup回归、价格回绕、容量预约/耐掉电/板卡仍缺，goal active。以下保留历史。
+
+# 恢复协调器真实服务接入通过（2026-10-25，优先历史）
+
+详见results/recovery_join_20261025.md/.json。可综合独立journal/准入/reset/两遍owner修复接入真实pager/owner AXI，32槽/单槽共10故障通过；journal至少早于owner转发一拍，target reset不清日志。实际GET/DEC及第二遍验证后，新epoch2/version4标签absent探测、328重载/读回、恰6ACK重提交及checkpoint17→18通过。完整owner等于CPU q2准备态，七类AXI全字节与全部标签帧独立审计。110原RTL/dat逐SHA保持，隔离新adapter，源冻结recovery_join_sources_20261025。
+
+下一优先把cfg/标签恢复回调迁为硬件服务、统一生产围栏并补新adapter正常共享/ripup回归；CPU authority/配置发包/标签重载当前仍TB，非完整自主checkpoint。容量需事先预留；没有完整warm搜索状态、unknown-page、真实价格/epoch回绕、耐掉电或板卡加速结论。完整checkpoint与prepare/search外层仍待研究，goal active。以下保留历史阶段记录。
+
+# 可综合恢复协调器组件通过（2026-10-25，优先历史）
+
+详见results/recovery_coordinator_20261025.md/.json及hardware/variants/recovery_coordinator_v1/CONTRACT.md。新增独立journal/准入/reset/两遍owner恢复FSM，权威refs非固定0；先修refs、再验证occupancy，支持同资源多net中间态。28次mock操作及交接/容量/身份/故障边界通过；同实例checkpoint推进后两次恢复。默认32项U280 OOC2187 LUT/2568 FF、零latch/BRAM/DSP，未route/Fmax。
+
+下一优先把该模块接入真实10故障链（journal先于修改、target reset不清journal、实际owner修复），之后实现真实cfg/label回调与统一生产围栏。当前新协调器只mock组件，先前真实10例仍TB协调，不能互相替代证据。容量须事先预留，cfg_authoritative依赖外部真实snapshot，日志非耐掉电；完整checkpoint/search/unknown-page/回绕及板卡仍缺，goal active。
+
+# 同实例提交checkpoint协调恢复通过（2026-10-25，优先历史）
+
+详见results/route_recovery_20261025.md/.json。五故障×32槽/单槽共10例：排空/围栏后同DUT reset，journal真实GET发现副作用、DEC修复、再GET归零；query epoch2/price4/version4冷探测absent、328权威标签重载/读回后完整6ACK重提交。全owner最终均等于CPU q2准备态，未双倍INC；跨reset AXI字节严格重放通过，无文件替换/清owner/backdoor。生产RTL不改，恢复journal/准入/流程仍TB协调器。
+
+此checkpoint只覆盖回溯提交操作标签/owner，不是完整search warm/created/frontier/path表恢复；已知328工作集、非回绕epoch/版本、无并发/实际价格变化或耐掉电保证。下一优先可综合恢复协调器和完整checkpoint，再prepare/search及unknown-page；goal active。
+
+# 真实组合早完成缺口已隔离修复（2026-10-25，优先历史）
+
+详见results/route_drain_20261025.md/.json。旧adapter在label RRESP2后native错误先返回、AXI仍余2拍即给完成；反例保留route_fault_counterexample_20261025。新route_commit_join_drain_v2加单挂起AXI观察器/backend_drained完成及admission屏障。32槽/单槽共10故障通过；owner B错误ACK0但物理已改1节点，取消/版本输入漂移ACK1改1，label/owner R错误不改owner。严格错误字节/排空及故障围栏审计通过。正常双query新旧全部周期轨迹、七类AXI及完整图像逐SHA一致。
+
+旧成功基线保留，仅正常路径有效；需要上述故障保证时用显式drain变体，不可把native完成等同物理排空。观察器非通用多ID AXI；没有自动rollback/协调reset-reload恢复、真实超时/协议损坏或价格/epoch更新。下一优先统一生产围栏/权威状态恢复，再prepare/search外层与unknown-page，goal active。
+
+# 可综合路径控制器真实服务接入通过（2026-10-25，优先历史）
+
+详见results/route_join_20261025.md/.json。新增route_commit_host_adapter，原109RTL/dat不改+2模块，替换TB回溯提交循环：四条命令驱动实际16标签读/24owner修改及保存路径ripup。32槽/单槽两query447decision/293cost/879ACK与四阶段完整owner、CPU q3、328标签/120页/16384物理帧及七类AXI均通过；全部配置/control/expand/frontier/host冲突入口正常路径围栏测试通过。整体adapter资源/时序未测。
+
+下一优先补真实组合故障/排空与统一围栏生产top，再迁移prepare/search外层和unknown-page生命周期。当前真实成功路径已接通，但外层search/prepare仍TB、328联合工作集CPU预知；core mock25项不能外推组合故障恢复，价格/epoch/altSink/板卡仍缺，goal active。
+
+# 可综合回溯/路径提交控制器首版通过（2026-10-25，优先历史）
+
+详见results/route_commit_20261025.md/.json及hardware/variants/route_commit_v1/CONTRACT.md。独立五状态RTL、两个保存路径slot，先验证整链再提交，ripup不重读prev；完整上下文/设计归属、背压故障排空。真实CPU payload+注册mock后端25项通过；U280默认MAX_PATH32 OOC综合2144 LUT/2924 FF、0latch/BRAM/DSP；仿真MAX_PATH8。未place/route/约束/Fmax。错误回复/取消可能已改owner，ACK计数不是副作用上界，无热重试/自动rollback。
+
+下一优先将模块经host接口仲裁和全程lease接入真实pager/owner AXI，替换连续查询TB回溯提交循环，再验证共享/ripup及故障边界。当前只是组件mock与OOC，非真实后端/完整search集成；TB验证不等于可综合外层已完成。价格/epoch/unknown-page、自主search及板卡仍缺，goal active。
+
+# 真实共享分支提交/ripup通过（2026-10-25，优先历史）
+
+详见results/shared_ripup_20261025.md/.json。同实例q1/q2实际路径保存，第二分支提交与两分支依次ripup；共享554512/263946 refs1→2→1→0，occupancy1→1→1→0。24次真实owner修改B、四阶段48 GET、全owner图像及七类AXI独立通过；第二分支提交图像还与原Router sequence3全9089009节点owner字段一致，完整CPU路由hash保持。32槽/单槽447decision/293cost/879ACK均通过，109生产RTL/dat未改。最终owner恢复原始，label/design/history不清。
+
+下一优先将TB实际回溯/路径保存/提交/拆除移为可综合控制器并补故障中断/完成屏障，再推进价格/epoch/unknown-page生命周期。当前仍TB调度、CPU预知328联合工作集，未覆盖价格更新/并发或板卡性能，goal active。
+
+# 同实例同网连续查询通过（2026-10-25，优先历史）
+
+详见results/continuous_query_20261025.md/.json。一复位/配置/初始328联合记录，同RTL实例q1实际搜索→7prev跳转→6真实owner INC→5标签准备写→q2实际搜索；无q2标签/owner/design重装。32槽/单槽均116POLL、114expand、447判定、293cost/OFFER、879ACK，两个末态及中间328准备态、完整design/owner/cost/16384物理帧和七类AXI独立通过；109生产RTL/dat未改。价格/存储epoch相同，仅完整搜索sequence1→2。
+
+回溯/提交/prepare仍TB经真实接口调度，非可综合自主控制器；q2路径尚未提交。下一优先q2提交/同网共享引用与ripup，再迁移自主backtrace/commit，并继续价格/epoch/unknown-page生命周期。328联合工作集仍CPU预知，板卡/完整系统未实现，不宣称仿真周期为加速，goal active。
+
+# 第二轮真实准备态 RTL 闭环通过（2026-10-25，优先历史）
+
+详见results/followup_rtl_20261025.md/.json。Vivado2022.2同B会话，32槽/单槽均通过171POLL、170expand、853捕获/849判定、421cost/commit/OFFER、1263ACK及最后4child EARLY drain。实际sequence180327进入32bit visited，owner pool53734条真实AXI读，第二轮共享/overflow/history成本一致。完整822 native记录/403页、16384物理帧及全design/owner/cost和七类AXI逐字节审计通过；两配置label SHA相同。109生产RTL/dat未改，总周期1049101/1067253只仿真。
+
+仍是从CPU准备态恢复一个后续query，非同一RTL实例前query提交/价格切换/后query prepare的连续生命周期。TB外层调度、CPU预知822标签工作集、未知页初始化、自主search/backtrace/owner commit和板卡仍缺。下一步优先同网连续query的实际路径提交与准备态切换，并明确unknown-page持久prev/距离标签规则；不要扩大当前证明范围。保持goal active。
+
+# 后续成本/过滤及输入绑定通过（2026-10-25，优先历史）
+
+详见results/followup_cost_20261025.md与followup_{q2,iter2}_inputs_20261025.json。query2/iteration2成本122/421次独立binary32重算；全history/价格/net/CPS1表通过，九文件actual search保持。iteration2有106共享调用、10overflow本net、26history>1、最大refs166；170expand全部warm hit，created不增加。独立warm/cold过滤通过，标签闭包194/822记录、75/403页；仍CPU预知工作集。region binder核验同一base和history/价格，将warm真实pool容量覆盖cost-only旧0占位。不代表多query RTL或unknown-page已完成。下一步接实际AXI/RTL后续query，保持完整32bit搜索sequence与2bit存储epoch分离，再推进多query切换/未知页默认值及自主search/backtrace/owner commit。
+
+# Warm持久状态codec通过（2026-10-25，优先历史）
+
+详见results/warm_state_20261025.md/.json及adapters/warm_state_v1/CONTRACT.md。两准备态各9089009行独立解码通过；iteration2恢复1647675 warm parents（1878空缓存）与53734 owner overflow entries。实际owner C++布局模型全primary/overflow GET及节点208292主owner删除提升/空闲链复用通过。只扩持久子集，不是完整cost/State表或RTL多query。prune关闭、静态type一致、度数<=32；pool恰满无新增容量余量；重复child以最早匹配位置恢复序列，非不可见位置身份。下一步扩完整cost/State codec、标签epoch/unknown-page策略及实际AXI/RTL多query验证，默认基线保持。
+
+# 后续真实查询生命周期通过（2026-10-25，优先历史）
+
+详见 results/followup_lifecycle_20261025.md/.json。logicnets sequence2及iteration2/sequence180327完整CPU路由hash保持，准备态独立恢复实际搜索的九文件逐字节相同。全9089009节点审计：首query末态→同网query2准备态仅9行变化，精确为6内部路径owner提交、target切换、source初始化。query2保留171旧标签/72 warm cache parents；iteration2有2467619旧visited、2439660非默认prev、50416 history>1/多net节点、53734 overflow引用、1647675 cache parents。present factor0.5→1.0。
+
+这只是CPU持久状态充分性证据；未知页默认初始化、warm/overflow硬件codec及多query RTL尚未完成。不要随connection标签清除owner/history/children，不要把旧距离标签当有效，也不能无证明把prev=-1改成0。下一步明确持久prev与query有效距离的契约，扩codec/按需页初始化后做多query硬件闭环。保持既有首query/仿真周期收益适用范围。
+
+# MCML自然查询RTL对照完成（2026-10-25，优先历史）
+
+详见 results/mcml_parent_upstream_20261025.md/.json。MCML全图14991410节点/66907822边无损导出与独立成本/过滤通过；327children/326判定的自然EARLY正确drain未判定child124201（parent2178064）。四次基线/缓存32槽/单槽闭环通过82POLL/81expand/178cost/534ACK及完整状态。parent读取178→59；POLL窗口下降1.22%/10.92%，只是行为仿真单query。五归档已实际恢复，mcml_query_restore_20261025.json。
+
+当前两个真实设计各首query，不是全设计FPGA布线或板卡加速。默认基线不提升，外层仍TB；label导入用CPU+oracle预知工作集，未知页按需初始化/跨query旧prev语义尚未证明。parent缓存只在排他lease内复用，lock gap/context/父子别名/fault必须失效。
+
+下一优先：多query/价格生命周期，后续query的真实owner/overflow/history/旧标签与未知页默认初始化，先明确持久prev与距离有效性再扩codec/控制器。自主search/backtrace/owner提交和板卡仍未完成。保留已有仿真收益与OOC资源证据的适用范围，goal active。
+
+# Parent缓存物理代价与MCML CPU oracle完成（2026-10-25，优先历史）
+
+详见 results/parent_physical_20261025.md/.json 与 natural_mcml_query_20261025.md/.json。相同U280/10ns模块OOC：路后LUT2576→2683（+107）、FF1951→2117（+166）、CARRY8+18，BRAM/DSP仍0；两者内部setup/hold通过，WNS2.847/2.786ns。I/O939/771未约束、TIMING-18保留，不能称整机Fmax或板卡时序闭合。57文件物理归档含综合/placed/routed DCP，已实际恢复。
+
+MCML首query已采集并精确CPU重放：index89391/id227074、net28747、source41486/sink41981、81expand/178搜索内push/82POLL；327 children而326判定，EARLY后parent2178064剩child124201未访问。14991410节点前后快照与9文件精确重现，完整48轮路由hash保持；尚无MCML codec/独立cost/RTL结果。
+
+下一优先：导出MCML原RRT全图和硬件输入/独立成本过滤oracle，验证真实EARLY剩余child drain与父值缓存收益，不复用logicnets硬编码尺寸和读取范围。多query/生命周期、完整自主search/backtrace/owner提交及板卡仍待完成。默认基线保持，goal active。
+
+# 帧内parent upstream复用已通过（2026-10-25，优先历史）
+
+详见 results/parent_upstream_20261025.md / .json。隔离variant parent_upstream_v1，真实首query的parent读取171→58；32槽POLL窗口311297→306813（-1.44%），单槽378601→332917（-12.07%），功能与完整状态一致。这里只是仿真周期，未测板上/Fmax/资源；未替换默认post或基线。21项边界和原两层合成递归回归均通过，三个归档已实际恢复，证据parent_upstream_restore_20261025.json。
+
+语义：缓存只在排他decision lease中有效，!decision_lock即清，与State缓存正常lock gap保持的规则不同。parent/context改变、fault/reset、自别名都不得用旧值；child.prev写ACK仍在读/缓存父值之前。active/version/design/query/price完整标签检查，absent父值不填充，lease内禁止任意并行写者。源码/审计固定parent_upstream_sources_20261025。
+
+下一优先：综合资源/Fmax代价、MCML/多query和祖先恢复后仍有允许成本分支的递归测试，之后才考虑默认接入；自主search/backtrace/owner commit和板卡仍未完成。保持goal active，不把单例cycle收益外推为系统加速。
+
+# 自然搜索阶段归因通过：State不在等待链上（2026-10-25，优先历史）
+
+本轮在不改109份生产RTL/dat的前提下，仅给真实自然搜索TB追加只读时间戳。32槽/单槽实际Vivado2022.2 XSim均通过，原natural_trace.txt（含周期）、完整design/label/owner/cost及全部AXI字节日志逐SHA等于已通过基线。主结果 results/natural_stages_v1；primary audit scripts/audit_natural_stages.py；精确区间分析 scripts/analyze_natural_stages.py → results/natural_stages_20261025.json。不是更换CPU oracle或减少实际工作量。
+
+测试台 hardware/variants/natural_stages_v1/tb_natural_stages.sv由build_tb.py生成，新增stage_trace.txt。72组expand/State request/reply/meta-ready、271组metadata reply/access decision、171组prefetch/post/geometry-cost/三标签commit/OFFER request与首次valid全部齐全。所有新探针只读，无force/backdoor/信号驱动。通过原成本、队列、标签、全页后备和design语义审计后，再断言每个阶段identity、先后顺序及区间无缝连接。
+
+分析窗口严格取实际首次POLL到目标POLL，32槽311297周期、单槽378601周期。所有时间被划成互不重叠的20类区间，逐段连续且总和恰等于窗口，没有把并行State读再次加到总时间。窗口包含TB每次POLL后的真实host标签读取、扩展调度、输出背压等验证开销，因此不是纯硬件自主search controller吞吐。下面是服务级elapsed区间，包含服务自己的握手/访问，并非纯算术或STA时钟关键路径。
+
+| 阶段 | 32槽周期 | 占窗口 | 单槽周期 | 占窗口 |
+| --- | --- | --- | --- | --- |
+| geometry+cost服务 | 78230 | 25.13% | 78230 | 20.66% |
+| children构建到结果握手 | 69972 | 22.48% | 73035 | 19.29% |
+| access判定 | 62944 | 20.22% | 65856 | 17.39% |
+| prev/geometry/center准备 | 35255 | 11.33% | 72088 | 19.04% |
+| metadata | 24237 | 7.79% | 24167 | 6.38% |
+| 三标签提交 | 14934 | 4.80% | 31437 | 8.30% |
+| owner/history/price/net预取 | 12080 | 3.88% | 11673 | 3.08% |
+
+其余区间（POLL标签观察和expand admission、结果到POLL、heap OFFER、输出退休/派发等）在JSON完整列出。geometry+cost共171次，各390..486周期；没有证据把整个服务区间都归为浮点算术。首组到末组State实际request→reply32槽4..21周期、单槽4..20周期；q_meta_valid最迟仍分别早于对应children结果561/572周期，范围561..2003与572..2181。JSON中seal命名的margin实际锚点是ce_result握手S，并非后继帧capture封存握手；metadata消费还在S之后。由此直接验证当前State读完成早于候选消费，结合上一轮72→1但所有事件周期不变，不能把State流量减少称为加速。
+
+单槽窗口比32槽增加67304周期；其中prev/geometry/center准备增加36833、标签提交增加16503，两项共53336、占差额79.25%。TB的POLL标签观察与admission区间另增加8470；children增加3063、access增加2912。metadata/预取有小幅负差，属于同一确定性slave握手相位变化，不把所有阶段都当单调容量收益。该对照只有SLOTS变化，逻辑工作量和最终字节一致；未测板卡、不外推速度或能效。
+
+下一优先候选是**当前扩展帧内的parent upstream复用**。真实171个成本调用只涉及58个有成本候选的parent，同帧parent upstream raw bits完全相同，且该帧内没有child push写回当前parent；潜在重复parent读113次。证据 results/natural_parent_upstream_candidate_20261025.json绑定真实输入审计。这只是可测假设，尚无parent缓存RTL或收益。缓存应只活在decision lease内，在!decision_lock、parent/context切换、fault/reset时失效；query间或扩展间允许host标签写入，不能套用上一轮State缓存“不随正常lock gap清除”的规则。后代递归和恢复父帧必须重新核验，不能复用陈旧距离标签。仍须保持child.prev写入、upstream读取/缓存、geometry/cost和三ACK/OFFER因果顺序。
+
+建议下一轮用隔离post模块实现该帧范围复用，并保留未优化自然基线；实际验证parent读次数、所有cost/native/design/heap和总周期。只在真正命中同帧父值时省读，cold/新parent/锁间隙与外部写入必须重新读，补身份/背压/取消测试。不要仅因113次重复计数就预设会加速。geometry+cost和children/access仍占多数，必要时再拆内部等待；State缓存资源代价、多查询/MCML、完整自主search/backtrace/owner提交与板上测量仍未完成，goal active。
+
+持久化：natural_stages_v1归档435常规文件/10618855B，位于results/offer_archives_20261025；所有压缩成员和copy SHA核验。原scratch实际移到.preserved后恢复435文件，分析JSON重建逐字节一致，凭据 natural_stages_restore_20261025.json。审计/分析/TB生成器和依赖固定在 natural_stages_sources_20261025。B MCP同PID147904、exit0/169.774s收据 natural_stages_completion_20261025.json。没有生产RTL改动、没有新工具功能或新HLS生成，本轮只是只读归因。
+
+# 查询级State驻留验证：读流量72→1，周期不变（2026-10-25，优先历史）
+
+同一自然logicnets首查询、同一TB和全部既有真实输入，在隔离variant中加入一行64B State缓存后通过32槽/单槽实际XSim。结果 results/natural_query_resident_v2，边界回归 connection_resident_bounds_v1。比较证据 results/query_residency_20261025.json（compare_query_residency.py），两个主审计 audit_natural_query_resident.py、audit_connection_resident.py。原109份生产RTL/dat中只在冻结新实验的params/connection_state_reader.sv替换一份，108份逐SHA保持；基线目录与原connection_state_v1源码未改，不自动提升为默认实现。
+
+| 项目 | 基线32槽 | 驻留32槽 | 基线单槽 | 驻留单槽 |
+| --- | --- | --- | --- | --- |
+| State 64B读拍 | 72 | 1 | 72 | 1 |
+| 仿真总周期 | 430263 | 430263 | 470003 | 470003 |
+| 首次到目标POLL周期差 | 311297 | 311297 | 378601 | 378601 |
+
+每配置少71次读/4544B，非State的完整natural_trace.txt（含逐事件周期）逐字节一致，design/labels/owner/cost完整文件和graph/design/label/owner/cost/table所有AXI字节日志均逐SHA一致。qstate日志恰等于原日志第一组AR/R，其他71组消失。73POLL、72expand、271candidate、171cost/commit/OFFER、513ACK、308最终记录和111物理有效标签页保持。没有仿真搜索时延改善；这与State读取被并行扩展准备所覆盖相符，但尚未做受控memory latency扫参或实际板上性能测量，不能宣称加速、能效改善或板卡收益。
+
+实现 hardware/variants/connection_resident_v1/connection_state_reader.sv，由derive.py从未改基线精确生成。缓存完整512bit State，不缓存任何距离/visited标签。key核验query2bit/price4bit、完整version32/design64、connection/net/sink/cross、configured profile revision32。原bad_request/bad_identity检查仍先执行，原row/RID/RRESP/RLAST/timeout/drift/abort及排空保持；仅在所有检查通过的R回复填充一行。命中重新回显本次cookie/身份并提供独立稳定响应。表在configured生命周期不可变，不能绕过所有者在后台修改后备。
+
+query inactive、上下文或revision变化、任何fault/abort均清cache_valid；rst也清。decision_lock正常在父扩展之间下降不失效，但请求和未退休响应仍沿用原锁/身份约束。新connection/net/sink/cross键不匹配会走原实际读与原row检查，未把某次缓存有效当作新请求合法。配置revision只允许冷复位后重新配置，测试revision2复位后首次miss。没有改变标签生命周期或价格版本距离有效性规则。
+
+独立边界TB保留原182个真实row及fault/drain回归，并增加无AR命中、cookie更新、lock-gap复用、query关闭重开miss、版本高16位变化miss、price/query变化miss、warm-cache错误net/sink/cross实际读后拒绝、profile冷重配、64bit design错误无AR拒绝、缓存响应背压期间late drift保留原响应且fault停止。终态CONNECTION_RESIDENT_PASS successes=195 errors=11 AR=199，所有195条完整row独立匹配原180326行表；错误/timeout/abort排空保持。不是并行多context或热profile修改证明。
+
+MCP已有B session/PID147904、Vivado2022.2：自然两组166.122s/exit0，边界10.265s/exit0。最早natural_query_resident_v1因生成器拼接endend编译失败，修正end后空格才运行v2；原失败manifest/log/reader固定在 results/query_residency_compile_failure_20261025，未改已通过基线或通过产物。最终源码/derive/TB/runner/审计依赖固定在 results/query_residency_sources_20261025；终态收据 query_residency_completion_20261025.json。没有新增工具版本要求，无新HLS内核或厂商补丁。
+
+持久化：offer_archives_20261025/natural_query_resident_v2.tar.gz为433常规文件/10585397B；connection_resident_bounds_v1.tar.gz为33文件/98754B。压缩成员与共享盘copy SHA核验，两个scratch目录实际移开到.preserved后解包恢复，完整对照JSON重新生成逐字节一致；凭据 query_residency_restore_20261025.json。依赖原自然输入、oracle、graph和baseline仍按各自索引保持。
+
+下一步优先测真实自然搜索的关键等待：State驻留已经减少流量但没有时延收益，不能继续把重复读取计数当加速依据。先用不改生产行为的观测TB拆出图/首次过滤、metadata/access、几何/成本、标签提交与队列等待，确认State miss完成相对扩展/metadata消费的时间；必要时受控总线延迟扫参。再按关键路径选择设计/查询级驻留，保留动态created/cache/owner语义和同一自然oracle。这个可选缓存尚未综合/布局布线或量化资源开销，若保留需补资源代价；完整可综合search controller、backtrace/owner commit、多查询/MCML/价格版本与板卡性能仍待完成。goal active。
+
+# 首个自然查询RTL闭环搜索通过（2026-10-25，优先历史）
+
+实际Vivado2022.2 XSim在已有B MCP会话 vivado-20261023-140925-d95d4d2b（PID147904）完成32槽/单槽两次主运行，exit0/166.75s。结果 results/natural_query_rtl_v1；机器汇总 natural_query_rtl_20261025.json，终态收据 natural_query_rtl_completion_20261025.json，独立审计 audit_natural_query_rtl.py + audit_natural_axi.py。本轮只加测试台/运行/审计，109份生产RTL/dat与既有通过基线逐SHA一致。
+
+输入仍为真实logicnets首查询：connection_index16506/id37267、net2717、source65185、sink150697、sequence1，实际bbox与64B State、owner/history/价格保持。全图9089009节点/40469536边来自已审计原CSR/RRT32，不改成小图，不设置合成占用或target。host接口实际逐字段导入308条字面标签，再将原prepare已seed的source以实际heap OFFER入队。query/price/version=1/3/3和design_id为TB身份编码，不是从CPU推断的价格版本；实际price table/present-factor保持CPU快照。
+
+新TB hardware/variants/natural_query_v1/tb_natural_query.sv（build_tb.py生成）让actual heap POLL返回node成为下一次expand_parent，每次POLL后通过真实host label读target位来决定停止。CPU P/C/cost文件只作断言评分，不供应下一parent或候选。POLL→实际graph/design首次过滤→metadata/access→geometry/cost→native提交/三ACK→actual OFFER→target EARLY内部CLEAR均通过现有实际链；外层POLL/扩展调度目前是TB顺序逻辑，不是新增可综合的自主search controller。仍未执行backtrace/saveRouting/owner commit/target cleanup。
+
+两配置各73次真实POLL、72次扩展、271次metadata/access/visited判定、171次实际geometry/cost、171组成本提交/513有序ACK与171次成本OFFER；source种子OFFER另计。382条原始边与271条候选的顺序等于原CPU，自然目标出现一次EARLY，实际内部CLEAR使用frontier op5（op3是PEEK），然后目标以40267287出队并停止。关闭前对308条完整native记录逐字检查。整个扩展期间同时排队CLOSE和host label/design/owner请求，围栏保持，内部CLEAR/OFFER继续完成。
+
+完整持久状态独立审计：145424192B design结果与原CSR、CPU逐候选时刻标签/created及过滤重新推导的全部字节一致；72个缓存发布、202个新created。CREATE对24个raw已created sink也设置冗余store.created位，这是幂等getOrCreate的实际结果，不是新建计数24；运行时created始终raw OR store。主owner+allocator145424256B及cost36804480B保持；全部物理标签3145728B的16384个192B帧匹配原CPU308记录分布的111有效逻辑页+16273零页（允许分配帧置换）。两配置物理labels.bin SHA实际相同04fa55e4283c1d4d5c56c3b977b1c97265dd2cddf5bc423d3728e9fd7015629d。
+
+| 配置 | 仿真总周期 | 标签AR事务 | 标签读拍 | 192B页读 | 写B回复 | 标签写拍 | 192B页写 | State读拍 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 32槽 | 430263 | 257 | 747 | 249 | 188 | 549 | 183 | 72 |
+| 单槽 | 470003 | 802 | 2364 | 788 | 387 | 1143 | 381 | 72 |
+
+页大小192B，跨4KiB边界时三拍页拆为2+1或1+2，故不能将AR事务/B回复乘3当总拍数。32槽读burst长度3/2/1分别241/8/8，写178/5/5；单槽读774/14/14，写375/6/6。新audit_natural_axi逐实际地址/长度验证4KiB分割、后续页片段、完整每拍与WSTRB及最终全文件，不改旧小用例已通过审计。上述周期包括host初始化、POLL标签观察、检查点和最终读回，不是纯搜索计时或板上加速。
+
+两组其他实际总线流量相同：graph4685读拍、design1068读/298写拍、owner422读、cost513读、connection State72读，table0。State72次×64B与72个parent对应，是后续query级驻留的实测仿真流量基线；不能现在就声称省71次后能带来多少速度。32槽面对111页也会驱逐，不是全驻留上界。目录仍FRAMES16384/INDEX14/HASH15，递归DEPTH4/CAPACITY32；本自然输入lookahead0，不增加递归覆盖。
+
+初次辅助审计先后暴露旧假设：CLEAR opcode应为5而非3，design.created位允许对raw创建冗余设置，标签页跨4KiB会拆突发。按既有生产代码和真实事务修正独立模型后所有严检查通过，未改生产RTL或重新运行以躲避失败。两份未通过审计源码及最终审计/辅助/TB生成器已固定在 results/natural_query_rtl_audit_sources_20261025（manifest逐SHA绑定）。唯一编译警告为旧axi_file_memory输出计数初始化VRFC10-8426，无错误/fatal；不是时序/综合结论。
+
+归档 results/offer_archives_20261025/natural_query_rtl_v1.tar.gz：433常规文件/10579578B压缩，逐成员与共享盘copy SHA核验。实际移走scratch到.preserved后解包433文件，重新汇总逐字节一致；恢复凭据 natural_query_rtl_restore_20261025.json。原始图、natural_query_inputs_v1与natural_query_oracle_v1依赖需按既有索引保持。普通run.py check也通过，但仅证明配置/文件可用，功能证据是本次RTL审计。
+
+下一优先任务：在新隔离RTL variant实现每query/connection State驻留，使本自然查询72次重复State读取减少，并保持全部输出/heap/native/design/owner/cost不变；缓存命中必须核验query/price、完整version/design、connection/net/sink/cross、profile revision，不能把新State缓存误作距离标签有效性。切换连接/版本/生命周期应明确失效或拒绝，补负向身份测试。用同自然输入/同TB计数和公平搜索窗口比较，保留本基线。随后将外层search loop移入可综合控制器、实现backtrace与owner提交，扩至多查询/MCML/跨价格有效性及板卡。当前仅一个自然query，goal active。
+
+# 自然查询硬件输入与独立过滤/成本oracle通过（2026-10-25，优先历史）
+
+机器汇总 results/natural_query_inputs_20261025.json；脚本 summarize_natural_query_inputs.py。已将真实首查询快照生成graph绑定、design/owner/cost/connection State/native label硬件格式，并独立核验实际过滤和全部成本值。仍未执行此自然查询的RTL搜索循环，不能把输入通过表述为硬件通过。
+
+主输入 results/natural_query_inputs_v1，从已通过的natural_query_v2快照恢复原Router，新增只读成本观测和输入导出；派生器 adapters/natural_query_v1/derive_cost_inputs.py，codec export_inputs.hpp，运行 prepare_natural_query_inputs.py。全部9个既有搜索文件仍逐字节等于自然采集：前后全节点状态、events、State、heap等，不改变搜索顺序。原成本函数在push前仅记录23输入/5结果，去掉新增观测恢复既有Router。独立audit_natural_query_inputs.py检查源、依赖、完整文件及数值。
+
+全9089009节点：design.bin按16B flags/count/mask/reserved编码，created只取相对raw初始标记的增量（本快照0），design_sink来自原RRT全部连接及替代sink；owners.bin按net+1主key、refs低16/occupancy高16编码；cost.bin保留全history与256价格及27960个net的几何/fanout；initial_labels.native160为全节点lb/upstream/prev/visited/target五字记录。真实180326个sink预引用/活跃owner节点和180326个总引用完整保留，不得把owner区清零。初始overflow/cache为空，pool capacity0，allocator独立64B全零；若换到非空溢出池或预热cache，本codec显式拒绝，不会静默丢失。所有64B区尾填零已审计。
+
+connections.bin含全部180326条64B CPS1记录，其identity和初始串行权重逐条从RRT解码校验；当前query index16506的权重来自实际State。全表不是所有未来时刻的State快照。cost price_offset=36356096、net_offset=36357120；rows311、columns0、hasLaguna0。原完整graph直接绑定 results/graph_image_20261024（9089009节点/40469536边）及同一RRT SHA，未改图或复制成小合成图。
+
+171个实际成本包全部独立按binary32逐阶段舍入重算，3933输入字/855结果字一致；geometry从原RRT坐标及动态prev/current upstream重建，不能用前轮合成常量代替。child类型NON_LOCAL96、LOCAL_BOTH4、LOCAL_EAST70、EXCLUSIVE_SINK_EAST1；查询net引用最大1，目标成本1次。本轮没有landmark/crossSLR/SLL成本覆盖，其他用例已有覆盖不能自动算入这个自然查询。
+
+独立过滤oracle results/natural_query_oracle_v1，由 verify_natural_query_filters.py 从完整原CSR和根前快照重新执行getChildren/excluded/access/visited/target判定。72次真实扩展、382条原始边→271条保留候选、0cache hit；170普通push+1target push，8bbox拒绝、28visited跳过、24graph_access拒绝、40非目标exclusive sink拒绝。lookahead0，EARLY1，全部202个created增量与完整搜索后快照一致。此oracle不依赖旧1216-parent脚本向量。
+
+从所有原始候选及实际标签读导出的保守读取范围为308节点/111个8-node逻辑页；initial_label_imports.u32逐行(node,lb,upstream,prev,visited,target)，expected_label_reads.u32为同节点搜索后记录。必须在自然查询开始前实际host导入这些字面值（包括prev=-1和source已seed状态），再让硬件自己驱动搜索。全量native160文件不是现有paged backing格式，也不能直接当label AXI后备；308条host导入只保证这个已审计query的读取范围，不能据此假定其他节点或后续查询的默认值正确。读集合由本次观测路径和独立过滤共同约束，硬件偏离路径应立即失败，不能再从CPU脚本替它选下一parent。
+
+持久化：natural_query_inputs_v1归档43文件/14032515B，natural_query_oracle_v1归档4文件/3587B，索引在 results/offer_archives_20261025。两个scratch根均实际移开后解包逐成员核验，重新汇总逐字节一致，凭据 results/natural_query_inputs_restore_20261025.json；输入原有图与natural_query_v2依赖仍需存在。原通过结果/共享基线保持不变。
+
+下一步为这个真实输入编写闭环TB：actual heap POLL产生parent→实际graph/design首次过滤→metadata/access→geometry/cost→prev及三ACK→actual OFFER；目标实际CLEAR后POLL到target停止，持续同一State/标签/heap/设计。对照72扩展/271候选/171成本/73POLL及308最终记录和202 created，测试32槽与单槽或其他压力容量。不要向TB逐parent注入CPU预定顺序，不要在候选间重置query标签或owner。按Ross技能和现有B Vivado MCP会话执行真实仿真。query级State驻留/提交优化尚需实现和公平计时，不能将减少加载次数估计为实测加速。后续多查询/价格版本/回溯与owner提交/MCML/板卡仍待完成，goal active。
+
+# 首个自然查询快照与原CPU搜索重放通过（2026-10-25，优先历史）
+
+本轮从真实logicnets完整原始串行路由中采集首个自然查询，不改图、不设合成owner/target、不复用旧脚本oracle。机器证据 results/natural_query_20261025.json，汇总 scripts/summarize_natural_query.py。采集链接 results/natural_query_v2；独立恢复搜索链接 results/natural_query_replay_v1。原始参考源码和共享基线均保持。
+
+查询identity：attempt/sequence1，iteration1，connection_index16506/id37267，net2717，source65185，sink150697，fanout257。实际bbox x[38,46]/y[283,295]；State share/wire/estimate raw bits分别3f800000/3e4ccccc/3f4ccccd，present factor为3f000000，cross=0、landmark=0、dead-end pruning=0，hot/prefetch/bbox启用。原prepare已经执行rip-up、设置target并将source入队；此时才保存快照，因此独立重放不可再执行prepare。
+
+全节点initial_nodes.u32与search_final_nodes.u32各9089009行，每行11个32bit字段（lb/upstream/history/prev/visited/target/ownerNet/ownerCnt/occupancy/created/type）。另存完整256价格、溢出引用、已有children cache、真实State和逻辑heap。ownerNet沿用原CPU -1为空/零起net编号，不是FPGA net+1编码。所有节点都存，既有标签/历史/占用不能按默认值替代。格式与事件契约在 adapters/natural_query_v1/README.md；无需Vivado即可完成本轮CPU工作。
+
+自然事件共72次扩展、271条有序children和271次候选检查、171次搜索内成本push、73次POLL；含prepare源push则172，与前轮完整普查相同。目标150697在父1411724下触发一次EARLY/CLEAR，CLEAR后目标入队并出队，found=1/aborted=0/剩余heap0；最终目标成本bits40267287。无lookahead。171个不同节点标签改变，202个created状态0到1。完整节点审计确认history、owner、引用和occupancy在搜索内保持，而不是随标签清零。快照结束点在原搜索循环之后、saveRouting/occupancy commit/target cleanup之前，不是完成连接提交后的状态。
+
+采集器由 derive.py 只插入观测，删去观测逐字节恢复 build/real_trace/original.cpp；完整12轮路由结果与冻结原串行结果逐字节相同。audit_natural_query.py逐候选核验读前标签、prev/lb/upstream/visited/target提交和全部节点最终状态，并独立实现原8叉heap/POLL/CLEAR顺序。它不独立重算成本或过滤条件。
+
+独立CPU重放进一步使用同一原Router和实际cost/filter/push，加载原RRT后恢复快照、cache、prices和State，重建HotExpand，再执行从原源码提取的搜索循环（不重新prepare）。make_replay.py生成driver；run_natural_query_replay.py与audit_natural_query_replay.py核验。全部9个文件逐字节一致：全节点前后状态、overflow、cache、prices、State、初末heap、全部events。因此是自然查询可独立恢复搜索的CPU oracle；尚无该查询的RTL执行、板卡性能或数学独立cost证明。
+
+原natural_query_v1在生成源码时因非唯一poll文本锚点停止，未编译/执行，保留scratch；v2改为唯一完整while锚点。通过结果从不覆盖。采集26文件归档14710474B，重放29文件归档11269548B，位于 results/offer_archives_20261025。两者完整移开后解包逐成员核验，并重建汇总逐字节一致；恢复凭据 results/natural_query_restore_20261025.json。tmp丢失时按两个同名JSON索引运行restore_offer_result.py。
+
+下一步：从此快照与事件生成自然查询的graph/design/owner/native label/64B State输入，先独立核验codec与实际geometry/cost输入，再驱动完整POLL→expand→filter→cost→三ACK→OFFER→target CLEAR搜索循环。当前只有每扩展候选链与合成递归组合，不能把72个父节点当作互相独立的旧脚本向量；须保持动态created/cache、标签写后读、全局heap与target位。测量query级State加载和重复准备可避免多少工作必须给真实计数，不能由逻辑次数直接声称加速。MCML自然查询快照/重放、多查询/跨价格有效性、真实多net提交与板卡实现仍待完成，研究goal active。
+
+# 两个真实设计的自然递归普查（2026-10-25，优先历史）
+
+完整原始串行搜索的观测普查和独立审计已通过；机器证据 results/natural_recursion_census_20261025.json，由 scripts/summarize_natural_recursion_census.py 汇总。
+
+| 真实设计 | 查询次数 | 扩展次数 | push次数 | lookahead | 最大观测深度 |
+| --- | --- | --- | --- | --- | --- |
+| logicnets_jscl | 570286 | 47721796 | 130334832 | 0 | 1 |
+| vtr_mcml | 718921 | 198273738 | 390136023 | 0 | 1 |
+
+合计1289207查询、245995534扩展、520470855次push，全部found/routed，无abort。两个设计使用同一观测二进制，分别12轮/48轮收敛到overused=0；最终完整路由文件各自与冻结原串行基线逐字节相同。没有修改原图去制造递归。全部观测State profile的cross=0、landmark=0；结论仅限这两个设计及当前串行配置，不能推断其他器件/跨SLR场景不会递归。
+
+观测源码删去新增观测后可逐字恢复冻结原始源码。正负合成对照使用同一header及同一原Router：Laguna正例lookahead=1、剩余兄弟=1、深度2；负例lookahead=0、深度1，故计数器具备实际递归触发覆盖。审计逐行检查34字段、query序列、每轮查询数、push总量及 expansions=pops-found-aborted+lookahead，未截断普查。审计脚本 audit_natural_recursion_census_v1.py 保留首次logicnets已冻结审计版本；通用 audit_natural_recursion_census.py 供MCML使用，其第三参数指向第一个普查目录绑定相同对照源码。
+
+结果链接 results/natural_census_v1、natural_census_controls_v1、natural_mcml_census_v1；三个完整归档位于 results/offer_archives_20261025，同名JSON为恢复索引，分别18/10/18文件。实际移开三个scratch目录后恢复并核验全部成员，重新汇总应与恢复前逐字节一致；凭据 results/natural_recursion_restore_20261025.json。不存在GPU/FPGA实测加速结论，观测运行时间不作为性能基准。
+
+下一优先工作改为采集自然普通查询的真实根前快照和逐候选事件，而不是继续寻找本配置未触发的递归。logicnets首选attempt1、connection_index16506/id37267、net2717、source65185、sink150697、fanout257：72扩展/172push，initial_queue=1、targets=1、最大raw/filtered degree8。MCML首选attempt1、connection_index89391：81扩展/179push。须在原ripup/prolog/prepare后的实际时刻保存State、bbox、标签、owner/history/价格和队列；真实队列长度用queue.sz，不能用底层h.size()。首查询present_factor bits为1056964608，不能从迭代日志推断时刻价格。
+
+尚未输出这些自然查询的可重放状态快照、逐child事件或新RTL oracle；既有1216-parent脚本向量与合成递归矩阵不能充当自然轨迹金标准。接下来研究query级State驻留/重复准备，保留合成递归正确性覆盖；跨价格版本标签有效性、真实owner生命周期、完整搜索/回溯/提交与板卡性能仍待完成。研究goal active。
+
+# 实际递归target/占用/共享三条件矩阵通过（2026-10-25，优先历史）
+
+本轮在实际递归graph/metadata/access/native标签/geometry/cost/三ACK/OFFER链中完成3种target初态×32槽/单槽共6个主运行。机器汇总results/recursive_target_matrix_20261025.json，组合审计scripts/audit_recursive_target_matrix.py，实际恢复凭据recursive_target_restore_20261025.json。109份生产RTL/dat跨三条件逐SHA相同，本轮新增输入、TB与审计，不改生产RTL或旧已通过结果。
+
+拓扑沿用明确合成逻辑0->{1,2},1->{2}，物理映射0,8,16,24,32，在33-node CSR中有28个无入边padding节点。目标标记设在逻辑2/物理16，而几何sink仍逻辑4/物理32；这是原算法target-marker条件测试，不代表已到达实际sink或完成连接布线。五条标签以实际host IO初始化prev=-1、node16.target=1，五个8-node页分开；heap另以fixture预置node24/key=3f800000。查询net0，资源CAPACITY=1。
+
+| 条件 | owner主记录(key,refs,occ) | 查询net引用 | occupancy | 价格索引/值 | 共享因子 | EARLY/CLEAR | 祖先剩余兄弟 | node16 total bits |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| free 空闲目标 | (0,0,0) | 0 | 0 | 0 / 1.0 | 1 | 是 | 静态排空，无metadata | 4089999a |
+| foreign 异net占用 | (2,1,1)，net1拥有 | 0 | 1 | 1 / 2.0 | 1 | 否 | 重新读visited77后SKIP | 40a9999a |
+| shared 同net共享 | (1,2,1)，net0拥有 | 2 | 1 | 0 / 1.0 | 3 | 是 | 静态排空，无metadata | 40199999 |
+
+owner key=net+1。shared将两个引用与一个占用net分开，不能把refs2当成occupancy2。foreign与shared均配置2个net，并保持cost.bin完全相同（price[1]=2.0），查询始终net0；free只配置1个net且未用的price[1]=1.0。不是单变量性能消融；所有几何、connection State、第一包成本完全相同，第二包23字输入只有count字段word1和实际price字段word4变化，其他21字逐位相同。没有收益、新颖性或路由质量提升结论。
+
+CPU prepare_recursive_early.py / prepare_recursive_occupied_target.py / prepare_recursive_shared_target.py保持原Router递归/成本/标签push/8叉heap，新增成本与CLEAR前heap-size观测。去掉观测后逐字恢复既有observed Router；构造器/原State initializer保持，只在搜索前设定明确owner/target/price/seed初态。独立audit_*_inputs.py逐字段重建CSR/RRT32/设计/owner/成本/64B State/最终label，并逐阶段binary32重算每条件56个cost输入/输出字及CPU事件/POLL。原CPU fixture预置childrenCache，硬件从同拓扑CSR构建，因此仍只覆盖全部created、无复杂排除的构建条件，不是自然图动态过滤轨迹。
+
+free/shared两组都验证：root(frame100,parent0)提交node8三ACK后立即下降；child(frame101,parent8)实际读取target16并判断不overuse，非空heap由seed-size1经CLEAR(status0,size0)清空。CLEAR回复严格早于node16.prev=8的native请求/ACK、parent upstream读取、实际geometry/cost、lb/upstream/visited三ACK与实际OFFER。node16全部三个成本ACK均保留target=1，parent8标签visited77/upstream3fa66666没有被heap CLEAR清掉。子OFFER成功后返回root，D日志显示remaining child16在controller NEXT_CHILD/early=1被直接消费，无第三次metadata/access/输出。只做2次候选判定，但静态expanded/raw计数仍3。
+
+foreign两组相反：真实owner服务读出same-net refs0、occupancy1，目标被判overuse；没有任何CLEAR命令。实际prefetch使用price-index1/value40000000，目标成本total40a9999a；heap保留seed并达到size2。子树返回后root发起第三次metadata，实际VISITED返回77并SKIP。最终验证POLL按原CPU顺序先返回node24/3f800000，再node16/40a9999a及EMPTY。shared实际count2/occupancy1/index0/value3f800000，sharing-result40400000，total40199999（保留原逐步浮点舍入，不能替换成十进制2.4的另一个raw值）。free/shared CLEAR后只返回目标与EMPTY。
+
+所有运行都把外部CLOSE和host label/design/owner请求排队在递归期间；围栏保持，内部CLEAR/OFFER仍可完成。每组2次实际递归扩展、2次成本/geometry、2次成本标签提交/6有序ACK、1次成本OFFER；seed OFFER另计。free/shared visited/metadata/输出各2次，foreign各3次；每组均消费3条静态children。最终checkpoint后五条完整160bit native记录（25字）与原CPU一致，node16.prev=8、visited77、target1，原其他节点状态保持；owner和history/price/net后备不被标签或heap操作清除。
+
+主审计audit_recursive_early.py / audit_recursive_occupied_target.py / audit_recursive_shared_target.py核验完整事件顺序/ACK/成本/队列/全部AXI字节。各条件额外复用audit_recursive_join_backing.py：3145728B标签后备全部16384个192B页匹配原CPU五个已存在页和16379个全零页（允许分配器页位置置换），并有五个带node读回关联；每条件32槽/单槽最终labels.bin实际SHA也相同。证明文件recursive_early_backing_20261025.json、recursive_occupied_target_backing_20261025.json、recursive_shared_target_backing_20261025.json。
+
+| 条件 | 32槽周期 | 单槽周期 | 32槽标签读突发/写回 | 单槽标签读突发/写回 |
+| --- | --- | --- | --- | --- |
+| free | 37127 | 38282 | 5 / 5 | 14 / 10 |
+| foreign | 37288 | 38484 | 5 / 5 | 14 / 10 |
+| shared | 37166 | 38285 | 5 / 5 | 14 / 10 |
+
+每个标签突发3拍：32槽15读拍/15写拍，单槽42读拍/30写拍。周期只是仿真收据，不比较不同逻辑工作量的速度。free/shared的graph38读拍、design12读/2写拍；foreign graph44读、design13读/2写；各组owner6读、cost6读、State1读、table0读。owner640B和cost1280B完整保持。仍用FRAMES16384/INDEX14/HASH15与递归DEPTH4/CAPACITY32，只走两层，不是默认大目录综合或板卡可行性证明。
+
+持久化：offer_archives_20261025下6个主包 early_inputs_v1、recursive_early_v2、occupied_target_inputs_v1、recursive_occupied_target_v1、shared_target_inputs_v1、recursive_shared_target_v1，共1395常规文件27171163B，逐成员和copy SHA核验。六个scratch目录全部实际移到.preserved后解包恢复1395文件；恢复后矩阵重新生成与原JSON逐字节相同。results的6个对应链接分别为recursive_early[_inputs]_20261025、recursive_occupied_target[_inputs]_20261025、recursive_shared_target[_inputs]_20261025；tmp丢失对索引运行restore_offer_result.py。最新MCP终态0/72.561s在recursive_target_completion_20261025.json。最初free v1普通检查已通过，v2只加D日志和drain计数断言、RTL不变；v1源/文本/log子集146文件235334B在recursive_early_history_20261025.*，不是主证明或大型binary的完整归档。
+
+边界：owner refs/occupancy是显式初始快照，仅查询，没有更新同网多分支引用、增添其他net或触发overflow池（本例pool capacity0）。未证明真实网表自然搜索轨迹、复杂过滤、实际landmark/crossSLR、价格跨版本距离失效修复、实际满堆停止、联合故障排空/reset/reload、完整search/backtrace/owner提交或板上加速。下一优先任务从原真实CPU搜索采集可重放的递归事件、根前标签/owner/history和实际State快照，生成新递归oracle；不能把旧1216-parent无递归向量直接当新结果金标准。旧真实CPU矩阵及“原串行基线仍最快”等结论保持，研究goal active。
+
+# 实际RTL递归汇合联合用例通过（2026-10-25，优先历史）
+
+这次真正执行了后代的graph/metadata/access/native标签、geometry/cost、三项标签ACK与实际OFFER，不再只证明mock调度或无action2前缀。主结果results/recursive_join_20261025（recursive_join_v1）完整32槽/单槽均通过；输入results/recursive_join_inputs_20261025（join_inputs_v1）。CPU/接口生成prepare_recursive_join.py，输入审计audit_recursive_join_inputs.py；运行run_recursive_join.py，主审计audit_recursive_join.py，额外完整物理标签语义审计audit_recursive_join_backing.py。综合收据recursive_join_revision_20261025.json。
+
+图是明确合成：逻辑0->{1,2},1->{2}，五个逻辑节点映射到物理0,8,16,24,32，坐标仍0..4，sink坐标4，33节点CSR含28个无入边padding节点。这样五个显式初始标签处于五个8-node页，单槽确实触发驱逐/重载。所有标签先用实际host native写prev=-1，以匹配原dense CPU初态；不是默认稀疏absent-prev=0的测试。所有类型NON_LOCAL，root Laguna，非crossSLR，landmark inactive，owner占用0、history/price均1、net center0/fanout1/doubleHPWL10。没有修改任何共享或原始基线。
+
+CPU使用前轮完整原Router立即递归类/实际成本/原push/原heap；去掉新增纯cost观测后逐字恢复前轮observed source，构造器与State initializer保持，非cost事件与原5节点金标准逐行相同。原CPU fixture预先提供childrenCache；硬件从同拓扑原始CSR建立缓存，因此本例验证的构建条件是全部已created、无排除的简单条件，不代表复杂过滤/新建状态的递归组合已覆盖。RRT32、CSR、design/owner/cost、64B connection State及最终label镜像经独立逐字段重建；56个cost23输入/输出字还以逐阶段binary32重算。不是自然器件路由轨迹。
+
+实际顺序：root(frame100)处理node8并提交lb/upstream/visited三ACK，action2退休后才启动child(frame101,parent8)；child处理node16并提交三ACK，然后实际OFFER(node16,total=0x4089999a)，成功退休后才恢复root对node16的metadata。此时真实VISITED读返回77，root以SKIP退休，没有重复入队或重新成本计算。主auditor检查E→seal→M→O→子E→子seal→子M→六次有序W/A→OFFER→子O→父M→V(77)→父SKIP及全部payload，明确区别于延后递归。
+
+关键最终标签（物理ID，映射后的原CPU结果）：
+
+| node | prev | upstream bits | total/lb bits | visited |
+| --- | --- | --- | --- | --- |
+| 8 | 0 | 3fa66666 | 406ccccd | 77 |
+| 16 | 8 | 402ccccd | 4089999a | 77 |
+
+node16成本输入里的parent upstream确实为node8刚提交的3fa66666；prev=8证明外层当前parent接线进入了实际postprev/commit。checkpoint后五条完整160bit native记录（25字）与原CPU一致，node0/24/32仍prev=-1且未visited。随后两次验证POLL返回node16/4089999a和EMPTY，再CLOSE；这些POLL是验证fixture，不是已实现的完整搜索循环，也没有到达sink32或完成回溯/占用提交。
+
+两组各2个真实扩展、3次metadata/判定/visited读、2次实际geometry+cost23、2次成本标签提交/6有序ACK、1实际OFFER。实际root/descendant frame context及连接State通过原已验证组合；109份既有RTL/dat全部同SHA，本轮只换输入和TB，不改已验证递归core/top。TB在整次递归期间排队外部CLOSE以及host label/design/owner请求，全部被围栏挡住；内部OFFER仍完成，实际CLOSE只在最终验证后发到heap。因此覆盖了正常递归时queued-CLOSE与内部OFFER共存，不是故障恢复证明。
+
+内存独立审计：graph44读拍/全1344B源镜像，design13读拍/2写拍/576B最终缓存状态，owner4读拍/640B与cost6读拍/1280B源镜像保持不变，connection State1读拍/64B，table0读。完整标签3145728B逐读拍/字节写掩码/B日志重放；另按原codec的bitmap8+8×160bit记录+zero tail，从CPU五条最终记录独立编码，全部16384个192B物理页多重集匹配5个有效页+16379个全零页，并以五个带node的native读回验证关联。额外证明是results/recursive_join_backing_20261025.json，不覆盖已归档的主审计。
+
+32槽标签5个读突发/15读拍、5个写回/15写拍；单槽13读突发/39读拍、9写回/27写拍。不可把AR事务数与burst beat数混用。两组最终labels.bin SHA均为7605ac01a9c4462c48fed6e3a005d14fc1718323f40eb04eb54baa1292d9a374。周期37242/38150仅仿真收据，非加速指标；仍用FRAMES16384/INDEX14/HASH15、递归DEPTH4/CAPACITY32，只走两层，不证明默认大配置资源可行性或深度边界。
+
+B原MCP同进程72.965s/exit0，receipt recursive_join_completion_20261025.json。两个主归档在offer_archives_20261025：join_inputs_v1为35文件693729B，recursive_join_v1为429文件8349727B；压缩成员与共享盘copy SHA验证，真实联合结果已移开scratch到.preserved后恢复429文件核验。restore_offer_result.py恢复原路径；tmp丢失需同时恢复输入和结果。先前所有通过的基线/失败记录保持。
+
+下一步补带target EARLY与预置非空heap的真实递归用例：在原CPU逻辑node2置target并在其queue预置node3，使子树EARLY实际CLEAR先于prev/cost/标签/OFFER，root未处理兄弟应排空而不进入metadata，target位必须跨三ACK/驱逐保留。然后再扩至原真实图的新递归CPU轨迹；旧1216-parent无递归oracle不能直接沿用。非零owner/ref、复杂children过滤/多net生命周期、真实landmark/crossSLR、实际满堆停机、联合故障排空/reset/reload、完整search/backtrace/occupancy提交、综合与板卡性能仍未完成。研究goal active。
+
+# 立即递归controller与当前parent接线（2026-10-25，优先历史）
+
+新增hardware/variants/recursive_controller_v1/recursive_candidate_controller.sv及derive_controller.py/TB；新增candidate_recursive_v1/core/top及derive_core/top.py。控制器实际联接已验证expansion_capture/children_frames。OUTPUT退休action2后进入DESCEND，在父下一项metadata前压子帧；子frame完成后RESTORE从完整512bit context恢复父/cookie/prune/hasLaguna/flags/bbox，再实际发起下一项metadata/access。共享early使祖先只排空剩余静态项，不判定后续兄弟。每次operation保持同一net/sink/sequence/query/price/full version/design，并对漂移停机。frame cookie在单次根operation内单调递增，返回不回退分配counter，32bit溢出显式停止；不宣称跨根operation/重启全局唯一。
+
+新增out_parent/out_root_cookie；实际新core把controller当前parent输出到外层held_parent wire，替代只在外部expand时更新的reg。postprev、commit的请求和身份校验仍使用held_parent，因此现在结构上跟随当前帧。连接级q_meta/q_connection/q_net/q_sink仍由根operation持有，递归不会重新加载或变更连接State。原capture/OFFER/成本/标签服务均未改；新core/top由此前冻结capture结果内存重建逐字审计。旧candidate_capture与先前通过的完整组仍保留。
+
+有效组件results/recursive_controller_20261025实际recursive_controller_v3，run_recursive_controller.py / audit_recursive_controller.py通过7项：多子汇合（E0→O0,1→E1→O1,2→重新读root child2 visited1→SKIP）、三层嵌套、子树EARLY向祖先传播、九层链/逐层回返、空根；另cookie=0xffffffff需要下降时只停止、不发wrapped请求，以及输出持有时full version高位漂移停止。全部76事件与独立Python DFS/visited模型一致，完整metadata上下文、544bit候选/parent背压与197bit终态回复保持由TB断言。组件使用DEPTH16/CAPACITY4。graph/metadata/access/标签提交回调为mock；visited在非skip输出退休时由TB更新，不是实际native ACK。不得据此声称真实标签/成本/入队递归或联合故障恢复。
+
+新controller result_count为所有帧已退休候选总数，result_expanded_count/raw_count为各帧完成计数之和，mask/hit只表示根帧，result_cookie为外部根cookie；out_cookie为当前frame cookie，out_root_cookie单独保留根身份。祖先EARLY排空项计入expanded/raw但不计入已退休候选。错误终态计数不承诺完整汇总。原非递归oracle不能直接套到包含后代的新输出。
+
+实际完整链回归results/candidate_recursive_pilot_20261025通过160根扩展/169 metadata及判定/40真实geometry+cost/40成本标签提交/120ACK/40实际OFFER，920输入成本字和200输出字逐bit相同，73条队列命令/回复相同，完整3145728B标签后备检查通过。52份旧baseline、61份prior和6份center RTL保持核验。该前缀无action2，未走真实下降，不代表真实后代计算通过；新core functional DEPTH4/CAPACITY32也未验证九层硬件容量。audit_candidate_recursive_pilot.py强制limit<=160，明确禁止将旧oracle应用到新递归输出。旧无递归完整32/1槽门禁是candidate_capture_full_20261025，不是这版新递归top的完整矩阵。
+
+负证据recursive_controller_v1由TB在赋新READY前记holding，误把已合法退休的输出当成必须保持，出现假失败；v2修正监控时序并加强完整回复/计数断言，RTL不变，五项正常通过。v3只增加两项终态测试（RTL仍相同）。历史27个源/文本/log文件22596B已逐成员SHA归档recursive_controller_history_20261025.*，不包含大型build。旧5项auditor保留audit_recursive_controller_v1.py。有效7项auditor和pilot auditor均绑定最终manifest及新controller SHA。
+
+持久化offer_archives_20261025/recursive_controller_v3.tar.gz 37文件164553B，candidate_recursive_pilot_v1.tar.gz 289文件5460177B，成员及copy SHA核验；实际新pipeline pilot已移开scratch后真实恢复289文件验证。组合收据results/recursive_revision_20261025.json。check仅文件/配置可用，不当功能证明。
+
+下一步必须建立真实后代的CPU/硬件联合oracle。优先复用明确合成5节点汇合图0->{1,2},1->{2}，原Router实际成本/标签/立即递归作为金标准，生成与实际graph reader、design/owner/cost、connection State ABI一致的小型AXI镜像，接本版完整geometry/cost/三ACK/OFFER与最终native读回，证明root后续兄弟真正读到子树提交visited、node2.prev=1及parent upstream继承，而不只mock测试。再加入EARLY与压槽回放，扩至原真实图脚本的新递归CPU轨迹。旧1216输入唯一action2在E304,parent5123419→6431273，两者原图degree都1，不能作为多兄弟证据；真实子节点也有1条边，不能假设空子帧。不要用旧heap/cost/label期望强行放行新递归结果。
+
+联合abort/drain/reset/reload、配置lease跨所有帧、实际FULL停止/重放、landmark/非零owner与真实crossSLR、默认大目录综合及板卡性能仍未完成。组件的cookie溢出/版本漂移停止没有证明这些组合恢复。目标保持active。
+
+# 封存children已联接实际候选/成本/提交/入队链（2026-10-25，优先历史）
+
+hardware/variants/candidate_capture_v1新增candidate_capture_query_core.sv、candidate_capture_engine.sv、TB和derive_core/top.py。core从guarded commit core派生，仅在原expansion_controller与candidate_controller之间插入已验证expansion_capture/children_frames；metadata/access及其实际标签端口保持原接线。真实扩展请求较父请求晚一拍，因此expansion.enable改为已受理operation_pending且配置无错，不能继续使用要求!operation_pending的can_start。外层operation_pending/host/config围栏覆盖整个父操作，底层expander释放后仍不提前放开。capture fault进入组合fault，但联合故障排空仍未证明。
+
+512bit帧保存12个连接/父字段及完整version32/design64/query/price，未缓存动态标签。实际metadata请求必须发生在物理expander完成、seal后，TB检查物理expansion.state=0及捕获适配器state=0；context父/cookie/完整身份与当前controller及外层版本逐项一致。独立auditor逐E/D重建384bit字段并验证保留位零、每帧完成children数以及S→M顺序。原cost/label/OFFER/journal全部保留。derive_core与derive_top均从先前冻结结果在内存重建逐字比较；其余53份旧baseline、62份prior与6份center RTL核验保持。
+
+主结果results/candidate_capture_pilot_20261025（160扩展/169判定/40 cost OFFER）与candidate_capture_full_20261025（完整32槽/单槽）通过。完整每组1216 seal/3066次seal后metadata、702实际geometry+cost23/702成本标签提交/2106有序ACK/701实际成本OFFER/65非空CLEAR，195 seed另计。16146成本输入与3510输出逐bit一致；978条队列命令/回复与原CPU8叉堆逐字段一致，关闭前验证POLL仅4条有效输出，不是真实搜索POLL。最终checkpoint后436条标签/2180字读回一致。13个prior-commit visited skips等压力仍来自前轮脚本输入，不是本轮实现递归的证据。
+
+完整后备标签3145728B及逐字journal核验；graph43888R（49短拍零填充）、owner1620R、cost2107R、tableR0；design145424192B/owner145433472B/cost36812672B后备全部核验。设计级owner/history未随标签清零；所有allowed owner仍为0，不能混称已覆盖非零owner组合。32槽label843R/1362W；单槽具体计数见revision JSON。周期仅仿真收据，不能宣称硬件加速。仍沿用受控4个SLL beginY修改及hasLaguna压力、landmark inactive/crossSLR0和跨扩展复用seq脚本，不是自然全连接搜索。
+
+run_candidate_capture.py为运行入口；最终audit_candidate_capture.py包含seal计数、完整384bit context与reserved检查。先导最初auditor在归档前已通过并冻结为audit_candidate_capture_v1.py，其原SHA与归档保持；后来加强的先导复核单独保存candidate_capture_pilot_stronger_20261025.json，不覆盖归档source_bound_audit。完整组最终主审计使用加强版；completed_full_audit只是运行中中间审计，不作为最终manifest凭据。组合收据results/candidate_capture_revision_20261025.json。
+
+尚未做递归：candidate_controller仍保留单parent pending，action2仍为回调。封存后每项重新实际metadata/access已接通，但没有子树挂起/返回，自然不能声称已验证返回后的标签重读。下一步除保存/恢复controller父context，还必须把当前parent送外层postprev/commit；现有held_parent只在外部expand更新，直接内递归会把根parent写给子帧。连接State的q_meta/q_connection/q_net/q_sink与frame cookie也须分离。详细契约hardware/RECURSIVE_INTEGRATION.md列出身份、立即下降、early传播、reply背压、FULL与联合恢复要求。真实landmark/非零owner/完整搜索回溯与板卡性能仍未完成。
+
+持久化offer_archives_20261025中的pilot/full两个包，成员与copy SHA核验，完整组已实际移开scratch后恢复验证；精确数量与bytes见revision JSON。B同进程跨300s观察交还继续，无超时重启。研究goal继续active。
+
+完整/单槽最终实测仿真计数（仅收据）：
+
+{
+  "full": {
+    "cycles": 2453955,
+    "label_R_beats_checked": 843,
+    "label_W_beats_checked": 1362,
+    "sealed_frames": 1216,
+    "sealed_before_metadata": 3066
+  },
+  "pressure": {
+    "cycles": 2470765,
+    "label_R_beats_checked": 3639,
+    "label_W_beats_checked": 3714,
+    "sealed_frames": 1216,
+    "sealed_before_metadata": 3066
+  }
+}
+
+# 真实children扩展器整帧捕获通过（2026-10-25，优先于历史）
+
+新增hardware/variants/recursive_frames_v1/expansion_capture.sv、tb_expansion_capture.sv、tb_expansion_capture_unit.sv；复用children_frames.sv（与前轮最终v2 SHA一致）。run_expansion_capture.py / audit_expansion_capture.py为真实图组合入口；run/audit_expansion_capture_unit.py为同RTL mock边界入口。主结果results/expansion_capture_20261025实际capture_v3；组件results/expansion_capture_unit_20261025实际capture_unit_v2。组合收据results/capture_revision_20261025.json passed。
+
+实际组合保持42份原基线文件同SHA，原graph reader、persistent design、children HLS、paged exclusion与原CPU getChildren对照不变。新增捕获适配器先受理begin、保存完整请求和不透明512bit context，向真实expander发出稳定请求，接收完整352bit node/position/ordinal/attrs流；完成cookie/count/序号检查并seal后才回放静态children。每帧独立保存165bit完成回复。TB明确断言每条回放前适配器物理请求state=0且真实engine_busy=0，完整context相同。回放期间外层围栏继续阻止host/config类入口，不依赖已释放的真实engine busy。当前TB只对host ctrl/io及expand有显式额外围栏，其他配置本场景不发起；生产组合需统一全部配置/图生命周期lease。
+
+先导16扩展/6 children通过。完整32槽和单槽各1212扩展/550缓存命中/662 build/3229 children/10753真实children服务/240 native读，CPU语义、全部事件与全部后备内存字节审计通过。graph19280读、design6109读/2500写；完整checkpoint2、label0读/18写；单槽checkpoint27、label15读/25写。周期484146/483559仅仿真收据，不是加速比较。TB functional FRAMES256、帧DEPTH4/CAPACITY32，实际输入原degree<=32；未验证大配置容量/综合。真实图脚本生命周期回放不是完整搜索。
+
+嵌套定向测试使用同一适配器/帧RTL但mock expander：ITEM10:1→ITEM20:3→RESULT20→ITEM10:2→RESULT10；完整165bit回复在背压时尝试新请求仍保持稳定并拒绝新请求；请求暴露期间前端cookie/parent改变不影响已锁存字段。最终v3用result_offered锁定已对外呈现的完成回复，不能因后来的嵌套请求撤回VALID。尚未present时同拍请求可优先压子帧；一旦present，则先退休该完成回复，不能再将此时的请求解释成它的子帧。调用方应在最后一项退休后立即提出lookahead，在该完成回复present之前确定是否下降。原型expand admission同时要求result_ready=0，调用方不能常拉高result_ready再期望发起新扩展。这里尚无真实expander嵌套调用、动态标签重读、成本/提交/队列或完整递归调度证据。
+
+接口限制：frame context不透明，适配器不自行校验active version/design漂移；调用方须覆盖完整身份并保持全查询lease。frames fault/abort后仍接收已开始捕获的物理输出直至完成；新的适配器未做故障注入，不能由上一轮帧组件mock排空外推到本组合恢复。未实现本地timeout/整体reset-reload协议。非零result status会使frame fault停机，不回放部分children，外层必须处理fault。深度/容量溢出同理，不能热重试已提交标签。
+
+负证据：capture_v1触发旧TB忙时expand_ready禁止断言；v2在顺序回放入口添加显式expand门控（保留旧断言），普通回放通过，但没有完成回复present后的保持改进；有效v3修正该边界并重新完整运行，不能用旧v2替代。capture_unit_v1编译因item task漏seq实参失败，v2补实参后通过，RTL与真实v3同SHA。上述历史144个源/文本/log文件969720B压缩并逐成员SHA核验，results/capture_history_20261025.*；大型二进制/内存镜像未列入该历史包。
+
+持久化：offer_archives_20261025/capture_v3.tar.gz为277文件5606949B，capture_unit_v2.tar.gz为35文件76525B；成员和copy SHA核验，真实capture_v3已实际移到.preserved后解包恢复277文件验证。restore_offer_result.py可恢复。下一步优先将captured frame消费接进candidate_controller的metadata/access路径，并在子树返回后重新实际读visited/parent upstream；再联接现有cost/commit/OFFER。当前只是成功解耦真实children生产与静态回放，尚未完成立即递归RTL，研究目标保持active。
+
+# children静态帧缓冲RTL组件（2026-10-25，优先于历史记录）
+
+新增hardware/variants/recursive_frames_v1/children_frames.sv与tb_children_frames.sv，脚本run_children_frames.py / audit_children_frames.py。最终有效结果results/children_frames_20261025指向frames_v2；results/frames_revision_20261025.json passed。XSim2022.2通过9项：三层嵌套/空子帧后恢复父游标、512bit上下文及352bit静态记录背压保持、帧槽复用无旧尾泄露、depth越界、children容量越界后继续排空producer、finish计数错、abort后排空、producer非零status、reset空帧及abort当拍屏蔽消费。其中嵌套和复用消费顺序10:1→20:3→10:2→40:4。frames_v1为早期8项通过结果，未覆盖abort同拍屏蔽；final v2增加!abort准入并保持首错码，不能把旧v1推广为该边界通过。未改旧成功组合/原始/shared基线。
+
+协议：begin携带不透明完整父context，成功受理后下一拍capture_active才能启动上游expander（depth溢出begin仍可受理报告fault，但不会进入capture_active）。capture阶段接受有序child_record，每条352bit预留node/position/ordinal/attrs；finish携带已输出children计数与status，必须匹配已捕获数，不是raw图邻接数。child与finish应串行；同拍finish优先，child_ready=0。整帧成功封存后才允许item消费，item_ready只推进当前帧游标；父项推进后可begin子帧。子帧frame_done后pop恢复父游标。begin/pop必须互斥，当前二者同时提出不受理；frame未耗尽不允许pop。异常后fault保持，已暴露capture继续接受children并丢弃直到finish；不提供热恢复，reset为独立组件清空。捕获无本地timeout，集成时需统一watchdog/abort与物理排空；不能只重置本模块忽略其他在途服务。
+
+动态标签不存入本帧。恢复后visited/access/prev/upstream必须由后续控制器重新实际读取。本轮mock producer组件没有标签服务，因此尚未证明动态标签重读，也尚未接真实graph expander、State、owner、cost/commit或实际frontier。仍需改造candidate_controller，将捕获和逐child访问分开，再把本帧接入立即递归调度；只加帧存储不能自动消除现有operation_pending限制。上下文宽度参数必须包含完整query/price/version/design及父连接State；512bit只是组件默认，集成须按实际字段核算。图/配置生命周期lease需覆盖所有挂起帧。默认DEPTH64/CAPACITY256未做综合或器件容量可行性证明；本次只测试DEPTH3/CAPACITY3，不代表64层RTL已测或资源已定。
+
+归档results/offer_archives_20261025/frames_v2.tar.gz：33常规文件54097B，成员和共享盘复制SHA验证，并实际移走scratch后解包恢复33文件验证。目标继续active；下一步优先接真实expander捕获及新逐child控制器，不停留在独立组件。
+
+# 显式父栈递归语义参考（2026-10-25，优先于历史记录）
+
+上轮实际成本OFFER为已验证进展。本轮新增scripts/prepare_iterative_recursion.py与audit_iterative_recursion.py；结果results/iterative_recursion_20261025，组合收据results/iterative_revision_20261025.json。完整原Router立即递归与显式软件父栈在40个明确合成图上事件、所有成本标签及完整POLL输出逐行一致：1305次扩展、1926次push、2446次visited skip、421条POLL输出；2560条最终label记录。case0沿用多子汇合反例，case1为64层全lookahead链，其余为固定LCG生成的有环/汇合图，偶数case设node63为target。不是自然设计搜索或真实硬件调度证明。
+
+变换只改变调度：push完成原三条标签赋值后，lookahead写iterative_child而不直接递归。每帧保存node和next；先把next推进，再完成当前child判定/提交，若需lookahead就压子帧。每轮从栈顶重新执行原visited/access/成本路径，不能缓存后续兄弟的访问结果。子树返回后父帧继续；共享earlyTermination令祖先逐层退出。独立auditor逆变换恢复整个原observed Router源码逐字一致，并绑定前一轮已审计observer源；完整成本函数/原heap未改。当前软件vector栈无容量上限，不证明硬件溢出/abort/排空。
+
+现有RTL阻碍已从source确认：candidate_pipeline_v1/candidate_controller.sv以operation_pending覆盖整次父扩展，NEXT_CHILD直接持有e_out，OUTPUT退休才让expander继续；candidate_commit_query_core.can_start要求!operation_pending。因此把action2反馈成新expand会被父pending阻塞，不能仅在top增加反馈线。下一步需将有序children捕获与逐child判定解耦，使expander在进入递归前可归还；保存父游标/连接State/元数据身份，恢复后重读动态标签。可选实现为先捕获完整父children静态记录，再逐child消费；父缓冲和栈容量必须有显式越界停机，不能丢弃已提交标签或冒充成功。当前尚未实现这项RTL改造。
+
+持久化results/offer_archives_20261025/iterative_v1.tar.gz为24个常规文件934538B，逐成员/压缩包复制SHA核验并实际移开原目录后恢复验证；旧目录.preserved留存。继续研究goal active。先前FULL实际满堆、外部CLOSE定向组合及完整搜索/回溯/板卡性能等缺口仍在，不由软件栈对照覆盖。
+
+# 实际成本入队与递归顺序对照（2026-10-25，优先于历史记录）
+
+当前可复核top为 hardware/variants/candidate_offer_v1/candidate_offer_engine.sv。实际cost23成功及lb/upstream/visited三项native ACK后，action1使用实际total/node进入同一个8叉frontier；action2只返回lookahead回调，不入队，尚未实现递归硬件调度。cost_offer拥有完整query/price/version32/design64身份与背压/排空状态；成功回复退休前禁止变更。外部CLOSE排队不能挡住当前decision必要的内部OFFER；该并发场景尚需定向组合测试。
+
+results/candidate_offer_pilot_20261025与candidate_offer_full_20261025均通过source-bound审计。完整32槽和单槽各1216扩展、3066判定、702实际cost/label提交、2106有序ACK、701实际成本OFFER，65非空CLEAR。195条seed OFFER单独统计。每组978条完整队列命令/回复与原CPU DaryPQ(arity8)逐字段一致；checkpoint前后SIZE及关闭前验证POLL也在对照中。只有4条有效条目在关闭前被POLL，其余大多被EARLY CLEAR清除；这些POLL是验证fixture，不是真实路由搜索调度。峰值50，不构成真实满堆测试。成本输入16146字/输出3510字逐bit一致，全部3145728B标签后备及checkpoint后436条最终记录/2180字保持检查；设计级owner/history不随标签清零。周期2447921/2464419仅为仿真收据，不能宣称FPGA加速或全布线等价。输入仍是受控SLL几何和跨扩展脚本seq压力，详见下方历史。
+
+scripts/audit_candidate_offer.py、audit_offer_trace.py、audit_offer_heap.py为当前审计入口。heap参考在results/offer_heap_inputs_20261025，原CPU堆体原样提取并以独立Python堆重放核验。guarded commit_v2 core保持不变。full批同一Vivado进程624.891s、exit0，300s仅观察交还，没有重启。
+
+results/cost_offer_unit_20261025通过16项mock-backend组件测试并由audit_cost_offer.py独立校验：正常与原始key位保持、七种错回复、合法/不合法FULL、abort暴露SEND/等待回复排空、timeout、version高位漂移、成功回复后late设计身份故障、idle异常回复。FULL已在标签提交之后，必须停止；不做静默丢弃/重试/回滚。FULL仅注入组件，尚无实际满堆组合或联合AXI故障恢复证明。
+
+results/recursion_order_20261025是明确合成5节点汇合图0->{1,2},1->{2}，使用完整原Router类/实际成本方法。audit_recursion_order.py去除纯observer后逐字恢复原source；deferred只改一处立即递归调用。立即递归使node2 prev=1,total=0x4089999a并入队一次；延后递归使prev=0,total=0x40400000且队列为空。这证明不能先完成父节点所有兄弟再处理lookahead。recursion_v1因Config未显式初始化被拒绝，仅留负证据；有效v2显式设定原0.8权重。这不是自然图样本或硬件递归通过。
+
+下一步：实现可挂起/恢复父上下文的立即递归调度，恢复后重新检查动态标签，并用上述多子汇合对照验证；另补外部CLOSE排队/实际满堆停机定向组合。父expander当前pending限制需要真正解决。联合故障排空/reset/reload、真实landmark数据、非零owner与当前组合、默认大目录综合及板卡性能仍未完成。研究目标保持active。
+
+归档入口scripts/archive_offer_result.py / restore_offer_result.py，持久化results/offer_archives_20261025，包含heap、pilot、full、unit、recursion五组逐成员SHA核验压缩包；最终归档清点见results/offer_revision_20261025.json。旧commit结果与源码不覆盖。
+
+# 成本标签有序提交与checkpoint读回通过（2026-10-25，优先下方历史）
+
+本轮有效top为hardware/variants/candidate_commit_v2/candidate_commit_engine.sv；core和cost_label_commit在candidate_commit_v1。实际cost23回复后依原push顺序native写lb(field0)=total、upstream(field1)=partial、visited(field3)=out_config字0 route sequence，每项必须等ACK成功才发下一项。不是out_sequence子ordinal。native ACK检查present/prev及已写字段；候选输出等待三个ACK，完整160bit payload在独立journal逐项核验。commit_busy进入统一lease/config/host围栏；post/State/prefetch/cost和commit回复共同退休。core仅加IO第5客户端，其他旧服务不变。v1/v2 derive_top与v1 derive_core供内存重建审计，冻结后勿重跑覆盖。
+
+额外准入修正很重要：v2显式要求fault=0且out_cost_status=0才发commit，并以非零cost status产生k_reply_error/fence。坏cost full-design身份及非零status实际pipeline强制注入均触发fault，成本标签请求受理0（可能已有prev/CLEAR/设计准备副作用，不是整体零副作用）。相同TB、106份相同RTL/dat，仅top admission/fault逻辑不同：old v1坏身份测试暴露不合格提交VALID，按预期失败，v2通过；不是声称old已实际写坏标签。results/commit_guard_contrast_20261025.json保存比较；old guard expected_failure源码/文本/log归档144文件233669B，不含大型binary/build。
+
+新CPU输入results/commit_inputs_20261025实际inputs_v2。prepare_commit_inputs_v2.py保留原始算术/State初始化和push三条赋值前缀；手工access machine与原始candidate控制分别从同一完整SparseLabels快照执行，1216个parent之后比较所有活跃页的lb/upstream/prev/visited/target。两条路径都真的更新成本标签。新流3066判定/702allowed/65EARLY（旧无commit为3063/713/66），audit_commit_inputs.py独立标签journal重建16146成本输入字，并检查13次先前commit导致visited SKIP、12次parent upstream继承commit、36次非零parent upstream及全部436条最终非零记录。算术3510输出字仍来自原CPU体。Query2序列100跨扩展反复使用是明确脚本状态压力，不是自然每connection搜索轨迹。堆/递归未执行，不能宣称全路由等价。inputs_v1是没有最终标签导出的早期中间CPU结果，留scratch；其原auditor逐SHA保存在audit_commit_inputs_v1.py，最终输入为v2。
+
+最终组合门禁results/commit_revision_20261025.json passed，使用audit_commit_revision_v2.py（SHA 4514e137e8ce1d019d8a3a9eb967ba68106633b6a9b76372fbeabe98fc8520ef），不是旧v1 revision入口。pipeline auditor为audit_candidate_commit_v2.py（SHA 41986a567e0455efa31ae4a1b7513f431ad6f37bd91e29fe66b6204312ef892e），trace auditor audit_commit_trace.py（SHA f2490c6837b52c592faf10f07b69a540062eb38157e0406bc62ccd8e45b6c4b6），input auditor ec5d074fe12ef9899e192e8f3b2ed82a3f0bb7e43e96adb0122674740a389eb8。输入manifest 1be3a9a2936dd40b9f6f23225c77c34269072faa53f91451fb4eb3f0ba362f74。pilot_v2/full_v2的106份RTL/dat同SHA（不含TB），旧baseline53份/prior62份、center生成6份及exact/geometry生成RTL/已验证cost_service均保持检查。
+
+32槽/单槽每组1216扩展/3066判定/1216 State读/702实际geometry+cost+post-center/702成本提交/2106有序ACK；16146成本输入和3510输出逐bit一致，I→W/A×3→候选O严格在实际cost CR之后，完整ACK payload五字段逐次匹配，背压保持。65非空CLEAR每次seed3实际条目（195 seed OFFER，不是cost OFFER），12 fresh SLL重读/12从prev=-1因写parent而Y翻转、8次external/internal控制同拍。最终checkpoint后实际host native读436记录/2180字，全部与CPU最终状态相同，单槽强制驱逐/重载仍通过。
+
+物理证据：完整label3145728B与逐R/W journal核验，32槽843R/1362W，单槽3639R/3714W；graph43888R含49短拍零填充、owner1620R、cost2107R逐字核验，tableR0。design145424192B/owner145433472B/cost36812672B完整后备一致；只标签更新，设计级owner/history未清零。legacy external center4281调用/1215退休后围栏仍是单独fixture；真正post-center702。cycles2434133/2449022只作仿真收据，不作速度比较。仍用FRAMES16384/INDEX14/HASH15及slots32/1，不是新默认163840组合/综合。所有allowed occupancy/refs/index均0，旧非零owner门禁不能与当前组合合并宣称覆盖。
+
+13项同RTL组件mock-native测试（unit_v1）通过：正常ACK停顿、raw NaN total/负零partial/高位route序列传递、三阶段错值、状态/缺present/错prev、abort已暴露SEND与pending ACK排空、timeout、version高16bit漂移、成功回复背压后late design fault保持、idle异常回复。独立检查12条响应payload/ACK前缀，含旧值不回滚。ACK mask只是已验证前缀，错误写可能已物理完成。组件故障可以保持已暴露命令/等待ACK；全组合global abort也会停止backend，协调排空/reset/reload尚未证明，不能由mock测试外推。成本回复注入门禁2项不是实际AXI错误恢复证明。
+
+运行状态：v1正常批603.472s/exit0后完成；修正后v2完整批612.519s/exit0，两个批均在300s观察交还后同进程继续，均未因超时重启。B147904已空闲/终态0，raw receipt commit_v1_full_completion_20261025.json、commit_v2_full_completion_20261025.json。v1正常回放审计保留在candidate_commit_full_v1_20261025，但主链接candidate_commit_pilot/full_20261025已指向guarded v2。无在途本阶段仿真。
+
+manifest/audit SHA：
+- candidate_commit_pilot_20261025: 6ccf3bb5eb458ac247e95f6407acf29bcdf53455732ccf81766ffa817850070e / 7ce938706295435690ad56fe41e85f045522965d67535375982039a134c4e901
+- candidate_commit_full_20261025: 9e0bc7f04933ef136900d00e9eef80e9c346904cb4af629e413ba49c2fb73cd0 / 7f593422f6e692d849bef128147c240cc5d14001a7d1de156ef0bf1c47b41a13
+- cost_label_commit_unit_20261025: d1bb6a2ee1729c5ba19b69e40ae5d0bf49cbf1e566192a8cb537953cce12c194 / 7b9627b19054537d495ad0bf7f151f0134f1da645ff077339888a32d9177c6db
+- commit_bad_cost_guard_20261025: 0852b94f913e30c35ca9c5d551762b3294709af8ee2eff4653316112700c310a / cf412924514ee60eddcf55b2130c6932d45e6da005df58d81061ed2cc8283985
+
+持久化：results/commit_archives_20261025中主证据inputs_v2/pilot_v2/full_v2/unit_v1/guard_v2五个tar.gz，每个压缩后解包成员hash与共享盘copy SHA验证；durability_audit.json给出精确bytes/members。另pilot_v1/full_v1作为旧正常功能证据单独归档，不替代v2门禁。restore_test.json把guarded pilot原目录移到.preserved再真实解包、277成员全hash验证；restore_test_v1.json也保留。results链接指向/tmp/B_state_residency_commit_20261025，tmp丢失先对所需json索引执行scripts/restore_commit_result.py；只验证/恢复，不覆盖已有目录。此前State表、cost23/params/postprev归档依赖仍保留。所有原始/shared/A基线未改。
+
+下一步实际OFFER与立即递归：当前action分布701 queue、1 lookahead、2364 skip，尚未把成本实际OFFER入Frontier。commit_schedule_gap_20261025.json已定位唯一action2：exp304 parent5123419→child6431273，conn29488/net4754/seq321，父过滤后children仅1、无剩余siblings；因此当前数据不能证明“递归先于后续父分支”。必须新增多子节点且递归会改变后续兄弟标签的压力。不能排完parent再递归仍称等价；现core不能在父operation未退休时expand子parent，需先分离有序children捕获与逐child判定，保存/恢复父上下文并重新读动态标签。OFFER要用actual total，确认ACK后退休；FULL/容量与部分提交停止语义需明确，不能丢掉visited已写的节点。再完整search/回溯owner引用提交、真实landmark存储、coordinate第3客户端真实crossSLR联合、与非零owner/history/price组合、joined fault/drain/reset/reload、默认目录/新联合综合和平台/板上。保留4节点beginY与hasLaguna几何压力限制，真实配置crossSLR0/landmark inactive。研究goal active，尚无完整路由或板上加速结论。
+
+---
+
+# 实际23字成本生产与算术已联接（2026-10-25，优先下方历史）
+
+本轮hardware/variants/candidate_cost23_v1新增cost23_inputs、candidate_cost23_engine/query_core、TB、derive_top/core.py。实际链：每扩展State读取→allowed owner/history/price/net→EARLY CLEAR→native prev写ACK→parent upstream/fresh effectiveY/实际center→geometry_step实际HLS→23字producer→exact cost_step实际HLS→候选共同退休。k_busy加入统一lease/config/host围栏，full version32/design64在外层保持至退休。core只在原postprev版基础添加coordinate第3客户端；其余旧服务逐SHA不变，top/core变换在审计中内存重建。geometry_service_v1是从cost collector按13in/4out双口ABI派生的新包装，实际正常调用通过，不等于完整fault/reset collector证明。冻结源码不要重跑derive覆盖。
+
+CPU输入results/cost23_inputs_20261025（/tmp/B_state_residency_cost23_20261025/inputs_v1）：scripts/prepare_cost23_inputs.py在原v7 driver里加入原始evaluateCostAndPush体，保留真实State初始化（WL约0.2/启发约0.8），仅最终push替换为23字及5输出记录；不会提交lb/upstream/visited或递归。CPU vectors/post_vectors/初末design/owner/cost/graph与原v7逐SHA完全相同；audit_cost23_inputs.py从实际graph/owner/history/price/net/State表与fresh post坐标独立重建713×23=16399字，3565输出字来自原CPU体。输入manifest 2ddba696c6b59a3bec5e906d08371d2ff3abbb5ff314bf84b3459b4eb1498981，输入auditor 265dbda341411a7eabefc1aa8d84f50d4be99e167d8589734fa61c42dfff0bed。landmark inactive/crossSLR0；无NaN输出，不把它当可选landmark或实时路由State轨迹。
+
+组合门禁results/cost23_revision_20261025.json passed，revision auditor eaec01fee752920cdddedb616963e29919ca3c6c4c5ca38eae432726f863e4c0。audit_candidate_cost23.py SHA 03bc1d390f0aa42e91b6533a1fd0eaaa86d92c9319b398692d380bd81b145555、audit_postprev_trace.py保持；pilot/full使用105份RTL/dat同SHA（不含TB），62份prior/53份baseline及6份center生成RTL检查保留，新增geometry/exact生成RTL逐manifest核验，cost_service_v2与旧已验证包装同SHA。32槽/单槽每组1216扩展/3063判定/1216 State R，713实际geometry+cost调用，全部16399输入字/3565输出字及geometry4逐bit检查；每包中心AR先于I→GQ→GR→CQ→CR严格有序，背压保持packet/result/geometry。713原顺序前缀/66nonempty CLEAR/12 fresh SLL读取/713实际center；legacy external center4278/退休后检查1215仍独立fixture。完整label3145728B journal，full69R/1362W、pressure1455R/2271W；graph43890R含49短拍零填充、owner1644R、cost2140R逐字核验，tableR0；design145424192B/owner145433472B/cost36812672B完整后备一致。cycles2327744/2282571仅仿真，不作加速比较。
+
+完整批568.760s/exit0：cell4839在300s交还后同进程完成，没有重启。MCP PID147904终态0，raw receipt results/cost23_full_completion_20261025.json。pilot160扩展40实际cost/geometry，原对照920输入字+200输出字及其余旧检查通过。
+
+额外组件门禁cost23_branches_20261025有效branches_v2：mock coordinate回复，复用21份相同实际geometry/cost RTL和包装，5项：different-SLR取sink/child SLR再Laguna列（3读，dx20/dy100/dist120）、same-SLR跳列（2读，dist40）、noncross跳全部表（0读）、landmark active显式status6停止且不启动算术、实际cost运行中active version高16bit变化status5停止。audit_cost23_branches.py另以逐阶段binary32独立核验两包10输出字。它不是新第3 coordinate arbiter在真实crossSLR图/表流量下的联合验证，详BRANCH_SCOPE.md。当前producer尚未接真实landmark数据，绝不能静默用零替代；初始inactive profile八对unused landmark字0有明确语义。
+
+失败证据：pilot_v1因新增expected_cost与旧TB同名而编译失败，改TB名expected_cost23后pilot_v2通过；branches_v1在wait(valid)同拍立即采样失败，v2只改为下降沿观察并增加OBS，原数值断言不弱化、RTL全部同SHA。负例源码/日志/文本分别115文件224220B和36文件45359B已单独tar/hash验证；大型镜像/build只留scratch，不宣称负例全部大文件已归档。
+
+manifest/audit SHA：
+- candidate_cost23_pilot_20261025: d0d49fbb65b588f3a7ff254cf943ac0daf8b47c9283a5693c72e57408de82b1b / 5e7e6b2dff752f594a1b617069182119273a50161f1b7a50e50b26b28010a513
+- candidate_cost23_full_20261025: c70a49c7fd8131a6a6b7974bdb7dfa15c7648a06686c77c77d691558fe2ad8c5 / 5c710f24840e48ef8b15eaf9d61eda30076cd6699a4ae6691219943ea61f09d3
+- cost23_branches_20261025: ca5bcfaf262ae8a72325959b7adbe239307ca243e717bb9d3f14e9dbbf0b4e49 / 1d42205a6ea0d3b2c4f95144c8d27372f0aa92353a5b8511776a0dfbf21e2d12
+
+持久化：results/cost23_archives_20261025，inputs_v1/pilot_v2/full_v1/branches_v2.tar.gz分别76951978/5309466/11970244/828771B，40/272/434/75 regular文件，共95060459B/821文件；每成员解压hash及共享盘copy SHA验证，durability_audit.json汇总。restore_test.json已把pilot原目录移到.preserved再真正解包、272成员全hash核验。results四个链接指向/tmp/B_state_residency_cost23_20261025，tmp丢失先运行restore_cost23_result.py加四个对应json；不覆盖已有目录。先前connection_state表与params/旧postprev独立归档依赖仍保留。无在途本阶段实验。
+
+下一步实际成本标签提交与调度：依原push顺序native写ACK lb(field0)/upstream(field1)/visited(field3)，visited必须是out_config字0 route sequence，不能用out_sequence子ordinal。成本副作用会改变后续访问判定，必须重新生成有真实标签更新的CPU对照，不能继续拿本轮无commit的v7判定流宣称完整等价。OFFER使用actual newTotal；action2需要保存有序children/父上下文并立即递归，当前单parent core未退休不能直接expand新parent，不能推迟递归仍称CPU语义。另补真实landmark存储/target pairs、第三coordinate client的真实crossSLR联合压力、与非零owner/hist/price组合、joined fault/drain/reset/reload、默认目录及新联合综合、完整search/回溯owner引用提交、平台/板上。保留4节点SLL beginY与hasLaguna压力限制；当前allowed占用/refs/index均0，不能合并旧非零owner证据。整个研究goal active，尚无完整路由或加速结论。
+
+---
+
+# 连接State每扩展读取已接入（2026-10-25，优先下方历史）
+
+本轮candidate_params_v1/candidate_params_engine.sv从冻结postprev wrapper派生；新增expand_connection和单独q_cfg/只读AXI，原postprev core与全部服务不变。接受expand时快照cookie/connection/net/sink/cross、query2/price4/full version32/design64和独立profile revision；每次扩展只读1×64B，全部children共享。immutable prefetch可重叠；metadata返回前禁止post-prev启动、candidate输出和最终result退休（含空扩展）。q pending/busy加入state_lease及配置/host edit/control围栏；所有配置就绪及node/net/design一致后才能OPEN。full身份漂移/reader异常停止。derive_top.py可在内存重建变换；不要重跑覆盖冻结源码。新CONTRACT.md有完整范围。
+
+最终组合门禁results/candidate_params_revision_20261025.json passed；auditor scripts/audit_candidate_params_revision.py SHA fb48b1dc5c409cc042de3b71f283c140f487d90e17955683de4c0a97e2a189cf。scripts/audit_candidate_params.py SHA f08bef7b1cc4bce3c43004362ced7450f97b099772840c06678e8166a3faeaa3保留旧全量图/owner/cost/label journal和post-prev/CLEAR/实际center检查，再逐笔绑定全部参数request/response/result身份与实际512bit AXI数据。pilot/full/delay使用的84份RTL与dat完全同SHA（不含TB）；62份旧prior模块保持同SHA，53份baseline及6份center生成RTL均冻结。真实State初始配置输入仍为上一节180326表，非live route State。
+
+32槽/单槽每组1216扩展/3063判定，1216条参数R=19456个word全部核验；713实际顺序前缀/66nonempty CLEAR/12fresh SLL重读/713实际center，8次external/internal控制同拍。label完整3145728B journal核验，full69R/1362W、pressure1455R/2271W；graph43890R含49短拍零填充、owner1644R、cost2140R逐字核验，tableR0；完整design145424192B/owner145433472B/cost36812672B对照一致。legacy external center4278/退休后检查1215仍是单独fixture。cycles1978439/1934607与先前相同，只是仿真，不主张速度或资源收益。366.988s/exit0；300s交还观察句柄后同进程完成，B147904终态0，raw receipt candidate_params_full_completion_20261025.json。
+
+定向压力candidate_params_delay_v1只改TB，参数AR故意延迟2048拍；160扩展/169判定/40内部prefix/6EARLY通过。实际等metadata的SKIP/allowed/empty分别[23575, 10151, 246251]拍，期间无post-prev写和out/result提交，所有物理数据与后备检查仍通过；不是joined fault/reset/reload验证。正常pilot也160扩展且独立审计通过。早期pilot因cycles前置声明/重复声明两次编译失败，源码/日志负例保留，RTL未为此修改；negative归档188文本/源码文件367785B，不含大型binary。results/candidate_params_pilot_20261025链接已指向有效pilot_v3，原首轮failed目录未改。
+
+manifest/audit SHA：
+- candidate_params_pilot_20261025: 0a3313c1b0731e79b3555fe8dc12a4dce64483a899f89831d097660861dd471d / 44232335151a1b50d0bf7fb4f693f69f6a9bac8f00ca45b485035dbc6a3fbb52
+- candidate_params_full_20261025: 35fc7400a85ca3e9a8dd1460e7256dc565cdbeee395c2f539dc46f9d97b1dd8a / 8079323f0cd73d2cf344e1fb6487c445f570ff2dcd9e1cae39a468c75079b62c
+- candidate_params_delay_20261025: 10722bac4c4d27981915b35d6469caa48d44a61eb83526caaf85e863a335357b / 13e69c01fe1765a82b02fe6ebe6427e564b46c007172d88c22bd2f0eff14e8dd
+
+持久化：results/connection_state_archives_20261025下本轮pilot/full/delay分别4609368/10459950/4486961B，226/363/226个regular文件，合计19556279B/815文件，压缩解包成员hash与共享盘copy SHA均核验。params_durability_audit.json汇总；params_restore_test.json将pilot原目录移到.preserved，再真正解包并核验全部成员。results symlink指向/tmp/B_state_residency_params_20261025，tmp丢失时先执行restore_connection_state_result.py加对应json索引；不覆盖现有目录。输入/standalone reader两个先前归档仍保留。无在途本阶段仿真。
+
+下一步完整23字：State导入已接，继续把sink/SLR/Laguna/landmark几何、实际refs/history/price/net、post-prev upstream/coords/center及baseCost/length接成producer，再调用已验证exact cost_service_v2，依原序ACK lb/upstream/visited（使用out_config字0 route sequence，不能用out_sequence子ordinal）。之后OFFER或立即递归；当前父operation未退休不能直接递归，须保存有序children/父上下文，不能推迟递归仍称CPU等价。新组合目前allowed occupancy/refs/index均0；上轮独立非零owner门禁不是与当前组合覆盖。保留4节点beginY+hasLaguna定向几何压力限制、原crossSLR连接0/landmark inactive；不可用零State或TB预计算23字替代真实producer。完整search/回溯owner引用提交、joined fault/drain/reset/reload、默认目录/新联合综合、平台与板上仍未完成；研究goal继续active。
+
+---
+
+# 连接State导入与独立RTL读取器通过（2026-10-25，优先下方历史）
+
+本轮补齐完整23字成本包的配置前提，尚未接入candidate。scripts/prepare_connection_state.py调用原始CPU逐字提取的非timing初始State初始化，导出180326×64B连接表；share/WL/estWL raw bits为1065353216/1045220556/1061997773（1/约0.2/约0.8），并携带真实source/net/sink/cross、SLR长度60与profile revision。独立audit_connection_state_inputs.py完整遍历原始RRT的9089009节点/40469536边/27960网，逐条核验180326连接和全部16word。该原始配置crossSLR=0、landmark未启用；不是live State轨迹或可选landmark实现。
+
+hardware/variants/connection_state_v1/connection_state_reader.sv为只读AXI64B表读取器：完整query/price/version32/design身份、独立profile revision、记录校验、背压持有、abort/drift/timeout停止准入并排空物理事务。Vivado2022.2 B会话147904通过Ross非project XSim流程验证。有效results/connection_state_reader_20261025（reader_v4）182真实记录逐512bit检查及7错误场景通过，audit_connection_state_reader.py独立复核全部ROW/输入hash/冻结源码和命令。manifest dc3c4dc8d7f479351a10e20b77e21f195197fea554bec18fafaac753ba1d3d61，auditor b07c73c35360c20bb4e808094a1a2dc4c3efa78dbd3fca40ffebee4e974b8c04。v1/v2较早试跑无逐ROW外部日志；v3新增日志时endelse拼接导致TB编译失败，原负例保留/tmp，v4仅修TB词法，RTL未改。不可声称联合fault/reload或板上性能。
+
+持久化results/connection_state_archives_20261025两个tar.gz，3050914B/20文件和87622B/33文件；压缩后每成员解压hash及共享盘副本hash验证。results输入与reader链接指向/tmp/B_state_residency_params_20261025。丢失时执行scripts/restore_connection_state_result.py加对应归档json；不覆盖现有目录。输入gate manifest0528cbe381ad565bc74b39273d1c558427f0513160cbb3164c24fc952a20d536，auditor b6fad3fa9f9903b925a7bd667fb4bdb2ecc406da1d54e1666176f3783667e650。
+
+下一步：candidate_params_v1尚为空目录；candidate_params_pilot/full两个symlink目前没有结果。复制冻结postprev wrapper，每个expand携带真实connection索引并读取一次State，参数未返回前禁止post写与result退休（包括空扩展），metadata busy加入统一lease/config/control围栏；保持原core/旧RTL不变，实际32槽/单槽完整回放并审计。随后接sink/SLR/Laguna/landmark几何、23字cost调用和按原序ACK lb/upstream/visited(route sequence)，再OFFER/立即递归。整个研究未完成，无新性能收益结论。本阶段无在途仿真。
+
+---
+
+# post-prev／实际中心距离顺序前缀通过（2026-10-25，优先下方历史）
+
+hardware/variants/candidate_postprev_v1新增postprev_inputs、query_frontier、candidate_postprev_query_core/engine和TB。真实链：immutable prefetch→EARLY实际Frontier CLEAR5回复(size0)→native child.prev=parent写ACK→native parent.upstream读→coordinate重新读SLL prev/parent graph→实际cost_center核(真实net中心)→结果与candidate共同退休。加native IO第4客户端、coordinate第2客户端并保持事务归属；62份旧RTL/model不变。derive_core.py/derive_top.py只供审计，在内存复原源码变换，不应重跑覆盖已冻结v1。Frontier自动随query OPEN/CLOSE，CP保持owner；全version32/design/query身份和post_busy纳入围栏。旧external center fixture仍保留，计数与新内部算术分开。
+
+有效门禁results/postprev_revision_20261025.json passed。输入postprev_inputs_v7_20261025/source_bound_audit.json：原CPU golden控制流只把cost/push替成顺序前缀；独立graph/label journal/binary32重建713行、24次非零parent upstream、12次SLL fresh prev从-1写parent后Y变化。full postprev_full_sll_v7_20261025/source_bound_audit.json passed：32槽/单槽每组1216扩展/3063判定/713内部前缀、66次nonempty CLEAR(每次seed3实际条目)、12次SLL标签及parent graph重读、713实际中心距离；8次外部/内部control握手同拍。逐笔核验CLEAR回复先于prev写、写ACK先于parent读与坐标、helper全部4输入/2输出、所有标签word/presence；label物理R/W与完整3145728B后备核验，32槽69R/1362W、单槽1455R/2271W。graph43890R(末尾49短读零填充)、owner1644R、cost2140R逐字核验；完整design145424192B/owner145433472B/cost36812672B一致。table R0。legacy fixture4278调用/1215退休后围栏检查不是713实际中心调用。cycles1978439/1934607只是仿真。
+
+必须保留压力语义：原图11520个SLL全部beginY=endY，11520条SLL入边全部parent.endY=child.endY，原hasLaguna=0过滤它们。v7明确强制hasLaguna=1，并在独立graph_attrs.rrt32中只改4个beginY半字269→209(8B)，CPU ns/hot同补丁，原图未改；每次旧prev设-1，12次翻转是定向几何/能力压力，不是自然实际路由几何。本轮allowed节点全部occupancy0/refs0/index0，上一轮非零owner门禁独立保留，不能宣称与新post-prev组合覆盖。
+
+342.538s/exit0：cell4730在300s交还后同一进程完成，未重启；Vivado status确认147904空闲/last_completed_code0，原响应保存在postprev_completion_status_20261025.json。输入manifest a8aee56b72905a5a72946cd86776ef702b4134f1350f71c56ad903e67af60121、auditor a0176381c9b0e39951a74f7438f8dfeb1b21829a164831310701d8924b33b90d；full manifest2603321646b656ca754238750fbdd47d26d805f56e8d4cdc306cd1e301c36efb、auditor ee7d59fceb00eeea192c9d057f7dbee0b7e578a8f9dec486d845c221e1a8dc75、trace auditor9926cec72982ea69ef900b3b49874258ea1a16f56d4ed17f0c3c8fcf75dac742。revision auditor d1dbd3f5cca4ba1b7c6f0eb00f29096131534dd27f1b0e723311c133918a7f15。
+
+持久化：有效inputs_v7、pilot_sll_v7、full_sll_v7三个results symlink指向/tmp/B_state_residency_postprev_20261025；持久证据为results/postprev_archives_20261025下3个tar.gz，76933486/4419663/9927498B，共91280647B，37/224/357个regular文件全部解压hash及共享盘副本hash验证；durability_audit.json passed，restore_test.json记录pilot实际移开原目录再解包/224文件核验，原.preserved保留。tmp丢失时先自动恢复：
+
+    for index in results/postprev_archives_20261025/postprev_*.json; do python3 scripts/restore_postprev_result.py "$index"; done
+
+restore不覆盖已有目录，只核验。另negative_evidence_20261025.tar.gz为662份失败/覆盖不足试跑源码、清单、日志、文本，4083163B；大型binary/build只列清单、留原tmp，不能声称全部负例大文件持久归档。
+
+排错证据：首轮pilot因缓冲日志/100M全局watchdog停止诊断(精确PID SIGTERM，非工具自然崩溃)；v2发现seed端口READY依赖VALID，下降沿轮询漏掉上升沿接受，Frontier回复正确保持；v3/close_debug发现wait READY后再等posedge的TB误判关闭握手。改为时钟沿确认，记录HQ/HP实际接收，未弱化断言，RTL未因这些TB问题修改。CPU v2误要求双向SLL入边而abort，v3换行转义编译失败，v4原hasLaguna过滤SLL，v5/v6端点相同达不到数值翻转，均不作专门SLL通过证据；v7才是完整门禁。共享盘quota多次阻止文档/归档，最终对13份旧owner镜像dig-holes回收1673265152B，前后SHA全同，收据postprev_storage_20261025.json；等待quota计账后归档成功，原冻结内容未改。CONTRACT曾被quota写成0B，现已完整重写并严格长度/结尾、Python doraise编译及run.py check核验，不把此前零文件当通过。完整原始源码/共享基线未改。
+
+脚本有效入口prepare_postprev_inputs_v7.py、audit_postprev_inputs_v7.py、run_postprev_sll_v7.py、audit_postprev.py/audit_postprev_trace.py、audit_postprev_revision.py；archive/restore_postprev_result.py。契约本variant/CONTRACT.md，报告results/postprev_20261025.md。无在途本阶段实验，整个研究仍active。
+
+下一步形成23字：已实际具备refs/hist/price/net、post distanceToCenter(字6)、parent upstream(字8)、graph baseCost/length；缺State share/WL/estWL/landmark权重真实导入及sink/SLR/Laguna/landmark几何。勿用State{}零权重或TB算好的23字替代producer。visited提交必须用route sequence(out_config字0/expand_sequence)，不是out_sequence子序号。调用exact cost后依原序ACK lb/upstream/visited，再OFFER或立即递归。当前候选控制器不能在父operation未退休时直接递归，后续须保存有序children/父上下文并立即递归，不能推迟递归仍称等价。完整search/回溯owner引用提交、joined fault/drain/reset/reload、默认目录、新联合综合、平台与板上均未完成。
+
+---
+
+# 实际非零占用候选回放通过（2026-10-25，优先下方历史）
+
+本轮没有修改综合RTL，64份RTL/AXI模型与上一轮prefetch全部同SHA；新TB只改module名和终态marker，原断言不弱化。scripts/prepare_candidate_occupied_v2.py在真实图的8个原空闲allowed节点上调用未改原CPU incrementUser，构造occupancy1/2/3/5/16/32、同网refs3/7/5等（含overflow同网），54条活跃overflow/容量64；8个history=1.25+i/8，原CPU重建全部256价格factor1.25。62条CPU实际owner/occupancy结果与编码独立核对，除列明节点/活跃pool/allocator/history/price外全部owner/cost字节不变。重新运行原完整CandidateOracle与access核对；3022条A恰好未变化，是新CPU执行所得而非沿用旧预期。
+
+results/candidate_occupied_revision_20261025.json passed，绑定有效输入、full+pressure及旧同RTL边界门禁。candidate_occupied_full_20261025/source_bound_audit.json passed：32槽/单槽每组1212扩展/3022判定/60EARLY、785自动prefetch（2237SKIP无prefetch），12次实际非零占用、6次同网。实际索引[0,1,2,3,4,5,15,16,31,32]，同一node208315在net1040上refs7/occ32取31，在net9230上refs0/occ32取32；主槽与overflow原始链都经过真实owner_state_store AXI。3024owner R/2356cost R/42117graph R全数据与镜像逐字核验，design145424192B/owner145433472B/cost36812672B完整后备一致；table R0，graph43短读零填充检查。保留center fixture4233调用/1211退休后围栏。cycles1780205/1674779只是仿真，不主张速度收益。223.235s/exit0/cell4655终态，B147904空闲。
+
+input有效v2 manifest cfd81461e369690a67441ef2c9256a099b0954408e562e11b6ff36c72cda3fff，输入auditor d74b26d64090d553bb7f5dbc71851ea2eceb9af52f73dd86a8ca426007893158；full manifest a4e7bf3fb3abbbce837fe87c5194a56439e3ae13477fdcd8d409880fa427f3e3、auditor4d58def5155482525f5a4ae683d9d6517ab3f6326371c65600a2add75d794d93；revision auditor220791ab6ebe071680c03c0da3d7c50cc4e746b8d699247520b7624e85cf3703。pilot160扩展35prefetch/8occupied/6same已单独核验，不替代full。
+
+重要失败证据：candidate_occupied_inputs_20261025原CPU driver在quota不足时仍exit0，未查ostream，initial_design只有16MiB、expected_design为0；旧manifest虽passed，但output_integrity_failure.json明确拒绝它，不能用该目录作正例。有效严格v2加入两份145424192B设计镜像长度、1212 E/完整A数量及末尾Q记录检查。保留所有原负例。首次新增auditor文件被quota写成0B，已在后续补齐，不是有效审计；实际使用完整d74版本。对旧center及cost-state镜像做fallocate --dig-holes，所有前后SHA相同，回收775421952B+386138112B，收据occupied_storage_20261025.json/occupied_archive_storage_20261025.json；未删/改任何冻结内容。archive full首写也遇quota、最终重新生成并逐成员核验成功。
+
+为避免共享盘quota，以下results目录是指向/tmp/B_state_residency_occupied_20261025的symlink：candidate_occupied_inputs_v2_20261025、candidate_occupied_pilot_20261025、candidate_occupied_full_20261025。持久证据在results/occupied_archives_20261025：三个tar.gz分别2102293/3760086/8432215B，32/177/285个regular文件全部解压后hash核验，再校验共享盘副本hash。durability_audit.json passed；restore_test.json记录pilot实际移开原目录后解包到原位置、177文件核验，原目录.preserved保留。未来会话如果tmp消失，先自动恢复，无需再询问：
+
+    for index in results/occupied_archives_20261025/candidate_occupied_*.json; do python3 scripts/restore_occupied_result.py "$index"; done
+
+restore脚本不覆盖已有目录，存在时逐文件hash验证。归档才是持久证据，不依赖临时盘存活。scripts/archive_occupied_result.py及restore_occupied_result.py；数据/run/audit脚本名含candidate_occupied，契约hardware/variants/candidate_prefetch_occupied_v1/EXPERIMENT.md，报告results/candidate_occupied_20261025.md。Python编译/run.py check通过。
+
+范围：非零状态是在真实图上的明确脚本注入，非自然route更新；修改hist/price为导入镜像，非本轮host SET。query版本3/5只脚本标签，不等于实际轮次价格。新组合仍未验证fault/drain/reset/reload、默认163840目录或新联合综合。下一步实际prev写ack后取effectiveY和parent upstream，EARLY先完成Frontier CLEAR，再形成完整23字成本包，顺序提交lb/upstream/visited与OFFER/立即递归，再完整search/回溯引用提交/平台板上。当前center仍TB fixture，不能认为已计算真实成本或有板上加速。全研究active。
+
+---
+
+# 内部owner/history/price/net取数已联接（2026-10-25，优先下方历史）
+
+hardware/variants/candidate_prefetch_v1/新增cost_inputs_prefetch、candidate_prefetch_query_core、candidate_prefetch_engine及测试台。allowed候选自动触发真实owner op0，再history(child)/price(occupancy-(sameNetRefs!=0))/net(实际expand net)，SKIP不取数；不是TB给读取地址。owner backend和cost backend各以accepted请求锁存归属并路由回复，核心其余body逆变换后逐字等于旧core，53个旧共享source及6个center生成RTL/2个collector保持冻结hash。完整query/full version/design身份和结果背压；prefetch_busy进入统一围栏，未写任何标签或owner。
+
+results/candidate_prefetch_revision_20261025.json passed，绑定三个明确门禁：candidate_prefetch_full_20261025/completed_full_audit.json仅完成的full case；candidate_prefetch_pressure_20261025/source_bound_audit.json单独pressure；cost_inputs_prefetch_boundaries_v2_20261025/source_bound_audit.json standalone mock边界。每组full/pressure1212扩展、3022判定/60EARLY、785内部prefetch、2237SKIP无prefetch；真实owner1764R、cost2356R（785×3+cookie10旧lease读）、graph42117R全部逐字核验。design145424192B、owner145433472B、cost36812672B全后备与原对照一致；graph末尾43短读零填充核验，table R0。保留center fixture4233调用/1211退休后围栏检查。cycles1765498/1659954只是仿真，不与旧TB计时比较宣称收益。
+
+真实这785个allowed child全部occupancy0/refs0/index0，不能声称已在实际占用样本验证same-net price减一。独立同RTL mock覆盖refs0/1/7/65535×occupancy0..258：1024合法（包括same-net只减1）、12非法索引/引用矛盾、13故障（回复full version/host/index/cookie、owner错误、identity/abort/timeout/idle异常），原始0..255外停止不裁剪。此为mock选择器覆盖，不是联合占用/AXI故障恢复。
+
+全批次123.563s后在准备pressure owner副本时quota失败，原manifest保持failed；full case此前已完成且artifacts已冻结，不重跑。只选full审计manifest73228ac199cf1e0967a6d2d2889ff8ff05aff61f31260abff3c92764f879b6c3。对本轮bin做fallocate --dig-holes，逐文件前后SHA相同，物理回收1553989632B，记录prefetch_storage_20261025.json，无删除/内容改写任何冻结正负例。独立pressure112.992s/exit0/cell4625终态，manifest e805236be7af534c8da04873c91fe5bd3189d38e64bd0bf86c07020cf02188f6。共同auditor992703dce9076dece9083f94843f15263530ad733d8d5c4a5dbb2417ab61660d；revision auditorfaeef8fc7720f7ea140b9cf115dcae0313be494e143f108da83d496a3c1e95c4。
+
+负例均保留：pilot初版raw_cs_req_ready前置声明冲突；pilot_v2的16扩展无allowed候选，只是无prefetch路径冒烟。pilot64及debug在cookie51/k2的输出稳定性失败：新raw state与action同拍变化、组合gate一瞬间沿用旧SKIP；RTL增加raw_seen一拍确认，原断言不弱化，pilot64_v3（8prefetch）/full/pressure通过。边界v1在idle异常时立即要求busy失败（fault立即停准入，busy在下一采样锁存stopped后置位），仅TB先检查fault/ready再过采样沿检查busy，v2通过；controller未改。脚本run/audit_candidate_prefetch、run_candidate_prefetch_pressure、run/audit_cost_inputs_prefetch、audit_candidate_prefetch_revision。契约本variant/CONTRACT.md，报告results/candidate_prefetch_20261025.md。Python编译/check通过，原/shared基线未改，B147904空闲，无在途实验。
+
+下一步：补实际store中的非零占用/同网引用与修改history/price数据样本，随后post-prev写ack→实际有效坐标与parent upstream，结合geometry/center/connection参数形成完整23字，再有序label提交/Frontier递归/完整search与回溯引用提交、平台板上。当前center仍TB fixture、没有post-prev或完整成本producer；新组合fault/drain/reset/reload、默认目录与联合综合也未完成。全研究active。
+
+---
+
+# 中心距离已接候选生命周期（2026-10-25，优先下方历史）
+
+新增独立hardware/variants/candidate_center_v1/candidate_center_engine.sv，连接同一candidate_query_core/cost_state_store及已验证cost_center_service与6个实际生成RTL。state_lease=cost_lease||cc_busy，算术回复退休前阻塞查询/CLOSE/扩展、host label/design/owner/cost编辑与五组config。center请求只在operation_pending且query_owned/p_active内准入；query/price/full version由已验证collector检查，新增design_id64捕获/漂移与统一fault传播。原wrapper/shared源码未改，新CONTRACT.md明确producer仍在外部端口。
+
+results/candidate_center_full_20261025/source_bound_audit.json passed：32槽/单槽各1212扩展/3022判定/60EARLY，与原CPU对照相同；4233 actual center调用（fixture3,-4,0,0→binary32 7）/1211次core最终结果先退休后的持续背压，每次保持4拍并主动offer五组cfg与host编辑，均无READY。cookie10保留原cost AXI lease退休后测试。每组9067成本R、194owner R、42117graph R逐字独立核对，完整design145424192B/owner145433472B/cost36812672B后备一致。graph最后43个短读拍的零填充独立核验，继承模型fread warnings并非未检查数据；table实际R0，不能称有新增table取数覆盖。54个旧共享source hash及6个center生成module/2个collector source逐一绑定旧通过门禁。cycles1849331/1743049仅仿真。
+
+244.709s/exit0/cell4575终态；manifest f6127e1c9786365edad3b30bc3ac013ea2b335607b63a80d48f8913e6b5b02b3，auditor b461f7c645ac8edd6a8ec34ef7734ac8c7b0c06f145a66f807ace1c072741cbf，副本auditor.py。pilot_v2只16扩展/6判定/21调用/15退休后检查，不代替全量；首轮candidate_center_pilot_20261025保留failed（query_owned在实例端口表达式使用前未声明，VRFC隐式wire冲突），只将reg声明前移，v2/full均通过。无后台本阶段作业，B147904空闲。
+
+scripts/run_candidate_center.py/audit_candidate_center.py；报告results/candidate_center_20261025.md。本次full参数FRAMES16384/INDEX14/HASH15，非默认163840目录；未做新联合综合，也未证明新组合identity fault/drain/reset/reload恢复。fixture不是实际坐标/网center数据流，cost读取仍由TB给地址，尚无真实23字内部producer、label提交、Frontier或完整search，更无板上加速。
+
+直接下一步：实际内部producer，从owner取refs/occupancy并按原式选择合法price（same-net occ-1，不能裁剪0..255外索引），prev写ack后重新取有效坐标，连接geometry/center与history/net/connection权重形成23字，随后有序label提交/Frontier递归与回溯引用提交。新联合identity/abort/reset/drain边界和默认目录门禁仍需补。全研究active，不将本阶段完成等同于目标完成。
+
+---
+
+# 中心距离调用服务已验证（2026-10-25，优先下方历史）
+
+新增hardware/variants/cost_center_service_v1/：cost_center_memory_call锁存4字输入与cookie/query2/price4/full version32，单读口一拍响应，按地址收集2字双写口（含done当拍），回复背压前后保持忙和身份。独立cost_center_service连接上一轮同一实际生成cost_center_step。abort/超时/接口异常/owner漂移停止，fault保持至服务与核心共同同步reset；完成最后允许拍优先超时。已暴露回复稳定，消费者必须检查fault，不能仅看rsp_status。尚未接candidate实际lease，不能据此说整个设计所有权已延长。
+
+results/cost_center_service_v2_20261025/source_bound_audit.json passed：XSim2022.2经B147904 MCP执行，110397实际核向量/220794输出字独立逐字核对冻结oracle，120个偏移abort→共同reset→同实例正常恢复，16项mock协议检查（快照、提前/同拍写、背压、重复/缺失/不同步、query/price/full版本漂移、abort、timeout16和最后拍完成、idle异常）。stale full3对active19低price相同仍拒绝。manifest c030b78ead2741a0cebb37c8619211609c7a6a4bca49eb96a9b10ce1d537e65e；auditor557c3c80fe49ced84cd783bb9b4d2f38c90b0b75f56c3f14284be9b2a57650f8。70.845s/exit0/cell4557终态，无后台实验。首轮cost_center_service_20261025保留failed：mock清除事件后同delta读组合fault，100ns done writes断言；仅测试台加入#1等待稳定，RTL未变，v2完整重跑通过，不隐藏负例。
+
+脚本run_cost_center_service.py/audit_cost_center_service.py；详细契约hardware/variants/cost_center_service_v1/CONTRACT.md，报告results/cost_center_service_20261025.md。未做新服务联合综合，不将1967LUT与34157LUT相加；无板上加速结论。原/shared基线未改。
+
+下一步：把算术调用生命周期接入candidate真实锁/完整设计身份，post-prev动态坐标与owner occupancy/history/net/connection参数形成23字实际producer（price范围不得裁剪），再接标签提交、Frontier/递归/回溯引用提交及平台板上。独立reset测试不等于联合pager/AXI同会话恢复。全研究继续，未完成。
+
+---
+
+# net-center距离已通过实际HLS/RTL与映射（2026-10-25，优先下方历史）
+
+results/cost_center_hls_20261025/source_bound_audit.json passed：Vitis_HLS2022.2实际Csim→csynth→Verilog/XSim cosim，110397调用/220794输出字全部与上一轮冻结oracle逐位一致，原vectors/hash未改。新rtl_testbench.cpp只读冻结文件，Csim/C预检查/C后检查及HLS二进制input/c-output/RTL-output逐交易核验（每记录big-endian u64 count+u32数组，末尾5a5aa5a50f0ff0f0）。实际RTL输出与C参考TV hash同52758f22841a74eb7fdee0ea1b69bf47c601bc32650c1c67fff27a2192777bc4。manifest367fc0421fa822ebea05ac4b7059b740b3e279f9452517d11bfacb08f6d1278d，auditor28c306cd35be109105be63a92b7426dcc0f801ada7e9f90ad7cc556090fde343，190.801461s/exit0/PID290627，exec42005终态，无HLS在途。
+
+实际cosim latency3/90/113、interval4/91/114 cycles，execution10060886cycles；HLS估计latency3/40/144、area5902LUT1164FF，不能混作观测/映射。数值域仍为finite net centers，非finite12054例返回status1/distance0；静态真实样本不是live成本调用或实际post-prev取数，不能据此宣称生命周期顺序已接通。
+
+results/cost_center_synthesis_20261025/final_audit.json passed：对上述同一RTL实际OOC1967LUT/1028FF/89CARRY8，零RAM/URAM/DSP/latch/组合环，内部无未约束端点。10ns max/setup估计+3.489ns，34输入/43输出无平台delay，hold未评估、HD.CLK_SRC未设、未布线。70.983s/exit0/history138/checksum842d260d/cell4538终态，36768字符完整收据与34001B会话segment绑定、DCP已保存；auditorcf63dce27fbad28fbd6cfcc7852c5de585060f16df287ee5775baa7aadb1750d。不能将独立1967LUT加到34157就称新的联合资源/速度。
+
+冻结生成ABI见cost_center_hls_20261025/interface_notes.json：input_r只有port0/4字/地址2位，一周期读响应；output_r有双写口/2字。完成时两写与ap_done/ap_ready同拍；尤其port0地址1写distance、port1地址0写status，必须按地址收集，不能按端口号解释。调用时完整snapshot，完成拍把当前写入纳入seen后再判断完整。该notes只是源接口审查，尚无新collector/abort/reset/query/full version归属证明；当前cost-state lease只证明既有AXI请求生命周期，新算术核若超过core操作退休，需扩展计算所有权或保持core结果不退休。
+
+复用Ross hls-run-flow的前置综合/argv检查，2022.2用既有vitis_hls Tcl批处理（不是新版vitis-run）；空csim/cosim.argv显式允许，cosim前syn目录检查执行。源码符合已读hls-pragma-scope/hls-synthesizable规则。脚本scripts/run_cost_center_hls.py/audit_cost_center_hls.py，hardware/scripts/synthesize_cost_center.tcl、scripts/capture_cost_center_synthesis_log.py/audit_cost_center_synthesis.py；报告results/cost_center_hls_20261025.md。第一次审计碰到manifest仍running时安全拒绝，确认原handle完成后再审计成功，未重跑HLS或修改冻结输入，不是kernel数值负例。
+
+Python编译/run.py check passed，原/共享baseline未改。B147904空闲，无本阶段后台任务；完整研究仍active。当前新核未连接实际lookup/prev写/成本23字或full search，也未包含在34157LUT的wrapper中。
+
+直接下一步：实际内部成本packet producer/必要collector：owner refs/occupancy取合法price，先写prev成功再取动态坐标，history/net/connection参数与几何/center字段生成23字交exact cost；输出按地址与完整identity快照收集，补abort/reset/超时/晚回复及真实联接验证。随后内部标签提交、Frontier/递归和完整search/回溯owner引用提交、平台/板上。可以把已验证center函数直接内联到packet-preparation HLS top以避免多一个服务边界，但需新的组合数值/RTL门禁，不能仅复用旧独立通过结论。不要把CPU/native或HLS估计当板上加速。
+
+---
+
+# 成本状态联合综合与距离输入数值门禁（2026-10-25，优先下方历史）
+
+results/candidate_cost_synthesis_20261025/final_audit.json passed：candidate_cost_state_engine实际默认SLOTS32/FRAMES163840/INDEX18/HASH18，54份真实RTL，源绑定candidate_cost_revision_20261025三门禁（full/pressure、8边界、default）。34157LUT/31557FF/375BRAM/3DSP/1154CARRY8，零URAM/latch/组合环；check_timing no_clock/internal unconstrained/loops/latchloops皆0。10ns内部max/setup估计+1.641ns；hold未评估，5287输入/4548输出无平台delay，HD.CLK_SRC未设、未布线，不是板上频率/加速证明。最差内部估计路径directory lease_phase→core expansion scan_position CE，data8.255ns（net估计6.671ns，80.8%），不是布后路径。
+
+542.149s/exit0/history137/checksum3d8c15c6。cell4511在300s交还后同一进程继续，无重启，status已确认终态0。275499字符完整历史输出与276967B唯一会话segment逐行多重集绑定，完整DCP/资源/DRC/check_timing/max timing报告保存。auditor0dd155f4957fa425432a1a734cb758264c5061f7c28e470786886c2786f772e9。warnings零critical/error，其他为已有零次replication/unused sequential/unused ports/constant ports及HD.CLK_SRC。脚本prepare_candidate_cost_synthesis.py、hardware/scripts/synthesize_candidate_cost.tcl、capture_candidate_cost_synthesis_log.py、audit_candidate_cost_synthesis.py。本值为实际联合综合，不是将31578与1916相加；新算术输入helper尚未包含。
+
+推进成本包输入：hardware/hls/cost_center/v1/{cost_center.hpp,kernel.cpp,testbench.cpp,ARCHITECTURE.md}增加distanceToCenter标量。输入signed32 childX/effectiveY、binary32 net centerX/Y，输出status/raw distance，复用原exact_v2 softfloat32.hpp不改共享数值实现。分别按binary32转换、减法、abs、加法舍入；net centers限定finite（实际导入全finite），非finite返回status1/0，有限输入结果溢出inf允许。不是整数child-to-sink距离，也不抓取实际服务或生成23字成本包。
+
+results/cost_center_cpu_20261025/source_bound_audit.json passed：110397 cases，12054非finite拒绝，32400边界组合+50000固定random+27960真实graph/net静态取值+37 SLL beginY替代样本。原CPU getNodeCost两行表达式原文提取作float oracle，-fno-fast-math/-ffp-contract=off/UBSan逐位核对，并独立binary32阶段重建全部向量及真实输入来源。真实静态样本并非live evaluateCost调用配对；37项只选另一Y，不证明post-prev服务顺序。manifestc7712bbb016f109718deabf273e847d760d6ee74b0edf8d4a9e7725c4b0648ed，auditorbb5ef5f6fe7d6b4367bc1d74f80c0a257c98da9900f2a46e88018ab9d601bcac。scripts/check_cost_center_cpu.py/audit_cost_center_cpu.py；Ross hls-pragma-scope及hls-synthesizable规则静态审查（top cost_center_step、function-body ap_memory/ap_ctrl、可达代码整数/有界循环，无系统调用/动态内存/递归），不是实际HLS/cosim证据。CPU testbench会生成vectors，未来HLS应新建只读冻结vector bench，不得覆盖原oracle。
+
+Python编译与run.py check通过，原/共享基线未改。B147904空闲，无本阶段在途作业。报告results/candidate_cost_synthesis_20261025.md；本轮未宣称内部成本生产/算术已连接，实际wrapper仍由TB给出读取地址。
+
+直接下一步：冻结向量驱动cost_center或综合packet-preparation top的HLS Csim/synthesis/cosim；再实现实际内部输入producer，依次owner refs/occupancy→合法price索引、prev写成功后动态坐标、history/net与connection参数，形成23字交exact cost；接标签提交、Frontier/递归、完整search/回溯引用提交和平台/板上。仍需同会话联合fault drain/reset/reload及未覆盖身份/协议路径。不要仅因主机数值通过而把新helper叫已验证RTL。全研究active。
+
+---
+
+# 联合SET可见性/错误边界/默认目录验收（2026-10-25，优先下方历史）
+
+results/candidate_cost_updates_20261025/source_bound_audit.json passed：8组实际完整wrapper，54个综合RTL加AXI file模型共55个共享RTL与既有full/pressure完全相同，无RTL改动。update组先在实际pager query active时拒绝BEGIN(status2)，关闭query后SET history[0]=2.0/price[0]=1.5，再PUBLISH3→4，排队OPEN发布前禁止、发布后进入；两次实际pager query中的internal AXI读均返回修改值，lease在core结果先退休后继续阻止host/CLOSE，成本回复与总线排空后正常关闭。11请求/6成本读/2写/B，4 graph读/3design读/1design写，33204cycles。修改值仅是原始字节可见性测试，不是原始拥塞更新公式或真实路由轮次。
+
+stale_open/stale_expand组 full19对held/published3（低4tag同为3），未接受错误请求，未启动query/扩展且无graph/design/cost AXI副作用；nodes组cost32对graph9089009、design_id组cost给定ID对统一外部ID不一致均停止。read_error组actual Rerr1，已暴露正常core final保持稳定，cost错误4传播停止；write_error组actual Berr1，history字节已改变但version仍3/editing1，未发布；abort_ar组CS AR阻塞4拍abort，VALID/全部字段和lease保持，逻辑错误先退休仍busy，释放AR后实际R排空，停止后无新admission。故障各组从新进程/新设计后备导入开始，不能称已验证同会话复位恢复。各组实际成本R/W/strb/B、36812672B cost、145433472B owner、145424192B design全部独立核验；仅已执行空扩展的node0按冻结CPU缓存record更新，其他design字节不变。210.590s/exit0/cell4498终态；manifestdacffc85a876afa04d0f8a9c2e8d1fe40eecfd2e5571a7ee4a4535e44c446a11，auditor98a16551998222d385ae73034fdfa7731360680df11c930384951c2f0444bb0e。
+
+results/candidate_cost_default_20261025/source_bound_audit.json passed：当前wrapper实际默认FRAMES163840/INDEX18/HASH18，32槽，1212扩展/3022判定/60EARLY，9073成本命令/9067actual成本R和194owner R逐笔核对，全部设计/owner/cost后备符合原对照。cycles1694377仅仿真，105.151s/exit0/cell4503终态，manifest5b81c76f46259fe0dc325c272119223e93ca8bc76cc957817ad577e5eed0e105。该回归仍是TB发起成本读/空编辑版本，SET可见性来自上方单独update组，不混用覆盖主张。
+
+results/candidate_cost_revision_20261025.json通过scripts/audit_candidate_cost_revision.py绑定full/pressure、8边界、default三门禁，54份实际综合RTL SHA一致（55含模型）；可供下一步联合综合。新测试源码hardware/variants/candidate_cost_state_updates_v1/，脚本run_candidate_cost_updates.py/audit_candidate_cost_updates.py/run_candidate_cost_default.py；pilot candidate_cost_update_pilot_20261025只含update，审计validated_cases明确只列update。报告results/candidate_cost_updates_20261025.md；契约hardware/CANDIDATE_COST_STATE_CONTRACT.md已更新。Python编译与run.py check通过，无新负例、原/共享基线未改。B147904空闲，无本阶段后台作业。
+
+直接下一步：对上述同一修订candidate_cost_state_engine做默认参数联合综合/结构门禁，不能将31578与1916独立LUT相加当测得联合资源。随后实际成本输入producer替代TB地址：owner count/occupancy→合法price索引，prev写成功后的几何、history/net/connection权重，生成cost23字并接exact cost/标签提交/Frontier/递归，再完整search/回溯引用提交和平台/板上。仍需补同会话联合fault drain/reset/reload及更多身份/协议路径。全研究active，尚无内部成本包生产或完整FPGA路由/板上加速。
+
+---
+
+# 成本状态综合与真实query联接（2026-10-25，优先下方历史）
+
+results/cost_state_synthesis_20261025/final_audit.json passed：同functional/boundary的cost_state_store默认MAX_CYCLES1048576，1916LUT/1338FF/100CARRY8，零BRAM/URAM/DSP/latch/组合环。1034输入/1040输出未设平台delay，10ns内部max/setup估计+7.833ns，hold未评估，HD.CLK_SRC未设、未布线；不是板上频率证据。69.315s/exit0/history128/checksumd2ccb4a6，cell4476终态，31927字符完整历史收据与31371B完整会话segment绑定通过。auditor1498f33fc0d05736eb45ec9c02c2c72254304043267fdecbf0cb4f900efd14fb。独立模块资源不等于新联合顶层资源，历史/表实际在外部AXI后备。
+
+新hardware/variants/candidate_cost_state_v1/{candidate_cost_state_engine,candidate_query_core}.sv将actual candidate/pager p_active/query/price连到成本状态服务：匹配accepted节点数、cost design_id与统一外部design_id、配置回复退休；OPEN需完整published version32，CP/CLOSE与expand带full version。cost internal请求在candidate operation内接受并获得cost_lease，core最终结果先退休后仍持有锁至成本回复/物理排空，阻止host label/control/design/owner与新expand。编辑期间PUBLISH优先，排队OPEN不会阻塞它。新core只增加已有operation_pending输出，完整body按原candidate_engine变换逐字核验；旧baseline未修改。
+
+results/candidate_cost_state_full_20261025/source_bound_audit.json passed：32槽/单槽各1212扩展/3022判定/60EARLY，9073条成本状态命令中9067 actual AXI读；42117 graph读、9131 design读、2500写、194 owner读均如原对照。完整design145424192B、owner145433472B、cost36812672B后备核验；每组9067成本R512与194owner R逐笔独立核对。cookie10明确验证core operation已退休但cost reply未退休时租约仍在且所有host口被阻塞；末尾排队OPEN在编辑时阻塞、PUBLISH完成后正常进入/关闭。FRAMES16384/INDEX14/HASH15，尚无新wrapper默认目录功能/联合综合/故障边界结果。cycles1463909/1358222，仅仿真。194.216s/exit0/cell4485终态。manifest595dcfa50f38c7bece5d2e0102121c60654961e1225df12aca2d6641590e0320，auditorddcb46187cf8d869f98477d5d6d0988c34be4965c4256962127a2d7150bf4b9e。
+
+重要范围：每个candidate决策在背压期间由TB发history(child)、price(ordinal%256)、net(real net)请求；尚非内部producer按occupancy选择price，更不是cost23字或算术已接通。脚本query价格tag3/5，空编辑将published3→5，末尾→6，真实导入仍是初始factor0.5且无SET，不能说已回放真实第3/5轮价格。联合host SET后下一查询可见、陈旧full version/计数错/设计标识错/fault/reload边界仍待补。配置只能验证导入者提供的ID/范围，原graph/design/owner无DesignID端口，不能识别同N的错文件。
+
+pilot results/candidate_cost_state_v4_20261025也审计passed（16扩展/6判定/19cost读/21命令），不代替完整owner覆盖。首轮candidate_cost_state_20261025因TB cs_reads与memory计数重名编译失败；v2/v3重复旧child，定位为cs_finish结束于posedge后out_ready只拉到negedge、未过采样沿；v3仅加详细诊断，v4仅TB对齐negedge后拉高READY，RTL未改，全部负例保留failed。当前B147904空闲，无本阶段后台作业。
+
+脚本prepare_cost_state_synthesis.py、hardware/scripts/synthesize_cost_state.tcl、capture_cost_state_synthesis_log.py、audit_cost_state_synthesis.py；run_candidate_cost_state.py/audit_candidate_cost_state.py。契约hardware/CANDIDATE_COST_STATE_CONTRACT.md，报告results/candidate_cost_state_20261025.md。Python编译与run.py check通过。
+
+直接下一步：在新wrapper补host SET→PUBLISH→下一真实query的数据可见性和full version/配置/fault恢复边界，再做默认目录/联合综合。随后把测试台内部请求替换成实际成本输入producer：owner count/occupancy、post-prev几何、history/price/net/connection权重，生成23字交cost_service，再标签提交/Frontier/递归、完整search与设计引用提交、平台/板上。全研究active，尚无完整FPGA路由/加速证据。
+
+---
+
+# 设计级成本状态服务已验证（2026-10-25，优先下方历史）
+
+新增hardware/variants/cost_state_v1/cost_state_store.sv，实际AXI512读取history N×u32、price256×u32、net M×128；SET仅4B strobe，BEGIN/PUBLISH在query与decision均关闭且无未退休请求时批量编辑/发布。编辑期间禁止reader与query admission，完整version32递增不回绕，price4仅低位标识；query生命周期不清history。尚未与candidate/pager/cost实际连接，query_active/decision_lock由TB提供；未来必须把ready_for_query/full version/design_id接入统一控制，不能把独立服务说成已经整体围栏。
+
+results/cost_state_inputs_20261025/manifest.json passed：原始CPU r.load实际导出9089009 history（全1.0，独立全字节核验）、256 CPU初始化price（factor0.5，独立公式逐项核对）、27960 net中心/连接数/doubleHPWL（全记录有效，fanout和180326）。真实初始镜像36812672B，price offset36360192、net offset36365312。后续edit为脚本，不是完整真实route历史更新。CPU原始源码冻结未改，导出器在本方向。实际RTL读取为稀疏抽样history/net及全部256 price，不能称硬件扫描全部9M节点。
+
+results/cost_state_20261025/source_bound_audit.json passed：synthetic977命令/642R/288W/B/16157cycles，real1207命令/839R/321W/B/20101cycles。每组8次query_active状态事件（4进入/4退出），发布至version18，version2与18低tag相同仍拒绝旧full version。逐条cookie/op/index/host/query/price/version/data、全部实际R512与W512/strb、所有B及完整4096/36812672B后备核验，邻居/填充保护通过。每组13逻辑拒绝（status1四次/2六次/3三次）；无AXI副作用。23.196s/exit0，manifestd2278f149c4a6976bb031d0b3a4d37c990e351f82587365c22d6aab0995c8f52，auditorbd86d7537fd5f77bbc8ec4b0a7a7e4fd0a352add9ea272bc769d14cb9f8444dd。functional MAX_CYCLES2048，非默认1M超时测试。
+
+results/cost_state_boundaries_20261025/source_bound_audit.json passed：99checks/9错误/10显式new-design后备重载恢复/306cycles；5R/3W/B，Rerr1/Berr1。actual AR/AW/W阻塞时abort保持VALID/字段；AR逻辑错误先退休而busy保持至物理排空；timeout64同样保留AR；query漂移、query/edit违规、UINT32_MAX拒绝发布回绕及最后恢复正常读通过。失败B实际已改history17，abort后已发写亦可能完成，无回滚主张。独立审计所有N重载标记、R字节、W/strobes、B与最终全后备。11.562s/exit0，manifesta46f677adc2b1ee98f3419f3c5efc580bba4d152c1509b647ebe8b73f5688b9f，auditorcc10b392c14ce1d4111f2fd24aec7110906066d2fa779291782e39e4d67f9402；与functional是相同RTL。
+
+入口scripts/prepare_cost_state_inputs.py/run_cost_state.py/audit_cost_state.py/run_cost_state_boundaries.py/audit_cost_state_boundaries.py；契约hardware/COST_STATE_CONTRACT.md、报告results/cost_state_20261025.md。Python编译与run.py check通过，原/共享基线未改，无本阶段负例或后台作业，B147904空闲。
+
+直接下一步：先为同一cost_state RTL做独立综合/结构检查，再将actual history/price/net与candidate query全生命周期/full version一致性接通，并产生真实post-prev geometry/cost23字；补connection权重等数据，内部标签提交/Frontier/递归再完整search/回溯owner提交。price表范围0..255，不能静默裁剪超界occupancy；数值hist更新与price重建仍在CPU导入/host编辑，未实现设备更新算术。该新模块未计入此前candidate综合31578LUT等数字，尚无其综合或板上加速结果。全研究active。
+
+---
+
+# 候选联合综合已验收（2026-10-25，优先下方历史）
+
+results/candidate_synthesis_20261025/final_audit.json passed：实际candidate_engine默认SLOTS32/FRAMES163840/INDEX18/HASH18，52个综合RTL（原共享53计数含axi_file_memory测试模型，综合已排除），绑定candidate_revision_20261025的三组功能/控制/实际AXI故障门禁。31578LUT/30068FF/375BRAM/3DSP/1029CARRY8，URAM/latch/组合环均0；check_timing no_clock/internal unconstrained/loops/latchloops皆0。独立OOC、xcu280-fsvh2892-2L-e，10ns research_clock，内部max/setup估计+3.190ns；仅max报告，hold NA未评估，4135输入/3473输出无平台delay，HD.CLK_SRC未设，未布线，不能宣称100MHz板上时序闭合或加速。
+
+571.452s/exit0/history125/checksum2327df0f，cell4430在300s交还但原Vivado继续，随后status确认同进程终态0；未重启。candidate_engine.dcp、269952字节完整工具历史输出收据与271438B会话日志segment已绑定，非截断；逐行多重集核对通过。auditorSHA ea1989ce03284c04cbac75b9123b829b9afd38623580393119c73d0d75134a2c。B147904当前空闲，无本阶段在途任务。manifest.json为prepared输入目录，不是运行状态；终态由completion_receipt/final_audit证明。
+
+脚本hardware/scripts/synthesize_candidate.tcl；scripts/prepare_candidate_synthesis.py、capture_candidate_synthesis_log.py、audit_candidate_synthesis.py。报告results/candidate_synthesis_20261025.md。warning为zero replication2、unused sequential7、unused/no-load ports765、constant outputs53、HD.CLK_SRC1，零critical/error；原RTL未修改。最差内部估计路径是pager directory lease_phase→expansion state CE，data6.706ns中net估计5.350ns，不是布后路径。
+
+成本接入顺序已按原源码核对：results/candidate_cost_binding_20261025.json、scripts/analyze_cost_binding.py、hardware/CANDIDATE_COST_BINDING.md。纠正旧交接中“prev/visited都先于坐标”的过宽描述：先EARLY query-CLEAR成功，再same-net count，写prev成功后重新获取SLL动态坐标/成本，算术完成才按lb/upstream/visited写入，最后offer或立即递归。visited不能提前到坐标读取之前；access阶段动态坐标不能默认复用。此项是源顺序分析，不是新成本RTL功能证据。
+
+直接下一步：建设设计级history/价格表版本及更新围栏、net/connection参数的实际数据权威，再把post-prev geometry与cost_service接入内部标签提交及Frontier/递归。当前design_state_store只有flags/count/mask，不是hist权威；dyn[id].hist在原CPU是跨query持久设计状态，不能塞入随query epoch清除的标签。价格4bit身份不是价格表内容。仍需更多实际AXI写错/重载恢复、完整search/回溯引用提交、平台/板上。全研究仍active；本联合体没有cost/Frontier，也不是完整FPGA路由。
+
+---
+
+# 候选控制排空修复与默认参数验收（2026-10-25，优先下方历史）
+
+candidate_controller.sv已修复abort后扩展最终回复先到、metadata/access已接收回复仍在途时过早FINAL的问题：增加m_pending/a_pending/e_pending/e_done归属，DRAIN须等扩展完成及逻辑服务回复排空；无归属回复停止，扩展非零status停止；同拍timeout/最终回复不丢结束，已暴露child/final字段保持。旧negative实证为results/candidate_control_negative_20261024/simulate.log fatal state6；该旧runner在缺PASS断言后错误留下manifest running，但MCP命令已终态失败，非在途作业。后续runner已修failed记录。该修复不是宣称故障写回滚，也不是保证逻辑错误回复时物理AXI已全部排空。
+
+results/candidate_control_boundaries_v2_20261024/source_bound_audit.json passed：268checks/27errors/419cycles；metadata状态/created/所有echo、access状态/所有echo、active/query/price漂移、timeout、最终回复timeout同拍、扩展错误/cookie、lateabort child稳定、latefinal fault稳定、无归属idle回复、非法descriptor无后端副作用；每case显式控制复位。受控leaf回复单测，不代替实际AXI。manifest2a18e6cb5aa4cc51574a9d99a1e12672f2afdbf10879e6ba07a45e618bdd0fc0。
+
+results/candidate_pipeline_v2_20261024/source_bound_audit.json passed：相同修复RTL的32槽/单槽/默认目录三组各1212扩展、3022判定、60EARLY；完整design/owner后备和每组194owner R字节核验通过。前两组FRAMES16384/INDEX14/HASH15，默认组163840/18/18，labels后备31457280B；cycles1319315/1211128/1548609，均为仿真周期，不是加速比。265.579s/exit0/cell4402终态，manifest3b3c24da52c7a72a79b3a54a78c91f6298d91ad21680ab6115434576deda6db5。
+
+results/candidate_axi_boundaries_v4_20261025/source_bound_audit.json passed：实际共享链在cookie10 metadata图AR阻塞4拍时abort，VALID/字段保持，释放AR后排空，手动退休错误前锁与回复稳定；另一组实际图R返回错误2，停止且排空，Rerr1。43/42graph读，36566/36552cycles，owner后备未改变/写0；未覆盖复位重载恢复、其他AXI错误类型。50.167s/exit0/cell4423终态。manifest2e87932908acac90bddaff8eb00b9ce3f0e9edaab2cff4b0f72ff7de62a64c83，auditordf6f6d374b2b4967cd919ed5f4d02e265217b6bfc4f1855dfa87bd794d391441。
+
+results/candidate_revision_20261025.json绑定上述三门禁，共享53个RTL文件及控制器SHA f00dffb79c3b874ffe6e6efedd2bf030404be0016e1b09c34d0e856e2187ac63相同。新脚本check_candidate_control.py/audit_candidate_control.py/run_candidate_boundaries.py/audit_candidate_boundaries.py，硬件control/boundary生成器与TB均在candidate_pipeline_v1。check与Python编译通过；无共享基线改动。本阶段B147904空闲，无后台作业。
+
+负例保留：AXI boundaries首轮hold_graph_ar先引用后声明导致编译错，v2 assign先于g_m_arready声明编译错；v3在扩展尚未输出child前就hold AR，自造TB等待环，确认具体xsimk PID2346387后终止。v4仅TB先等m_pending再阻塞AR，实际RTL未改；不是观察超时就重启。均有failed记录，切勿将这些负例当RTL故障。
+
+直接下一步：针对同一最终RTL做联合综合与组合环/时序约束审查（尚无本联合体综合结果）；按需要继续补实际design/owner/label AXI错误与复位重载验证。再接真实cost、先写prev/visited后坐标、Frontier/递归/回溯提交及完整search、平台/板上。控制单测错误回复排空不证明物理总线已全排空，恢复仍需协调排空和设计后备重载。当前真实CPU fixtures仍是脚本query标签/target，只读候选判定，无内部cost/push。全研究active，不能称完整FPGA路由或板上加速。
+
+---
+
+# 实际候选联合功能已通过（2026-10-24，优先下方历史）
+
+results/candidate_pipeline_full_20261024/source_bound_audit.json passed：actual children→metadata→access_owner/coordinate/pager，单一graph/design/claim与请求快照仲裁，32槽和单槽分别1212扩展/550 cachehits/3229 filtered children/3022判定/60EARLY；每组42117 graph读、9131 design读、2500 design写、194真实owner读。全部decision(node/ordinal/position/bits/action/services)与Config14一致，完整145424192B设计后备逐字节匹配，145433472B owner后备保持不变，194条owner R逐笔对照初始镜像通过。host锁探测1275641/1167135周期，覆盖metadata/access切换和输出背压；cycles1319315/1211128仅仿真，不是加速比。测试FRAMES16384/INDEX14/HASH15，未用默认163840帧/18bit。166.426s/exit0/cell4381终态，B147904空闲，无本阶段后台作业。manifest39390be8b3c295a0c3af5dab7ecfd36a9f6569f0a5c5e90cdf332e3ec3ea967d，auditord22993456c42206db640e7d8ab1de8ad16f12b427c75da3de353e137fa8d231c。
+
+真实初始owner：results/candidate_initial_owner_20261024/manifest.json passed，原CPU r.load导出9089009节点/27960net/180326connection，180326 occupied/refs，全部节点16B记录与独立owner_profile_real_v4_20261024加载阶段事件逐项核验，空节点、reserved、padding、pool/allocator全零。primary145424192B；pooloffset145428288/cap64；allocatoroffset145433408；total145433472B。本阶段只读且初始overflow0，64不能外推完整routing（既有peak53734）。实际板上导入仍未实现。
+
+CPU fixture：results/candidate_decisions_20261024/source_bound_audit.json passed；保持原getChildren及exploreAndExpand判定体，仅将cost调用替换为记录，用access_machine逐child对照allowed/lookahead/early/pruned。3022 decisions/785allowed/60EARLY/12pruned/42308 Config字，静态字段独立核验真实graph字节。query visited/prev及每13次首child target为脚本状态，不是完整真实搜索；无内部cost/push/label更新。初始真实owner保持原加载状态。EARLY后只排空余下children replay，未继续metadata/access。pilot candidate_pipeline_20261024亦已独立audit passed（16扩展/6判定/0owner读），不能拿pilot概括owner覆盖。
+
+脚本：prepare_initial_owner.py、prepare_candidate_decisions.py、audit_candidate_inputs.py、run_candidate_pipeline.py、audit_candidate_pipeline.py。契约hardware/CANDIDATE_PIPELINE_CONTRACT.md，报告results/candidate_integration_20261024.md。源码binding含原CPU判定体替换校验、全部fixture产物/配置静态字段与最终RTL源/产物/依赖门禁；owner原事件文件完整hash核对。run.py check与新增Python编译通过。未改变共享/原始基线。
+
+直接下一步：联合candidate_controller/arbiter的abort/漂移/身份/timeout/末拍/暴露回复与未完成请求排空边界，原模块边界不能代替该新增控制链。补全默认目录参数的功能边界，再联合综合；之后接真实cost/写prev visited/Frontier/递归/回溯提交与完整search，平台/板上。Config14 type基于eager图，lazy JNI覆盖仍不支持；等N不能识别新DesignID，必须整体重置重载。全研究仍active，尚无完整FPGA路由或加速证据。
+
+---
+
+# 候选链路整合进行中（2026-10-24，优先下方历史）
+
+新增 hardware/variants/candidate_pipeline_v1/{candidate_engine,candidate_controller,service_arbiter}.sv 与 generate_top.py，连接实际children/metadata/access/owner/coordinate/pager，图、设计和标签IO分别通过带请求快照与归属的串行仲裁共享。operation_pending覆盖整个父节点扩展到最终结果退休，阻止阶段间host更新；EARLY后排空剩余children回放，尚无cost/push/Frontier或内部标签更新，不能称完整search。
+
+results/candidate_compile_v2_20261024/manifest.json passed：Vivado2022.2 xvlog/xelab通过57模块（包含新增仲裁TB，未运行顶层功能仿真）。connections.json passed：690个使用信号有源；该脚本仅检查源存在，不证明位宽、唯一驱动、时序或功能。脚本 scripts/check_candidate_compile.py、check_candidate_connections.py。首轮candidate_compile_20261024虽展开通过，审查发现五根e_d_claim_*未连接；v2已接同一d_claim_*。另修复dispatch标签回复status/payload/present误加rsp_前缀。首轮产物保留，不能作最终RTL证据。
+
+results/candidate_arbiter_20261024/manifest.json passed：三客户端优先级/请求后端阻塞4拍保持/回复阻塞3拍持有归属/退休前禁新请求/无归属故障/复位恢复。脚本scripts/check_candidate_arbiter.py，实际RTL独立XSim测试。仲裁器依赖后端持有回复至ready，实际叶服务为寄存回复；没有证明任意脉冲式零延迟后端可用。
+
+直接下一步：建立真实CSR输入的联合TB与原CPU判定oracle；在真实r.load后导入180326初始owner引用，不能沿用独立access测试人工owner准备来宣称真实设计初始化。核验所有child与Config14、每个skip/allow/EARLY、cache命中、完整design/owner后备与跨阶段host锁，32槽/单槽及错误排空；随后再联合综合。当前尚未创建联合fixture/TB，尚未运行联合功能测试、故障测试和综合。原metadata等冻结结果不变；本阶段不存在后台运行作业。完整研究仍未完成，尚无板上加速证据。
+
+---
+
+# 实际元数据最新入口（2026-10-24，优先下方历史）
+
+hardware/variants/metadata_v1/{metadata_controller,metadata_service}.sv已用实际graph_static_reader和design_state_store产生Config14，不接受外部dead/type/static flags。只请求sequence/flags mask0x11d/BB与parent/child/sink/net/cookie/query/price。三次META+child GET，token32不回绕，合并初始created和设计增量；design claim未发布/host回复在途时拒绝metadata，整个meta_pending至响应退休拒绝host设计更新。图/设计实际接受N与外部owner_nodes不匹配即停止；owner_configured/query上下文在本独立服务由上层输入，尚未与真实owner/pager/access/children串联。契约hardware/METADATA_CONTRACT.md，报告results/metadata_20261024.md。
+
+metadata_inputs_20261024对原Config14逐字验证后按child、dead0→dead1重排，保持原case及全部值，防止错误地按query清dead；metadata_v2_20261024/audit passed：11664/512/614抽样，共12790份/179060字与原CPU一致。host设计命令13335/586/685，graph读71928/3167/3786，design读24999/1098/1299、写37/586/36；最终1024/145424192/1024B全部字节核验，dead18/74/17节点持续。46.141s/cell4320终态，manifestc6bdf2544963d0c9c9d4d329cf4a7725884e9bf7b70e061e47341d2ef819ea7f。抽样旧名pressure但无pager，不要说是单槽测试。
+
+metadata_boundaries_v2_20261024/audit passed：15错误/15显式重载恢复/19正常/5789周期。配置三个N不匹配、held cfg、坏输入/归属、static-created与dynamic-created合并、R/B错、AR abort排空、owner失活、timeout/latefault、token3实际耗尽、int16/32数值极值；145g读、71d读、49写/B、各Rerr1/Berr1、33重载，失败B物理字节已改变。metadata_control_v2_20261024/audit passed：17检查/16错误/244周期，graph四回显+status、d cookie/status、query/price/active/claim漂移、无归属、排空、完成timeout同拍、暴露响应稳定。使用受控服务单测，AXI证明来自实际service。边界manifest688b6ad3c66abfbb50172b5fb93c83cedc10c9ef881c2555fa1dffef4d200e65，控制manifest e87c3771ab52037236f2997a61e6c9b99652b3f9b73559e1098f4889419fa5ad。
+
+metadata_synthesis_20261024/final_audit.json passed：2824LUT/2578FF/190CARRY8，零RAM/DSP/latch/组合环；84.393s/exit0/checksumf18a7f8/history110，68230B完整收据+DCP。1942输入/1335输出无平台delay、HD.CLK_SRC未设、未布线。cell4331已终态，B147904空闲，无本阶段在途作业。auditor61850a544561f9e17c220a49a51576967344e1b3c44f0d6cee3785e6e5e208cb。所有门禁对应同一RTL，m3流程已完成但全研究保持active。
+
+失败保留：metadata_20261024实例名design为SV保留字编译错，v2只改实例名；metadata_boundaries首轮15/15已过，v2新增静态created1+设计0的真实合并测试；metadata_control首轮runner错TB文件名编译错，v2修路径。没有改共享/原始基线。
+
+直接下一步：串联真实children→metadata→access_owner，用同一个design_state_store/claim状态与请求仲裁，不能把独立store共指文件就当claim一致。选中child来源目前仍CPU fixture，不证明真实CSR/过滤输出。可先将metadata_controller接expansion中央g/d服务；expansion_controller.sv116-118在G_WAIT接受并复制g_rsp到out_attrs后进入OUTPUT，图回复已释放，所以OUTPUT背压本身不占原始graph端口，可做握手owner寄存器仲裁。保留metadata→access最终退休的连续排他，禁止阶段空隙host label/owner/design更新，活动query/price连贯；owner_nodes必须从实际accepted配置取值。设备级配置只验证N，不是DesignID，同N新设计仍必须整体重置/导入。以后再geometry/cost/Frontier/递归/回溯提交、实际180326初始引用、平台板上。eager图type与loader一致，lazy JNI sink type覆盖需另行支持。不要将独立metadata资源加到旧组合就宣称完整资源/速度。
+
+---
+
+# 真实owner联接验收入口（2026-10-24，优先下方历史）
+
+当前hardware/variants/access_owner_v1/access_fabric.sv＋owner_bridge_v1已接实际AXI owner_state_store，kind4/6不再由模型返回。host_owner_req/rsp真实增减/查询，与整个access_pending child至最终回复退休互斥；完整kind/phase/node/net/token/query/price桥快照及raw cookie验证。契约hardware/ACCESS_OWNER_CONTRACT.md，报告results/access_owner_20261024.md。Config/dead/static仍fixture；真实net设计加载/提交、完整search与平台板上未完成。
+
+access_owner_v3_20261024/source_bound_audit.json passed：合成11664/真实512/单槽614，实际owner请求4970/59/249、host owner命令55248/2557/2963、owner AXI读169135/7408/9184、写78526/3693/4329，全部host增减/服务/HLS/图表/标签/完整owner后备及活动/free链独立核验；每CLOSE读回owner仍保持。227.209s/exit0/cell4273终态，manifest80e4a5b5f859e517c5ba7d8b1be71bd520a1b04cec7eaa8d451af4aaf1527f63。输入仍同一fixture，真实图512无SLR请求，不外推完整路由。
+
+owner_bridge_v3_20261024/audit passed：15检查/12错误/177周期，完整身份快照/映射、cookie/status、query/price/lock漂移、非法owner/kind、timeout/lateabort、host逻辑拒绝及无归属raw响应。实际桥RTL与functional完全相同。单独此测试使用受控raw模型，整合三组才是实际AXI后端。manifest2db1937e340ed1ddf4500d64fee25acaa0115524f724de052e31e0d420ff389b。
+
+access_owner_boundaries_v3_20261024/audit passed：完整默认FRAMES163840/HASH18，4实际整合故障/5正常恢复，42 owner读/9写/B，Rerr1/Berr1、9显式后备重载。owner R错、暂停owner AR时abort保持VALID并排空、owner回复暴露后abort、host B错均传播并停止；恢复验action1/bits0/7步/6svc且CLOSE保持owner count0/occ1。8次直接逐地址262144项冷目录扫描，剩余max_service262083，2099921周期，37.949s/cell4291终态。前置owner准备与目录清零重叠，所以不能拿旧262129等待当总初始化工作量。manifest34bc5059a9c381ecbbb57bb15592b682454796df05a1ab280161ce46379a2d7b。
+
+保留负例：access_owner首轮声明使用顺序编译错/v2缺dispatch依赖elaborate错，v3只修生成/依赖，dispatch未改；bridge v1/v2是TB同delta采样fault及ready已握手仍等待，v3仅修测试驱动，设计RTL未改；integration v1初始rst断言晚、v2错误剩余等待阈值均保留，v3改为直接扫描工作量检查，RTL未改。
+
+完整默认组合 results/access_owner_synthesis_20261024/final_audit.json passed：24634LUT/20366FF/375BRAM/3DSP/713CARRY8，零URAM/latch/组合环，LUTLP/check_timing loops均0；442.241s/exit0/checksumcd394aad/history103。cell4293已终态，B147904空闲，无本阶段在途工作。100KiB截断原收据和按唯一marker完整日志逐行绑定审计通过。3603输入/1998输出无平台delay、HD.CLK_SRC未设、未布线。综合auditor a7b5e49a3debf85770501ab9bf0413813deb44e2fd66695852fd722f0cf51a39。
+
+额外源绑定测量 results/owner_reuse_20261024/analysis.json：当前access单child重复owner GET三组均0。原evaluateCostAndPush必读count；允许且已有owner快照2232/51/113 child，对应未来cost重复GET的条件读事务6796/161/350。cost尚未整合，该条件不是已测节省/加速；只有扩展owner只读锁至cost退休或可靠设计修改版本验证后才可复用，不能根据重复query2/price4直接复用。metadata和真实cost接入优先。
+
+下一步metadata生产（同时补图/owner/design nodes及设计配置一致性门禁，当前wrapper由调用者保证）：从真实扩展child attrs、parent/sink静态属性及design GET dead位生成Config14，保持原getChildren完成后的快照顺序；eager序列化图type与loader一致，但lazy JNI在加载sink时会覆盖type（main.cpp5049/5085），不能未经额外支持外推。再实际geometry/cost、Frontier/显式递归/回溯提交、真实初始180326引用导入、平台与板上。桥只提供完整身份、host更新排他和计数查询，不是完整search。全研究仍active。
+
+---
+
+# 真实占用AXI最新入口（2026-10-24，优先下方历史）
+
+hardware/variants/owner_axi_v1/owner_state_store.sv 已实际实现CPU布局的GET/INC/DEC，primary/pool/allocator64位地址AXI512，16B strobes，完整链检查/重复net前缀重读、主owner晋升/前驱修复/free回收/容量拒绝，单请求锁至响应退休；正常成功在最后B后返回。契约hardware/OWNER_AXI_CONTRACT.md，报告results/owner_axi_20261024.md。尚未接access_fabric kind4/6身份桥，当前共享访问模块owner端口仍是模型，不能宣称整合已完成。
+
+owner_axi_v2_20261024/source_bound_audit.json passed：13549命令、79645读、7083写/B、1146826仿真周期，209四记录提交；9043成功、2549减空、1944容量拒绝、10引用上限、2范围、1非法op。每返回/B计数、所有AXI字节及完整16384B窗口独立核验，跨0x1fffff000→0x200000000和相邻记录/填充保护通过。首轮owner_axi_20261024向量C++程序继承Vivado旧libstdc++缺GLIBCXX_3.4.29，在RTL前失败；v2仅清理主机C++子进程LD_LIBRARY_PATH/LD_PRELOAD，源RTL没改，工具进程环境不改。负例保留。
+
+owner_axi_boundaries_20261024/audit passed：22故障/22显式设计后备重载恢复、97检查、8857周期；129读/29写/B，Rerr1/Berr2、52次new-design reload和11条损坏记录。覆盖R/B状态/身份/RLAST、meta/primary/free/重复net链，AR/AW/W背压abort保持VALID与字段、计划abort无写、AR超时、最后成功B/timeout同拍错误优先、late fault暴露字段稳定、idle无归属R/B。错误响应可以先于当前单拍排空出现；bus VALID不因fault撤销。第二B失败明确观察pool/primary已写、allocator未写，后续写停止；不能把失败视为回滚，复位只清控制，设计须重载。
+
+owner_axi_synthesis_20261024/final_audit.json passed：4866LUT/3081FF/252CARRY8，零RAM/DSP/latch/组合环；80.646s/exit0/checksum899b478/history96/34845B完整收据+DCP。默认MAX_CYCLES1048576，故障参数2048；891输入/806输出无平台delay、HD.CLK_SRC未设、未布线。cell4255终态，B147904空闲，本阶段无在途任务。功能manifest41f235c7a31bf2d46b3d1fc8d2524d511de881f1a91ca9471bbb4f8f5963bad3，边界b366b221ea82653545efec3dbb7beb2f96963020553f7b673f2ff715f189518b，综合auditor f7936ea7831934d7beb0ec4b80ede978c5114457c614c31076c167961a471d04。
+
+下一步直接接完整kind/phase/node/net/token/query/price身份桥和host设计引用命令仲裁，busy期间拒绝host引用更新/配置；从整个child接受至退休保持排他，不仅锁单次owner读取。把实际owner服务接access_fabric_v3生成新variant，修改fixture为真实host引用初始化，覆盖query CLOSE/OPEN/CP后owner不丢失，并重跑合成11664/真实512/单槽614和整合故障/综合。保留设计加载180326预引用，不能随connection标签清本状态。长链前缀读可能超默认预算，当前CPU65535-net边界不等于该预算内硬件完成保证；后续量化真实owner读负载再考虑缓存。再接metadata/geometry/cost/Frontier/递归/回溯提交/平台板上，研究保持active。
+
+---
+
+# 设计占用存储最新入口（2026-10-24，优先下方历史）
+
+新增 hardware/search/owner_state_v1/owner_store.hpp：CPU可执行16B primary＋16B overflow池＋16B allocator规范，GET0/INC1/DEC2；prepare只读形成最多4项before/after写计划，commit检查generation/全部before后应用。不是HLS/RTL，不得称AXI完成；access_fabric_v3 kind4/6仍是模型。契约hardware/OWNER_STORE_CONTRACT.md，报告results/owner_store_20261024.md。
+
+results/owner_store_v2_20261024/source_bound_audit.json passed：原源count/promotion/sync/inc/dec原样提取，200000随机增减/3200000逐net查询差分、65535主/overflow引用及occupancy边界、256net、池耗尽/跨节点回收复用、旧计划/损坏before/代号耗尽/损坏链通过UBSan。全18515060真实更新重放，65536池峰值53734，18940411逻辑16B写计划/最多4项。最终145424144B primary、1048576B pool及16B allocator独立全字节核验，722477活跃节点，所有已分配池条目从free链可达，未分配全零。manifest6b2b7ce7d9a789f0c1c03d8a777e6d704451eeca8702acfbfb74b6b9f83ff9a4；auditor ebe953e157553db4af13226dcdedc866c9a012529c141b25d6d3f4dcfd2aedfc。exec97365/50389终态，无B在途工作。
+
+首次owner_store_20261024缺HotExpand测试别名编译失败，原源/日志保留。新规范确定链表头晋升，与原unordered_map任意晋升的内部owner选择可不同，支持域内所有net count/occ/overuse一致；引用仅支持≤65535，原回绕/更宽overflow域超界显式失败，不宣称完全复刻溢出。primary net+1/refs16|occ16/head+1/reserved，pool net+1/refs32/next+1/reserved，free net=refs=0。新设计三块清零后必须重放加载预引用，标签OPEN/CP/CLOSE绝不能清本状态。
+
+直接下一步：实现实际64位地址AXI512事务控制器，16B strobes，保护相邻记录，64B区域对齐/范围与重叠校验。单命令排他至最后成功B后正常回应；R/B错误、错误身份、晚到响应、超时/复位与半提交后停止，不能将CPU原子commit当总线写失败回滚。再接kind4/6完整kind/phase/node/net/token/query/price身份桥，整个child期间拒绝引用更新，替换fabric模型。然后metadata生产、geometry/cost、Frontier/递归/回溯提交及平台板上。整个研究仍active。
+
+---
+
+# 当前共享访问服务验收（2026-10-24，优先下方历史）
+
+当前设计 hardware/variants/access_fabric_v3，报告 results/access_fabric_20261024.md，契约 hardware/ACCESS_FABRIC_CONTRACT.md。实际access HLS/dispatch/coordinate_service/pager/graph/tables已联接；owner kind4/6仍为占用/引用模型，metadata仍为fixture，尚无完整search或板上结果。
+
+v3功能 results/access_fabric_v3_20261024 已通过三组及源绑定审计：合成11664、真实512、单槽614。ownership_change_audit证明v2→v3仅改所有权寄存器及mux，正常结果/周期/全部memory trace逐字节相同。v3_boundaries通过19故障/19协调冷复位恢复，1478082周期；v3_cold在默认163840帧/HASH18通过两条路径，最久服务262129周期。cell4185终态exit0/53.384s。功能manifest2aeefc5018b01d9bc46372b4d14fe60a3f987d2c82dc85996382a9e9bdeccc77，边界9dcfe372dd8ccfac7e5479795e403322bb8cb8573737329ec4d213a545d78d68，cold b0e80a5e11a1134d48d93686865dadfa871f54621b974279c3454a39fa913d09。
+
+历史负例必须保留：v2完整综合 results/access_fabric_synthesis_20261024 已终态exit0/393.9s/history90，但LUTLP-1/check_timing发现1条4-LUT组合环，结构门禁failed。a_busy含fault又门控标签响应归属导致反馈。v3以req握手置位、最终rsp退休清零的access_pending持有所有权，保留v2目录冷启动预算(1<<HASH_BITS)+262144。不得设置ALLOW_COMBINATORIAL_LOOPS或将工具exit0当结构通过。v1/v2功能正例及早期低预算/测试台编译负例均冻结保留。
+
+v3完整默认综合 results/access_fabric_v3_synthesis_20261024/final_audit.json passed：19739LUT/16938FF/375BRAM/3DSP/453CARRY8，零URAM/latch/组合环，check_timing loops与LUTLP均0。433.643s/exit0/checksum298dc55e/history92。cell4190已终态；B147904空闲，不重投。原100KiB截断收据与唯一marker完整日志已绑定审计。2864输入/1307输出无平台delay、HD.CLK_SRC未设、未布线。
+
+真实owner观测 results/owner_profile_real_v4_20261024/source_bound_audit.json passed；报告results/owner_profile_20261024.md。全部18515060次更新独立ledger重放，原完整570286搜索/130334832push/12轮overused0，路径、全metadata、采样标签访问保持一致。增10803655/减7711405，同net再增9523648，新net1280007，删除557530，主owner晋升82455；最大同net引用255、overflow引用173、distinct占用4、单节点overflow3，同时overflow条目53734/节点50416，最终overflow0/占用节点722477。事件592481952B，manifest061b8352a190992a471072e87ff872954875a16085b2176255d9ae3da2d1e56e。exec2003和76439已终态，当前无B在途作业。
+
+重要初始化证据：load阶段就有180326次sink/初始路径预引用，占用180326节点；不能到首次connection才空初始化设计owner。首次v1生成锚点重复含JNI失败；v2/v3因晚开统计触发加载阶段断言，v3明确header34。v4首次增引用前开始观测、route前插入独立op0标记，原更新与源码行数不改。所有负例保留。当前只是串行CPU观测，没有物理owner硬件，峰值不约束其他设计，127032ms带观测时间不是性能比较。
+
+下一步实现真实设计级occupancy/同net引用服务：先原函数定义域差分及增/减/晋升/容量耗尽边界，再实际AXI存储和B后可见提交，接入access_fabric替换kind4/6模型；已测单设计峰值不能直接当普遍容量上限。CAPACITY1，ownerCnt/occCnt uint16，overflow int，主owner删除会晋升overflow并窄化。hot occ cap255只在过用布尔上等价，价格索引不可直接沿用。再接metadata生产、geometry/cost、Frontier、显式递归栈、回溯/提交和平台板上。保留target先CLEAR5、prev写后重算SLL、首次push置visited、CP不清heap/栈、设计history独立。整个研究仍active。
+
+---
+
+# 访问性驻留服务最新恢复入口（2026-10-24，优先下方历史）
+
+`hardware/variants/access_service_v1` 已用实际access_step HLS实现完整child判定驻留循环：Config14字及phase/bits/aux/action驻留，动态svc返回后自动ADVANCE，无每步主机往返。入口含parent/child/sink/net/query2/price4/cookie32；svc回显kind4/phase5/node/net/token/query/price。六字ap_memory collector允许done前写，ready/done同拍收齐。契约`hardware/ACCESS_SERVICE_CONTRACT.md`，报告`results/access_service_20261024.md`。
+
+`access_service_20261024`/audit passed：46656child、195175实际HLS调用、148519动态请求，11类全覆盖；skip25230/普通16097/lookahead5329/early2308/pruned1614，151parent.prev/61prev tile。195175完整20字输入快照和六字返回检查、请求身份/顺序/值及最终决策独立审计过。4442374仿真周期含人为背压，不能当板上速度；动态服务目前仍是冻结原CPU差分轨迹模型，不是已接物理后端，也未执行lookahead递归。49.842s/exit0，cell4129终态。
+
+`access_boundaries_20261024`/audit passed：六字720排列、18收集错误、完成/超时同拍；实际HLS+控制器122检查（包括96逐周期复位位置）、217次复位、正常fixture54拍；实际token3耗尽、整体128拍timeout、七类svc错身份、服务失败、inactive/owner拒绝、owner漂移、lateabort、140拍响应背压。全部首轮通过，22.681s/exit0。默认token32/单HLS64拍/整体8388608拍/MAX_STEPS32；未覆盖物理服务fabric故障。
+
+`access_service_synthesis_20261024`/final_audit passed：完整驻留控制+实际HLS OOC综合1675LUT2687FF57CARRY8，零BRAM/URAM/DSP/latch/组合环；776输入415输出无delay，HD.CLK_SRC未设，未布线。122.3s/exit0/checksum6b05da52/history81，31588字节完整收据+DCP。cell4135已终态，B147904空闲；不要重投或动其他会话。check及Python语法检查通过。
+
+下一步必须接实共享服务fabric：在完整child busy期间阻止host OPEN/CLOSE/标签修改，visited/target/parent.prev接coordinate_service的分页通用IO，SLR/ENDY/PREV_TILE接其坐标请求；真实占用/同net引用服务供WILL_OVERUSE和COUNT_USER。源metadata在首次children构建后取一致快照，核实hot/ns属性/占用副本一致性，不丢失热路径语义。现svc按kind映射child/sink/parent/aux；前驱tile范围由后端验证。不能用预设布尔替代占用服务，也不能说已形成完整search。
+
+再连接geometry+cost、Frontier、显式递归栈、回溯和设计提交；保留target先CLEAR5、prev写后重算SLL、首次push置visited、CP保留heap/栈、occupancy/history独立。全研究仍active，未达平台/板上/端到端终态。
+
+manifest SHA 功能4c98036bcc07b4758f690fda57ed122ff45c758567eb55e361146a96e6438378，边界3f39e6eda2478a9ab1502cd3acb643e573d5a2dadf9895ae98055ea5bea16d07。
+
+---
+
+# 坐标服务最新恢复入口（2026-10-24，优先下方历史）
+
+当前 `hardware/variants/coordinate_v1` 已连接实际 graph_static_reader、geometry_table_reader、paged_exclusion_engine 通用标签口及 coordinate_controller。op0ENDY/1SLR/2LAGUNA/3STATIC；query2/price4/cookie32 快照，独占 host 直到响应退休，图/表 token32 不回绕，操作超时262144（不含响应背压）。接口 `hardware/COORDINATE_SERVICE_CONTRACT.md`，报告 `results/coordinate_service_20261024.md`。
+
+关键语义已用原始 Router/SparseLabels hot0/hot1 证明：paged 空 prev=0 与 dense 默认−1不同；前驱 SLL 也只读其静态 endY，不递归。硬件不得将 absent0 改成−1。真实图 node0 endY273，本次全部11520 SLL初始空标签无Y差异；合成反例有差异。真实hasLaguna0不表示没有SLL。真实311行表已与原loader逐项核对，列/north合成覆盖单独说明。
+
+`coordinate_service_v2_20261024`/source_bound_audit passed：真实23957请求/23292标签读取，全部11520SLL；合成740和单槽压力740，检查点8/13/17。独立逐返回/全部图表AXI字节/标签后备重放通过；功能FRAMES16384/INDEX14/HASH15，默认综合163840/18/18。图/表AXI64位高地址，标签后备当前32位。首轮coordinate_service_20261024因子Python缺-I继承Vivado环境失败，未进RTL，v2只修runner，保留负例。
+
+`coordinate_boundaries_20261024` passed：40控制器+17表检查，token3实际耗尽、timeout64、身份/状态/非法prev/坐标/owner变化/无归属响应/latefault/配置及AXI错误。`coordinate_integration_boundaries_v2_20261024` passed：实际整合7故障+7协调冷复位恢复、99422周期；图Rerr1、表Rerr1、标签Rerr2/Berr1。首轮665ns恢复采样同delta失败；v2仅测试台加negedge，RTL与功能冻结相同，负例保留。物理AXI复位仍要求旧事务排空/取消，不能单独reset控制器。
+
+`coordinate_synthesis_20261024`/final_audit passed：完整默认坐标服务实际OOC综合17873LUT14570FF375BRAM3DSP376CARRY8，零URAM/latch/组合环；2180输入1391输出无delay，HD.CLK_SRC未设，未布线。311.908s/exit0/checksuma901d510/history78。MCP历史约100KiB截断，已保存原收据并按唯一marker提取完整full_synthesis.log，独立逐行绑定审计过。cell4103/exec72710（负例）/exec48783（正例）均终态；B147904空闲，不重投或动其他会话。check/plan/smoke均完成。
+
+下一步：access_step驻留状态/归属/超时包装，动态visited/target/prev、图属性、本坐标服务及同网引用/价格服务；geometry+cost组合后再完整search、显式递归栈、回溯提交。保留target先CLEAR5再prev/cost/offer、首次push置visited、prev写后重算SLL坐标、CP保留heap/栈、设计occupancy/history独立。完整dense/paged兼容、平台/板上/端到端研究仍active。
+
+manifest SHA 功能775c3a6e2aa11acf2dda82470856f7ba603d97bc1c9a73ce6a88d2f881a2dc09，独立边界aed9f28031484241f5182494d8ae958c327726e652ff9afe11c85d7645377d3e，实际故障06ffb201f72bd97eb615a96aac9094578069dfdda45551104b99b3e295bf8ee6。
+
+---
+
+# 原始可访问性最新恢复入口（2026-10-24，优先下方历史）
+
+当前`hardware/hls/search_access/v2/access_machine.hpp`/`access_step`已实现每个已过滤child的visited/prune/target/bbox/graph/sink/pinbounce/Laguna/SLL防返回及lookahead/early决策，显式状态START0/ADVANCE1，20输入字/6输出[status,phase,bits,aux,request,action]，无隐藏持久算法状态。action0skip/1普通push/2立即递归；AHEAD在拒绝前可能已置位，须看action。11类动态请求保留原条件和顺序，NON_LOCAL_LEADING先sink/child SLR，graph先child/sink；SLL防返回parent.prev两读未合并。接口`hardware/SEARCH_ACCESS_CONTRACT.md`，报告`results/search_access_20261024.md`。
+
+`search_access_unit_v3_20261024`/audit passed：原函数原样提取，18³类型×8场景=46656、195175START/ADVANCE；允许21426/skip25230/lookahead5329/early2308/prune1614/visited命中2715/hot23328，11请求全覆盖，151parent.prev/61prev tile；label/SLR/endY调用顺序一致，UBSan过。初次v1仅fixture Candidate缺TLD宏编译失败；v2补宏后过；v3增强SLR/endY顺序记录后过，header/kernel未因此改，所有证据保留。lookahead只证明决策，不证明递归执行器。
+
+`search_access_hls_20261024`/audit passed：195175正常转移+9非法op/state/config包，195184调用1171104字Csim/实际RTL一致。latency13/interval14、2732575总周期；93.280s终态。HLS估计2809LUT757FF6.491ns仅估计。实际`search_access_synthesis_20261024`/audit passed：764LUT756FF32CARRY8，零DSP/BRAM/URAM/latch/组合环；66输入87输出无delay，HD.CLK_SRC未设、未布线。87.583s/exit0/checksum98f9839/history74/27606字节收据+DCP。exec28062、cell4067均终态，B147904空闲，不重投或动其他会话。
+
+`adapters/build_search_access_router.py`仅替换exploreAndExpand每child判定，保留getChildren/evaluate/push及break。静态属性可先快照，动态请求按原条件，直接TLD显式使用原行号。`search_access_real_20261024`/audit passed：完整570286搜索130334832push/12轮overused0，路径/全metadata/采样access二进制与geometry_real_v2一致，route101.728s非加速比较。exec60231终态。
+
+下一步优先真实设备服务：标签visited/target/prev、图属性及动态SLL endY、SLR/Laguna表读取（原RRT在load处含numRows/intYToSLRIndex、hasLaguna/numCols/next/prev），然后同net引用/occupancy/价格与中心距离float。access_step当前只接受响应值，尚无pending代号/query/price/超时/中断复位包装；Config和状态应驻留设备控制器，不引入每步主机往返。geometry+cost实际组合及完整search/显式递归栈/回溯提交仍缺；先核对初始prev/paged默认0的跨SLR语义，不能将真实lookahead0外推。保留target先CLEAR5再prev/cost/labels/offer、首次push置visited、CP保留heap/栈、设计occupancy/history独立。平台/整体物理/板上/端到端研究仍active。
+
+manifest SHA unit e98a4da117709e9d2db398087e2fc59f5893ae754143a47c4ecbfde4c5fec7c0，HLS9105914e3a17ab20e6abdfd72a18b86b1e48617dd25affa67994bd723a2b1be5，real2a3af39dedadf53cdffa329af47c0c6aaea15f0b69ba54df1d04ad45df5ef632；源绑定审计全部通过，不将单步决策核扩大为完整访问性设备服务或FPGA路由。
+
+---
+
+# 整数几何最新恢复入口（2026-10-24，优先下方历史）
+
+当前`hardware/hls/search_geometry/v1/geometry.hpp`/`geometry_step`已实现代价阶段整数距离，13int32输入/4u32输出[status,dx,dy,distance]，ap_memory/ap_ctrl_hs。非cross/同SLR Manhattan，相邻SLR dy小于SLL长度则2*length-dy；跨SLR next==prev原“在柱上”，否则最近可用柱，等距离取总程小者。原detour比较与fallback选相同柱，消除冗余比较；原INT_MAX+det已被O0/UBSan确认溢出，O2优化探针不报。新int64中间值、非负int32返回；status1无可用柱/2范围/4相邻分支负SLL长度，失败数值全0且必须中止。接口`hardware/SEARCH_GEOMETRY_CONTRACT.md`，报告`results/search_geometry_20261024.md`。
+
+`search_geometry_unit_v3_20261024`/audit passed：9496组（8192原函数定义域+150边界+1154极值），状态0/1/2/4数量8604/188/671/33；8192包括4095cross、1820相邻/910多SLR、910在柱上、470等距、655next近/695prev近。原片段自动提取，不用候选作golden。v1数值过但错误期待O2必报UB而runner失败；v2 O0已报UB但字符串操作数顺序断言错误；v3只修runner，helper/kernel/testbench均未改，保留失败。
+
+`search_geometry_hls_20261024`/audit passed：9496组37984字Csim/实际RTL一致，latency9/interval10、94959总周期；44.825s终态。HLS估计2081LUT439FF7.288ns仅估计。实际`search_geometry_synthesis_20261024`/audit passed：1145LUT408FF100CARRY8，零DSP/BRAM/URAM/latch/组合环；66输入83输出无delay，HD.CLK_SRC未设、未布线。44.348s/exit0/checksuma01e9cdc/history73/26688字节收据+DCP。exec80258、cell4043终态，B147904空闲，不重投/不动其他会话。
+
+`adapters/build_search_geometry_router.py`只替换原evaluate整数计算、保留坐标/SLR/标签访问顺序及行号，checked CPU包装失败抛异常。`search_geometry_real_v2_20261024`/audit passed：完整570286搜索130334832push/12轮overused0、路径/全metadata/采样access二进制不变，继续exact binary32；CPUroute98.602s非加速结论。exec43438终态。旧search_geometry_real目录因unit预条件停止，未启动路由，记录保留。
+
+下一步原可访问性graphIsAccessible/bbox/pinbounce/target、SLR/Laguna表/中心距离float/价格与同网引用服务、geometry+cost实际快照归属组合，再完整search/显式递归栈/回溯提交。几何kernel只接标量、尚无查询/复位包装。SLL动态endY在prev写前后不同，需补足初始prev与paged默认0的CrossSLR验证；真实图lookahead0不能证明递归。保留target先CLEAR5再prev/cost/labels/offer、首次push置visited、CP保留heap/栈、设计occupancy/history独立。平台/整体物理/板上/端到端仍缺，全研究active。
+
+manifest SHA unit2453fbaad0f2c4bba37ea47a2d7df2e745275cdc7e7e602a41ec7fd8ac450b06，HLS889b97f546ec97aaa92fad4d9b718274273f065a06198c0c45f1c2908eef72f0，real1ec03e1d3c9ba5c986971bce4b542875d55cd9d30f565ecce64889a4c6644882。所有结果独立源绑定审计通过，后续不要把标量几何通过扩大为完整访问性/搜索验证。
+
+---
+
+# 代价调用服务最新恢复入口（2026-10-24，优先下方历史）
+
+当前`hardware/variants/cost_service_v2`已连接实际整数binary32 exact_v2 HLS。23字握手快照/一拍双读、五字双写收集，启动即建立归属允许ready前结果；原核done/ready同拍，收齐五字才发布。外部active/query2/price4必须保持到响应退休，cookie32回显，inactive1/owner2拒绝无HLS调用，正常0。1024拍计算超时；背压不计时。fault锁存，已给响应保持但接收必须检查fault0；协调cold reset清算术/包装并排空其他服务旧事务。契约`hardware/COST_SERVICE_CONTRACT.md`，报告`results/cost_service_20261024.md`。
+
+`cost_service_v2_20261024`/audit passed：21576原向量、23019请求22299响应（22297有效/111485输出字一致），721次复位取消720请求；对最长包index4169扫720时刻，最长正常服务689拍。89634次ready前写出，22329算术完成（包括复位取消的未退休响应）。120收集排列、18协议故障、完成/超时同拍边界及1100拍背压通过。`cost_service_boundaries_20261024`/audit passed：4种外部失效×11时刻=44（32计算中/12已给响应），另实际8拍timeout，故障保持1030拍、44次单拍冷复位恢复通过。主149.018s、boundary14.688s/exit0终态。
+
+`cost_service_20261024`初次测试70ns失败`early outputs rejected`：测试台清写口同delta采样组合fault未稳定。v2仅clear_events后加1ns，设计RTL与实际核测试台与v1逐字节相同，审计检查；失败源码/日志保留。禁止将初次负例当设计缺陷或通过结果。
+
+完整服务实际综合`cost_service_synthesis_20261024`/audit passed：8038LUT5814FF20DSP365CARRY8，零BRAM/URAM/latch/组合环；相对裸算子+495LUT/+1023FF。785输入204输出无delay，HD.CLK_SRC未设、未布线。142.699s/exit0/checksumb1b51999/history72，61619字节完成收据+DCP冻结。cell4010/4017均终态，B147904空闲；不重投、不动其他A/B会话。主manifest39a0ce78386e10fd4aa209e21d45f176f827e454f670faf8d02cce1796eff6c9，boundary48796ee0a2d7436316f585a9634fbc82f3014fc5389b48b18499ede6ef86e656。
+
+下一步原整数几何/可访问性、价格服务和完整search controller，保留prev先写影响SLL坐标、首次push置visited、target先CLEAR5后push、有序children退休后递归/显式栈；页CP不能清heap/栈。再接回溯/同网引用/occupancy/history提交。当前真实配置lookahead0仍不能证明递归。平台聚合、完整物理/板上与端到端性能仍缺；全研究active，不宣称完整FPGA路由或加速。下方关于代价包装尚待实现的文字仅属历史。
+
+---
+
+# 搜索代价数值硬件最新恢复入口（2026-10-24，优先下方历史）
+
+当前可用算术源`hardware/hls/search_cost/exact_v2`，HLS结果`search_cost_exact_hls_20261024`/audit passed：21576组/107880输出字host/Csim/RTL逐位一致（4096普通、144special、512随机、24underflow、576双NaN、16224真实样本）。实际cosim latency224/477/687周期、interval225/478/688，总10328294周期。HLS流程300.553s终态；报告估计21024LUT6946FF20DSP，不能当实际资源。
+
+原`native_v1`/`search_cost_native_hls_20261024`跑完但**数值门禁failed**：158组331字不一致，普通4096全相同、special33/82、随机101/201、underflow24/48；Csim一致但RTL不同。工具cosim PASS仅是characterization完成，审计numerical_audit.json integration_gate failed，禁止将native当逐位兼容实现。日志/RTL/负例冻结。
+
+`softfloat32.hpp`整数IEEE add/mul/div/int32/compare/min显式GRS/RNE保留subnormal。primitive1000256对输入5001280检查/UBSan passed；`exact_v1` C++组合门禁曾在case4390双NaN partial/total payload不一致，保留失败。`exact_v2`依据冻结SSE指令的交换律操作数优先级修正（不是改变结合/舍入点），21576向量含新增576双NaN组合全一致；任意编译器NaN payload可移植性不保证。cpp成功`search_cost_exact_cpp_v2_20261024`/audit通过，21000组；额外576在HLS runner host/Csim/RTL均测。
+
+`cost_capture_real_20261024`/audit passed：完整CPU路由129764546 cost evaluations，按每8192及每轮前32采16224包，23输入/5输出，覆盖12轮；观察后路径/全部metadata/已采集访问完全一致。`search_cost_exact_real_20261024`/audit passed：同一整数primitive经`hardware/search/search_cost_exact.hpp`接回完整570286搜索130334832push、12轮overused0，路径/metadata/采集访问不变。不是全cost数值逐条日志，也非全量标签访问；已采集访问仍抽样，RTL真实向量16224是采样。
+
+实际综合`search_cost_synthesis_20261024`/audit passed：7543LUT4791FF20DSP365CARRY8，零BRAM/URAM/latch/组合环；66输入86输出无delay，HD.CLK_SRC未设、未布线。MCP115.262s/exit0/checksum5a1378c4/history68，完整57511字节完成收据、生成RTL、DCP冻结。B147904空闲，cell3989已终态；错误session名称的调用未执行任务，后续正确调用已完成，不重投/不动旧A2607458/B467625。exec64870(native)、37066(capture)、55366(v1失败)、63502(v2)、17431(exact HLS)、17622(integer full route)全部终态。
+
+下一步优先实现cost调用包装与原访问性/几何/完整search controller。**ap_memory接口不同于Frontier**：cost_step的ap_ready与ap_done同在最终state23，双输出写口在state20/21已返回字，不能复用“ap_ready前结果非法”的Frontier collector。输入双读口23字快照（5位地址），输出双写口5字（3位地址），须启动即建立归属、检查越界/重复/同拍冲突、收齐5字+done后稳定回复；清晰query/price/cookie与abort/timeout/cold reset，当前尚无包装/中断复位证明。参考worst HLS711周期、实际max687，不能沿用256周期timeout。
+
+原CrossSLR整数几何/访问性仍未硬件化；保留首次push即visited、target先CLEAR5后prev/代价/标签/offer、prev改变SLL坐标、paged源prev=-1、页CP保留heap与递归帧。本真实配置lookahead0不能替代递归验证；单扩展引擎父输出需退休才能递归。回溯/同网引用/设计occupancy/history提交、完整组合物理/平台/板上仍缺，全研究active，无端到端加速结论。报告results/search_cost_numerics_20261024.md，接口hardware/hls/search_cost/ARCHITECTURE.md。
+
+manifest SHA：native8ad91506d62723e35824e86404049d119a45651c4e17057234848adf8d4f04c6，cppv2 2cbffab50b59a495260b196fbfb6494333c2d44436d5cba9f51c29873b374b43，exact HLS3eb3a3ed23ca1b4dd0574d22907ea327b573e103a42bef118e09a236ff8fd516，capture9df0fd09e61b437f0c8731851aeaf36877f031e14e53ad06094cfca47505008c，integer reald8866f0e50259644404e88cca0427d964e1cb7bfecd7861a8e149c8f2b3f1a6b。项目check passed，所有冻结正负例保留。
+
+---
+
+# 搜索代价/CLEAR最新恢复入口（2026-10-24，优先下方历史）
+
+原exploreAndExpand发现提前target时先queue.clear再evaluate/push，因此`frontier_service_v3`新增op5 CLEAR（active且query/price匹配、完成真实CLEAR后size0但保留owner）。v2仅OPEN/CLOSE不能代替该操作。v3完整`frontier_service_v3_20261024`/audit passed：135350请求135157响应、135733 HLS调用、390boot/391reset、192中断时刻、真实65536容量全量入出，collector120排列12故障。`frontier_clear_boundaries_20261024`七故障passed，新增CLEAR错误size保留owner/镜像但实际堆可已改，必须终止查询。正常96.574s/history65、boundary12.944s/history66，均exit0终态。
+
+v3实际综合`frontier_clear_synthesis_20261024`/audit passed：3768LUT2297FF116BRAM140CARRY8，零DSP/URAM/latch/组合环；比v2增加8LUT。138输入181输出无delay，HD.CLK_SRC未设、未布线。77.6s/exit0/checksumfba70535/history67，完整67573字节收据、DCP冻结。cells3939/3945已完成，B147904空闲，不重投/不动旧A2607458/B467625。
+
+`hardware/search/search_cost.hpp`和`adapters/build_search_cost_router.py`拆出纯float sharing/node+偏置/partial/landmark/total；保留原几何、价格查询、TLD顺序/行号。`search_cost_unit_20261024`/audit passed：原始参考三个函数原样golden，262144组exact bits、prev/访问顺序/push对照，含741NaN373inf，各131072 cross/ALT/reverseY、65536 hot；UBSan过。原Laguna哨兵INT_MAX+detour潜在溢出未覆盖/修复，不能当受支持参考行为。
+
+`search_cost_real_20261024`/audit passed：完整570286搜索130334832push、12轮overused0；路径/全部metadata/已采集访问二进制与children_real完全一致。访问采集抽样，不能称完整标签全量验证。runner exec62146已终态（route pid3704712/exit0）。代价尚无HLS/RTL，不能据CPU位一致声称硬件浮点一致。
+
+`search_schedule_20261024/audit.json`全metadata汇总：queue offer130334832/poll48292082/cleared82042750，全部570286查询清过非空堆，max38638。总push=offer证明本配置lookahead push0；其他设计递归语义仍必须保留。aggregate exec76476/31617终态，不重投。合同hardware/SEARCH_COST_AND_SCHEDULE_CONTRACT.md，报告results/search_cost_and_clear_20261024.md。
+
+下一步优先验证search_cost实际HLS IEEE舍入/特殊值，不能假定subnormal/NaN/FMA等价；再接原可访问性、CrossSLR整数几何与完整search controller。保留首次push即visited（不是decrease-key A*）、target先CLEAR5后prev/代价/标签/offer、prev更新影响SLL endY、paged source prev=-1、labels checkpoint保留heap/栈。当前单扩展引擎不支持父输出未退休时递归，须先收完有序子列表并保存帧再递归，明确栈上限/溢出；本真实用例lookahead0不能替代递归测试。外部pager/Frontier共同OPEN/CLOSE、回溯/同网引用/设计occupancy/history、完整组合物理/平台/板上仍缺，全研究active。无FPGA端到端性能结论。
+
+manifest SHA：v3 998029495e3b0c709a506127bf1146bef8a0c6d507a2895dc71ddb1fe6ba7e60；boundary0f7d938659953ee2be261d647c47bf8cd4c99a6cbfcc1f90e9ef9d2ee7b6fe40；unit03874a09a8c676308b1f54a9558b9596dbcfb2e26fcb016c586c80c9d3845f51；real e6f9df3a7253b6c10cd4549c1cae3a9866e88709b8c47254cda94961d3519ba4。所有冻结结果/失败证据保留，项目check passed。
+
+---
+
+# Frontier查询服务恢复入口（2026-10-24，优先下方历史）
+
+`hardware/variants/frontier_service_v2`已将实际64K Frontier HLS接上启动CLEAR/OPEN/CLOSE、query2/price4归属、四输出collector、背压与故障停止。原HLS冷复位负例已确认：size仍2且POLL可见旧deadbeef；`frontier_reset_20261024`9调用复现并验证CLEAR后EMPTY。原生成RTL不改，服务每次boot先完成真实CLEAR才ready，不清整块RAM；页checkpoint不可清堆。cold reset必须协调上游旧事务，不提供跨复位旧请求过滤；cookie仅回显，不能当generation。
+
+`frontier_service_v2_20261024`/`audit_frontier_service.py` passed：实际65536容量/完整唯一key排序出队，135343请求/135150响应，193请求被协调reset取消，390完成boot/391 reset断言，135727实际HLS接受，6033329周期；OFFER/POLL各96个中断时刻、单元素IEEE raw payload、错上下文/OPEN/未知op、CLOSE/背压/late abort。collector120全排列121调用12故障。`frontier_service_boundaries_20261024`/audit passed：boot idle/完成timeout、坏status/size/payload、执行中abort六组停止，冷复位恢复。fault时可能真实heap已变但镜像未提交，禁止原查询继续；已给响应保持稳定但使用须fault0。
+
+v1/diag失败是TB wait(fault)捕捉delta暂态；v2仅改稳定下降沿采样，RTL/collector TB完全相同，所有负例冻结。不能把旧失败manifest running当活任务。合同hardware/FRONTIER_SERVICE_CONTRACT.md，报告results/frontier_service_20261024.md。
+
+实际完整服务综合`frontier_service_synthesis_20261024`/audit passed：3760LUT2297FF116BRAM140CARRY8，零DSP/URAM/latch/组合环；比原裸Frontier增加349LUT503FF、BRAM不变。138输入181输出无delay、HD.CLK_SRC未设、未布线；原裸Frontier物理时序不能套用。MCP77.561s/exit0/checksum5f5be8ff/history64，完整67654字节收据已保存。主仿真95.853s、boundary12.7s、rawreset14.103s均终态；cells3921/3927已返回完成。健康B147904空闲，不重投，不动旧A2607458/B467625。
+
+manifest：正常370608d7bdec324e0524421bba4e1ef1dda4ff418c87e81073ef51bd37bb0874，boundaryc1f0e24b3425f2846408ec52ebfeb8f19eed58162905183f87d1c52ed27d9a01，raw负例cbe00187696173004b5c160ed3f4cfdfe12783753539441da9fbb0cca2cc49b2。项目check passed，源/门禁/收据/DCP冻结。
+
+下一步直接推进原CPU距离/代价/可访问性/目标判断和查询入口source prev=-1标签初始化，接Frontier+真实扩展调度，再回溯/同网引用/设计级占用历史拥塞提交。外部查询控制器须协调pager/Frontier OPEN/CLOSE，标签CP保持heap；paged默认0不可混同serial prev初始化。所有组件尚未形成完整硬件搜索/路由，平台/XRT/板上及完整组合物理仍缺；研究active，旧端点9.5213%不是本模块收益。不要再把Frontier复位核实作为待办或重跑已完成任务。
+
+---
+
+# 真实getChildren扩展组合恢复入口（2026-10-24，优先下方历史）
+
+`hardware/variants/expansion_v1`已组合实际graph reader、design store、children HLS与paged exclusion/native标签后备；META真实count→CLAIM→hit重放或miss完整服务→PUBLISH→有序child/attrs输出。整个扩展直至最终result退休封锁host ctrl/io，含相邻EXCLUDE间隙与输出背压；初始created OR运行增量，sink由完整真实设计导入。当前不再用测试服务替代getChildren路径，但距离/代价/Frontier/搜索提交仍缺。
+
+`expansion_inputs_20261024`/`audit_expansion_inputs.py` passed：原CPU loader与独立suffix解析核对27960 nets、180326 connections/sinks、hasLaguna0，初始设计映像已构建；CPU原getChildren仅观察hook，paged标签上下文。`expansion_20261024`/`audit_expansion.py` passed：1212扩展/550hit/3229child，662构建/10753服务/240原生标签READ；默认32槽CP2，单槽TX6/GEN3压力CP27。全部服务事件、图/设计/标签AXI字节及145424192B最终设计状态与CPU/独立语义重放一致；created增量1792、dead46，最终设计SHAaf7feabcab281d6ed54a6185f38a8bfa23c88a21dce8653da7dfe4a6ece3bebd。16先导通过。功能FRAMES256，不是全目录容量/完整路由回放。
+
+`expansion_boundaries_20261024`/`audit_expansion_boundaries.py` passed：15组输入/配置、实际graph/design AXI错、强制pager fault、三类错token、回复/流背压期间故障、实际token4到15和owner3到7后安全耗尽。部分claim保留、错误B可已写物理valid但不成功；每例新初始化后备，不证明故障设计可原地重滤恢复。opcode/错误契约见hardware/NODE_EXPANSION_CONTRACT.md。
+
+实际默认FRAMES163840综合`expansion_synthesis_20261024`/`audit_expansion_synthesis.py` passed：21726LUT20299FF375BRAM3DSP546CARRY8，0URAM/latch、组合环0；2149输入1928输出无delay、HD.CLK_SRC未设、未布线。MCP411.06s/exit0/checksumd460cd60，history id58；cell3885的300s running交接已终态，禁止重投。截断history收据与完整Vivado日志均保存，841完整历史行和部分末行在完整日志中核对；旧收据审计脚本保留。预检查Python3.8/系统PYTHONHOME两次失败保留于expansion_synthesis_preflight_20261024，最终Tcl使用`/usr/bin/python3 -I`，无RTL改动。B147904空闲，旧A2607458/B467625不动。
+
+本轮CPUinput exec38746、仿真cells3873(95.062s)/3878(128.163s)、综合3885均终态；所有源/门禁/文件/DCP/完成收据冻结。manifest：inputs66b108b1e126f42ede074531f88f995c6480c74fec76a95db2882c28b2406347，integration135f538360df0f474038604aeaf9a90510f020b589f8f13a6ba472d9a0b6a3eb，boundaries7de4f3161e0a534998d2289c7fb6efecdf8dc34808a3fdcfe068068e624b5ebe。项目check passed，报告results/node_expansion_20261024.md。
+
+下一步优先核实Frontier静态size的冷复位/CLEAR语义（当前kernel_hls.cpp仅static size=0和CLEAR，无显式size reset pragma；不能据C++ CLEAR测试认定ap_rst隐藏旧堆）。随后接原CPU距离/代价与可访问性/目标判断、查询入口source prev=-1等标签初始化、Frontier调用、回溯及设计级占用/历史拥塞/同网引用提交。继续完整真实连接搜索对照、完整组合物理/平台XRT/板上。现有原生标签是paged零默认，其他CPU模式prev初始化不可混同。32位置缓存适用已核验max18，超32拒绝；初始hasLaguna按设计元数据提供，标签/设计/图缓冲区实际不得别名。全研究active，当前尚非完整FPGA路由或板上加速；先前端点9.5213%不可套用。
+
+---
+
+# 设计级状态/持久缓存服务恢复入口（2026-10-24，优先下方历史）
+
+`hardware/variants/design_store_v3/design_state_store.sv`已实现实际AXI后备记录、排他claim、原序keep_mask和成功B后publish。`design_store_v3_20261024`/`audit_design_store.py` passed：98893命令、68287逐笔读/17821写和B顺序核对，4524发布/命中、890空缓存、9049归属拒绝；额外安全冷复位GET使总AR=R=68288。全部145424192B外存与独立预期一致。200先导和17故障/35检查通过，含错误B已物理写入但停止并保留claim。v1仅TB关键字config编译失败；v2改名通过，v3仅加B日志/等待断言，三版RTL/oracle字节一致，全部证据保留。
+
+实际综合`design_store_synthesis_20261024`/`audit_design_store_synthesis.py` passed：1059LUT1056FF34CARRY8，0RAM/DSP/latch，组合环0；762输入849输出无delay，HD.CLK_SRC未设、未布线。MCP v3回归41.486s/exit0、综合60.628s/exit0/checksum5f59a1a9；cells3848(v2)/3850(v3)/3853(synth)均终态。B147904空闲，不重投；不动旧A2607458/B467625。manifest SHA26b1678947ca7881e6dd85494a05113b47ae5d49aa21b8222bc74915a9073056。全研究active，尚无完整设备路由/板上。
+
+接口[DESIGN_STORE_CONTRACT](hardware/DESIGN_STORE_CONTRACT.md)，报告[设计级存储验证](results/design_store_20261024.md)。16B/node四uint32为flags(created增量/dead/cache_valid/design_sink)、raw_count、keep_mask、reserved0；后备区在设计开始清零一次，没有query/price清除接口。32原始位置容量覆盖真实max18，超32拒绝；valid空缓存和未构建区分，位置位图保持重复边。唯一串行写所有者，无多主并发。GET0 CLAIM1 CREATE2 DEAD3 EMIT4 PUBLISH5 SINK6，owner/parent归属校验，EMIT位置递增。失败不回滚CREATE，B错可能已写物理valid；停止并保留claim，未完成claim不能在同设计状态上重滤恢复，当前需终止并从清零设计状态重启。
+
+下一步真正组合图/存储/构建/排除服务：图META实际count→CLAIM，hit按mask重放CSR，miss进入children_build_engine；CLAIM先于HLS START，外层扩展owner与后取得的HLS generation关联。有效created=raw_graph.flags[0] OR store.created增量；从真实设计端点导入design_sink，按原函数算dead/canBeDead。NEXT/CLASSIFY用实际图/状态，CREATE/DEAD/EMIT/PUBLISH用实际存储，EXCLUDE接paged_exclusion。整个扩展（含CLAIM和重放）保护query/price与相关标签修改，不能只锁单边。当前保留决策为测试输入，尚未完成这些组件的联接。随后Frontier复位/距离代价/回溯同网引用提交/平台板上仍待完成。
+
+---
+
+# 真实图读取服务恢复入口（2026-10-24，优先下方历史）
+
+`hardware/variants/graph_reader_v1` 已实现独立64位地址CSR/属性AXI读取器。`graph_reader_20261024`和独立`audit_graph_reader.py` passed：完整真实文件中的10163抽样父节点/64806请求（10163 META、44480 CHILD、10163边界拒绝），覆盖全部8875个CSR offset 4KiB边界；逐笔地址/全256位返回核对221602正常AXI事务，含故障总AR=R=221640。19故障、28配置、64828检查；200请求先导也通过。不是全9M节点RTL遍历。
+
+实际综合`graph_reader_synthesis_20261024`/`audit_graph_reader_synthesis.py` passed：1829LUT873FF166CARRY8，0RAM/DSP/latch、组合环0；880输入519输出无IO delay、HD.CLK_SRC未设、未布线。MCP回归34.591s/exit0，综合60.108s/exit0/checksum17e9e66c，cells3831/3834终态；B147904空闲，不重投，不动旧A2607458/B467625。manifest SHA17164dd246812ff861955fdea4d9d88289540b0e20557df0119115be272f0498。源/文件/逐笔日志/DCP/收据已冻结，项目check passed。
+
+接口[GRAPH_READER_CONTRACT](hardware/GRAPH_READER_CONTRACT.md)，报告[真实图AXI读取](results/graph_reader_20261024.md)。op0 META返回实际CSR start/count及父属性；op1 CHILD先验证实际degree，再返回原序child/原始属性。保留重复边，不能把原始CSR当过滤缓存、把初始created当动态created。单请求/单AXI读拍，固定ID0/64B，表物理窗口补齐64B，需主机分配。配置一次锁定至冷复位；坏输入拒绝，坏AXI/图数据或无归属R停止；已提供回复稳定，status0必须同时fault0。无热取消/超时/独立热复位，恢复需协调总线/上下游。
+
+下一步接实际服务组合：由META真实count决定构建参数，关联generation/parent/position；实现设计级created/dead和持久首次过滤缓存claim/publish/hit，再接paged_exclusion。整个build busy期间保护query/price及相关标签修改，不能只锁单个EXCLUDE。缓存hit不重滤、空缓存valid、淘汰保留后备列表/原序位图，query checkpoint不清设计状态；CREATE仍先于类型/死端丢弃。随后Frontier静态复位/CLEAR、距离/代价、回溯/同网引用与提交、平台/板上。当前读取器与children engine尚未联接；没有完整设备路由/板上收益结论，全研究active。
+
+---
+
+# 首次构建引擎整合最新终态（2026-10-24）
+
+本段优先下方历史。hardware/variants/children_engine_v2组合实际state-reset children_step、13输入/11输出collector及build controller。START到result退休保持busy；独立核对generation/phase/position/node/emitted/owner，服务回显匹配后才提交HLS RESPONSE，匹配服务错误进入HLS故障锁存；错误/异步fault停止。status0且fault0方可使用结果，已提供结果背压稳定。busy必须由外层用于整个构建上下文保护，目前并未封锁pager host入口。
+
+children_engine_v2_20261024及audit_children_engine.py passed：collector4228组顺序/4229调用/19故障；gen3两轮14构建84服务100调用2耗尽；full93728正常构建813439服务、907281 HLS调用813527 RESPONSE、26故障/协议场景、93755检查、2440589阻塞周期。正常向量EMIT46896。pilot1024也通过。v1在155ns首请求失败，诊断显示gen0→156ns gen1，下一请求255ns同类delta采样；v2仅TB改为valid后下一下降沿检查，所有RTL/oracle/HLS不变，负例及diag已绑定。manifest SHA6b73e7c74cea56b04bb1bf3bb88e00d2a4e32ef5198f747a137cdd41334718fb。
+
+children_engine_v2_synthesis_20261024/audit_children_engine_synthesis.py passed：1550CLB LUT2047FF70CARRY8/0RAM/DSP/latch，78.002s/exit0/checksuma8c0c267，LUTLP和check_timing loop均0；402输入371输出无delay、HD.CLK_SRC未设、未布线。资源不含图/设计/缓存或pager服务。MCP B147904回归173.388s和综合78.002s均终态；cells3806/3810/3817、诊断exec24303完成，不重投。旧A2607458/B467625不动。
+
+报告results/children_engine_20261024.md，接口hardware/CHILDREN_ENGINE_CONTRACT.md。本轮服务仍是模型，尚无真实图AXI/动态created/dead/持久设计缓存/paged_exclusion服务联接。下一步优先实现这些实际服务：CSR度数须决定并校验build_count，缓存hit不重滤，miss先排他claim；整个构建跨EXCLUDE锁query/price与相关标签修改。设计缓存淘汰必须保留后备原列表/顺序位图，query CP不清设计状态。再接Frontier/代价/距离/回溯提交，Frontier静态复位/CLEAR仍先核实。全目标active，完整设备路由/平台/板上未完成。冻结源/门禁/DCP及失败证据不覆盖。
+
+---
+
+# 首次邻接过滤HLS接口最新终态（2026-10-24）
+
+本段优先下方历史。hardware/hls/children以已验证children_machine.hpp原样副本实现children_step：START/RESPONSE/SNAPSHOT，单构建，generation32/parent/query/price/position/phase/node归属校验；空列表也等PUBLISH应答才结束。服务错误锁存fault，保存未完成阶段，START/RESPONSE停止；错身份/阶段/位置/载荷不推进，可正确重试。SNAPSHOT在fault下status仍0，外层必须同时查fault。无热取消/在线RESET，config_rtl -reset state，冷复位需外部旧消息排空，不能撤销已发生CREATE副作用。
+
+results/children_hls_20261024和audit_children_hls.py已passed：32位93728正常上下文/918795调用/10657拒绝，原函数谓词＋独立边循环oracle；NEXT/EXCLUDE252794各、CREATE/CLASSIFY66833各、EMIT46896、CHECK32917、MARK644、PUBLISH93728；另一次PUBLISH服务失败。gen3实际7构建/406调用/337拒绝，第8START耗尽。C++/Csim/Csynth/RTL cosim全部通过；32位263.51s、gen3 42.01s。HLS估计1598LUT882FF仅估计，不能代替实际综合。manifest dec9112fc869f66a0de687e830bd6f5ef4565cab0ded7741468da5db592d4aff。
+
+children_reset_20261024/audit_children_reset.py passed：直接生成gen32 RTL八阶段复位、故障恢复、空发布、最高24位parent/child，11复位63调用；MCP14.684s/exit0。children_hls_synthesis_20261024/audit_children_synthesis.py passed：实际944CLB LUT881FF36CARRY8/0BRAM/URAM/DSP/latch；84.354s/exit0/checksumc23d7bc6。LUTLP与check_timing loops均0，418输入248输出无delay、HD.CLK_SRC未设、未布线。资源不含调用收集器或图/设计/缓存服务及边引擎。
+
+runner1055952/exec47602与MCP cell3793均终态，健康B147904本轮已完成，无后台待等/重投。旧A2607458/B467625不动。报告results/children_protocol_20261024.md，接口hardware/hls/children/ARCHITECTURE.md。所有冻结源/报告/DCP/收据保持。全研究active，尚无完整设备路由/平台/板上。
+
+下一步：实现13输入/11独立ap_vld输出的调用收集与单构建服务分派，保持已修复的ap_start/ap_ready无组合反馈规则；START只用于已经取得排他缓存所有权的miss，hit直接重放持久列表。接实际raw图/动态created/dead/设计缓存和paged_exclusion_engine。整个构建跨多个EXCLUDE，外层须锁住query/price及相关标签修改，不能仅依赖单边引擎保护。设计缓存不能随query CP清除或淘汰后重滤；保持先CREATE后类型丢弃、原序重复child和结构any_alive。随后Frontier/代价/距离/回溯/提交/平台仍待完成，Frontier静态复位/CLEAR先核实。
+
+---
+
+# 首次邻接过滤最新终态（2026-10-24）
+
+本段优先下方历史。新增hardware/search/children_machine.hpp，SHA2c81dcc34cf7ca50eca31354806a3e943517c3a271857590d4b62a4e19782ed3；NEXT/EXCLUDE/CREATE/CLASSIFY/EMIT/CHECK_DEAD/MARK_DEAD/PUBLISH/DONE单构建请求状态机。adapters/build_children_router.py仅替换首次过滤，原缓存命中、lazy fetch/intern、所有权与发布保留，源行数保持。源码/基线不修改。
+
+children_unit_v4_20261024/audit_children_unit.py passed：73728参数组合+20000多边序列=93728组；同数缓存重访不重新过滤，66841空结果、8760创建后丢弃；对照逐字抽取原getChildren/排除/dead谓词。v1/v2/v3是测试脚手架命名空间/别名/字符偏移截取编译失败，目录保留；最终helper本体未改。简化lazy与锁分支按串行调用，非并发或动态intern硬件证明。
+
+children_real_20261024/audit_children_real.py passed：同图完整570286搜索/130334832push/12轮/overused0，与冻结exclusion_real基线路径、全部搜索元数据、已采集标签访问二进制一致；访问仍抽样，不是全访问证明。manifest SHAd79a8a0bd96a6fb318244828d4700bfb219e2606f62bf4fa80c356136ed3f171。runner891272/tool8353已经终态，无本轮后台任务。本轮纯CPU算法/语义工作未启动Vivado；既有B147904自动页综合已终态。
+
+必须保持：未排除child先CREATE再检查INACCESSIBLE/deadEnd；重复child读取更新后created；any_alive在排除前依据结构谓词更新。首次缓存是设计生命周期状态，query/price变化不重滤，空列表也valid；未来缓存淘汰必须保留后备列表/顺序位图，不能丢弃后重新运行EXCLUDE。部分构建已发生的CREATE副作用不能假定可撤销。详情hardware/CHILDREN_FIRST_TOUCH.md及results/children_first_touch_20261024.md。
+
+下一步把已验证helper做成带构建generation/position/phase归属的硬件请求接口，接raw图读取、动态设计created/dead/cache存储，再委托已验证paged_exclusion_engine完成边排除。当前helper未HLS/RTL，没有图AXI读取器或设备缓存，不能说完整设备节点扩展已完成。后续Frontier仍先核实静态复位/CLEAR策略，代价/距离/回溯/提交/平台/板上待完成。全研究目标active；冻结源/结果/失败证据不覆盖。
+
+---
+
+# 自动换页整合最新终态（2026-10-24）
+
+本段优先下方历史。最终新源hardware/variants/auto_pager_v1，默认32槽/TX16/binding16/163840帧/epoch16，独占native入口；接入冻结engine_v4、label_v2、state-reset HLS与sparse_records原生端点。缺页WB成功后RELEASE/BIND/RF；解析租约退休前不允许替换，边活动时禁止通用IO和生命周期操作。自动checkpoint保留后备页并重启TX/binding编号，不复位HLS generation；CLOSE完整回收。错误fail-stop保留脏victim/未完成租约，恢复仍需全链路协调冷复位。
+
+results/auto_pager_20261024五组XSim及scripts/audit_auto_pager.py已passed。production32实际27681边（27680 oracle+1重开）、34898标签响应、62579 HLS调用、26984 WB/97070 RF、185502检查，70000额外访问跨真实TX16边界max65503/autoCP1；AW=B27724/AR100000/R291210，字节模型一致。budget32 TX6 autoCP35；single GEN3 autoCP651；wrap16实际65536绑定，65535后CP再编号1、无AXI；fault三组B错/R错/FULL保留状态并停止。默认功能仿真256帧，wrap/fault16/2帧，不能说完整容量RTL回放。manifest SHA df27c1553abff3fbebe572ddb400dd809b9f7c6206847491303970f9a22b758f。
+
+results/auto_pager_synthesis_20261024及audit_auto_pager_synthesis.py已passed：完整默认容量实际16528CLB LUT/15156FF/375BRAM/3DSP/196CARRY8，0URAM/latch；280.532s/exit0/checksum57828bf5。LUTLP-1与check_timing loop均0，无内部无时钟/无约束端点；806输入920输出无delay、HD.CLK_SRC未设、未布线无频率结论。资源包含完整native端点，不可与只1172LUT的edge_v4直接作同范围比较。冻结源、DCP、收据、日志、脚本/门禁保持不变。
+
+MCP健康B147904本轮仿真385.813s/exit0、综合280.532s/exit0均终态，functions cell3722旧running交接和3734均不重投；无本轮后台待等任务。旧A2607458/B467625不动。项目run.py check passed。报告results/auto_pager_20261024.md。研究目标仍active，完整FPGA路由/平台/板上未完成，既有端点回放9.5213%不得套用新增管理器或全路由。
+
+下一步：连接已核验图镜像读取和动态created/getChildren首次过滤缓存；保持原CPU getNode/created、副作用与原始读取次序，raw CSR不能直接当过滤缓存。Frontier尚未整合，未来接入时先查HLS静态状态复位策略（旧exclusion默认control复位反例已证实，但不能未经检查推定frontier行为）。再接代价/距离更新、回溯/连接提交；完整组合物理与平台预算仍缺。任何改动用新变体/结果，不改冻结基线。
+
+---
+
+# 排除边引擎v4最新终态（2026-10-24）
+
+本段优先下方所有历史。最终源hardware/variants/exclusion_engine_v4；实际生成HLS→调用收集/边调度→label_v2→冻结sparse_records原生端点已经整合验证。results/exclusion_edge_engine_v4_20261024及audit_exclusion_edge_engine_v4.py passed：27680条原始CPU函数oracle边/34898预期读取；含13错误恢复总110686检查、34911标签请求、34906原生READ、62592HLS调用、34904RESPONSE；独立collector720输出/done排列、721调用、9故障。实际gen3两轮耗尽14成功/2拒绝/16HLS调用，中间协调复位。
+
+必须使用新的results/exclusion_hls_reset_20261024（hardware/hls/exclusion_reset_state）：config_rtl -reset state，算法/端口源码原样；32位354530调用与gen3 C++/Csim/Csynth/cosim重新passed/audited。旧默认HLS control复位不清静态generation/Machine；exclusion_reset_negative_20261024直接复现复位后generation2，新positive同TB4调用/3复位通过。冷复位仍需全链路排空协调，不能热取消。详细勘误hardware/HLS_RESET_BOUNDARY.md。不要将旧HLS物理时序/资源套用新版本。
+
+v1失败是collector TB采样瞬态导致的误判，VCD保留；v2整合全27680正常边后在复位恢复失败，diagnose/独立负例保留；v3功能通过但综合发现7LUT组合环（LUTLP-1=1），结构门禁失败。v4仅将ap_start改为锁存stopped/外部abort控制、断开ap_ready组合反馈，同一完整回归通过，未加ALLOW_COMBINATORIAL_LOOPS。
+
+v4实际综合results/exclusion_edge_engine_v4_synthesis_20261024 / audit_exclusion_engine_synthesis.py passed：1172CLB LUT2190FF39CARRY8/0BRAM/URAM/DSP/latch，55.875s/exit0/checksumdee28a76，LUTLP与check_timing loop均0；419输入228输出无delay，HD.CLK_SRC未设，未布线无时序闭合结论。资源不含原生存储端点。MCP B147904 idle；functions cell3686/3703/3708/3712和exec92183/6321/73030等均终态，不重投。旧A2607458/B467625不动。
+
+下一步自动页解析/租约与miss的WB/RELEASE/BIND/RF、原生命令仲裁，再接图读取和动态created/getChildren首次过滤缓存。当前只3预绑定槽/32帧目录/epoch16，无AXI、无自动换页或完整路由。不能将27680边向量当完整CPU搜索硬件重放；既有全38端点回放9.5213%仍非板上加速。报告results/exclusion_edge_engine_20261024.md。全目标继续active。
+
+---
+
+# 标签读取适配器 v2 最新终态（2026-10-24）
+
+本段优先下方历史状态。最终源hardware/variants/exclusion_label_v2，v1初轮通过但增强测试发现同拍故障可见性问题，负例保留results/exclusion_label_samecycle_negative_20261024（462741ns）。v2将fault组合暴露当前abort并内部锁存，回复背压稳定；所有冻结源码/报告不改。
+
+results/exclusion_label_adapter_v2_20261024已经XSim通过并经scripts/audit_exclusion_label_adapter.py独立审计：32槽×8偏移×4阶段1024项，2250检查/1049原生READ/11735阻塞周期；6错身份、30服务错误、8中止场景；3位实际token耗尽7接受+1拒绝+1非法。生产32位token不回绕，边generation32/事务token32/页binding16分离。native sparse_records完整RTL接入，测试映射预先驻留、32帧目录、epoch16；无AXI，不是自动分页/HLS整链路。
+
+独立综合results/exclusion_label_adapter_v2_synthesis_20261024终态/audit passed：163 CLB LUT（原始LUT primitive171）、191FF、11CARRY8，0BRAM/URAM/DSP/latch；38.094s/exit0/checksum5684f693，functions cell3667已完成关闭。未布线无新时序结论。MCP健康B147904 idle；所有本轮和此前full38/HLS任务均终态，不重投。A2607458/旧B467625不动。
+
+下一步：为已验证exclusion HLS生成RTL实现ap_done/独立ap_vld输出收集、调用归属与错误处理，再接v2标签适配器和页解析/租约。只有status=0且fault=0才提交HLS RESPONSE；同拍fault也必须阻止提交。保持resident_zero原始0/显式-1、created与present分离，禁止把raw CSR当过滤缓存。报告results/exclusion_label_adapter_20261024.md。完整FPGA搜索/平台/板上仍未完成，不能把本轮组件验证或既有端点回放9.5213%解释为全路由加速。
+
+---
+
+# 邻接排除硬件接口进展（2026-10-24）
+
+最新优先本段。`hardware/hls/exclusion`沿用已经完整CPU验证的helper原样副本，新增单边generation/phase响应校验；START忙拒绝、编号单调不回绕、旧/重复/错阶段响应拒绝，SNAPSHOT只读。没有在线RESET；冷复位须外层排空旧消息，不声称跨复位旧响应保护。尚未连接标签端点/图读取或完整设备搜索。
+
+`results/exclusion_hls_20261024` 32位354530调用/27648上下文、gen3真实7上下文耗尽/12调用，C++/Csim/Csynth/RTL cosim全部passed，独立audit_exclusion_hls.py源码门禁审计passed。原runner2669585/exec30327终态，不重投。HLS估计均1825LUT2330FF/0BRAM/DSP，不视为实际Vivado资源。
+
+实际Vivado gen32综合已终态审计passed：exclusion_hls_vivado_synthesis_20261024，798LUT1415FF/0BRAM/0URAM/0DSP/0latch，43.455s/exit0/checksumbf4b1600。cell3634已关闭，不再wait。冻结脚本因复用仍名synthesize_frontier_hls.tcl，内容SHA与根目录synthesize_exclusion_hls.tcl一致，审计显式记录legacy basename；不改冻结源。
+
+排除接口物理也已终态：exclusion_hls_timing_20261024，116.2s/exit0，791LUT1415FF/0BRAM/DSP/latch，WNS7.124/WHS.038/WPWS4.725，内部失败和route错误0；287输入79输出无delay。audit_exclusion_timing.py final_audit evidence_verified，方法学报告/diff/全部artifact绑定。cell3638已完成关闭，不再wait/source。健康B147904 idle。此前所有full38及frontier物理也已终态。
+
+接入边界静态审计 `exclusion_label_boundary_20261024` / hardware/EXCLUSION_LABEL_BOUNDARY.md：prev字段2/95:64，visited字段3/127:96；node先检查<2^24才拆21bit page+3bit offset；边generation32与页binding generation16独立。原生空记录全零对应resident_zero，不得自行prev0→-1；未来完整集成必须绑定同一驻留查询模型，不能直接将dense标签默认值套入。尚未实现标签端点适配器。额外保持设计级created与查询级rsp_present分离；不能拿present当getNode/created，也不能将导出时createdAtInit永远当运行时created。
+
+接口详情hardware/hls/exclusion/ARCHITECTURE.md、INTERFACES.md。所有活动源码/冻结case及门禁保持；需要修订时新变体/结果目录。
+
+---
+
+# 最新恢复入口（2026-10-24，全部后台实验已终态）
+
+本段优先所有下方历史live/排队记录。研究目标仍active；完整FPGA图搜索、平台和板上尚未完成。当前健康B Vivado147904 idle；A2607458/旧B467625不动。没有需要继续等待或重投的全38回放。
+
+1. 原WB全38已full_replay_audited：5936429820ns，较原生16位6140213280ns减少3.3188336%，38/38收据区间更快，1次合法FINISH重试。原PID3960194/3960259/3966513和工具66155终态。
+2. 组合WB/RF全38也已full_replay_audited：`sparse_records_full_20261024`，38query/28CP/21466914原命令/2472066trans/零错误/零FINISH重试，5555584670ns，较原生减少9.5213079%，较WB-only再减少6.4153904%；37区间更快1相同0更慢。省略WB3248686空EXPORT、RF8773322空BEAT；1850442次RF mask，AXI页payload仍474636672B。监督者351225/runner2863769/xsim2868678及原工具17706均终态，不再poll/重投。MCP原6项todo全部done。报告 `results/sparse_full_ablation_20261024.md`，三组证据/CSV `results/sparse_full_ablation_20261024`；这是状态端点访问回放，不是全路由或板上加速。
+3. Frontier Csim/Csynth/完整64K RTL cosim135228调用及独立审计完成，真实完整CPU570286搜索验证完成。实际综合3411LUT1794FF116RAMB36E2/0DSP，原HLS32 BRAM_18K估计不可当实际资源。物理 `frontier_hls_timing_20261024` 已终态324.482s/exit0，3394LUT1794FF116BRAM/0DSP，WNS1.336/WHS.039/WPWS4.458、内部失败/route错误0，98输入105输出无delay。`audit_frontier_timing.py` final_audit evidence_verified，METHODOLOGY报告/diff均绑定；无平台闭合。cell3593早已返回running交接并关闭，勿再wait/source。报告 `results/frontier_component_20261024.md`。
+4. 完整图 `graph_image_20261024` 已passed/audited：9089009节点40469536有序原始边/最大度18，CSR198234184B＋属性290848288B；原CPU加载器全图逐项核对，独立重建原RRT1 SHA一致。raw CSR不等于getChildren过滤缓存，flags bit16原样保留。图布局见INTERFACES.md，未上传设备。
+5. 新 `hardware/search/exclusion_machine.hpp` 拆分isExcluded为显式条件标签请求：CHILD_PREV→可选CHILD_VISITED/PARENT_VISITED→可选ARC_PREV，最多4响应，保留短路及原有重复prev读取。`exclusion_unit_20261024` 原函数抽取golden对27648组flags/created/Laguna/prev/sequence组合判断及节点读取顺序通过。`exclusion_real_20261024` 接在已验证bounded frontier之上，完整570286搜索/130334832push的路径/全部元数据/原采样标签访问二进制一致，独立audit_exclusion_real.py passed。runner2468166/session39119终态。helperSHA73a77287774192a36412bfa31164a4e5d9441cb62a86ba76b13887c105eef00d，勿改冻结helper/门禁；新RTL实现须独立版本。此模块仍只是C++请求状态机，没有RTL证明。
+
+下一步：把排除逻辑接成有明确请求/响应和边上下文的硬件控制接口，防止过期/重复响应；保持getChildren首次过滤与缓存副作用，继续接图访问、动态设计状态和标签端点。不能用预过滤raw CSR替代依赖prev/visited/created的判断。原CPUheap已驻留且clear为O(1)，不得据新frontier宣称初始化收益。任何源变更先新变体，不能改上级/默认RTL/已冻结基线。
+
+---
+
+完整图镜像 `results/graph_image_20261024` 已passed/audited：9089009节点40469536有序原始边/最大度18，CSR198234184B＋属性290848288B，原CPU加载器逐项全图核对，独立重建RRT1 SHA一致。图格式见INTERFACES.md，报告results/graph_image_20261024.md；不是过滤后邻接、动态cost视图或硬件上传。保留原flags未定义bit16，不能假定清零。
+
+# 最新恢复入口：Frontier 已完成真实容量、RTL与实际综合（2026-10-24）
+
+本段优先下方历史记录。研究目标仍active；完整FPGA图搜索、平台与板上未完成。
+
+- 真实容量 `frontier_real_20261024`：570286搜索、130334832push，峰值p50=114/p90=253/p99=671/max=38638。64K仅覆盖此轨迹，未知设计仍须FULL/查询回退；512KiB为逻辑payload。
+- 同helper完整CPU路径 `bounded_frontier_real_20261024` 审计passed：路径结果、全部元数据、原已采集标签样本一致，不声称全访问逐条核对。原CPU heap本已驻留且clear为O(1)，不主张新初始化收益。
+- `frontier_cpp_verified_20261024` 两实现各135228命令及1000169组比较passed/audited。HLS2022.2 `frontier_hls_relative_project_20261024` Csim/Csynth/完整64K RTL cosim及独立审计passed；135228调用含实际填满/溢出拒绝/排空。1000169比较是TB校验，非等量独立RTL调用。HLS213.93s/XSIM终点49783975ns非完整路由性能。首轮绝对工程名失败目录frontier_hls_20261024保留。session68468/runner2667068/watch2682106均终态，勿重投。
+- 实际Vivado综合 `frontier_hls_vivado_synthesis_20261024` 与 `scripts/audit_frontier_vivado_synthesis.py` passed：3411LUT1794FF116RAMB36E2/0URAM/0DSP/0latch，存储容量4276224bit覆盖4194304bitpayload。源码/15个RTL及初始化artifact/HLS门禁/DCP绑定；MCP cell3579已终态69.566s/exit0/checksum3c484d91，不再wait。HLS原32 BRAM_18K估计不是实际映射。
+- 正在健康B147904执行 `source hardware/scripts/implement_frontier_hls.tcl`，结果frontier_hls_timing_20261024，functions cell3593活动。10ns研究时钟、Default、无IO预算/平台时钟模型。不重复source；先status/恢复wait，终态保存completion_receipt.json，再 `python3 scripts/audit_frontier_timing.py`，绑定时序/方法学/diff/报告/DCP，允许真实负结果。A2607458/旧B467625不动。
+- 原WB全量已终态full_replay_audited：38q28CP21466914原命令2472066trans/0errors/1合法FINISH重试/end5936429820ns，较原生16位6140213280ns减少3.3188336%，38/38查询收据区间更快；完整源绑定与逐区间独立审计passed。报告results/sparse_writeback_full_20261024.md。PID3960194/3960259/3966513及工具66155均终态勿重投。组合full监督者351225已自动启动唯一全38，runner2863769，xsim wrapper2866895，results/sparse_records_full_20261024，最近12query/0CP。冻结源/脚本/门禁勿改，勿重投。
+
+组件源 hardware/hls/frontier；报告results/frontier_component_20261024.md。当前frontier未接图扩展/自动分页标签/连接级提交，不是完整设备搜索核。
+
+---
+
+# 当前恢复入口（2026-10-24）
+
+优先本段与NEXT_STEPS顶部；下方历史live仅属当时。研究目标继续active，完整FPGA路由器、平台与板上验证尚未完成。默认RTL/上级基线/冻结结果保留，新研究仅在独立变体。
+
+最新高地址组合 `sparse_records_address64_20261024` 两case/源码绑定审计通过：既有未修改address64两模块＋稀疏WB/RF内核、EPOCH16。BASE12fffff000下32槽8CP/800阻塞/288trans/1778checks、AW/AR进位11/88；19真实查询75194cmd5183trans/end18927670ns、进位2632/1884，全部含时间收据/计数等于原生稀疏组合。包装层尚无完整38或XRT/板上；不修改两条原生全量链。报告 `results/sparse_records_address64_20261024.md`。
+
+高地址组合综合/物理均终态审计：综合12812LUT11279FF375BRAM3DSP，对未包装+106LUT/+68FF，checksumcc0b0ad6，MCP147904/cell3502完成220.495s/exit0。物理12773LUT11272FF375BRAM3DSP，对未包装+149LUT/+64FF，WNS1.134/WHS.028/WPWS4.458、内部失败/route错误0，417.822s/exit0；693输入938输出delay/上游clock缺口保留，非平台闭合。21artifact含METHODOLOGY报告/diff哈希通过；cell3508旧running交接已关闭且正式终态，不继续wait/source。健康B147904现idle；A2607458/旧B467625不动。
+
+主机边界条件模型 `native_host_envelope_20261024` 绑定原生16位全38：21466914公开命令，90bit命令+182bit响应的总逻辑字段量折合729875076B；16/32B对齐假设为1030411872B，非新ABI/信息下界/实测PCIe。额外串行延迟只作敏感性，不把TB时间当纯器件计算。若命令由设备内搜索产生，逐命令外部主机假设不适用。真实CPU切分源码审计 `search_control_boundary_20261024` 与 `hardware/SEARCH_CONTROL_BOUNDARY.md` 明确rip-up/搜索/回溯/commit/回退单一所有权，尚未移植搜索核。PATH无XRT工具不证明SDK/板卡不存在。
+
+最新组合WB/RF变体 `hardware/variants/sparse_records` 已实现内部RF_MASK14：全部8条codec解码后仅有效BEAT，精确确认位图收尾，再内存成功/COMPLETE/RETIRE。公开原生ingress拒绝14；独立控制器的受信任mask本身不是解码或DMA证明，详见CONTRACT.md。已通过256位图、33边界、九故障、32槽8CP/800阻塞、65536合法回收/1次真实16位回绕/574合法重试；七组源码绑定审计passed。19查询候选18.92767ms，对WB-only19.47927ms增量−2.83173%，对原生16位−8.13273%；18/19区间更快、1不变。省略12017空BEAT，2190次RF mask收尾；公开接口/192B页/AXI量不变。报告 `results/sparse_records_20261024.md`。
+
+组合默认容量综合已完成：12706LUT11211FF375BRAM3DSP0latch，对WB-only−243LUT/+36FF，checksum9cbc31ac；MCP147904/cell3464已终态221.947s/exit0，不继续wait/source。组合物理 `sparse_records_timing_20261024` 也已终态413.206s/exit0、独立审计：12624LUT11208FF375BRAM3DSP，对WB-only−236LUT/+36FF，WNS1.100/WHS.035/WPWS4.458，内部失败/route错误0。627输入/847输出delay及上游clock模型缺口保留，非平台闭合；METHODOLOGY_RESOLUTION_REPORT.md、diff与22个artifact哈希已核对。函数cell3472旧running交接已关闭，勿继续wait/source。健康B会话PID147904现idle，A2607458/旧B467625不动。
+
+额外相位先导均终态审计passed：`sparse_records_phases_20261024` 6case/3整体相位配对，增量2.83172%–2.83173%，差额均551600ns；`sparse_records_relative_phases_20261024` 6case/3通道相对相位（8通道不同offset权重1/3/5/7/11/13/17/19），增量2.81598%–2.83173%。每case19query、功能/AXI不变，零相位逐时间收据与已审计先导一致。这些是指定确定性调度，不是随机置信度或平台性能。工具49543/20691和PID539400/656361均终态，不继续poll/重投。
+
+
+组合全38尚未启动，已配置唯一依赖监督者 `run_sparse_records_full_workflow.py`，`sparse_records_full_workflow_20261024`，PID351225/工具17706，waiting_wb_full、commands为空，30秒只读核验原WB监督者。只在原WB完整终态full_replay_audited后启动一次组合全38，自动audit_sparse_records_full.py；不重投两条链。其冻结脚本/依赖与已绑定RF先导审计勿改；没有Luna选择接口，仍为确定性监督。组合全量收益未验收。
+
+当前唯一全量回放：写回稀疏控制 `sparse_writeback_cycle64_full_20261024`，workflow `run_sparse_writeback_full_workflow.py`，目录 `sparse_writeback_full_workflow_20261024`，PID3960194、工具66155，子runner3960259，xsim wrapper3962504。最近29query/14CP，原进程live；长查询需查进程/收据，不据完成query数判卡死。不重投、不改workflow冻结脚本、活动源或其审计门禁。终态自动 `audit_sparse_writeback_cycle64.py --full`，目标full_replay_audited，重新统计全量WB位图工作量；先导5.45549%不能外推为全量收益。
+
+稀疏WB变体 `hardware/variants/sparse_writeback`：存储内部READ_MASK=6同步读取present位图，WB锁定后向控制器返回mask/tx，absent偏移预记已表示；上层仅有效偏移EXPORT，仍为全部8条codec输入并保持192B页/AXI字节不变，RF仍逐条BEAT。已通过256mask/512trans/5377checks、22边界checks、九故障267checks、32槽8CP/800阻塞；六case源码绑定审计passed。初版strictFINISH先导遇合法7失败保留，独立配对bounded retry先导19q20.60328→19.47927ms、1次重试计入；17587空EXPORT省略、6357保留，AXI计数不变。新unsigned64 TB先导所有时间收据/计数/end与signed32候选相同，source_bound审计通过。报告 `results/sparse_writeback_20261024.md`。
+
+本变体默认容量综合已终态且审计：12949LUT11175FF375BRAM3DSP0latch，比原生16位+126LUT/+8FF，checksum61fb09d2；MCP147904/cell3417完成、279.857s/exit0，不继续wait/重投。物理也已终态并审计：sparse_writeback_timing_20261024，407.735s/exit0，12860LUT11172FF375BRAM3DSP（比原生16位+110LUT/+11FF），WNS1.726/WHS.039/WPWS4.458、内部失败/route错误0。METHODOLOGY_RESOLUTION_REPORT.md与constraints_diff.html已绑定；627输入/847输出无delay与上游clock模型缺口保留，非平台闭合。函数cell3433旧running交接已关闭，不继续wait/重投source。两版物理均已终态；健康B会话vivado-20261023-140925-d95d4d2b/PID147904现idle，勿触碰A会话PID2607458或旧B467625。
+
+原16位epoch全38已完整终态：`record_epoch16_full_workflow_20261024` full_replay_audited；PID2824110/runner2824288/工具5163均终态，不重投。38q28CP21466914cmd2472066trans0errors/end6140213280ns，所有时间收据/计数等于已完成6位记录组合；相对无旁路小页减少1.70670973%来自记录响应旁路，不是epoch位数增加。source_bound/query comparison passed。报告 `results/record_epoch16_full_20261024.md`。物理16位12750LUT11161FF375BRAM，WNS1.240/WHS.037内部通过；非平台闭合。原 `record_epoch16_timing/final_audit.json` 保持不变。
+
+长期epoch证据 `epoch_lifecycle_20261024`：570286实际搜索尝试、180326唯一连接、12轮；假设每尝试一次成功回收，6位9052回绕/23.729s清表工作，16位8回绕/20.972ms，10ns条件模型非完整FPGA性能。6位默认容量实测fence内262144清表周期；16位32帧65536合法回收/1真回绕/574合法重试验证。四查询保留测试 `query_lifetime_20261024` 6/16位各56checks：ID跨price不可复用、非独占CP拒绝、完整fence后安全重用。直接按net延迟回收仍需ID/事务/回退准入，不共享旧距离标签。
+
+页密度 `page_record_density_20261024` 全2472066页传输哈希/格式检查通过，空记录60.7893%；方向普查page_density_by_direction_20261024验证WB空3248686、RF空8773322，后者占全部空记录72.9772%。只是控制工作机会，不是已测加速。WB与组合RF变体都只有19查询收益，全量仍待终态。6位源包 `hardware/candidates/native_epoch6_record` 与其完整38/干净重建均终态，保留不变；地址64旧6位版与新稀疏组合都只有19查询/综合/物理，未完成高地址全38、XRT或板上。
+
+所有更长新仿真使用独立unsigned64周期TB；既有38冻结signed32记录仍在有效范围，不修改旧源。沿用用户FPGA/AMD规则、Ross技能版本核实及MCP优先；2022.2文本方法学报告替代2026.1专用JSON，不虚造平台约束或覆盖失败结果。
+
+---
+
+已审计其他完成回放的计数器范围：scripts/audit_replay_counter_range.py及results/replay_counter_range_20261023，两个小页全38冻结TB仍32bit signed，但实际结束保守624682852周期<2147483648，未触发该溢出，现有结果保留有效。未来更长轨迹须新64bit TB变体，不修改已冻结源。cycle64先导也通过范围核对；修正版全量原kernel2094743持续，最新12query0CP。
+
+cycle64全量自动衔接观察器已启动：watch_cycle64_replay.py，results/cycle64_replay_completion_watch_20261023，PID2105572/工具93763，绑定原runner2086684。终态执行audit_checkpoint_replay_cycle64.py再compare_small_page_full_cycle64.py并核对输出passed，绝不重启仿真。活动依赖冻结勿改。当前原kernel2094743 live，11query/0CP；full runner工具67831保持。研究目标未完成。
+
+cycle64修正版19查询pilot已passed，runner96305 exit0，77099cmd/6086trans/end72898860ns，cycle_comparison核全部旧pilot query/计数/周期一致。全38恢复已启动results/rtl_checkpoint_stream_cycle64_full_20261023，runner工具67831，run_checkpoint_stream_cycle64.py --full，原DUT/向量不改，仅独立TB longint unsigned cycle。恢复先audit_checkpoint_progress_cycle64.py，终态audit_checkpoint_replay_cycle64.py，再compare_small_page_full_cycle64.py；不要等待失败旧kernel2901368/旧workflow或重投旧runner。仍须完整重放跨原失败点才能确认修复，未给全量旧/小页性能结论。
+
+重要：原64节点全38回放已failed终止，不再live。rtl_checkpoint_stream_full_20261023在30query22CP后check16160831/op6/RF_GET超时，time21475461350ns；TB integer cycle越过2^31后负余数使AXI读与调度条件永久false，边界短仿真rtl_cycle_counter_boundary_20261023复现old_progress0/new36。失败日志/分类保留，不能生成全量性能比较。新独立TB周期计数器改longint unsigned，DUT不改，runner run_checkpoint_stream_cycle64.py；19查询pilot results/rtl_checkpoint_stream_cycle64_pilot_20261023工具96305活动。需先核对旧pilot全部收据/周期一致，再启动独立full恢复。原workflow已failed，不要重投旧runner。研究目标仍active。
+
+静态codec/epoch6全38查询RTL已完整passed且自动watch replay_audited：rtl_epoch6_checkpoint_stream_full_20261023 manifest c640e49ff949d63612c893f781e92e02c4b79c1c942aa804dcceff23cf69a447，21466914cmd/2472066trans/28CP/16wrap/0errors/end6246828510ns。epoch6_full_cycle_comparison_20261023核对全部query/CP收据、计数、周期与动态epoch8完全一致。runner830632和watch1061977终态，勿重投/继续当live。原64节点全38仍30query22CP、kernel2901368 live；完成后audit_checkpoint_replay.py及compare_small_page_full.py。报告rtl_epoch6_checkpoint_stream_full_20261023.md。物理v2已通过但平台/完整FPGA路由/实卡仍未完成，目标保持active。
+
+完整小页查询耗时集中度分析完成：scripts/analyze_full_replay_concentration.py及small_full_query_concentration_20261023，38个收据区间对独立query_audit核对、总和闭合。query30/31（attempt543648/550387）占44.657%模拟时间、44.542%传输、16/28CP；不是独立checkpoint耗时或主机时间。长时间29query必须结合CP收据/原进程判断，不能仅据完成查询计数判卡死。原64节点29query18CP、epoch6 29query15CP仍live。
+
+完整64节点/小页对照脚本scripts/compare_small_page_full.py已准备并执行输入门禁：返回waiting_for_complete_audited_inputs，仅原rtl_checkpoint_stream_full_20261023未完成，未创建最终比较结果。完成后运行同脚本；验证两版final_audit绑定、38query/14047736fields同capture、逐query命令/传输/时间、checkpoint总数，计算整体配置差异而非页大小单因子或实卡加速。小页完整结果已通过，不重跑。原64节点29query18CP、epoch6 29query14CP仍live。
+
+小页动态epoch8全38RTL完整passed并审计：rtl_small_checkpoint_stream_full_20261023 manifest SHA9ef586ffdcf0a541cdea68ee8c17dc235e419439b153faf1903958d01374d91e，21466914cmd/2472066trans/28CP/16tagwrap/0errors/end6246828510ns，workflow replay_audited。勿继续当live或重跑。epoch6物理v2也完成并审计，12216LUT11111FF303BRAM3DSP、WNS1.621/WHS.037/WPWS4.458、内部失败0，MCP147904闲置，旧cell1712因会话中断已不可用（终态以MCP收据与最终审计为准）；v1崩溃保留。报告同结果目录名.md。原64节点全量仍29query18CP；epoch6候选29query13CP，前29query与其13CP逐项周期一致，见epoch6_replay_prefix_29_20261023；原runner与watch继续，未完成整个研究。
+
+共同前缀对照扩展至22query/7CP：results/epoch6_replay_prefix_22_20261023，6324743命令/712060传输、所有逐query/CP计数与time_ps一致。仅完成前缀。最新原29query15CP、小页30query23CP、epoch6 22query7CP均原kernel live；epoch6终态watch PID1061977仍观察runner830632。物理恢复v2 MCP147904/cell1712原任务正常运行，勿重投。
+
+epoch6物理v1已工具崩溃终止，非活动：PID808216不存在、MCP会话消失，代理日志exit134；route成功日志后未写正式报告/routedDCP。crash栈libudev/许可host-info/Webtalk，根因未定；results/rtl_epoch6_endpoint_timing_20261023/failure_classification.json与crash.log保留，估计WNS不作验收。v2恢复已启动MCP147904/source implement_epoch6_endpoint_v2.tcl，cell1712活动，results/rtl_epoch6_endpoint_timing_v2_20261023，相同已审计DCP/约束/Default，增加placed.dcp保存。完成用audit_epoch6_endpoint_timing_v2.py，勿重复source。旧cell1687已回收running交接，勿再wait。三组回放不受影响；最近小页30query21CP、epoch6 20query6CP核验通过。
+
+新增epoch6全38终态自动审计观察器：hardware/scripts/watch_epoch6_replay.py，results/epoch6_replay_completion_watch_20261023，PID1061977/工具90326，绑定原runner830632，冻结auditor hash，仅观察原任务并终态运行audit_small_stream.py --full，不重启仿真。不要修改活动依赖。现状observing_original_runner；epoch6物理MCP808216/cell1687仍live。入口check/smoke通过，plan生成results/plan_20261023T173225.972373Z.json，smoke结果smoke_20261023T173232.121722Z.json；这些不是硬件或全量性能验收。
+
+目录路径成分分析已核对：scripts/analyze_small_directory_paths.py、results/small_directory_path_analysis_20261023，逐项交叉核验动态/静态各10条max路径与审计TSV。动态最差7.739ns含route4.904ns（63.37%）；静态9.168ns含route5.917ns（64.54%），17逻辑级且owner BRAM级联后接状态判断。仅物理路径证据，不能由此外推流水收益/Fmax；现10ns均通过，待epoch6物理完成再判断是否增加访问延迟。MCP808216/cell1687仍live；最新小页29query18CP、epoch6 17query2CP进度核验通过。
+
+小页codec配对物理实现完整审计通过：rtl_small_codec_endpoint_timing_20261023/final_manifest.json SHA2723d7d34e53b780ec0f72be6f4ebc599bbd68be2de5174bf96d1bddbf44ec10。动态/静态布线后14511/11571LUT、11159/11118FF、均319BRAM3DSP；WNS2.109/0.766、WHS均.037，所有内部失败端点0。最差路径位于目录而非codec，627输入847输出无IOdelay，非平台闭合。MCP147904已终态exit0闲置，cell1634已回收。epoch6物理MCP808216/cell1687仍运行。共同前缀v2对照epoch6_replay_prefix_17_20261023已核17query及其checkpoint收据/时间一致，不能代替全38通过。
+
+epoch6物理实现已启动：MCP vivado-20261023-172251-d634d7a2/PID808216 source implement_epoch6_endpoint.tcl，cell1687活动，results/rtl_epoch6_endpoint_timing_20261023；audit_epoch6_endpoint_timing.py准备完成。恢复status勿重复source。原动态/静态配对cell1634已回收，返回running交接而非终态，实际MCP147904仍路由中，继续查其status。层级比较epoch6_hierarchy_comparison_20261023已核对：目录-126LUT、codec+29、memory子树-97；pages+665，其中work FIFO+566，总+568。不能将整体LUT增加解释为epoch比较器直接成本。最新旧29query13CP、小页29query15CP、epoch6 16query1CP均进度审计通过。
+
+epoch6默认整端点综合已审计通过：rtl_epoch6_endpoint_synthesis_20261023/final_audit.json，12256LUT/11115FF/303BRAM/3DSP/0latch；对静态epoch8增加568LUT（4.86%）但少16BRAM（5.02%）。索引176、owner125、其他2BRAM。仅资源权衡，未默认采用/未物理时序。MCP808216 source exit0/234.547s，cell1666已回收闲置。全38epoch6与原配对时序cell1634继续。报告results/rtl_epoch6_endpoint_synthesis_20261023.md。
+
+新增共同前缀对照脚本scripts/compare_epoch6_replay_prefix.py与results/epoch6_replay_prefix_20261023：动态epoch8/静态epoch6全量已完成共同12query的全部命令/传输/time_ps一致，仅部分证据非全量通过。三组原kernel进度审计通过；小页动态29query/13CP。README已更新当前结论并明确下文为历史状态，避免旧待办误导。独立epoch6综合cell1666与配对物理cell1634仍live。
+
+配对物理实现动态版已完成并部分核验：rtl_small_codec_endpoint_timing_20261023/dynamic_partial_audit.json，WNS2.109ns/WHS0.037ns/WPWS4.458ns，各失败端点0；627输入/847输出无IOdelay，不能声称平台闭合。静态版仍待完成，尚无配对结论。新epoch6全38回放已12query/0CP进度审计通过且kernel live；独立综合cell1666和原配对cell1634均继续。
+
+epoch6默认整端点综合已在独立MCP会话启动：vivado-20261023-172251-d634d7a2/PID808216，source synthesize_epoch6_endpoint.tcl，cell1666活动，results/rtl_epoch6_endpoint_synthesis_20261023。恢复先status勿重复source，终态保存completion_receipt并audit_epoch6_synthesis.py。原配对时序MCP147904/cell1634继续。epoch6全38实际值RTL也已启动：results/rtl_epoch6_checkpoint_stream_full_20261023，runner工具58467，run_epoch6_checkpoint_stream.py --full，同冻结全向量/先导源hash门禁；恢复查manifest/进程，使用audit_small_stream.py目录 --full --progress，终态去掉--progress审计。未替换两组旧回放。
+
+默认163840帧epoch6目录容量+回绕测试passed：rtl_small_directory_capacity_epoch6_20261023 runner95224 exit0，328219checks/130回收，实际观测786432清表周期=启动+2回绕，end50032850ns，final_audit通过。高帧65535/65536/163839发布与checkpoint保留核对、全帧分配查询、回绕后旧owner不可见均通过；仅目录元数据，非30MiB原始数据实卡证明。配对时序cell1634仍运行，epoch6综合准备未启动。
+
+默认容量epoch6目录回绕测试已启动：results/rtl_small_directory_capacity_epoch6_20261023，runner工具95224；verify_small_directory_capacity_epoch6.py独立TB，163840帧全分配/查询+130次完整回收，预期328219checks及786432清表周期（启动+2回绕），尚待结果。恢复查原进程，勿重投。epoch6综合审计audit_epoch6_synthesis.py已准备；其综合仍未启动，待配对时序cell1634。
+
+epoch6集成两组已passed：rtl_epoch6_checkpoint_stream_pilot_20261023 runner83448 exit0，19queries/75194cmd/5183trans/end20885360ns，与epoch8逐query收据及终态计数一致，final_audit/cycle_comparison齐全；rtl_small_endpoint_epoch6_20261023 runner35152 exit0，1778checks/8CP/800blockedcycles，新增每次CP保持epoch1断言通过。仅独立TB参数改动，默认RTL不变。默认容量epoch6综合已准备但未启动：rtl_epoch6_endpoint_synthesis_20261023，synthesize_epoch6_endpoint.tcl，待当前配对时序cell1634完成后执行，勿视为已综合。
+
+epoch位宽分析与6bit定向回归完成：directory_epoch_tradeoff_20261023，保持163840帧/262144哈希槽；8→6bit节省65536B有效元数据，38次query recycle不新增清表，长期63次回收一次清表。RTL小容量定向rtl_small_directory_epoch6_20261023 runner11963 exit0，1060checks/130recycles覆盖两次回绕，final_audit通过；尚未默认容量综合/集成验证，未改默认配置。配对时序cell1634/MCP147904仍运行。最新旧全28query11CP、小页26query9CP，原workflow继续。
+
+目录存储效率已核对：results/directory_bram_efficiency_20261023/manifest.json；索引192BRAM、owner125BRAM，11403264有效位/11685888物理位=97.58%，理想总位数下限310对实际317，仅排布最多7BRAM空间（非可实现承诺）。下一步需epoch/索引策略与清表/扫描成本权衡，不能通过缩减默认163840帧冒充等容量收益。配对物理实现cell1634仍待完成。
+
+动态/静态codec整端点配对布局布线已启动：results/rtl_small_codec_endpoint_timing_20261023，MCP147904 source implement_small_codec_endpoint_pair.tcl，functions cell1634待回收，勿重复source。两版已审计默认容量DCP、U280/10ns/Default/2threads一致，不改约束或冻结RTL。audit_small_codec_endpoint_timing.py已准备，终态保存completion_receipt后运行；保留负slack及缺IO/物理时钟上下文限制。最近全量原27query/10CP、小页24query/8CP仍live。
+
+静态codec整端点默认综合已审计通过：rtl_static_endpoint_synthesis_20261023/final_audit.json，11688LUT/11123FF/319BRAM/3DSP/0latch，对动态14651/11164/319/3减少2963LUT（20.22%）与41FF。MCP147904 source exit0/294.149s、cell1617回收闲置，DCP/源码/日志hash已审计。真实19query逐query周期与动态版一致，见rtl_static_checkpoint_stream_pilot_20261023/cycle_comparison.json。下一步配对物理时序与目录成本；全38两组原workflow继续，尚无实卡或完整路由加速结论。
+
+静态codec真实19查询通过：results/rtl_static_checkpoint_stream_pilot_20261023 manifest 54cca9441f126fc2dbab694d9615caea660ae6d4fcbbbf906f1e53754f22bc66，runner60253 exit0，75194cmd/5183trans/0errors/end20885360ns；final_audit独立核对19query，cycle_comparison对动态版逐query时间与全部终态计数完全相同。源码run_static_checkpoint_stream.py与独立TB冻结，未修改原全量workflow。整端点综合MCP147904/cell1617仍运行；审计脚本audit_static_synthesis.py已准备，完成需保存completion_receipt后审计。
+
+静态codec整端点默认综合已启动：results/rtl_static_endpoint_synthesis_20261023，MCP147904/source synthesize_static_endpoint.tcl，cell1617待回收，勿重复source。默认容量/10ns/U280保持；尚未审计结果。全量旧27/38查询10CP、小页23/38查询7CP，进度审计通过，原workflow继续。
+
+常量切片codec配对综合完成：4215→1972LUT(-53.21%)、1627→1582FF、均0BRAM/DSP/latch，final_audit rtl_small_codec_synthesis_pair_20261023 SHA6e0e63402efe10b5023bb4f297a82fc171b91bad26e8259e6eacfc35388c7251；MCP147904 source exit0/118.015s、cell1607已回收闲置。静态codec完整端点变体32槽/阻塞回归通过1778checks/288trans/8CP/800blockedcycles/end694830ns，runner84060 exit0，manifest 491c80801a8b2a29c09d1b9c0fddc6b6a8f8db64f4e75222f05fd9ea03e48d97，final_audit与旧终止时间相同。独立模块名/codec引用改动，未替换两个全量回放DUT。下一步静态codec整端点默认综合/真实轨迹与时序对照；不能把独立LUT差直接当整端点收益。报告results/rtl_static_small_codec_20261023.md。
+
+独立常量切片codec变体scratch_page_codec_small_static已通过99case/286checks（runner91939 exit0），新旧同输入逐周期差分2851周期通过（runner49113 exit0），两版及差分结束同为28610ns，final_audit results/rtl_static_small_codec_diff_20261023。不是形式等价。配对独立codec OOC综合已启动：results/rtl_small_codec_synthesis_pair_20261023，MCP147904 source synthesize_small_codec_pair.tcl，functions cell1607仍待完成，勿重复source；尚无资源结论。全量两个回放保持旧DUT，不改冻结依赖。
+
+小页默认综合已完整passed并审计：rtl_small_endpoint_synthesis_20261023/final_manifest.json SHAa422f9b3f58b9c6018fb03bd24a7ee74316cc856b2654ae206b2b4504278afec，14651LUT/11164FF/319BRAM/3DSP/0latch，原6532/5296/43/3增8119LUT5868FF276BRAM。目录317BRAM，codec5115LUT1622FF；下一步独立codec常量索引变体及目录成本研究，不改冻结基线。MCP147904 source exit0/291.738s已close_project闲置，cell1586回收；启动manifest历史running勿当live，终态见final_manifest。审计/警告/DCP齐全，仅综合非时序平台闭合。小页全38回放最新16query/1CP，旧全38为25query/8CP，两个原workflow仍live。
+
+完成19查询原型对照：results/small_page_pilot_comparison_20261023，逐query与共同capture哈希核验，64节点/4槽72898860ns→8节点/32槽20885360ns，模拟时间降71.35%，bytes8179584→995136降87.83%，18/19query更低。仅整体原型配置比较（codec/槽位/目录/哈希/cookie同时变化），非单因子页大小或实卡加速，见同名md。默认小页综合MCP147904/cell1586仍在等待，恢复查status勿重复source；两个全量回放继续。
+
+完整小页向量已passed并逐query审计：small_checkpoint_vectors_full_20261023 manifest 86c9d4b68b76ddad945243826a5691ddaa373dbf3197c4435aff2655ce077d57，38queries/14047736fields/21466914cmd/2472066trans/28CP；生成PID97333已终止。自动workflow PID196907/76553已进入rtl_replay，results/rtl_small_checkpoint_stream_full_20261023编译230887/展开231720 exit0，simulate233271运行中。恢复使用audit_small_stream.py该目录 --full --progress并查workflow，勿重复提交。小页默认综合MCP147904/cell1586仍活动，勿另发execute。
+
+默认小页端点OOC综合正在运行：results/rtl_small_endpoint_synthesis_20261023，MCP vivado-20261023-140925-d95d4d2b/PID147904，source synthesize_small_endpoint.tcl，functions cell1586未回收。U280/10ns/2threads/默认163840帧18bit索引32槽，输入从已通过stalls冻结并hash核验。不要重复source；恢复先vivado_status，完成后保存完整status为completion_receipt.json，再执行hardware/scripts/audit_small_synthesis.py（当前仅准备未运行）。该审计核资源/0latch/BRAM清单/DCP/hash，非时序或平台闭合。两个回放workflow继续独立，勿改其冻结依赖。
+
+小页真实19查询RTL v3完整passed：rtl_small_checkpoint_stream_pilot_v3_20261023 runner53094 exit0，75194cmd/5183trans/end20885360ns，逐query final_audit passed，manifest f1c08741a5bdd2cbefbe6cba99c3cd14185ae4976112764551e9f94847003368。v1timeout/v2末尾旧清表计数失败保留，v3共享TB_HASH修复TB配置，DUT不改。新自动衔接small_checkpoint_workflow_20261023 PID196907/工具76553，等待生成PID97333/session19901→全向量审计→full小页RTL→finalaudit，依赖文件冻结勿改勿手动重投。旧64节点全38RTL最新24query/8CP、kernel2901368仍运行。下一步可做独立默认综合；两个workflow均需最终结果核对，研究目标仍active。
+
+小页stream先导v1因TB单命令timeout仍按15bit目录清表退出：check633 WB/M_LOOK_WAIT、725590ns，旧62768周期低于18bit清表262144；结果rtl_small_checkpoint_stream_pilot_20261023 failed已分类保留。v2仅TB模块名及上限改为30000+(1<<18)+2*TB_FRAMES，DUT/数据断言不变，run_small_checkpoint_stream_v2.py已启动results/rtl_small_checkpoint_stream_pilot_v2_20261023；恢复查manifest/原进程勿重投。完整小页向量生成PID97333/session19901仍活动，逐query审计已18/38，audit_small_checkpoint_vectors.py --progress对独立小页planner一致。旧64节点全38RTL原kernel仍运行。
+
+小页端点3变异完成runner14073 exit0，rtl_small_endpoint_mutants_20261023 manifest 896d73c376700427dd9b6f4c7d38768499dc62cda2151b58c3905315e521d686，classification按实际host错误分类，不误称均blocked-prerequisite断言。小页向量pilot runner80202 exit0，19queries/56588fields/75194cmd/5183trans，manifest cce7cdbeb73b7bd1ca696940bffb8d7413e947557d271d795533c97a5f8c06fe，独立参考计数一致。活动完整38小页向量results/small_checkpoint_vectors_full_20261023 PID97333，make_small_checkpoint_vectors.py；恢复查原进程勿重投。下一步small stream TB/runner先pilot再全量，尚无小页真实RTL结果。旧64节点全38RTL23query/7CP仍原kernel2901368 live。
+
+小页32槽同时绑定及阻塞checkpoint两组完成：rtl_small_endpoint_32slots_20261023 runner3955 exit0、rtl_small_endpoint_stalls_20261023 runner25758 exit0；均1778checks/288trans/8CP/4tagwrap/9绑定拒绝。阻塞组8场景800周期，四调度enable各2次，确有相应队列待处理且无提前回收，随后读回通过。final_audit已核验，报告results/rtl_small_endpoint_32slots_20261023.md。这里32槽驻留、串行公开命令，非32并发AXI。下一步完整小页端点变异/真实轨迹生成/默认综合；旧全38RTL22query/7CP仍原kernel2901368 live，勿重投。
+
+小页完整端点先导passed：results/rtl_small_endpoint_20261023，221checks/36trans/8CP/4tagwrap，slots0/8/16/31，高21bit页号，全5字段，runner69695 exit0，manifest b5986230e9c6caeb0af111779ae5d3fd93972ff4e66ee6883a12d02900a69fec，final_audit通过。make_small_endpoint.py生成3独立模块，CMD_WIDTH236+TX+GEN、query_used保持4bit。下一步32槽同时驻留/阻塞排空/变异、真实轨迹与默认综合。默认目录容量v2已passed，163840帧/327703checks，runner66729 exit0，manifest1a23103f05335f05fa74a448b206eb83065d7265b427341b3894264721416b35，final_audit通过，不再活动。旧全38RTL仍原kernel运行勿重投。
+
+容量测试状态纠正：原rtl_small_directory_capacity_20261023已compile失败终止（runner52101 exit1），原因TB #64'd延时语法；没有启动仿真。v2仅TB模块名与延时改为#(64'd100000000000)，新runner verify_small_directory_capacity_v2.py，results/rtl_small_directory_capacity_v2_20261023已启动；恢复先查其manifest/live句柄，不再等待旧PID。原日志保留，DUT不改。
+
+小页服务全链passed：results/rtl_small_services_20261023，1511checks/1048records/64页512记录回收后读回/32租约通过，runner27577 exit0，manifest 31a6a74b3486ce0ae3bf264993e5af26737e063dc478c223bee5b338b5851817，final_audit通过。活动默认163840帧目录全分配/lookup/高frame65535-65536-163839/保留回收：results/rtl_small_directory_capacity_20261023，runner52101/PID4106802，预期327703checks，恢复查原进程/manifest勿重投。旧全38RTL21query/6checkpoint仍live。小页完整端点及综合未做，无debug差异根因待分析。
+
+目录变异诊断完成选项差异复现：results/rtl_small_directory_diagnosis_20261023 runner30591 exit0，baseline无debug也check97 STALE；mutant typical在目标checkpoint lost allocation失败。全部3变异v2按先导--debug typical重跑均对应检出，results/rtl_small_directory_mutants_v2_20261023 runner67949 exit0，manifest 35f76f5c9b341273fcfebf7556d96e0e90bc9266fae51f5b8b25d599e4f338f1。并未证明具体工具bug，原无debug差异待最小复现/调度分析，见同名diagnosis.md；勿把原3mutants rawpassed当对应目标证据。新增make_small_services.py及backing_page_service_small/record_backing_service_small源码，未编译测试；下一步记录服务全链验证。旧全38RTL原kernel2901368持续，不重投。
+
+小页目录先导通过328checks/32slots/40owners/8fullrecycles：results/rtl_small_directory_v2_20261023，runner37869 exit0，manifestcdb009e4bf2645cc77cc4ed797f58d5ea8518275deb5748367907ca705e4f332，final_audit通过。v1仅错TB路径，launch_failure保留未仿真。默认163840frames/18bit未大容量验证或综合。三变异runner6345 exit0但classification仅partial_target_coverage：truncate_owner/alias_slot确认；drop_checkpoint_backing在check97首次MEMORY_DONE提前STALE（预期应成功checkpoint后暴露），原因未明，下一步优先核查该异常/对照源码与重放，不声称已验证目标丢后备断言。raw logs位于results/rtl_small_directory_mutants_20261023。旧全38RTL最新20query/6checkpoint仍live，原kernel2901368勿重投。
+
+小页codec+AXI联合验证完整passed：results/rtl_small_codec_axi_20261023/final_audit.json，146checks/70write/65read/8errors/520records/412rawbeats/end75670ns，runner8153 exit0，manifest704d02a9182463369136da64275808cee745acc6ba725c8734eba9ff2fd27d05。64种4KiB偏移、高地址、72bit高位cookie、背压和错误排空通过。3变异rtl_small_axi_mutants_20261023局部检出、40792 exit0，manifest 086a4ce617b7a585a1512b16e8e1d852afbd91d4303f0e61695272f8b33f5aa4。源码冻结；下一步27bit owner/32槽/72bit cookie/192Bstride目录与服务，尚未实现。原全38RTL18query/5checkpoint仍live，勿重投。详见results/rtl_small_codec_axi_20261023.md。
+
+小页codec边界回归完成：rtl_small_codec_edges_20261023 99case/286checks，runner80555 exit0，manifest 12845f8460f9e2fa29167606aba6ffadde1104984661b18c03d21ba912de99a7；三变异rtl_small_codec_mutants_20261023均检出、48237 exit0（ignore_commit/tail为invalid record exposed，ignore_cancel为watchdog仅活性检出）。原DUT不改，详见results/rtl_small_codec_edges_20261023.md。新增scratch_page_axi_small.sv由make_small_page_axi.py导出3beat/72bitcookie/最高起址ffffff40，尚未编译测试；下一步小页codec+AXI完整字节/跨4KiB/错误/高位cookie验证。旧全38RTL18query/5checkpoint收据，原kernel2901368 live，勿重投。
+
+新增小页codec RTL先导通过：results/rtl_small_codec_v2_20261023，83case/259checks，全部阶段和runner87310 exit0，manifest SHA266eea1c00d5f2f73d161b570d4f110923074236d77c4aff7c3d6e190736c0ba。scratch_page_codec_small为1536bit整页寄存器/3beat/commit门控，未综合。v1仅runner误计387导致exit1，原失败保留；v2仅改预期259，RTL/TB不改重跑。报告results/rtl_small_codec_20261023.md。下一步补cancel/reset/非法encode与变异，然后3beat72bit AXI；旧全38RTL最新18query/4checkpoint核对通过，原kernel2901368仍live。Ross simulate skill与xsim reference已读；MCP147904 preflight确认2022.2无工程、闲置，独立XSim批处理完成。
+
+小页实际值参考已完整passed：results/small_page_checkpoint_20261023/final_audit.json，38查询/14047736字段/28checkpoint，2472066传输474636672B，额外65传输；峰59843后备页，TXmax65518/GENmax2152，runner14928 exit0。manifest SHA5e5c2e244a9d3e4aa476f334f964ee2fa0a5336d19ce54103aa26b8185be6825。新增72bit cookie契约通过10002往返/17非法值并证实64bit截断碰撞。接入约束见results/small_page_rtl_integration_20261023.md，注意1B位图导致记录非word对齐，不能仅缩短旧codec。下一步独立smallpage codec/AXI RTL验证后扩展目录及端点；先读Ross仿真skill。旧全38RTL仍live，17query/4checkpoint收据，勿重投。
+
+新增8节点小页实际值参考回放：results/small_page_checkpoint_20261023，PID3626741/工具14928，当前running、29/38查询。源码scripts/replay_small_page_checkpoint.py冻结，32槽、192B编码、16bit TX/GEN，预留34事务后checkpoint；每次读值及最终发布内容对独立字典，后备30MiB检查。定向codec/丢后备/损坏位/漏写脏页负例 results/small_page_checkpoint_faults_20261023已passed（8项）。均软件参考，未实现小页RTL。恢复查原进程与manifest，勿重投；完成后审计总数/源hash/收据，生成报告。原全38 RTL仍live，17query/3checkpoint收据。
+
+页粒度扫描已完成exit0：results/page_granularity_demand_20261023，manifest SHAdc301acda05faa5012f323cfb355ce7bf59e0cdc3df43ed80d274ba311bb63e7，38查询/14047736字段。固定256节点，8节点/页总搬运474624192B，对64节点3687774720B减少87.13%，命令21466689对21662616；1节点搬运更少但命令增加，128节点有2查询超过30MiB已发布后备容量。仅无界ID需求统计，新格式未实现RTL；见同名md和summary_audit。下一步优先8节点/页字段语义与有界checkpoint参考验证。全量RTL原进程继续，勿重投。
+
+当前页粒度扫描活动：scripts/audit_page_granularity.py results/page_granularity_demand_20261023，PID3571124，工具session32361。固定256驻留节点，页大小1/4/8/16/32/64/128，搬运stride按64B对齐，核对30MiB容量；64节点/页逐查询对照独立基线。仅需求统计、无checkpoint、非RTL性能。恢复先查manifest和原进程，勿重投；终态生成comparison.csv/同名md并核对completion_audit。
+
+最新容量扫描完成：results/resident_capacity_demand_20261023，manifest SHA27c13e7db7b4e10f9754a9f32e4c0809ebb4650c0c5599283e94a946818a1dbe，38查询/14047736字段，4→8/64/512页传输减少8.00%/14.75%/28.99%。仅无界ID、无checkpoint地址写标志统计，非RTL性能；见同名md。全量RTL最新17查询、3checkpoint收据核对通过，原kernel2901368仍live，勿重投。
+
+配对实现已完整完成并审计：results/rtl_checkpoint_timing_20261023/final_manifest.json SHA77f0e6fa37ce67b45bbaff77a2ca10673a5ff7f85e9db544d15cb98d0d47304e；MCP147904 source exit0/443.055秒、close_design已闲置，cell1445已回收（其300s running输出是旧观察，以最新status为准）。indexed/retained内部WNS+4.382/+3.727ns，WHS+.036/+.027，WPWS4.458，两版失败端点0、10768/11343 nets全路由errors0。布后5975/6497 LUT、5288/5296 FF、43BRAM3DSP（+522LUT/+8FF）。624/788 IO delay与HD.CLK_SRC/HD.PARTPIN_LOCS缺失保留，evidence_verified不是平台闭合。启动manifest仍保留running配置，终态查final_manifest/receipt，勿重投。
+
+全38RTL已16query/1705999命令/204194传输/1checkpoint核对通过；首次真实checkpoint发生于attempt504884，命令1666405/传输199012，恢复后的该query完整结束，first_checkpoint_audit保留当时未结束快照，最新progress_audit为完整16query。后续query继续，原kernel2901368/workflow2801476仍live；勿标全量完成。
+
+配对实现部分进度：indexed基线已写completed.txt/routed.dcp，内部WNS+4.382ns/WHS+0.036ns/WPWS4.458ns，负端点0；仍624输入/788输出无delay，不是平台闭合。最差max路径pages/work/read_ptr_reg[0]/C→pages/endpoint/transferred_reg[1][12]/D。retained版已进入布局，整对未完成/未终态审计。原MCP source cell1445/PID147904持续运行，勿重复提交。全38RTL仍15query完成、checkpoint0，原内核2901368 live。
+
+时序配对终态审计脚本已准备 hardware/scripts/audit_checkpoint_timing.py，仅py_compile通过，尚未运行（实现仍活动）。完成后先通过vivado_status取得is_command_running=false/last_completed_code=0的完整收据写入rtl_checkpoint_timing_20261023/completion_receipt.json，再执行该脚本；它逐个核对DCP输入hash、未改约束、完整路由、10条max/min内部路径与timing summary吻合、资源/DRC/methodology，保留负slack，audit_status=evidence_verified不等于平台或内部时序满足。当前implementation source cell1445仍待完成；勿重复提交。全38RTL最新15query/1126246命令/133481传输核对一致，尚无checkpoint完成收据，原kernel2901368 live。
+
+新增活动：索引基线与checkpoint端点OOC配对布局布线 results/rtl_checkpoint_timing_20261023，MCP vivado-20261023-140925-d95d4d2b/PID147904，source implement_checkpoint_pair.tcl，开始16:02:01Z，functions cell1445尚在等待（可wait或查vivado_status，勿重复source）。两份冻结DCP哈希验证，同U280/10ns/2threads/Default opt-place-route，无约束修改；继承无IO delay/上游物理时钟源的研究模型，不能称平台闭合。MCP当前忙，不再称闲置。进程LD_PRELOAD仅原既有libc局部环境，未改全局。
+
+全38RTL仍独立运行，kernel2901368/runner2892789/workflow2801476，当前13query/588094命令/68202传输、checkpoint0计数核对通过。自动workflow仍负责完整回放审计；MCP新todo把两个运行任务合并为runs活动，最终需两批分别完整终态审计。不要因为MCP观察超时或无新query行而重启。
+
+全量RTL实时审计已接入：hardware/scripts/audit_checkpoint_progress.py，最新12已完成query/46974命令/3612传输，逐query计数与已通过query_audit一致，checkpoint收据0（此输入前缀本来无checkpoint）。原XSim内核PID2901368存在live，父链2898152→2898222→2898525→2901368，wrapper/主线程S不表示停止，内核CPU约99%。monitor需遍历/proc/PID/task/*/children（kernel由非主线程启动），初版仅主线程children漏检已修正，没有重启或修改任务。自动workflow_v2 PID2801476/19956仍负责完整终态审计；当前不能称全量或实际checkpoint回放完成。恢复先运行只读progress审计和查看manifest，勿重复提交。
+
+当前全量RTL已启动：results/rtl_checkpoint_stream_full_20261023，runner PID2892789，XSim启动PID2898152，compile/elaborate exit0、simulation运行中。自动workflow_v2 PID2801476/工具19956负责等待终态并运行audit_checkpoint_replay.py；无独立exec runner句柄，查workflow/live进程。勿手动重复提交。全38向量生成已passed，原PID2520936/76448终止；完整逐query/哈希审计exit0，manifest 31578e48cf9df928a2905364a1b118413ccd3b979ddc285f1bedd85b7677bbf8，21662794命令/2743929页传输/14047736字段/31checkpoint。全部与独立planner一致。全量RTL尚无整批结果。
+
+新增checkpoint被动周期测量已通过：results/rtl_checkpoint_profile_20261023，runner61139 exit0，manifest a8d8d96a2280b74e2227d8a344435a2704b8dccaad1b528f173f0ec796caa83f。8次四页测试checkpoint首次响应25–29周期/平均26.375，排空2–5周期；host消费多4周期背压。阶段和+1等于响应，原221检查/结束354420ns一致。只计已写回/释放后的checkpoint，不含前后搬运或实卡延迟，见results/rtl_checkpoint_profile_20261023.md。
+
+自动workflow_v2 PID2801476/runner19956继续，原生成器PID2520936/76448状态passed，最新38/38；workflow状态rtl_replay。全量RTL已由控制器提交，恢复时查commands与live状态，不要重复提交。
+
+当前自动衔接流程：results/checkpoint_replay_workflow_v2_20261023，runner19956/PID2801476，状态waiting_for_existing_generator；等待原generator2520936/76448完成后依次运行audit_checkpoint_vectors.py（全量）、run_checkpoint_stream.py --full、audit_checkpoint_replay.py（逐query/31checkpoint终态），均受源哈希/退出码/唯一目录检查约束。全量RTL尚未提交，后续勿手动重复提交：先查看workflow commands/原进程。任一步失败保留日志，不自动重跑。v1控制进程2776339/45364在commands=[]阶段被替换，以处理passed manifest与completion收据写入间隙；superseded.json保留，未停止生成器、未提交RTL。
+
+生成进度最新30/38（543648）逐query审计通过，10270351字段/2018475传输，含该查询9checkpoint；原生成器仍live。新audit_checkpoint_replay.py准备最终按独立query_audit的每查询命令/传输/CP次数与RTL日志逐项匹配，并核对ps/ns与全38总数、所有源/向量/日志哈希。此审计尚未运行，不能当最终通过。下一次先检查自动workflow与generator，避免并发启动相同全量回放。新增源码已由workflow冻结哈希，运行期间勿改。
+
+新增完成：四页/五字段/非零query2-price9 checkpoint测试 results/rtl_retained_multipage_20261023，221检查/36页传输/8checkpoint/4tag回绕，结束354420ns，runner48726 exit0，manifest 7157b1b2aa8221796beb04d690f68f2e6ab5c7c7e6118092be2701a3039c1d02。冻结RTL不改，原AXI字节与所有字段检查通过，见results/rtl_retained_multipage_20261023.md。
+
+当前全38向量生成仍live：PID2520936/runner76448，最新29查询至537506，8分15秒99%CPU。新增逐查询审计audit_checkpoint_vectors.py --progress核对29/38，7127089字段/1380406传输，与独立planner逐项一致；仅partial，勿称全量passed。生成终态后执行 python3 hardware/scripts/audit_checkpoint_vectors.py results/checkpoint_vectors_full_20261023，再调用已通过小pilot的 run_checkpoint_stream.py results/rtl_checkpoint_stream_full_20261023 --full。该全量RTL尚未提交；先核验原进程/manifest不重复启动。综合与小pilot均完成，MCP147904闲置，todo vectors活动。
+
+当前活动：完整38查询checkpoint向量生成 results/checkpoint_vectors_full_20261023，runner76448/PID2520936，最新22查询（531662）完成，进程99%CPU live；恢复先查manifest/process，不重复提交。生成器make_checkpoint_vectors.py沿用冻结字段/事务oracle，仅加预留6事务与gen阈值触发的写回/释放+op12，后备保持，逐项比对独立planner；目标21662794公开命令/2743929页传输/31checkpoint/14047736字段，未终态前不当通过。
+
+本轮完成：20组主动阻塞（dispatch/execute/fence_service/ack_receive各5组）2000周期无提前回收，恢复后21checkpoint通过；rtl_retained_stalls_v2_20261023 manifest49138830f9d23baae6b522f6d9337d22326ef71ebdd74e53fd01ae9c2458dc79。v1因TB_TAG声明前引用compile失败保留，v2只移动声明，不改RTL/断言。默认23405帧checkpoint顶层综合exit0/101.037秒，6532LUT5296FF43BRAM3DSP0latch，比旧+517LUT/+8FF，synthesis manifest01929c3ca6270dbf33cca1f01520bb163960c6ed796471a0c707539b971e037a。B MCP147904已close_project闲置，todo vectors活动。
+
+全量流式工具已准备：make_checkpoint_stream_tb.py、run_checkpoint_stream.py；小查询输入逐字节与旧一致，rtl_checkpoint_stream_small_20261023 runner28528 exit0，77099命令/6086传输、结束72898860ns一致，manifest e0dfbb61ba09a778fd27101fbda63ec38c2234c290f678348e596d7c0a15b5ce。输入全38生成passed后调用 python3 hardware/scripts/run_checkpoint_stream.py results/rtl_checkpoint_stream_full_20261023 --full；脚本检查向量完整/源码与小pilot一致，不修改冻结文件。该全量RTL尚未启动。现有38计划预计31checkpoint但仍需生成结果/实际RTL验证。报告results/rtl_retained_stalls_and_synthesis_20261023.md。
+
+最新完成：完整7大查询v2已passed，3286037命令/414485页传输/2110433字段，终态coverage_audit通过，manifest b0dc8ea1d5cfde5171769926b0c81316af0d2f5280fa4bab926c278e09febdd7。runner48199/PID1636017已终止，无需重投。
+
+端点checkpoint新增memory_scratch_endpoint_retained先导完成：134检查/21checkpoint/21传输/11tag回绕；旧small370与19真实查询77099命令6086传输全部通过，旧profile两CSV逐字节一致、7289882周期。4负例检出（第三更早既有RECYCLE断言，原43727退出1保留分类，最后8517完成）。final_audit results/rtl_retained_endpoint_pilot_20261023/final_audit.json通过，pilot manifest e6c446cd38f6fdaf9e9385bddabfaa55aee7e2ad9555b6e9a02934c7c95ab0fe。报告results/rtl_retained_endpoint_20261023.md。新源冻结；32822/71586/8517及审计均终止，无活动batch。下一步主动阻塞ACK/排空并增加多页多字段checkpoint测试，然后全38真实轨迹生成/31checkpoint RTL流式回放和默认容量综合。完整路由与实卡仍未完成。仅存B索引MCP147904闲置；时钟壳MCP2985465已死，A勿碰。
+
+服务链保留数据回收已完成：results/rtl_retained_services_20261023，runner74475 exit0，全部编译/展开/模拟exit0。1401服务检查、8384记录、64页4096记录回收后AXI原内容一致，8错误/3坏输入/3坏读页继续通过；manifest 497dce164f4b0e955ed987b2ced6d4045edfdd04e67eecdf79e5160d146df27c。见results/rtl_retained_services_20261023.md。新服务源码与测试冻结；目前仅内部opcode5→目录6，fence_retired仍可信，无完整端点checkpoint或综合。下一步新增memory_scratch_endpoint_retained：独占query条件、bound_mask、内部BEGIN/FINISH→service5→同query恢复，禁止外部queued12/13透传，先完整小位宽/负例再旧19查询。7大查询v2仍独立运行，最新5个完成，需核验终态，勿重投。
+
+目录兼容性及4负例回归完成：results/rtl_retained_directory_regression_20261023，runner53936 exit0，manifest0ceb1ab33bddcfe568d1d0852bd67a75a681a2fdffc2b5177abc8199d7278dac。旧small1450条通过线性差分；原1460中的10条opcode6非法检查因新定义明确排除并保留原行号。large66261条原样通过oracle。skip_id_reset/drop_allocation/ignore_leases/ignore_fence均预期检出。
+
+当前活动：新增backing_page_service_retained/record_backing_service_retained，服务opcode5映射目录6（仍为可信内部控制），测试在完整旧record测试中增加64页/4096记录回收后AXI读回。results/rtl_retained_services_20261023，runner74475，恢复先查manifest/live，不重复提交；未完成前勿称通过。7大查询v2仍活动，最新5查询/2452178命令/305915传输，无功能错误。
+
+最新目录原语：backing_frame_directory_retained新增内部RECYCLE_TX=6，leased==0且fence_retired才重置tx_used/last_tx，owner/published/index/epoch不变。XSim1006命令/40回收/6完整RECYCLE通过，见results/rtl_retained_directory_20261023.md，classified_manifest bf6ec0fbf3c7912b6fbfdcb73851a8caf69bfd9cae1c0b723422241798069981。尚无服务/top接入、排空证明、旧全回归、负例变异或综合。原MCP时钟壳会话vivado-20261023-131530-a3bc53bd PID2985465在launch_simulation的tcmalloc/SimBridge处SIGABRT已死，勿恢复；编译/展开成功后独立batch72067完成，raw runner因误计1007对实际1006退出1，冻结分类审计通过，无测试改动/重跑。7大查询v2仍活动，最新3查询/1529078命令/186631传输通过；下次查live状态勿重投。
+
+最新软件参考：保留后备数据的checkpoint已完成38查询/14047736真实字段访问，31次回收，577471WB+2166458RF；比无限ID无checkpoint统计增加1WB+48RF。12个超限查询均完整通过，19小查询原计数一致，3个数据破坏负例检出；manifest158bf20f132d9f032883eb425aaca793ff1936777ad8b91c61cbcfc389f46dc4。见results/retained_checkpoint_plan_20261023.md。仅顺序内容/预算验证，RTL drain/ACK/独占query与故障隔离尚待实现，勿当硬件通过。7大查询v2仍活动，最新已2查询/1078473命令/129818传输，无失败；恢复时先查live manifest/log，不重复启动。
+
+当前活动：7个完整大查询v2流式RTL回放 results/rtl_streaming_large_v2_20261023，runner工具句柄48199，XSim启动PID1636017（核验manifest/live handle及kernel子进程），当前compile/elaborate已exit0、simulation运行中，不重复提交。3286037公开命令、414485页传输、2110433字段、默认23405 frame；原始输入不变。首轮rtl_streaming_large_20261023/71672/1094194已终止，runner exit1：测试台无位宽500000000000常量被VRFC10-8884截断为1783793664，恰在该ns时刻watchdog失败；已完成2查询但不可拼接当整批通过。failure_audit保留。独立watchdog_width_probe证明64位常量按500000000000ns触发。新TB stream_v2只改watchdog位宽和time_ps标签，新runner_v2拒绝该截断警告；v2小查询48567退出0，计数/结束72898860ns仍一致，manifest3847e6d0f46a530cf23083737f70d79b75d357d1667f56c4b371841c3b73bd3a。原流式小pilot和向量生成均已退出0，原向量大小/哈希冻结。见results/rtl_streaming_large_20261023.md。后续需全7完成后终态审计，按time_ps/1000对比$finish ns，核对7查询累计命令/传输与需求表。
+
+最新完成：显式BUFG时钟壳配对布线已结束source exit0，见results/rtl_clock_shell_20261023.md。原版WNS/WHS -1.158/-2.175ns，宽版+1.575/-1.957；内部hold+.010/+.011，输入hold为负。两版全IO delay覆盖0缺失、BUFGCE_X0Y0/core_clk ROUTED、9566/9903 nets完整、0路由错误。但日志各有Route35-197缺HD.CLK_SRC及合计1248个Route35-198缺HD.PARTPIN_LOCS；原report_clock_shell.py模型完整性gate失败退出1，失败源码/收据冻结。report_clock_shell_with_limits.py仅证据审计evidence_verified_only，original_model_gate_passed/clock_model_complete/interface_placement_complete/platform_timing_closed全部false。manifest0d8c4aea4a2283d65d16082540e13774033ce233c14480d000bdc188a114cab7，不能称为时钟模型或平台闭合。MCP vivado-20261023-131530-a3bc53bd PID2985465已闲置close_project，配对耗时5362.879s，勿重投。其他B索引会话147904也闲置；A会话不动。
+
+最新完成：有界索引已接入完整状态端点，见 results/rtl_indexed_endpoint_20261023.md。新服务/top机械透传索引参数，旧RTL冻结；small370命令/46传输/25fence/9故障通过，8索引回绕/4未索引分配；actual19查询56588字段→77099命令/6086传输全部原字节/协议检查通过。周期8249001→7289882（含32768初始化），减少11.6271%，16查询改善3变慢，非实卡加速。独立模型全部14活动目录状态吻合：6086请求6107桶探测4278owner读取1829分配0回退。整体综合6015LUT/5288FF/43RAMB36/3DSP、无latch，相较宽基线+331/+103/+21/+3。三项负例检出；第三项更早同义断言触发，原runner5244退出1保留，通过classified_manifest审计，无重跑/改检查。最终manifest 3e9af59e016e6ca70c7064446504a679a1a3f09d2b3e0d7e7e3d7331fd85b428。仿真70847/审计64559退出0，综合MCP vivado-20261023-140925-d95d4d2b PID147904 source完成exit0/close_project。新源/输入/证据冻结。完整大查询RTL与有限事务checkpoint尚未接入；全38 CPU回放有577440WB+2166437RF及31checkpoint，不能忽略恢复代价。下一步先量化各大查询有限ID/页容量需求，再完整大查询回放，仍须完成上方活动时钟壳配对。
+
+大查询需求审计已完成：results/large_query_demand_20261023.md，全部38查询14047736访问完整读取，独立复现既有19小查询计数。7个完整大查询可在当前16位事务/代次预算执行：472505,495400,531645,531663,531707,551295,551296；合计2110433字段、414485传输、3286037公开命令，pages.hex约1.12GB，后续应流式读期望页而非全部readmemh。12个其余大查询仍需checkpoint，其中543648/550387还耗尽槽代次；不可截断或丢弃。manifest cbc1340cf62b89ea6b00e3f1a62a8476857a5ac3c36bc0a0ca78243a16c6fbda；runner78648退出0。下一步生成并完整回放全部7个可执行大查询，使用默认23405 frame与索引参数，同时设计另外12个的回收/恢复路径；这批大查询RTL尚未提交，不能说已在运行。此前make_controller_vectors.Oracle的独立字段/事务语义可复用，但它默认跳过>100000记录且逐条写内部EXPORT/BEAT文本，应新增版本直接投影公开命令和顺序期望页，避免约2700万内部文本中间命令；旧源不改。
+
+最新完成：有界目录索引RTL独立验证与综合，见 results/rtl_indexed_directory_20261023.md。新backing_frame_directory_indexed保留权威owner BRAM，32K桶/64探测/8位epoch、溢出回退扫描、回绕清表。1460命令与旧目录+独立oracle差分通过，3回绕；66261命令覆盖最大真实21883键和192对抗键，75未索引分配均正确，四项负例检出。独立目录480LUT/500FF/18BRAM→747/606/39并加3DSP；小容量周期15910对15622略慢，无加速结论。final_manifest SHA 68296cc4cc3029d072956d0e919803bd67a24f44fe6e6c0e70cb3a91a57d8193。旧RTL不改、新源/向量/证据冻结；尚未接入完整状态端点。MCP索引会话vivado-20261023-140925-d95d4d2b PID147904配对综合exit0、工程已关闭，负例85606/仿真48927均退出0，无索引计算。下一步新增服务/top变体复用19查询完整协议oracle与分阶段周期观察，再推进大查询有限ID回放。键集合先导见directory_keysets_20261023.md，608配置；32K mixed均值1.34865、max61不能作上界，合法对抗max177。
+
+最新：两份冻结默认23405-frame DCP已完成相同10ns/2线程/Default的OOC布局布线与审计，见results/rtl_codec_timing_20261023.md。原版/宽版最终WNS +4.395/+4.280ns，WHS +0.036/+0.016ns，WPWS均4.458ns；建立/保持/脉宽失败端点0，9608/9948可路由nets全部完成，routing errors0。宽版实现后5626LUT/5184FF/22BRAM，原版5249/5105/20.5；不要混用综合数。最差建立路径均cookie→目录BRAM使能。624输入/788输出无delay，HD.CLK_SRC缺失、时钟net unset，TIMING-18各1000条、RTSTAT-10各1条涉及246nets保留；无waiver、无Fmax/平台实卡闭合。21.56%周期收益仍仅前轮19小查询状态端点仿真。最终证据results/rtl_codec_timing_20261023/libc_batch/manifest.json，SHA 715e94855a9c6e69e8d2ee7aa007f681afa7797456f33f3187d2eed0e297446c。新driver hardware/scripts/implement_codec_pair_libc.tcl与report_codec_timing.py，旧RTL/DCP不改。MCP B开发会话vivado-20261023-101326-b113e545(PID2552581)在route收尾abort6已死；独立原环境batch PID2389338同处exit134；失败证据保留root和batch/，不能当完整结果。probe/诊断Vivado自带tcmalloc+deepbind libudev枚举复现realloc崩溃，子进程预加载/lib/x86_64-linux-gnu/libc.so.6后正常；最终libc_batch也成功exit0，环境/库hash留存。未改全局配置、安装或许可；WebTalk原本双禁用。不要恢复死会话或重复21054(已退出0)、29182(已退出134)；其他B质量/A会话保留勿扰。无活动计算。下一步建立显式时钟/接口研究测试壳验证保持裕量，再优化目录有界索引/记录往返并推进大查询有限ID回放；完整路由/实卡未完成。以下为历史。
+
+最新：被动周期观察+宽记录codec配对实验已三组XSim、7负例、默认容量整体综合/终态审计passed，见results/rtl_wide_codec_20261023.md。同一19真实小查询77099命令/6086页传输，周期10516484→8249001，减少21.5612%；19查询配对均下降，非实卡加速。宽顶层5684 LUT/5185 FF/22 RAMB36，较基线+383 LUT/+80 FF/+1.5 BRAM tile。原codec320x32改新scratch_page_codec_wide的64x136整记录RAM；组合/top/TB只改module引用，旧源码冻结保留。原profile manifest ffb831197bb24124b95429f9d241443adf7ca8975505c04a7f5745ff0365e9a1；宽manifest 64f217d65ddf19a3347d7104d3d2a9a42d26c9d5d3d79dcd5081fe4a81b8dc9d。下一步比较两份冻结DCP实现/时序，确认周期收益不被降频抵消；再优化剩余记录往返/逐word解码及大查询有界索引。当前线性扫描、无大查询RTL/完整路由/平台实卡证明。MCP会话vivado-20261023-101326-b113e545已close_sim，wide_codec工程，cwd旧queued；构建65387和审计82902退出0。无活动计算。以下为历史。
+
+最新：memory_scratch_endpoint闭合页槽/AXI/双域fence RTL已两组XSim、7负例、默认23405-frame整体综合/终态审计passed，见results/rtl_memory_endpoint_20261023.md。边界370命令/25fence/12tag回绕/9故障；真实19小查询56588字段访问→77099公开命令/6086完整页传输，峰值390后备页，512-frame实例覆盖64种4KB偏移。完整顶层5301 LUT/5105 FF/20 RAMB36+1 RAMB18，无latch。内部依次完成64条记录确认、内存成功、页槽COMPLETE、地址RETIRE；页FINISH成功后RECYCLE，旧外部响应消费前阻止新query；外部低层命令禁入。manifest 6c22b2762a8e22dbfeb940ac41727c65aa2caf2e5f68e1c0a0061380535ecccb。仍为串行状态端点，无完整搜索路由/大查询RTL/布后时序/实卡性能证明；下一步不可改冻结源码，新增周期观察器测目录、队列往返、记录搬运与AXI开销，再优化线性索引和流水。MCP会话vivado-20261023-101326-b113e545已关闭仿真，memory_endpoint工程，cwd旧queued；首版52265负例分类退出1，v2继承6例并完成最后1例与综合，99486退出0，审计40540退出0。无活动计算。以下为历史。
+
+最新：可综合record_backing_service已XSim、7项负例、默认23405-frame整体综合/终态审计passed，见results/rtl_record_backing_20261023.md。1144服务检查/4288记录/195 lookup/8总线错误/3坏写输入/3损坏页；整体2078 LUT/3035 FF/18 RAMB36+1 RAMB18，不包含页槽。RTL自动校验输入后启动AXI、成功内存响应后commit、失败后cancel；新增lookup-only，无分配副作用；fault封锁RETIRE等全部命令。原模块冻结，新增_lookup版本。manifest 95603ad1496c22a604b79ce1dd35cdd5b31b136935a6e31c15e9e432aedb57f0。下一步queued页槽闭环：禁止外部EXPORT/BEAT/COMPLETE；WB/RF先reserve/lookup，再页槽事务与记录桥接，等待最后BEAT响应后COMPLETE→RETIRE；FINISH_FENCE→RECYCLE均成功前不接受新query。当前RETIRE/fence_retired仍可信控制，无完整路由/实卡加速证明。MCP会话vivado-20261023-101326-b113e545已关闭仿真，record_backing工程，cwd仍旧queued；首版4776因负例分类不符退出1，v2继承首例并完成余6例与综合，63752退出0。无活动计算，不重复任务。以下为历史。
+
+最新：页codec独立与AXI串接XSim、6项负例、综合/最终审计passed，见results/rtl_page_codec_20261023.md。独立5645检查/64编码65解码/7拒绝5中止；串接910服务检查、4096记录、2942 raw拍、8类总线错误。codec单独965 LUT/1469 FF/1 RAMB18E2，0 latch；不是全顶层资源。仿真协调器仍是TB task，queued页COMPLETE→地址RETIRE→双域fence待RTL实现；下一步先实现可综合适配器并在启动AXI写前校验全部编码输入，新增RF lookup-only避免误分配。源码/证据冻结，manifest ff8d055be3acaa280e834a2027034377dafce8a4bdaf0c3c8062e945693de003。MCP会话vivado-20261023-101326-b113e545已关闭仿真，当前codec工程，cwd仍旧queued结果；初版构建95880因变体替换歧义退出1，v2继承核验4例并完成余2例/综合，句柄1596退出0，不重复运行。无活动计算，无实卡加速证明。以下为历史。
+
+最新：独立后备目录+原始页AXI服务已最终905检查、5项负例、默认23405-frame综合/终态审计passed，见results/rtl_backing_axi_20261023.md。64-frame行为实例覆盖全部64种4KB偏移、73成功写页/64读页、7总线错误、4槽保留租约；修复读错误后必须排完当前burst，旧版负例保留。独立后备服务资源932 LUT/1416 FF/18 BRAM，不包含此前页槽。当前目录线性扫描，填满23405新owner扫描计数547770620周期，非性能结果。当前容器XRT2.14.354可见设备0（不代表物理无卡）。MCP闲置会话vivado-20261023-101326-b113e545现打开本轮backing工程、工作目录仍旧queued结果；已close_sim。正确v2构建在results/rtl_backing_axi_20261023/verified_build，句柄15246退出0；旧12015仅负例匹配文字失败，保留，不重启。无活动计算。下一步160bit记录/512bit页codec与queued端点总顶层结合、页COMPLETE→地址RETIRE→双域fence协调，以及有界目录索引优化。RETIRE/fence_retired当前仍是适配器前提，无完整AXI路由/实卡加速证明。以下为历史。
+
+最新：闭合有界队列/fence RTL组合已XSim、5项负向对照、OOC综合、终态审计passed，见results/rtl_queued_endpoint_20261023.md。边界2267命令/48fence/1位tag24回绕；19真实小查询56588访问→472689命令；独立顺序值压力6144次、三级队列均满。U280共2708 LUT（含432 memory LUT）、1653 FF、2 RAMB36E2。源码bounded_sync_fifo.sv/queued_scratch_endpoint.sv与旧核心已冻结。MCP会话vivado-20261023-101326-b113e545（PID2552581）仅闲置无活动仿真；负例句柄96867、独立batch综合27767均退出0。此次为规避两次launch_runs父崩溃而直接batch综合，无再次崩溃/重启。下一步固定后备地址/描述符租约及内存写响应→COMPLETE接入；排空证明仅涵盖同钟闭合队列，尚不覆盖AXI/真实DMA/外部旧包，COMPLETE持久性仍为适配器前提。无板级加速证明。以下为历史。
+
+最新：页槽传输端点RTL组合已XSim/OOC综合/终态审计passed，见results/rtl_page_controller_20261023.md。3位边界29774命令/40fence；16位真实19完整小查询56588访问→472689命令（2702WB/3384refill）。U280共2154 LUT、1605 FF、2 RAMB36E2、0 latch。源码hardware/rtl/scratch_page_controller.sv冻结，原页槽/CPU来源不改。MCP会话vivado-20261023-095030-d4927f96父1998871在launch_runs再次崩溃；原独立子2223090已正常综合结束，无重复启动；本机DCP报告退出0，句柄54472结束，无活动计算。simulation_session.log是完整仿真证据（子simulate.log空/NUL）。下一步远端有界传输/有限fence tag-ACK队列RTL及地址后备池接入；当前COMPLETE持久完成与peer_quiescent/ingress_empty仍是可信外部前提，不能称为完整DMA fence/实卡加速。以下为历史。
+
+最新：真实五字段完整30 MiB回放与终态审计passed：38查询/14047736访问、31checkpoint；首个页槽RTL单写端口版本XSim/OOC综合/终态审计也passed（results/rtl_scratch_bram_20261023T090356Z），19完整小查询56588字段访问转换98322命令，98351检查、17358背压周期；U280综合2 RAMB36E2、1332 LUT、641 FF。见results/rtl_scratch_20261023.md及hardware/SCRATCH_FRAME_CONTRACT.md。无活动计算队列。初版多写语句RAM退化寄存器，原综合子进程774656已superseded并核验终止，保留负例收据；MCP主会话vivado-20261023-025350-329eb221曾崩溃不可复用，后用本机2022.2批处理完成修正版。旧B质量会话仍须先查询后使用，勿动A方案会话。下一步有限事务/完成租约/fence及整页发布控制器RTL接入；CLEAN和token回收当前仍依赖外部可信控制。无DMA/布后时序/实卡加速证明。以下活动记录为历史。
+
+最新：完整真实五字段30 MiB回放与终态审计passed（real_scratch_full_20261023T024846Z），38查询/14047736访问、31checkpoint、69fence、138重复ACK、38迟到写回，峰值21883后备页。CPU runner190599/句柄67747已结束。当前硬件工作：scratch页槽初版XSim passed（98351检查/98322实际命令），MCP会话vivado-20261023-025350-329eb221在launch_runs时主进程崩溃，但独立原版综合子进程774656仍需核验终态。原版因多写语句RAM退化寄存器；独立单写端口修正版hardware/rtl/scratch_frame_store_bram.sv正通过本机2022.2批处理验证，目录results/rtl_scratch_bram_20261023T090356Z、工具句柄37837，不重复启动。无DMA控制器/有限ID回收RTL/板级加速证明。以下活动描述为历史。
+
+当前活动：真实五字段完整回放 `results/real_scratch_full_20261023T024846Z`，runner PID190599、工具句柄67747、CPU25；恢复先核验，不重复启动。完整38查询/14047736实际字段访问，4驻留页、30 MiB固定raw池、stride1344B，16位事务/槽代次、2位query/fence tag；hist单独观测不搬运/计算。捕获real_field_values_20261023T024250Z已passed并终态审计，真实CPU全路由SHA/收敛与原始一致，97项Python+生成代理ASan/UBSan通过。先导real_scratch_pilot_20261023T024745Z已passed：19查询56588访问、2checkpoint。完整回放尚待完成；报告results/real_field_values_20261023.md。以下活动记录为历史。
+
+当前活动：真实五字段值轨迹采集 `results/real_field_values_20261023T024250Z`，runner PID50316、句柄54107。冻结real_values_trace_v1，18读/10写站点，原始float32位模式，hist单独观测；选首8查询、每轮首查询及全部19超大查询。先实际生成代理ASan/UBSan，再完整LogicNets路由结果SHA/收敛比对和逐读位模式oracle。恢复先核验，不重复启动。新ScratchLabel/codec每记录20B、64节点stride1344B，5项新单测已过，完整采集结果待定；无真实DMA/RTL/性能结论。以下活动记录为历史。
+
+最新：13 MiB固定字节后备池完整真实地址回放及终态审计passed，见 [报告](results/bounded_backing_real_addresses_20261023.md)。目录bounded_backing_real_addresses_20261023T022124Z，PID3736475/句柄82952已正常结束，当前无活动队列。1132查询/16151535访问，63中途恢复、1195fence、298次2位tag回绕；直接解码raw池核验完整值，数据/控制计数与前版全部一致。容量审计最大23279唯一页，raw预算13 MiB，host元数据/快照等不计入；92项测试通过。下一步真实字段生命周期拆分及codec/真实值轨迹，hist不得随connection清零；仍无真实DMA/RTL/性能结论。以下活动记录为历史。
+
+当前活动：13 MiB固定字节后备池完整真实地址回放 `results/bounded_backing_real_addresses_20261023T022124Z`，PID3736475、工具句柄82952、CPU25；恢复先核验，不重复启动。容量审计 `results/query_page_demand_20261023T022050Z/manifest.json` passed：1132查询/16151535访问，最大23279唯一页，合成stride576B需13408704B，预算13631488B。直接解码raw池核对checkpoint/最终oracle，完整控制/数据计数需与前版一致。全套92项通过；尚未完成本轮回放，无DMA/RTL/性能结论。以下活动记录为历史。
+
+最新：有界字节后备池+有限页值模型已实现，9项新/全套92项通过，见 [报告](results/bounded_backing_20261023.md)。当前无活动队列。raw bytearray固定预算、旧query地址隔离到完整fence，单ACK不释放地址；容量/队列背压原子。合成int64 codec不是NodeDyn，64节点stride576B；host字典/快照等未计入raw预算。下一步统计真实查询唯一页需求并选择预算回放，仍无真实DMA/RTL。以下活动描述为历史。
+
+最新：有限控制包完整真实地址回放passed且终态审计，见 [报告](results/finite_control_real_addresses_20261023.md)。PID3236559/句柄41598已结束，当前无活动队列。1132查询/16151535访问，63中途恢复、1195fence、298次2位tag回绕、2390重复ACK；数据事件与前版全部一致。全套83项通过。下一步有界物理后备页地址/字节容量/旧query租约与背压，仍无真实DMA/RTL/价格状态证明。以下活动描述均为历史。
+
+当前活动有限控制包真实地址回放：`results/finite_control_real_addresses_20261023T020009Z`，runner PID=3236559、工具句柄41598，CPU25。2位fence tag，每次模拟排空注入重复request和ACK。完整1113+19查询/16151535访问，无截断；应与旧finite_page_fast逐组数据事件一致。9项新/全套83项通过，源/driver/模型冻结。恢复先核验，不重复启动。前一回放已完整passed。
+
+最新：有限ID真实地址+合成值完整回放已passed并终态审计，见 [报告](results/finite_page_real_addresses_20261023.md)。fast目录finite_page_fast_real_addresses_20261023T014500Z/PID2873755/句柄65976已结束，当前无活动队列。1113+19查询/16151535访问，tail63次中途checkpoint、probe_skip0。慢版已superseded不可重启；源/构建保留。全套74项已通过。下一步有限fence控制请求/ACK队列及旧ACK隔离，仍无DMA/RTL/真实距离值证明。以下活动描述均为历史。
+
+当前活动等价有限分配器回放：`results/finite_page_fast_real_addresses_20261023T014500Z`，runner PID=2873755、工具句柄65976，CPU25。原慢速finite_page_real_addresses_20261023T013936Z/PID2744789/句柄89782因确认二次扫描且差分/interval/前2tail交叉一致而superseded，部分证据保留，不重启。全套74项通过，新源/driver冻结，完整回放待完成。
+
+当前活动有限页真实地址回放：`results/finite_page_real_addresses_20261023T013936Z`，runner PID=2744789、工具句柄89782，CPU24；1113间隔查询2399968访问+19超大查询13751567访问，无截断。实际页状态checkpoint+可信模拟排空后同价格恢复，不用oracle恢复值。16位事务/槽代次、2位query、18位page ID。源/driver/模型冻结，恢复先核验不重启。新8项/全套72项通过；完整回放结果待定。边界额外迟到写回探针若ID耗尽记boundary_probe_skips，不跳过真实访问。
+
+最新：有限队列+页值组合已实现，8项新增/全套64项通过，见 [报告](results/finite_page_values_20261023.md)。当前无活动队列。peer先写隔离query后备再ACK，旧refill不能发布新槽，重复请求副作用一次；2000步随机值oracle含完整逻辑映射/小位宽排空。仍是封闭单owner模型，无真实DMA/物理地址复用/有限payload字节预算，控制fence非wire包。下一步有限fence控制握手或真实地址回放集成，不改旧CPU基线。以下活动状态为历史。
+
+最新：有界传输队列+排空模拟已实现，8项新增/全套56项通过，见 [报告](results/finite_transport_20261023.md)。当前无活动队列。封装从请求/work/完成队列和本地leases导出允许复用条件，200个1位ID随机排空周期通过；只覆盖封闭模拟器，无隐藏网络/旧fence-ACK/多生产者/丢包恢复。下一步组合页值与writeback/refill副作用oracle，仍未接DMA/RTL。以下活动描述为历史。
+
+最新：独立有限完成标识ledger已实现，8项新检查/全套48项通过，见 [报告](results/finite_completion_20261023.md)。当前无活动队列。按字段匹配、ID/槽代次隔离到可信排空；外部peer静止/完成队列空仍是模型前提，负向测试明确展示假排空后同包ABA。尚未与页值/DMA集成。下一步可执行传输队列/排空状态机，再组合页值模型；不宣称硬件完成。
+
+最新：push租约三重复12/12 passed并统一审计，见 [报告](results/resident_push_lease_repeated_20261023.md)。runner1839612/句柄98143已结束，当前无活动队列。配对下降中位数4.24%/3.24%，各设计六次标签计数/输出/收敛一致，仍慢于原始CPU。下一步优先有限位宽设备完成标识与排空屏障，替代事件模型的对象身份/无界代次假设；CPU构建冻结保留。以下活动描述均为历史。
+
+当前活动push租约三重复：`results/resident_push_lease_repeated_20261023T010208Z`，runner PID=1839612、工具句柄98143；两设计field/push各三次共12项，LogicNets256/MCML4096槽、CPU8、prefetch-on、indexLRU冻结。构建/测试/driver不改，恢复先核验，不重复提交。先导均已结束。
+
+最新：push租约先导4/4 passed并独立审计，见 [报告](results/resident_push_lease_20261023.md)。runner1628258/句柄86686已结束，当前无活动队列。两个设计输出/收敛/全部计数等价，本次耗时下降4.24%/3.41%，单次待重复。下一步三次完整配对确认收益，后续安全读取租约与设备协议仍待研究。旧基线/构建不改。以下活动描述为历史。
+
+当前活动push租约先导：`results/resident_push_lease_pilot_20261023T005319Z`，runner PID=1628258、工具句柄86686；两设计field_leases/push_lease各单次共4项，LogicNets256/MCML4096槽，CPU8/prefetch-on/indexLRU保持不变。只合并push的lb/upstream/visited三个相邻写租约，块结束先于递归与queue。新resident_push_lease_v1原生ASan/UBSan含实际push及继承LRU oracle已通过。构建/测试/driver冻结，先核验，不重复启动。此前队列均结束。
+
+最新：索引LRU三重复12/12 passed并统一审计，见 [报告](results/resident_index_lru_repeated_20261023.md)。runner985829/句柄53617已结束，当前无活动队列。配对下降中位数LogicNets1.73%、MCML4.56%，六次各设计计数完全一致，仍慢于原始CPU。元数据探针已完成，仅初始已列容量。下一步安全作用域租约合并逐字段查找，先语义审计；设备有限位宽协议等完整目标仍未完成。以下活动描述为历史。
+
+当前活动索引LRU三重复：`results/resident_index_lru_repeated_20261023T002652Z`，runner PID=985829、工具句柄53617；两个设计list/index各三次共12项，LogicNets256/MCML4096槽、CPU8、prefetch-on冻结。原构建/测试/新driver冻结，先核验，不重复启动。元数据探针待独立完成，不能把标签载荷等同总内存。此前先导均结束。
+
+最新：索引LRU先导4/4 passed并独立审计，见 [报告](results/resident_index_lru_20261023.md)。runner768951/句柄7275已结束，当前无活动队列。两设计全部标签计数/输出/收敛一致，本次耗时下降2.14%/4.93%，单次不足以确认稳定收益。下一步三次受控配对并计入实际元数据，之后处理重复标签查找或有限位宽协议；旧构建不改。以下活动描述均为历史。
+
+当前活动索引LRU先导：`results/resident_index_lru_pilot_20261023T001754Z`，runner PID=768951、工具句柄7275；两设计list_lru/index_lru各单次共4项，LogicNets256/MCML4096槽、PBITS6、CPU8，prefetch-on不变。resident_index_lru_v1原生ASan/UBSan及精确LRU顺序/pin独立oracle已通过。新builder/测试/driver/构建冻结，先核验，不重复提交。此前队列均结束。
+
+最新：预取消融4/4 passed并独立审计，见 [报告](results/resident_prefetch_20261023.md)。runner495619/句柄33667已结束，当前无活动队列。关闭预取仅本次LogicNets0.59%、MCML0.10%耗时下降，无明显净收益，不改默认基线。下一步独立固定槽索引LRU布局，严格保留pin/租约/reset/wrap语义并与原LRU对照。下面活动描述均为历史。
+
+当前活动预取消融：`results/resident_prefetch_pilot_20261023T000636Z`，runner PID=495619、工具句柄33667；两设计各prefetch on/off单次配对共4项，LogicNets256页/MCML4096页，CPU8同序。新resident_noprefetch_v1原生ASan/UBSan已通过，只改resident预取函数。driver/构建/测试冻结，恢复先核验，不重复启动。此前队列均结束。
+
+最新：PC诊断4/4通过并统一审计，见 [报告](results/resident_profile_20261023.md)。runner220189/句柄76567已结束，当前无活动队列。标签计数开关一致。reset样本0.42%/2.95%，LRU/pin/dirty约6%，预取3.21%/6.24%；归因有库/内联偏差，不能当精确延迟。下一步独立消融resident预取，保持语义与容量，测完整结果；再决定LRU策略。下面活动状态均为历史。
+
+当前活动PC诊断：`results/resident_profile_20261022T235505Z`，runner PID=220189，工具句柄76567；两个设计代表容量各采样开/关一次共4项，冻结resident_profile_v1与driver。标签核心逐字节等同resident_zero_v1，继承其原生证明；不改原构建。先核验，不重复提交。此前队列全部结束。
+
+最新：三重复24/24 passed并统一审计，见 [报告](results/resident_repeated_20261022.md)。runner3222033/句柄48490已结束，不要重启。当前无活动队列。所有resident容量在三个区组都慢于同轮原始CPU。下一步独立诊断构建，拆分reset、零页/后备查找、置换、复制和租约开销，评估插桩扰动；不再继续堆容量点。以下活动描述均为历史。
+
+当前活动三重复实验：`results/resident_repeated_20261022T230635Z`，runner PID=3222033，工具句柄48490；两设计×(原始flat+resident64/256/4096页)×3随机区组，共24次完整串行CPU8运行，冻结构建。先核验，不重复启动。此前队列均结束。
+
+最新：容量扫描8/8 passed并独立审计，见 [报告](results/resident_capacity_20261022.md)。runner2730652/句柄84525已结束，不要重启。当前无活动队列。两设计64/256/1024/4096页单次完整结果全部等价，LogicNets耗时非单调，MCML4096页仍大量换页。下一步代表容量重复测量+同轮原始基线，并拆分换页/页查找/重置耗时。以下活动描述均为历史。
+
+当前活动容量扫描：`results/resident_capacity_20261022T224734Z`，runner PID=2730652、工具句柄84525；两个设计×64/256/1024/4096页，共8次完整单次运行，PBITS6，冻结resident_zero_v1。恢复先核验进程，不重复启动。以下旧活动状态均为历史。
+
+最新：零页读取先导已4/4 passed并独立复核，见 [报告](results/resident_zero_pilot_20261022.md)。runner2444739/句柄90590对应实验已结束，勿重启。本次LogicNets耗时下降7.31%、MCML下降2.11%，峰值后备页数未变；单次CPU结果。下一步受控容量扫描，保留完整大查询，再确定硬件边界。下面活动队列描述均为历史。
+
+当前活动零页读取先导：`results/resident_zero_pilot_20261022T223634Z`，runner PID=2444739，工具句柄90590，4次单次配对，核心/原生测试/驱动冻结。原生ASan/UBSan通过，真实路由结果待定。先核验进程，勿重复提交。
+
+最新：读写分离先导已4/4通过并完成独立哈希/日志/计数复核，见 [报告](results/resident_rw_pilot_20261022.md)。runner PID2084395与句柄29200对应实验已结束，不要重复启动。LogicNets本次耗时下降9.33%，MCML下降12.95%；单次CPU结果，未证明硬件加速。下一步量化只读零页初始化与重复分配，原构建保留。以下活动状态为历史记录，以本条为准。
+
+# 方案 B 工作上下文
+
+- 当前活动先导：`results/resident_rw_pilot_20261022T222232Z`，runner PID=2084395、工具句柄29200；两设计×保守/显式读写共4次单次配对，64槽×64节点、串行CPU8。恢复先核验，不重复提交。新构建 `build/resident_rw_v2`、builder `adapters/build_resident_rw_router.py`、native测试 `tests/resident_rw_semantics.cpp` 与驱动 `scripts/benchmark_resident_rw.py` 暂冻结。
+- 新版本审计18只读/10写入位点，const读句柄不标脏且保留RAII；v1原生检查发现槽位换绑继承dirty导致干净页重复写回，失败证据 `build/resident_rw_v1/semantic_failure.json`。v2已在换绑后清dirty再按write标志更新，ASan/UBSan全部通过，真实运行收益仍待先导。旧保守构建不改。
+
+- C++resident真实先导3/3已passed且复核，无活动运行，不要再轮询98762/PID。报告 `results/resident_pilot_20261022.md`，证据目录 `results/resident_pilot_20261022T220822Z`。两设计固定64槽×64节点（96KiB仅页槽载荷）实际同步换页，结果SHA/逐轮收敛与冻结串行一致；单次61.134/271.580s，明显不优于原始串行。页表/后备/全局状态另计。
+- 成功独立构建 `build/resident_real_v3`、核心 `adapters/resident_labels.inc`、builder `adapters/build_resident_router.py`、驱动 `scripts/benchmark_resident.py` 保留。28处TLD访问用表达式级RAII租约保护；实际类ASan/UBSan通过。C++同步拷贝确认后才复用，无异步DMA/token/RTL/有限generation证明。当前所有访问保守标脏；下一步优先拆分真实读/写/预取接口，避免盲目增加页容量矩阵。
+
+- 真实TLD地址+合成值页协议回放已全部passed：1113间隔查询2399968访问、19尾部查询13751567访问，仅4槽×64节点页，逐访问/最终全映射对照通过；共1132旧查询完成拒绝。证据 `results/page_protocol_real_addresses_20261022T215927Z/manifest.json`，报告 `results/page_protocol_real_addresses_20261022.md`。40项Python检查通过，无活动回放。不是实际距离/dirty轨迹，不是真实路由器、DMA/RTL并发或有限标识验证。
+
+- 新增运行中页置换CPU规格 `src/page_residency.py`，6项协议检查含2000步随机值对照通过；证据 `results/page_protocol_20261022T215754Z/manifest.json`，全套38项Python检查通过。slot/pin/IO租约到确认后才复用，迟到/重复/伪造完成与价格/恢复失效已测。未替换原Context.labels或真实路由器，非DMA/RTL/并发/有限位宽验证。下一步可将真实TLD地址序列用于带合成值的置换压力验证，但不能声称真实距离回放。
+
+- 身份校验8次配对先导已passed，无活动先导进程，无需轮询45545或旧PID。报告 `results/identity_pilot_20261022.md`；结果/汇总/复核在 `results/identity_pilot_20261022T214133Z/`。sparse_identity比compact再省20.6%–43.9% context容量，四组单次均慢约2.8%–3.8%；保留容量取舍，不宣称提速或稳定退步，不直接扩大重复矩阵。
+- 独立构建 `build/identity_real_v1` / builder `adapters/build_identity_router.py` / 驱动 `scripts/benchmark_identity.py` 保留；ASan/UBSan通过。容量必须包含dense_id_bytes；32项Python检查通过。下一优先任务是运行中页写回/换入协议及迟到完成校验，非继续盲目变体堆叠；当前Context租约仍禁止查询内驱逐。
+
+- 当前目标继续后续研究，保持active。78次正式矩阵已全部passed，链已结束，无需再轮询或重复提交。路径 `results/research_chain_20261022T183749Z/matrix/`，汇总 `summary.json` 与 `completion_audit.json` 在其上层。旧PID/会话句柄仅属历史。
+- 最新正式报告 `results/research_matrix_20261022.md`：两设计×13配置×3次。原始串行中位24.947/93.390s仍最快；512页node_epoch相对paged同序串行降低41.1%/32.6%，compact串行略慢但context容量约少66%。MCML batch compact相对node_epoch快15.4%，不能跨调度混算。
+- 冻结构建 `build/paged_real_v2`、`build/compact_real_v1`及原始loader保持完整，后续新变体使用独立文件/目录。数据logicnets_jscl与vtr_mcml均ready，溯源见data/derived/*provenance.json。MCML14991410节点、70980信号net、224819连接。
+- 四个唯一结果全部严格物理比较0差异、可布net全布通、routing errors=0。logicnets两调度RTSTAT=0；MCML各1条RTSTAT-10警告涉及72net。72net连接/状态与输入相同，原输入不报此警告，原因未定；不能宣称零违规。证据 `results/vivado_state_quality_20261022/all_outputs_quality_manifest.json`。未测全DRC/时序。B的Vivado2022.2 MCP会话 `vivado-20261022-184131-d05de85e` 上次空闲；若使用须先查活会话，不能碰A的会话。
+- 生命周期CPU规格 `src/lifecycle.py` 与真实570286事件回放通过，最终722477占用资源与原used_nodes一致；11次模拟丢包恢复。强化输入绑定的凭据 `results/lifecycle_real_20261022T193750Z/manifest.json`。未接入真实路由器热路径/设备，未回放history数值或距离计算；版本无界，不代表硬件回绕安全。
+- 参数化页缓存分析 `results/page_cache_20261022.md`：1113间隔与19尾部样本分开；64页+4MiB模型无间隔样本重读，但尾部19/19重读；16MiB时尾部4/19重读。预算是敏感性假设，非实际板卡资源；现有租约不支持查询中换页。31项Python检查通过。
+- 原始方法来源和贡献边界见 `RELATED_WORK.md`。dense/sparse反向身份校验已完成独立先导，见顶部报告；不可称新算法或已证明提速。
+
+- 本目录研究：驻留状态与稀疏初始化。研究问题：按器件、设计、net 和 connection 生命周期组织状态，能否减少初始化、重复准备和主机—设备同步？
+- 优先阅读 README.md、EXPERIMENTS.md、INTERFACES.md、NEXT_STEPS.md。原始论文与公共参考源码位于上级目录，路径已列出。
+- 当前有 Python 语义样例、396 个 C++ 合成状态样本及两个真实设计的78次正式矩阵，首设计另有完整CPU轨迹。入口 `python3 scripts/run.py profile-real`，报告 `results/real_trace_20261022.md`。GPU/FPGA 后端尚未实现；导出图合法性通过，回写后route-status/RTSTAT见顶部汇总，全DRC/时序仍未测。
+- 用户要求吸纳其他场景的成熟方法以提高可实现性；不能仅因方法已有基础就排除创新可能，也不能未经比较宣称新颖或保证收益。
+- 已完成真实路径占比：原始布线中位数 23.220 s（含 bbox），12 轮收敛；标签初始分配约 42.2 ms、rip-up/commit 合计约 319.5 ms。初始化不是当前串行主要瓶颈。PC 源码采样不是精确内存延迟或可实现加速比。
+- 已记录 570286 次搜索路径和全体访问计数；固定间隔 1113 次查询加 19 次超大查询完整访问，无截断。512 节点页的加权触达密度分别 0.538%/3.480%；这是访问布局统计，不是性能加速。
+- 已接通真实分页/逐节点 epoch（`benchmark-paged-real`）。正式 15 次运行在 `results/paged_real_20261022T174334Z/`：同序串行分页 57.428→33.165 s（-42.2%），固定 4-worker 批处理 50.635→35.279 s（-30.3%）；同模式输出/收敛一致且图验证通过。原始串行标记 24.389 s 仍最快。512 节点页，结束时 epoch 数组增加 32 MiB，没有压缩页池。下一步补第二设计、页大小/紧凑布局与回收代价，不能宣称超过串行基线或 FPGA 加速。
+- 使用冻结构建 `build/paged_real_v2/build.json`、配置 `configs/paged_real.json`。两种真实标签类经过 ASan/UBSan 回绕/增长/槽位复用/回收检查。原始 RRT1 的完整 CSR 经验证后在本地适配中置 flatGraphBuilt，以启用已有 batch 入口；两种分页适配相同。先导样本不纳入正式三次统计。
+- 长批处理已使用 long-run-supervision 技能；本任务无可用 luna 切换接口，保留现有进程句柄做轻量核验。不要为了模型切换或补监控重启既有实验。
+- 真实输入在 `/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_Acc/projects/persistroute/third_party/fpga24/logicnets_jscl/`。清点真实资产用 `rg --files --hidden --no-ignore`，此前普通检索遗漏了被忽略的目录。冻结导出、官方同版本运行时和 SHA256 见 data/derived/logicnets_jscl_provenance.json。
+- rapidwright_runtime.zip.zip 是上级原始提交 ZIP 的加密成员，不是本次生成。没有密码；当前使用公开 RapidWright 2025.2.1 jar，本阶段不再依赖该密码。
+- 原始串行策略已使用 visited 标记，不能只与全量清零比；gatherShareSet 属于 GPU flood 的主机准备，不是普通串行 CPU 搜索阶段。原样提取见 adapters/extract_state.py，周围上下文简化和测量边界见 INTERFACES.md。
+- 保留负结果：分散访问的逐节点初始化改善了分页基线但未超过串行标记；同网哈希索引未显示整体收益。不要为合成负载直接选定 FPGA 架构。
+- 原始参考源码保留在 `../_shared/assets/gpu_router_original/` 和 `../FPGA-Routing-main/`。本方案改写与适配放在本目录，避免无意改变其他方案的基线。若需公共改动，说明影响并运行受影响目录的检查。
+- 沿用上级 AGENTS.md 的 FPGA/AMD 工具规则：按任务选择并阅读 Ross Skill；纯算法/代码/文稿任务无需启动 Vivado。实际 Vivado 操作优先检查并使用现有 MCP 会话，默认 Tcl 无 GUI；默认版本 2022.2，先核实新功能支持。
+- 在已有授权内自主推进，不把实验阶段或文档中的待办项当作额外审批要求。
+
+本方向重点语义：
+
+- 设计级占用/历史拥塞不能随 connection 标签一起清零。
+- 同网多分支共享资源需引用关系，资源占用按不同 net 计数。
+- 跨价格版本复用距离标签需要明确失效或修复条件；存储复用不等于距离有效。
+- epoch 回绕、并发上下文和页回收不能暴露旧状态。
+
+
+## 2026-10-31 KA准入边界补充分析
+
+新增 source_analysis、admission_review、admission_pairs 三份 results/stage_static_cp_shadow_v6_ka_*_20261031.json。真实绑定源码显示 AXI 响应延迟只延长 AW，不直接制造 AS 请求背压；AP/lease/publication 与恢复准入互斥。scripts/research_checks/check_ka_admission_pairs_v1.py 校验实际源码片段与 SHA，穷举1024组二态组合排除恢复/AP offer、恢复/新lease、恢复/publication 同时准入；另16组确认 DRAIN 不能在 authority busy 或配置响应尚待消费时离开。这是手工转录组合条件的有限检查，不是全RTL形式证明、未知态证明或 KA 背压全局不可达证明。rearm通过 as_retired 等待实际接收端退休，不能假定 rearm 未完就进入 AS。
+
+下一需建立跨周期接收端 configured/fault/drained 与 AS 入口不变量，或找到可恢复的合法异常/同时边界刺激。现有 recovery_retry_v1 单元 TB 已含周期性 a_ready 与 held-payload 稳定检查，但不能替代实际 full-system RTL/gate 背压覆盖。v6保持failed，physical v5关闭，无相同完整重跑或重作业提交。
+
+
+## 2026-10-31 KA跨周期分析与后续终态工具校准
+
+results/stage_static_cp_shadow_v6_ka_cross_cycle_review_20261031.json 绑定4份真实源码，明确 rearm 后 DRAIN 要等待 as_retired，而 k_rcfg_done 实际为 config_restore 的 cf_rsp_valid，不能直接假定它等于 authority ready。尚无全RTL时序不变量证明或合法KA背压刺激，不放宽v6门控。
+
+scripts/shadow_terminal_receipt_v1.py 为未来版本新增终态辅助函数，未接入或修改原runner；results/shadow_terminal_receipt_v1_calibration_20261031.json 的8项校准包含真实v6 exit0/Fatal重放、缺标志/ERROR/Fatal拒绝、缺exit拒绝，以及真实短子进程存活时保留、退出后写failed。真实v6重放正确识别KA覆盖Fatal，原manifest/日志/runner SHA前后完全不变。未来新runner仍需单独集成、绑定和验证；不能据此声称旧runner已修复。无重作业提交，整体goal active。
+
+
+## 2026-10-31 真实receiver配置响应背压实验完成
+
+ka_real_receiver_stall_v1使用v6绑定checkpoint_authority_reader与owner_state_store真实RTL，本机XSim2022.2编译/展开/仿真均exit0；250ns终态KA_REAL_RECEIVER_STALL_PASS stalls8/transfers1/response_status1。外部unit请求在配置响应未消费时经历8个背压边沿，消费配置响应后接收请求，针对有意错误design返回身份拒绝1，3轮held response及全部身份metadata精确检查，无AXI请求或fault。该实验不是有效身份数据读成功，也不是顶层lease下可达背压或gate等价。results/ka_real_receiver_stall_v1_review_20261031.json独立核验源码SHA/日志/计数；8份证据archive实际恢复逐SHA一致。
+
+producer与receiver各自的实际端口背压行为均已小型实验验证，但正常full-system准入互斥仍使组合覆盖缺失；不得把单元实验相加当full通过。后续应优先完整接收端ready阻塞条件的跨周期可达性检查，而非继续重复同类单元覆盖。v6仍failed/physical门控关闭，当前无owned重作业，整体goal active。

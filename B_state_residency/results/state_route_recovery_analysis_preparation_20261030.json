@@ -1,0 +1,69 @@
+{
+  "fixtures": [
+    {
+      "path": "/tmp/B_state_residency_offer_20261025/checkpoint_edit_physical_v1/timing_placed.rpt",
+      "reported_paths": 20,
+      "sha256": "4934fa4cacfd2f0ffa7313afaf5633bd970aa5e89d0243e2305c1c320a81e483",
+      "worst": {
+        "Hold": {
+          "destination": "inner/backend/dut/core/child_capture/frames/records_reg_64_127_21_27/RAMG/I",
+          "logic_levels": 0,
+          "net_placement_counts": {
+            "estimated": 1
+          },
+          "slack_ns": 0.006,
+          "source": "inner/backend/dut/core/expansion/out_attrs_reg[27]/C"
+        },
+        "Setup": {
+          "destination": "inner/backend/fence/request_reg[717]/D",
+          "logic_levels": 40,
+          "net_placement_counts": {
+            "estimated": 39,
+            "routed": 2
+          },
+          "slack_ns": -4.01,
+          "source": "inner/backend/fence/FSM_onehot_state_reg[7]/C"
+        }
+      }
+    },
+    {
+      "path": "/tmp/B_state_residency_offer_20261025/udev_route_probe_v2/preloaded_udev/timing_reopened.rpt",
+      "reported_paths": 2,
+      "sha256": "e40f3bd6a147adad02c6bf830b97be1cc766f31e3d014c5b266080ee89c3d709",
+      "worst": {
+        "Hold": {
+          "destination": "q_reg[6]/D",
+          "logic_levels": 1,
+          "net_placement_counts": {
+            "routed": 2
+          },
+          "slack_ns": 0.07,
+          "source": "q_reg[5]/C"
+        },
+        "Setup": {
+          "destination": "q_reg[7]/D",
+          "logic_levels": 1,
+          "net_placement_counts": {
+            "routed": 2
+          },
+          "slack_ns": 9.445,
+          "source": "q_reg[1]/C"
+        }
+      }
+    }
+  ],
+  "gate_stderr": "Traceback (most recent call last):\n  File \"/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_state_route_recovery_v1.py\", line 99, in <module>\n    if __name__=='__main__': main()\n  File \"/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_state_route_recovery_v1.py\", line 37, in main\n    assert gate['status']=='observed' and gate['stage']=='complete', 'Wait for recovery owner, actual restoration and freeze'\nAssertionError: Wait for recovery owner, actual restoration and freeze\n",
+  "negative_controls": [
+    "wrong summary rejected",
+    "estimated nets rejected when routed required",
+    "running owner rejected before target read or result output"
+  ],
+  "scope": "22 existing report paths only; not recovered full-system routed measurements. Current owner and bound tools were not changed.",
+  "status": "prepared_controls_passed_not_final_analysis",
+  "tools": {
+    "scripts/analyze_state_route_recovery_v1.py": "5f12ee48be3ba91fe3007e53e8bde2b035ea86351e51ed403716f88b4a5c72c0",
+    "scripts/audit_state_ooc_physical_v2.py": "c10257a8c6155d43f6a7a475ac7698bf984e713dbe2c045772859c2ff8f61b4b",
+    "scripts/freeze_state_route_recovery_analysis_v1.py": "cbc727434ee204fedca3c26a1d96f40fc372697baf21b338b74418c72d688880",
+    "scripts/parse_state_timing_paths.py": "7559e413a33d0e72183e43a3f56646bcfa674b90ec9028760ac9a66e470dfa10"
+  }
+}

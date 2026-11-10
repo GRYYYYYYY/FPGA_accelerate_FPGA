@@ -1,0 +1,151 @@
+#!/bin/bash
+#  RapidWright launcher — ACCELERATED.
+#  Transparently redirects `com.xilinx.rapidwright.rwroute.PartialRouter <in.dcp> <out.dcp> [args]`
+#  to the C++ in-process router (RWRouteCppJni). All other classes fall through to stock behavior.
+#  Original stock launcher preserved as bin/rapidwright.stock.bak.
+
+# Absolute paths so the launcher works regardless of the caller's CWD (relative in/out DCP paths
+# are resolved against the caller's CWD, which is left unchanged).
+RAPIDWRIGHT_PATH="$(cd "$(dirname "$(dirname "$0")")" && pwd)"   # .../rewrite/RapidWright
+ROOT="$(dirname "$RAPIDWRIGHT_PATH")"                            # .../rewrite
+SO_DIR="$ROOT/cpp_router/build"                                 # holds libRWRouteCppJni.so
+CP="$RAPIDWRIGHT_PATH/bin:$RAPIDWRIGHT_PATH/jars/*"             # compiled classes + deps
+# Prefer packaged devices/; RWDEV_* overrides; /tmp is last resort.
+if [ -n "${RWDEV_RDV:-}" ]; then RDV="$RWDEV_RDV"
+elif [ -f "$ROOT/devices/xcvu13p.rdv" ]; then RDV="$ROOT/devices/xcvu13p.rdv"
+else RDV="/tmp/xcvu13p.rdv"; fi
+if [ -n "${RWDEV_ATC:-}" ]; then ATC="$RWDEV_ATC"
+elif [ -f "$ROOT/devices/xcvu13p.atc" ]; then ATC="$ROOT/devices/xcvu13p.atc"
+else ATC="/tmp/xcvu13p.atc"; fi
+# libstdc++ for the .so (conda toolchain); harmless if absent
+CONDA_LIB="$HOME/miniconda3/lib"
+
+# ---- one-time AppCDS archive generation: ./bin/rapidwright --gen-cds ----
+# Re-run after any javac into bin/ (the launcher auto-falls back to the plain classpath when stale).
+if [ "$1" = "--gen-cds" ]; then
+    jar cf /tmp/rwcpp_classes.jar -C "$RAPIDWRIGHT_PATH/bin" . || exit 1
+    if [ ! -f /tmp/rwcpp_cds.lst ]; then
+        echo "[gen-cds] no /tmp/rwcpp_cds.lst; dump one first:" >&2
+        echo "  RW_JVM_ARGS=-XX:DumpLoadedClassList=/tmp/rwcpp_cds.lst $0 com.xilinx.rapidwright.rwroute.PartialRouter <small.dcp> <out.dcp> --nonTimingDriven --lutPinSwapping" >&2
+        exit 1
+    fi
+    java -Xshare:dump -XX:SharedClassListFile=/tmp/rwcpp_cds.lst \
+         -XX:SharedArchiveFile=/tmp/rwcpp_app.jsa -cp "/tmp/rwcpp_classes.jar:$RAPIDWRIGHT_PATH/jars/*" \
+         > /dev/null 2>&1 || { echo "[gen-cds] archive dump failed" >&2; exit 1; }
+    echo "[gen-cds] done: /tmp/rwcpp_classes.jar + /tmp/rwcpp_app.jsa"
+    exit 0
+fi
+
+# ---- one-time device-data generation: ./bin/rapidwright --gen-device [part] ----
+if [ "$1" = "--gen-device" ]; then
+    PART="${2:-xcvu13p-fhgb2104-2-e}"
+    echo "[gen-device] $PART -> $RDV (RWDeviceCompactExport, needs large heap) ..."
+    java -Xmx110g -cp "$CP" com.xilinx.rapidwright.rwroute.RWDeviceCompactExport "$PART" "$RDV" || exit 1
+    echo "[gen-device] $PART -> $ATC (RWAttrCompact) ..."
+    java -Xmx32g  -cp "$CP" com.xilinx.rapidwright.rwroute.RWAttrCompact "$PART" "$ATC" || exit 1
+    echo "[gen-device] done."
+    exit 0
+fi
+
+# ---- accelerated path: PartialRouter -> C++ RWRouteCppJni ----
+if [ "$1" = "com.xilinx.rapidwright.rwroute.PartialRouter" ]; then
+    shift
+    if [ ! -f "$SO_DIR/libRWRouteCppJni.so" ]; then
+        echo "ERROR: C++ router not built: $SO_DIR/libRWRouteCppJni.so" >&2
+        echo "  build it:  (cd $ROOT/cpp_router/build && cmake .. && make RWRouteCppJni)" >&2
+        exit 1
+    fi
+    if [ ! -f "$RDV" ] || [ ! -f "$ATC" ]; then
+        echo "ERROR: device data missing ($RDV / $ATC). Generate once:" >&2
+        echo "  $0 --gen-device" >&2
+        exit 1
+    fi
+    export RWDEV=1 RWDEV_RDV="$RDV" RWDEV_ATC="$ATC"
+    export LD_LIBRARY_PATH="$CONDA_LIB:$SO_DIR:$LD_LIBRARY_PATH"
+    # Best-known defaults so the bare competition command gets the banked config; explicit env wins.
+    # RW_GPU_FLOOD falls back to pure CPU gracefully if no CUDA device is visible. Small inputs
+    # (<10MB, same threshold as Java's bigCase) skip the flood attempt entirely: their route is
+    # ~3s and a failed CUDA setup on a busy GPU costs 0.2-2s for zero benefit.
+    INDCP=""
+    for a in "$@"; do case "$a" in --*) ;; *.dcp) [ -z "$INDCP" ] && INDCP="$a";; esac; done  # first .dcp = input
+    if [ -n "$INDCP" ] && [ -f "$INDCP" ] && [ "$(stat -c%s "$INDCP" 2>/dev/null || echo 99999999)" -lt 10000000 ]; then
+        export RW_GPU_FLOOD="${RW_GPU_FLOOD:-0}"
+    fi
+    export RW_GPU_FLOOD="${RW_GPU_FLOOD:-1}" RW_HOTEXPAND="${RW_HOTEXPAND:-1}"
+
+    # AppCDS (--gen-cds): swap in the jarred classpath + shared archive when FRESH (bin/ has no
+    # newer .class). Stale or absent -> plain bin classpath, no CDS (correctness first).
+    JAVA_CDS=""
+    if [ -f /tmp/rwcpp_classes.jar ] && [ -f /tmp/rwcpp_app.jsa ] && \
+       [ -z "$(find "$RAPIDWRIGHT_PATH/bin" -name '*.class' -newer /tmp/rwcpp_classes.jar -print -quit 2>/dev/null)" ]; then
+        CP="/tmp/rwcpp_classes.jar:$RAPIDWRIGHT_PATH/jars/*"
+        JAVA_CDS="-XX:SharedArchiveFile=/tmp/rwcpp_app.jsa -Xshare:auto"
+    fi
+
+    LOG="$(mktemp)"
+    java $RW_JVM_ARGS $JAVA_CDS -cp "$CP" -Djava.library.path="$SO_DIR" \
+        com.xilinx.rapidwright.rwroute.RWRouteCppJni "$@" 2>&1 | tee "$LOG"
+    rc=${PIPESTATUS[0]}
+
+    # Auto-fallback: --lutPinSwapping crashes in post-process on some designs (a RapidWright limitation
+    # that also crashes the stock Java PartialRouter). Retry with --nonTimingDriven only so a result is
+    # still produced. (Cases where lutPinSwapping works -- e.g. mcml_RLE, THEIA -- never hit this.)
+    if [ "$rc" -ne 0 ] && grep -q "Couldn't identify proper pin swap" "$LOG" && \
+       printf '%s\n' "$@" | grep -q -- '--lutPinSwapping'; then
+        echo "WARN: --lutPinSwapping failed in post-process (RapidWright limitation); retrying with --nonTimingDriven only" >&2
+        NEWARGS=""
+        for a in "$@"; do [ "$a" = "--lutPinSwapping" ] || NEWARGS="$NEWARGS $a"; done
+        java $RW_JVM_ARGS $JAVA_CDS -cp "$CP" -Djava.library.path="$SO_DIR" \
+            com.xilinx.rapidwright.rwroute.RWRouteCppJni $NEWARGS
+        rc=$?
+    fi
+
+    # Post-write self-verification (RW_VERIFY=0 disables): a rare parallel race can produce a
+    # silently-broken output DCP (observed once on k_100_dsp: 96% of sinks missing). Re-load the
+    # output with the checker; anything but UNROUTED=0 + shorts=0 triggers ONE fully-serial rerun
+    # (all RW_PAR_* / prepass-early off) -- correctness beats the parallel savings.
+    OUTDCP=""
+    for a in "$@"; do case "$a" in --*) ;; *.dcp) OUTDCP="$a";; esac; done   # last .dcp arg = output
+    if [ "$rc" -eq 0 ] && [ -n "$OUTDCP" ] && [ "${RW_VERIFY:-1}" != "0" ]; then
+        # The run itself verifies in-process when it can (RWRouteCppJni prints "VERIFY: CHECK ...",
+        # ~4x faster than a fresh checker JVM: device/JIT already warm). Only fall back to the
+        # external checker when that line is absent (in-process verify crashed or was disabled).
+        CHK=$(grep -m1 "^VERIFY: CHECK " "$LOG" | sed 's/^VERIFY: //')
+        if [ -z "$CHK" ]; then
+            CHK=$(java $RW_JVM_ARGS $JAVA_CDS -cp "$CP" -Djava.library.path="$SO_DIR" \
+                  com.xilinx.rapidwright.rwroute.RWRouteCppCheck "$OUTDCP" 2>&1 | grep -m1 "CHECK ")
+            echo "VERIFY: $CHK"
+        fi
+        if ! printf '%s' "$CHK" | grep -q "UNROUTED=0" || ! printf '%s' "$CHK" | grep -q "shorts(PIPoverlaps)=0"; then
+            echo "WARN: output DCP failed self-verification -> ONE fully-serial retry" >&2
+            RW_PAR_STATS=0 RW_PAR_CATEGORIZE=0 RW_PREPASS_EARLY=0 RW_PAR_FIX=0 RW_PAR_INJECT=0 \
+            RW_PAR_ASSIGN=0 RW_PAR_FINALIZE=0 RW_PAR_LUTSWAP=0 \
+            java $RW_JVM_ARGS $JAVA_CDS -cp "$CP" -Djava.library.path="$SO_DIR" \
+                com.xilinx.rapidwright.rwroute.RWRouteCppJni "$@"
+            rc=$?
+            CHK=$(java $RW_JVM_ARGS $JAVA_CDS -cp "$CP" -Djava.library.path="$SO_DIR" \
+                  com.xilinx.rapidwright.rwroute.RWRouteCppCheck "$OUTDCP" 2>&1 | grep -m1 "CHECK ")
+            echo "VERIFY(retry): $CHK"
+            printf '%s' "$CHK" | grep -q "UNROUTED=0" || { echo "ERROR: retry still broken" >&2; rc=1; }
+        fi
+    fi
+    rm -f "$LOG"
+    exit $rc
+fi
+
+# ---- stock behavior for everything else ----
+MAIN_JAR="$RAPIDWRIGHT_PATH/build/libs/main.jar"
+if [ $# -eq 0 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ] || [ "$1" = "/?" ]; then
+    echo "rapidwright com.xilinx.rapidwright.<ClassName> -- to execute main() method of Java class"
+    echo "rapidwright com.xilinx.rapidwright.rwroute.PartialRouter <in.dcp> <out.dcp> [args] -- ACCELERATED (C++)"
+    echo "rapidwright --gen-device [part]                -- one-time: generate /tmp/xcvu13p.{rdv,atc}"
+    exit 0
+fi
+if [ -f "$MAIN_JAR" ]; then
+    case "$1" in
+        com.xilinx.rapidwright.*) exec java -cp "$MAIN_JAR" "$@";;
+        *)                        exec java -jar "$MAIN_JAR" "$@";;
+    esac
+fi
+# main.jar not built -> run from compiled classes
+exec java -cp "$CP" "$@"

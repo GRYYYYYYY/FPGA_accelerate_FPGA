@@ -1,0 +1,42 @@
+{
+  "status": "prepared_candidate_not_compiled_or_validated",
+  "parent_shadow_sha256": "dc5bb0a5bcee5e7466aaf9beaf9b143bd8e24f45574c47aca0eeea7b09c9f637",
+  "proof_report_sha256": "9070a6615d18f848d4233394f8220f81e32ba7cd868e6014d4ea3699642993f7",
+  "patches": [
+    {
+      "before": "if(ka_active_checks==0||ka_stall_checks==0||ka_transfer_checks==0||ka_edge_checks==0||ka_idle_observations==0)",
+      "after": "if(ka_active_checks==0||ka_stall_checks!=0||ka_transfer_checks==0||ka_edge_checks==0||ka_idle_observations==0)"
+    },
+    {
+      "before": "  if(actual_k_a_cookie!==expected_k_a_cookie||actual_k_a_checkpoint!==expected_k_a_checkpoint||actual_k_a_design!==expected_k_a_design)$fatal(1,\"KA_META_MISMATCH phase=%0d time=%0t\",at_edge,$time);",
+      "after": "  if(actual_k_a_cookie!==expected_k_a_cookie||actual_k_a_checkpoint!==expected_k_a_checkpoint||actual_k_a_design!==expected_k_a_design)$fatal(1,\"KA_META_MISMATCH phase=%0d time=%0t\",at_edge,$time);\n  if(actual_k_a_ready!==1'b1||expected_k_a_ready!==1'b1)$fatal(1,\"KA_FIXTURE_READY_INVARIANT phase=%0d time=%0t\",at_edge,$time);"
+    },
+    {
+      "before": "FULL_SHADOW_PROTOCOL_PASS outputs=346",
+      "after": "FULL_SHADOW_FIXTURE_READY_CANDIDATE_PASS outputs=346"
+    }
+  ],
+  "inverse_exact": true,
+  "cp_pw_tasks_unchanged": true,
+  "cases": 58,
+  "policy": "Only current initialized source/parameter-matched legal fixture. Assert known ready1 on every valid KA observation, including pre-edge; require active/transfer/edge/idle coverage and zero stalls. Keep all original knownness/data/metadata/unconditional comparisons and CP/PW stall requirements.",
+  "scope": "Fake controls prepared only. No full shadow runner may consume this until actual independent controls/restore/review and exact full-netlist source bindings pass. Two-state theorem does not replace four-state comparisons.",
+  "not_reused": "New candidate pass marker deliberately differs from every old full-pass marker; old auditors must not accept it.",
+  "files": {
+    "shadow.sv": "fe501b2ba838705e4266b0dfafa0f2b51b136a728df97d23bb9acfe5185c6747",
+    "control.sv": "922bb2dd3527367e98649afc401a316175237dda831316c2a69349db9e687fed",
+    "cases.json": "2df6f845cef6e6c05c50b8dc31ed1486c9b3eb917700f81ead901c06fd642ab1"
+  },
+  "preparer_sha256": null,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false,
+  "parent_candidate_manifest_sha256": "f80b5399278012496310ff78689df64f60f4eb8d407eeb999f3fbc393f2218e8",
+  "parent_control_sha256": "f8ae3a62cb9338a4a8d9de077bd107140df98314cb7fe9bb73595b79f6c914a8",
+  "control_delta": {
+    "before": "wire ka_ready=(counter>=12)?1'bx:cp_m_ready;",
+    "after": "wire ka_ready=(counter>=12)?1'bx:1'b1;",
+    "occurrences": 2
+  },
+  "failure_review_sha256": "50ce53c6ae41c798906247baf9f622288f50f03bfe4154390795296f753b1a72",
+  "preparation_method": "Recorded exact two-expression replacement in new control source; no checker/case-list changes"
+}

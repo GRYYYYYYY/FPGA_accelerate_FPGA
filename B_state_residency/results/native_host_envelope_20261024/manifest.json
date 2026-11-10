@@ -1,0 +1,97 @@
+{
+  "status": "conditional_model_verified",
+  "observed_utc": "2026-10-24T11:51:25.961298+00:00",
+  "script_sha256": "c0fe26fd5b3b78524f95e3fba5ff7ec2cddcb6795e24d1fbf102fca7fa8b4df6",
+  "native_manifest_sha256": "f21cc68690e77c7b32f94d7f68ed36dd40921f9cf4d40d68f4cff2963338c8cd",
+  "native_audit_sha256": "49c82f680fff2879053e589bef051ff8ea180ad69ac31a4a816376b39f8a3878",
+  "vector_manifest_sha256": "86c9d4b68b76ddad945243826a5691ddaa373dbf3197c4435aff2655ce077d57",
+  "native_rtl_sha256": "13b3ae7568f5299fe9394458751e5d708a027ca70ea0b5e1f28e04f25c9c513b",
+  "queries": 38,
+  "public_commands": 21466914,
+  "field_accesses": 14047736,
+  "public_operation_counts": {
+    "0": 38,
+    "1": 2473485,
+    "3": 3723220,
+    "2": 10324516,
+    "5": 621624,
+    "4": 2473485,
+    "6": 1850442,
+    "10": 38,
+    "11": 38,
+    "12": 28
+  },
+  "command_fields_bits": {
+    "op": 4,
+    "slot": 5,
+    "query": 2,
+    "page": 21,
+    "price": 4,
+    "generation": 16,
+    "offset": 3,
+    "field": 3,
+    "value": 32
+  },
+  "response_fields_bits": {
+    "status": 4,
+    "payload": 160,
+    "present": 1,
+    "dirty": 1,
+    "tx": 16
+  },
+  "uncompressed_fixed_bits_per_command": 272,
+  "uncompressed_fixed_bitpacked_bytes": 729875076,
+  "illustrative_aligned_command_bytes": 16,
+  "illustrative_aligned_response_bytes": 32,
+  "illustrative_aligned_control_bytes": 1030411872,
+  "backing_axi_payload_bytes": 474636672,
+  "reference_replay_ns_including_tb_pacing": 6140213280,
+  "reference_ns_per_public_command": 286.03148454407557,
+  "extra_serial_latency_scenarios": [
+    {
+      "extra_serial_latency_ns_per_command": 0,
+      "added_latency_ns": 0,
+      "reference_plus_added_ns": 6140213280,
+      "added_over_reference_fraction": 0.0
+    },
+    {
+      "extra_serial_latency_ns_per_command": 50,
+      "added_latency_ns": 1073345700,
+      "reference_plus_added_ns": 7213558980,
+      "added_over_reference_fraction": 0.1748059311711726
+    },
+    {
+      "extra_serial_latency_ns_per_command": 100,
+      "added_latency_ns": 2146691400,
+      "reference_plus_added_ns": 8286904680,
+      "added_over_reference_fraction": 0.3496118623423452
+    },
+    {
+      "extra_serial_latency_ns_per_command": 250,
+      "added_latency_ns": 5366728500,
+      "reference_plus_added_ns": 11506941780,
+      "added_over_reference_fraction": 0.874029655855863
+    },
+    {
+      "extra_serial_latency_ns_per_command": 1000,
+      "added_latency_ns": 21466914000,
+      "reference_plus_added_ns": 27607127280,
+      "added_over_reference_fraction": 3.496118623423452
+    },
+    {
+      "extra_serial_latency_ns_per_command": 10000,
+      "added_latency_ns": 214669140000,
+      "reference_plus_added_ns": 220809353280,
+      "added_over_reference_fraction": 34.961186234234525
+    }
+  ],
+  "assumptions": [
+    "All public commands cross a hypothetical external host boundary and each gets one reply. Internal EXPORT/BEAT/RF_MASK are excluded.",
+    "Uncompressed fixed layout;16/32byte alignment is illustrative, not a new implemented ABI or an information-theoretic lower bound.",
+    "Extra latency is hypothetical additional serialized overhead beyond existing TB pacing, with no overlap or batching; it is not a PCIe/XRT measurement.",
+    "Native replay reference includes initialization/protocol and fixed TB checks; it is not pure device-compute time.",
+    "Backing AXI payload and host control may be on different physical links and must not be added as measured PCIe traffic.",
+    "If native commands are produced by an on-device graph-search engine, the per-command external-host assumption does not apply."
+  ],
+  "implication": "Address64 composition alone does not establish a practical per-field host API. Locate frontier/search control on-device or define semantically valid coarse commands before claiming host synchronization benefit. No new grouped-query or XRT engine implemented."
+}

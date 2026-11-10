@@ -1,0 +1,374 @@
+2026/10/23 10:13:26.463774 vivado-proxy: starting PID=2552040 host=fpgaacc1--cfc8cd109508-jnnrja5s7q go=go1.25.11 GOARCH=amd64 GOOS=linux
+2026/10/23 10:13:26.464308 vivado-proxy: listening on 127.0.0.1:45125
+2026/10/23 10:13:26.464369 vivado-proxy: MCP_PROXY_PORT_DIR unset — running without connection authentication (loopback only)
+2026/10/23 10:13:26.466235 vivado-proxy: spawning: [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado -mode tcl -log .vivado-ai/vivado_50406364_2bfa852b.log -journal .vivado-ai/vivado_50406364_2bfa852b.jou -notrace -source .vivado-ai/init_50406364_2bfa852b.tcl]
+2026/10/23 10:13:26.467022 vivado-proxy: child PID 2552182
+2026/10/23 10:13:26.467632 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:13:26.467794 vivado-proxy: output stream client connected from 127.0.0.1:56260
+2026/10/23 10:13:26.467896 vivado-proxy: output stream resuming from stdout=0 stderr=0
+2026/10/23 10:13:37.041253 vivado-proxy: message limit verified (10000000)
+2026/10/23 10:13:37.506994 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:13:37.507159 vivado-proxy: config webserver_url = http://localhost:40317
+2026/10/23 10:13:37.507226 vivado-proxy: config log_file_path = /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/.vivado-ai/vivado_50406364_2bfa852b.log
+2026/10/23 10:14:30.931697 vivado-proxy: exec [aeptcah2cqyf] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-1 version -short
+2026/10/23 10:14:31.263123 vivado-proxy: exec [26av5w71m1nb] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-2 create_project b_queued_endpoint ./project -part xcu280-fsvh2892-2L-e; add_files ../../hardware/rtl/bounded_sync_fifo.sv; add_files ../../hardware/rtl/queued_scratch_endpoint.sv; add_files ../../hardware/rtl/scratch_page_controller.sv; add_files ../../hardware/rtl/scratch_frame_store_bram.sv; add_files -fileset constrs_1 ../../hardware/rtl/scratch_frame_store.xdc; add_files -fileset sim_1 ../../hardware/tb/tb_queued_scratch_endpoint.sv; set_property top queued_scratch_endpoint [current_fileset]; set_property top tb_queued_small [get_filesets sim_1]; set_property target_simulator XSim [current_project]; set_property xsim.simulate.runtime 1001ms [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; list [get_property TOP [get_filesets sim_1]] [get_property PART [current_project]] [get_files -of_objects [get_filesets sim_1]]
+2026/10/23 10:14:35.183110 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:14:35.185863 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:14:46.359298 vivado-proxy: exec [1vqkj052gj8l] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-3 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 10:15:53.308536 vivado-proxy: exec [vslwqeagtb67] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-4 close_sim; set_property top tb_queued_actual [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_controller_20261023/vectors/actual.txt} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1
+2026/10/23 10:15:59.891222 vivado-proxy: exec [kbulq1gq8he8] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-5 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 10:16:05.181533 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:16:05.185923 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:16:15.182566 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:16:15.184272 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:18:15.848696 vivado-proxy: exec [wyi9lajob7cz] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-6 close_sim
+2026/10/23 10:20:47.817315 vivado-proxy: exec [jcx18erscgzk] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-7 add_files -fileset sim_1 ../../hardware/tb/tb_queued_ordering.sv; set_property top tb_queued_ordering [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1
+2026/10/23 10:20:55.778271 vivado-proxy: exec [61zm8yodr0lp] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-8 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 10:22:16.230797 vivado-proxy: exec [wbl7uoyz1vj7] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-9 close_sim
+2026/10/23 10:46:45.769476 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:46:45.783324 vivado-proxy: exec [h5k5wkifhrmp] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-10 close_project
+2026/10/23 10:46:46.132567 vivado-proxy: exec [x1c0itncbgns] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-11 create_project b_backing_axi ../rtl_backing_axi_20261023/project -part xcu280-fsvh2892-2L-e; add_files ../../hardware/rtl/scratch_page_axi.sv; add_files ../../hardware/rtl/backing_frame_directory.sv; add_files ../../hardware/rtl/backing_page_service.sv; add_files -fileset constrs_1 ../../hardware/rtl/scratch_frame_store.xdc; add_files -fileset sim_1 ../../hardware/tb/tb_backing_page_service.sv; set_property top backing_page_service [current_fileset]; set_property top tb_backing_page_service [get_filesets sim_1]; set_property target_simulator XSim [current_project]; set_property xsim.simulate.runtime 101ms [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts B_BACKING_SIM_BEGIN; list [version -short] [get_property TOP [get_filesets sim_1]] [get_property PART [current_project]]
+2026/10/23 10:46:56.214326 vivado-proxy: exec [tlw3qjzf8v5a] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-12 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 10:49:27.879354 vivado-proxy: exec [gtpvy8yfjygr] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-13 close_sim
+2026/10/23 10:49:28.390572 vivado-proxy: exec [a3kq7rxn1h7f] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-14 puts B_BACKING_FINAL_SIM_BEGIN; update_compile_order -fileset sim_1
+2026/10/23 10:49:42.585814 vivado-proxy: exec [iyefje6t2zto] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-15 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 10:49:45.181742 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:49:45.185198 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:51:55.993273 vivado-proxy: exec [133ahz2cf29w] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-16 close_sim
+2026/10/23 10:51:56.530456 vivado-proxy: exec [nyh2xriue4hw] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-17 puts B_BACKING_DRAIN_FIXED_BEGIN; update_compile_order -fileset sim_1
+2026/10/23 10:52:02.898477 vivado-proxy: exec [cubhigcg0zoa] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-18 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 10:52:05.184409 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:52:05.185978 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:54:03.407037 vivado-proxy: exec [1qvr7brdzi01] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-19 close_sim
+2026/10/23 10:54:03.948816 vivado-proxy: exec [k4zsl3l39alk] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-20 puts B_BACKING_ALL_CASES_BEGIN; update_compile_order -fileset sim_1
+2026/10/23 10:54:05.183968 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:54:05.186440 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:54:11.754037 vivado-proxy: exec [dhrqz97s3wkr] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-21 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 10:54:15.189658 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:54:15.192387 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 10:55:34.008928 vivado-proxy: exec [hr5geljf8zd5] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-22 close_sim -force
+2026/10/23 11:18:10.849056 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:18:10.849257 vivado-proxy: exec [umqi9yfofs67] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-23 close_project
+2026/10/23 11:19:04.186671 vivado-proxy: exec [i9peov4qtvvf] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-24 create_project b_page_codec ../rtl_page_codec_20261023/project -part xcu280-fsvh2892-2L-e; add_files ../../hardware/rtl/scratch_page_codec.sv; add_files -fileset sim_1 ../../hardware/tb/tb_scratch_page_codec.sv; set_property top scratch_page_codec [get_filesets sources_1]; set_property top tb_scratch_page_codec [get_filesets sim_1]; set_property xsim.simulate.runtime 101ms [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex -testplusarg RECORDS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/records.hex} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts B_CODEC_STANDALONE_BEGIN
+2026/10/23 11:19:05.181802 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:19:05.186130 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:19:17.828868 vivado-proxy: exec [mzsv30k48qdv] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-25 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 11:19:25.185960 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:19:25.186478 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:19:59.302306 vivado-proxy: exec [mtuurm3109q8] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-26 close_sim -force
+2026/10/23 11:21:12.090306 vivado-proxy: exec [6uhagnwx2u16] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-27 add_files {../../hardware/rtl/scratch_page_axi.sv ../../hardware/rtl/backing_frame_directory.sv ../../hardware/rtl/backing_page_service.sv}; add_files -fileset sim_1 ../../hardware/tb/tb_codec_axi.sv; set_property top tb_codec_axi [get_filesets sim_1]; update_compile_order -fileset sim_1; puts B_CODEC_AXI_BEGIN
+2026/10/23 11:21:18.841579 vivado-proxy: exec [h1fbbdh1xfh9] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-28 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 11:21:25.183100 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:21:25.186645 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:22:06.008450 vivado-proxy: exec [xe9i1ydg82fk] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-29 close_sim
+2026/10/23 11:22:26.652772 vivado-proxy: exec [jws4ll0zjsb4] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-30 set_property top tb_scratch_page_codec [get_filesets sim_1]; update_compile_order -fileset sim_1; puts B_CODEC_STANDALONE_FINAL_BEGIN
+2026/10/23 11:22:37.276307 vivado-proxy: exec [57mh88zhuh9m] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-31 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 11:22:45.182338 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:22:45.184191 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:23:17.423418 vivado-proxy: exec [kmztnv15bnrq] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-32 close_sim -force
+2026/10/23 11:23:23.830671 vivado-proxy: exec [zkdwi9f8xp6d] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-33 set_property top tb_codec_axi [get_filesets sim_1]; update_compile_order -fileset sim_1; puts B_CODEC_AXI_FINAL_BEGIN
+2026/10/23 11:23:25.183209 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:23:25.185676 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:23:36.042772 vivado-proxy: exec [cv443mgdhqwb] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-34 launch_simulation -mode behavioral
+2026/10/23 11:23:45.182103 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:23:45.185769 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:23:56.142553 vivado-proxy: exec [mfqdwqn9l3pm] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-35 close_sim -force -quiet
+2026/10/23 11:33:44.603139 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:33:44.604552 vivado-proxy: exec [hqcyw2bpnfrb] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-36 close_project
+2026/10/23 11:34:19.429881 vivado-proxy: exec [67xupegxmq2h] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-37 create_project b_record_backing ../rtl_record_backing_20261023/project -part xcu280-fsvh2892-2L-e; add_files {../../hardware/rtl/scratch_page_axi.sv ../../hardware/rtl/backing_frame_directory_lookup.sv ../../hardware/rtl/backing_page_service_lookup.sv ../../hardware/rtl/scratch_page_codec.sv ../../hardware/rtl/record_backing_service.sv}; add_files -fileset sim_1 ../../hardware/tb/tb_record_backing_service.sv; set_property top record_backing_service [get_filesets sources_1]; set_property top tb_record_backing_service [get_filesets sim_1]; set_property xsim.simulate.runtime 101ms [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex -testplusarg RECORDS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/records.hex} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts B_RECORD_BACKING_BEGIN
+2026/10/23 11:34:24.334421 vivado-proxy: exec [ytak704v2tvc] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-38 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 11:34:25.182556 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:34:25.183532 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:36:08.379071 vivado-proxy: exec [63d6tr19e36h] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-39 close_sim -force
+2026/10/23 11:53:10.073525 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:53:10.073724 vivado-proxy: exec [ashzq9ww0y10] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-40 close_project
+2026/10/23 11:53:10.442065 vivado-proxy: exec [adc8bz3dj27o] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-41 create_project b_memory_endpoint ../rtl_memory_endpoint_20261023/project -part xcu280-fsvh2892-2L-e; add_files {../../hardware/rtl/bounded_sync_fifo.sv ../../hardware/rtl/scratch_frame_store_bram.sv ../../hardware/rtl/scratch_page_controller.sv ../../hardware/rtl/queued_scratch_endpoint.sv ../../hardware/rtl/scratch_page_axi.sv ../../hardware/rtl/backing_frame_directory_lookup.sv ../../hardware/rtl/backing_page_service_lookup.sv ../../hardware/rtl/scratch_page_codec.sv ../../hardware/rtl/record_backing_service.sv ../../hardware/rtl/memory_scratch_endpoint.sv}; add_files -fileset sim_1 ../../hardware/tb/tb_memory_endpoint.sv; set_property top memory_scratch_endpoint [get_filesets sources_1]; set_property top tb_memory_endpoint_small [get_filesets sim_1]; set_property xsim.simulate.runtime 2s [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts B_MEMORY_SMALL_BEGIN
+2026/10/23 11:53:15.181326 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:53:15.181907 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:53:15.459035 vivado-proxy: exec [zzipcojfues4] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-42 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 11:53:42.502812 vivado-proxy: exec [y9mou6qh63nw] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-43 close_sim -force
+2026/10/23 11:53:43.005516 vivado-proxy: exec [riz4fcgm8l5b] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-44 puts B_MEMORY_SMALL_FINAL_BEGIN
+2026/10/23 11:53:43.334178 vivado-proxy: exec [vna2wtlhcjt9] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-45 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 11:53:45.183365 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:53:45.184605 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:03.066662 vivado-proxy: exec [eccbqnds5nel] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-46 close_sim
+2026/10/23 11:54:03.655855 vivado-proxy: exec [gctzj4ushijy] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-47 set_property top tb_memory_endpoint_actual [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/actual.txt -testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/pages.hex} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1; puts B_MEMORY_ACTUAL_BEGIN
+2026/10/23 11:54:05.181696 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:05.186362 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:06.867998 vivado-proxy: exec [16327r3ct1am] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-48 launch_simulation -mode behavioral
+2026/10/23 11:54:15.183836 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:15.186854 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:25.182212 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:25.185139 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:35.195010 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:35.198643 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:45.182992 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:54:45.186724 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 11:56:29.551867 vivado-proxy: exec [jaq072dsmq9j] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-49 close_sim -force -quiet
+2026/10/23 12:08:19.592815 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:19.593024 vivado-proxy: exec [2sl59i7hspfu] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-50 close_project
+2026/10/23 12:08:19.923986 vivado-proxy: exec [c8xqvzf88pte] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-51 create_project b_memory_profile ../rtl_memory_profile_20261023/project -part xcu280-fsvh2892-2L-e; add_files [glob ../rtl_memory_profile_20261023/sources/hardware/rtl/*.sv]; add_files -fileset sim_1 {../rtl_memory_profile_20261023/sources/hardware/tb/tb_memory_endpoint.sv ../rtl_memory_profile_20261023/sources/hardware/tb/tb_memory_endpoint_profile.sv}; set_property top memory_scratch_endpoint [get_filesets sources_1]; set_property top tb_memory_endpoint_profile [get_filesets sim_1]; set_property xsim.simulate.runtime 2s [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/actual.txt -testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/pages.hex -testplusarg PROFILE=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_profile_20261023/profile} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts B_MEMORY_PROFILE_BEGIN
+2026/10/23 12:08:24.947495 vivado-proxy: exec [fmhdud1i6l18] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-52 launch_simulation -mode behavioral
+2026/10/23 12:08:25.182415 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:25.196575 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:35.183679 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:35.186575 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:45.193284 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:45.202433 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:55.184649 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:08:55.185959 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:09:05.182955 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:09:05.186837 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:09:15.182940 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:09:15.184302 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:09:39.013332 vivado-proxy: exec [6k60vsxw91uw] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-53 close_sim -force
+2026/10/23 12:14:45.059814 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:14:45.059934 vivado-proxy: exec [wxw4v4ui908e] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-54 close_project
+2026/10/23 12:14:45.181873 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:14:45.182421 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:14:45.430997 vivado-proxy: exec [q8cfnzdpwqrb] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-55 create_project b_wide_codec ../rtl_wide_codec_20261023/project -part xcu280-fsvh2892-2L-e; add_files {../../hardware/rtl/bounded_sync_fifo.sv ../../hardware/rtl/scratch_frame_store_bram.sv ../../hardware/rtl/scratch_page_controller.sv ../../hardware/rtl/queued_scratch_endpoint.sv ../../hardware/rtl/scratch_page_axi.sv ../../hardware/rtl/backing_frame_directory_lookup.sv ../../hardware/rtl/backing_page_service_lookup.sv ../../hardware/rtl/scratch_page_codec_wide.sv ../../hardware/rtl/record_backing_service_wide.sv ../../hardware/rtl/memory_scratch_endpoint_wide.sv}; add_files -fileset sim_1 {../../hardware/tb/tb_scratch_page_codec_wide.sv ../../hardware/tb/tb_memory_endpoint_wide.sv ../../hardware/tb/tb_memory_endpoint_wide_profile.sv}; set_property top memory_scratch_endpoint_wide [get_filesets sources_1]; set_property top tb_scratch_page_codec_wide [get_filesets sim_1]; set_property xsim.simulate.runtime 2s [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex -testplusarg RECORDS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_page_codec_20261023/records.hex} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts B_WIDE_CODEC_BEGIN
+2026/10/23 12:14:50.244317 vivado-proxy: exec [as7ppeyeuxam] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-56 launch_simulation -mode behavioral -simset sim_1
+2026/10/23 12:14:55.183008 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:14:55.185710 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:15:48.320013 vivado-proxy: exec [j18ado251d01] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-57 close_sim
+2026/10/23 12:15:48.837527 vivado-proxy: exec [a30ha0h6c2sn] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-58 set_property top tb_memory_endpoint_wide_small [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1; puts B_WIDE_SMALL_BEGIN
+2026/10/23 12:15:50.585486 vivado-proxy: exec [ge11izd7dvic] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-59 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 12:15:55.183439 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:15:55.185877 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:14.209528 vivado-proxy: exec [ouxm34mm65yl] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-60 close_sim -force -quiet
+2026/10/23 12:16:14.715250 vivado-proxy: exec [2fdmubu5r8l4] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-61 set_property top tb_memory_endpoint_wide_profile [get_filesets sim_1]; set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/actual.txt -testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/vectors/pages.hex -testplusarg PROFILE=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_wide_codec_20261023/profile} -objects [get_filesets sim_1]; update_compile_order -fileset sim_1; puts B_WIDE_ACTUAL_BEGIN
+2026/10/23 12:16:15.180739 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:15.185060 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:16.422271 vivado-proxy: exec [i4clf8nlsd95] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-62 launch_simulation -mode behavioral
+2026/10/23 12:16:25.183691 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:25.187526 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:35.183503 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:35.186338 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:45.183618 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:45.184807 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:55.183590 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:16:55.186213 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:19:03.815862 vivado-proxy: exec [1en8oa36w6bz] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-63 close_sim -force
+2026/10/23 12:45:45.667211 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:45:45.668467 vivado-proxy: exec [b0a8pprqkrm5] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-64 version -short; help report_methodology; help place_design; help route_design; help report_timing_summary
+2026/10/23 12:46:10.511206 vivado-proxy: exec [jqnrqt8512n7] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-65 set b_timing_out {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_codec_timing_20261023}; redirect -file $b_timing_out/help_2022_2.txt {version -short; help report_methodology; help place_design; help route_design; help report_route_status; help get_timing_paths}; puts {B_TIMING_HELP_SAVED}
+2026/10/23 12:46:22.615696 vivado-proxy: exec [lqc0t39jbvzr] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-66 help report_methodology
+2026/10/23 12:46:53.350202 vivado-proxy: exec [jadmxizu53ba] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-67 close_project
+2026/10/23 12:47:07.418374 vivado-proxy: exec [3089rmgohbyo] req=vivado-20261023-101326-b113e545-ca89ad9b-cmd-68 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/implement_codec_pair.tcl
+2026/10/23 12:47:15.184129 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:15.186850 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:25.182002 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:25.184339 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:35.181499 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:35.186250 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:45.182075 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:45.183999 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:55.182808 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:47:55.244502 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:05.180801 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:05.185051 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:15.182199 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:15.185074 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:25.189832 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:25.193434 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:35.182086 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:35.183533 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:45.181061 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:45.185633 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:55.183070 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:48:55.184250 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:05.182515 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:05.186045 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:15.182745 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:15.185632 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:25.182883 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:25.185508 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:35.181793 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:35.185234 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:45.182583 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:45.185424 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:55.182668 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:49:55.184631 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:05.182758 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:05.185343 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:15.182464 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:15.185096 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:19.638414 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:25.182120 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:25.185563 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:35.181754 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:35.184129 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:45.185699 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:45.188345 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:55.182006 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:50:55.185752 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:51:05.181784 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:51:05.186096 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:51:15.288397 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:51:15.292698 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 12:51:15.299777 vivado-proxy: child exited: exit status 134
+2026/10/23 12:51:15.299948 vivado-proxy: last output from Vivado before it exited:
+198] Port "m_rdata[467]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "m_rdata[467]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "m_awready" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "m_awready". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "m_arready" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "m_arready". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+Post Restoration Checksum: NetGraph: d9999283 NumContArr: cc91d37a Constraints: 0 Timing: 0
+Phase 1 Build RT Design | Checksum: 1a62b65fd
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:12 . Memory (MB): peak = 5926.656 ; gain = 0.000 ; free physical = 578038 ; free virtual = 1294862
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 1a62b65fd
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:12 . Memory (MB): peak = 5926.656 ; gain = 0.000 ; free physical = 577981 ; free virtual = 1294804
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 1a62b65fd
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:12 . Memory (MB): peak = 5926.656 ; gain = 0.000 ; free physical = 577975 ; free virtual = 1294798
+
+Phase 2.3 Global Clock Net Routing
+Phase 2.3 Global Clock Net Routing | Checksum: 1a62b65fd
+
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:16 . Memory (MB): peak = 6250.227 ; gain = 323.570 ; free physical = 576138 ; free virtual = 1292961
+
+Phase 2.4 Update Timing
+Phase 2.4 Update Timing | Checksum: 1c02adb02
+
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:18 . Memory (MB): peak = 6250.227 ; gain = 323.570 ; free physical = 577828 ; free virtual = 1294651
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=4.681  | TNS=0.000  | WHS=0.013  | THS=0.000  |
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 9608
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 7876
+  Number of Partially Routed Nets     = 1732
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 235e67ec5
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:24 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 588031 ; free virtual = 1304854
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 235e67ec5
+
+Time (s): cpu = 00:00:32 ; elapsed = 00:00:24 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 588758 ; free virtual = 1305582
+Phase 3 Initial Routing | Checksum: 17f40b95c
+
+Time (s): cpu = 00:00:44 ; elapsed = 00:00:30 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 593806 ; free virtual = 1310630
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 1824
+ Number of Nodes with overlaps = 134
+ Number of Nodes with overlaps = 14
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 3
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=4.366  | TNS=0.000  | WHS=0.036  | THS=0.000  |
+
+Phase 4.1 Global Iteration 0 | Checksum: 1ab62d71e
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:48 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 622384 ; free virtual = 1339208
+
+Phase 4.2 Additional Iteration for Hold
+Phase 4.2 Additional Iteration for Hold | Checksum: 1b889acd3
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:49 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 622381 ; free virtual = 1339205
+Phase 4 Rip-up And Reroute | Checksum: 1b889acd3
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:49 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 622376 ; free virtual = 1339200
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 1b889acd3
+
+Time (s): cpu = 00:01:11 ; elapsed = 00:00:49 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 622371 ; free virtual = 1339195
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 1b889acd3
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:00:49 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 622349 ; free virtual = 1339174
+Phase 5 Delay and Skew Optimization | Checksum: 1b889acd3
+
+Time (s): cpu = 00:01:12 ; elapsed = 00:00:49 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 622315 ; free virtual = 1339139
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 260cea41d
+
+Time (s): cpu = 00:01:14 ; elapsed = 00:00:50 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621863 ; free virtual = 1338687
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=4.366  | TNS=0.000  | WHS=0.036  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 260cea41d
+
+Time (s): cpu = 00:01:14 ; elapsed = 00:00:50 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621865 ; free virtual = 1338689
+Phase 6 Post Hold Fix | Checksum: 260cea41d
+
+Time (s): cpu = 00:01:14 ; elapsed = 00:00:51 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621866 ; free virtual = 1338689
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.0880907 %
+  Global Horizontal Routing Utilization  = 0.101101 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 2728cea20
+
+Time (s): cpu = 00:01:16 ; elapsed = 00:00:52 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621228 ; free virtual = 1338052
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 2728cea20
+
+Time (s): cpu = 00:01:16 ; elapsed = 00:00:52 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621226 ; free virtual = 1338049
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 2728cea20
+
+Time (s): cpu = 00:01:17 ; elapsed = 00:00:53 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621218 ; free virtual = 1338041
+
+Phase 10 Resolve XTalk
+Phase 10 Resolve XTalk | Checksum: 2728cea20
+
+Time (s): cpu = 00:01:17 ; elapsed = 00:00:53 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621239 ; free virtual = 1338063
+
+Phase 11 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=4.366  | TNS=0.000  | WHS=0.036  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 11 Post Router Timing | Checksum: 2728cea20
+
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:53 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621145 ; free virtual = 1337969
+INFO: [Route 35-16] Router Completed Successfully
+
+Time (s): cpu = 00:01:18 ; elapsed = 00:00:53 . Memory (MB): peak = 6264.336 ; gain = 337.680 ; free physical = 621210 ; free virtual = 1338034
+
+Routing Is Done.
+realloc(): invalid pointer
+Abnormal program termination (6)
+Please check '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/hs_err_pid2552581.log' for details
+2026/10/23 12:51:15.301893 vivado-proxy: exec [3089rmgohbyo] abandoned — Vivado exited before the end marker

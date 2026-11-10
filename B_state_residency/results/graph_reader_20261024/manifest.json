@@ -1,0 +1,184 @@
+{
+  "status": "passed",
+  "pid": 1926452,
+  "sources": {
+    "graph_static_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/graph_reader_v1/graph_static_reader.sv",
+      "sha256": "a55dc78260404a07f29b91715b05c2461019c7a997446b4372a067120e6120ee"
+    },
+    "make_vectors.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/graph_reader_v1/make_vectors.py",
+      "sha256": "449222108e55c555a1e8a9ba7e9adc6584ed50710d504a17161454d2b77da98c"
+    },
+    "tb_graph_static_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/graph_reader_v1/tb_graph_static_reader.sv",
+      "sha256": "28b1baeed2c6b033a4bf36cd9ddee77e2279ccb81e99a15d34dd11f680525a92"
+    },
+    "run_graph_reader.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_graph_reader.py",
+      "sha256": "00592a6fcff9aa32c41bfef3885ed427d370336de40ab8596fcd1b11d5dd3e48"
+    }
+  },
+  "graph": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+  "graph_manifest_sha256": "78a531decd3f39c5f2c74a97c0d33ab946cbcfdeab70463e35c493bfeecaf7b0",
+  "graph_gate_sha256": "3ee5b9e8d5cf99511fd723ecc45d2b8686fa741c2a588a22a0fc133e6a8f97e3",
+  "graph_artifacts": {
+    "offsets.u32le": "3fdd2e3811dfadbabfb178e5664ee46e1708066ffdb9e7971dcf88c6f4ff0a47",
+    "edges.u32le": "930ec8f23fef75750f60b1f6054bfac7ff34646b4a274a6fe2bbe6eaeac2da8b",
+    "nodes.rrt32": "4b85c1329d66bc5a4e7fb520ce03d48fa6f3d41dfbc75120083c4f32afb3e4b9"
+  },
+  "commands": [
+    {
+      "stage": "oracle",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/lnx64/python-3.8.3/bin/python3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/sources/make_vectors.py",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/vectors.txt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/coverage.json"
+      ],
+      "pid": 1927039,
+      "exit_code": 0,
+      "elapsed_s": 5.784071596339345
+    }
+  ],
+  "cases": {
+    "pilot": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/sources/graph_static_reader.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/sources/tb_graph_static_reader.sv"
+          ],
+          "pid": 1927710,
+          "exit_code": 0,
+          "elapsed_s": 1.616062220185995
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_graph_static_reader",
+            "-s",
+            "graph_reader",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 1928113,
+          "exit_code": 0,
+          "elapsed_s": 3.079628814011812
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "graph_reader",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "graph=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+            "--testplusarg",
+            "vectors=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/vectors.txt",
+            "--testplusarg",
+            "trace=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/pilot/axi_trace.txt",
+            "--testplusarg",
+            "limit=200"
+          ],
+          "pid": 1929650,
+          "exit_code": 0,
+          "elapsed_s": 5.394775163382292
+        }
+      ],
+      "result": "GRAPH_READER_PASS queries=200 checks=222 configurations=28 faults=19 AR=415 R=415 blocked=74 cycles=6140",
+      "artifacts": {
+        "simulate.log": "5e66a88af54cf434169cc207b06c00d4115ab837f0c032cac11b515e204a00df",
+        "run.tcl": "546ad833a4c2443351371130367944b7a7f8ec918d8c34282d64b3a30c05f4d5",
+        "compile.stdout.log": "d40ff371570b991846f5beb1f284a2272bc2326bfefe5e143a71a0783641c5cc",
+        "xvlog.log": "d40ff371570b991846f5beb1f284a2272bc2326bfefe5e143a71a0783641c5cc",
+        "simulate.stdout.log": "539ff0e7386984f57b9127af93d5ea66bd892aac24bf477498614523f9c76abf",
+        "xelab.log": "eac3b3506e45ae909d2d99dc0681317bce81ddd8ae5d85518069324f1cc73ea0",
+        "axi_trace.txt": "49de62a85e0476fd46fa740883cf33ceb452fa7186842a358ea123113e7f7609",
+        "elaborate.stdout.log": "eac3b3506e45ae909d2d99dc0681317bce81ddd8ae5d85518069324f1cc73ea0"
+      }
+    },
+    "full": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/sources/graph_static_reader.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/sources/tb_graph_static_reader.sv"
+          ],
+          "pid": 1933233,
+          "exit_code": 0,
+          "elapsed_s": 1.616263572126627
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_graph_static_reader",
+            "-s",
+            "graph_reader",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 1933267,
+          "exit_code": 0,
+          "elapsed_s": 3.0487910602241755
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "graph_reader",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "graph=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+            "--testplusarg",
+            "vectors=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/vectors.txt",
+            "--testplusarg",
+            "trace=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_reader_20261024/full/axi_trace.txt",
+            "--testplusarg",
+            "limit=0"
+          ],
+          "pid": 1934226,
+          "exit_code": 0,
+          "elapsed_s": 11.851130809634924
+        }
+      ],
+      "result": "GRAPH_READER_PASS queries=64806 checks=64828 configurations=28 faults=19 AR=221640 R=221640 blocked=54973 cycles=2678058",
+      "artifacts": {
+        "simulate.log": "f130f3ed660bbfc59e3fa34e910ed2d9777691337dcf8b12f41d6cbc8c7901c7",
+        "run.tcl": "546ad833a4c2443351371130367944b7a7f8ec918d8c34282d64b3a30c05f4d5",
+        "compile.stdout.log": "d40ff371570b991846f5beb1f284a2272bc2326bfefe5e143a71a0783641c5cc",
+        "xvlog.log": "d40ff371570b991846f5beb1f284a2272bc2326bfefe5e143a71a0783641c5cc",
+        "simulate.stdout.log": "7cfaaec2881fa1894529b4420b187ef7cda94b6258d32381ffd0187696dfa2c5",
+        "xelab.log": "eac3b3506e45ae909d2d99dc0681317bce81ddd8ae5d85518069324f1cc73ea0",
+        "axi_trace.txt": "9b0c55969edbf3fb6545d7701346a4317158fb720e86e49e2d91febadc6b0427",
+        "elaborate.stdout.log": "eac3b3506e45ae909d2d99dc0681317bce81ddd8ae5d85518069324f1cc73ea0"
+      }
+    }
+  },
+  "scope": "Actual RTL file-backed AXI read service; sampled requests from the complete real CSR/attribute images. No device upload, children-controller integration or board performance claim.",
+  "oracle": {
+    "vectors.txt": "a52d9f7f8850fe6982db894a686eb15fd3bc00cee05019402da69a55d6f9ae38",
+    "coverage.json": "ac0692aa12df233942ef4354383c575741b02c47c61fe43fae9e204c2d531cbf"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "status": "analytical_model",
+  "frames": 163840,
+  "hash_slots": 262144,
+  "query_recycles": 38,
+  "checkpoint_TX_only_recycles": 28,
+  "rows": [
+    {
+      "epoch_bits": 1,
+      "reuse_period_recycles": 1,
+      "full_clear_passes_including_reset": 39,
+      "clear_cycles_including_reset": 10223616,
+      "additional_clear_cycles_vs_epoch8": 9961472,
+      "index_payload_bits": 4980736,
+      "total_payload_bits": 9568256,
+      "ideal_RAM36_bit_capacity_lower_bound": 260,
+      "metadata_bytes_saved_vs_epoch8": 229376
+    },
+    {
+      "epoch_bits": 2,
+      "reuse_period_recycles": 3,
+      "full_clear_passes_including_reset": 13,
+      "clear_cycles_including_reset": 3407872,
+      "additional_clear_cycles_vs_epoch8": 3145728,
+      "index_payload_bits": 5242880,
+      "total_payload_bits": 9830400,
+      "ideal_RAM36_bit_capacity_lower_bound": 267,
+      "metadata_bytes_saved_vs_epoch8": 196608
+    },
+    {
+      "epoch_bits": 3,
+      "reuse_period_recycles": 7,
+      "full_clear_passes_including_reset": 6,
+      "clear_cycles_including_reset": 1572864,
+      "additional_clear_cycles_vs_epoch8": 1310720,
+      "index_payload_bits": 5505024,
+      "total_payload_bits": 10092544,
+      "ideal_RAM36_bit_capacity_lower_bound": 274,
+      "metadata_bytes_saved_vs_epoch8": 163840
+    },
+    {
+      "epoch_bits": 4,
+      "reuse_period_recycles": 15,
+      "full_clear_passes_including_reset": 3,
+      "clear_cycles_including_reset": 786432,
+      "additional_clear_cycles_vs_epoch8": 524288,
+      "index_payload_bits": 5767168,
+      "total_payload_bits": 10354688,
+      "ideal_RAM36_bit_capacity_lower_bound": 281,
+      "metadata_bytes_saved_vs_epoch8": 131072
+    },
+    {
+      "epoch_bits": 5,
+      "reuse_period_recycles": 31,
+      "full_clear_passes_including_reset": 2,
+      "clear_cycles_including_reset": 524288,
+      "additional_clear_cycles_vs_epoch8": 262144,
+      "index_payload_bits": 6029312,
+      "total_payload_bits": 10616832,
+      "ideal_RAM36_bit_capacity_lower_bound": 288,
+      "metadata_bytes_saved_vs_epoch8": 98304
+    },
+    {
+      "epoch_bits": 6,
+      "reuse_period_recycles": 63,
+      "full_clear_passes_including_reset": 1,
+      "clear_cycles_including_reset": 262144,
+      "additional_clear_cycles_vs_epoch8": 0,
+      "index_payload_bits": 6291456,
+      "total_payload_bits": 10878976,
+      "ideal_RAM36_bit_capacity_lower_bound": 296,
+      "metadata_bytes_saved_vs_epoch8": 65536
+    },
+    {
+      "epoch_bits": 7,
+      "reuse_period_recycles": 127,
+      "full_clear_passes_including_reset": 1,
+      "clear_cycles_including_reset": 262144,
+      "additional_clear_cycles_vs_epoch8": 0,
+      "index_payload_bits": 6553600,
+      "total_payload_bits": 11141120,
+      "ideal_RAM36_bit_capacity_lower_bound": 303,
+      "metadata_bytes_saved_vs_epoch8": 32768
+    },
+    {
+      "epoch_bits": 8,
+      "reuse_period_recycles": 255,
+      "full_clear_passes_including_reset": 1,
+      "clear_cycles_including_reset": 262144,
+      "additional_clear_cycles_vs_epoch8": 0,
+      "index_payload_bits": 6815744,
+      "total_payload_bits": 11403264,
+      "ideal_RAM36_bit_capacity_lower_bound": 310,
+      "metadata_bytes_saved_vs_epoch8": 0
+    }
+  ],
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/small_checkpoint_vectors_full_20261023/manifest.json": "86c9d4b68b76ddad945243826a5691ddaa373dbf3197c4435aff2655ce077d57",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/memory_scratch_endpoint_small.sv": "a1d310daf3da4b9757334334cac7d7e81fa8044aafb6ad3847dbd5cd08d1d41b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/analyze_directory_epoch_tradeoff.py": "402d178aa6c9e5e6eb9b5d0629a7bbab5e83ec2fc230da5a372de892cd1a117d"
+  },
+  "limitations": [
+    "Counts CLEAR_INDEX cycles only, not total endpoint latency.",
+    "Checkpoint RECYCLE_TX retains epoch and backing; it does not count as a full recycle.",
+    "RAM36 bit-capacity lower bounds ignore packing and ports; actual resource savings require synthesis.",
+    "No RTL configuration changed; narrower epochs require wrap regression at chosen configuration."
+  ]
+}

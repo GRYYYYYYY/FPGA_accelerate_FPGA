@@ -1,0 +1,13 @@
+# 后续恢复期baseline重复初始化消融（尚未实现）
+
+先完成当前G4 sole-owner恢复候选的真实故障与完整审计，作为隔离优化的正确性基线，不继续机械增加同类正常查询数量。现有G3 warm阶段已有测量：781条恢复记录会读取781次baseline、执行3905次baseline seed字段写，再执行3905次实际恢复字段写。新G4数据应重新按实际事件计数，不照抄旧数。
+
+源码定位：resident_page_manager在ENABLE_BASELINE且非raw_probe时，对每个host IO做probe_access；缺记录则BASE_SEND/WAIT读取baseline并逐字段SEED。label_restore_controller已经锁存完整160bit恢复payload，并在WS/WW依次写入全部五字段；业务此时被恢复fence封锁。raw_probe只为PS/PW的空检查服务，当前对raw写明确拒绝。不得简单关闭全局baseline或放宽raw_probe写。
+
+候选方向：新增默认关闭、独立的恢复整记录写许可；只有实际原生label_restore的WS/WW事务归属、recovery-owned和k_labels_valid共同成立时，向manager传递可跳过baseline seed的资格。资格需覆盖请求已受理后的WW直到回复退休，不能仅用l_write==WS导致队列中的请求丢失来源；manager在真实IO受理时锁存，且只对合法io_write适用。普通业务和恢复回读仍保持baseline语义。
+
+每次已接受的完整payload由leaf写完五字段后才能计written；原始流CRC、恢复结束前全部781回读验证、三类回执、失败/取消封锁和退休条件不变。中途取消可能留下部分记录，只能维持owned/fault并在下一attempt原生target reset后重试；不能把部分记录视为成功恢复。原生模块对非法flags、cookie、长度、节点及CRC的拒绝不可放宽。
+
+验证要求：默认关闭候选与已冻结G4 warm的原始native/12AXI/周期完全相同；开启后保持CPU数值、最终DDR/path/query/owner及状态次序，独立逐字段重放证明减少的只是恢复期baseline与seed写。至少补实际恢复写中途取消/错误CRC后非冷重试，确认普通查询未知记录仍从baseline初始化且不出现未授权跳过。分别报告32槽/单槽的基线读、native读写数、恢复阶段周期与资源影响；行为周期改进不等于板卡加速。
+
+该文件只是依据已读本地源码形成的实验设计，没有新增生产RTL或优化通过结论。

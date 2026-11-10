@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "sources": {
+    "search_cost.hpp": "d277ad8207433a6520bff50971d86e7d7317ef64dc2017959c6804ae4e85deff",
+    "softfloat32.hpp": "fdbeea3d7f4ac79ff6be8907f22ab44250dc53f405161fc95016b601835ae8cd",
+    "vector_count.hpp": "3c0f6013fc780af9ce961815ee85611d53f03e078e2cdcb5f4bcc0b0b2cba4ad",
+    "test_primitives.cpp": "a5f25f71c63b9c27d6041a39448dab353c24065d2fc83e5379ff7570b2571474",
+    "testbench.cpp": "78279f32788619b19ff71065260bc51948bc5fc20d4319d6380a7025999dc72e",
+    "make_vectors_extended.cpp": "fc497765e5b0d28d029e4b0c37c86b265cd5999451544cd9214aadd2bf8937f5",
+    "cost_api.hpp": "1ba8c0bcbca6816ed1ea5e9b5cf48661eb8babf617bcf3f137f1880e86422128",
+    "kernel.cpp": "0b9991ab89021fdc2dd2b48fb95dd15abb9b3f013c2f6ebc93e74afa2d53897e"
+  },
+  "native_manifest_sha256": "8ad91506d62723e35824e86404049d119a45651c4e17057234848adf8d4f04c6",
+  "real_gate_sha256": "b169d79d267801d225c217172772d0a50b56a61a937adeceaa75b1888dd8997f",
+  "runner_sha256": "a44d1dbe64ddf013efde0b07b255c328bf0324f9d3119d81fe9c40721e635347",
+  "vectors_sha256": "e6441fd0abd0b7f920b4ea6f6ebce3061fb515ddae44d4a9c92acb002923bb71",
+  "commands": [
+    {
+      "stage": "primitive_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/sources/test_primitives.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/primitives"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "primitives",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/primitives"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "cost_build",
+      "argv": [
+        "g++",
+        "-std=c++14",
+        "-O2",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fsanitize=undefined",
+        "-fno-sanitize-recover=all",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/sources/kernel.cpp",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/sources/testbench.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/cost"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "cost",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/search_cost_exact_cpp_v2_20261024/cost"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "artifacts": {
+    "vectors.txt": "e6441fd0abd0b7f920b4ea6f6ebce3061fb515ddae44d4a9c92acb002923bb71",
+    "cost_build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "observed.txt": "acd351d9f453c7e14074dd3a15aac0420d594fcd0e56e912124a14e8d3cea19b",
+    "primitive_build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "primitives": "07e54421b29132637803ae523fa7d3a163da8abd3a51a2c8fb1a54318ecd98fb",
+    "cost": "81c00c6d125467895b08195e195144656bc0cd15cc740a862129cb420657262d",
+    "primitives.log": "6612c3ff2cff0ade6b239ee0379f5cc893b449a4df9477b97cebe8d8a8a00f4c",
+    "cost.log": "ac240604270998b8436811514a9802e8759ba1204dbea2bc52e3c83ed92631a0",
+    "runner.py": "a44d1dbe64ddf013efde0b07b255c328bf0324f9d3119d81fe9c40721e635347"
+  }
+}

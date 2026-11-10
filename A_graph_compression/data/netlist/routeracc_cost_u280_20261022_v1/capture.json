@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "baseline_capture_complete",
+  "part": "xcu280-fsvh2892-2L-e",
+  "timestamp_utc": "2026-10-22T16:54:25.616841+00:00",
+  "scope": "OOC registered wrapper of original RouterAcc cost_calculator; not compression accelerator or whole-router evaluation",
+  "tool": "Vivado 2022.2 build 3671981",
+  "primitive_cells": 1833,
+  "hierarchical_nets": 2993,
+  "logical_nets": 2631,
+  "fully_routed_nets": 1277,
+  "routing_error_nets": 0,
+  "route_design_wall_ms": 40920,
+  "wns_ns": 6.53,
+  "whs_ns": 0.02,
+  "clock_period_ns": 10.0,
+  "unconstrained_input_ports": 168,
+  "unconstrained_output_ports": 175,
+  "unconstrained_internal_endpoints": 0,
+  "source_sha256": {
+    "workloads/routeracc_cost_registered.v": "01c58f3b948b3204aa101035da227d728c4504a3fc4d17bfa93a805288eae278",
+    "../FPGA-Routing-main/FPGA-Routing-hw/src/cost_calculator.v": "1f6f6f1573ad3b6e6ebb7f6e45f6f774c933f0fd00871be7b30f568ca5db7968",
+    "../FPGA-Routing-main/FPGA-Routing-hw/src/dly_cell.v": "93ac784826009f01a6afd714867e3c234146dca517e052b169e0d2061234363c",
+    "adapters/build_netlist.tcl": "b05d1cad29085e920926e2056c2a47b91fb490d50465f447f7a25b5dbf709592",
+    "adapters/resume_netlist_u280.tcl": "d9570b1564bbad116a27b2adb40711e7df8312aad76244e97e4c0a2cbd82ae3e",
+    "configs/netlist_u280_driver.tcl": "0041e2603a561d1eeda759ba9fcef73cc5b9aa689ac5372a7de526d7c4136124"
+  },
+  "artifacts": {
+    "timing_summary.rpt": {
+      "path": "data/netlist/routeracc_cost_u280_20261022_v1/timing_summary.rpt",
+      "sha256": "12f091fa86a8b0a36f07a7b8128f48dca9400172079b217a2d6a93ba33971933"
+    },
+    "placed.dcp": {
+      "path": "data/netlist/routeracc_cost_u280_20261022_v1/placed.dcp",
+      "sha256": "e0284e215c47c36f5f1de40d9b105c251ff07e6681e15ea18a679f0b65d055e8"
+    },
+    "placed_utilization.rpt": {
+      "path": "data/netlist/routeracc_cost_u280_20261022_v1/placed_utilization.rpt",
+      "sha256": "5bea6890df752084b0a576bd1fc95578c7f3281ab9f70630d97b5bd40c4ad1a7"
+    },
+    "route_status.rpt": {
+      "path": "data/netlist/routeracc_cost_u280_20261022_v1/route_status.rpt",
+      "sha256": "d60f9e29f1ae29f260fce3648e01dce620ffee6b4e69aa5a9b7958d57f18ab70"
+    },
+    "build.tsv": {
+      "path": "data/netlist/routeracc_cost_u280_20261022_v1/build.tsv",
+      "sha256": "42a2662a722d7e5de16717673def2e871af69d70d03abc27c9d3e2db478d69f4"
+    },
+    "routed.dcp": {
+      "path": "data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp",
+      "sha256": "24f6a9f881436c08b54b26ae097b9d113221c7e22ecfa6e6b230d94bd21c3044"
+    }
+  },
+  "successful_command": [
+    "env",
+    "LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado",
+    "-mode",
+    "batch",
+    "-source",
+    "adapters/resume_netlist_u280.tcl",
+    "-log",
+    "results/vivado/resume_u280_20261022_preload.log",
+    "-journal",
+    "results/vivado/resume_u280_20261022_preload.jou"
+  ],
+  "workaround": {
+    "basis": "Local reproducible crash stack; no matched vendor Answer Record found",
+    "change": "Process-only preload of existing system libudev.so.1; no installation, licensing, RTL or placement change",
+    "result": "Full script completed, exit 0, routed checkpoint and reports generated",
+    "library_sha256": "1f47ab3bd9929605e30935503e339b6f5dcceb71595f0716377be1318962561d",
+    "prior_crash_logs": [
+      "results/vivado/hs_err_pid983478.log",
+      "hs_err_pid1755357.log"
+    ]
+  },
+  "limitations": [
+    "No physical Alveo board measurement",
+    "OOC IO ports unplaced with no input/output timing delay constraints and no HD.CLK_SRC; not complete board timing signoff",
+    "No custom routing replacement yet",
+    "VU13P and U280 resources are separate datasets"
+  ]
+}

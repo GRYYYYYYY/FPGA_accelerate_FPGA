@@ -1,0 +1,110 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 12:58:45 2026
+# Process ID: 2538821
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_codec_timing_20261023/probe
+# Command line: vivado -mode batch -source probe.tcl -log probe.log -journal probe.jou
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_codec_timing_20261023/probe/probe.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_codec_timing_20261023/probe/probe.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2700.001 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source probe.tcl
+# puts [help list_param]
+list_param
+
+Description: 
+Get all parameter names
+
+Syntax: 
+list_param  [-quiet] [-verbose]
+
+Returns: 
+list
+
+Usage: 
+  Name        Description
+  -----------------------
+  [-quiet]    Ignore command errors
+  [-verbose]  Suspend message limits during command execution
+
+Categories: 
+PropertyAndParameter
+
+Description:
+
+  Gets a list of user-definable configuration parameters. These parameters
+  configure a variety of settings and behaviors of the tool. For more
+  information on a specific parameter use the report_param command, which
+  returns a description of the parameter as well as its current value.
+
+Arguments:
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns a list of all user-definable parameters:
+
+    list_param 
+    
+
+See Also:
+
+   *  get_param
+   *  report_param
+   *  reset_param
+   *  set_param
+
+# puts [help config_webtalk]
+config_webtalk
+
+Description: 
+Enable/disable WebTalk to send software, IP and device usage statistics to Xilinx.
+Note: WebTalk is always enabled for WebPACK users. WebTalk ignores user
+and install preference when a bitstream is generated using the WebPACK license.
+If a design is using a device contained in WebPACK and a WebPACK license is available,
+the WebPACK license will be used. To change this, please see answer record 34746.
+
+Syntax: 
+config_webtalk  [-info] [-user <arg>] [-install <arg>] [-quiet] [-verbose]
+
+Usage: 
+  Name        Description
+  -----------------------
+  [-info]     Show whether WebTalk is currently enabled or disabled
+  [-user]     Enable/disable WebTalk for the current user. Specify either 
+              'on' to enable or 'off' to disable.
+              Default: empty
+  [-install]  Enable/disable WebTalk for all users of the current 
+              installation. Specify either 'on' to enable or 'off' to 
+              disable. If you specify 'off', individual users will not be 
+              able to enable WebTalk using the -user option. You may need 
+              administrator rights to use this option.
+              Default: empty
+  [-quiet]    Ignore command errors
+  [-verbose]  Suspend message limits during command execution
+
+Categories: 
+FileIO
+
+# puts [info commands *param*]
+list_param get_board_parameters get_param set_param update_sw_parameters reset_param report_param
+# config_webtalk -info
+INFO: [Common 17-1369] WebTalk has been disabled by the current user.
+INFO: [Common 17-1370] WebTalk has been disabled for the current installation.
+INFO: [Common 17-1366] This combination of user/install settings means that WebTalk is currently disabled.
+# exit
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 23 12:58:50 2026...

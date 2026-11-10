@@ -1,0 +1,37 @@
+from pathlib import Path
+import json,shutil,struct
+from run_checkpoint_authority import ROOT,sha
+base=Path('/tmp/B_state_residency_offer_20261025');names=['iter2_warm_full_v1','iter2_warm_pressure_v1','iter2_warm_default_full_v1','iter2_warm_default_pressure_v1','followup_iter2_next_v1']
+audits={n:json.loads((base/n/'source_bound_audit.json').read_text())for n in names};restores={n:json.loads((ROOT/f'results/{n}_restore_20261025.json').read_text())for n in names}
+assert all(a['status']=='passed'for a in audits.values())and all(x['status']=='passed'and x['audit_byte_identical']for x in restores.values())
+d=ROOT/'hardware/variants/iter2_warm_v1'
+for n in names[:4]:
+ for f in ['query_residency_system.sv','search_residency_system.sv','residency_system.sv']:assert sha(d/f)==sha(base/n/'sources'/f)
+nextroot=base/names[-1];nextstate=audits[names[-1]]['state'];assert nextstate['sequence']==[180328]and nextstate['conn_index']==[170996]
+# Observed next preparation has owner deltas beyond the previous commit.
+samples={}
+with(nextroot.joinpath('initial_nodes.u32').open('rb'))as f:
+ for node,prev in [(558358,[26422,4,2]),(265324,[26422,5,1])]:
+  f.seek(node*44);r=struct.unpack('<11I',f.read(44));assert list(r[6:9])==([26422,3,2]if node==558358 else[26422,4,1]);samples[str(node)]=dict(previous_commit=prev,next_prepared=list(r[6:9]))
+closure=ROOT/'results/iter2_warm_sources_20261026';closure.mkdir();sources={}
+paths=[*d.glob('*.py'),*d.glob('*.sv'),*d.glob('*.md')]+[ROOT/'scripts'/n for n in ['run_iter2_warm.py','audit_iter2_warm.py','run_iter2_warm_default.py','audit_iter2_warm_default.py','report_iter2_warm.py','run_followup_query.py','audit_followup_query.py']]+[ROOT/'adapters/natural_followup_v1/natural_query.hpp']
+for f in paths:
+ n=str(f.relative_to(ROOT));q=closure/n;q.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(f,q);sources[n]=sha(q)
+for n in names[:2]:assert sha(d/'tb_warm.sv')==sha(base/n/'sources/tb_query_fault.sv')
+(closure/'manifest.json').write_text(json.dumps(sources,indent=2)+'\n');(ROOT/'results/iter2_warm_20261026.json').write_text(json.dumps(dict(status='passed',audits=audits,restores=restores,sources=sources,next_query_owner_samples=samples),indent=2)+'\n')
+body='''# 真实iteration2的822标签G1 warm恢复通过（2026-10-26）
+
+详见results/iter2_warm_20261026.json及hardware/variants/iter2_warm_v1/CONTRACT.md。query/search/residency三层增加RESTORE_RECORDS参数，默认512，本例显式1024；822标签、probe204279及stream末尾821同步接入。32槽/单槽均通过完整warm恢复。G1/CP17初始PC租约实际导出empty path78字/CRC4ca00bd5和query10字/CRC4aaeb774，后者version3/flags0x0d/无已消费sequence，未手填旧seq1。
+
+真实自然query180327的第二个owner写（558358）BRESP2，第一写339193成功，形成两键journal；query status7/detail5/committed0。原生G1两轮authority核对与2次DEC恢复339193至0/0、558358/net26422至refs3/occ2，另一net23916/ref1保留。新attempt4/query2/price4恢复822条标签并实际回读验证822；empty path与初始query原字节/CRC经原生回执消费，三类receipt与服务退休联合完成，最终成功回复消费后才放行，无外部cold reset/工作DDR重装。
+
+故障前和重试的两轮171poll/170expand/849candidate/421cost均与原CPU数值oracle一致。重试成功提交三节点、target清理、原生ripup、重复完整sequence180327拒绝通过。822标签、403逻辑页对应全部3MB物理页、10次owner record写、最终146284032B owner图像及全部8AXI重放通过。source price/history未变。默认512的旧328标签G2共享恢复，两容量28文件及周期精确匹配原基线。
+
+同时采集并审计下一自然sequence180328：connection170996/net26422/source66893/sink67922，113expand/114poll/564candidate/302标签更新；原CPU全路由哈希不变。下一prepared-state在558358/265324上的refs为3/4，而上一提交后为4/5，存在额外准备阶段owner变化，不能直接装新快照冒充连续G2执行。新query的独立cost/CPS1/oracle/闭包及RTL仍未生成或验证，具体接入要求见G2_NEXT.md。
+
+四个RTL实验与一份CPU采集均已归档并实际恢复重审，audit字节一致；源冻结results/iter2_warm_sources_20261026。未完成本数据G2三方发布/连续下一query故障恢复、任意未知页/全局cache构建、运行中硬件快照writer、持久化floor/认证、变价有效性、综合时序或板卡收益。当前822 labels仍依赖CPU保守未来读闭包，本自然路径不新增overflow slot。研究继续，goal active。
+'''
+(ROOT/'results/iter2_warm_20261026.md').write_text(body)
+for n in ['AGENTS.md','README.md','NEXT_STEPS.md','EXPERIMENTS.md','INTERFACES.md']:
+ f=ROOT/n;s=f.read_text();assert not s.startswith(body.splitlines()[0]);f.write_text(body+'\n以下保留历史。\n\n'+s)
+print('iteration2 warm evidence frozen',len(sources))

@@ -1,0 +1,11 @@
+# CP基线剩余七场景准备
+
+复用已归档实际恢复的query_matrix off/on/retry_cancel各full/pressure，以及retry_crc_full七个参考。既有checkpoint_edit_system_crc_pressure_v1作为第八项anchor，不重跑。保持每例原始刺激、容量、故障注入、命令、四查询scoreboard和固定价格/history范围。
+
+仅使用已冻结checkpoint_edit_exclusion_v1的query_lifecycle/query_residency_system两份生产覆盖；全部133生产源必须与已恢复checkpoint_edit_synth_v1及CP CRC anchor逐SHA匹配。保留原backend/capture/query监视，追加已冻结CP实际端口观察。CP safe/edit未知或重叠fatal；safe/busy/import/export非空、请求回复平衡，edit计数单独记录，不能假设完整矩阵会覆盖普通edit。
+
+每例必须独立审计27份输出逐字节一致、结束周期一致及原监视行原样一致，再归档实际恢复复审。最终八场景只证明此CP候选和具体刺激，不能自动覆盖path/stage或任意参数、价格、取消点与板卡时序。
+
+preflight仅检查来源和生成监视文本，不启动编译/仿真。sources/evidence要求现有checkpoint_edit_route_recovery_followup_v1完整终态、独立路后检查、实际恢复和freeze通过。该门槛用于串行资源/证据所有权，不要求负slack变为正值，亦不把物理artifact审计当时序闭合。
+
+后续最多一个行为任务，遵守连续60秒不超过225/300GiB的内存准入；由独立队列负责逐例run/audit/archive/actual restore。当前只准备builder/runner/auditor和preflight，没有创建矩阵实验目录或提交队列。原冻结工具和源保持不变。

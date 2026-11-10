@@ -1,0 +1,70 @@
+{
+  "datasets": [
+    {
+      "id": "toy_A",
+      "kind": "synthetic_smoke",
+      "status": "ready",
+      "path": "toy.json",
+      "description": "两个相邻 tile 共享一个规范节点；同一个局部连接模板展开后加一条例外边，与显式图逐项比较。"
+    },
+    {
+      "id": "real_A_1",
+      "kind": "real",
+      "status": "pending",
+      "path": null,
+      "description": "同学 xcvu13p 器件图与真实查询轨迹",
+      "target_device": null,
+      "source_version": null,
+      "sha256": null
+    },
+    {
+      "id": "real_A_2",
+      "kind": "real",
+      "status": "pending",
+      "path": null,
+      "description": "FPGA24 公共器件图及兼容输入；需单独完成格式适配",
+      "target_device": null,
+      "source_version": null,
+      "sha256": null
+    },
+    {
+      "id": "real_A_vivado_semantics_1",
+      "kind": "real",
+      "status": "ready",
+      "path": "raw/xcvu13p_sample_20261022_v2.tsv",
+      "description": "Vivado 2022.2 xcvu13p 20 seed tile / 534 complete source adjacency sample; semantics only, not a full routing benchmark",
+      "target_device": "xcvu13p-fhgb2104-2-e",
+      "source_version": "Vivado v2022.2 (64-bit), SW Build 3671981",
+      "sha256": "94b76533891139c44269a201067391d8b81fe2347f227e8c15dcf8102ff25664",
+      "capabilities": [
+        "sampled_complete_one_hop_adjacency",
+        "canonical_wire_aliases",
+        "pip_identity_direction_properties",
+        "independent_downhill_node_oracle"
+      ],
+      "routing_benchmark_ready": false
+    },
+    {
+      "id": "real_A_slr_holdout_1",
+      "kind": "real",
+      "status": "ready",
+      "path": "raw/regions_20261022_v1/heldout.tsv",
+      "description": "SLR1–3: 36 seed tiles / 828 complete source rows; frozen template evaluation",
+      "target_device": "xcvu13p-fhgb2104-2-e",
+      "source_version": "Vivado v2022.2 SW Build 3671981",
+      "sha256": "9d0f1f0d199ad655862b042cb03884bf41fb766e7f7b256dd64b4f8f01eb91cf",
+      "routing_benchmark_ready": false
+    },
+    {
+      "id": "real_A_bfs_domain_1",
+      "kind": "real",
+      "status": "ready",
+      "path": "raw/regions_20261022_v1/closure.tsv",
+      "description": "Three real resource seeds, four-hop bounded BFS domain; constructed search queries, no netlist workload",
+      "target_device": "xcvu13p-fhgb2104-2-e",
+      "source_version": "Vivado v2022.2 SW Build 3671981",
+      "sha256": "3448e5a12aa2b348ce533f518c435fafe5703dcbb9a859155a454095f2d8f7dc",
+      "routing_benchmark_ready": false
+    }
+  ]
+}

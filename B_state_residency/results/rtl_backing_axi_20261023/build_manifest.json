@@ -1,0 +1,67 @@
+{
+  "status": "failed",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi.sv": "27365b16cc997b107a15cae232a5dd3232f2941c0d560e815578cd79ba2b4e69",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory.sv": "616b42670cdd9b487781686348690c46591543237e41f83c857e920088f67ee6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_page_service.sv": "b8eba97c3f3d3c70d385c16c3fe32868f14dbfad4f8faabed8fd8f2b9cab8893",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc": "a9259339b45b2eef2df30687117b50aed5a9a207d151e14f8538c125057c4459",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_backing_page_service.sv": "104311006c9c041a82386c07502fcdcda5f4cf70c29d0c62b0f8b2e9825bf8dd",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_axi_pages.py": "fe7887ec3f2fb3a15cac92c0fed53e620787a865f6f6221c81801f6bad553a6a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_backing_axi_artifacts.py": "1c58f474054089c4612c453588d25e472bc87d5db9a0d9e5ef50a2ea1d6aa9cc"
+  },
+  "negative_controls": {
+    "complete_before_B": {
+      "status": "running",
+      "file": "scratch_page_axi.sv",
+      "removed": "if(position==length-1'b1)state<=WRITE_RESPONSE;",
+      "replacement": "if(position==length-1'b1)begin if(total==20)begin state<=IDLE;done_valid<=1;end else state<=WRITE_RESPONSE;end",
+      "expected_failure": "before final B response",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/negative_controls/complete_before_B/scratch_page_axi.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/sources/hardware/rtl/backing_frame_directory.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/sources/hardware/rtl/backing_page_service.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/sources/hardware/tb/tb_backing_page_service.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_backing_page_service",
+            "--snapshot",
+            "negative_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "negative_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--testplusarg",
+            "PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ]
+    }
+  },
+  "synthesis": {},
+  "error": "ValueError('Wrong negative outcome complete_before_B')"
+}

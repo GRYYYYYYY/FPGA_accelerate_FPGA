@@ -1,0 +1,369 @@
+{
+  "schema": "hls_ii_diagnosis_v1",
+  "skill": "amd-ross-agentic-ai-assistant:hls-ii-diagnose",
+  "version_compatibility": "2022.2 classic HLS: syn/report and solution/.autopilot/db replace modern component paths; raw CLI log retained. No source or directive edits and no flows launched as part of diagnosis.",
+  "scope": "Schedule-level diagnosis; not attribution of measured board memory latency or exact runtime percentage.",
+  "diagnoses": [
+    {
+      "target_label": "VITIS_LOOP_22_1",
+      "module": "alias_lookup_Pipeline_VITIS_LOOP_22_1",
+      "achieved_ii": 74,
+      "target_ii": null,
+      "tool_loop_table_target": 1,
+      "explicit_source_ii_target": false,
+      "category": [
+        "b: long AXI read-request scheduling latency in binary-search recurrence"
+      ],
+      "diagnosis": "lo/hi -> midpoint -> two AXI key words -> comparison -> lo/hi. Schedule assigns readreq 70 stages (ST_3 to ST_72); data at ST_73/ST_74 and bounds stores at ST_75. This is a dependent-address memory recurrence, not evidence of arithmetic complexity alone.",
+      "evidence": {
+        "log": "results/hls_synth_20261022_v2.log",
+        "log_lines": [
+          {
+            "line": 217,
+            "text": "INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_22_1'."
+          },
+          {
+            "line": 218,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 219,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 220,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 221,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 222,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 223,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 224,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 225,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 226,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 227,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 228,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 70, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 229,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 230,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 72, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 231,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 232,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'alias_lookup_Pipeline_VITIS_LOOP_22_1' (loop 'VITIS_LOOP_22_1'): Unable to enforce a carried dependence constraint (II = 73, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln25_2', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:25) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:23)."
+          },
+          {
+            "line": 233,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 234,
+            "text": "INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 74, Depth = 75, loop 'VITIS_LOOP_22_1'"
+          }
+        ],
+        "schedule": "build/hls_graph_expand_20261022_v2/solution/.autopilot/db/alias_lookup_Pipeline_VITIS_LOOP_22_1.verbose.sched.rpt",
+        "schedule_excerpt": [
+          {
+            "line": 196,
+            "text": "ST_3 : Operation 106 [70/70] (3.65ns)   --->   \"%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %graph_addr, i32 2\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:24]   --->   Operation 106 'readreq' 'empty' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 403,
+            "text": "ST_72 : Operation 175 [1/70] (3.65ns)   --->   \"%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %graph_addr, i32 2\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:24]   --->   Operation 175 'readreq' 'empty' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 406,
+            "text": "ST_73 : Operation 176 [1/1] (3.65ns)   --->   \"%at = read i32 @_ssdm_op_Read.m_axi.p1i32, i32 %graph_addr\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:24]   --->   Operation 176 'read' 'at' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 409,
+            "text": "ST_74 : Operation 177 [1/1] (3.65ns)   --->   \"%aw = read i32 @_ssdm_op_Read.m_axi.p1i32, i32 %graph_addr\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:24]   --->   Operation 177 'read' 'aw' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 421,
+            "text": "ST_75 : Operation 187 [1/1] (0.38ns)   --->   \"%store_ln22 = store i32 %lo_15, i32 %lo\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:22]   --->   Operation 187 'store' 'store_ln22' <Predicate = true> <Delay = 0.38>"
+          },
+          {
+            "line": 422,
+            "text": "ST_75 : Operation 188 [1/1] (0.38ns)   --->   \"%store_ln22 = store i32 %mid_4, i32 %hi_8\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:22]   --->   Operation 188 'store' 'store_ln22' <Predicate = true> <Delay = 0.38>"
+          }
+        ],
+        "source": "hardware/hls/graph_expand.cpp",
+        "source_line": 24
+      },
+      "next_step": "Evaluate an exact on-chip indexed mapping/cache or multiple independent lookup contexts to reduce/hide dependent external-memory accesses; charge the mapping/cache and initialization to both formats. An II annotation alone does not remove the recurrence. No optimization or flow was run for this diagnosis."
+    },
+    {
+      "target_label": "VITIS_LOOP_10_1",
+      "module": "expand_rule_Pipeline_VITIS_LOOP_10_1",
+      "achieved_ii": 74,
+      "target_ii": null,
+      "tool_loop_table_target": 1,
+      "explicit_source_ii_target": false,
+      "category": [
+        "b: long AXI read-request scheduling latency in binary-search recurrence"
+      ],
+      "diagnosis": "lo/hi -> midpoint -> two AXI key words -> comparison -> lo/hi. Schedule assigns readreq 70 stages (ST_3 to ST_72); data at ST_73/ST_74 and bounds stores at ST_75. This is a dependent-address memory recurrence, not evidence of arithmetic complexity alone.",
+      "evidence": {
+        "log": "results/hls_synth_20261022_v2.log",
+        "log_lines": [
+          {
+            "line": 187,
+            "text": "INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_10_1'."
+          },
+          {
+            "line": 188,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 189,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 190,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 191,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 192,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 193,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 194,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 4, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 195,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 196,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 67, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 197,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 198,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 70, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 199,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 200,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 72, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 201,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 202,
+            "text": "WARNING: [HLS 200-880] The II Violation in module 'expand_rule_Pipeline_VITIS_LOOP_10_1' (loop 'VITIS_LOOP_10_1'): Unable to enforce a carried dependence constraint (II = 73, distance = 1, offset = 1) between 'icmp' operation ('icmp_ln13_2', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:13) and 'add' operation ('p', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:11)."
+          },
+          {
+            "line": 203,
+            "text": "Resolution: For help on HLS 200-880 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-880.html"
+          },
+          {
+            "line": 204,
+            "text": "INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 74, Depth = 75, loop 'VITIS_LOOP_10_1'"
+          }
+        ],
+        "schedule": "build/hls_graph_expand_20261022_v2/solution/.autopilot/db/expand_rule_Pipeline_VITIS_LOOP_10_1.verbose.sched.rpt",
+        "schedule_excerpt": [
+          {
+            "line": 196,
+            "text": "ST_3 : Operation 106 [70/70] (3.65ns)   --->   \"%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %graph_addr, i32 2\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:12]   --->   Operation 106 'readreq' 'empty' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 403,
+            "text": "ST_72 : Operation 175 [1/70] (3.65ns)   --->   \"%empty = readreq i1 @_ssdm_op_ReadReq.m_axi.p1i32, i32 %graph_addr, i32 2\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:12]   --->   Operation 175 'readreq' 'empty' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 406,
+            "text": "ST_73 : Operation 176 [1/1] (3.65ns)   --->   \"%gx = read i32 @_ssdm_op_Read.m_axi.p1i32, i32 %graph_addr\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:12]   --->   Operation 176 'read' 'gx' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 409,
+            "text": "ST_74 : Operation 177 [1/1] (3.65ns)   --->   \"%gy = read i32 @_ssdm_op_Read.m_axi.p1i32, i32 %graph_addr\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:12]   --->   Operation 177 'read' 'gy' <Predicate = true> <Delay = 3.65> <CoreInst = \"m_axi\">   --->   Core 121 'm_axi' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : 'read' 'write' 'readreq' 'writereq' 'writeresp'>"
+          },
+          {
+            "line": 421,
+            "text": "ST_75 : Operation 187 [1/1] (0.38ns)   --->   \"%store_ln10 = store i32 %lo_5, i32 %lo\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:10]   --->   Operation 187 'store' 'store_ln10' <Predicate = true> <Delay = 0.38>"
+          },
+          {
+            "line": 422,
+            "text": "ST_75 : Operation 188 [1/1] (0.38ns)   --->   \"%store_ln10 = store i32 %mid_2, i32 %hi_1\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:10]   --->   Operation 188 'store' 'store_ln10' <Predicate = true> <Delay = 0.38>"
+          }
+        ],
+        "source": "hardware/hls/graph_expand.cpp",
+        "source_line": 12
+      },
+      "next_step": "Evaluate an exact on-chip indexed mapping/cache or multiple independent lookup contexts to reduce/hide dependent external-memory accesses; charge the mapping/cache and initialization to both formats. An II annotation alone does not remove the recurrence. No optimization or flow was run for this diagnosis."
+    },
+    {
+      "target_label": "VITIS_LOOP_102_6",
+      "module": "decode_Pipeline_VITIS_LOOP_102_6",
+      "achieved_ii": 11,
+      "target_ii": null,
+      "tool_loop_table_target": 1,
+      "explicit_source_ii_target": false,
+      "category": [
+        "c: two-port local buffer shortage",
+        "loop-carried insertion-sort comparison/shift"
+      ],
+      "diagnosis": "The compiler unrolled the seven-word record operations; buffer is one 32-bit, 7168-word, two-port BRAM. The scheduler reports load/store port shortages at II9/10 and serializes seven stores through ST_12..ST_18. Loop exit comparison also constrains the recurrence. No per-function runtime profile was collected, so its fraction of total batch latency is unknown.",
+      "evidence": {
+        "log": "results/hls_synth_20261022_v2.log",
+        "log_lines": [
+          {
+            "line": 271,
+            "text": "INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_102_6'."
+          },
+          {
+            "line": 272,
+            "text": "WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:40)) in the first pipeline iteration (II = 1 cycles)."
+          },
+          {
+            "line": 273,
+            "text": "Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html"
+          },
+          {
+            "line": 274,
+            "text": "WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:40)) in the first pipeline iteration (II = 2 cycles)."
+          },
+          {
+            "line": 275,
+            "text": "Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html"
+          },
+          {
+            "line": 276,
+            "text": "WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:40)) in the first pipeline iteration (II = 3 cycles)."
+          },
+          {
+            "line": 277,
+            "text": "Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html"
+          },
+          {
+            "line": 278,
+            "text": "WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:40)) in the first pipeline iteration (II = 4 cycles)."
+          },
+          {
+            "line": 279,
+            "text": "Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html"
+          },
+          {
+            "line": 280,
+            "text": "WARNING: [HLS 200-878] Unable to schedule the loop exit test ('and' operation ('spec_select_i', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:40)) in the first pipeline iteration (II = 7 cycles)."
+          },
+          {
+            "line": 281,
+            "text": "Resolution: For help on HLS 200-878 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-878.html"
+          },
+          {
+            "line": 282,
+            "text": "WARNING: [HLS 200-885] The II Violation in module 'decode_Pipeline_VITIS_LOOP_102_6' (loop 'VITIS_LOOP_102_6'): Unable to schedule 'store' operation ('buffer_addr_write_ln102', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102) of variable 'buffer_load', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:40 on array 'buffer_r' due to limited memory ports (II = 9). Please consider using a memory core with more ports or partitioning the array 'buffer_r'."
+          },
+          {
+            "line": 283,
+            "text": "Resolution: For help on HLS 200-885 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-885.html"
+          },
+          {
+            "line": 284,
+            "text": "WARNING: [HLS 200-885] The II Violation in module 'decode_Pipeline_VITIS_LOOP_102_6' (loop 'VITIS_LOOP_102_6'): Unable to schedule 'load' operation ('buffer_load_16', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102) on array 'buffer_r' due to limited memory ports (II = 10). Please consider using a memory core with more ports or partitioning the array 'buffer_r'."
+          },
+          {
+            "line": 285,
+            "text": "Resolution: For help on HLS 200-885 see www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=hls+guidance;d=200-885.html"
+          },
+          {
+            "line": 286,
+            "text": "INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 11, Depth = 17, loop 'VITIS_LOOP_102_6'"
+          }
+        ],
+        "schedule": "build/hls_graph_expand_20261022_v2/solution/.autopilot/db/decode_Pipeline_VITIS_LOOP_102_6.verbose.sched.rpt",
+        "schedule_excerpt": [
+          {
+            "line": 233,
+            "text": "ST_12 : Operation 126 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load, i13 %buffer_addr\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 126 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          },
+          {
+            "line": 241,
+            "text": "ST_13 : Operation 132 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load_13, i13 %buffer_addr_13\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 132 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          },
+          {
+            "line": 247,
+            "text": "ST_14 : Operation 136 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load_14, i13 %buffer_addr_14\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 136 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          },
+          {
+            "line": 253,
+            "text": "ST_15 : Operation 140 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load_15, i13 %buffer_addr_15\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 140 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          },
+          {
+            "line": 259,
+            "text": "ST_16 : Operation 144 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load_16, i13 %buffer_addr_16\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 144 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          },
+          {
+            "line": 269,
+            "text": "ST_17 : Operation 152 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load_17, i13 %buffer_addr_17\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 152 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          },
+          {
+            "line": 272,
+            "text": "ST_18 : Operation 153 [1/1] (1.24ns)   --->   \"%store_ln102 = store i32 %buffer_load_18, i13 %buffer_addr_18\" [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/hls/graph_expand.cpp:102]   --->   Operation 153 'store' 'store_ln102' <Predicate = (!icmp_ln102 & spec_select_i)> <Delay = 1.24> <CoreInst = \"RAM_2P_BRAM\">   --->   Core 94 'RAM_2P_BRAM' <Latency = 1> <II = 1> <Delay = 1.24> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 7168> <RAM>"
+          }
+        ],
+        "source": "hardware/hls/graph_expand.cpp",
+        "source_line": 102
+      },
+      "next_step": "Evaluate a full-record-wide/banked local memory or ordered merge of rules/exceptions to reduce record movement; account for resource cost. Do not simply add pipeline pragmas without addressing ports and recurrence."
+    }
+  ],
+  "sha256": {
+    "results/hls_synth_20261022_v2.log": "2bf16b9c417bcab5409ccaa0f2ef80840e50db9090f939f5f57e33f5ca29f7aa",
+    "hardware/hls/graph_expand.cpp": "35388d4ff4ada8f745f0e6a3ad201b7e25d3cc272d4a062483a247f273bc6b9b",
+    "build/hls_graph_expand_20261022_v2/solution/.autopilot/db/alias_lookup_Pipeline_VITIS_LOOP_22_1.verbose.sched.rpt": "7490165012e3db927c40a47a3290612b496640a8cd3d6d987d4ea98b6173e18a",
+    "build/hls_graph_expand_20261022_v2/solution/.autopilot/db/expand_rule_Pipeline_VITIS_LOOP_10_1.verbose.sched.rpt": "917d650980da079ea0b59cb595e4315c2d964fe8d41119983afc86337fc88f6e",
+    "build/hls_graph_expand_20261022_v2/solution/.autopilot/db/decode_Pipeline_VITIS_LOOP_102_6.verbose.sched.rpt": "54c2b63fead5011c3a4d6087dea2a7d58f9b767ceeaf9c2856abaadf8fbd4b24"
+  }
+}

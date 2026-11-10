@@ -1,0 +1,69 @@
+{
+  "dataset_kind": "synthetic_smoke",
+  "fixture_id": "toy_D",
+  "graph": {
+    "nodes": [
+      {
+        "id": 0
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "edges": [
+      {
+        "id": "e01slow",
+        "src": 0,
+        "dst": 1,
+        "cost": 5
+      },
+      {
+        "id": "e01fast",
+        "src": 0,
+        "dst": 1,
+        "cost": 1
+      },
+      {
+        "id": "e02",
+        "src": 0,
+        "dst": 2,
+        "cost": 2
+      },
+      {
+        "id": "e13",
+        "src": 1,
+        "dst": 3,
+        "cost": 1
+      },
+      {
+        "id": "e23",
+        "src": 2,
+        "dst": 3,
+        "cost": 4
+      },
+      {
+        "id": "e34",
+        "src": 3,
+        "dst": 4,
+        "cost": 1
+      }
+    ]
+  },
+  "source": 0,
+  "targets": [
+    4
+  ],
+  "expected": {
+    "status": "found",
+    "cost": 3
+  }
+}

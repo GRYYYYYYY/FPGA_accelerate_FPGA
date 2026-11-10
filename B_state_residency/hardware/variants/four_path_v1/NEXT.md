@@ -1,0 +1,11 @@
+# 当前候选与后续G4恢复边界
+
+已完成运行根位于/tmp/B_state_residency_offer_20261025：fourth_system_full_v2、fourth_system_pressure_v2。两例均已终态并独立审计通过，run_fourth_system.py与audit_fourth_system.py用于完整四槽候选。开发full_v1实际在G4导出后因190328断言失败；修正版只改两处期望为180329，完整共有native事件/周期与12AXI原始前缀一致，单独开发失败审计通过。不是生产RTL反例。
+
+归档实际恢复与冻结的最终凭据见results/fourth_system_20261027.json。路径源从所有阶段重新156字导出，不可将旧117字CRC转抄过来。审计已分别核对G4复制前A=G2、复制后A=G4以及保持不变的C=G3。第72个authority读beat后的真实退休边界没有在途事务；此前与此后分别使用旧/新图像，全85个读beat核对。G4copy为累计四条64B脏行，非全图重新加载。CPU q4自己的cost/filter已完成，保守426条闭包仅作审计，不作工作标签预加载。
+
+后续优先G4恢复真实“已经释放最后owner”的状态，而不只重复共享引用场景。建议在q4实际ripup之后、owner commit之前注入一次图R错误（现TB fault_case3已有图R受理序号接口，具体受理点必须以实际轨迹核实）。此时journal应已含990178/558358/265324三键；工作owner目标分别为0/0、refs3/occ2、refs4/occ1，G4 authority对应1/1、4/2、5/1。若确实在任何commit前故障，原生恢复应三次INC，包括990178由全零primary重新创建为net26422/ref1/occ1；其他net23916/ref1与满overflow池保持。不能预先硬填错误状态或伪造owner回复。
+
+G4源上下文6/0/6、floor180329、前三路径加空第四槽、原生导出的标签集合/数量/CRC必须来自本次成功发布。恢复attempt应大于6，例如7/query1/price7，价格/history字节仍不变；以原始source descriptor与path/query CRC进行rebase，三类真实回执及最终成功消费之前不放行业务。恢复后重新登记q4历史元数据、实际ripup，再用未成功消费的完整sequence180330重试。若故障尝试已消费序号，必须依据原生ledger行为调整，不能绕过下限或手填旧序号。
+
+这一G4 warm后续尚未实现或验证。正常q4的31个owner record写已实际逐字节核对；无overflow新增回收、固定价格、外部可信初始baseline/clones、无持久化认证/floor、无当前完整层级时序或板卡收益等范围都应分别说明。候选完成审计/恢复后释放自身干净文件缓存，不删除原始证据。

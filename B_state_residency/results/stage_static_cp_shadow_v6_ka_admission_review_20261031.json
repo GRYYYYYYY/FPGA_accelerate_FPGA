@@ -1,0 +1,156 @@
+{
+  "status": "ka_admission_exclusion_source_review_not_formal_reachability_proof",
+  "predecessor": {
+    "path": "results/stage_static_cp_shadow_v6_ka_stall_source_analysis_20261031.json",
+    "sha256": "3472cf29fd03813a80a842e8ae955a4ee47d77bd7c821ffdef1cf56b9620ddc6"
+  },
+  "files": {
+    "query_residency_system.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/query_residency_system.sv",
+      "sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+      "evidence": {
+        "wire as_initial_safe=": [
+          {
+            "line": 516,
+            "text": "wire as_initial_safe=!rst&&!k_cold_rst&&!abort&&!pc_owned&&!pc_acquire_valid&&!cp_valid&&!cp_test_reset&&!qc_busy&&!ss_busy&&!k_busy&&!f_recovery_owned&&f_normal_retired&&f_backend_idle&&f_all_drained&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid;"
+          }
+        ],
+        "assign as_cfg_ready=": [
+          {
+            "line": 517,
+            "text": "assign as_cfg_ready=(!boot_pending||boot_admin_allowed)&&(as_initial_safe||(jp_prepare&&jp_authority_stage))&&as_core_cfg_ready;"
+          }
+        ],
+        "wire ap_allow=": [
+          {
+            "line": 528,
+            "text": "wire ap_allow=!rst&&!k_cold_rst&&!abort&&pc_owned&&!jp_owned&&!k_busy&&!k_rec_valid&&!as_cfg_lease&&!k_a_valid&&!ap_owned;"
+          }
+        ],
+        "assign b_k_rec_valid=": [
+          {
+            "line": 604,
+            "text": "assign c_route_ready=qc_busy&&b_rc_req_ready;assign c_route_rsp_valid=qc_busy&&b_rc_rsp_valid;assign b_k_rec_valid=!boot_pending&&!qc_busy&&!pc_owned&&!as_cfg_lease&&k_rec_valid;assign k_rec_ready=!boot_pending&&!qc_busy&&!pc_owned&&!as_cfg_lease&&b_k_rec_ready;"
+          }
+        ],
+        "wire pc_quiet=": [
+          {
+            "line": 587,
+            "text": "wire pc_quiet=!rst&&!k_cold_rst&&!abort&&p_active&&k_permit&&f_phase==0&&f_normal_retired&&f_backend_idle&&f_all_drained&&(!qc_busy||qc_cp_busy)&&!ss_busy&&!qc_fault&&!ss_fault&&!fault&&!rc_fault&&!k_fault&&!cf_fault&&!lr_fault&&!f_fault&&!k_busy&&!f_recovery_owned&&!as_cfg_lease&&!as_fault;"
+          }
+        ],
+        "wire pc_retired=": [
+          {
+            "line": 589,
+            "text": "wire pc_retired=!rst&&!k_cold_rst&&f_normal_retired&&f_backend_idle&&f_all_drained&&!qc_busy&&!ss_busy&&!k_busy&&!f_recovery_owned&&(f_phase==0||f_phase==6);"
+          }
+        ],
+        "checkpoint_lease_guard checkpoint_lease(": [
+          {
+            "line": 590,
+            "text": "checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));"
+          }
+        ],
+        ".cfg_valid((!boot_pending": [
+          {
+            "line": 543,
+            "text": ".cfg_valid((!boot_pending||boot_admin_allowed)&&as_cfg_valid&&(as_initial_safe||(jp_prepare&&jp_authority_stage))),.cfg_ready(as_core_cfg_ready),.cfg_design(as_cfg_design),.cfg_generation(as_cfg_generation),.cfg_primary(as_cfg_primary),.cfg_pool(as_cfg_pool),.cfg_allocator(as_cfg_allocator),.cfg_checkpoint(as_cfg_checkpoint),.cfg_nodes(as_cfg_nodes),.cfg_nets(as_cfg_nets),.cfg_capacity(as_cfg_capacity),"
+          }
+        ],
+        "assign as_retired=": [
+          {
+            "line": 520,
+            "text": "assign as_retired=!as_busy&&!as_core_cfg_valid;"
+          }
+        ]
+      }
+    },
+    "checkpoint_lease_guard.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_lease_guard.sv",
+      "sha256": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+      "evidence": {
+        "assign acquire_ready=": [
+          {
+            "line": 6,
+            "text": " assign acquire_ready=!rst&&!owned&&healthy&&route_retired&&no_offers&&!command_busy&&!test_reset;"
+          }
+        ],
+        "assign release_ready=": [
+          {
+            "line": 7,
+            "text": " assign release_ready=!rst&&owned&&retired&&route_retired&&!command_busy&&!command_valid&&!test_reset;"
+          }
+        ]
+      }
+    },
+    "checkpoint_publish_barrier.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_publish_barrier.sv",
+      "sha256": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+      "evidence": {
+        "assign owned=": [
+          {
+            "line": 19,
+            "text": " assign owned=!rst&&state!=IDLE;"
+          }
+        ],
+        "assign prepare_allowed=": [
+          {
+            "line": 20,
+            "text": " assign prepare_allowed=!rst&&state==OPEN&&lease_owned&&!fault&&!commit_valid&&!cancel_valid;"
+          }
+        ],
+        "assign start_ready=": [
+          {
+            "line": 21,
+            "text": " assign start_ready=!rst&&state==IDLE&&lease_owned&&retired&&!stage_busy&&!fault&&prepared==0;"
+          }
+        ]
+      }
+    }
+  },
+  "deductions": [
+    {
+      "path": "AP new request during recovery",
+      "conditions": [
+        "AP admission requires pc_owned and !k_busy",
+        "recovery admission requires !pc_owned and !as_cfg_lease",
+        "new lease acquisition requires pc_quiet, which requires !k_busy"
+      ],
+      "conclusion": "ordinary AP competition cannot simply be enabled during active recovery; pre-existing ownership and simultaneous admission require transition-level checking"
+    },
+    {
+      "path": "ordinary authority configuration during recovery",
+      "conditions": [
+        "as_initial_safe includes !k_busy and !k_rec_valid",
+        "actual cfg_valid is qualified by as_initial_safe or publication preparation",
+        "publication preparation requires lease ownership"
+      ],
+      "conclusion": "holding raw as_cfg_valid high does not establish authority configuration during active recovery"
+    },
+    {
+      "path": "prior AP response held outstanding",
+      "conditions": [
+        "lease command_busy includes ap_owned and as_busy",
+        "lease release requires !command_busy",
+        "recovery admission requires !pc_owned"
+      ],
+      "conclusion": "holding an AP response blocks lease release and thereby recovery admission; not demonstrated as a KA-stall stimulus"
+    },
+    {
+      "path": "unit-level coordinator backend stall",
+      "conditions": [
+        "existing recovery_retry_v1/tb_recovery_coordinator.sv drives a_ready periodically and checks held request stability"
+      ],
+      "conclusion": "existing unit testing can exercise producer stall, but does not establish full-system RTL/gate KA-stall coverage"
+    }
+  ],
+  "remaining_obligations": [
+    "transition-level simultaneous lease/recovery/config admissions",
+    "authority rearm completion and reconfiguration_done ordering before AS",
+    "reader configured/fault/drained invariants at each AS entry",
+    "legal exceptional setup/abort behavior with finite KA stall and successful completion"
+  ],
+  "decision": "Do not submit an unchanged 26-hour full run. First derive a reachable stimulus or a machine-checked scoped reachability result; retain all v6 failed gates and physical closure.",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

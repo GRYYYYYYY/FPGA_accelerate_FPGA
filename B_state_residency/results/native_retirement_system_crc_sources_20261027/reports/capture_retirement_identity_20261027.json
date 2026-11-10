@@ -1,0 +1,35 @@
+{
+  "analyzer_sha256": "44bec9b835e97542d0e0de7193bdc7cb7b5b85c560251219f89486662f128731",
+  "checked_source_expressions": {
+    "capture/children_frames.sv": [
+      " wire has_frame=level!=0;",
+      " assign depth=level;",
+      " assign frame_done=!rst&&!capturing&&has_frame&&!push&&((fault||abort)?!presented[top]:cursors[top]==counts[top]);"
+    ],
+    "capture/expansion_capture.sv": [
+      "children_frames #(.DEPTH(DEPTH),.CAPACITY(CAPACITY),.CONTEXT_BITS(512)) frames(",
+      ".capture_active(capturing),.fault(frame_fault),.error_code(frame_error),.depth(depth),",
+      ".frame_done(frame_done),",
+      " assign result_valid=frame_done&&state==0&&(fault||!expand_valid||result_offered);"
+    ],
+    "priced/candidate_recursive_query_core.sv": [
+      "expansion_capture #(.DEPTH(4),.CAPACITY(32)) child_capture(",
+      ".busy(capture_busy),.fault(capture_fault),.depth(capture_depth),",
+      ".result_valid(e_result_valid),",
+      " assign retired_idle=!rst&&!busy&&!arb_g_busy&&!arb_d_busy&&!arb_io_busy&&!pc_arb_busy&&\n capture_depth==0&&b_retired_idle&&\n !g_rsp_valid&&!d_rsp_valid&&!b_result_valid&&!ce_result_valid&&!e_result_valid&&\n !m_rsp_valid&&!a_rsp_valid&&!s_rsp_valid&&!c_rsp_valid&&!t_rsp_valid&&!o_rsp_valid&&!o_b_rsp_valid&&!p_result_valid;"
+    ]
+  },
+  "nonvacuous_reply_valuations": 56,
+  "reference": "/tmp/B_state_residency_offer_20261025/route_block_system_crc_pressure_v1",
+  "reference_audit_sha256": "57ac7014644f7a42eeb961db5a71924b66c5009e0522d607594f753257b7820b",
+  "reference_restore_sha256": "6cb16df327e619f60da181a9d97a62eb856a9ad982536fce6e96dd65e08f5241",
+  "rewrite": "Remove only !e_result_valid from query core retired_idle, retaining capture_depth==0 and every other retirement gate.",
+  "scope": "Source-bound two-state Boolean identity. Zero/nonzero abstraction covers every 32-bit level. The native capture result implies nonzero depth without FSM reachability assumptions. Not an X/Z proof, sequential formal proof, synthesis result or full-system validation.",
+  "source_sha256": {
+    "capture/children_frames.sv": "c4779c39a8877b0b6b9d1b72e6eadb995568aa2742a54377d3df6ce10e954a43",
+    "capture/expansion_capture.sv": "eb9e4eb559989470eb574bc56b6df7480740b8329922e677ef209e8dfbf7f0cf",
+    "priced/candidate_recursive_query_core.sv": "e69429733b981049e8958ad43f22d8cba22ba293c719aae02278f914206be93d"
+  },
+  "status": "zero_depth_retirement_identity_not_rtl_validation",
+  "valuations": 8192
+}

@@ -1,0 +1,1 @@
+Nine native component tests and full CRC pressure behavior now passed, archived and actually restored. Full audit: 27 exact files,48288200ns,4828815 exclusion checks,26 authority and32 owner completed requests. Sources/tools frozen in results/recovery_backend_system_crc_sources_20261027. Capture retirement composition and structural results are separate pending work.

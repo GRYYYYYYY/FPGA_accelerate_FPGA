@@ -1,0 +1,179 @@
+{
+  "accepted_reference_transfers": {
+    "authority_requests": 26,
+    "cp_export_words": 1560,
+    "label_write_beats": 8223
+  },
+  "analyzer_sha256": "fbef056c025be184cec82520442e2fe57703e000d65feb97d79998e1e1a05224",
+  "authority_mux_boolean_cases": [
+    {
+      "ap_offer": 0,
+      "ap_owned": 0,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 0,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 1
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 0,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 0,
+      "k_a_valid": 1,
+      "k_payload_consumed": true,
+      "ready": 1
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 0,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 0,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 1
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 0,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 0,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 1
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 1,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 1,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 1
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 1,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 0,
+      "ap_owned": 1,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 1
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 1,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 1,
+      "k_a_valid": 0,
+      "k_payload_consumed": false,
+      "ready": 1
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 1,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 0
+    },
+    {
+      "ap_offer": 1,
+      "ap_owned": 1,
+      "k_a_valid": 1,
+      "k_payload_consumed": false,
+      "ready": 1
+    }
+  ],
+  "failed_shadow_freeze_sha256": "d0876edc97b8f5072801a8754d9c39d6bca55b706927c49f052747dc569fb24e",
+  "failed_shadow_report_sha256": "c1422547ae3f92938a3937fe04e32e9579cd406e3b188d0bc0450dbb9eca3c54",
+  "full_system_functional_netlist_validated": false,
+  "proposed_groups": [
+    {
+      "payloads": [
+        "cp_m_data"
+      ],
+      "prior_controls": "17 actual-restored CP controls",
+      "ready": "cp_m_ready",
+      "valid": "cp_m_valid"
+    },
+    {
+      "consumer": "authority mux and reader capture only under request valid/ready",
+      "payloads": [
+        "k_a_node",
+        "k_a_net"
+      ],
+      "ready": "k_a_ready",
+      "valid": "k_a_valid"
+    },
+    {
+      "consumer": "AXI file memory write queue only under WVALID/WREADY",
+      "payloads": [
+        "p_m_wdata"
+      ],
+      "ready": "p_m_wready",
+      "valid": "p_m_wvalid"
+    }
+  ],
+  "qualification_not_applied": true,
+  "required_observer_controls": [
+    "Each group valid must be known and equal even idle",
+    "Payload must be known/equal whenever valid1 including backpressure",
+    "Check pre-clock acceptance and post-edge states",
+    "Inject active/stalled/pre-edge payload errors and X/Z",
+    "Inject unknown/mismatched valid and nonqualified control errors",
+    "Independent gate transfer logs must match gold26 authority requests,8223 AXI write beats and1560 CP words",
+    "Do not infer stability or equality of idle payloads, or ignore other342 outputs",
+    "Keep failed v3/v4 unchanged; new control suite and new full experiment required"
+  ],
+  "sampled_unconditional_output_count": 342,
+  "scope": "Source and16-case Boolean mux analysis only, not RTL/formal proof or a new observer/full simulation result. Sampled four differences are not proof no later differences exist. No source/checker changed, no new job.",
+  "source_sha256": {
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_host_full_static_v1/full/label_axi.txt": "77ef512bdf619674785419e15055b37e4b555d6a2ac41bc4951c8a78e2029358",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_host_full_static_v1/full/natural_trace.txt": "aab5645a08a6a52a6bb0bf492ea82e4f8cf017a0700634eed50e29d26983854e",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/axi_file_memory.sv": "64e518308ff72068779c0e6a2874c7038d17eeea5c660562513bc971c9d6d33a",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/checkpoint_authority_reader.sv": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/checkpoint_authority_rotator.sv": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/expansion_20261024/pager/backend/backing_page_service_small.sv": "d3151a2baef9798f3b5450979faae7f1f83ee09c6a150548548662afade5ab97",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/expansion_20261024/pager/backend/scratch_page_axi_small.sv": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/recovery_coordinator.sv": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+    "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v4/sources/tb_query_fault.sv": "0f79196ed63c79c80d5722e2884046898836ae10dc943a0ed95c0979eab0502e"
+  },
+  "status": "source_bound_payload_contract_analysis_only",
+  "timing_qualified": false
+}

@@ -1,0 +1,84 @@
+{
+  "status": "source_bound_analysis",
+  "facts": [
+    {
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/recovery_fault_matrix_v2/sources/recovery_coordinator.sv",
+      "sha256": "23295373d0d706790800325eb28c76f485937cf2720fdd21ae20a33cbb002b87",
+      "evidence": [
+        {
+          "line": 35,
+          "text": "assign recover_ready=!cold_rst&&configured&&!fault&&state==NORMAL&&!cfg_rsp_valid&&!cfg_valid&&!j_valid;"
+        },
+        {
+          "line": 36,
+          "text": "assign cfg_ready=!cold_rst&&!fault&&state==NORMAL&&!cfg_rsp_valid&&!recover_valid&&!j_valid&&backend_drained&&normal_retired;"
+        },
+        {
+          "line": 47,
+          "text": "if(cold_rst)begin"
+        },
+        {
+          "line": 48,
+          "text": "state<=NORMAL;configured<=0;owned<=0;stopped<=0;verify_pass<=0;error_code<=0;journal_count<=0;"
+        },
+        {
+          "line": 61,
+          "text": "else begin configured<=1;saved_design<=cfg_design;saved_checkpoint<=cfg_checkpoint;current_version<=cfg_version;current_query<=cfg_query;current_price<=cfg_price;journal_count<=0;end"
+        },
+        {
+          "line": 112,
+          "text": "else begin current_version<=new_version;current_query<=new_query;current_price<=new_price;journal_count<=0;complete(0);end"
+        }
+      ]
+    },
+    {
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/recovery_fault_matrix_v2/sources/label_restore_controller.sv",
+      "sha256": "307f44e38cf1443fee64b59a7454855aa0a7de35aaba33a2aee297c41934fd8c",
+      "evidence": [
+        {
+          "line": 20,
+          "text": "assign start_ready=!rst&&state==IDLE&&!stopped&&backend_drained;"
+        },
+        {
+          "line": 29,
+          "text": "if(rst)begin state<=IDLE;stopped<=0;error_code<=0;checkpoint_phase<=0;elapsed<=0;count<=0;nodes<=0;probe<=0;version<=0;index<=0;verify_index<=0;node<=0;query<=0;price<=0;field<=0;payload<=0;row<=0;rsp_valid<=0;rsp_status<=0;rsp_cookie<=0;written<=0;verified<=0;end"
+        }
+      ]
+    },
+    {
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/recovery_fault_matrix_v2/sources/config_restore_controller.sv",
+      "sha256": "44b18d392a31e67c0cff8cecc5b34eee9548b4a317d2671bff7fd5ac084bba13",
+      "evidence": [
+        {
+          "line": 19,
+          "text": "assign start_ready=!rst&&!stopped&&configured&&state==IDLE&&!load_rsp_valid&&!load_valid&&backend_drained&&normal_retired;"
+        },
+        {
+          "line": 35,
+          "text": "if(rst)begin state<=IDLE;configured<=0;stopped<=0;error_code<=0;elapsed<=0;current_version<=0;tx_version<=0;descriptor<=0;sent<=0;retired<=0;saved_design<=0;saved_checkpoint<=0;load_rsp_valid<=0;load_status<=0;rsp_valid<=0;rsp_status<=0;rsp_cookie<=0;end"
+        }
+      ]
+    },
+    {
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/recovery_fault_matrix_v2/sources/residency_system.sv",
+      "sha256": "7824caeaea1270330c13d4513d855a756d334d51110925a69dc512ba51a4c587",
+      "evidence": [
+        {
+          "line": 947,
+          "text": "config_restore_controller #(.MAX_CYCLES(1048576))config_restore(.clk(clk),.rst(k_cold_rst),.abort(1'b0),.backend_drained(f_all_drained),.normal_retired(f_normal_retired),.load_valid(fd_cf_load_valid),.load_ready(fd_cf_load_ready),.load_authoritative(fd_fc_authoritative),.load_payload(fd_fc_payload),.load_design(fd_fc_design),.load_checkpoint(fd_fc_checkpoint),.load_rsp_valid(fd_cf_load_rsp_valid),.load_rsp_ready(fd_cf_load_rsp_ready),.load_status(fd_cf_load_status),.start_valid(k_rcfg_valid),.start_ready(),.start_design(k_saved_design),.start_checkpoint(k_saved_checkpoint),.start_cookie(32'hf0010001),.start_version(k_new_version),.start_price(k_new_price),.cfg_valid(cf_valid),.cfg_ready(cf_ready),.cfg_payload(cf_payload),.cfg_rsp_valid(cf_replies),.cfg_rsp_ready(cf_reply_ready),.cfg_status(cf_status),.rsp_valid(cf_rsp_valid),.rsp_ready(!k_rcfg_valid),.rsp_status(cf_rsp_status),.rsp_cookie(cf_rsp_cookie),.busy(cf_busy),.fault(cf_fault),.sent(cf_sent),.retired(cf_retired),.saved_design(cf_saved_design),.saved_checkpoint(cf_saved_checkpoint));"
+        },
+        {
+          "line": 948,
+          "text": "label_restore_controller #(.MAX_RECORDS(512),.MAX_CYCLES(1048576))label_restore(.clk(clk),.rst(k_cold_rst),.abort(1'b0),.backend_drained(f_all_drained),.start_valid(lr_start_valid),.start_ready(lr_start_ready),.start_design(k_saved_design),.expected_design(snapshot_design_held),.start_checkpoint(k_saved_checkpoint),.expected_checkpoint(snapshot_checkpoint_held),.start_cookie(snapshot_cookie_held),.start_count(snapshot_count_held),.start_nodes(snapshot_nodes_held),.start_probe(snapshot_probe_held),.start_version(k_new_version),.start_query(k_new_query),.start_price(k_new_price),.s_valid(lr_s_valid),.s_ready(lr_s_ready),.s_node(lr_s_node),.s_cookie(lr_s_cookie),.s_payload(lr_s_payload),.s_last(lr_s_last),.rsp_valid(lr_rsp_valid),.rsp_ready(lr_rsp_ready),.rsp_status(lr_rsp_status),.rsp_cookie(lr_rsp_cookie),.written(lr_written),.verified(lr_verified),.busy(lr_busy),.fault(lr_fault),.c_valid(lr_c_valid),.c_ready(lr_c_ready),.c_op(lr_c_op),.c_query(lr_c_query),.c_price(lr_c_price),.c_version(lr_c_version),.c_rsp_valid(f_cbrv[6]),.c_rsp_ready(lr_c_rsp_ready),.c_status(f_cbrp[1536+:4]),.l_valid(lr_l_valid),.l_ready(lr_l_ready),.l_write(lr_l_write),.l_node(lr_l_node),.l_value(lr_l_value),.l_field(lr_l_field),.l_rsp_valid(lr_l_rsp_valid),.l_rsp_ready(lr_l_rsp_ready),.l_status(f_cbrp[2048+:4]),.l_present(f_cbrp[2052]),.l_payload(f_cbrp[2053+:160]));"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Coordinator recover/config readiness is masked by sticky fault; no warm restart is implemented.",
+    "Coordinator cold reset clears the journal; using it to reopen work loses dirty-key evidence.",
+    "Label/config restore services share k_cold_rst with coordinator; label sticky fault requires context recovery without blindly clearing coordinator journal or saved descriptors.",
+    "A future retry protocol must retire actual callbacks/AXI and preserve authoritative checkpoint/configuration plus journal before resetting per-attempt state."
+  ],
+  "scope": "Code-supported gap analysis, not an implemented retry protocol or a complete checkpoint design."
+}

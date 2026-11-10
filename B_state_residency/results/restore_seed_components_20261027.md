@@ -1,0 +1,7 @@
+# 恢复写跳过baseline的组件验证
+
+详见同名JSON与hardware/variants/restore_seed_bypass_v1/STATUS.md。候选修改8份隔离生产源，默认关闭，通过原生启动握手锁存许可；只允许恢复fence下的标签写跳过baseline初始化，保留CRC、完整写入/回读及退休条件。
+
+原生label_restore切片4场景286检查通过：许可开关启动后反转、CRC错误、第三字段写入后延迟回复期间取消。实际manager/native endpoint在32槽、单槽各157检查通过：恢复5字段无baseline读取/预读，3种非法使用无native事务，普通后续未知记录仍初始化，页写回/重载及AXI字节独立重放通过。
+
+3个归档均实际恢复复审，audit逐字节一致；43文件源码已冻结。叶切片是RAM后端与逐场景服务reset，不能推断全系统取消及非冷恢复。4组完整系统default-off/on仿真尚在运行，当前没有完整兼容性或周期收益结论。开启优化后的完整系统取消/CRC失败与非冷重试仍需接入。研究继续。

@@ -1,0 +1,105 @@
+{
+  "created_utc": "2026-10-24T16:31:40.331360+00:00",
+  "status": "external_heap_cpu_and_hls_csim_passed_rtl_running_full_router_prepared",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_external_20261024_v1/plan.json": "8179c48ac641ec26203dbf38d4141a7280e4f3acb2e2ead5d9617dd5d7e4f987",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/search_heap_external_20261024_v1/solution/syn/report/search_heap_external_top_csynth.xml": "36203b155b56ed4bbc219726ebe47809970a7d787a977236121c6c37d9f040e5",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/search_heap_external_20261024_v1/solution/csim/report/search_heap_external_top_csim.log": "3b8ce7df66818fee9182f8d7baf724e25202eb6509086538b71ce547a36d643f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/external_heap_router_20261024_v1/plan.json": "ef2c60c1e11e6dc53d4b6d32d4741e96f738b624afd2728f7078d6014101b2bf",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/external_heap_router_20261024_v1/driver_tests.json": "1594bb43cd91115d0ecdeefb66ee2999eba537ee836a1537fde02c8eb5219b9a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_heap_external_audit.py": "23edb6321e946d1f4bc1e3b67c68a04f5b463dc1a45e7039b0f3f10651acf431"
+  },
+  "cpu_top": {
+    "command": [
+      "/tmp/a_search_heap_external_top_20261024"
+    ],
+    "exit_code": 0,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "cases": 7,
+    "initial_counts": [
+      0,
+      73388,
+      73329,
+      131072,
+      131073,
+      131071,
+      131071
+    ],
+    "operations": [
+      4096,
+      4096,
+      4096,
+      128,
+      8,
+      4097,
+      0
+    ],
+    "final_counts": [
+      2,
+      73329,
+      73223,
+      131071,
+      131073,
+      131071,
+      131071
+    ],
+    "statuses": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0
+    ]
+  },
+  "audit_parser": {
+    "command": "python3 -m unittest discover -s tests -p test_search_heap_external_audit.py -v",
+    "exit_code": 0,
+    "invalid_evidence_cases": 10
+  },
+  "synthesis_estimates": {
+    "clock_ns": 3.65,
+    "resources": {
+      "BRAM_18K": 0,
+      "FF": 19672,
+      "LUT": 45460,
+      "URAM": 0,
+      "DSP": 0
+    }
+  },
+  "hls_state_snapshot": {
+    "owner_pid": 2992261,
+    "status": "running",
+    "stage": "csim_synth_cosim",
+    "child_pid": 2992262,
+    "command": [
+      "taskset",
+      "-c",
+      "120",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+      "-f",
+      "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_external_20261024_v1/source/run_search_heap_external.tcl"
+    ]
+  },
+  "prior_router_state_snapshot": {
+    "owner_pid": 2550136,
+    "status": "running",
+    "stage": "four_full_workloads",
+    "completed": [
+      1,
+      3,
+      0
+    ]
+  },
+  "new_router_launched": false,
+  "limitations": [
+    "RTL seven-transaction run still pending; no board timing.",
+    "CPU real-workload external-heap run not yet launched; predecessor audit is prerequisite.",
+    "Full labels, site state, occupancy and search controller not synthesized.",
+    "AXI payload is 3*131072*8 bytes, excluding commands/responses/metadata and other routing state."
+  ]
+}

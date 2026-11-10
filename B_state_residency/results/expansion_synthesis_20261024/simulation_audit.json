@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "manifest_sha256": "135f538360df0f474038604aeaf9a90510f020b589f8f13a6ba472d9a0b6a3eb",
+  "auditor_sha256": "1f1f4ffbdc117d14155b8a692441217b5c48bf3bf3f437c82fde7a2c7dae2788",
+  "cases": {
+    "pilot": {
+      "expansions": 16,
+      "hits": 0,
+      "children": 6,
+      "builds": 16,
+      "services": 53,
+      "native_reads": 0,
+      "checkpoints": 0,
+      "host_blocks": 2297,
+      "graph_reads": 69,
+      "design_reads": 51,
+      "design_writes": 22,
+      "label_reads": 0,
+      "label_writes": 0,
+      "cycles": 4561,
+      "created_delta_nodes": 6,
+      "dead_nodes": 0,
+      "design_sha256": "50bc723b76dd6a2fd42038c162216b140d9f4e196db75e3b8d2a0fc877113af5"
+    },
+    "full": {
+      "expansions": 1212,
+      "hits": 550,
+      "children": 3229,
+      "builds": 662,
+      "services": 10753,
+      "native_reads": 240,
+      "checkpoints": 2,
+      "host_blocks": 469489,
+      "graph_reads": 19280,
+      "design_reads": 6109,
+      "design_writes": 2500,
+      "label_reads": 0,
+      "label_writes": 18,
+      "cycles": 476407,
+      "created_delta_nodes": 1792,
+      "dead_nodes": 46,
+      "design_sha256": "af7feabcab281d6ed54a6185f38a8bfa23c88a21dce8653da7dfe4a6ece3bebd"
+    },
+    "pressure": {
+      "expansions": 1212,
+      "hits": 550,
+      "children": 3229,
+      "builds": 662,
+      "services": 10753,
+      "native_reads": 240,
+      "checkpoints": 27,
+      "host_blocks": 466500,
+      "graph_reads": 19280,
+      "design_reads": 6109,
+      "design_writes": 2500,
+      "label_reads": 15,
+      "label_writes": 25,
+      "cycles": 475098,
+      "created_delta_nodes": 1792,
+      "dead_nodes": 46,
+      "design_sha256": "af7feabcab281d6ed54a6185f38a8bfa23c88a21dce8653da7dfe4a6ece3bebd"
+    }
+  },
+  "scope": "Actual graph reader + persistent design store + children HLS engine + paged exclusion engine, compared with original CPU getChildren under scripted query/label contexts. Not full routing, timing/occupancy update, or board.",
+  "limitations": [
+    "Default synthesized FRAMES163840 is larger than functional FRAMES256.",
+    "Selected real expansions with scripted query contexts, not full routing replay.",
+    "No frontend integration error-injection or actual counter exhaustion gate yet.",
+    "No distance/cost/frontier/backtrace/commit/platform/board integration."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "analyzer_sha256": "2a5559599c9843c8d5a8001f12c89067f93dea679d66196c03844e17880fcde2",
+  "checked_source_expressions": {
+    "query_lifecycle.sv": [
+      "wire cp_drift=(cp_rebasing&&!cp_rebase_permit)||!active||!cp_safe||!backend_drained||host_label_edit||active_design!=cp_ctx_design||active_generation!=cp_ctx_generation||active_version!=cp_ctx_version||active_query!=cp_ctx_query||active_price!=cp_ctx_price;"
+    ],
+    "query_residency_system.sv": [
+      "wire host_base=!wm_owned&&!qc_busy&&!qc_fault&&!pc_owned&&!as_cfg_lease;",
+      "wire host_open=host_base&&!boot_pending;",
+      "wire boot_admin_open=host_base&&boot_admin_allowed;",
+      "wire[15:0]host_mask={16{host_open}}|({16{boot_admin_open}}&16'hc17f);",
+      "assign f_sr=b_f_sr&host_mask;",
+      ".cp_safe((wm_owned?wm_safe:(pc_owned&&pc_safe))&&!qc_reset_held)",
+      ".host_label_edit(f_sv[8]&&f_sr[8]&&f_sp[19456])"
+    ]
+  },
+  "cp_safe_cases": 3072,
+  "generic_counterexample": {
+    "cp_safe": true,
+    "host_label_edit": true,
+    "original_drift": true,
+    "other_drift": false,
+    "specialized_drift": false
+  },
+  "host_edit_cases": 48,
+  "reference": "/tmp/B_state_residency_offer_20261025/query_native_synth_v1",
+  "reference_audit_sha256": "33342cf1d051b5e97873766486de8ded113b27e4522c8243d3b2883892398b04",
+  "reference_restore_sha256": "53b59f5051333f9e06e6d9cc155650477ba41714e6d2712bc337badef9d67e55",
+  "scope": "Direct combinational wiring excludes host edit whenever native query CP safe is true, including normal and boot admin masks. Other drift terms arbitrary; no sequential reachability assumption. Only CP drift edit term may specialize; host edit/label-dirty semantics elsewhere unchanged. Generic default must preserve overlapping external inputs. No X/Z, RTL formal, timing or full-system candidate proof.",
+  "source_sha256": {
+    "query_lifecycle.sv": "f58f7c65a58223e4c973d813a789f61db98fbf776fec7236eb1d529851d2fdce",
+    "query_residency_system.sv": "071391439ed4cc25cc9a670fcae74c231f77c3d003f0e90275fd8677cc7f34bf"
+  },
+  "status": "native_cp_safe_excludes_edit_two_state_not_rtl_validation",
+  "valuations": 16384
+}

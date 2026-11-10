@@ -1,0 +1,480 @@
+{
+  "status": "passed",
+  "source_closure": "results/runtime_owner_snapshot_sources_20261027",
+  "cases": {
+    "iter2_runtime_owner_full_v4": {
+      "status": "passed",
+      "manifest_sha256": "8e216e92ce0bf08ef3adf4a13722dd0a9e08afaadb95057b516c7e09f470fd34",
+      "auditor_sha256": "29e8f056187a4a0a56932a0bd7a2ef7465e2c00a49f892a2f406a3f1217048ba",
+      "case": "full",
+      "polls": 171,
+      "expands": 170,
+      "candidates": 849,
+      "costs": 421,
+      "labels": 822,
+      "logical_pages": 403,
+      "owner_capacity": 53734,
+      "committed_path": [
+        204279,
+        339193,
+        558358,
+        265324,
+        66893
+      ],
+      "historical_path": [
+        67922,
+        990179,
+        558358,
+        265324,
+        66893
+      ],
+      "intermediate_owner_matches_next_cpu_prepared": true,
+      "retained_query_sequence": 180328,
+      "physical_owner_record_writes": 13,
+      "runtime_owner_lines": 4,
+      "runtime_owner_read_beats": 8,
+      "runtime_owner_write_beats": 4,
+      "source_context": [
+        3,
+        1,
+        3
+      ],
+      "restored_context": [
+        4,
+        2,
+        4
+      ],
+      "warm_labels_verified": 822,
+      "repair_keys": 2,
+      "repair_corrections": 2,
+      "next_query_polls": 114,
+      "next_query_expands": 113,
+      "next_query_candidates": 564,
+      "next_query_costs": 302,
+      "published_checkpoint": 18,
+      "published_generation": 4294967298,
+      "memory": {
+        "graph": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 25464,
+          "read_beats": 25464,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 25464
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 489082472
+        },
+        "design": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 2373,
+          "read_beats": 2373,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 2373
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 145424192
+        },
+        "cost": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 3075,
+          "read_beats": 3075,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 3075
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 36804480
+        },
+        "owner": {
+          "error_read_beats": 0,
+          "error_write_replies": 1,
+          "read_transactions": 2644,
+          "read_beats": 2644,
+          "write_beats": 13,
+          "write_replies": 13,
+          "read_burst_lengths": {
+            "1": 2644
+          },
+          "write_burst_lengths": {
+            "1": 13
+          },
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 146284032
+        },
+        "label": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 2593,
+          "read_beats": 7563,
+          "write_beats": 4110,
+          "write_replies": 1404,
+          "read_burst_lengths": {
+            "3": 2449,
+            "2": 72,
+            "1": 72
+          },
+          "write_burst_lengths": {
+            "3": 1336,
+            "1": 34,
+            "2": 34
+          },
+          "logical_192B_reads": 2521,
+          "logical_192B_writes": 1370,
+          "bytes_checked": 3145728
+        },
+        "qstate": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 396,
+          "read_beats": 396,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 396
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 11540864
+        },
+        "table": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 0,
+          "read_beats": 0,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {},
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 1344
+        },
+        "snapshot": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 31,
+          "read_beats": 31,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 31
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 292568064
+        }
+      },
+      "limits": [
+        "Historical path metadata and CPU future label closure remain external. Owner candidate updates generated by native dirty-line copy/readback from live work DDR into a G1 baseline clone under lease. No general fresh full-image writer or replay-safe persistent snapshot.",
+        "Only next-owner preparation complete. Native G2 CP18 publication, two-owner-B fault repair, 822 labels and native path/query restoration, then attempt4 retry of query180328. Fixed source price/history content.",
+        "Behavioral simulation, no synthesis or board performance claim."
+      ]
+    },
+    "iter2_runtime_owner_pressure_v4": {
+      "status": "passed",
+      "manifest_sha256": "932e2e2b187ad797259a0872a4d034919fb4d775f1e5f1ee8d53f3d7c57772c7",
+      "auditor_sha256": "29e8f056187a4a0a56932a0bd7a2ef7465e2c00a49f892a2f406a3f1217048ba",
+      "case": "pressure",
+      "polls": 171,
+      "expands": 170,
+      "candidates": 849,
+      "costs": 421,
+      "labels": 822,
+      "logical_pages": 403,
+      "owner_capacity": 53734,
+      "committed_path": [
+        204279,
+        339193,
+        558358,
+        265324,
+        66893
+      ],
+      "historical_path": [
+        67922,
+        990179,
+        558358,
+        265324,
+        66893
+      ],
+      "intermediate_owner_matches_next_cpu_prepared": true,
+      "retained_query_sequence": 180328,
+      "physical_owner_record_writes": 13,
+      "runtime_owner_lines": 4,
+      "runtime_owner_read_beats": 8,
+      "runtime_owner_write_beats": 4,
+      "source_context": [
+        3,
+        1,
+        3
+      ],
+      "restored_context": [
+        4,
+        2,
+        4
+      ],
+      "warm_labels_verified": 822,
+      "repair_keys": 2,
+      "repair_corrections": 2,
+      "next_query_polls": 114,
+      "next_query_expands": 113,
+      "next_query_candidates": 564,
+      "next_query_costs": 302,
+      "published_checkpoint": 18,
+      "published_generation": 4294967298,
+      "memory": {
+        "graph": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 25464,
+          "read_beats": 25464,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 25464
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 489082472
+        },
+        "design": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 2373,
+          "read_beats": 2373,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 2373
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 145424192
+        },
+        "cost": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 3075,
+          "read_beats": 3075,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 3075
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 36804480
+        },
+        "owner": {
+          "error_read_beats": 0,
+          "error_write_replies": 1,
+          "read_transactions": 2644,
+          "read_beats": 2644,
+          "write_beats": 13,
+          "write_replies": 13,
+          "read_burst_lengths": {
+            "1": 2644
+          },
+          "write_burst_lengths": {
+            "1": 13
+          },
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 146284032
+        },
+        "label": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 4971,
+          "read_beats": 14565,
+          "write_beats": 7425,
+          "write_replies": 2526,
+          "read_burst_lengths": {
+            "3": 4739,
+            "2": 116,
+            "1": 116
+          },
+          "write_burst_lengths": {
+            "3": 2424,
+            "1": 51,
+            "2": 51
+          },
+          "logical_192B_reads": 4855,
+          "logical_192B_writes": 2475,
+          "bytes_checked": 3145728
+        },
+        "qstate": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 396,
+          "read_beats": 396,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 396
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 11540864
+        },
+        "table": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 0,
+          "read_beats": 0,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {},
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 1344
+        },
+        "snapshot": {
+          "error_read_beats": 0,
+          "error_write_replies": 0,
+          "read_transactions": 31,
+          "read_beats": 31,
+          "write_beats": 0,
+          "write_replies": 0,
+          "read_burst_lengths": {
+            "1": 31
+          },
+          "write_burst_lengths": {},
+          "logical_192B_reads": null,
+          "logical_192B_writes": null,
+          "bytes_checked": 292568064
+        }
+      },
+      "limits": [
+        "Historical path metadata and CPU future label closure remain external. Owner candidate updates generated by native dirty-line copy/readback from live work DDR into a G1 baseline clone under lease. No general fresh full-image writer or replay-safe persistent snapshot.",
+        "Only next-owner preparation complete. Native G2 CP18 publication, two-owner-B fault repair, 822 labels and native path/query restoration, then attempt4 retry of query180328. Fixed source price/history content.",
+        "Behavioral simulation, no synthesis or board performance claim."
+      ]
+    },
+    "owner_snapshot_unit_v3": {
+      "status": "passed",
+      "manifest_sha256": "fabd4e5a53662d17d6f6d8305544ab559b5f898515704758ada3d0b0cd92f760",
+      "auditor_sha256": "2bca40526677ceb1c2c6c7843116cb3ee74663ba617db7a283805061a57ced18",
+      "checks": 66,
+      "results": [
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0
+        ],
+        [
+          6,
+          0,
+          0
+        ],
+        [
+          7,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0
+        ]
+      ],
+      "read_beats": 10,
+      "write_beats": 5,
+      "error_read_beats": 2,
+      "error_write_replies": 1,
+      "scope": "Actual AXI bytes independently replayed; dirty dedup, descriptor capture, no-lease and in-flight R/B cancellation, R/B/verify errors, capacity overflow, source B error and overlap reject. No system integration or board claim."
+    }
+  },
+  "scope": "Runtime native dirty-line owner producer replaces prebuilt prepared G2 owner delta: four lines copied and readback verified under lease into initial G1 baseline clone; real receipt gates native G2 publication, followed by actual q180328 owner-B warm fault recovery. Initial baseline clone, CPU label closure and historical path metadata still external. No full-state runtime snapshot, dynamic epoch rotation, synthesis or board claim.",
+  "restores": {
+    "iter2_runtime_owner_full_v4": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/iter2_runtime_owner_full_v4.json",
+      "archive_sha256": "5164f6071fd10edd5b5e2d4a06528a7baf6b0e770074ac9c47bb32ef3cd318a7",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/iter2_runtime_owner_full_v4",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/iter2_runtime_owner_full_v4",
+      "files": 337,
+      "audit_byte_identical": true,
+      "audit_sha256": "85bf095d8065c4fab06b8b6e277e8dd5f1732011bf84bb2bc21f841182e10f74",
+      "auditor": "audit_iter2_runtime_owner.py"
+    },
+    "iter2_runtime_owner_pressure_v4": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/iter2_runtime_owner_pressure_v4.json",
+      "archive_sha256": "915d30541ec50649916b6d34b37648bb04639f66275d60265d670eb5280f24d5",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/iter2_runtime_owner_pressure_v4",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/iter2_runtime_owner_pressure_v4",
+      "files": 337,
+      "audit_byte_identical": true,
+      "audit_sha256": "d87f4389ed5da799d5aa48ddc04a2dd17abf9347c6ba2aabfc1209eacf155cef",
+      "auditor": "audit_iter2_runtime_owner.py"
+    },
+    "owner_snapshot_unit_v3": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/owner_snapshot_unit_v3.json",
+      "archive_sha256": "993cf1b8d564c7de3b44111d45539d232fceed1b77b0242845cf9e0cf6cd9c8f",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/owner_snapshot_unit_v3",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/owner_snapshot_unit_v3",
+      "files": 40,
+      "audit_byte_identical": true,
+      "audit_sha256": "10a122882af5c316a713196907dcdb833634f89c99a8fc329206fa5c740cdb16",
+      "auditor": "audit_owner_snapshot_unit.py"
+    }
+  }
+}

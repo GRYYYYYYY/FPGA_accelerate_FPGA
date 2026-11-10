@@ -1,0 +1,16 @@
+# 真实children扩展器整帧捕获通过（2026-10-25，优先于历史）
+
+新增hardware/variants/recursive_frames_v1/expansion_capture.sv、tb_expansion_capture.sv、tb_expansion_capture_unit.sv；复用children_frames.sv（与前轮最终v2 SHA一致）。run_expansion_capture.py / audit_expansion_capture.py为真实图组合入口；run/audit_expansion_capture_unit.py为同RTL mock边界入口。主结果results/expansion_capture_20261025实际capture_v3；组件results/expansion_capture_unit_20261025实际capture_unit_v2。组合收据results/capture_revision_20261025.json passed。
+
+实际组合保持42份原基线文件同SHA，原graph reader、persistent design、children HLS、paged exclusion与原CPU getChildren对照不变。新增捕获适配器先受理begin、保存完整请求和不透明512bit context，向真实expander发出稳定请求，接收完整352bit node/position/ordinal/attrs流；完成cookie/count/序号检查并seal后才回放静态children。每帧独立保存165bit完成回复。TB明确断言每条回放前适配器物理请求state=0且真实engine_busy=0，完整context相同。回放期间外层围栏继续阻止host/config类入口，不依赖已释放的真实engine busy。当前TB只对host ctrl/io及expand有显式额外围栏，其他配置本场景不发起；生产组合需统一全部配置/图生命周期lease。
+
+先导16扩展/6 children通过。完整32槽和单槽各1212扩展/550缓存命中/662 build/3229 children/10753真实children服务/240 native读，CPU语义、全部事件与全部后备内存字节审计通过。graph19280读、design6109读/2500写；完整checkpoint2、label0读/18写；单槽checkpoint27、label15读/25写。周期484146/483559仅仿真收据，不是加速比较。TB functional FRAMES256、帧DEPTH4/CAPACITY32，实际输入原degree<=32；未验证大配置容量/综合。真实图脚本生命周期回放不是完整搜索。
+
+嵌套定向测试使用同一适配器/帧RTL但mock expander：ITEM10:1→ITEM20:3→RESULT20→ITEM10:2→RESULT10；完整165bit回复在背压时尝试新请求仍保持稳定并拒绝新请求；请求暴露期间前端cookie/parent改变不影响已锁存字段。最终v3用result_offered锁定已对外呈现的完成回复，不能因后来的嵌套请求撤回VALID。尚未present时同拍请求可优先压子帧；一旦present，则先退休该完成回复，不能再将此时的请求解释成它的子帧。调用方应在最后一项退休后立即提出lookahead，在该完成回复present之前确定是否下降。原型expand admission同时要求result_ready=0，调用方不能常拉高result_ready再期望发起新扩展。这里尚无真实expander嵌套调用、动态标签重读、成本/提交/队列或完整递归调度证据。
+
+接口限制：frame context不透明，适配器不自行校验active version/design漂移；调用方须覆盖完整身份并保持全查询lease。frames fault/abort后仍接收已开始捕获的物理输出直至完成；新的适配器未做故障注入，不能由上一轮帧组件mock排空外推到本组合恢复。未实现本地timeout/整体reset-reload协议。非零result status会使frame fault停机，不回放部分children，外层必须处理fault。深度/容量溢出同理，不能热重试已提交标签。
+
+负证据：capture_v1触发旧TB忙时expand_ready禁止断言；v2在顺序回放入口添加显式expand门控（保留旧断言），普通回放通过，但没有完成回复present后的保持改进；有效v3修正该边界并重新完整运行，不能用旧v2替代。capture_unit_v1编译因item task漏seq实参失败，v2补实参后通过，RTL与真实v3同SHA。上述历史144个源/文本/log文件969720B压缩并逐成员SHA核验，results/capture_history_20261025.*；大型二进制/内存镜像未列入该历史包。
+
+持久化：offer_archives_20261025/capture_v3.tar.gz为277文件5606949B，capture_unit_v2.tar.gz为35文件76525B；成员和copy SHA核验，真实capture_v3已实际移到.preserved后解包恢复277文件验证。restore_offer_result.py可恢复。下一步优先将captured frame消费接进candidate_controller的metadata/access路径，并在子树返回后重新实际读visited/parent upstream；再联接现有cost/commit/OFFER。当前只是成功解耦真实children生产与静态回放，尚未完成立即递归RTL，研究目标保持active。
+

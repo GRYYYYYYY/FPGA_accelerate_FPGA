@@ -1,0 +1,44 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Sat Oct 24 21:52:30 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_drc -checks LUTLP-1 -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_synthesis_20261024/combinational_loops.rpt
+| Design       : access_fabric
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : ignored
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: access_fabric
+          Floorplan: design_1
+      Design limits: <entire design considered>
+
+            Checks: LUTLP-1
+             Max violations: <unlimited>
+             Violations found: 1
++---------+------------------+--------------------------+------------+
+| Rule    | Severity         | Description              | Violations |
++---------+------------------+--------------------------+------------+
+| LUTLP-1 | Critical Warning | Combinatorial Loop Alert | 1          |
++---------+------------------+--------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+LUTLP-1#1 Critical Warning
+Combinatorial Loop Alert  
+4 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is access/controller/rst_0. Please evaluate your design. The cells in the loop are: access/controller/busy_INST_0_i_1,
+access/controller/o_rsp_ready_INST_0_i_7,
+coordinates/controller/busy_INST_0_i_3, dispatch/o_rsp_ready_INST_0_i_3.
+Related violations: <none>
+
+

@@ -1,0 +1,62 @@
+{
+  "status": "original_two_module_discard_nonzero_implies_lease_owned_inductively_proved_dependency_control_restored",
+  "assertions": 2,
+  "assumptions": 1,
+  "covers": 2,
+  "query_command_busy_instance": "checkpoint_lease_guard checkpoint_lease(.clk(clk),.rst(rst||k_cold_rst),.acquire_valid(pc_acquire_valid),.acquire_ready(pc_acquire_ready),.release_valid(pc_release_valid),.release_ready(pc_release_ready),.owned(pc_owned),.healthy(pc_quiet),.retired(pc_retired),.route_retired(pc_route_retired),.no_offers(!ap_valid&&f_sv==0&&!rc_req_valid&&!qc_cmd_valid&&!k_rec_valid),.command_busy(ap_owned||cp_busy||qc_cp_busy||qc_pending||(boot_pending&&pc_owned)||jp_owned||as_cfg_lease||as_busy||(|jp_reply)),.command_valid(ap_valid||cp_valid||qc_cp_valid),.test_reset(cp_test_reset||qc_cp_test_reset||qc_reset_held),.safe(pc_safe));",
+  "fault_values": [
+    {
+      "rst": 0,
+      "pc_owned": 0,
+      "jp_owned": 1,
+      "pub_discard_valid": 1
+    },
+    {
+      "rst": 0,
+      "pc_owned": 0,
+      "jp_owned": 1,
+      "pub_discard_valid": 1
+    }
+  ],
+  "archive_sha256": "bca704d48d7690814f39548f7a56eb72f57e7ffac5a357126aa226ed73ead448",
+  "file_sha256": {
+    "ka_publication_discard_lease_unit_v1/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "ka_publication_discard_lease_unit_v1/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "ka_publication_discard_lease_unit_v1/harness.sv": "f9ee51014ca4937332fcf41ab12b667bdffd2a494022f116063c7d46cc01cf74",
+    "ka_publication_discard_lease_unit_v1/projection.json": "9759c556de0d7a8b8f63109d2708c8d7bf09b074aafa702ec374d68f52c08d23",
+    "ka_publication_discard_lease_unit_v1/prepare.ys": "d639554d0ea84322363bfe86a67c209652b3a0f17fbaf634563ee0c9269600be",
+    "ka_publication_discard_lease_unit_v1/manifest.json": "dc8a92223064b3b707ceb9431fe80f126fbf5c6ef2c889dc7b5b5bd518259135",
+    "ka_publication_discard_lease_unit_v1/prepare.log": "3fc26f2f1cd2249b00cd237febb291cca4c866feef2f133af18f312a45278bee",
+    "ka_publication_discard_lease_unit_v1/design.smt2": "c18846f741436f49c78c73a2df752ee62103766485ec2f4292012e0c6292f82b",
+    "ka_publication_discard_lease_unit_v1/bmc.log": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0",
+    "ka_publication_discard_lease_unit_v1/induction.log": "3b54c743218b370593e48a405150dc271062f0c1d842ad9ac5686c4c74778517",
+    "ka_publication_discard_lease_unit_v1/cover.log": "8c35acc785018e27b4a02ba501d000afd75c32b46e711b197755eca58d44f0b9",
+    "ka_publication_discard_lease_unit_v1/cover0.vcd": "8fd84ad2dcb49cf9cacfbd8150782fbb1f8502e68ec0e06373db6aff48062ce5",
+    "ka_publication_discard_lease_unit_v1/cover1.vcd": "b77db20027d97de5ae5414d7196126a7660a9862a040242ca7ac788cfbe0fa39",
+    "ka_publication_discard_no_owned_busy_control_v1/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "ka_publication_discard_no_owned_busy_control_v1/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "ka_publication_discard_no_owned_busy_control_v1/harness.sv": "08ec31b159475832255592dea71609b8c6fc87bd3586c5673ced9292908dd62f",
+    "ka_publication_discard_no_owned_busy_control_v1/projection.json": "d41b627ff9d933d93f0a8f514f6393e5de32a312e2d61d89d9f4ed0783c1d655",
+    "ka_publication_discard_no_owned_busy_control_v1/prepare.ys": "d639554d0ea84322363bfe86a67c209652b3a0f17fbaf634563ee0c9269600be",
+    "ka_publication_discard_no_owned_busy_control_v1/manifest.json": "93290d97d3385892e6f9192f191818195089addc36d5c352a3c2eeb79bb05412",
+    "ka_publication_discard_no_owned_busy_control_v1/prepare.log": "58dd1270be374a4a68d62192868fe06f7d8bf1ced8b120e2bbf62998bc1138ae",
+    "ka_publication_discard_no_owned_busy_control_v1/design.smt2": "1eb22786fa82ea2e185a18df2832fa61f51411ff3ed4ab481fc31bbc8e0276c1",
+    "ka_publication_discard_no_owned_busy_control_v1/bmc.log": "2e19c18a27285f35c701afed9e378535afaf62e720f94e7493b0662122cb5713",
+    "ka_publication_discard_no_owned_busy_control_v1/bmc_failure.vcd": "80d1b6149ec399648f56063ea10fa5f6bd0c37985a570dd38fe6e1db7c6e5f4e",
+    "repo/scripts/research_checks/audit_publication_discard_lease_unit_v1.py": "d28afea11ec3299beea263d4604b6e5d44f69bc8a94d2c556429cb467ea28a16",
+    "repo/scripts/research_checks/prepare_publication_discard_lease_unit_v1.py": "e1880deb4363a1e5b4ca9f763f9475a72979d7404fb9604046ca662d95784694",
+    "repo/scripts/research_checks/run_publication_discard_lease_unit_v1.py": "812b19ba3ef1236e02ad8f8383cd45c2e05caf422037c1e10fa924bccdd12444",
+    "repo/scripts/research_checks/run_publication_discard_no_owned_busy_control_v1.py": "8f8825274733a905821d869a086c752bfa1e929d7b0bfb671979de86f2aa8fbb",
+    "repo/hardware/variants/ka_publication_discard_lease_unit_v1/harness.sv": "f9ee51014ca4937332fcf41ab12b667bdffd2a494022f116063c7d46cc01cf74",
+    "bound_sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5"
+  },
+  "reviewer_sha256": "d28afea11ec3299beea263d4604b6e5d44f69bc8a94d2c556429cb467ea28a16",
+  "scope": "Complete original lease/publication modules, all other inputs arbitrary, common reset/clock and actual query command_busy includes jp_owned. Discard nonzero implies lease owned and publication owned. Orphan publication cover still reachable; no global owned-implies-lease assumption.",
+  "remaining": [
+    "Compose this phase guarantee with actual full-query AS excludes lease-owned temporal proof, which remains running.",
+    "Full initialized start/release overlap probe remains waiting memory.",
+    "No AS discard exclusion, complete native ready or full shadow acceptance claimed."
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

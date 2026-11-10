@@ -1,0 +1,261 @@
+{
+  "status": "passed",
+  "pid": 2195638,
+  "sources": {
+    "design_state_store.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/design_store_v2/design_state_store.sv",
+      "sha256": "f2c067617f641fe539d3854f161fe573edb91fc7edbd112d3d71f4d67026f130"
+    },
+    "make_vectors.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/design_store_v2/make_vectors.py",
+      "sha256": "64768cc78cfd5c0b94ff0e3db7135aa5e7fb085358f427f48aecf72032b9a981"
+    },
+    "tb_design_state_store.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/design_store_v2/tb_design_state_store.sv",
+      "sha256": "caff69446487fc44d5f4057cf002629f79699177ac092f004303d57dc20a206a"
+    },
+    "run_design_store_v2.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_design_store_v2.py",
+      "sha256": "4e33c60a0aba8a15776fda8b0b2b6332222c8c46ca8b5697bcae6f88ebcfb0d9"
+    }
+  },
+  "graph": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+  "graph_manifest_sha256": "78a531decd3f39c5f2c74a97c0d33ab946cbcfdeab70463e35c493bfeecaf7b0",
+  "graph_gate_sha256": "3ee5b9e8d5cf99511fd723ecc45d2b8686fa741c2a588a22a0fc133e6a8f97e3",
+  "graph_artifacts": {
+    "offsets.u32le": "3fdd2e3811dfadbabfb178e5664ee46e1708066ffdb9e7971dcf88c6f4ff0a47",
+    "edges.u32le": "930ec8f23fef75750f60b1f6054bfac7ff34646b4a274a6fe2bbe6eaeac2da8b"
+  },
+  "commands": [
+    {
+      "stage": "oracle",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/lnx64/python-3.8.3/bin/python3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/make_vectors.py",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024"
+      ],
+      "pid": 2196534,
+      "exit_code": 0,
+      "elapsed_s": 0.803126685321331
+    }
+  ],
+  "cases": {
+    "pilot": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/design_state_store.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/tb_design_state_store.sv"
+          ],
+          "pid": 2198217,
+          "exit_code": 0,
+          "elapsed_s": 1.6227612290531397
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_design_state_store",
+            "-s",
+            "design_store",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2199654,
+          "exit_code": 0,
+          "elapsed_s": 3.4803281370550394
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "design_store",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "memory=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/pilot/memory.bin",
+            "--testplusarg",
+            "vectors=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/vectors.txt",
+            "--testplusarg",
+            "trace=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/pilot/axi_trace.txt",
+            "--testplusarg",
+            "limit=200",
+            "--testplusarg",
+            "faults=0"
+          ],
+          "pid": 2201438,
+          "exit_code": 0,
+          "elapsed_s": 5.362210800871253
+        }
+      ],
+      "initial_memory_sha256": "5994cfd7690436e225fe7fd9a701330c9df9a584ada8e03cd32b8401ceed9326",
+      "result": "DESIGN_STORE_PASS commands=200 checks=201 configurations=6 faults=0 AR=112 R=112 AW=24 W=24 B=24 awfirst=7 wfirst=7 simultaneous=10 cycles=2865",
+      "artifacts": {
+        "simulate.log": "bd8eeefdb8de2e60e3de7be8cbd182ccd3b2bf70b439f9830e38d37b0fd226ca",
+        "run.tcl": "546ad833a4c2443351371130367944b7a7f8ec918d8c34282d64b3a30c05f4d5",
+        "compile.stdout.log": "083b8d33c27d82bb15d89aed5eef2e6b88e1f220f0eab1fb7486e114d66fe62b",
+        "memory.bin": "dc10105aa244c2c59c76f686a32e0cd0a23820facb8d07ca7881051356332ee0",
+        "xvlog.log": "083b8d33c27d82bb15d89aed5eef2e6b88e1f220f0eab1fb7486e114d66fe62b",
+        "simulate.stdout.log": "bf21910fb7e31d299f5ab4ef736991df7bd178316c87ac3c944f9eb3571ccd5c",
+        "xelab.log": "6ade5211ef48d441eca8f6735641ff06c692b81d626f00c613603e5b8dacb71f",
+        "axi_trace.txt": "63935cb189c8ee192e28bab0cded5a0c331e1326672db6bb90d7d1b1a845810c",
+        "elaborate.stdout.log": "6ade5211ef48d441eca8f6735641ff06c692b81d626f00c613603e5b8dacb71f"
+      }
+    },
+    "full": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/design_state_store.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/tb_design_state_store.sv"
+          ],
+          "pid": 2201874,
+          "exit_code": 0,
+          "elapsed_s": 1.6533334255218506
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_design_state_store",
+            "-s",
+            "design_store",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2202623,
+          "exit_code": 0,
+          "elapsed_s": 3.4815572686493397
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "design_store",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "memory=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/full/memory.bin",
+            "--testplusarg",
+            "vectors=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/vectors.txt",
+            "--testplusarg",
+            "trace=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/full/axi_trace.txt",
+            "--testplusarg",
+            "limit=0",
+            "--testplusarg",
+            "faults=0"
+          ],
+          "pid": 2204356,
+          "exit_code": 0,
+          "elapsed_s": 10.964376179501414
+        }
+      ],
+      "initial_memory_sha256": "5994cfd7690436e225fe7fd9a701330c9df9a584ada8e03cd32b8401ceed9326",
+      "result": "DESIGN_STORE_PASS commands=98893 checks=98895 configurations=7 faults=0 AR=68288 R=68288 AW=17821 W=17821 B=17821 awfirst=4449 wfirst=8883 simultaneous=4489 cycles=1608029",
+      "artifacts": {
+        "simulate.log": "9fbf0f8dec486512d1ff8a852b7930903253455912bb1179006d801534927547",
+        "run.tcl": "546ad833a4c2443351371130367944b7a7f8ec918d8c34282d64b3a30c05f4d5",
+        "compile.stdout.log": "083b8d33c27d82bb15d89aed5eef2e6b88e1f220f0eab1fb7486e114d66fe62b",
+        "memory.bin": "61ea6e5da3854af1df7d3a81f0855d21b135ebdaf6e21335067589eb3afc42f3",
+        "xvlog.log": "083b8d33c27d82bb15d89aed5eef2e6b88e1f220f0eab1fb7486e114d66fe62b",
+        "simulate.stdout.log": "b66153e1a1b9ff866b8f8b4c421f73fc9efb1125d386a9a6f8e21a594a2b9196",
+        "xelab.log": "6ade5211ef48d441eca8f6735641ff06c692b81d626f00c613603e5b8dacb71f",
+        "axi_trace.txt": "064c24e6b98b16b7e674d65b25094642861d10bbaf746e295da8df1ccf13b132",
+        "elaborate.stdout.log": "6ade5211ef48d441eca8f6735641ff06c692b81d626f00c613603e5b8dacb71f"
+      }
+    },
+    "faults": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/design_state_store.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/sources/tb_design_state_store.sv"
+          ],
+          "pid": 2210019,
+          "exit_code": 0,
+          "elapsed_s": 1.6238280199468136
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_design_state_store",
+            "-s",
+            "design_store",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "pid": 2210850,
+          "exit_code": 0,
+          "elapsed_s": 3.492862682789564
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "design_store",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "memory=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/faults/memory.bin",
+            "--testplusarg",
+            "vectors=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/vectors.txt",
+            "--testplusarg",
+            "trace=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/design_store_v2_20261024/faults/axi_trace.txt",
+            "--testplusarg",
+            "limit=0",
+            "--testplusarg",
+            "faults=1"
+          ],
+          "pid": 2212601,
+          "exit_code": 0,
+          "elapsed_s": 5.306716587394476
+        }
+      ],
+      "initial_memory_sha256": "5994cfd7690436e225fe7fd9a701330c9df9a584ada8e03cd32b8401ceed9326",
+      "result": "DESIGN_STORE_PASS commands=0 checks=35 configurations=24 faults=17 AR=31 R=31 AW=5 W=5 B=5 awfirst=2 wfirst=2 simultaneous=1 cycles=909",
+      "artifacts": {
+        "simulate.log": "0cf43ed05b4e354d1ba2c360fd9311411bf1c0a44ff925142c1db4d20873dcda",
+        "run.tcl": "546ad833a4c2443351371130367944b7a7f8ec918d8c34282d64b3a30c05f4d5",
+        "compile.stdout.log": "083b8d33c27d82bb15d89aed5eef2e6b88e1f220f0eab1fb7486e114d66fe62b",
+        "memory.bin": "a48d816a3ab0acd203a55828aebdaa23f64a6f6e22d4a53826417aa711f5d384",
+        "xvlog.log": "083b8d33c27d82bb15d89aed5eef2e6b88e1f220f0eab1fb7486e114d66fe62b",
+        "simulate.stdout.log": "dc79aa442598c428aa923ec47b9b8046e640fb50e726d14135e2835bf2bb1a1f",
+        "xelab.log": "6ade5211ef48d441eca8f6735641ff06c692b81d626f00c613603e5b8dacb71f",
+        "axi_trace.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "elaborate.stdout.log": "6ade5211ef48d441eca8f6735641ff06c692b81d626f00c613603e5b8dacb71f"
+      }
+    }
+  },
+  "scope": "Actual RTL persistent design records and claim/keep-mask/publish service over file-backed AXI. Real graph node IDs/counts/children drive most store commands; keep decisions are synthetic, not complete getChildren or graph/pager integration.",
+  "oracle": {
+    "vectors.txt": "1ab348482b0a6a4c904395ace782b5a355b1145eb454d3bafec3a30079821b60",
+    "coverage.json": "69cab7c64d99d1a49776bc9791ceeec3dfd5ab4cdd6f100c97890700ffb1e683",
+    "expected_memory.bin": "61ea6e5da3854af1df7d3a81f0855d21b135ebdaf6e21335067589eb3afc42f3"
+  }
+}

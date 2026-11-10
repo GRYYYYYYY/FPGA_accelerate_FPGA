@@ -1,0 +1,313 @@
+{
+  "status": "passed",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv": "db0ae12bc80a2b08296b7daa267425e2bfe32df18443b97f6dda2b5ba6ce9c99",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv": "62b4249f86d3e78d97cba61d4c89963c5c3fa06aa8645720dc4f5864e8354a4e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv": "509f76d0853a3d08f2a4e165a12c7a75acd709d489f721b846e672981c30b92b",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/queued_scratch_endpoint.sv": "e4896ea1794efff60b396d0c3dd098169bb65a0465715cd10266532ec41fa8d6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv": "d6c13d07ae4e660b3dbc02612424dbae722dc70ef4d42d3dcf132b4ddcfbec0f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_queue_guards.py": "98eda7c49ca62385a12e3bc4bfc7b00029a7d62d74b7e1e61c545da71a968604"
+  },
+  "mutations": {
+    "ignore_old_responses": {
+      "status": "expected_failure_observed",
+      "removed": "&& response_count==0",
+      "replacement": "",
+      "expected_failure": "retired with old response buffered",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/queued_scratch_endpoint.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_queued_small",
+            "--snapshot",
+            "guard_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "guard_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "causal_failure": "Fatal: retired with old response buffered",
+      "artifacts": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/simulate.log": "bc5f5d5235a76aaa26dc76f3a947699f95e6f66cc5e6d2b94cf7bd8fc7356ec6",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/simulate.console.log": "2e41dece560b60d09643b3d28caf9852610e1c5491e9c760a3d8bb66d772b0c3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/queued_scratch_endpoint.sv": "389cb194e9da673e3a5302b661e12227920741768978152e6ea462d0b1a41659",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/xvlog.log": "af79a2eb9e67eeaa1155802f967fe606abfa82b89c5b66b9c72e1cf1737850bc",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/compile.console.log": "af79a2eb9e67eeaa1155802f967fe606abfa82b89c5b66b9c72e1cf1737850bc",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/xelab.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/simulate.tcl": "f954c78c424fd29a5953a97837edccfd9303a6b345d97148803fb207a1058a45",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_old_responses/elaborate.console.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a"
+      }
+    },
+    "ignore_duplicate_acks": {
+      "status": "expected_failure_observed",
+      "removed": "&& fence_ack_count==0",
+      "replacement": "",
+      "expected_failure": "response mismatch",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/queued_scratch_endpoint.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_queued_small",
+            "--snapshot",
+            "guard_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "guard_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "causal_failure": "Fatal: response mismatch check=90 status=0/7 payload=0000000000000000000000000000000000000000/0000000000000000000000000000000000000000 present=0/00000000000000000000000000000000 dirty=0/00000000000000000000000000000000 tx=0/0",
+      "artifacts": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/simulate.log": "944222f38aa935b6a3c4b0d9a17008c327afb4a07d79092ce46b56ed674bccc4",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/simulate.console.log": "d7b2b90f8381bd5bfe8be920f8b0acc6484d484468118ef1ff3c584868ed2e45",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/queued_scratch_endpoint.sv": "cb6ca062a1973fe21fbbc3007efeb85061253770cd00334e241c24a068cfafed",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/xvlog.log": "d81796e5c70461e3820a5f4ab73d959ce07b71c6148367296c0c1af0fa71ac83",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/compile.console.log": "d81796e5c70461e3820a5f4ab73d959ce07b71c6148367296c0c1af0fa71ac83",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/xelab.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/simulate.tcl": "f954c78c424fd29a5953a97837edccfd9303a6b345d97148803fb207a1058a45",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_duplicate_acks/elaborate.console.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a"
+      }
+    },
+    "ignore_queued_work": {
+      "status": "expected_failure_observed",
+      "removed": "&& work_count==1",
+      "replacement": "",
+      "expected_failure": "response mismatch",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/queued_scratch_endpoint.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_queued_small",
+            "--snapshot",
+            "guard_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "guard_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "causal_failure": "Fatal: response mismatch check=94 status=0/7 payload=0000000000000000000000000000000000000000/0000000000000000000000000000000000000000 present=0/00000000000000000000000000000000 dirty=0/00000000000000000000000000000000 tx=0/0",
+      "artifacts": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/simulate.log": "18abc8fe461dcc2bd9bef1a58711052e509619d0c2e7c20b03ac4564c6738efd",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/simulate.console.log": "96b32ed880116dbbb9bd84ae651ad10c98835cfa437e2c7e035a4d3dcb440588",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/queued_scratch_endpoint.sv": "44d0be12cd92a57a032b35818897d570e759f95ebcfc0b901c0f9a48e3e22f8a",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/xvlog.log": "0cdda9d7c8e86ec6d2c5c857627043ef725959f6fb6d52fdf20aaa10e3e5f465",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/compile.console.log": "0cdda9d7c8e86ec6d2c5c857627043ef725959f6fb6d52fdf20aaa10e3e5f465",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/xelab.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/simulate.tcl": "f954c78c424fd29a5953a97837edccfd9303a6b345d97148803fb207a1058a45",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_queued_work/elaborate.console.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a"
+      }
+    },
+    "ignore_same_cycle_ingress": {
+      "status": "expected_failure_observed",
+      "removed": "&& fence_request_count==0 && fence_ack_count==0 && !(cmd_valid && cmd_ready);",
+      "replacement": "&& fence_request_count==0 && fence_ack_count==0;",
+      "expected_failure": "response mismatch",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/queued_scratch_endpoint.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_queued_small",
+            "--snapshot",
+            "guard_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "guard_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "causal_failure": "Fatal: response mismatch check=96 status=0/7 payload=0000000000000000000000000000000000000000/0000000000000000000000000000000000000000 present=0/00000000000000000000000000000000 dirty=0/00000000000000000000000000000000 tx=0/0",
+      "artifacts": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/simulate.log": "3c1d501b61d99004ec466c7da3406372bdb7fa919599e5a7d5391796a12ad4f1",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/simulate.console.log": "b0b88ac55a4f7f441e6cd2aedbe144448f13b5a59bc09fe2f80b819cdb32f203",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/queued_scratch_endpoint.sv": "ab11885e53f175bd16c6f62c543f498bfb2606678f2b2c7261c0046c22fd12f6",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/xvlog.log": "a1820ae0b21deaf64a3130df8a4975352746a3c0b1d18cd87f44ea6c0bdbc14b",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/compile.console.log": "a1820ae0b21deaf64a3130df8a4975352746a3c0b1d18cd87f44ea6c0bdbc14b",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/xelab.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/simulate.tcl": "f954c78c424fd29a5953a97837edccfd9303a6b345d97148803fb207a1058a45",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/ignore_same_cycle_ingress/elaborate.console.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a"
+      }
+    },
+    "seal_with_live_lease": {
+      "status": "expected_failure_observed",
+      "removed": "&& request_count==0 && work_count==0 && leases==0",
+      "replacement": "&& request_count==0 && work_count==0",
+      "expected_failure": "peer sealed with outstanding lease",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "--work",
+            "xil_defaultlib",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/queued_scratch_endpoint.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_queued_scratch_endpoint.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "xil_defaultlib.tb_queued_small",
+            "--snapshot",
+            "guard_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "guard_tb",
+            "--tclbatch",
+            "simulate.tcl",
+            "--log",
+            "simulate.log"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "causal_failure": "Fatal: peer sealed with outstanding lease",
+      "artifacts": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/simulate.log": "d5685d89fce5ab25922bea63afbbdea1569836d5fb7fda8642758cb00aa693f5",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/simulate.console.log": "77e3078db513ddd6c4d0dde4a165fb6021caf1f7fe1a504e82b611405ccebe96",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/queued_scratch_endpoint.sv": "895e142fc922d71461293442aa781d6ae2fe419e39ab1d90e2e068762bd7b264",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/xvlog.log": "f1478ca34fd0fd36491d0b050209ae7070ad97c6c0994a1e7334735c99c83f34",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/compile.console.log": "f1478ca34fd0fd36491d0b050209ae7070ad97c6c0994a1e7334735c99c83f34",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/xelab.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/simulate.tcl": "f954c78c424fd29a5953a97837edccfd9303a6b345d97148803fb207a1058a45",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/negative_guards/seal_with_live_lease/elaborate.console.log": "02ef11b765deb66de2dea69c4a713d38442f1bae048ba8b92c0247b8deb5052a"
+      }
+    }
+  }
+}

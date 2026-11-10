@@ -1,0 +1,171 @@
+{
+  "input_sha256": "1983d8a58826e72623326b289f50fca0471e6ae91b0039215fed13c2c5ae9632",
+  "budget_pops": 0,
+  "budget_policy": {
+    "mode": "diagnostic",
+    "requested_budget": 0,
+    "effective_budget": 0,
+    "optimization_enabled": false,
+    "diagnostics_available": true,
+    "reason": "explicit_diagnostic_only"
+  },
+  "scheduler": "existing_partition_one_worker",
+  "runs": {
+    "traced": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate_b0_p1_1/traced.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 17.328939,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "1",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0",
+        "C_TRACE_PATH": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate_b0_p1_1/trace.jsonl",
+        "C_CPU_BUDGET": "0",
+        "C_TRACE_LIMIT": "2000",
+        "C_TRACE_CAP": "200000"
+      }
+    },
+    "original_cpu_compat": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_original",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/shared_candidate_b0_p1_1/original_cpu_compat.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.240384,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "1",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0"
+      }
+    }
+  },
+  "analysis": {
+    "scope": "Observed label accesses/writes and paths; serial execution mapped to original DAG. Potential concurrency hazards, not an observed parallel race or proof of physical legality.",
+    "coverage": {
+      "all_attempts_and_instrumented_sets_recorded": true,
+      "unobserved_attempts": 0,
+      "truncated_attempts": 0,
+      "full_memory_access_coverage": false
+    },
+    "verification": {
+      "record": "verification",
+      "connections": 8,
+      "unrouted": 0,
+      "bad_paths": 0,
+      "final_overused_nodes": 0,
+      "attempts_total": 8,
+      "attempts_recorded": 8,
+      "budget_aborts_total": 0
+    },
+    "search": {
+      "attempts": 8,
+      "pops": 64,
+      "budget_aborts_recorded": 0,
+      "successful_budget_retries_recorded": 0,
+      "attempt_p50_ms_instrumented": 0.019302,
+      "attempt_p95_ms_instrumented": 0.063876,
+      "attempt_max_ms_instrumented": 0.063876,
+      "attempt_sum_ms_instrumented": 0.18839
+    },
+    "partition_tasks": 2,
+    "partition_edges": 0,
+    "unordered_label_access": {
+      "iteration_task_pairs": 1,
+      "bbox_disjoint_pairs": 1,
+      "examples": [
+        {
+          "iteration": 1,
+          "tasks": [
+            0,
+            1
+          ],
+          "bbox_disjoint": true,
+          "resources": 1,
+          "examples": [
+            "2097152"
+          ]
+        }
+      ]
+    },
+    "unordered_label_read_write": {
+      "iteration_task_pairs": 1,
+      "bbox_disjoint_pairs": 1,
+      "examples": [
+        {
+          "iteration": 1,
+          "tasks": [
+            0,
+            1
+          ],
+          "bbox_disjoint": true,
+          "resources": 1,
+          "examples": [
+            "2097152"
+          ]
+        }
+      ]
+    },
+    "unordered_path_sharing": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "dense_label_page_counts": [
+      {
+        "iteration": 1,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 1,
+        "task": 1,
+        "pages": 1
+      }
+    ]
+  },
+  "checks": {
+    "all_connections_routed": true,
+    "paths_valid_in_exported_graph": true,
+    "final_path_capacity_legal": true,
+    "output_equal_to_cpu_compat_baseline": true
+  },
+  "status": "passed",
+  "artifacts_sha256": {
+    "traced.stderr.log": "4fe0e8d3ebc94c10adc73cd50c5775f4b660f906d1632ce73c10b304cd81b68d",
+    "original_cpu_compat.stdout.log": "9e361d03dbd8d0622ecf7b5ae275bc2b81d560c5c6e461b4458d7e26ccf5997e",
+    "trace.jsonl": "a73dde74c0b657e78ef151cadd2d317918c04d652bec21981d656d125e7f48a9",
+    "traced.stdout.log": "ef9e72068a0d49a32a1009690de4450a05a039ada08839d74cf9cf73bdb36d8a",
+    "traced.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861",
+    "original_cpu_compat.stderr.log": "cc6819ef9c96219287ac088bf1b64533b62c66e57e2ac7c1f1daec2b6042356e",
+    "original_cpu_compat.result": "db4c155d48997aac9b7657006e2469c22da1b4c43269d32b72b81ac93f322861"
+  }
+}

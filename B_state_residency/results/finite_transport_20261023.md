@@ -1,0 +1,15 @@
+# 有限描述符传输队列与排空：可执行事件模型
+
+src/finite_transport.py组合FiniteCompletionDomain，新增有界请求队列、peer处理中队列与完成队列，均可乱序推进；复制事件只从现存队列生成重复包。peer_seen按本次排空区间的有限transaction记录完整描述符，重复请求不重复进入work。完成按字段匹配，不依赖对象身份。
+
+提交在请求队列满时先阻塞，不消耗事务号或留下半个pending。peer work/完成队列满时同样不移走源事件。重复完成只能被消费为duplicate，不释放其他slot或改变新pending；字段损坏的完成拒绝且保留有效pending。旧query完成返回stale，原槽仍需全部pin/IO确认后才能release。
+
+request_fence停止host新发起；seal_peer只有请求和work均空时才允许，模拟peer不再产生新完成。finish_fence还检查请求/work/完成队列全部为空，并由ledger检查本地pending和所有binding均释放；之后才允许有限编号复用。没有向调用者暴露自行填写quiescent=True的回收接口。domain底层低级方法仍存在，组合保证只适用于使用该封装的单一owner，绕过封装不受保护。
+
+8项新检查通过，全套56项Python检查通过，完整测试日志和源码/测试快照已保存。用1位transaction/query/generation、两槽和随机队列顺序运行200次排空重用周期，重复请求、乱序完成与重复完成均纳入，完成队列含旧重复包时不能回收；全部清空后确实重用相同有限wire字段。另覆盖peer仍有request/work时不能确认排空、本地无pending但没有peer确认仍不允许回收、pin需全部确认以及背压原子性。
+
+模型边界必须保留：所有延迟包都必须存在于这三个已建模队列，peer_seen记录不会因丢失状态而消失，单一host/peer调用者在fence期间停止旧请求。没有隐藏网络、排空后外部注入旧包、硬件reset丢失去重表、ACK丢失/重试或并行生产者。seal_peer是模拟器状态转换，不是已实现的远端控制报文；尚未验证有限fence-ID/旧fence-ACK乱序问题。前一阶段假排空后的同包ABA反例仍成立，本模型只是让模拟队列非空时无法错误确认静止，并未消除真实链路必须满足的契约。
+
+本阶段只有描述符与槽所有权，没有writeback/refill数据值、副作用提交时刻、真实DMA/缓存一致性、RTL或性能数据。不能用通过队列检查宣称整个页协议完成。下一步组合页值状态：确保写回副作用和refill发布都受query与binding校验，取消后旧副作用不能污染新query；加入实际数据oracle，并检查重复请求不重复写后备。之后再设计真实传输fence控制报文和失效恢复。
+
+证据目录：`finite_transport_20261023T013028Z/`，含manifest.json、tests.log和四个源/测试快照；performance为空。复核：`python3 -m unittest discover -s tests -v`。

@@ -1,0 +1,9 @@
+CP19双容量完整发布已通过，归档恢复证据见results/owner_g3_publish_20261027.json。自然q3（完整seq180329）的真实CPU prepared-state、旧路径准备事件已采集并独立核对；新数值cost/CPS1 oracle与RTL接入仍待完成。不能重复已消费180328或直接加载新的owner快照冒充连续性。
+
+q3为connection170785/net26422/source66893/sink151354。CPU实际旧路径及新回溯路径均为151354→990179→558358→265324→66893；准备阶段真实refs2→1、4→3、5→4，occupancy2/2/1不变。两个CPU采集版本的10份输出逐字节一致，完整路由哈希不变。前q2提交与本q3拆线抵消同三个内部节点的owner变化，全量9089009行转换只留下source66893序号与旧目标67922/新目标151354标记三行差异；不意味着可以省略实际owner操作。q3为114poll/113expand/565candidate/302标签更新，302不是已独立验证的cost次数。
+
+路径容量是下一实质接入点：当前route_commit_controller的req_slot/内部slot为1bit、path数组[0:1]、slot_valid为2bit；export_manifest也固定2槽/78字。q1、q2必须继续保存。不能因为q3和q2的内部节点相同便拆掉q2代替q3旧路径。应在隔离变体中参数化路径槽数及各层slot宽度、checkpoint序列化/CRC/manifest验证，并先证明默认2槽字节兼容和至少3槽的实际保存/拆线/导入导出。q3历史路径来自此次CPU原生记录，导入只能登记路径元数据，不得多加owner引用；然后实际ripup后复用自己的槽提交。若G3源需包含历史q3路径，必须在新实验中重新实际导出并发布对应路径镜像，不能沿用本轮78字CRC冒充更大镜像。
+
+G3 source为store5/query3/price5、gen0x100000003/CP19、781标签/393页、两path78字、query10字/floor180328。当前恢复TB仍硬接G2 checkpoint18及source3/1/3，snapshot_label_crc也仍需选择新的native export CRC；未接G3恢复。下一次恢复attempt必须高于5，保留实际seq floor，所有源字节/CRC来自本次真实导出；不要手改原字节或复用旧777/q1-only镜像。两个path槽当前都满，必须先明确自然q3准备阶段应拆哪条路径、是否需要扩大原生路径容量，不能为了让seq检查通过而静默丢路径。
+
+export_manifest取消后目前fail closed且无非冷重arm；后续需要显式退休/错误后重启语义。持久化writer/认证与floors、全图baseline reseed/可扩展dirty表、实际overflow新增回收、任意变价、综合时序和板卡均另证。

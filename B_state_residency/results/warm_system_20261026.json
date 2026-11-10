@@ -1,0 +1,501 @@
+{
+  "status": "passed",
+  "audits": {
+    "warm_join_context_unfixed_v1": {
+      "status": "passed",
+      "expected_failure": true,
+      "manifest_sha256": "56ad3ae281f5e45656a756cbc0733377bf13119ef20fdd49bc2a21678c415e82",
+      "auditor_sha256": "b9c542b3799d0933a6e6819a130e1b86eb3dff91650687730624e83e319438cd",
+      "reason": "Owner-repaired preceding label initialization wrongly required active target context, quarantining before native label control could create it.",
+      "scope": "Source-bound observed negative, not an AXI correctness or successful-recovery claim."
+    },
+    "warm_join_context_v1": {
+      "status": "passed",
+      "manifest_sha256": "fb5526c33852bea3e5472400c826563978558e6729e07cabc02bcda7e476f04d",
+      "auditor_sha256": "c3c4514eb7e4e7651435f71e5c4330fc7b0379894d7d2c2cb6fda9a12f75b641",
+      "checks": 405,
+      "scenarios": 9,
+      "native_label_runs": 8,
+      "labels_verified": 2624,
+      "native_label_field_writes": 13120,
+      "gate_observations": 72,
+      "fault_cases": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "limits": [
+        "Native three-controller restore slice, behavioral mutable label RAM. Recovery ownership/owner-repaired and active identity/context supplied by TB; not full-root fence/coordinator integration.",
+        "No working-owner AXI repair or q2 search/retry executed; no cross-price distance-validity, durable authorization, synthesis/timing or board proof."
+      ]
+    },
+    "warm_system_v1": {
+      "status": "passed",
+      "expected_failure": true,
+      "manifest_sha256": "af8a49cd478d8ac5057dbb16ac3665df50de03feb8e711821b8eca40ebcf148b",
+      "auditor_sha256": "b9c542b3799d0933a6e6819a130e1b86eb3dff91650687730624e83e319438cd",
+      "reason": "Frontend recover-ready coincides with backend acceptance; pre-edge attempt register remained0, so actual native recovery accepted without arming warm join.",
+      "scope": "Source-bound observed negative, not an AXI correctness or successful-recovery claim."
+    },
+    "warm_system_normal_v2": {
+      "status": "passed",
+      "manifest_sha256": "0fd2b17844f26102d3318ddd280b0da245c843b170cf610d8161a6ae830c4c59",
+      "auditor_sha256": "1b002bd3bd4e45f2f5b45efddbf64449e43d734306f6f42f0faf0e723b91107f",
+      "cases": {
+        "full_5": {
+          "exact_files": {
+            "graph_axi.txt": "40c50dc7f6a7a150b7a3a0faefc01b45ef2460cfe323d3eb4f3df05a075ae93e",
+            "cost_axi.txt": "8c02771655c0284f1d904abb21ba1a63fa055a825ccfac18ea0db249f0d5b637",
+            "design_axi.txt": "8bd84d7613f3ba06ff4663646e06fa432b813a9d9390ad99b9cf510ab7334e67",
+            "owner_axi.txt": "d11fec736048a101b3babebbaad358b094dd2b4f0cf0c8d8d52ac973d8d7f5b1",
+            "label_axi.txt": "d3584ae21f58d4a8a82606fdaddb77e3bbe9f365386dd218671fca0170faa50f",
+            "qstate_axi.txt": "5e2c7af53a38a892601200a9ee7e6e6501cd50f56d21d2f2ce367a2b345777d9",
+            "table_axi.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "snapshot_axi.txt": "efd5a5410037f9b9b4cd355f0faca02aaaa95c7b42f3dd3644af814713d8011a",
+            "owners.bin": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+            "labels.bin": "614a2c28297996f5334c53e1e153defb38753bc1a372f07b68afc1be4776bfcd",
+            "cost.bin": "1b8e7a1e9dc945f1e8328d3d2c57c04c043e38feaedef7aff0612e422e6dc682",
+            "design.bin": "7fff9a9a5126a34b6871862245adf3dc8dc6e579598d134c1b6afc69f9e366d9",
+            "natural_trace.txt": "71e40f80fe26822adddae5a1c94ce9fe315c035f5eb02ed107f7ce2c1c90e77f",
+            "directory.txt": "ceed8645e177910e7224ff3475ded793aec8e9e07c8779e81049059988b45d33"
+          },
+          "result": "QUERY_FAULT_OBSERVED case=5 outcome=recovered_retry cycles=1049120 repairs=1"
+        },
+        "pressure_5": {
+          "exact_files": {
+            "graph_axi.txt": "40c50dc7f6a7a150b7a3a0faefc01b45ef2460cfe323d3eb4f3df05a075ae93e",
+            "cost_axi.txt": "8c02771655c0284f1d904abb21ba1a63fa055a825ccfac18ea0db249f0d5b637",
+            "design_axi.txt": "8bd84d7613f3ba06ff4663646e06fa432b813a9d9390ad99b9cf510ab7334e67",
+            "owner_axi.txt": "d11fec736048a101b3babebbaad358b094dd2b4f0cf0c8d8d52ac973d8d7f5b1",
+            "label_axi.txt": "8a9c2fe550bced4c46508cb3ab9230e1316994ed242d5784f407132a7b47cd58",
+            "qstate_axi.txt": "5e2c7af53a38a892601200a9ee7e6e6501cd50f56d21d2f2ce367a2b345777d9",
+            "table_axi.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "snapshot_axi.txt": "efd5a5410037f9b9b4cd355f0faca02aaaa95c7b42f3dd3644af814713d8011a",
+            "owners.bin": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+            "labels.bin": "07993479c3ba470ec47c55398e387ca1deee3b06233ef9114b0b750e8e83310f",
+            "cost.bin": "1b8e7a1e9dc945f1e8328d3d2c57c04c043e38feaedef7aff0612e422e6dc682",
+            "design.bin": "7fff9a9a5126a34b6871862245adf3dc8dc6e579598d134c1b6afc69f9e366d9",
+            "natural_trace.txt": "870368ae465f0e378406fa123ac5cc00efd1ad1a87c63804e274245d64e3c950",
+            "directory.txt": "9c05cbbe431eec760df7adb6ac6769915695b5c3289c3075298e4fa3d860f412"
+          },
+          "result": "QUERY_FAULT_OBSERVED case=5 outcome=recovered_retry cycles=1140364 repairs=1"
+        }
+      },
+      "scope": "Full warm plumbing disabled; exact ordinary-path regression, not enabled warm-fault proof."
+    },
+    "warm_system_v2": {
+      "status": "passed",
+      "manifest_sha256": "1e01b51beafe652089b28e442b0671b5167152487fb41d7030195acd5f248bec",
+      "auditor_sha256": "80491f46f374e4e8bef85e43d1c75c64fcb84a31b466d120bec314bd0a24694c",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "full_5": {
+          "repaired_node": 1231788,
+          "wanted_refs": 0,
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1558,
+              "read_beats": 1558,
+              "write_beats": 28,
+              "write_replies": 28,
+              "read_burst_lengths": {
+                "1": 1558
+              },
+              "write_burst_lengths": {
+                "1": 28
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 974,
+              "read_beats": 2811,
+              "write_beats": 1890,
+              "write_replies": 654,
+              "read_burst_lengths": {
+                "3": 900,
+                "1": 37,
+                "2": 37
+              },
+              "write_burst_lengths": {
+                "3": 606,
+                "1": 24,
+                "2": 24
+              },
+              "logical_192B_reads": 937,
+              "logical_192B_writes": 630,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 22,
+              "read_beats": 22,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 22
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        },
+        "pressure_5": {
+          "repaired_node": 1231788,
+          "wanted_refs": 0,
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1558,
+              "read_beats": 1558,
+              "write_beats": 28,
+              "write_replies": 28,
+              "read_burst_lengths": {
+                "1": 1558
+              },
+              "write_burst_lengths": {
+                "1": 28
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 2700,
+              "read_beats": 7668,
+              "write_beats": 3876,
+              "write_replies": 1358,
+              "read_burst_lengths": {
+                "3": 2412,
+                "2": 144,
+                "1": 144
+              },
+              "write_burst_lengths": {
+                "3": 1226,
+                "1": 66,
+                "2": 66
+              },
+              "logical_192B_reads": 2556,
+              "logical_192B_writes": 1292,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 22,
+              "read_beats": 22,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 22
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "First q2 owner-B fault in one-net, capacity-zero owner fixture. Other fault ordinals, shared-node fault points, overflow and arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "Gate HALT/cancellation retry without cold reset, durable authenticated manifests/floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    }
+  },
+  "restores": {
+    "warm_join_context_unfixed_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_join_context_unfixed_v1.json",
+      "archive_sha256": "7b8a444c4c2538f27185c6ec7885e11018bc360d0126d77595832766097a76c5",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_join_context_unfixed_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_join_context_unfixed_v1",
+      "files": 43,
+      "audit_byte_identical": true,
+      "audit_sha256": "76f2131445421bb2aae7a74477e6e0bdb970b2a0492405074faf63c357b467d0",
+      "auditor": "audit_warm_negative.py"
+    },
+    "warm_join_context_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_join_context_v1.json",
+      "archive_sha256": "4514d4e23cbfe0b1959b69242ddc1cfb735d2908e48abf0ab70c6a3ea9c6fb02",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_join_context_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_join_context_v1",
+      "files": 43,
+      "audit_byte_identical": true,
+      "audit_sha256": "b35126bf29195e2629b1135b07e6d38ad95607a362c2c5836870e95e263d470f",
+      "auditor": "audit_warm_join_context.py"
+    },
+    "warm_system_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_system_v1.json",
+      "archive_sha256": "110b2bf923b23b35fe022aec288a333f1e93944e9a003eb5fd3bbbc67e923af3",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_system_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_system_v1",
+      "files": 322,
+      "audit_byte_identical": true,
+      "audit_sha256": "551acb6e74024ba51e25b21843e753a6e00ad467b92e02af235fe51cbc9a1d49",
+      "auditor": "audit_warm_negative.py"
+    },
+    "warm_system_normal_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_system_normal_v2.json",
+      "archive_sha256": "15fb7eaa229d4e1d0b526c9a8a4c6c28c5f5c5c92bfc0a9454957bf0bc7806be",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_system_normal_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_system_normal_v2",
+      "files": 503,
+      "audit_byte_identical": true,
+      "audit_sha256": "b7a7309eafc1ef8db70e7c4ba13c10c74160814ca861b27b3d67c537910a8046",
+      "auditor": "audit_warm_system_normal.py"
+    },
+    "warm_system_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_system_v2.json",
+      "archive_sha256": "04fdb626c6d9061a8d5fc6209ef107048345c9ba362c167c889a96f0ef85c9fe",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_system_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_system_v2",
+      "files": 509,
+      "audit_byte_identical": true,
+      "audit_sha256": "b87fa794af8fac751416ae8e44e5e611f19409e7b8c106fb541f38e67814d381",
+      "auditor": "audit_warm_system.py"
+    }
+  },
+  "simulation_phase_cycles": {
+    "full_5": {
+      "trace_sha256": "1447fb42902f961155fcd199f43340e98b2b898865200c69dcea1c63d3931aac",
+      "owner_phase": 173,
+      "label_phase": 128820,
+      "path_phase": 257,
+      "query_phase": 29,
+      "completion_phase": 10,
+      "fault_to_retry": 129318
+    },
+    "pressure_5": {
+      "trace_sha256": "035c5e0ac2ef21cde064138c106f4de210bf4f7560da1c23aec0e14fb54a65b0",
+      "owner_phase": 152,
+      "label_phase": 94058,
+      "path_phase": 257,
+      "query_phase": 29,
+      "completion_phase": 10,
+      "fault_to_retry": 94535
+    }
+  },
+  "sources": {
+    "hardware/variants/warm_system_v1/build.py": "02e059964b3b5a40c9cb2140ec255a208b21685453208559f2c3358b70261708",
+    "hardware/variants/warm_system_v1/build_tb.py": "18582d025e3fc3cedfe692f88ae89a83a25b78e5e820696726614a56dda82b8f",
+    "hardware/variants/warm_system_v1/query_residency_system.sv": "f863b60753b2a18b715a5ac455f55f3579687072b854f7a75f97165c7b17f050",
+    "hardware/variants/warm_system_v1/search_residency_system.sv": "8c3ff5d8c0c86758785d3c0b74af49ad2bbb38fd7a6e7ec39b12ecd0e58fe3a5",
+    "hardware/variants/warm_system_v1/residency_system.sv": "b207a201e3b00cd70e3d07492a4558054b646667d05159ebe0806b7b362804d9",
+    "hardware/variants/warm_system_v1/warm_restore_receipt_join.sv": "f07521a753ec60bc9a266be196fcbccd923722be521b2f35722306ab4eebb387",
+    "hardware/variants/warm_system_v1/tb_join_context.sv": "da017e5898b7ca940ffcfcdd582463f24060dbeb5ee04b6709c4103066585b30",
+    "hardware/variants/warm_system_v1/tb_warm.sv": "5c12c0622a1db98f6e41c3cdf7f7546357343d25d9fe355dc44cdad3813885c9",
+    "hardware/variants/warm_system_v1/CONTRACT.md": "bcb9ab100bf2754b1495ac3b843cbfaf205b30960d9efe795c17e36ab2ebd6dd",
+    "scripts/run_warm_join_context.py": "4706e41f2654f133d59d86d94f3e3a777549647d601e341fcd8957d5166cdc13",
+    "scripts/audit_warm_join_context.py": "c3c4514eb7e4e7651435f71e5c4330fc7b0379894d7d2c2cb6fda9a12f75b641",
+    "scripts/run_warm_system.py": "f119b68104de1d3c7aed624637b43c04fcc813b3998381097b0ec17ea3e7150d",
+    "scripts/extend_warm_system_pressure.py": "5f7b7dce89c7f85d08c110c4307778f949c8a3b5a536d14cbb17b59b732e2c24",
+    "scripts/audit_warm_system.py": "80491f46f374e4e8bef85e43d1c75c64fcb84a31b466d120bec314bd0a24694c",
+    "scripts/run_warm_system_regression.py": "cf10b105f7de7dbd28dd3ac0a72efeaec81f36372c5983603165553b1368fc99",
+    "scripts/audit_warm_system_normal.py": "1b002bd3bd4e45f2f5b45efddbf64449e43d734306f6f42f0faf0e723b91107f",
+    "scripts/audit_warm_negative.py": "b9c542b3799d0933a6e6819a130e1b86eb3dff91650687730624e83e319438cd",
+    "scripts/report_warm_system.py": "baaa80f1a90542d67ba7761fe08b91e7c456f230ac3b5a82518e8769535bc6fc"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "status": "read_only_observation_aliases_and_actual_model_preparation_reviewed_proof_pending",
+  "source_bindings": {
+    "checkpoint_authority_rotator.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_rotator.sv",
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032"
+    },
+    "checkpoint_authority_reader.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+    },
+    "owner_state_store.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/access_owner_v3_20261024/owners/owner_state_store.sv",
+      "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c"
+    }
+  },
+  "core_json_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+  "exposed_json_sha256": "6dd9d0b66a7e2d05c269c12774264c656e16eec507d8a9085c975b172044ad63",
+  "harness_sha256": "c3ce331f6b4ca9dae5320cf3aafc3e7496ca2bd38877304c4b72e2725d9d8f67",
+  "observation_ports": {
+    "f_bank0_configured": "bank0.configured",
+    "f_bank1_configured": "bank1.configured",
+    "f_bank0_bound_valid": "bank0.bound_valid",
+    "f_bank1_bound_valid": "bank1.bound_valid",
+    "f_rotator_state": "state",
+    "f_target": "target",
+    "f_active_bank": "active_bank"
+  },
+  "observation_only_no_cell_or_net_changes": true,
+  "smt_constraint_counts": {
+    "assert": 4,
+    "assume": 1,
+    "cover": 2
+  },
+  "bmc_steps_passed": 12,
+  "live_process_at_observation": {
+    "stage": "induction",
+    "pid": 2463077,
+    "start_ticks": "1663633745",
+    "argv": [
+      "python3",
+      "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+      "-s",
+      "z3",
+      "-i",
+      "-t",
+      "12",
+      "--dump-vcd",
+      "induction_failure.vcd",
+      "design.smt2"
+    ],
+    "identity_verified": true
+  },
+  "original_session": 20887,
+  "limitations": [
+    "No induction or cover acceptance implied by this preparation review",
+    "Not full-system configured invariant or KA stall closure"
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

@@ -1,0 +1,361 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date              : Fri Oct 23 14:49:24 2026
+| Host              : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command           : report_timing -from [get_ports -filter {DIRECTION == IN && NAME != clk}] -to [all_registers] -delay_type max -max_paths 5 -path_type full_clock_expanded -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_clock_shell_20261023/wide/input_max.rpt
+| Design            : clock_shell_wide
+| Device            : xcu280-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Temperature Grade : E
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             2.071ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/memory/memory_service/directory/owners_reg_bram_10/ENARDEN
+                            (rising edge-triggered cell RAMB36E2 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        7.696ns  (logic 0.556ns (7.224%)  route 7.140ns (92.775%))
+  Logic Levels:           7  (LUT2=1 LUT4=2 LUT5=3 LUT6=1)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.216ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.216ns = ( 12.216 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.156ns (routing 1.162ns, distribution 0.994ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 f  rst (IN)
+                         net (fo=4024, unset)         0.000     2.071    endpoint/memory/memory_service/directory/rst
+    SLICE_X44Y59         LUT5 (Prop_C6LUT_SLICEM_I3_O)
+                                                      0.088     2.159 r  endpoint/memory/memory_service/directory/lease_phase[3][1]_i_8/O
+                         net (fo=3, routed)           1.458     3.617    endpoint/memory/memory_service/directory/dir_ready
+    SLICE_X45Y59         LUT4 (Prop_H6LUT_SLICEL_I3_O)
+                                                      0.036     3.653 r  endpoint/memory/memory_service/directory/lease_phase[3][1]_i_6/O
+                         net (fo=40, routed)          0.642     4.296    endpoint/memory/memory_service/directory/lease_phase[3][1]_i_6_n_0
+    SLICE_X44Y58         LUT4 (Prop_C6LUT_SLICEM_I2_O)
+                                                      0.051     4.347 r  endpoint/memory/memory_service/directory/lease_phase[1][1]_i_5/O
+                         net (fo=2, routed)           0.435     4.782    endpoint/memory/memory_service/directory/lease_phase[1][1]_i_5_n_0
+    SLICE_X44Y58         LUT6 (Prop_H6LUT_SLICEM_I0_O)
+                                                      0.039     4.821 r  endpoint/memory/memory_service/directory/owners_reg_bram_0_i_44/O
+                         net (fo=43, routed)          0.841     5.662    endpoint/memory/memory_service/directory/write_word[24]
+    SLICE_X33Y59         LUT5 (Prop_D6LUT_SLICEL_I1_O)
+                                                      0.146     5.808 r  endpoint/memory/memory_service/directory/owners_reg_bram_17_i_5/O
+                         net (fo=22, routed)          1.342     7.149    endpoint/memory/memory_service/directory/p_4_out
+    SLICE_X15Y64         LUT5 (Prop_D6LUT_SLICEL_I0_O)
+                                                      0.146     7.295 r  endpoint/memory/memory_service/directory/owners_reg_bram_10_i_3/O
+                         net (fo=5, routed)           0.372     7.667    endpoint/memory/memory_service/directory/owners_reg_bram_10_i_3_n_0
+    SLICE_X15Y64         LUT2 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.050     7.717 r  endpoint/memory/memory_service/directory/owners_reg_bram_10_ENARDEN_cooolgate_en_gate_15/O
+                         net (fo=1, routed)           2.050     9.767    endpoint/memory/memory_service/directory/owners_reg_bram_10_ENARDEN_cooolgate_en_sig_8
+    RAMB36_X1Y10         RAMB36E2                                     r  endpoint/memory/memory_service/directory/owners_reg_bram_10/ENARDEN
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        2.156    12.216    endpoint/memory/memory_service/directory/core_clk
+    RAMB36_X1Y10         RAMB36E2                                     r  endpoint/memory/memory_service/directory/owners_reg_bram_10/CLKARDCLK
+                         clock pessimism              0.000    12.216    
+                         clock uncertainty           -0.035    12.180    
+    RAMB36_X1Y10         RAMB36E2 (Setup_RAMB36E2_RAMB36_CLKARDCLK_ENARDEN)
+                                                     -0.342    11.838    endpoint/memory/memory_service/directory/owners_reg_bram_10
+  -------------------------------------------------------------------
+                         required time                         11.838    
+                         arrival time                          -9.767    
+  -------------------------------------------------------------------
+                         slack                                  2.071    
+
+Slack (MET) :             2.366ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/memory/memory_service/dma/buffer_data_reg[273]/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        7.687ns  (logic 0.526ns (6.843%)  route 7.161ns (93.157%))
+  Logic Levels:           4  (LUT2=1 LUT4=1 LUT5=1 LUT6=1)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.219ns = ( 12.219 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.159ns (routing 1.162ns, distribution 0.997ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 f  rst (IN)
+                         net (fo=4024, unset)         0.000     2.071    endpoint/memory/memory_service/dma/rst
+    SLICE_X49Y54         LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.146     2.217 f  endpoint/memory/memory_service/dma/position[5]_i_7/O
+                         net (fo=2, routed)           1.325     3.542    endpoint/memory/memory_service/dma/position[5]_i_7_n_0
+    SLICE_X49Y54         LUT5 (Prop_H5LUT_SLICEL_I1_O)
+                                                      0.109     3.651 f  endpoint/memory/memory_service/dma/position[5]_i_5/O
+                         net (fo=19, routed)          1.160     4.811    endpoint/memory/memory_service/dma/position[5]_i_5_n_0
+    SLICE_X48Y53         LUT4 (Prop_C6LUT_SLICEM_I3_O)
+                                                      0.123     4.934 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_3/O
+                         net (fo=9, routed)           0.943     5.877    endpoint/memory/memory_service/dma/buffer_data[511]_i_3_n_0
+    SLICE_X49Y53         LUT2 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.148     6.025 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_1/O
+                         net (fo=512, routed)         3.733     9.758    endpoint/memory/memory_service/dma/buffer_data
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[273]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        2.159    12.219    endpoint/memory/memory_service/dma/core_clk
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[273]/C
+                         clock pessimism              0.000    12.219    
+                         clock uncertainty           -0.035    12.184    
+    SLICE_X62Y43         FDRE (Setup_HFF2_SLICEL_C_CE)
+                                                     -0.060    12.124    endpoint/memory/memory_service/dma/buffer_data_reg[273]
+  -------------------------------------------------------------------
+                         required time                         12.124    
+                         arrival time                          -9.758    
+  -------------------------------------------------------------------
+                         slack                                  2.366    
+
+Slack (MET) :             2.366ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/memory/memory_service/dma/buffer_data_reg[275]/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        7.687ns  (logic 0.526ns (6.843%)  route 7.161ns (93.157%))
+  Logic Levels:           4  (LUT2=1 LUT4=1 LUT5=1 LUT6=1)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.219ns = ( 12.219 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.159ns (routing 1.162ns, distribution 0.997ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 f  rst (IN)
+                         net (fo=4024, unset)         0.000     2.071    endpoint/memory/memory_service/dma/rst
+    SLICE_X49Y54         LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.146     2.217 f  endpoint/memory/memory_service/dma/position[5]_i_7/O
+                         net (fo=2, routed)           1.325     3.542    endpoint/memory/memory_service/dma/position[5]_i_7_n_0
+    SLICE_X49Y54         LUT5 (Prop_H5LUT_SLICEL_I1_O)
+                                                      0.109     3.651 f  endpoint/memory/memory_service/dma/position[5]_i_5/O
+                         net (fo=19, routed)          1.160     4.811    endpoint/memory/memory_service/dma/position[5]_i_5_n_0
+    SLICE_X48Y53         LUT4 (Prop_C6LUT_SLICEM_I3_O)
+                                                      0.123     4.934 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_3/O
+                         net (fo=9, routed)           0.943     5.877    endpoint/memory/memory_service/dma/buffer_data[511]_i_3_n_0
+    SLICE_X49Y53         LUT2 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.148     6.025 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_1/O
+                         net (fo=512, routed)         3.733     9.758    endpoint/memory/memory_service/dma/buffer_data
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[275]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        2.159    12.219    endpoint/memory/memory_service/dma/core_clk
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[275]/C
+                         clock pessimism              0.000    12.219    
+                         clock uncertainty           -0.035    12.184    
+    SLICE_X62Y43         FDRE (Setup_GFF2_SLICEL_C_CE)
+                                                     -0.060    12.124    endpoint/memory/memory_service/dma/buffer_data_reg[275]
+  -------------------------------------------------------------------
+                         required time                         12.124    
+                         arrival time                          -9.758    
+  -------------------------------------------------------------------
+                         slack                                  2.366    
+
+Slack (MET) :             2.368ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/memory/memory_service/dma/buffer_data_reg[272]/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        7.685ns  (logic 0.526ns (6.845%)  route 7.159ns (93.155%))
+  Logic Levels:           4  (LUT2=1 LUT4=1 LUT5=1 LUT6=1)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.219ns = ( 12.219 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.159ns (routing 1.162ns, distribution 0.997ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 f  rst (IN)
+                         net (fo=4024, unset)         0.000     2.071    endpoint/memory/memory_service/dma/rst
+    SLICE_X49Y54         LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.146     2.217 f  endpoint/memory/memory_service/dma/position[5]_i_7/O
+                         net (fo=2, routed)           1.325     3.542    endpoint/memory/memory_service/dma/position[5]_i_7_n_0
+    SLICE_X49Y54         LUT5 (Prop_H5LUT_SLICEL_I1_O)
+                                                      0.109     3.651 f  endpoint/memory/memory_service/dma/position[5]_i_5/O
+                         net (fo=19, routed)          1.160     4.811    endpoint/memory/memory_service/dma/position[5]_i_5_n_0
+    SLICE_X48Y53         LUT4 (Prop_C6LUT_SLICEM_I3_O)
+                                                      0.123     4.934 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_3/O
+                         net (fo=9, routed)           0.943     5.877    endpoint/memory/memory_service/dma/buffer_data[511]_i_3_n_0
+    SLICE_X49Y53         LUT2 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.148     6.025 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_1/O
+                         net (fo=512, routed)         3.731     9.756    endpoint/memory/memory_service/dma/buffer_data
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[272]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        2.159    12.219    endpoint/memory/memory_service/dma/core_clk
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[272]/C
+                         clock pessimism              0.000    12.219    
+                         clock uncertainty           -0.035    12.184    
+    SLICE_X62Y43         FDRE (Setup_HFF_SLICEL_C_CE)
+                                                     -0.060    12.124    endpoint/memory/memory_service/dma/buffer_data_reg[272]
+  -------------------------------------------------------------------
+                         required time                         12.124    
+                         arrival time                          -9.756    
+  -------------------------------------------------------------------
+                         slack                                  2.368    
+
+Slack (MET) :             2.368ns  (required time - arrival time)
+  Source:                 rst
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/memory/memory_service/dma/buffer_data_reg[274]/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        7.685ns  (logic 0.526ns (6.845%)  route 7.159ns (93.155%))
+  Logic Levels:           4  (LUT2=1 LUT4=1 LUT5=1 LUT6=1)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.219ns = ( 12.219 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.159ns (routing 1.162ns, distribution 0.997ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 f  rst (IN)
+                         net (fo=4024, unset)         0.000     2.071    endpoint/memory/memory_service/dma/rst
+    SLICE_X49Y54         LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.146     2.217 f  endpoint/memory/memory_service/dma/position[5]_i_7/O
+                         net (fo=2, routed)           1.325     3.542    endpoint/memory/memory_service/dma/position[5]_i_7_n_0
+    SLICE_X49Y54         LUT5 (Prop_H5LUT_SLICEL_I1_O)
+                                                      0.109     3.651 f  endpoint/memory/memory_service/dma/position[5]_i_5/O
+                         net (fo=19, routed)          1.160     4.811    endpoint/memory/memory_service/dma/position[5]_i_5_n_0
+    SLICE_X48Y53         LUT4 (Prop_C6LUT_SLICEM_I3_O)
+                                                      0.123     4.934 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_3/O
+                         net (fo=9, routed)           0.943     5.877    endpoint/memory/memory_service/dma/buffer_data[511]_i_3_n_0
+    SLICE_X49Y53         LUT2 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.148     6.025 r  endpoint/memory/memory_service/dma/buffer_data[511]_i_1/O
+                         net (fo=512, routed)         3.731     9.756    endpoint/memory/memory_service/dma/buffer_data
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[274]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        2.159    12.219    endpoint/memory/memory_service/dma/core_clk
+    SLICE_X62Y43         FDRE                                         r  endpoint/memory/memory_service/dma/buffer_data_reg[274]/C
+                         clock pessimism              0.000    12.219    
+                         clock uncertainty           -0.035    12.184    
+    SLICE_X62Y43         FDRE (Setup_GFF_SLICEL_C_CE)
+                                                     -0.060    12.124    endpoint/memory/memory_service/dma/buffer_data_reg[274]
+  -------------------------------------------------------------------
+                         required time                         12.124    
+                         arrival time                          -9.756    
+  -------------------------------------------------------------------
+                         slack                                  2.368    
+
+
+
+

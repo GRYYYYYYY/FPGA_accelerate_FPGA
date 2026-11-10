@@ -1,0 +1,80 @@
+{
+  "dataset_kind": "synthetic_smoke",
+  "fixture_id": "toy_G",
+  "graph": {
+    "nodes": [
+      {
+        "id": 0,
+        "layer": 0
+      },
+      {
+        "id": 1,
+        "layer": 0
+      },
+      {
+        "id": 2,
+        "layer": 0
+      },
+      {
+        "id": 3,
+        "layer": 1
+      },
+      {
+        "id": 4,
+        "layer": 1
+      },
+      {
+        "id": 5,
+        "layer": 1
+      }
+    ],
+    "edges": [
+      {
+        "id": "h01",
+        "src": 0,
+        "dst": 1,
+        "cost": 1
+      },
+      {
+        "id": "h02",
+        "src": 0,
+        "dst": 2,
+        "cost": 2
+      },
+      {
+        "id": "p13",
+        "src": 1,
+        "dst": 3,
+        "cost": 3
+      },
+      {
+        "id": "p24",
+        "src": 2,
+        "dst": 4,
+        "cost": 1
+      },
+      {
+        "id": "h35",
+        "src": 3,
+        "dst": 5,
+        "cost": 1
+      },
+      {
+        "id": "h45",
+        "src": 4,
+        "dst": 5,
+        "cost": 1
+      }
+    ]
+  },
+  "source": 0,
+  "target": 5,
+  "portal_edge_ids": [
+    "p13",
+    "p24"
+  ],
+  "expected": {
+    "best_portal": "p24",
+    "cost": 4
+  }
+}

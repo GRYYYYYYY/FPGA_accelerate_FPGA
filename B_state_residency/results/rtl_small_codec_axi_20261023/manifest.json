@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "pid": 3859524,
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi_small.sv": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_small_codec_axi.sv": "5ada891e45d9a419c80e1bbea0852f5a180312b18d8f348bf864ce9fd1955966",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_small_codec_axi.py": "bc87246d862aeb72c9ce8783652cf2c049d7ba7e48817ac176735adac38a8245",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_small_page_axi.py": "b62c64e44032fa4116957b593c90b8a717a2f465cf142c2036b7184106d53e11",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_small_codec_axi_tb.py": "dd78aab96495f42b1e06a1da8956f0161a79de5251cd046442e921303170f7cd"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/sources/scratch_page_codec_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/sources/scratch_page_axi_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/sources/tb_small_codec_axi.sv"
+      ],
+      "pid": 3859617,
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_small_codec_axi",
+        "-s",
+        "small_codec",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "pid": 3860424,
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "small_codec",
+        "--tclbatch",
+        "simulate.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/pages.hex",
+        "--testplusarg",
+        "RECORDS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/records.hex"
+      ],
+      "pid": 3862193,
+      "exit_code": 0
+    }
+  ],
+  "scope": "8-node codec + 3-beat AXI, all 64 aligned 4KiB offsets and high address, 8 errors; no directory or top integration",
+  "inputs": {
+    "pages.hex": "8755c74eaf08c12fd95ae845ba11036912d8c24aa24649a728b8e36487f76198",
+    "records.hex": "39c42e8fc3ab1a926522398068abe1c9c4e03cc2c4f318a34e922f940785213e"
+  },
+  "results": [
+    "SMALL_CODEC_AXI_PASS checks=146 write_pages=70 read_pages=65 errors=8 records=520 raw_beats=412"
+  ],
+  "artifacts": {
+    "simulate.log": "69e8643c0319432d269f9d0e0131b187d43ac2efefd155880d15179ed64df7f9",
+    "compile.stdout.log": "7f056b55e5a7e10e7d71bc02cab8f1fc0deaf6330b361a23f59047e153354dfe",
+    "xvlog.log": "7f056b55e5a7e10e7d71bc02cab8f1fc0deaf6330b361a23f59047e153354dfe",
+    "simulate.stdout.log": "66b7093499e3702db1d1a82913a371679a03ab0cff9a8cef3082d0a3d3cd423f",
+    "xelab.log": "f0458018df095adba7be12d70a5fa4dfdedc0874410f615cafa07ef9fbc9be2b",
+    "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "elaborate.stdout.log": "f0458018df095adba7be12d70a5fa4dfdedc0874410f615cafa07ef9fbc9be2b"
+  }
+}

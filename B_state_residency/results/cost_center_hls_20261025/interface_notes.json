@@ -1,0 +1,33 @@
+{
+  "status": "source_inspected",
+  "rtl_sha256": "5bd0ec6f0ca275d63dade03cb013f24cee57a52fbd1b529b214f80d4e0e51f4b",
+  "top": "cost_center_step",
+  "input_words": 4,
+  "output_words": 2,
+  "input_ports": 1,
+  "output_ports": 2,
+  "input_read_latency_cycles": 1,
+  "interface": "ap_ctrl_hs / ap_memory",
+  "ap_ready_equals_ap_done": true,
+  "output_writes_at_completion": true,
+  "collector_requirements": [
+    "snapshot all four inputs before launch",
+    "model actual single input read port with one-cycle data response",
+    "use output addresses, not port number: port0 writes distance word1, port1 writes status word0",
+    "collect both output writes including writes on done cycle before testing completeness",
+    "keep query/full-version/lease identity through response retirement",
+    "coordinated reset/abort testing is still required"
+  ],
+  "scope": "Inspection of frozen generated source, not a proved collector/reset/ownership service",
+  "output_port_to_word": {
+    "port0": {
+      "word": 1,
+      "meaning": "distance"
+    },
+    "port1": {
+      "word": 0,
+      "meaning": "status"
+    }
+  },
+  "cosim_memory_model_sha256": "03f89542ae6ebf99a7f5e757fc56ed27a75c8e81b5987a65648e8604b8963b72"
+}

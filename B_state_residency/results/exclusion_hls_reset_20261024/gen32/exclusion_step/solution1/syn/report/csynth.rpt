@@ -1,0 +1,151 @@
+
+
+================================================================
+== Synthesis Summary Report of 'exclusion_step'
+================================================================
++ General Information: 
+    * Date:           Sat Oct 24 17:00:55 2026
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        exclusion_step
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: virtexuplus
+    * Target device:  xcu280-fsvh2892-2L-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +---------------------------------------+------+------+---------+--------+----------+---------+------+----------+------+----+------------+------------+-----+
+    |                Modules                | Issue|      | Latency | Latency| Iteration|         | Trip |          |      |    |            |            |     |
+    |                & Loops                | Type | Slack| (cycles)|  (ns)  |  Latency | Interval| Count| Pipelined| BRAM | DSP|     FF     |     LUT    | URAM|
+    +---------------------------------------+------+------+---------+--------+----------+---------+------+----------+------+----+------------+------------+-----+
+    |+ exclusion_step*                      |     -|  4.39|        4|  40.000|         -|        4|     -|  dataflow|     -|   -|  2330 (~0%)|  1825 (~0%)|    -|
+    | + p_anonymous_namespace_load_input    |     -|  5.89|        0|   0.000|         -|        0|     -|        no|     -|   -|     3 (~0%)|    29 (~0%)|    -|
+    | + p_anonymous_namespace_compute       |     -|  4.39|        3|  30.000|         -|        3|     -|        no|     -|   -|   621 (~0%)|   946 (~0%)|    -|
+    |  + step                               |     -|  5.78|        2|  20.000|         -|        2|     -|        no|     -|   -|   328 (~0%)|   894 (~0%)|    -|
+    |   + accept                            |     -|  5.78|        0|   0.000|         -|        0|     -|        no|     -|   -|           -|   248 (~0%)|    -|
+    | + p_anonymous_namespace_store_output  |     -|  5.87|        0|   0.000|         -|        0|     -|        no|     -|   -|   162 (~0%)|    65 (~0%)|    -|
+    +---------------------------------------+------+------+---------+--------+----------+---------+------+----------+------+----+------------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* Other Ports
++-------------------+---------+----------+
+| Interface         | Mode    | Bitwidth |
++-------------------+---------+----------+
+| child             | ap_none | 32       |
+| created           | ap_none | 32       |
+| excluded          | ap_vld  | 32       |
+| flags             | ap_none | 32       |
+| generation        | ap_none | 32       |
+| has_laguna        | ap_none | 32       |
+| node              | ap_vld  | 32       |
+| op                | ap_none | 32       |
+| parent            | ap_none | 32       |
+| phase             | ap_none | 32       |
+| request           | ap_vld  | 32       |
+| result_generation | ap_vld  | 32       |
+| status            | ap_vld  | 32       |
+| value_r           | ap_none | 32       |
++-------------------+---------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++-------------------+-----------+---------------+
+| Argument          | Direction | Datatype      |
++-------------------+-----------+---------------+
+| op                | in        | unsigned int  |
+| parent            | in        | unsigned int  |
+| child             | in        | unsigned int  |
+| flags             | in        | unsigned int  |
+| created           | in        | unsigned int  |
+| has_laguna        | in        | unsigned int  |
+| generation        | in        | unsigned int  |
+| phase             | in        | unsigned int  |
+| value             | in        | unsigned int  |
+| status            | out       | unsigned int& |
+| result_generation | out       | unsigned int& |
+| request           | out       | unsigned int& |
+| node              | out       | unsigned int& |
+| excluded          | out       | unsigned int& |
++-------------------+-----------+---------------+
+
+* SW-to-HW Mapping
++-------------------+--------------------------+---------+
+| Argument          | HW Interface             | HW Type |
++-------------------+--------------------------+---------+
+| op                | op                       | port    |
+| parent            | parent                   | port    |
+| child             | child                    | port    |
+| flags             | flags                    | port    |
+| created           | created                  | port    |
+| has_laguna        | has_laguna               | port    |
+| generation        | generation               | port    |
+| phase             | phase                    | port    |
+| value             | value_r                  | port    |
+| status            | status                   | port    |
+| status            | status_ap_vld            | port    |
+| result_generation | result_generation        | port    |
+| result_generation | result_generation_ap_vld | port    |
+| request           | request                  | port    |
+| request           | request_ap_vld           | port    |
+| node              | node                     | port    |
+| node              | node_ap_vld              | port    |
+| excluded          | excluded                 | port    |
+| excluded          | excluded_ap_vld          | port    |
++-------------------+--------------------------+---------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++----------------------------------+-----+--------+----------+-----+--------+---------+
+| Name                             | DSP | Pragma | Variable | Op  | Impl   | Latency |
++----------------------------------+-----+--------+----------+-----+--------+---------+
+| + exclusion_step                 | 0   |        |          |     |        |         |
+|  + p_anonymous_namespace_compute | 0   |        |          |     |        |         |
+|   + step                         | 0   |        |          |     |        |         |
+|     add_ln22_fu_509_p2           | -   |        | add_ln22 | add | fabric | 0       |
++----------------------------------+-----+--------+----------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
++------------------+------+------+--------+----------+---------+------+---------+
+| Name             | BRAM | URAM | Pragma | Variable | Storage | Impl | Latency |
++------------------+------+------+--------+----------+---------+------+---------+
+| + exclusion_step | 0    | 0    |        |          |         |      |         |
+|   commands_U     | -    | -    |        | commands | fifo    | srl  | 0       |
+|   replies_U      | -    | -    |        | replies  | fifo    | srl  | 0       |
++------------------+------+------+--------+----------+---------+------+---------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+---------------------------+---------------------------------------------------------------------+
+| Type      | Options                   | Location                                                            |
++-----------+---------------------------+---------------------------------------------------------------------+
+| interface | ap_ctrl_hs port=return    | ../rearchitect/v1/src/kernel_hls.cpp:16 in exclusion_step, return   |
+| dataflow  |                           | ../rearchitect/v1/src/kernel_hls.cpp:17 in exclusion_step           |
+| stream    | variable=commands depth=2 | ../rearchitect/v1/src/kernel_hls.cpp:20 in exclusion_step, commands |
+| stream    | variable=replies depth=2  | ../rearchitect/v1/src/kernel_hls.cpp:21 in exclusion_step, replies  |
++-----------+---------------------------+---------------------------------------------------------------------+
+
+

@@ -1,0 +1,152 @@
+2026/10/23 02:53:50.375054 vivado-proxy: starting PID=311315 host=fpgaacc1--cfc8cd109508-jnnrja5s7q go=go1.25.11 GOARCH=amd64 GOOS=linux
+2026/10/23 02:53:50.375703 vivado-proxy: listening on 127.0.0.1:32983
+2026/10/23 02:53:50.375769 vivado-proxy: MCP_PROXY_PORT_DIR unset — running without connection authentication (loopback only)
+2026/10/23 02:53:50.377764 vivado-proxy: spawning: [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado -mode tcl -log .vivado-ai/vivado_24030267_c0dd7fa4.log -journal .vivado-ai/vivado_24030267_c0dd7fa4.jou -notrace -source .vivado-ai/init_24030267_c0dd7fa4.tcl]
+2026/10/23 02:53:50.378583 vivado-proxy: child PID 311330
+2026/10/23 02:53:50.379158 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 02:53:50.379273 vivado-proxy: output stream client connected from 127.0.0.1:37706
+2026/10/23 02:53:50.379359 vivado-proxy: output stream resuming from stdout=0 stderr=0
+2026/10/23 02:54:05.389993 vivado-proxy: WARNING message-limit probe got no reply in 5s — cannot confirm command markers will keep being emitted
+2026/10/23 02:54:19.414726 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 02:54:19.414841 vivado-proxy: config webserver_url = http://localhost:59129
+2026/10/23 02:54:19.414892 vivado-proxy: config log_file_path = /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/.vivado-ai/vivado_24030267_c0dd7fa4.log
+2026/10/23 02:54:32.809814 vivado-proxy: exec [fz7d3wd5k48d] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-1 puts [version -short]; puts [info commands launch_simulation]; puts [info commands export_simulation]; puts [get_parts -quiet xcu280-fsvh2892-2L-e]; puts [auto_execok /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog]
+2026/10/23 02:54:47.099390 vivado-proxy: exec [6rx153ts9z5v] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-2 create_project b_scratch_frame ./project -part xcu280-fsvh2892-2L-e; set_property target_simulator XSim [current_project]; puts [get_property PART [current_project]]; puts [get_property target_simulator [current_project]]; puts [get_filesets -filter {FILESET_TYPE == SimulationSrcs}]; puts [list_property [get_filesets sim_1]]
+2026/10/23 02:54:55.182271 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 02:54:55.185190 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 02:59:17.137585 vivado-proxy: exec [vc8s5pzb7e57] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-3 set b_help [exec /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim -help]; foreach b_line [split $b_help \n] {if {[string match *testplusarg* $b_line]} {puts $b_line}}
+2026/10/23 02:59:57.122606 vivado-proxy: exec [wcgkwkxo6wtj] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-4 add_files -norecurse {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv}; add_files -fileset sim_1 -norecurse {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv}; set_property top scratch_frame_store [get_filesets sources_1]; set_property top tb_scratch_frame_store [get_filesets sim_1]; set_property xsim.simulate.runtime 120ms [get_filesets sim_1]; set_property xsim.simulate.xsim.more_options {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt} [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts [get_property TOP [get_filesets sim_1]]; puts [get_files -of_objects [get_filesets sim_1]]
+2026/10/23 03:00:10.335900 vivado-proxy: exec [qu65uaenb2hb] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-5 help set_property
+2026/10/23 03:00:21.366542 vivado-proxy: exec [21rcb7vdeb7b] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-6 set_property -name xsim.simulate.xsim.more_options -value {-testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt} -objects [get_filesets sim_1]; update_compile_order -fileset sources_1; update_compile_order -fileset sim_1; puts [get_property TOP [get_filesets sim_1]]; puts [get_files -of_objects [get_filesets sim_1]]; puts [get_property xsim.simulate.xsim.more_options [get_filesets sim_1]]
+2026/10/23 03:00:25.180847 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 03:00:25.183554 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 03:00:26.141490 vivado-proxy: exec [r9tjkjs28tcu] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-7 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 08:57:31.291209 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 08:57:31.307975 vivado-proxy: exec [c9fg56685hfr] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-8 launch_simulation -simset sim_1 -mode behavioral
+2026/10/23 08:57:35.182649 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 08:57:35.184032 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 08:58:37.959224 vivado-proxy: exec [kkhkbyz99fiz] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-9 close_sim; foreach b_prop [list_property [get_runs synth_1]] {if {[string match *SYNTH_DESIGN.ARGS* $b_prop]} {puts $b_prop}}
+2026/10/23 08:59:24.584045 vivado-proxy: exec [qhkfz9e80gij] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-10 add_files -fileset constrs_1 -norecurse {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.xdc}; set_property -name {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} -value {-mode out_of_context} -objects [get_runs synth_1]; puts [get_property {STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS} [get_runs synth_1]]
+2026/10/23 08:59:24.921723 vivado-proxy: exec [eqpljk37vdsr] req=vivado-20261023-025350-329eb221-ca89ad9b-cmd-11 launch_runs synth_1 -jobs 2
+2026/10/23 08:59:25.184051 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 08:59:25.187091 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 08:59:26.644924 vivado-proxy: child exited: exit status 134
+2026/10/23 08:59:26.645063 vivado-proxy: last output from Vivado before it exited:
+rame.sim/sim_1/behav/xsim/xvlog.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+
+VSCEND:1
+INFO: [MCP 00-101] ===MCP_CMD_END:r9tjkjs28tcu:1===
+INFO: [MCP 00-100] ===MCP_CMD_START:c9fg56685hfr===
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_scratch_frame_store'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_scratch_frame_store' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_scratch_frame_store_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing Verilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '3' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_scratch_frame_store_behav xil_defaultlib.tb_scratch_frame_store xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_scratch_frame_store_behav xil_defaultlib.tb_scratch_frame_store xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.scratch_frame_store_default
+Compiling module xil_defaultlib.tb_scratch_frame_store
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_scratch_frame_store_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '3' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/project/b_scratch_frame.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_scratch_frame_store_behav -key {Behavioral:sim_1:Functional:tb_scratch_frame_store} -tclbatch {tb_scratch_frame_store.tcl} -log {simulate.log} -testplusarg VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/actual_vectors.txt"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_scratch_frame_store.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 120ms
+TEST_PASS scratch_frame_store checks=98351 actual_commands=98322 stalled_cycles=17358
+$finish called at time : 3780030 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_scratch_frame_store.sv" Line 109
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_scratch_frame_store_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 120ms
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:09 . Memory (MB): peak = 1812.141 ; gain = 62.117 ; free physical = 676439 ; free virtual = 1392943
+
+VSCEND:0
+INFO: [MCP 00-101] ===MCP_CMD_END:c9fg56685hfr:0===
+INFO: [MCP 00-100] ===MCP_CMD_START:kkhkbyz99fiz===
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+STEPS.SYNTH_DESIGN.ARGS.FLATTEN_HIERARCHY
+STEPS.SYNTH_DESIGN.ARGS.GATED_CLOCK_CONVERSION
+STEPS.SYNTH_DESIGN.ARGS.BUFG
+STEPS.SYNTH_DESIGN.ARGS.DIRECTIVE
+STEPS.SYNTH_DESIGN.ARGS.RETIMING
+STEPS.SYNTH_DESIGN.ARGS.NO_RETIMING
+STEPS.SYNTH_DESIGN.ARGS.FSM_EXTRACTION
+STEPS.SYNTH_DESIGN.ARGS.KEEP_EQUIVALENT_REGISTERS
+STEPS.SYNTH_DESIGN.ARGS.RESOURCE_SHARING
+STEPS.SYNTH_DESIGN.ARGS.CONTROL_SET_OPT_THRESHOLD
+STEPS.SYNTH_DESIGN.ARGS.NO_LC
+STEPS.SYNTH_DESIGN.ARGS.NO_SRLEXTRACT
+STEPS.SYNTH_DESIGN.ARGS.SHREG_MIN_SIZE
+STEPS.SYNTH_DESIGN.ARGS.MAX_BRAM
+STEPS.SYNTH_DESIGN.ARGS.MAX_URAM
+STEPS.SYNTH_DESIGN.ARGS.MAX_DSP
+STEPS.SYNTH_DESIGN.ARGS.MAX_BRAM_CASCADE_HEIGHT
+STEPS.SYNTH_DESIGN.ARGS.MAX_URAM_CASCADE_HEIGHT
+STEPS.SYNTH_DESIGN.ARGS.CASCADE_DSP
+STEPS.SYNTH_DESIGN.ARGS.ASSERT
+STEPS.SYNTH_DESIGN.ARGS.INCREMENTAL_MODE
+STEPS.SYNTH_DESIGN.ARGS.MORE OPTIONS
+
+VSCEND:0
+INFO: [MCP 00-101] ===MCP_CMD_END:kkhkbyz99fiz:0===
+INFO: [MCP 00-100] ===MCP_CMD_START:qhkfz9e80gij===
+VSCSTART
+-mode out_of_context
+
+VSCEND:0
+INFO: [MCP 00-101] ===MCP_CMD_END:qhkfz9e80gij:0===
+INFO: [MCP 00-100] ===MCP_CMD_START:eqpljk37vdsr===
+VSCSTART
+CRITICAL WARNING: [HDL 9-1206] Syntax error near 'matches' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:50]
+CRITICAL WARNING: [HDL 9-1206] Syntax error near 'matches' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:101]
+CRITICAL WARNING: [HDL 9-1206] Syntax error near 'else' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store.sv:102]
+WARNING: [Vivado 12-7122] Auto Incremental Compile:: No reference checkpoint was found in run synth_1. Auto-incremental flow will not be run, the standard flow will be run instead.
+realloc(): invalid pointer
+Abnormal program termination (6)
+Please check '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_scratch_20261023/hs_err_pid311366.log' for details
+2026/10/23 08:59:26.645548 vivado-proxy: exec [eqpljk37vdsr] abandoned — Vivado exited before the end marker
+2026/10/23 08:59:26.644706 vivado-proxy: stdout read error: read |0: file already closed
+2026/10/23 08:59:26.644828 vivado-proxy: stderr read error: read |0: file already closed

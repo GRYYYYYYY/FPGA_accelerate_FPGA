@@ -1,0 +1,104 @@
+{
+  "created_utc": "2026-10-24T20:38:56.071402+00:00",
+  "status": "bounded_node_occupancy_cpu_and_synthesis_verified_full_real_workloads_running",
+  "inputs_and_artifacts_rechecked": 129,
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_router_20261024_v1/report.json": "ca1ef40efb9fbde86769a014f2586aa64aaa00e8ce3d7455b6904fe9cd17e5ef",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_router_20261024_v1/plan.json": "48aa611be39e110d03b7dd02eec4e084227c7aa92d8febc3920f75d8c31b82fd",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_router_20261024_v1/execution_plan.json": "3f189f73dac9b7e276b83fbf1eec6be0c9acdef411cf7afa8e0631fe7de19708",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_hls_20261024_v1/plan.json": "b6723ae88979874d5d696b104001b25d342b68804a396066d4b3bcfefa1ecdd4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/node_occupancy_synthesis_review_20261024_v1.json": "ae651dfc362d5ce28ff512b37d5c5a095fd0bb44497363dbffc0de9b84e3bc9f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/node_occupancy_router_pipeline.py": "cbf563c861bf94265b35aa3c85ea1f9085c132bdea53b12f481c127298b50522",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_node_occupancy_router.py": "7966adcd5cbeaa224fd572cae1cb4c050dcd04b6f6853e0bbcce57c993b17971",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/node_occupancy_hls_pipeline.py": "a9409ff59e08da25a143ca5ea6e993cea2070e9020d8d3e6ff59f714d5679b0a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run_node_occupancy_synthesis.tcl": "0e32f0e8cd174a9c6e185534c5025a75fc3697401232af185f0320cd534160fd"
+  },
+  "observations": [
+    {
+      "label": "real_workloads",
+      "state": {
+        "owner_pid": 694011,
+        "status": "running",
+        "stage": "four_full_workloads",
+        "completed": []
+      },
+      "owner_live": true,
+      "owner_start_ticks": 1602928496
+    },
+    {
+      "label": "component_hls",
+      "state": {
+        "owner_pid": 699302,
+        "status": "complete",
+        "stage": "synthesized_pending_independent_audit_and_rtl",
+        "child_pid": 699303
+      },
+      "flow_receipt": {
+        "exit_code": 0,
+        "command": [
+          "taskset",
+          "-c",
+          "118",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+          "-f",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_hls_20261024_v1/source/run_node_occupancy_synthesis.tcl"
+        ],
+        "log_sha256": "d8a157ef09d538e661ea8b4bfce0a4596299a3ad8c19c2017649bfacf313eb36"
+      }
+    },
+    {
+      "label": "worker_000.submission",
+      "pid": 694611,
+      "live": true,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_router_20261024_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/csr.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_csr_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_csr_inputs_20261023_v1/sites.txt 4096 80 200000 8 kernel /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_region_fixtures_20261023_v1/csr/config.bin "
+    },
+    {
+      "label": "worker_001.submission",
+      "pid": 694612,
+      "live": true,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/node_occupancy_router_20261024_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/compact.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_compact_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt 4096 80 200000 8 kernel /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_region_fixtures_20261023_v1/compact/config.bin "
+    }
+  ],
+  "new_component": {
+    "random_operations": 12000,
+    "accepted_updates": 6503,
+    "capacity_rejections": 3782,
+    "history_rounds": 1715,
+    "production_nodes": 1048576,
+    "production_peak_pairs": 1048578,
+    "index_slots": 2097152
+  },
+  "full_negotiation_differential": {
+    "cases": 400,
+    "representations": 2,
+    "searches": 4938,
+    "snapshots": 3750,
+    "rounds": 1250,
+    "site_paths": 2896,
+    "node_history_snapshots": 2412,
+    "site_history_snapshots": 2106
+  },
+  "synthesis_summary": {
+    "resources": {
+      "BRAM_18K": 0,
+      "DSP": 16,
+      "FF": 34036,
+      "LUT": 72044,
+      "URAM": 0
+    },
+    "estimated_clock_ns": 3.65,
+    "warning_counts": {
+      "HLS 200-960": 1,
+      "HLS 200-878": 45,
+      "RTGEN 206-101": 14
+    },
+    "loop_constraints_all_satisfied": false
+  },
+  "scope": "Same bounded node ownership/history helper used by CPU full-router integration and new HLS component; production search C-model unchanged.",
+  "limitations": [
+    "Full real workload validation still running; no full-workload success claim for this new ownership implementation.",
+    "Open-addressed ownership can require full-table probes near capacity; no throughput claim.",
+    "New occupancy RTL, physical implementation and board execution remain unverified.",
+    "Site ledger, outer scheduling and packet construction remain host work; physical site evidence still covers14 instances."
+  ]
+}

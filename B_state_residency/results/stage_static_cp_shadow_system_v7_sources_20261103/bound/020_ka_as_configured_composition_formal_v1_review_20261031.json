@@ -1,0 +1,88 @@
+{
+  "status": "as_authority_configured_conditional_composition_inductively_proved_dependency_controls_restored",
+  "assertions": 10,
+  "assumptions": 5,
+  "covers": 1,
+  "contracts": {
+    "native_authoritative_contract": {
+      "meaning": "While not cold reset, !cfg_stage && cfg_authoritative implies authority generation nonzero.",
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/residency_system.sv",
+      "source_sha256": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+      "binding": "cfg_stage=jp_permit; authoritative native branch explicitly includes as_bound_generation!=0"
+    },
+    "generation_persistence_contract": {
+      "meaning": "Authority generation stays nonzero across cycles without cold reset.",
+      "review": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_generation_persistence_formal_v1_review_20261031.json",
+      "review_sha256": "357a040f0de4f7434bdf48ffd5937b6b68bab367a461162fd2f26edec4566e93"
+    },
+    "reset_clock_binding": "coordinator cold_rst and authority rst both k_cold_rst, both clk; exact source mapping must be reviewed.",
+    "retirement_configured_contract": {
+      "review": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_retirement_state_kernel_formal_v1_review_20261031.json",
+      "meaning": "normal_retired implies !as_busy; !abort implies !as_fault; with nonzero generation this implies configured.",
+      "review_sha256": "e009eb734d75bbf3a0a18d71f71dfb025474d21f621df84a28efc5a35558d49f"
+    },
+    "configured_persistence_contract": {
+      "review": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_configured_persistence_formal_v1_review_20261031.json",
+      "meaning": "With positive generation and configured previously, no authority rearm valid implies configured persists. rearm_valid=as_attempt_reset=k_attempt_reset=attempt_reset.",
+      "review_sha256": "71fd85bfb993352b748361b37e386b772d7dac57a3f23b1cdf190d521884d8c2"
+    }
+  },
+  "archive_sha256": "f57241ab9c57e9eb34bef507cead0be0185baecead15c69e9428127311adbf15",
+  "file_sha256": {
+    "ka_as_configured_composition_formal_v1/kernel.json": "1ba0464c926208e214ac86cbb0ab63dce8e88af9c4e5c24cdfcbb55e1bb3261d",
+    "ka_as_configured_composition_formal_v1/preparation.json": "6552e3badbfd9c7ba7daeed0a2e30a9bfebc908f70dc6feaa7038ec4922db240",
+    "ka_as_configured_composition_formal_v1/harness.sv": "e162c8744402809a7c6322b537a6080791f8822f60ebe43a26b14c69848390fb",
+    "ka_as_configured_composition_formal_v1/contracts.json": "8117ecb173523c4f2c03dedfb8ad0475e70f072f9521e76322aaef05704ad032",
+    "ka_as_configured_composition_formal_v1/manifest.json": "117c37b780a211b0f538a59c2b924fa9bd52df45b1f87e8279470673f94ca19d",
+    "ka_as_configured_composition_formal_v1/prepare.ys": "8b5d2a80e293e3dbcba11ad8ec1fa6553d4ab6423c4447a67c48ce142cb95e88",
+    "ka_as_configured_composition_formal_v1/prepare.log": "f94fe804e11bb86b9b87f6b2333e1a7b30dcf7290b7d6493dcae4463e157862f",
+    "ka_as_configured_composition_formal_v1/design.smt2": "7cddf64a2109fe1e1fc3088bd7eea679b62cca2402878b58082cee0721e43cb1",
+    "ka_as_configured_composition_formal_v1/bmc.log": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0",
+    "ka_as_configured_composition_formal_v1/induction.log": "ce792594b30627c28ad6bbf735070d79648815f5681c4df9685eb3bc2c7187c2",
+    "ka_as_configured_composition_formal_v1/cover.log": "54cbe50a0c0d1cf554cf24297c2fa6e070aad12a939595e099d166f2fef93b73",
+    "ka_as_configured_composition_formal_v1/cover.vcd": "b8e3af4ced3e54bec0322b14aca7c72172e74fb4879b9a77e4aee0943e735c63",
+    "ka_as_configured_composition_no_retirement_contract_v1/kernel.json": "1ba0464c926208e214ac86cbb0ab63dce8e88af9c4e5c24cdfcbb55e1bb3261d",
+    "ka_as_configured_composition_no_retirement_contract_v1/preparation.json": "6552e3badbfd9c7ba7daeed0a2e30a9bfebc908f70dc6feaa7038ec4922db240",
+    "ka_as_configured_composition_no_retirement_contract_v1/contracts.json": "8117ecb173523c4f2c03dedfb8ad0475e70f072f9521e76322aaef05704ad032",
+    "ka_as_configured_composition_no_retirement_contract_v1/harness.sv": "ef797890c03b135281a996440560edce9d6e2b901f9ad6c62e569a4d24e49543",
+    "ka_as_configured_composition_no_retirement_contract_v1/manifest.json": "890e305eee44a97019a9bce99d3e59ea915748981ba795cb783f53d7ce4da401",
+    "ka_as_configured_composition_no_retirement_contract_v1/prepare.ys": "8b5d2a80e293e3dbcba11ad8ec1fa6553d4ab6423c4447a67c48ce142cb95e88",
+    "ka_as_configured_composition_no_retirement_contract_v1/prepare.log": "a5ccc4e7533213fa7fe2a92b4ecbb6c761c49aa9bf54ceb05358ce1ba5a359b3",
+    "ka_as_configured_composition_no_retirement_contract_v1/design.smt2": "5262cf02ca7cdcbe118efbffa4ed783fc467165862fa686e981b53187f25d760",
+    "ka_as_configured_composition_no_retirement_contract_v1/bmc.log": "a5a590db6b5c3c3c97ae878a4232b74e581b2824397cb0f157264dc2d1c6aa49",
+    "ka_as_configured_composition_no_retirement_contract_v1/bmc_failure.vcd": "39b78057b7bc7ca537bbfd893c3fd9ef87e60a411519f1fabac2730056d78934",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/kernel.json": "1ba0464c926208e214ac86cbb0ab63dce8e88af9c4e5c24cdfcbb55e1bb3261d",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/preparation.json": "6552e3badbfd9c7ba7daeed0a2e30a9bfebc908f70dc6feaa7038ec4922db240",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/contracts.json": "8117ecb173523c4f2c03dedfb8ad0475e70f072f9521e76322aaef05704ad032",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/harness.sv": "29246ebb9e964250527f54f5805815e4da5378689324605e8ba95f24438f331b",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/manifest.json": "ece45e795d604deb7ea2f32d14065cce66fc63d764f95cd49805c92e3c77b1f1",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/prepare.ys": "8b5d2a80e293e3dbcba11ad8ec1fa6553d4ab6423c4447a67c48ce142cb95e88",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/prepare.log": "64c29eb13d029c3e4a7a857a5202e14542fb74d4bacf8410f135f99d8d82520d",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/design.smt2": "5a20e7568342edd23a2080c86b512c84f2114db94fbf839d2a6693de2fa1de5c",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/bmc.log": "479102ccb29abe5dcaceeb314d898965051e0869f89105dd450ff1242cd5ec1c",
+    "ka_as_configured_composition_no_configured_persistence_contract_v1/bmc_failure.vcd": "3d30053bc14efc393dec6d11d382519cfa86497e8f5e43c47ccf0534b7d0a6b7",
+    "repo/scripts/research_checks/run_as_configured_composition_no_configured_persistence_contract_v1.py": "7f82bae47d9d2ae0cdd3ea34fb6e6198bda0ab56c37ee000e3a9b7dd86db23d9",
+    "repo/scripts/research_checks/audit_as_configured_composition_formal_v1.py": "7f9192440e1ef321b42ad9b5f20ce79929c32bd2ca4d2b5535b44bb94c8c05ee",
+    "repo/scripts/research_checks/run_as_configured_composition_no_retirement_contract_v1.py": "36c98c2b1701449969d392494327bfd963460d79e4d65f582e5ad8f62be7c5a9",
+    "repo/scripts/research_checks/run_as_configured_composition_formal_v1.py": "b41042f888abb3fcd9c966c7d8fd53bcfa609ba01cde8dccafdabdc974033608",
+    "repo/hardware/variants/ka_as_configured_composition_formal_v1/harness.sv": "e162c8744402809a7c6322b537a6080791f8822f60ebe43a26b14c69848390fb",
+    "repo/hardware/variants/ka_as_configured_composition_formal_v1/selection.json": "a4d1a1c6f251495930099f699c9ff16fc887ebcbe782172f19b4152e0bf13f75",
+    "repo/scripts/research_checks/prepare_selected_state_cone_v2.py": "81cf8ef9752535719fd4f9bd7d651066ce01ee5a6a5a82de476ef0405d190a7c",
+    "repo/results/ka_coordinator_transition_integration_v3_review_20261031.json": "a90decf12873dd9c5cefbc22ec91e1d7f983c6fc428e51d012021b3e5797310b",
+    "repo/results/ka_generation_persistence_formal_v1_review_20261031.json": "357a040f0de4f7434bdf48ffd5937b6b68bab367a461162fd2f26edec4566e93",
+    "repo/results/ka_retirement_state_kernel_formal_v1_review_20261031.json": "e009eb734d75bbf3a0a18d71f71dfb025474d21f621df84a28efc5a35558d49f",
+    "repo/results/ka_configured_persistence_formal_v1_review_20261031.json": "71fd85bfb993352b748361b37e386b772d7dac57a3f23b1cdf190d521884d8c2",
+    "sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "sources/search_residency_system.sv": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63",
+    "sources/residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9"
+  },
+  "reviewer_sha256": "7f9192440e1ef321b42ad9b5f20ce79929c32bd2ca4d2b5535b44bb94c8c05ee",
+  "scope": "Actual coordinator five-state-bit overapproximation with independently proven native/generation/retirement/configured-persistence contracts. Negative traces reach RESET with authority configured false after removing one guarantee; not actual full-system bugs.",
+  "remaining": [
+    "Reader IDLE and no outstanding response/codec busy.",
+    "No overlapping configuration, publication, rearm or AP ownership interfering with KA ready.",
+    "Full shadow coverage failure remains; no physical gate acceptance."
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

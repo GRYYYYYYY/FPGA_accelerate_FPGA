@@ -1,0 +1,62 @@
+{
+  "status": "diagnostic_observer_compiled_and_tested_full_workload_running",
+  "classification": "progress",
+  "previous_turn_classification": "progress",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_build_20261023_v1/plan.json": "7806b3eaa2bd7119c45c795fd68c724c10143c7e99f58a484574370d51f38e65",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_run_20261023_v1/plan.json": "6ba16bc5eabe769bad198ff2c69ac67ca8ffc2d477645c3b6d845ea1210d4b20",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_run_20261023_v1/submission.json": "35b9c6851a426b1d62c73239b097e9c5165b0416df3659c5c55a4c260b27413e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/regression_router_access_profile_20261023_v1.log": "164333e4ae612bb1713d1656c628d61b226acc2e240de29350bfe4e3dab67757",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/project_check_after_access_profile_20261023_v1.log": "fdc02178a2f82def16690d3e532ea0d90ffbdaa1b47628f8456a1baa2a0252bb"
+  },
+  "binding_count": 103,
+  "state_snapshot": {
+    "owner_pid": 113851,
+    "status": "running",
+    "stage": "full_router",
+    "child_pid": 117200
+  },
+  "process_snapshot": {
+    "113851": {
+      "command": "python3 -u scripts/router_access_profile_pipeline.py ",
+      "stat": "113851 (python3) S 113843 113843 113843 0 -1 4194560 6919 0 0 0 672 104 0 0 20 0 1 0 1591966445 76816384 8767 18446744073709551615 94232993587200 94232996423357 140728508772496 0 0 0 0 16781312 2 1 0 0 17 5 0 0 0 0 0 94232998795312 94232999079288 94233006985216 140728508781503 140728508781556 140728508781556 140728508788711 0\n"
+    },
+    "117200": {
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_build_20261023_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/compact.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_compact_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_run_20261023_v1/access ",
+      "stat": "117200 (router) R 113851 113843 113843 0 -1 4194560 277664 0 0 0 7487 49 0 0 20 0 1 0 1591967279 511369216 122991 18446744073709551615 94601501704192 94601501828469 140727296678272 0 0 0 0 0 0 0 0 0 17 123 0 0 0 0 0 94601501857736 94601501859880 94601511239680 140727296679881 140727296680789 140727296680789 140727296687944 0\n"
+    },
+    "4065010": {
+      "command": "python3 -u scripts/vitis_tile_cache_cosim_pipeline.py ",
+      "stat": "4065010 (python3) S 4064989 4064989 4064989 0 -1 4194560 11701 0 0 0 59 47 0 0 20 0 1 0 1591908753 76861440 12475 18446744073709551615 94031356686336 94031359522493 140723279349024 0 0 0 0 16781312 2 1 0 0 17 31 0 0 0 0 0 94031361894448 94031362178424 94031372451840 140723279356862 140723279356916 140723279356916 140723279364071 0\n"
+    },
+    "4065711": {
+      "command": "/bin/bash /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls -f /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run_stratified_cosim.tcl ",
+      "stat": "4065711 (vitis_hls) S 4065010 4064989 4064989 0 -1 4194560 786 1871 0 0 0 1 1 0 20 0 1 0 1591908897 8257536 966 18446744073709551615 94105365999616 94105366912877 140722273406688 0 0 0 65536 4 65538 1 0 0 17 121 0 0 0 0 0 94105367157392 94105367205456 94105386459136 140722273411325 140722273411581 140722273411581 140722273419169 0\n"
+    },
+    "2924311": {
+      "command": "python3 -u scripts/kernel_router_pipeline.py ",
+      "stat": "2924311 (python3) S 2924292 2924292 2924292 0 -1 1077936384 21911 6754194 0 0 835 130 194508 2103 20 0 3 0 1591636936 211329024 18233 18446744073709551615 94563425189888 94563428026045 140731023704048 0 0 0 0 16781312 2 0 0 0 17 8 0 0 0 0 0 94563430398000 94563430681976 94563459272704 140731023709127 140731023709172 140731023709172 140731023716327 0\n"
+    },
+    "3371574": {
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/kernel_router_cmodel_20261023_v1/csr/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/csr.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_csr_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_csr_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_region_fixtures_20261023_v1/csr/config.bin ",
+      "stat": "3371574 (router) R 2924311 2924292 2924292 0 -1 4194560 3439077 0 0 0 237707 1134 0 0 20 0 1 0 1591735948 3675242496 896681 18446744073709551615 94153026793472 94153026912661 140727010506832 0 0 0 0 0 0 0 0 0 17 122 0 0 0 0 0 94153026943016 94153026945064 94153051353088 140727010508761 140727010509656 140727010509656 140727010516811 0\n"
+    },
+    "3373595": {
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/kernel_router_cmodel_20261023_v1/compact/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/compact.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_compact_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/hls_region_fixtures_20261023_v1/compact/config.bin ",
+      "stat": "3373595 (router) R 2924311 2924292 2924292 0 -1 4194560 3438430 0 0 0 236853 1058 0 0 20 0 1 0 1591736893 3670495232 895520 18446744073709551615 94249189949440 94249190070661 140737114863760 0 0 0 0 0 0 0 0 0 17 124 0 0 0 0 0 94249190098984 94249190101032 94249194377216 140737114869697 140737114870612 140737114870612 140737114877767 0\n"
+    }
+  },
+  "tests": {
+    "helper_asan_ubsan": "valid,empty,unknown,cache hit/miss and reset; eight invalid observations rejected",
+    "independent_parser": "three tests including18 malformed inputs/count mismatches and full real-image degree-domain check"
+  },
+  "scope": "Original full compact/direct site router,1062nets,two batches,cache4096. Independent original algorithm and output retained; add percanonical counters only.",
+  "next": "Original owner finishes full raw output, then independent full semantic comparison and per-node degree/count conservation audit.",
+  "limitations": [
+    "Diagnostic counting overhead is present; timings are not performance comparisons.",
+    "Per-node counts do not preserve temporal ordering.",
+    "One fixed workload, cache capacity and partial14-instance site model, not population estimates.",
+    "Native CPU access observations are not board memory traffic or measured RTL cycles.",
+    "No completed full-router profile is claimed before its independent audit."
+  ]
+}

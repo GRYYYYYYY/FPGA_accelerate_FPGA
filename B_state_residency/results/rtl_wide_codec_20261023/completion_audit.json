@@ -1,0 +1,135 @@
+{
+  "status": "passed",
+  "simulation": {
+    "codec": {
+      "checks": 5645,
+      "encoded": 64,
+      "decoded": 65,
+      "rejected": 7,
+      "aborted": 5,
+      "stalls": 3620,
+      "end_time_ns": 833270
+    },
+    "small": {
+      "small": 1,
+      "checks": 370,
+      "transfers": 46,
+      "fences": 25,
+      "tag_wraps": 12,
+      "errors": 9,
+      "gap_cycles": 200,
+      "host_stalls": 1480,
+      "aw": 40,
+      "ar": 19,
+      "b": 40,
+      "r": 378,
+      "end_time_ns": 601030
+    },
+    "actual": {
+      "small": 0,
+      "checks": 77099,
+      "transfers": 6086,
+      "fences": 19,
+      "tag_wraps": 4,
+      "errors": 0,
+      "gap_cycles": 152,
+      "host_stalls": 308396,
+      "aw": 3521,
+      "ar": 4454,
+      "b": 3521,
+      "r": 71064,
+      "end_time_ns": 82490050
+    }
+  },
+  "synthesis": {
+    "top": "memory_scratch_endpoint_wide",
+    "frames": 23405,
+    "ram_cells": [
+      "memory/codec/labels_reg_0 RAMB36E2",
+      "memory/codec/labels_reg_1 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_0 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_1 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_10 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_11 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_12 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_13 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_14 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_15 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_16 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_17 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_2 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_3 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_4 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_5 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_6 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_7 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_8 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_9 RAMB36E2",
+      "pages/endpoint/storage/data_reg_0 RAMB36E2",
+      "pages/endpoint/storage/data_reg_1 RAMB36E2"
+    ],
+    "codec_ram_cells": [
+      "memory/codec/labels_reg_0 RAMB36E2",
+      "memory/codec/labels_reg_1 RAMB36E2"
+    ],
+    "utilization": {
+      "luts": 5684,
+      "registers": 5185,
+      "bram_tiles": 22,
+      "latches": 0
+    },
+    "baseline_utilization": {
+      "luts": 5301,
+      "registers": 5105,
+      "bram_tiles": 20.5,
+      "latches": 0
+    }
+  },
+  "scope": "Paired deterministic 19-small-query state-endpoint simulation. Width changes codec memory access, no controller or stimulus semantics changed. Timing phase can change fixed-calendar stalls. More/fewer simulated cycles and OOC resources do not establish clock frequency, power or board routing speed.",
+  "paired_cycles": {
+    "baseline": 10516484,
+    "wide": 8249001,
+    "saved": 2267483,
+    "reduction_fraction": 0.21561227117352144,
+    "same_clock_cycle_ratio": 1.2748797096763596,
+    "phases": {
+      "idle_and_response_hold": {
+        "baseline_cycles": 539693,
+        "wide_cycles": 539693
+      },
+      "ordinary_page_commands": {
+        "baseline_cycles": 589288,
+        "wide_cycles": 591292
+      },
+      "owner_lookup": {
+        "baseline_cycles": 1063143,
+        "wide_cycles": 1063143
+      },
+      "transfer_start": {
+        "baseline_cycles": 40186,
+        "wide_cycles": 40198
+      },
+      "write_export_and_feed": {
+        "baseline_cycles": 1724822,
+        "wide_cycles": 1724947
+      },
+      "read_decode_and_beat": {
+        "baseline_cycles": 3660775,
+        "wide_cycles": 2785817
+      },
+      "memory_completion_wait": {
+        "baseline_cycles": 2821090,
+        "wide_cycles": 1425875
+      },
+      "page_complete_and_address_retire": {
+        "baseline_cycles": 77373,
+        "wide_cycles": 77922
+      },
+      "address_recycle": {
+        "baseline_cycles": 114,
+        "wide_cycles": 114
+      }
+    }
+  },
+  "manifest_sha256": "64f217d65ddf19a3347d7104d3d2a9a42d26c9d5d3d79dcd5081fe4a81b8dc9d"
+}

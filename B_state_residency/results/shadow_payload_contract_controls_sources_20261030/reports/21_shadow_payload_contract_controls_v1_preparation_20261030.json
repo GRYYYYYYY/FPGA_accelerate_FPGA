@@ -1,0 +1,313 @@
+{
+  "all_pin_strict_equivalence": false,
+  "cases": [
+    {
+      "define": null,
+      "expected": "FULL_SHADOW_PROTOCOL_PASS",
+      "name": "matching"
+    },
+    {
+      "define": "READY_NBA",
+      "expected": "FULL_SHADOW_PROTOCOL_PASS",
+      "name": "ready_nba"
+    },
+    {
+      "define": "DATA_FLIP_STALL",
+      "expected": "CP_DATA_MISMATCH phase=0 ready=0",
+      "name": "stall_data_flip"
+    },
+    {
+      "define": "DATA_FLIP_ACTIVE",
+      "expected": "CP_DATA_MISMATCH",
+      "name": "active_data_flip"
+    },
+    {
+      "define": "EDGE_ONLY_FLIP",
+      "expected": "CP_DATA_MISMATCH phase=1 ready=1",
+      "name": "edge_only_data_flip"
+    },
+    {
+      "define": "DATA_X_BOTH",
+      "expected": "CP_DATA_UNKNOWN",
+      "name": "active_unknown_both"
+    },
+    {
+      "define": "VALID_X_BOTH",
+      "expected": "CP_VALID_UNKNOWN",
+      "name": "valid_unknown_both"
+    },
+    {
+      "define": "IDLE_VALID_X_BOTH",
+      "expected": "CP_VALID_UNKNOWN",
+      "name": "idle_valid_unknown_both"
+    },
+    {
+      "define": "VALID_DROP",
+      "expected": "CP_VALID_MISMATCH",
+      "name": "valid_drop"
+    },
+    {
+      "define": "META_FLIP",
+      "expected": "CP_META_MISMATCH",
+      "name": "metadata_flip"
+    },
+    {
+      "define": "OTHER_FLIP",
+      "expected": "FULL_SHADOW_MISMATCH port=boot_pending",
+      "name": "other_control_flip"
+    },
+    {
+      "define": "OTHER_X",
+      "expected": "FULL_SHADOW_MISMATCH port=boot_pending",
+      "name": "other_control_x"
+    },
+    {
+      "define": "OTHER_Z",
+      "expected": "FULL_SHADOW_MISMATCH port=boot_pending",
+      "name": "other_control_z"
+    },
+    {
+      "define": "SHORT_RESET",
+      "expected": "FULL_SHADOW_INCOMPLETE",
+      "name": "short_reset"
+    },
+    {
+      "define": "NO_STREAM",
+      "expected": "CP_PROTOCOL_COVERAGE_MISSING",
+      "name": "no_stream"
+    },
+    {
+      "define": "NO_TRANSFERS",
+      "expected": "CP_PROTOCOL_COVERAGE_MISSING",
+      "name": "no_transfers"
+    },
+    {
+      "define": "NO_STALLS",
+      "expected": "CP_PROTOCOL_COVERAGE_MISSING",
+      "name": "no_stalls"
+    },
+    {
+      "define": "DATA_Z_BOTH",
+      "expected": "CP_DATA_UNKNOWN",
+      "name": "cp_data_z"
+    },
+    {
+      "define": "VALID_Z_BOTH",
+      "expected": "CP_VALID_UNKNOWN",
+      "name": "cp_valid_z"
+    },
+    {
+      "define": "IDLE_VALID_Z_BOTH",
+      "expected": "CP_VALID_UNKNOWN",
+      "name": "cp_idle_valid_z"
+    },
+    {
+      "define": "CP_META_X_BOTH",
+      "expected": "CP_META_UNKNOWN",
+      "name": "cp_meta_x"
+    },
+    {
+      "define": "CP_META_Z_BOTH",
+      "expected": "CP_META_UNKNOWN",
+      "name": "cp_meta_z"
+    },
+    {
+      "define": "CP_READY_X",
+      "expected": "CP_READY_UNKNOWN",
+      "name": "cp_ready_x"
+    },
+    {
+      "define": "KA_DATA_FLIP_STALL",
+      "expected": "KA_DATA_MISMATCH phase=0 ready=0",
+      "name": "ka_stall_flip"
+    },
+    {
+      "define": "KA_DATA_FLIP_ACTIVE",
+      "expected": "KA_DATA_MISMATCH",
+      "name": "ka_active_flip"
+    },
+    {
+      "define": "KA_EDGE_ONLY_FLIP",
+      "expected": "KA_DATA_MISMATCH phase=1 ready=1",
+      "name": "ka_edge_flip"
+    },
+    {
+      "define": "KA_DATA_X_BOTH",
+      "expected": "KA_DATA_UNKNOWN",
+      "name": "ka_data_x"
+    },
+    {
+      "define": "KA_DATA_Z_BOTH",
+      "expected": "KA_DATA_UNKNOWN",
+      "name": "ka_data_z"
+    },
+    {
+      "define": "KA_VALID_X_BOTH",
+      "expected": "KA_VALID_UNKNOWN",
+      "name": "ka_valid_x"
+    },
+    {
+      "define": "KA_VALID_Z_BOTH",
+      "expected": "KA_VALID_UNKNOWN",
+      "name": "ka_valid_z"
+    },
+    {
+      "define": "KA_IDLE_VALID_X_BOTH",
+      "expected": "KA_VALID_UNKNOWN",
+      "name": "ka_idle_valid_x"
+    },
+    {
+      "define": "KA_IDLE_VALID_Z_BOTH",
+      "expected": "KA_VALID_UNKNOWN",
+      "name": "ka_idle_valid_z"
+    },
+    {
+      "define": "KA_VALID_DROP",
+      "expected": "KA_VALID_MISMATCH",
+      "name": "ka_valid_drop"
+    },
+    {
+      "define": "KA_META_FLIP",
+      "expected": "KA_META_MISMATCH",
+      "name": "ka_meta_flip"
+    },
+    {
+      "define": "KA_META_X_BOTH",
+      "expected": "KA_META_UNKNOWN",
+      "name": "ka_meta_x"
+    },
+    {
+      "define": "KA_META_Z_BOTH",
+      "expected": "KA_META_UNKNOWN",
+      "name": "ka_meta_z"
+    },
+    {
+      "define": "KA_READY_X",
+      "expected": "KA_READY",
+      "name": "ka_ready_x"
+    },
+    {
+      "define": "KA_NO_STREAM",
+      "expected": "KA_PROTOCOL_COVERAGE_MISSING",
+      "name": "ka_no_stream"
+    },
+    {
+      "define": "KA_NO_TRANSFERS",
+      "expected": "KA_PROTOCOL_COVERAGE_MISSING",
+      "name": "ka_no_transfers"
+    },
+    {
+      "define": "KA_NO_STALLS",
+      "expected": "KA_PROTOCOL_COVERAGE_MISSING",
+      "name": "ka_no_stalls"
+    },
+    {
+      "define": "PW_DATA_FLIP_STALL",
+      "expected": "PW_DATA_MISMATCH phase=0 ready=0",
+      "name": "pw_stall_flip"
+    },
+    {
+      "define": "PW_DATA_FLIP_ACTIVE",
+      "expected": "PW_DATA_MISMATCH",
+      "name": "pw_active_flip"
+    },
+    {
+      "define": "PW_EDGE_ONLY_FLIP",
+      "expected": "PW_DATA_MISMATCH phase=1 ready=1",
+      "name": "pw_edge_flip"
+    },
+    {
+      "define": "PW_DATA_X_BOTH",
+      "expected": "PW_DATA_UNKNOWN",
+      "name": "pw_data_x"
+    },
+    {
+      "define": "PW_DATA_Z_BOTH",
+      "expected": "PW_DATA_UNKNOWN",
+      "name": "pw_data_z"
+    },
+    {
+      "define": "PW_VALID_X_BOTH",
+      "expected": "PW_VALID_UNKNOWN",
+      "name": "pw_valid_x"
+    },
+    {
+      "define": "PW_VALID_Z_BOTH",
+      "expected": "PW_VALID_UNKNOWN",
+      "name": "pw_valid_z"
+    },
+    {
+      "define": "PW_IDLE_VALID_X_BOTH",
+      "expected": "PW_VALID_UNKNOWN",
+      "name": "pw_idle_valid_x"
+    },
+    {
+      "define": "PW_IDLE_VALID_Z_BOTH",
+      "expected": "PW_VALID_UNKNOWN",
+      "name": "pw_idle_valid_z"
+    },
+    {
+      "define": "PW_VALID_DROP",
+      "expected": "PW_VALID_MISMATCH",
+      "name": "pw_valid_drop"
+    },
+    {
+      "define": "PW_META_FLIP",
+      "expected": "PW_META_MISMATCH",
+      "name": "pw_meta_flip"
+    },
+    {
+      "define": "PW_META_X_BOTH",
+      "expected": "PW_META_UNKNOWN",
+      "name": "pw_meta_x"
+    },
+    {
+      "define": "PW_META_Z_BOTH",
+      "expected": "PW_META_UNKNOWN",
+      "name": "pw_meta_z"
+    },
+    {
+      "define": "PW_READY_X",
+      "expected": "PW_READY",
+      "name": "pw_ready_x"
+    },
+    {
+      "define": "PW_NO_STREAM",
+      "expected": "PW_PROTOCOL_COVERAGE_MISSING",
+      "name": "pw_no_stream"
+    },
+    {
+      "define": "PW_NO_TRANSFERS",
+      "expected": "PW_PROTOCOL_COVERAGE_MISSING",
+      "name": "pw_no_transfers"
+    },
+    {
+      "define": "PW_NO_STALLS",
+      "expected": "PW_PROTOCOL_COVERAGE_MISSING",
+      "name": "pw_no_stalls"
+    },
+    {
+      "define": "KA_NODE_ONLY_FLIP",
+      "expected": "KA_DATA_MISMATCH",
+      "name": "ka_node_only_flip"
+    },
+    {
+      "define": "KA_NET_ONLY_FLIP",
+      "expected": "KA_DATA_MISMATCH",
+      "name": "ka_net_only_flip"
+    }
+  ],
+  "full_system_functional_netlist_validated": false,
+  "status": "59_controls_prepared_not_executed",
+  "tools": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_shadow_protocol_v5/manifest.json": "65d596879e85d7eb6a11775e23d82b1f90696b2ee60562a26e198deda9a551de",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_shadow_protocol_v5/shadow.sv": "dc5bb0a5bcee5e7466aaf9beaf9b143bd8e24f45574c47aca0eeea7b09c9f637",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_shadow_protocol_v5/tb_query_fault.sv": "0f79196ed63c79c80d5722e2884046898836ae10dc943a0ed95c0979eab0502e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/stage_static_cp_shadow_payload_contracts_20261030.json": "411398194499b31bf468bbf3722f935159002996a4aad6b0aedccfb60990a54d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/config_native_publication_synth_common_v1.py": "aa491c4f9bcc0506c7a2f19931375c86f585fa6f71138916d2d53adba90af258",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/host_edit_system_common_v1.py": "fbd0b16ac75b62f4f7b05b2dcfc226158f536a25154b45523992e1c4f62b59a8",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/prepare_stage_static_cp_shadow_protocol_v5.py": "3867bf08ef082a1e69fc25db1414dd73f849cd46ce21406a1c80493f06dd3c2c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_shadow_cp_protocol_controls_v5.py": "56310d38d365cab0d7752330ec50d78fbde52c2b162cad8103df600707bd2611",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_shadow_payload_contract_controls_v1.py": "d6f07ac6f3954dc23d3569253bce4da1862750a3bc59e58e9f505f88a1a35239"
+  }
+}

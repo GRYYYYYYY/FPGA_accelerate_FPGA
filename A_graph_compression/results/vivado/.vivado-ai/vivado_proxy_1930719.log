@@ -1,0 +1,330 @@
+2026/10/22 16:55:36.725818 vivado-proxy: starting PID=1930719 host=fpgaacc1--cfc8cd109508-jnnrja5s7q go=go1.25.11 GOARCH=amd64 GOOS=linux
+2026/10/22 16:55:36.726462 vivado-proxy: listening on 127.0.0.1:42063
+2026/10/22 16:55:36.726526 vivado-proxy: MCP_PROXY_PORT_DIR unset — running without connection authentication (loopback only)
+2026/10/22 16:55:36.728408 vivado-proxy: spawning: [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/vivado -mode tcl -log .vivado-ai/vivado_88136691_07eba6f7.log -journal .vivado-ai/vivado_88136691_07eba6f7.jou -notrace -source .vivado-ai/init_88136691_07eba6f7.tcl]
+2026/10/22 16:55:36.729218 vivado-proxy: child PID 1930733
+2026/10/22 16:55:36.729786 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:55:36.729950 vivado-proxy: output stream client connected from 127.0.0.1:49754
+2026/10/22 16:55:36.730051 vivado-proxy: output stream resuming from stdout=0 stderr=0
+2026/10/22 16:55:43.761663 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:55:43.761813 vivado-proxy: config webserver_url = http://localhost:49207
+2026/10/22 16:55:43.761868 vivado-proxy: config log_file_path = /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/.vivado-ai/vivado_88136691_07eba6f7.log
+2026/10/22 16:55:46.733478 vivado-proxy: message limit verified (10000000)
+2026/10/22 16:55:53.466832 vivado-proxy: exec [scajcf1106v5] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-1 open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+2026/10/22 16:55:55.178961 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:55:55.179968 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:56:05.176303 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:56:05.177088 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:56:15.194594 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:56:15.196302 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:56:41.871298 vivado-proxy: exec [e4lssewltzhb] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-2 help get_nets
+2026/10/22 16:56:42.281502 vivado-proxy: exec [r5uav2ozm2yi] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-3 set n [lindex [get_nets -hier -filter {ROUTE_STATUS == ROUTED && TYPE == SIGNAL}] 0]; puts "NET $n"; puts [list_property $n]; puts "SITEPINS [get_site_pins -of_objects $n]"; puts "NODES [get_nodes -of_objects $n]"; puts "ROUTE [get_property ROUTE $n]"; set sp [lindex [get_site_pins -of_objects $n] 0]; puts "SPPROPS [list_property $sp]"; report_property $sp
+2026/10/22 16:56:59.347820 vivado-proxy: exec [p9udyfb4k1ud] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-4 set allnets [get_nets -hier -top_net_of_hierarchical_group]; puts "TOPNETS [llength $allnets]"; set ss [get_nets -segments {cg_q[0]}]; puts "SEGMENTS $ss"; puts "SITEPINS [get_site_pins -of_objects $ss]"; puts "TYPECLK [get_property TYPE [get_nets clk_global]]"; puts "PIPP [list_property [lindex [get_pips -of_objects $ss] 0]]"; puts "WIREPATH [get_property ROUTE [get_nets {cg_q[0]}]]"; puts "DRIVER_NODES [get_nodes -of_objects [get_site_pins -of_objects $ss -filter {DIRECTION == OUT}]]"; puts "LOAD_NODES [get_nodes -of_objects [get_site_pins -of_objects $ss -filter {DIRECTION == IN}]]"; puts "PRIMITIVEPINS [get_pins -of_objects $ss -filter {IS_LEAF == 1}]"
+2026/10/22 16:58:27.536458 vivado-proxy: exec [iek8glewbhrk] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-5 source -notrace /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/netlist_snapshot.tcl
+2026/10/22 16:58:27.868261 vivado-proxy: exec [wgke6ysjnas7] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-6 netlist_snapshot::export /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/snapshot.tsv
+2026/10/22 16:58:35.176803 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:58:35.178008 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:58:45.180432 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:58:45.181616 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:58:55.185302 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:58:55.187842 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:05.183870 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:05.184809 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:15.176269 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:15.177289 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:25.176684 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:25.177771 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:35.176417 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:35.178905 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:45.177186 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:45.178162 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:55.177063 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 16:59:55.178264 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:05.177154 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:05.178265 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:15.178008 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:15.179147 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:25.176515 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:25.177575 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:35.176757 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:00:35.177674 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:04:16.570703 vivado-proxy: exec [10tdzp9rcqu9] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-7 puts [get_property NAME [get_nodes {INT_X2Y90/EE2_E_BEG0 INT_X3Y120/EE2_E_BEG0 INT_X2Y90/EE12_BEG0 INT_X3Y120/EE12_BEG0 LAG_LAG_X104Y0/UBUMP0 LAG_LAG_X40Y0/UBUMP0}]]
+2026/10/22 17:04:29.163343 vivado-proxy: exec [1k0mj1sdggyl] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-8 set lag [lsort [get_property NAME [get_tiles -filter {TYPE == LAG_LAG && SLR_REGION_ID == 0}]]]; puts "LAG [lrange $lag 0 2] ... [lrange $lag end-2 end]"; puts "COUNT [llength $lag]"; set seed [lindex $lag 0]; puts "NODES [lrange [get_property NAME [get_nodes -of_objects [get_tiles $seed] -filter {INTENT_CODE_NAME == NODE_LAGUNA_OUTPUT}]] 0 2]"
+2026/10/22 17:04:55.912857 vivado-proxy: exec [i77pv8lciflx] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-9 foreach t {INT_X2Y90 INT_X3Y120 INT_X10Y390 LAG_LAG_X104Y180 LAG_LAG_X104Y181} {puts "$t [get_property SLR_REGION_ID [get_tiles $t]]"}; puts [get_property NAME [get_nodes {LAG_LAG_X104Y180/UBUMP0 LAG_LAG_X104Y181/UBUMP0}]]
+2026/10/22 17:11:16.418875 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:11:16.419069 vivado-proxy: exec [t0dj0uw0dnlf] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-10 help find_routing_path
+2026/10/22 17:23:01.576868 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:23:01.577060 vivado-proxy: exec [b7w0k3c3jda2] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-11 help route_design; help find_routing_path
+2026/10/22 17:23:42.166277 vivado-proxy: exec [iyna1cx1ouwe] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-12 help route_design
+2026/10/22 17:35:57.937002 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:35:57.937237 vivado-proxy: exec [waoagm8zegep] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-13 report_drc -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/netlist_baseline_drc_20261022.rpt
+2026/10/22 17:51:01.139540 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:01.139741 vivado-proxy: exec [vedtmtijoj92] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-14 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/preflight_route_export.tcl
+2026/10/22 17:51:01.489838 vivado-proxy: exec [wlebz3hap8r1] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-15 netlist_preflight::export /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/netlist_preflight_20261022_v1/selection.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/netlist_preflight_20261022_v1/reference_pips.tsv
+2026/10/22 17:51:05.177294 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:05.178951 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:15.176546 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:15.178167 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:25.177347 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:25.180403 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:35.176205 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:35.177473 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:45.176762 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:51:45.177999 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:52:57.118519 vivado-proxy: exec [yupciwdhoccr] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-16 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/apply_netlist_routes.tcl
+2026/10/22 17:52:57.485317 vivado-proxy: exec [43arih8w8lzr] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-17 netlist_apply::apply /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/netlist_preflight_20261022_v1/routes.tsv /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/preflight_applied_20261022_v1
+2026/10/22 17:53:05.176539 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:05.177922 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:15.176401 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:15.177564 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:25.176746 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:25.177980 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:35.176697 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:35.177734 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:45.176668 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:45.179282 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:55.176421 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:53:55.177770 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:05.176662 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:05.177750 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:15.176736 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:15.178008 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:25.176430 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:25.178024 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:35.178283 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:35.179794 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:45.176178 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:45.177704 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:55.176880 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:54:55.178156 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:05.176877 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:05.178486 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:15.176904 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:15.178138 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:25.179116 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:25.180419 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:35.177762 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:55:35.178962 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 17:57:07.071015 vivado-proxy: exec [atzi72q0mlas] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-18 close_design
+2026/10/22 17:57:07.720610 vivado-proxy: exec [0pvv4s5qjagx] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-19 open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+2026/10/22 18:44:52.693464 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:44:52.693655 vivado-proxy: exec [16id4nyvplop] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-20 netlist_apply::apply /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/netlist_integration16_20261022_v1/routes.tsv /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/integration16_applied_20261022_v1
+2026/10/22 18:45:27.779267 vivado-proxy: exec [buiqjamg8v3j] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-21 netlist_apply::apply /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/netlist_integration16_20261022_v1/routes.tsv /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/integration16_applied_20261022_v2
+2026/10/22 18:45:35.184141 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:45:35.187095 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:45:45.179651 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:45:45.182715 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:45:55.179414 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:45:55.181425 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:05.179001 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:05.181324 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:15.179351 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:15.182424 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:25.179603 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:25.181788 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:35.178988 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:35.182295 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:45.179024 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:45.181169 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:55.178527 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:46:55.180750 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:05.178909 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:05.180881 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:15.180688 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:15.183095 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:25.178385 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:25.180383 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:35.178677 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:35.180732 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:45.179022 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:45.181284 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:55.179814 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:47:55.182337 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:48:05.179474 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:48:05.181590 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:48:15.179521 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:48:15.183380 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:48:25.182314 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:48:25.188594 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:55:14.845770 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:55:14.845967 vivado-proxy: exec [sdqprn5ztddb] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-22 close_design
+2026/10/22 18:55:15.179208 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:55:15.182258 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:55:15.561193 vivado-proxy: exec [ywwntegfpp5h] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-23 open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+2026/10/22 18:56:05.367884 vivado-proxy: exec [13xswuxbl59x] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-24 netlist_apply::apply /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/netlist_all_nets_cap8_20261022_v1/routes.tsv /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/all_nets_cap8_applied_20261022_v1
+2026/10/22 18:56:15.178361 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:15.181089 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:25.178479 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:25.180890 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:35.179642 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:35.183354 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:45.179275 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:45.182585 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:55.180415 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:56:55.183994 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:05.182168 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:05.184798 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:15.179049 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:15.181193 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:25.178500 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:25.180606 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:35.179081 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:35.181711 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:45.178552 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:45.180988 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:55.180304 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:57:55.182521 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:05.178993 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:05.181554 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:15.179017 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:15.181161 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:25.178530 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:25.180656 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:35.180078 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:35.182968 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:45.179344 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:45.181463 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:55.178271 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:58:55.180335 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:05.178524 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:05.181980 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:15.179289 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:15.180423 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:25.178401 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:25.180698 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:35.180355 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:35.183002 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:45.179379 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:45.181218 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:55.195925 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 18:59:55.198700 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:00:05.179952 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:00:05.181556 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:00:15.180912 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:00:15.182113 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:00:25.179620 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:00:25.181711 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:16:38.092220 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:16:38.092433 vivado-proxy: exec [n3docjh8k6dv] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-25 close_design
+2026/10/22 19:16:38.927728 vivado-proxy: exec [mtfrpcy197ce] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-26 open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+2026/10/22 19:16:45.182280 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:16:45.183623 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/22 19:16:46.041938 vivado-proxy: exec [3a8kpkxr9vzc] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-27 help get_tiles -args; set pn [get_nodes INT_X12Y410/INODE_W_60_FT0]; set pw [lindex [get_wires -of_objects $pn] 0]; list node_lookup [time {get_nodes INT_X12Y410/INODE_W_60_FT0} 10] node_properties [time {foreach key [list_property $pn] {get_property $key $pn}} 10] alias_lookup [time {get_nodes -of_objects $pw} 10] downhill [time {get_pips -downhill -of_objects $pn} 10]
+2026/10/22 19:18:28.190429 vivado-proxy: exec [63fax0eq538c] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-28 help get_tiles -args
+2026/10/22 19:18:28.599457 vivado-proxy: exec [xh49kla7fuw9] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-29 set sf [open /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/region_u280_20261022_v1/endpoint_sites.txt]; set sns [split [string trim [read $sf]] \n]; close $sf; set sobjs [get_sites $sns]; set ts [get_tiles -of_objects $sobjs]; set cx [lsort -integer [get_property COLUMN $ts]]; set cy [lsort -integer [get_property ROW $ts]]; list sites [llength $sobjs] tiles [llength $ts] bbox [list [lindex $cx 0] [lindex $cx end] [lindex $cy 0] [lindex $cy end]] schema_equal [expr {[lsort [list_property $pn]] eq [lsort [list_property -class node]]}] wire_properties [list_property $pw]
+2026/10/22 19:20:10.583017 vivado-proxy: exec [dqkkmdro1y5n] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-30 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/select_region.tcl
+2026/10/22 19:20:10.914828 vivado-proxy: exec [k23npzhyu12x] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-31 independent_region::select /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/region_u280_20261022_v1/endpoint_sites.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/raw/region_u280_20261022_v1/selection 2 2000000
+2026/10/23 05:14:26.544189 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:14:26.557512 vivado-proxy: exec [d7zqq5vunq9o] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-32 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/apply_region_20261023_v1.tcl
+2026/10/23 05:14:35.180424 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:14:35.183287 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:14:45.180635 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:14:45.183461 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:14:55.181573 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:14:55.186172 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:05.181460 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:05.184975 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:25.618695 vivado-proxy: exec [t4rrorcghye8] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-33 get_property ROUTE_STATUS [netlist_snapshot::exact_net {cg_q[2]}]
+2026/10/23 05:15:32.881837 vivado-proxy: exec [kufv51q68fey] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-34 netlist_snapshot::export /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/region_cap8_applied_20261023_v1/failure_snapshot.tsv
+2026/10/23 05:15:35.181070 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:35.183652 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:45.182030 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:45.184145 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:55.182093 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:15:55.185220 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:05.181183 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:05.183770 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:15.182177 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:15.183471 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:25.182280 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:25.184688 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:35.183768 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:35.188259 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:45.179707 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:45.182742 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:55.180737 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:16:55.185610 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:05.180449 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:05.183164 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:15.183415 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:15.186364 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:25.180931 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:25.227335 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:35.182010 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:35.183913 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:45.181894 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:45.185634 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:55.180777 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:17:55.185425 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:05.180720 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:05.183502 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:15.180532 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:15.184819 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:25.182207 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:25.184239 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:35.184396 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:35.185474 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:45.183538 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:45.184715 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:55.181393 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:18:55.186021 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:19:14.021497 vivado-proxy: exec [58w9z0gry2e8] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-35 report_route_status -of_objects [netlist_snapshot::exact_net {cg_q[2]}] -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/region_cap8_applied_20261023_v1/cg2_route_status.rpt
+2026/10/23 05:20:10.686134 vivado-proxy: exec [bnlhk3sa55hc] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-36 report_property [get_sites SLICE_X22Y411]
+2026/10/23 05:20:25.920462 vivado-proxy: exec [3k3o4pz90s3r] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-37 report_drc -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/region_cap8_applied_20261023_v1/failure_drc.rpt
+2026/10/23 05:20:33.897136 vivado-proxy: exec [7g7syxngmrrh] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-38 report_property [get_bels SLICE_X22Y411/G6LUT]
+2026/10/23 05:20:47.791868 vivado-proxy: exec [2okzulghcgap] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-39 open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+2026/10/23 05:21:04.849881 vivado-proxy: exec [zrtjrg9ec0ml] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-40 get_property CONFIG.EQN [get_bels SLICE_X22Y411/G6LUT]
+2026/10/23 05:21:05.185214 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:21:05.187669 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:21:33.259343 vivado-proxy: exec [hjeunsnk63et] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-41 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/probe_site_conflict_20261023_v1.tcl
+2026/10/23 05:21:35.180617 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:21:35.183514 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:21:52.686263 vivado-proxy: exec [dnsx3fzljl80] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-42 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/probe_site_conflict_20261023_v1.tcl
+2026/10/23 05:21:55.181244 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:21:55.185056 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:22:31.021961 vivado-proxy: exec [a9fqnlp0tgnr] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-43 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_region_bel_config_20261023_v1.tcl
+2026/10/23 05:22:35.180551 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:22:35.183766 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:22:45.183175 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:22:45.185838 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:22:55.182398 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:22:55.185839 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:23:05.181475 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:23:05.186079 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:23:33.023195 vivado-proxy: exec [qigz14thombe] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-44 report_property [get_pips {CLEL_R_X14Y411/CLEL_R.CLE_CLE_L_SITE_0_G5->>CLE_CLE_L_SITE_0_GMUX}]
+2026/10/23 05:23:53.374951 vivado-proxy: exec [hm0qrlqbkrh5] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-45 get_property NAME [get_sites -of_objects [get_tiles CLEL_R_X14Y411]]
+2026/10/23 05:23:53.829778 vivado-proxy: exec [mz8zs8gurlx8] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-46 report_property [get_bel_pins SLICE_X22Y411/OUTMUXG/D6]
+2026/10/23 05:24:31.685844 vivado-proxy: exec [kux14d3ldbgb] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-47 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/export_pseudo_sites_20261023_v1.tcl
+2026/10/23 05:24:35.182028 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:24:35.184266 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:25:57.299330 vivado-proxy: exec [1683j9nszo9o] req=vivado-20261022-165536-938cabaa-ca89ad9b-cmd-48 source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/diagnose_region_routes_20261023_v1.tcl
+2026/10/23 05:26:05.181575 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:26:05.185471 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:26:15.183249 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:26:15.187967 vivado-proxy: HELLO handshake complete, protocol v3
+2026/10/23 05:26:19.540767 vivado-proxy: child exited: exit status 139
+2026/10/23 05:26:19.540910 vivado-proxy: last output from Vivado before it exited:
+val_y_reg[79]_i_3_n_0} {original_cost/genblk1[5].h_val_y_reg[79]_i_5_n_0} {original_cost/genblk1[5].h_val_y_reg[79]_i_6_n_0} {original_cost/genblk1[5].h_val_y_reg[83]_i_1_n_0} {original_cost/genblk1[5].h_val_y_reg[83]_i_2_n_0} {original_cost/genblk1[5].h_val_y_reg[83]_i_3_n_0} {original_cost/genblk1[5].h_val_y_reg_reg[79]_i_1_n_0} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[71]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[72]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[73]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[74]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[75]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[76]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[77]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[78]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[79]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[80]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[81]} {original_cost/genblk1[5].h_val_y_reg_reg_n_0_[83]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[71]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[72]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[73]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[74]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[75]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[76]} {original_cost/genblk1[5].h_val_z_reg_reg_n_0_[83]} original_cost/h_val_0__1_carry_i_1_n_0 original_cost/h_val_0__1_carry_i_2_n_0 original_cost/h_val_0__1_carry_i_3_n_0 original_cost/h_val_0__1_carry_i_4_n_0 original_cost/h_val_0__1_carry_n_0 {original_cost/h_val_0__40[10]} {original_cost/h_val_0__40[11]} {original_cost/h_val_0__40[12]} {original_cost/h_val_0__40[13]} {original_cost/h_val_0__40[1]} {original_cost/h_val_0__40[2]} {original_cost/h_val_0__40[3]} {original_cost/h_val_0__40[4]} {original_cost/h_val_0__40[5]} {original_cost/h_val_0__40[6]} {original_cost/h_val_0__40[7]} {original_cost/h_val_0__40[8]} {original_cost/h_val_0__40[9]} original_cost/h_val_14__1_carry_i_1_n_0 original_cost/h_val_14__1_carry_i_2_n_0 original_cost/h_val_14__1_carry_i_3_n_0 original_cost/h_val_14__1_carry_i_4_n_0 original_cost/h_val_14__1_carry_n_0 {original_cost/h_val_14__40[10]} {original_cost/h_val_14__40[11]} {original_cost/h_val_14__40[12]} {original_cost/h_val_14__40[13]} {original_cost/h_val_14__40[1]} {original_cost/h_val_14__40[2]} {original_cost/h_val_14__40[3]} {original_cost/h_val_14__40[4]} {original_cost/h_val_14__40[5]} {original_cost/h_val_14__40[6]} {original_cost/h_val_14__40[7]} {original_cost/h_val_14__40[8]} {original_cost/h_val_14__40[9]} original_cost/h_val_28__1_carry_i_1_n_0 original_cost/h_val_28__1_carry_i_2_n_0 original_cost/h_val_28__1_carry_i_3_n_0 original_cost/h_val_28__1_carry_i_4_n_0 original_cost/h_val_28__1_carry_n_0 {original_cost/h_val_28__40[10]} {original_cost/h_val_28__40[11]} {original_cost/h_val_28__40[12]} {original_cost/h_val_28__40[13]} {original_cost/h_val_28__40[1]} {original_cost/h_val_28__40[2]} {original_cost/h_val_28__40[3]} {original_cost/h_val_28__40[4]} {original_cost/h_val_28__40[5]} {original_cost/h_val_28__40[6]} {original_cost/h_val_28__40[7]} {original_cost/h_val_28__40[8]} {original_cost/h_val_28__40[9]} original_cost/h_val_42__1_carry_i_1_n_0 original_cost/h_val_42__1_carry_i_2_n_0 original_cost/h_val_42__1_carry_i_3_n_0 original_cost/h_val_42__1_carry_i_4_n_0 original_cost/h_val_42__1_carry_n_0 {original_cost/h_val_42__40[10]} {original_cost/h_val_42__40[11]} {original_cost/h_val_42__40[12]} {original_cost/h_val_42__40[13]} {original_cost/h_val_42__40[1]} {original_cost/h_val_42__40[2]} {original_cost/h_val_42__40[3]} {original_cost/h_val_42__40[4]} {original_cost/h_val_42__40[5]} {original_cost/h_val_42__40[6]} {original_cost/h_val_42__40[7]} {original_cost/h_val_42__40[8]} {original_cost/h_val_42__40[9]} original_cost/h_val_56__1_carry_i_1_n_0 original_cost/h_val_56__1_carry_i_2_n_0 original_cost/h_val_56__1_carry_i_3_n_0 original_cost/h_val_56__1_carry_i_4_n_0 original_cost/h_val_56__1_carry_n_0 {original_cost/h_val_56__40[10]} {original_cost/h_val_56__40[11]} {original_cost/h_val_56__40[12]} {original_cost/h_val_56__40[13]} {original_cost/h_val_56__40[1]} {original_cost/h_val_56__40[2]} {original_cost/h_val_56__40[3]} {original_cost/h_val_56__40[4]} {original_cost/h_val_56__40[5]} {original_cost/h_val_56__40[6]} {original_cost/h_val_56__40[7]} {original_cost/h_val_56__40[8]} {original_cost/h_val_56__40[9]} original_cost/h_val_70__1_carry_i_1__0_n_0 original_cost/h_val_70__1_carry_i_2__0_n_0 original_cost/h_val_70__1_carry_i_3__0_n_0 original_cost/h_val_70__1_carry_i_4__0_n_0 original_cost/h_val_70__1_carry_n_0 {original_cost/h_val_70__40[10]} {original_cost/h_val_70__40[11]} {original_cost/h_val_70__40[12]} {original_cost/h_val_70__40[13]} {original_cost/h_val_70__40[1]} {original_cost/h_val_70__40[2]} {original_cost/h_val_70__40[3]} {original_cost/h_val_70__40[4]} {original_cost/h_val_70__40[5]} {original_cost/h_val_70__40[6]} {original_cost/h_val_70__40[7]} {original_cost/h_val_70__40[8]} {original_cost/h_val_70__40[9]} original_cost/p_0_in3_in original_cost/p_0_in4_in original_cost/p_0_in5_in original_cost/p_3_in original_cost/p_4_in original_cost/p_5_in {px_q[0]} {px_q[10]} {px_q[11]} {px_q[12]} {px_q[13]} {px_q[14]} {px_q[15]} {px_q[16]} {px_q[17]} {px_q[18]} {px_q[19]} {px_q[1]} {px_q[20]} {px_q[21]} {px_q[22]} {px_q[23]} {px_q[24]} {px_q[25]} {px_q[26]} {px_q[27]} {px_q[28]} {px_q[29]} {px_q[2]} {px_q[30]} {px_q[31]} {px_q[32]} {px_q[33]} {px_q[34]} {px_q[35]} {px_q[36]} {px_q[37]} {px_q[38]} {px_q[39]} {px_q[3]} {px_q[40]} {px_q[41]} {px_q[42]} {px_q[43]} {px_q[44]} {px_q[45]} {px_q[46]} {px_q[47]} {px_q[4]} {px_q[5]} {px_q[6]} {px_q[7]} {px_q[8]} {px_q[9]} {py_q[0]} {py_q[10]} {py_q[11]} {py_q[12]} {py_q[13]} {py_q[14]} {py_q[15]} {py_q[16]} {py_q[17]} {py_q[18]} {py_q[19]} {py_q[1]} {py_q[20]} {py_q[21]} {py_q[22]} {py_q[23]} {py_q[24]} {py_q[25]} {py_q[26]} {py_q[27]} {py_q[28]} {py_q[29]} {py_q[2]} {py_q[30]} {py_q[31]} {py_q[32]} {py_q[33]} {py_q[34]} {py_q[35]} {py_q[36]} {py_q[37]} {py_q[38]} {py_q[39]} {py_q[3]} {py_q[40]} {py_q[41]} {py_q[42]} {py_q[43]} {py_q[44]} {py_q[45]} {py_q[46]} {py_q[47]} {py_q[4]} {py_q[5]} {py_q[6]} {py_q[7]} {py_q[8]} {py_q[9]} {pz_q[0]} {pz_q[10]} {pz_q[11]} {pz_q[12]} {pz_q[13]} {pz_q[14]} {pz_q[15]} {pz_q[16]} {pz_q[17]} {pz_q[1]} {pz_q[2]} {pz_q[3]} {pz_q[4]} {pz_q[5]} {pz_q[6]} {pz_q[7]} {pz_q[8]} {pz_q[9]} reset_q valid_q}
+Attempting to get a license for feature 'Implementation' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xcu280'
+INFO: [Route 35-333] 1062 nets were fully unrouted.
+INFO: [Common 17-83] Releasing license: Implementation
+3 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+# set f [open $diag_dir/immediate_status.tsv {WRONLY CREAT EXCL}]
+# set diag_count 0
+# foreach name [dict keys $diag_routes] {
+#     set n [netlist_snapshot::exact_net $name]
+#     set code [catch {set_property FIXED_ROUTE [dict get $diag_routes $name] $n} message]
+#     set segments [get_nets -segments [list $name]]
+#     set nodes_equal [expr {[netlist_snapshot::names [get_nodes -quiet -of_objects $segments]] eq [lsort -unique [dict get $diag_nodes $name]]}]
+#     set pips_equal [expr {[netlist_snapshot::names [get_pips -quiet -of_objects $segments]] eq [lsort -unique [dict get $diag_pips $name]]}]
+#     puts $f [join [list net $name $code [get_property ROUTE_STATUS $n] $nodes_equal $pips_equal] "\t"]
+#     if {$code} {puts $f [join [list error $name [string map {\n { | } \t { }} $message]] "\t"]}
+#     incr diag_count
+#     if {$diag_count%100==0} {flush $f;puts "DIAGNOSTIC_PROGRESS $diag_count"}
+# }
+Abnormal program termination (11)
+Please check '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/vivado/hs_err_pid1930770.log' for details
+segfault in /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/vivado -exec vivado -mode tcl -log .vivado-ai/vivado_88136691_07eba6f7.log -journal .vivado-ai/vivado_88136691_07eba6f7.jou -notrace -source .vivado-ai/init_88136691_07eba6f7.tcl, exiting...
+2026/10/23 05:26:19.542562 vivado-proxy: exec [1683j9nszo9o] abandoned — Vivado exited before the end marker

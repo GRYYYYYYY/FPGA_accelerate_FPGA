@@ -1,0 +1,109 @@
+{
+  "cases": {
+    "restore_seed_leaf_v1": {
+      "auditor_sha256": "53615761a8e249442cc0389cb8a67df745bcd0cfb15f44f4ebf2f589cb5d2ea9",
+      "checks": 286,
+      "delayed_reply_cycles": 4,
+      "field_writes": 28,
+      "held_terminal_cycles": 8,
+      "independent_crc": "4a597036",
+      "manifest_sha256": "7ee308255701e25cf8c333ab4364c18d8ad92b062a81b232cee192aa058329d6",
+      "scenarios": 4,
+      "scope": "Actual label_restore_controller with RAM backend model. Disabled/enabled permission pin reversal after acceptance; bad CRC rejects last record; abort after third field waits for delayed reply and remains stopped. Each scenario uses service reset. No whole-system cancellation or noncold retry proof.",
+      "start_permission_latched": true,
+      "status": "passed"
+    },
+    "restore_seed_manager_full_v1": {
+      "auditor_sha256": "9d253811d5542cc34ae29c7cffe9fc8d8e2cdd6ec96645395c7664e1b75cef6d",
+      "baseline_misses": 5,
+      "baseline_read_beats": 5,
+      "checks": 157,
+      "client_read_seed_survives_writeback_refill": true,
+      "drain_fault": false,
+      "field_writes": 26,
+      "first_write_preserves_other_fields": true,
+      "manifest_sha256": "d22c9d7122cf4a980132fb9679f473fb6fcc761125dda98c27bb4e47a1e07faa",
+      "misuse_rejections_without_native_access": 3,
+      "native_reads": 16,
+      "page_refills": 5,
+      "page_writebacks": 4,
+      "physical_page_bytes_checked": 3072,
+      "post_open_epoch_pin_changed": true,
+      "read_seed_survives_writeback_refill": true,
+      "restored_without_seed": 1,
+      "scope": "Actual manager/native endpoint plus baseline/page AXI; final baseline error or native-fault deferred drain closes business. Restore qualifier sampled at real IO acceptance and dropped while pending; five native field writes without pre-read/seed; three invalid uses rejected; subsequent ordinary read still seeds from actual baseline. Fixed initial context only. Not full query, warm recovery, arbitrary cancellation, authentication or board proof.",
+      "seeded_records": 4,
+      "single": false,
+      "status": "passed"
+    },
+    "restore_seed_manager_pressure_v1": {
+      "auditor_sha256": "9d253811d5542cc34ae29c7cffe9fc8d8e2cdd6ec96645395c7664e1b75cef6d",
+      "baseline_misses": 5,
+      "baseline_read_beats": 5,
+      "checks": 157,
+      "client_read_seed_survives_writeback_refill": true,
+      "drain_fault": false,
+      "field_writes": 26,
+      "first_write_preserves_other_fields": true,
+      "manifest_sha256": "2ec24ac5dcede0bd2315a0ff2e5ab7400713f611e7afe129f91af47b9add6d1d",
+      "misuse_rejections_without_native_access": 3,
+      "native_reads": 16,
+      "page_refills": 5,
+      "page_writebacks": 4,
+      "physical_page_bytes_checked": 3072,
+      "post_open_epoch_pin_changed": true,
+      "read_seed_survives_writeback_refill": true,
+      "restored_without_seed": 1,
+      "scope": "Actual manager/native endpoint plus baseline/page AXI; final baseline error or native-fault deferred drain closes business. Restore qualifier sampled at real IO acceptance and dropped while pending; five native field writes without pre-read/seed; three invalid uses rejected; subsequent ordinary read still seeds from actual baseline. Fixed initial context only. Not full query, warm recovery, arbitrary cancellation, authentication or board proof.",
+      "seeded_records": 4,
+      "single": true,
+      "status": "passed"
+    }
+  },
+  "full_system_runs": [
+    "/tmp/B_state_residency_offer_20261025/restore_seed_off_full_v1",
+    "/tmp/B_state_residency_offer_20261025/restore_seed_off_pressure_v1",
+    "/tmp/B_state_residency_offer_20261025/restore_seed_on_full_v1",
+    "/tmp/B_state_residency_offer_20261025/restore_seed_on_pressure_v1"
+  ],
+  "restores": {
+    "restore_seed_leaf_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_leaf_v1.json",
+      "archive_sha256": "16247359bb21c06093b61e259bf4c269e45bdf720bb64010f0f8b16eece5ce99",
+      "audit_byte_identical": true,
+      "audit_sha256": "1433e83ad8bf5f490c3fc83967ca119f282585db7115c9296f668b3e242b0faa",
+      "auditor": "audit_restore_seed_leaf.py",
+      "files": 33,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_leaf_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_leaf_v1",
+      "resumed_after": "Wrapper argument mistakenly included scripts/ prefix; extraction had completed. Ran auditor directly, compared preserved audit bytes and all archive member hashes.",
+      "status": "passed"
+    },
+    "restore_seed_manager_full_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_manager_full_v1.json",
+      "archive_sha256": "ecac26a7a7a782278b1170676413fc2844c289fb34cd0ee179ede07cb7ec31a2",
+      "audit_byte_identical": true,
+      "audit_sha256": "6956959805acb6f0401c2f2075c8f2c67e620d33c0832b1ca9a5338ed7eaff4d",
+      "auditor": "audit_restore_seed_manager.py",
+      "files": 68,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_manager_full_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_manager_full_v1",
+      "status": "passed"
+    },
+    "restore_seed_manager_pressure_v1": {
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/restore_seed_manager_pressure_v1.json",
+      "archive_sha256": "a2890de8adc1c29c78b09fc01d3fb3264da7419db7bb1138b11373a9775582fd",
+      "audit_byte_identical": true,
+      "audit_sha256": "d68b1847c3fefffe559c8b5c8098c2d2975858464922734d8e424c0c0afad919",
+      "auditor": "audit_restore_seed_manager.py",
+      "files": 68,
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/restore_seed_manager_pressure_v1",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/restore_seed_manager_pressure_v1",
+      "status": "passed"
+    }
+  },
+  "scope": "Native restore leaf and actual pager/native endpoint components only. Complete-system default-off equivalence and enabled G4 recovery still running; optimized complete-system partial-write cancellation/CRC-failure noncold retry not yet tested. No resource, timing or board performance claim.",
+  "source_freeze": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/restore_seed_components_sources_20261027",
+  "source_freeze_sha256": "ab9e49509b7ba0ed1a4db2f69d42601cd0fa547cca95ddbe7f289cab435c6fc0",
+  "status": "components_passed_full_system_pending"
+}

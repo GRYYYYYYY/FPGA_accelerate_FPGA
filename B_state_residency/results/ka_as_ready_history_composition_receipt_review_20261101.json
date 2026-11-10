@@ -1,0 +1,170 @@
+{
+  "status": "conditional_as_ready_state_history_inductively_proved_dependency_controls_restored_integration_pending",
+  "assertions": 6,
+  "assumptions": 5,
+  "covers": 2,
+  "retained_bits": 5,
+  "as_trace_steps": [
+    {
+      "step": 6,
+      "seen_aw_response": 0
+    },
+    {
+      "step": 11,
+      "seen_aw_response": 1
+    }
+  ],
+  "cover_artifact_scope": "Runner used one cover.vcd, overwritten by second cover. Retained final trace independently contains both first-AS and post-AW-AS witnesses.",
+  "negative_values": {
+    "ka_as_ready_history_without_drain_contract_v1": [
+      {
+        "step": 4,
+        "state": 2,
+        "quiet": 0,
+        "a_valid": 0,
+        "a_ready": 1
+      }
+    ],
+    "ka_as_ready_history_without_quiet_persistence_v1": [
+      {
+        "step": 4,
+        "state": 2,
+        "quiet": 0,
+        "a_valid": 0,
+        "a_ready": 0
+      }
+    ],
+    "ka_as_ready_history_without_response_retirement_v1": [
+      {
+        "step": 8,
+        "state": 6,
+        "quiet": 0,
+        "a_valid": 0,
+        "a_ready": 0
+      },
+      {
+        "step": 9,
+        "state": 7,
+        "quiet": 0,
+        "a_valid": 0,
+        "a_ready": 1
+      },
+      {
+        "step": 10,
+        "state": 7,
+        "quiet": 0,
+        "a_valid": 0,
+        "a_ready": 1
+      }
+    ],
+    "ka_as_ready_history_without_ready_contract_v1": [
+      {
+        "step": 6,
+        "state": 4,
+        "quiet": 1,
+        "a_valid": 1,
+        "a_ready": 0
+      }
+    ]
+  },
+  "contracts": {
+    "quiet_definition": "!authority.busy && authority.drained && !authority.fault",
+    "reports": {
+      "ka_reader_quiet_persistence_formal_v1_review_20261101.json": "5c5592b6236309c645e57dcf82309d9aaa896633db373f5efc7697834143af58",
+      "ka_as_configured_composition_formal_v1_review_20261031.json": "2ea72025ce7f3c77ba167673ea2bc78cfba01d3c549cb69c5aa07755459d90f5",
+      "ka_as_authority_admin_composition_20261101.json": "b94b3a86bba474151d70bf683f434a7ca95d21cc55d9cc6343c3cfa52fcab46c",
+      "ka_as_no_ap_owned_formal_v1_review_20261031.json": "373b2d0675c7afbb93396b0ed02173c6c7529a968fffad610c629905f17c44ef",
+      "ka_ready_combinational_formal_v1_review_20261031.json": "1a5ad86ddcb23c0f5e98317f6543df10190cdbd61f080bbea92a5f2e699958db"
+    },
+    "obligations": {
+      "drain": "backend_drained contains as_drained; normal_retired contains as_retired=>!as_busy; !abort=>!as_fault.",
+      "persistence": "No admin in coordinator phases1..9 except AS request; AP offer suppressed by k_busy, AP owned absent when quiet and phases2..9. Authority abort is constant0.",
+      "response_retire": "AW maps rsp_valid/rsp_ready directly while AP owned0; !coordinator abort=>!authority fault; local fault-free retirement applies.",
+      "ready": "At AS, authority configured, no admin, no AP, abort0 and cold0 are separately proved; quiet plus source combinational sufficient-ready property implies a_ready. This is conditional on quiet, not an unconditional AS-ready assumption."
+    },
+    "scope": "Conditional state-history composition; actual source mappings and all obligations require independent main audit before accepting full native-ready consequence."
+  },
+  "source_contract_integration_reviewed": false,
+  "remaining": [
+    "Independently verify phase-wide admin/AP exclusion and exact request/response clock/reset wiring for all four contracts.",
+    "Verify no circular use of the quiet-to-ready condition and actual configured qualifier.",
+    "Only then assess native-ready safety scope; full shadow coverage gate is unchanged."
+  ],
+  "archive_sha256": "68abcdbb7e6172a5ab2459f6c147a40ca70a0f7f1a0300d16f7047ab08086948",
+  "file_sha256": {
+    "ka_as_ready_history_composition_formal_v1/kernel.json": "835a36c31ce8c40f38d5b13cac86f014bebdaf320ab8b2b4fe319fb575b4dd2f",
+    "ka_as_ready_history_composition_formal_v1/preparation.json": "5d0e70332def2379ec6b8f8702c867832c2e1674700c0d1d1e28fab41e9ef8f7",
+    "ka_as_ready_history_composition_formal_v1/harness.sv": "2a264acc9dd15f324e8de475e1ff83f796cb5c01c4f8a91721c0211124305b3b",
+    "ka_as_ready_history_composition_formal_v1/contracts.json": "5d4d9c92d6b05c33156bc3b276ef96cbdcad030f268e76c72827f1302b8cd4f9",
+    "ka_as_ready_history_composition_formal_v1/manifest.json": "4f69639a0336004e94c772d6a61a3c15b699a16dfc805337442cf46157c62dfa",
+    "ka_as_ready_history_composition_formal_v1/prepare.ys": "770147f6aebcf68f48d8a5454d231aa856d8109f4cd475eaf844583681ed6852",
+    "ka_as_ready_history_composition_formal_v1/prepare.log": "31318db20d1685665ce5ea8c052880742c4cfa781818aed71bdaea7a716347e9",
+    "ka_as_ready_history_composition_formal_v1/design.smt2": "2f5e3ed9b8bc285e44ee04ba12b7f702c928b77d164c215b0ab9ac01137d06bb",
+    "ka_as_ready_history_composition_formal_v1/bmc.log": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0",
+    "ka_as_ready_history_composition_formal_v1/induction.log": "ce792594b30627c28ad6bbf735070d79648815f5681c4df9685eb3bc2c7187c2",
+    "ka_as_ready_history_composition_formal_v1/cover.log": "d3075c9a0fbefbc242d25ad9d3ee39e09a26497acbe941f4c3498dea1257879f",
+    "ka_as_ready_history_composition_formal_v1/cover.vcd": "7e93f6014da9774b3ff1abb24d5279929b804870b6d98345d670fe0df0e5af25",
+    "ka_as_ready_history_without_drain_contract_v1/kernel.json": "835a36c31ce8c40f38d5b13cac86f014bebdaf320ab8b2b4fe319fb575b4dd2f",
+    "ka_as_ready_history_without_drain_contract_v1/preparation.json": "5d0e70332def2379ec6b8f8702c867832c2e1674700c0d1d1e28fab41e9ef8f7",
+    "ka_as_ready_history_without_drain_contract_v1/contracts.json": "5d4d9c92d6b05c33156bc3b276ef96cbdcad030f268e76c72827f1302b8cd4f9",
+    "ka_as_ready_history_without_drain_contract_v1/harness.sv": "f9b728ae9759ea75f4cbd9afd85b713e5ec98ccda974e7f2e32e758ad066fb93",
+    "ka_as_ready_history_without_drain_contract_v1/control.json": "b3e79441338e0a663318c109e0026a8c8142c64fc6538f9560efc24237522866",
+    "ka_as_ready_history_without_drain_contract_v1/manifest.json": "3aab4ea9a404fa087a12dac0abf4f5afdf7dedd82144024c20ec6c3faf75990d",
+    "ka_as_ready_history_without_drain_contract_v1/prepare.ys": "770147f6aebcf68f48d8a5454d231aa856d8109f4cd475eaf844583681ed6852",
+    "ka_as_ready_history_without_drain_contract_v1/prepare.log": "76a4ca68c3730b4f7b7677ab777d22276958441ece33eb3bcc60ff85065bd2a0",
+    "ka_as_ready_history_without_drain_contract_v1/design.smt2": "a83fce82284b035388809dc3114905b205e3bb155c4daeefbba59d93d1551ab0",
+    "ka_as_ready_history_without_drain_contract_v1/bmc.log": "a2972d0ae71c6681c2337000d5819a263e955196412b18401a9f280fbe94675b",
+    "ka_as_ready_history_without_drain_contract_v1/bmc_failure.vcd": "d20ce46d6c70e17471c795c63b2e3e7e4b4a2c51334cb970766f9b264857e01e",
+    "ka_as_ready_history_without_quiet_persistence_v1/kernel.json": "835a36c31ce8c40f38d5b13cac86f014bebdaf320ab8b2b4fe319fb575b4dd2f",
+    "ka_as_ready_history_without_quiet_persistence_v1/preparation.json": "5d0e70332def2379ec6b8f8702c867832c2e1674700c0d1d1e28fab41e9ef8f7",
+    "ka_as_ready_history_without_quiet_persistence_v1/contracts.json": "5d4d9c92d6b05c33156bc3b276ef96cbdcad030f268e76c72827f1302b8cd4f9",
+    "ka_as_ready_history_without_quiet_persistence_v1/harness.sv": "207b21021102b1a48e3a39de466ba13618e893d44650e19ff612222fe95bbad9",
+    "ka_as_ready_history_without_quiet_persistence_v1/control.json": "4a053e282cb0814a8a915ca33fa1765150579df90748a683a997905aaca442f3",
+    "ka_as_ready_history_without_quiet_persistence_v1/manifest.json": "1d58bdbf063ece455f7d15de898b2d4dc751de6dbb2195b625fdd4336ac55955",
+    "ka_as_ready_history_without_quiet_persistence_v1/prepare.ys": "770147f6aebcf68f48d8a5454d231aa856d8109f4cd475eaf844583681ed6852",
+    "ka_as_ready_history_without_quiet_persistence_v1/prepare.log": "c0475056b54f9a39b84f1de6f0d0cd0f55c7c4c540d6a5565923972e0e2cc629",
+    "ka_as_ready_history_without_quiet_persistence_v1/design.smt2": "e9c4eec6025c04a5e696870218710c768c659a1f83e7389ef42bccf4fadabd67",
+    "ka_as_ready_history_without_quiet_persistence_v1/bmc.log": "c0a7d08be95625f48c28d3598f63227a24ae784eb5906a482358d2480ddd46e8",
+    "ka_as_ready_history_without_quiet_persistence_v1/bmc_failure.vcd": "c848428fc75d41e2bb579254cb58184614a828d050e1427f019d85c0ae293b22",
+    "ka_as_ready_history_without_response_retirement_v1/kernel.json": "835a36c31ce8c40f38d5b13cac86f014bebdaf320ab8b2b4fe319fb575b4dd2f",
+    "ka_as_ready_history_without_response_retirement_v1/preparation.json": "5d0e70332def2379ec6b8f8702c867832c2e1674700c0d1d1e28fab41e9ef8f7",
+    "ka_as_ready_history_without_response_retirement_v1/contracts.json": "5d4d9c92d6b05c33156bc3b276ef96cbdcad030f268e76c72827f1302b8cd4f9",
+    "ka_as_ready_history_without_response_retirement_v1/harness.sv": "d414d26db4246c9f75700e89804e51c1150259e7de76b8586a139af267a7b910",
+    "ka_as_ready_history_without_response_retirement_v1/control.json": "5274add89a7a108657ebe783e19a98c595f73f58deaca703ee6486c095b99515",
+    "ka_as_ready_history_without_response_retirement_v1/manifest.json": "9a0803b316abc863df15fe84cbef8427b9e24dc113da2cfb62a8b18fdb2d8ff3",
+    "ka_as_ready_history_without_response_retirement_v1/prepare.ys": "770147f6aebcf68f48d8a5454d231aa856d8109f4cd475eaf844583681ed6852",
+    "ka_as_ready_history_without_response_retirement_v1/prepare.log": "dc2f31e04eaee004427af5fa0630cca3d7216b9207017650b2c0a85138fc7158",
+    "ka_as_ready_history_without_response_retirement_v1/design.smt2": "74bad12f0d6cc8583c691efe91f9137532e49b40954cc5fc700c5ead7eab95e5",
+    "ka_as_ready_history_without_response_retirement_v1/bmc.log": "b1402dd7669a5e496ad20935248a80f92730a088c91224c3f526fe2ef8ff086b",
+    "ka_as_ready_history_without_response_retirement_v1/bmc_failure.vcd": "8fe82dc68822cb253ca89b4eaea8f68a2e2ab9d96671fb5b2b1980c6115881d1",
+    "ka_as_ready_history_without_ready_contract_v1/kernel.json": "835a36c31ce8c40f38d5b13cac86f014bebdaf320ab8b2b4fe319fb575b4dd2f",
+    "ka_as_ready_history_without_ready_contract_v1/preparation.json": "5d0e70332def2379ec6b8f8702c867832c2e1674700c0d1d1e28fab41e9ef8f7",
+    "ka_as_ready_history_without_ready_contract_v1/contracts.json": "5d4d9c92d6b05c33156bc3b276ef96cbdcad030f268e76c72827f1302b8cd4f9",
+    "ka_as_ready_history_without_ready_contract_v1/harness.sv": "a9dea9392802caa8c0c10c7b2de64f5eca0d600ed74bb77a1aed354e94df7740",
+    "ka_as_ready_history_without_ready_contract_v1/control.json": "068c6418e4696c2cfe44165d3ae6ce798661356029bf6b9a29997c2bf4206da1",
+    "ka_as_ready_history_without_ready_contract_v1/manifest.json": "33cd8bda123799e65f4e8ce62f9808887c9807e95063ae9d4cc2a4ca0deddd6b",
+    "ka_as_ready_history_without_ready_contract_v1/prepare.ys": "770147f6aebcf68f48d8a5454d231aa856d8109f4cd475eaf844583681ed6852",
+    "ka_as_ready_history_without_ready_contract_v1/prepare.log": "09c3ff3921e66b8ac7513a29c6ea2463f6573c9d62571d541787020b728adf36",
+    "ka_as_ready_history_without_ready_contract_v1/design.smt2": "b7dcd9851e8b20e55c28ecf31145f531d4953945e2ac6906966a3ca69d7e425e",
+    "ka_as_ready_history_without_ready_contract_v1/bmc.log": "7897a8f122ef896feb239a02bcfd671f895a1a75144ea61a1394c10c2988648b",
+    "ka_as_ready_history_without_ready_contract_v1/bmc_failure.vcd": "bb5191016b89eeb466323afd87c9199e1b0f92f5d391017ee1e235e67b6f160c",
+    "repo/scripts/research_checks/audit_as_ready_history_receipts_v1.py": "6c7b86b5edb7429090909cd14edd2ec3d8695f6f654ae9222714d2c7c8cb9744",
+    "repo/scripts/research_checks/prepare_selected_state_cone_v2.py": "81cf8ef9752535719fd4f9bd7d651066ce01ee5a6a5a82de476ef0405d190a7c",
+    "repo/scripts/research_checks/run_as_ready_history_composition_formal_v1.py": "ebad371b1cd752b1c75f13a7dbf1010f8ef531dcaf3b1d41734b768a7c224a41",
+    "repo/scripts/research_checks/run_as_ready_history_without_ready_contract_v1.py": "9c79514b546bbaac1af1846647e0ff00da9b4d90d38fbde4e6c0b0049c85340e",
+    "repo/scripts/research_checks/run_as_ready_history_without_response_retirement_v1.py": "ae0718a522b8cb7df65cb32775eb5245c4d1099101e09d40d0af16acb6c8eede",
+    "repo/scripts/research_checks/run_as_ready_history_without_drain_contract_v1.py": "fa575b4b5cb80ee44499d7c64315d843f161ab367f1e0875361b8044dc13a494",
+    "repo/scripts/research_checks/run_as_ready_history_without_quiet_persistence_v1.py": "76205af953b15565e413bf3652280f31ab40baf0fef7e4d46d3db77ea4ccdd52",
+    "repo/hardware/variants/ka_as_ready_history_composition_formal_v1/harness.sv": "2a264acc9dd15f324e8de475e1ff83f796cb5c01c4f8a91721c0211124305b3b",
+    "repo/hardware/variants/ka_as_ready_history_composition_formal_v1/selection.json": "e5c918d5e09a60f8e6602d708f9fe129d73bad854e01fdd8380ad86c5b3e3294",
+    "repo/results/ka_reader_quiet_persistence_formal_v1_review_20261101.json": "5c5592b6236309c645e57dcf82309d9aaa896633db373f5efc7697834143af58",
+    "repo/results/ka_as_configured_composition_formal_v1_review_20261031.json": "2ea72025ce7f3c77ba167673ea2bc78cfba01d3c549cb69c5aa07755459d90f5",
+    "repo/results/ka_as_authority_admin_composition_20261101.json": "b94b3a86bba474151d70bf683f434a7ca95d21cc55d9cc6343c3cfa52fcab46c",
+    "repo/results/ka_as_no_ap_owned_formal_v1_review_20261031.json": "373b2d0675c7afbb93396b0ed02173c6c7529a968fffad610c629905f17c44ef",
+    "repo/results/ka_ready_combinational_formal_v1_review_20261031.json": "1a5ad86ddcb23c0f5e98317f6543df10190cdbd61f080bbea92a5f2e699958db"
+  },
+  "reviewer_sha256": "6c7b86b5edb7429090909cd14edd2ec3d8695f6f654ae9222714d2c7c8cb9744",
+  "scope": "Conditional composition receipts, exact selected coordinator transitions and abstract dependency controls. This report does not grant full-system native ready or unconditional KA stall-unreachability acceptance.",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

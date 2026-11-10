@@ -1,0 +1,257 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date              : Fri Oct 23 14:49:29 2026
+| Host              : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command           : report_timing -from [all_registers] -to [get_ports -filter {DIRECTION == OUT}] -delay_type min -max_paths 5 -path_type full_clock_expanded -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_clock_shell_20261023/wide/output_min.rpt
+| Design            : clock_shell_wide
+| Device            : xcu280-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Temperature Grade : E
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.781ns  (arrival time - required time)
+  Source:                 endpoint/rsp_payload_reg[152]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            rsp_payload[152]
+                            (output port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Min at Fast Process Corner
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.039ns  (logic 0.039ns (100.000%)  route 0.000ns (0.000%))
+  Logic Levels:           0  
+  Output Delay:           -0.500ns
+  Clock Path Skew:        -1.242ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.049ns
+    Source Clock Delay      (SCD):    1.291ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Source):      1.249ns (routing 0.689ns, distribution 0.560ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.025     0.025    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.017     0.042 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        1.249     1.291    endpoint/core_clk
+    SLICE_X54Y84         FDRE                                         r  endpoint/rsp_payload_reg[152]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y84         FDRE (Prop_DFF_SLICEL_C_Q)
+                                                      0.039     1.330 r  endpoint/rsp_payload_reg[152]/Q
+                         net (fo=0)                   0.000     1.330    rsp_payload[152]
+                                                                      r  rsp_payload[152] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.030     0.030    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.019     0.049 r  b_clock/O
+                         clock pessimism              0.000     0.049    
+                         output delay                 0.500     0.549    
+  -------------------------------------------------------------------
+                         required time                         -0.549    
+                         arrival time                           1.330    
+  -------------------------------------------------------------------
+                         slack                                  0.781    
+
+Slack (MET) :             0.783ns  (arrival time - required time)
+  Source:                 endpoint/rsp_payload_reg[153]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            rsp_payload[153]
+                            (output port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Min at Fast Process Corner
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.041ns  (logic 0.041ns (100.000%)  route 0.000ns (0.000%))
+  Logic Levels:           0  
+  Output Delay:           -0.500ns
+  Clock Path Skew:        -1.242ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.049ns
+    Source Clock Delay      (SCD):    1.291ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Source):      1.249ns (routing 0.689ns, distribution 0.560ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.025     0.025    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.017     0.042 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        1.249     1.291    endpoint/core_clk
+    SLICE_X54Y84         FDRE                                         r  endpoint/rsp_payload_reg[153]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X54Y84         FDRE (Prop_DFF2_SLICEL_C_Q)
+                                                      0.041     1.332 r  endpoint/rsp_payload_reg[153]/Q
+                         net (fo=0)                   0.000     1.332    rsp_payload[153]
+                                                                      r  rsp_payload[153] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.030     0.030    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.019     0.049 r  b_clock/O
+                         clock pessimism              0.000     0.049    
+                         output delay                 0.500     0.549    
+  -------------------------------------------------------------------
+                         required time                         -0.549    
+                         arrival time                           1.332    
+  -------------------------------------------------------------------
+                         slack                                  0.783    
+
+Slack (MET) :             0.788ns  (arrival time - required time)
+  Source:                 endpoint/memory/memory_service/directory/allocated_reg[14]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            allocated[14]
+                            (output port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Min at Fast Process Corner
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.038ns  (logic 0.038ns (100.000%)  route 0.000ns (0.000%))
+  Logic Levels:           0  
+  Output Delay:           -0.500ns
+  Clock Path Skew:        -1.250ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.049ns
+    Source Clock Delay      (SCD):    1.299ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Source):      1.257ns (routing 0.689ns, distribution 0.568ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.025     0.025    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.017     0.042 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        1.257     1.299    endpoint/memory/memory_service/directory/core_clk
+    SLICE_X41Y60         FDRE                                         r  endpoint/memory/memory_service/directory/allocated_reg[14]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y60         FDRE (Prop_AFF_SLICEM_C_Q)
+                                                      0.038     1.337 r  endpoint/memory/memory_service/directory/allocated_reg[14]/Q
+                         net (fo=11, unset)           0.000     1.337    allocated[14]
+                                                                      r  allocated[14] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.030     0.030    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.019     0.049 r  b_clock/O
+                         clock pessimism              0.000     0.049    
+                         output delay                 0.500     0.549    
+  -------------------------------------------------------------------
+                         required time                         -0.549    
+                         arrival time                           1.337    
+  -------------------------------------------------------------------
+                         slack                                  0.788    
+
+Slack (MET) :             0.789ns  (arrival time - required time)
+  Source:                 endpoint/pages/fence_tag_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            fence_tag[0]
+                            (output port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Min at Fast Process Corner
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.039ns  (logic 0.039ns (100.000%)  route 0.000ns (0.000%))
+  Logic Levels:           0  
+  Output Delay:           -0.500ns
+  Clock Path Skew:        -1.250ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.049ns
+    Source Clock Delay      (SCD):    1.299ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Source):      1.257ns (routing 0.689ns, distribution 0.568ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.025     0.025    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.017     0.042 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        1.257     1.299    endpoint/pages/core_clk
+    SLICE_X51Y75         FDRE                                         r  endpoint/pages/fence_tag_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X51Y75         FDRE (Prop_CFF_SLICEL_C_Q)
+                                                      0.039     1.338 r  endpoint/pages/fence_tag_reg[0]/Q
+                         net (fo=5, unset)            0.000     1.338    fence_tag[0]
+                                                                      r  fence_tag[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.030     0.030    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.019     0.049 r  b_clock/O
+                         clock pessimism              0.000     0.049    
+                         output delay                 0.500     0.549    
+  -------------------------------------------------------------------
+                         required time                         -0.549    
+                         arrival time                           1.338    
+  -------------------------------------------------------------------
+                         slack                                  0.789    
+
+Slack (MET) :             0.789ns  (arrival time - required time)
+  Source:                 endpoint/memory/memory_service/directory/allocated_reg[10]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            allocated[10]
+                            (output port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Min at Fast Process Corner
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.039ns  (logic 0.039ns (100.000%)  route 0.000ns (0.000%))
+  Logic Levels:           0  
+  Output Delay:           -0.500ns
+  Clock Path Skew:        -1.250ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    0.049ns
+    Source Clock Delay      (SCD):    1.299ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Source):      1.257ns (routing 0.689ns, distribution 0.568ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.025     0.025    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.017     0.042 r  b_clock/O
+    X1Y1 (CLOCK_ROOT)    net (fo=6093, routed)        1.257     1.299    endpoint/memory/memory_service/directory/core_clk
+    SLICE_X41Y60         FDRE                                         r  endpoint/memory/memory_service/directory/allocated_reg[10]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X41Y60         FDRE (Prop_DFF_SLICEM_C_Q)
+                                                      0.039     1.338 r  endpoint/memory/memory_service/directory/allocated_reg[10]/Q
+                         net (fo=12, unset)           0.000     1.338    allocated[10]
+                                                                      r  allocated[10] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.030     0.030    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.019     0.049 r  b_clock/O
+                         clock pessimism              0.000     0.049    
+                         output delay                 0.500     0.549    
+  -------------------------------------------------------------------
+                         required time                         -0.549    
+                         arrival time                           1.338    
+  -------------------------------------------------------------------
+                         slack                                  0.789    
+
+
+
+

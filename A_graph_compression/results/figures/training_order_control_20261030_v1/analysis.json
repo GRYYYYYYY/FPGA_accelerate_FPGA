@@ -1,0 +1,207 @@
+{
+  "status": "six_permutation_CPU_supplement_plotted_without_pooling",
+  "rows": [
+    {
+      "block": 1,
+      "condition": "csr/direct",
+      "position": 1,
+      "application_seconds": 1111.4834557641298,
+      "worker_process_seconds": 1351.370667039
+    },
+    {
+      "block": 1,
+      "condition": "compact/expanded",
+      "position": 2,
+      "application_seconds": 1005.9988470058888,
+      "worker_process_seconds": 1248.268728595
+    },
+    {
+      "block": 1,
+      "condition": "compact/direct",
+      "position": 3,
+      "application_seconds": 1588.4403673615307,
+      "worker_process_seconds": 1829.885478061
+    },
+    {
+      "block": 2,
+      "condition": "csr/direct",
+      "position": 3,
+      "application_seconds": 1084.1277682427317,
+      "worker_process_seconds": 1323.334002332
+    },
+    {
+      "block": 2,
+      "condition": "compact/expanded",
+      "position": 2,
+      "application_seconds": 995.5073000565171,
+      "worker_process_seconds": 1238.251407001
+    },
+    {
+      "block": 2,
+      "condition": "compact/direct",
+      "position": 1,
+      "application_seconds": 1605.042915750295,
+      "worker_process_seconds": 1848.86262408
+    },
+    {
+      "block": 3,
+      "condition": "csr/direct",
+      "position": 2,
+      "application_seconds": 1098.324305454269,
+      "worker_process_seconds": 1341.358179175
+    },
+    {
+      "block": 3,
+      "condition": "compact/expanded",
+      "position": 1,
+      "application_seconds": 989.2619572691619,
+      "worker_process_seconds": 1231.352134677
+    },
+    {
+      "block": 3,
+      "condition": "compact/direct",
+      "position": 3,
+      "application_seconds": 1600.9242631196976,
+      "worker_process_seconds": 1850.9176043950001
+    },
+    {
+      "block": 4,
+      "condition": "csr/direct",
+      "position": 1,
+      "application_seconds": 1098.7401139214635,
+      "worker_process_seconds": 1340.3563434270002
+    },
+    {
+      "block": 4,
+      "condition": "compact/expanded",
+      "position": 3,
+      "application_seconds": 1017.7228975761682,
+      "worker_process_seconds": 1267.278446112
+    },
+    {
+      "block": 4,
+      "condition": "compact/direct",
+      "position": 2,
+      "application_seconds": 1573.1335215829313,
+      "worker_process_seconds": 1818.829595007
+    },
+    {
+      "block": 5,
+      "condition": "csr/direct",
+      "position": 3,
+      "application_seconds": 1110.943278009072,
+      "worker_process_seconds": 1353.3707751050001
+    },
+    {
+      "block": 5,
+      "condition": "compact/expanded",
+      "position": 1,
+      "application_seconds": 999.201088603586,
+      "worker_process_seconds": 1243.258785158
+    },
+    {
+      "block": 5,
+      "condition": "compact/direct",
+      "position": 2,
+      "application_seconds": 1594.7258759737015,
+      "worker_process_seconds": 1838.860424108
+    },
+    {
+      "block": 6,
+      "condition": "csr/direct",
+      "position": 2,
+      "application_seconds": 1212.0939339268953,
+      "worker_process_seconds": 1454.540403888
+    },
+    {
+      "block": 6,
+      "condition": "compact/expanded",
+      "position": 3,
+      "application_seconds": 1050.0695530101657,
+      "worker_process_seconds": 1295.31415303
+    },
+    {
+      "block": 6,
+      "condition": "compact/direct",
+      "position": 1,
+      "application_seconds": 1607.5680468920618,
+      "worker_process_seconds": 1851.921267478
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "numerator": "compact/direct",
+      "denominator": "csr/direct",
+      "metric": "application_wall_ms",
+      "ratios_by_repeat": [
+        1.429117418818888,
+        1.4804923946851,
+        1.4576061507238995,
+        1.431761252411484,
+        1.4354701158385144,
+        1.3262734858212883
+      ],
+      "median_paired_ratio": 1.4336156841249992
+    },
+    {
+      "numerator": "compact/expanded",
+      "denominator": "csr/direct",
+      "metric": "application_wall_ms",
+      "ratios_by_repeat": [
+        0.9050956555302735,
+        0.9182564354662182,
+        0.9007011429652385,
+        0.9262635310035778,
+        0.8994168364691492,
+        0.8663268774955344
+      ],
+      "median_paired_ratio": 0.902898399247756
+    }
+  ],
+  "orders": [
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      2,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      2
+    ],
+    [
+      0,
+      2,
+      1
+    ],
+    [
+      1,
+      2,
+      0
+    ],
+    [
+      2,
+      0,
+      1
+    ]
+  ],
+  "limitations": [
+    "Application timer covers fresh template training for compact representations, complete captured-TSV conversion and two routing batches, including validation and exports. CSR requires no template training.",
+    "Excludes Vivado acquisition, board transfer and physical readback; these remain separate requirements. Training is rebuilt from the original3761 captured sources and must reproduce the frozen440-template bank exactly before reading the evaluation graph.",
+    "Preflight integrity checks and post-route semantic audit are outside application timer but inside process wall.",
+    "Parent conversion peak and native child peak are distinct process measurements; do not sum them as simultaneous memory.",
+    "Parent drops graph/adapter objects before native launch. Shared host, page cache and buffered disk writes remain uncontrolled.",
+    "Supplemental order control selected after inspecting the original seven blocks; does not replace or pool their results.",
+    "All six permutations once: each condition occurs twice at each position; each pair precedes the other three times.",
+    "Six fresh processes per condition; each application includes fresh input preparation and TWO complete1062-net batches.",
+    "No cache flush or exclusive host; balanced order is not cold-cache control and does not remove unrelated/shared RTL workload effects.",
+    "Original native algorithm, cache4096, budgets and14-instance physical site model remain unchanged.",
+    "No real-device or full end-to-end FPGA claim; inherited RUSAGE_CHILDREN peaks are not native-only post-exec memory."
+  ],
+  "experiment_complete": false
+}

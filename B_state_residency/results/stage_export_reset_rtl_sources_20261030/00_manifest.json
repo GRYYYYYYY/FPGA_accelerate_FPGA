@@ -1,0 +1,52 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "controller.sv",
+        "tb.sv"
+      ],
+      "exit_code": 0,
+      "stage": "compile"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_stage_export_after_reset",
+        "-s",
+        "probe",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "stage": "elaborate"
+    },
+    {
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "probe",
+        "-tclbatch",
+        "run.tcl"
+      ],
+      "exit_code": 0,
+      "stage": "simulate"
+    }
+  ],
+  "exit_code": 0,
+  "memory_admission": {
+    "current_bytes": 181579489280,
+    "limit_bytes": 322122547200,
+    "stable_seconds": 60.0490745306015
+  },
+  "runner_pid": 3347200,
+  "runner_sha256": "9e455af8198dc6350634c2cf0d05cdc084cc90bcc18fa6e1a78abcb6aab29008",
+  "runner_start_ticks": "1649945372",
+  "sources": {
+    "controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+    "run.tcl": "6218ffa4f2392f3c61113605d4ab2cd023186e11f1da826b920e510a9a797efb",
+    "tb.sv": "4805147abc35f692388c8a1d1171666928de2a148ee030fb5735d58021b33fb1"
+  },
+  "stage": "complete",
+  "status": "observed"
+}

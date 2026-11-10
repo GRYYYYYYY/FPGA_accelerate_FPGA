@@ -1,0 +1,70 @@
+{
+  "status": "passed",
+  "scope": "Source order and dependency analysis only; not an integrated cost RTL test",
+  "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/reference/trace.cpp",
+  "source_sha256": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+  "locations": {
+    "int countSourceUses = searchCountUser(childRnode, c.netIdx);": [
+      1357
+    ],
+    "TLD(childRnode).prev = rnode;": [
+      1359
+    ],
+    "float newPartial = TLD(rnode).upstream;": [
+      1361
+    ],
+    "newPartial += getNodeCostSearch": [
+      1362
+    ],
+    "int childY = searchEndY(childRnode);": [
+      1366
+    ],
+    "push(st, childRnode, newPartial, newTotal, lookahead);": [
+      1409
+    ],
+    "TLD(child).lb = newTotal;": [
+      1343
+    ],
+    "TLD(child).upstream = newPartial;": [
+      1344
+    ],
+    "TLD(child).visited = st.sequence;": [
+      1345
+    ],
+    "if (lookahead)": [
+      1348
+    ],
+    "st.queue->offer(newTotal, child);": [
+      1351
+    ],
+    "st.queue->clear();": [
+      1447
+    ],
+    "int p = TLD(id).prev;": [
+      735,
+      1027
+    ],
+    "dyn[id].hist += overuse * historicalCongestionFactor;": [
+      3389,
+      3417,
+      3438
+    ]
+  },
+  "order": [
+    "access decision",
+    "EARLY: query frontier CLEAR5 succeeds",
+    "same-net count/occupancy snapshot under operation lock",
+    "prev write succeeds",
+    "read parent upstream and post-prev geometry; read persistent history and frozen price/net inputs",
+    "exact cost arithmetic",
+    "lb then upstream then visited writes succeed",
+    "lookahead: recursive expansion; otherwise Frontier OFFER succeeds"
+  ],
+  "missing_authorities": [
+    "design-level history storage/update independent of query label epoch",
+    "price table/version and design update fence",
+    "net center/fanout/HPWL and connection/share/weight parameter snapshots",
+    "integer geometry and cost packet construction after prev write",
+    "joined label writes, frontier and recursive stack"
+  ]
+}

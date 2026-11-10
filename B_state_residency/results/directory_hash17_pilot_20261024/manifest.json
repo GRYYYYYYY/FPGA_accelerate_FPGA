@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "cases": {
+    "small": {
+      "status": "passed",
+      "baseline_sha256": "f1c08741a5bdd2cbefbe6cba99c3cd14185ae4976112764551e9f94847003368",
+      "observer_sha256": "329e4db7cd00d0d9f113b967ba9ac519cb7a1464fd33bde7a7c6e6a26326bb15",
+      "commands": [
+        {
+          "stage": "compile",
+          "pid": 4070937,
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/bounded_sync_fifo.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/scratch_frame_store_bram.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/scratch_page_controller_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/queued_scratch_endpoint_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/memory_scratch_endpoint_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/scratch_page_codec_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/scratch_page_axi_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/backing_frame_directory_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/backing_page_service_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/record_backing_service_small.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/directory_hash17_pilot_20261024/small/sources/tb_small_endpoint_checkpoint_stream_v3_init_observer.sv"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "pid": 4070971,
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_small_endpoint_checkpoint_stream_v3_init_observer_small",
+            "-s",
+            "checkpoint_tb",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "pid": 4072999,
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "checkpoint_tb",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "VECTORS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/small_checkpoint_vectors_pilot_20261023/actual.txt",
+            "--testplusarg",
+            "PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/small_checkpoint_vectors_pilot_20261023/pages.hex"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "modified_tb_sha256": "581630755a0a7cedf7aa33d0216c2abd6cd366be980e0745f286fba321190a59",
+      "observer": "time_ps=1310760000 last_reset_sample_ps=30000 clear_samples=131072",
+      "end_ns": 19576360,
+      "baseline_end_ns": 20885360,
+      "counts": {
+        "small": 0,
+        "checks": 75194,
+        "transfers": 5183,
+        "fences": 19,
+        "tag_wraps": 4,
+        "errors": 0,
+        "gap_cycles": 152,
+        "host_stalls": 300776,
+        "aw": 3086,
+        "ar": 2269,
+        "b": 3086,
+        "r": 6570
+      },
+      "log_sha256": "2ea0b2725fa025bfde52ae971a3cc449568ba0c09b97d6975bfdf79be5cf35b5"
+    }
+  }
+}

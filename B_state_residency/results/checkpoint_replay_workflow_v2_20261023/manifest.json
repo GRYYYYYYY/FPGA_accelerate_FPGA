@@ -1,0 +1,37 @@
+{
+  "status": "failed",
+  "pid": 2801476,
+  "generator_pid": 2520936,
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/continue_checkpoint_replay_v2.py": "80c5ac891794bd82d47a3e96a1fd31fcd8ceee1b51dc072fe6bd08012c22df78",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/audit_checkpoint_vectors.py": "703a59ce44a4db7f903f962bc0714bc263aac111afa3bd998cce3ca7c3c5a901",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/run_checkpoint_stream.py": "d7681f8700fe30d60bd6b71d99bd53b9a7bf63ae239718a9b8b38c63e99a1121",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/audit_checkpoint_replay.py": "fa6db6a59d83ec51c33b0e01bc98d73013fdd0c4db4e2d16feaf1bfc76b1d337"
+  },
+  "commands": [
+    {
+      "stage": "vector_audit",
+      "argv": [
+        "python3",
+        "hardware/scripts/audit_checkpoint_vectors.py",
+        "results/checkpoint_vectors_full_20261023"
+      ],
+      "pid": 2888845,
+      "exit_code": 0
+    },
+    {
+      "stage": "rtl_replay",
+      "argv": [
+        "python3",
+        "hardware/scripts/run_checkpoint_stream.py",
+        "results/rtl_checkpoint_stream_full_20261023",
+        "--full"
+      ],
+      "pid": 2892789,
+      "exit_code": 1
+    }
+  ],
+  "goal_completed": false,
+  "queries_generated": 38,
+  "error": "AssertionError('rtl_replay')"
+}

@@ -1,0 +1,39 @@
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /tmp/B_state_residency_offer_20261025/webtalk_runtime_probe_v1/probe.tcl
+# if {[version -short] ne "2022.2"} {error "Expected Vivado 2022.2"}
+# puts "PROBE_VERSION [version -short]"
+PROBE_VERSION 2022.2
+# config_webtalk -info
+INFO: [Common 17-1369] WebTalk has been disabled by the current user.
+INFO: [Common 17-1370] WebTalk has been disabled for the current installation.
+INFO: [Common 17-1366] This combination of user/install settings means that WebTalk is currently disabled.
+# set probe_names {}
+# foreach probe_name [list_param] {
+#     if {[string match -nocase *webtalk* $probe_name]} {
+#         lappend probe_names $probe_name
+#         puts "PROBE_PARAM $probe_name=[get_param $probe_name]"
+#     }
+# }
+# foreach probe_name {webtalk.disableTransmit webtalk.disableBeta general.enableWebtalk} {
+#     if {[lsearch -exact $probe_names $probe_name] >= 0} {
+#         report_param $probe_name
+#         set probe_previous [get_param $probe_name]
+#         set_param $probe_name true
+#         puts "PROBE_SET $probe_name=[get_param $probe_name]"
+#         set_param $probe_name $probe_previous
+#         puts "PROBE_RESET $probe_name=[get_param $probe_name]"
+#     } else {
+#         puts "PROBE_NOT_LISTED $probe_name"
+#     }
+# }
+PROBE_NOT_LISTED webtalk.disableTransmit
+PROBE_NOT_LISTED webtalk.disableBeta
+PROBE_NOT_LISTED general.enableWebtalk
+# puts PROBE_WEBTALK_DONE
+PROBE_WEBTALK_DONE
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 30 00:08:54 2026...

@@ -1,0 +1,84 @@
+{
+  "created_utc": "2026-10-24T16:09:04.495625+00:00",
+  "status": "heap_search_integration_tests_passed_full_workloads_and_hls_in_progress",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/prepare_search_heap_router.py": "41e2933095db39ab3991828de82990fd6786d40f34e497cd2d95a9049b227a39",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/search_heap_router_pipeline.py": "b8c9719b03b08aa084dfda762615880f615d57659be3a0f4f703f6a1706bdc69",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_search_heap_router.py": "a51c581619ebd8aa2b4b915f35da29532f7c81dd916cb36759519b86bb55d57a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/src/native/search_heap_adapter.hpp": "f854225af624268445d9cef78db015e94ad8e5dbcf96f5abf980f19c9ada9274",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_heap_integration.py": "01e3c570100f938bd1bdd0be7d0d5aab2cbde1c270f1c9d99b475e6ad7d4f554",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_search_heap_hls.py": "ef72c9dcc9fecebc65470da53f5d2af981706b33136ccb7e07772ebfa4e859f0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/tests/test_search_heap_hls_audit.py": "3953b8a92eef244b231c8a9d24dec4cf5512a7257555cd83d6a6037e736615a2",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_router_20261024_v1/plan.json": "098df8641a7bc4750e7e66b547b24d16ac16848c58e3d908a16aefc09dc4fffb",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_router_20261024_v1/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_hls_20261024_v2/plan.json": "968dcaed48caab21693525fca8512ffa6d92c00c714fbe646813c8e9f0884fa7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_hls_20261024_v1/receipt.json": "f2b04aa3e57c5951b5f39fe14610309a5074672b7db25eb2ce00f7e349b1abaf"
+  },
+  "tests": {
+    "search_integration": {
+      "command": "python3 -m unittest discover -s tests -p test_search_heap_integration.py -v",
+      "exit_code": 0,
+      "reference_scenarios": 12,
+      "capacity_exhaustion_scenarios": 2,
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "observed_duration_seconds": 35.266
+    },
+    "hls_audit_parser": {
+      "command": "python3 -m unittest discover -s tests -p test_search_heap_hls_audit.py -v",
+      "exit_code": 0,
+      "tests": 2,
+      "invalid_evidence_cases": 10
+    },
+    "project_check": {
+      "command": "python3 scripts/run.py check",
+      "status": "passed",
+      "scope": "files/configuration/local source availability"
+    }
+  },
+  "processes": {
+    "hls_owner": {
+      "pid": 2468333,
+      "command": "python3 scripts/search_heap_hls_pipeline_v2.py ",
+      "stat": "2468333 (python3) S 8737 2468333 2468333 0 -1 4194560 7205 0 0 0 6 4 0 0 20 0 1 0 1601295615 58851328 3920 18446744073709551615 94099241009152 94099243845309 140724762047200 0 0 0 0 16781312 2 1 0 0 17 91 0 0 0 0 0 94099246217264 94099246501240 94099252318208 140724762051525 140724762051572 140724762051572 140724762058727 0\n"
+    },
+    "hls": {
+      "pid": 2468371,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/lnx64.o/vitis_hls -f /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_hls_20261024_v2/source/run_search_heap_v2.tcl ",
+      "stat": "2468371 (vitis_hls) S 2468350 2468333 2468333 0 -1 1077936384 51112084 313614 0 0 25134 9725 341 191 20 0 4 0 1601295644 1919234048 328646 18446744073709551615 4202496 4215341 140728648184240 0 0 0 0 0 1166040831 0 0 0 17 121 0 0 0 0 0 4225816 4227400 25976832 140728648189552 140728648189847 140728648189847 140728648200079 0\n"
+    },
+    "router_owner": {
+      "pid": 2550136,
+      "command": "python3 scripts/search_heap_router_pipeline.py ",
+      "stat": "2550136 (python3) S 8737 2550136 2550136 0 -1 1077936384 12008 0 0 0 178 23 0 0 20 0 5 0 1601316906 347369472 8666 18446744073709551615 94476996222976 94476999059133 140730118724528 0 0 0 0 16781312 2 0 0 0 17 86 0 0 0 0 0 94477001431088 94477001715064 94477023739904 140730118730693 140730118730740 140730118730740 140730118737895 0\n"
+    },
+    "csr_direct": {
+      "pid": 2551385,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_router_20261024_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/csr.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_csr_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_csr_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct ",
+      "stat": "2551385 (router) R 2550136 2550136 2550136 0 -1 4194560 1796620 0 0 0 14693 367 0 0 20 0 1 0 1601317155 1230540800 294356 18446744073709551615 94253790154752 94253790273989 140730060801312 0 0 0 0 0 0 0 0 0 17 122 0 0 0 0 0 94253790304296 94253790306344 94253816692736 140730060808341 140730060809054 140730060809054 140730060816209 0\n"
+    },
+    "csr_expanded": {
+      "pid": 2551388,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_router_20261024_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/csr.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_csr_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_csr_inputs_20261023_v1/sites.txt 4096 80 200000 8 expanded ",
+      "stat": "2551388 (router) R 2550136 2550136 2550136 0 -1 4194560 1005345 0 0 0 14835 225 0 0 20 0 1 0 1601317156 1331990528 316579 18446744073709551615 93937442902016 93937443021253 140732861568448 0 0 0 0 0 0 0 0 0 17 124 0 0 0 0 0 93937443051560 93937443053608 93937443360768 140732861575315 140732861576030 140732861576030 140732861583185 0\n"
+    },
+    "compact_expanded": {
+      "pid": 2551391,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_router_20261024_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/compact.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_compact_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt 4096 80 200000 8 expanded ",
+      "stat": "2551391 (router) R 2550136 2550136 2550136 0 -1 4194560 1004289 0 0 0 14830 229 0 0 20 0 1 0 1601317156 1326862336 315415 18446744073709551615 94787500777472 94787500896709 140734738617632 0 0 0 0 0 0 0 0 0 17 126 0 0 0 0 0 94787500927016 94787500929064 94787529879552 140734738624647 140734738625374 140734738625374 140734738632529 0\n"
+    },
+    "compact_direct": {
+      "pid": 2551393,
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/search_heap_router_20261024_v1/router /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/compact.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_compact_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct ",
+      "stat": "2551393 (router) R 2550136 2550136 2550136 0 -1 4194560 1265022 0 0 0 14795 265 0 0 20 0 1 0 1601317156 904413184 211070 18446744073709551615 94828232146944 94828232266181 140729895153536 0 0 0 0 0 0 0 0 0 17 125 0 0 0 0 0 94828232296488 94828232298536 94828241911808 140729895161993 140729895162718 140729895162718 140729895169873 0\n"
+    }
+  },
+  "limitations": [
+    "Full real workload equivalence and peak queue size not yet known.",
+    "HLS Csim passed; synthesis/cosim not complete.",
+    "CPU search uses 1048576-entry heap; HLS component top separately uses 1023 entries.",
+    "Full FPGA search, complete special-resource semantics, physical timing and board experiments remain incomplete."
+  ]
+}

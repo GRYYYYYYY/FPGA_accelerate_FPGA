@@ -1,0 +1,15 @@
+# 常驻配置快照与六端口恢复服务
+
+config_restore_controller 把2304位配置描述符保存在独立冷复位域。六个384位lane依次为connection、graph、design、tables、owner、cost；有效字段按现有端口低位顺序打包，其余高位为零。load在空闲、原事务退休且物理排空时接收可信快照，响应持有期间不启动恢复；load优先于同拍start。相同design的checkpoint严格增加，version不可回退；非法load返回status1并保留旧快照，不当作清状态命令。load_authoritative及外部normal_retired/backend_drained是可信调用方契约，不是完整持久化快照证明。
+
+描述符校验q/cost的64位design一致、五处nodes一致且非零、q/cost net数一致且非零、connection数及revision非零、所有padding零。地址对齐/窗口/容量等各后端专属条件仍由真实服务校验；本模块没有文件读取器或全图地址验证器。
+
+start匹配驻留design/checkpoint，version严格增加且price为其低4位。恢复仅把cost lane的version字段改成新version，其他字段取自已加载的不可变快照，后续load输入漂移不会改变在途配置。cfg_valid先发connection lane0，收到成功回复并退休后才同时暴露另外五个lane。每端口独立记录accepted/retired，READY不同拍不重复发送，响应也可不同拍到达。所有已暴露VALID在错误/取消/超时后均保持到握手，全部已接受请求的回复仍须退休；第一lane失败不启动后续五lane，后五lane有一失败也不能撤销另一个已暴露但未接受的VALID。
+
+完成需要应收回复均退休、物理排空及normal_retired；响应持有时身份、状态和sent/retired掩码稳定，不接受新start。成功更新current_version；后续可在同实例加载推进的可信checkpoint并再次恢复。失败锁定fault，不允许新load/start，部分后端可能已重新配置，无rollback/热重试；外部协调器必须继续隔离该上下文。
+
+rsp_status1是start身份/版本错误，2是任意配置服务回复非零，3是取消/超时。load_status独立标识快照安装失败。取消/超时不能使永不握手的外部VALID消失；若后端永远不接受或不回复，安全排空也会等待，不能将本模块timeout误解成撤销AXI或坏协议恢复保证。MAX_CYCLES必须至少1。
+
+rst只接自身cold reset，不能接目标服务target_reset。cold reset丢失快照，不耐掉电。真实组合在正常路由开始前装载checkpoint17描述符，故障后target reset仅复位六服务；恢复配置由硬件直接启动/完成并向协调器传故障，成功重提交后可信checkpoint18再次装载。TB仍负责初始可信快照安装、CPU authority和标签snapshot数据流；不是完整硬件snapshot读取器或统一生产top。
+
+研究范围仍缺完整warm/design/created/frontier/path恢复、真实价格更新/回绕、未知页、日志容量预约、统一所有入口围栏和板卡测量。真实组合五类故障仍发生于正常route阶段；配置自身的错误/取消/超时用独立注册mock服务验证，尚未在真实六服务上注入。组件OOC不能代表整个恢复系统资源/时序。

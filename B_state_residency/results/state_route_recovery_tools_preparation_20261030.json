@@ -1,0 +1,38 @@
+{
+  "status": "prepared_not_executed",
+  "tools": {
+    "scripts/prepare_state_route_recovery_v1.py": "fee2d0382fbed43656ed2d6a46e073e5c0fb221b95dd95de043e05efcb29e064",
+    "scripts/run_state_route_recovery_v1.py": "c78366d4361f2b28384c07f7a8399361ed0dc3e549e17d633785a61e5ce25b8c",
+    "scripts/audit_state_route_recovery_v1.py": "d058a98d73ff6973e272ea8ad16de1e25d7a7898471a8c9bbdb415899a6df5d2",
+    "hardware/scripts/resume_state_route_v1.tcl": "4d17c7c1acc0208be38260428d1ceab1f55592be3f5134eb542a805f6508ae8c",
+    "hardware/scripts/inspect_state_route_v1.tcl": "25c9b251c79b75da7d82baccd2d8e13054790d33f23491b02531c6493b783ea6"
+  },
+  "gate": "Requires independently audited and actually restored udev_route_probe_v2; it is still running. No full-system recovery root/job created.",
+  "prior_placed_observations": {
+    "resources": {
+      "LUT": 139612.0,
+      "FF": 88186.0,
+      "BRAM": 163.0,
+      "DSP": 23.0,
+      "URAM": 0.0,
+      "latches": 0.0
+    },
+    "timing": {
+      "WNS_ns": -4.01,
+      "TNS_ns": -102401.625,
+      "WHS_ns": 0.006,
+      "THS_ns": 0.0,
+      "failing_endpoints": {
+        "setup": 43466,
+        "hold": 0,
+        "pulse_width": 0
+      },
+      "endpoint_counts": {
+        "setup": 239779,
+        "hold": 239779,
+        "pulse_width": 90700
+      }
+    }
+  },
+  "scope": "Existing report helper checks only; not a new full physical result."
+}

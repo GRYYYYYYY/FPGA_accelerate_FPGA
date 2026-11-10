@@ -1,0 +1,143 @@
+{
+  "cases": {
+    "matching": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "control.sv",
+            "shadow.sv",
+            "cp_monitor.sv",
+            "payload_monitor.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "ac6a415a12acaae77c9f55f536ac410819d32762409b794aa28489a4a6a020e0"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "shadow_cp_transfer_monitor",
+            "shadow_payload_transfer_monitor",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "12bc416ebe2b0e4dacfa36840776d3fd36fbb42a0ec7684932c255284942a157"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "50c4a9d3156c788816ad0f58dca0f31cc10e967a3271cfd24c4d62e3355549be"
+        }
+      ],
+      "inputs": {
+        "control.sv": "3af63d436455dc6fa6b40ecb2a9f285100f398f156231e82e2ce1db46919e157",
+        "cp_monitor.sv": "1977476401544ce25779803d5917436662df025155c4305ce9ab8e67df6a548b",
+        "payload_monitor.sv": "b87acc066160cc0f829485a18f8a3212ea3271b8a87771acc84ca395b1f8cd0e",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "dc5bb0a5bcee5e7466aaf9beaf9b143bd8e24f45574c47aca0eeea7b09c9f637"
+      },
+      "status": "observed",
+      "transfer_log_sha256": {
+        "shadow_cp_export.log": "adc9bb4dbaa92753348edb1e3aa612850be094689214b84ecec28de458e2a093",
+        "shadow_ka_requests.log": "1dd15b503399a86f1fd1a6e6eac97dc5f53ddd0d9f6b3d3b7e908d1de8a28e77",
+        "shadow_pw_beats.log": "1ed02c5cd369412ad907ec5f5a1bd3ea184a448495ce170b5d83ac9b602ea679"
+      }
+    },
+    "ready_nba": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "READY_NBA",
+            "control.sv",
+            "shadow.sv",
+            "cp_monitor.sv",
+            "payload_monitor.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "e605a395295136979434b0132036ec57e630cd5a631d6f45c80e7f3f22412870"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "shadow_cp_transfer_monitor",
+            "shadow_payload_transfer_monitor",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "62475cfd88504f09eefa7273b4f10089d164afeb25bc40257512b8d3dbab7775"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "b6a635926f156cae5d5098a5d6fde1403d905856cbfd37c8e91584951fdfae86"
+        }
+      ],
+      "inputs": {
+        "control.sv": "3af63d436455dc6fa6b40ecb2a9f285100f398f156231e82e2ce1db46919e157",
+        "cp_monitor.sv": "1977476401544ce25779803d5917436662df025155c4305ce9ab8e67df6a548b",
+        "payload_monitor.sv": "b87acc066160cc0f829485a18f8a3212ea3271b8a87771acc84ca395b1f8cd0e",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "dc5bb0a5bcee5e7466aaf9beaf9b143bd8e24f45574c47aca0eeea7b09c9f637"
+      },
+      "status": "observed",
+      "transfer_log_sha256": {
+        "shadow_cp_export.log": "c4c22ccdbfd1f395d46b96519d3ed1b35dddce8f4ad178160990b4251106cb6a",
+        "shadow_ka_requests.log": "62447a982195946021ea59c2af27d080e3e781da4a2e46f7e8ba648d7c756999",
+        "shadow_pw_beats.log": "8a2b751f3e86255623881bc741a18550e806fbf8908def9384f0fa105232b398"
+      }
+    }
+  },
+  "checker_sha256": "dc5bb0a5bcee5e7466aaf9beaf9b143bd8e24f45574c47aca0eeea7b09c9f637",
+  "cp_monitor_sha256": "1977476401544ce25779803d5917436662df025155c4305ce9ab8e67df6a548b",
+  "full_system_functional_netlist_validated": false,
+  "memory_admission": {
+    "current_bytes": 203098894336,
+    "limit_bytes": 322122547200,
+    "stable_seconds": 60.06196208484471
+  },
+  "parent_control_freeze_sha256": "cd13f7824c76f8f9a6ef5c18276cd385b6bd67ae1976f819da34f9464af847d1",
+  "parent_control_report_sha256": "a5647e7986339412adff268ad5eb7b5bd0b44b0a36b5f57cc33d6e3977d7bfa2",
+  "payload_monitor_sha256": "b87acc066160cc0f829485a18f8a3212ea3271b8a87771acc84ca395b1f8cd0e",
+  "runner_pid": 52870,
+  "runner_sha256": "62276e6631fc6211fe097f4d0a5f33d534e0ef2d04715786287fb3a07d0733b2",
+  "runner_start_ticks": "1651607763",
+  "scope": "Two bounded fake-model logger controls only, no actual FPGA DUT.",
+  "stage": "complete",
+  "status": "observed"
+}

@@ -1,0 +1,262 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date              : Fri Oct 23 14:12:23 2026
+| Host              : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command           : report_timing -from [get_ports -filter {DIRECTION == IN && NAME != clk}] -to [all_registers] -delay_type min -max_paths 5 -path_type full_clock_expanded -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_clock_shell_20261023/baseline/input_min.rpt
+| Design            : clock_shell_baseline
+| Device            : xcu280-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -2.175ns  (arrival time - required time)
+  Source:                 cmd_value[5]
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/value_reg[5]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Slow Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.011ns  (logic 0.000ns (0.000%)  route 0.011ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            0.500ns
+  Clock Path Skew:        2.684ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.684ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Destination): 2.613ns (routing 1.486ns, distribution 1.127ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.036     0.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     0.060 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  0.500     0.560    
+                                                      0.000     0.560 r  cmd_value[5] (IN)
+                         net (fo=0)                   0.011     0.571    endpoint/cmd_value[5]
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.613     2.684    endpoint/core_clk
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[5]/C
+                         clock pessimism              0.000     2.684    
+    SLICE_X58Y104        FDRE (Hold_GFF2_SLICEL_C_D)
+                                                      0.062     2.746    endpoint/value_reg[5]
+  -------------------------------------------------------------------
+                         required time                         -2.746    
+                         arrival time                           0.571    
+  -------------------------------------------------------------------
+                         slack                                 -2.175    
+
+Slack (VIOLATED) :        -2.175ns  (arrival time - required time)
+  Source:                 cmd_value[7]
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/value_reg[7]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Slow Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.011ns  (logic 0.000ns (0.000%)  route 0.011ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            0.500ns
+  Clock Path Skew:        2.684ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.684ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Destination): 2.613ns (routing 1.486ns, distribution 1.127ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.036     0.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     0.060 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  0.500     0.560    
+                                                      0.000     0.560 r  cmd_value[7] (IN)
+                         net (fo=0)                   0.011     0.571    endpoint/cmd_value[7]
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[7]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.613     2.684    endpoint/core_clk
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[7]/C
+                         clock pessimism              0.000     2.684    
+    SLICE_X58Y104        FDRE (Hold_HFF2_SLICEL_C_D)
+                                                      0.062     2.746    endpoint/value_reg[7]
+  -------------------------------------------------------------------
+                         required time                         -2.746    
+                         arrival time                           0.571    
+  -------------------------------------------------------------------
+                         slack                                 -2.175    
+
+Slack (VIOLATED) :        -2.174ns  (arrival time - required time)
+  Source:                 cmd_value[1]
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/value_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Slow Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.012ns  (logic 0.000ns (0.000%)  route 0.012ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            0.500ns
+  Clock Path Skew:        2.684ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.684ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Destination): 2.613ns (routing 1.486ns, distribution 1.127ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.036     0.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     0.060 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  0.500     0.560    
+                                                      0.000     0.560 r  cmd_value[1] (IN)
+                         net (fo=0)                   0.012     0.572    endpoint/cmd_value[1]
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.613     2.684    endpoint/core_clk
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[1]/C
+                         clock pessimism              0.000     2.684    
+    SLICE_X58Y104        FDRE (Hold_EFF2_SLICEL_C_D)
+                                                      0.062     2.746    endpoint/value_reg[1]
+  -------------------------------------------------------------------
+                         required time                         -2.746    
+                         arrival time                           0.572    
+  -------------------------------------------------------------------
+                         slack                                 -2.174    
+
+Slack (VIOLATED) :        -2.174ns  (arrival time - required time)
+  Source:                 cmd_value[3]
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/value_reg[3]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Slow Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.012ns  (logic 0.000ns (0.000%)  route 0.012ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            0.500ns
+  Clock Path Skew:        2.684ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.684ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Destination): 2.613ns (routing 1.486ns, distribution 1.127ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.036     0.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     0.060 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  0.500     0.560    
+                                                      0.000     0.560 r  cmd_value[3] (IN)
+                         net (fo=0)                   0.012     0.572    endpoint/cmd_value[3]
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[3]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.613     2.684    endpoint/core_clk
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[3]/C
+                         clock pessimism              0.000     2.684    
+    SLICE_X58Y104        FDRE (Hold_FFF2_SLICEL_C_D)
+                                                      0.062     2.746    endpoint/value_reg[3]
+  -------------------------------------------------------------------
+                         required time                         -2.746    
+                         arrival time                           0.572    
+  -------------------------------------------------------------------
+                         slack                                 -2.174    
+
+Slack (VIOLATED) :        -2.171ns  (arrival time - required time)
+  Source:                 cmd_value[0]
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/value_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Slow Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.013ns  (logic 0.000ns (0.000%)  route 0.013ns (100.000%))
+  Logic Levels:           0  
+  Input Delay:            0.500ns
+  Clock Path Skew:        2.684ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    2.684ns
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    -0.000ns
+  Clock Net Delay (Destination): 2.613ns (routing 1.486ns, distribution 1.127ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.036     0.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     0.060 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  0.500     0.560    
+                                                      0.000     0.560 r  cmd_value[0] (IN)
+                         net (fo=0)                   0.013     0.573    endpoint/cmd_value[0]
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.613     2.684    endpoint/core_clk
+    SLICE_X58Y104        FDRE                                         r  endpoint/value_reg[0]/C
+                         clock pessimism              0.000     2.684    
+    SLICE_X58Y104        FDRE (Hold_EFF_SLICEL_C_D)
+                                                      0.060     2.744    endpoint/value_reg[0]
+  -------------------------------------------------------------------
+                         required time                         -2.744    
+                         arrival time                           0.573    
+  -------------------------------------------------------------------
+                         slack                                 -2.171    
+
+
+
+

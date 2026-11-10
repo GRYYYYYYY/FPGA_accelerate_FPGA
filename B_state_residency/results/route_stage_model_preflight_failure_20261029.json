@@ -1,0 +1,11 @@
+{
+  "status": "source_scanner_assertion_failed_before_model",
+  "original_analyzer": "scripts/analyze_route_stage_write_factoring.py",
+  "original_sha256": "168661ec461419513db508e1f03fc2526db2aa11110922c75cf2175af8f89513",
+  "observed_count": 11,
+  "expected_assignments": 9,
+  "cause": "Regex crossed two cp_stage reads and counted subsequent cp_dup_pos/cp_status nonblocking assignments. No RTL or simulation failure.",
+  "new_analyzer": "scripts/analyze_route_stage_write_factoring_v2.py",
+  "new_sha256": "d5c91af8c5d4378be2c8c8e28904ba4f7dad922ad4511d2966cad9e23780dab3",
+  "change": "Limit the match to a closed cp_stage subscript immediately followed by <=; all nine original writes remain required."
+}

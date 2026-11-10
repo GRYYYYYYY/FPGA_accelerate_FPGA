@@ -1,0 +1,48 @@
+{
+  "status": "resident_snapshot_elaboration_sigkill_observed_isolated_recovery_started_root_cause_unproven",
+  "observed_utc": "2026-10-25T01:37:41Z",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/resident_snapshot_rtl_20261024_v1/state.json": "0c1719947a2d5bc60b39f0c8a5fce586e066fa0d0c98cbdb0fbf04ff0e079807",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/resident_snapshot_rtl_20261024_v1/elaborate.log": "5c9609110ba7f889df976b7fad53d4b838ffc64d67c08ac14b74f8f41ab5cf32",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/resident_snapshot_rtl_20261024_v1/elaborate.receipt.json": "141ab7412d67ce540298716db7306f69b1ed84b0d9e5d2af285f01c4437bae04",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/resident_snapshot_rtl_20261024_v1/elaborate.submission.json": "6adb548632bf8b408d88ee7ef37590176f893a53da9ed3f0e5a91db6e634c969",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/resident_snapshot_rtl_recovery.py": "c367961e9075613614525ac24edf3a94ea03c3919b60319bda7ce560176a585f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_resident_snapshot_rtl_recovery.py": "d420081b149c21bc53975ac0fb7a73cbe2d789ea99d56c02639307c01c469588"
+  },
+  "signature": {
+    "phase": "xelab",
+    "exit_code": 137,
+    "log": "rdiArgs.sh: Killed"
+  },
+  "cgroup_observation": {
+    "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 1\n",
+    "memory.current": "102117228544\n",
+    "memory.max": "322122547200\n"
+  },
+  "attribution": "Current cgroup oom_kill=1 has no timestamp or process attribution; insufficient to prove this failed xelab was killed by OOM.",
+  "research": {
+    "queries": [
+      "xelab Killed memory 2022.2 elaboration",
+      "2022.2 UG900 xelab memory mt off optimization"
+    ],
+    "official_reference": "https://docs.amd.com/r/2022.2-English/ug900-vivado-logic-simulation/xelab",
+    "direct_matching_answer_record_identified": false,
+    "local_help_verified": [
+      "--mt off",
+      "--O0",
+      "--stats"
+    ],
+    "version": "2022.2"
+  },
+  "recovery": {
+    "bundle": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/resident_snapshot_rtl_recovery_20261025_v1",
+    "owner_pid": 848340,
+    "scope": "Original full-depth synthesis RTL and 30-transaction inputs/postcheck; changed only simulator threading/optimization and added resource measurement",
+    "verified_workaround": false
+  },
+  "limits": [
+    "No root-cause confirmation",
+    "No smaller pointer domains, fewer transactions or alternate simulator substituted",
+    "No successful elaboration/RTL conclusion yet"
+  ]
+}

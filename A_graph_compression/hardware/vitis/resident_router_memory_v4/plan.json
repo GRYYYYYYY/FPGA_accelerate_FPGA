@@ -1,0 +1,1961 @@
+{
+  "status": "eight_component_static_shared_buffer_capacity_checked_device_unverified",
+  "kernels": {
+    "search_kernel_top": [
+      {
+        "id": 0,
+        "name": "image",
+        "pointer": true,
+        "element_bytes": 4,
+        "const": true,
+        "depth": 33554432,
+        "bundle": "graph_mem",
+        "port": "M_AXI_GRAPH_MEM",
+        "payload_bytes": 134217728
+      },
+      {
+        "id": 1,
+        "name": "config",
+        "pointer": true,
+        "element_bytes": 4,
+        "const": true,
+        "depth": 32,
+        "bundle": "input_mem",
+        "port": "M_AXI_INPUT_MEM",
+        "payload_bytes": 128
+      },
+      {
+        "id": 2,
+        "name": "image_words",
+        "pointer": false,
+        "element_bytes": 4,
+        "port": "S_AXI_CONTROL"
+      },
+      {
+        "id": 3,
+        "name": "roots",
+        "pointer": true,
+        "element_bytes": 4,
+        "const": true,
+        "depth": 1048576,
+        "bundle": "input_mem",
+        "port": "M_AXI_INPUT_MEM",
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 4,
+        "name": "packet",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": true,
+        "depth": 4194304,
+        "bundle": "input_mem",
+        "port": "M_AXI_INPUT_MEM",
+        "payload_bytes": 33554432
+      },
+      {
+        "id": 5,
+        "name": "packet_words",
+        "pointer": false,
+        "element_bytes": 4,
+        "port": "S_AXI_CONTROL"
+      },
+      {
+        "id": 6,
+        "name": "heap",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 393216,
+        "bundle": "heap_mem",
+        "port": "M_AXI_HEAP_MEM",
+        "payload_bytes": 3145728
+      },
+      {
+        "id": 7,
+        "name": "slots",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 1048576,
+        "bundle": "index_mem",
+        "port": "M_AXI_INDEX_MEM",
+        "payload_bytes": 8388608
+      },
+      {
+        "id": 8,
+        "name": "records",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 5242880,
+        "bundle": "record_mem",
+        "port": "M_AXI_RECORD_MEM",
+        "payload_bytes": 41943040
+      },
+      {
+        "id": 9,
+        "name": "keys",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 34078720,
+        "bundle": "key_mem",
+        "port": "M_AXI_KEY_MEM",
+        "payload_bytes": 272629760
+      },
+      {
+        "id": 10,
+        "name": "unknown_nodes",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 16384,
+        "bundle": "output_mem",
+        "port": "M_AXI_OUTPUT_MEM",
+        "payload_bytes": 131072
+      },
+      {
+        "id": 11,
+        "name": "unknown_pips",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 1100754,
+        "bundle": "output_mem",
+        "port": "M_AXI_OUTPUT_MEM",
+        "payload_bytes": 8806032
+      },
+      {
+        "id": 12,
+        "name": "path",
+        "pointer": true,
+        "element_bytes": 4,
+        "const": false,
+        "depth": 4194304,
+        "bundle": "output_mem",
+        "port": "M_AXI_OUTPUT_MEM",
+        "payload_bytes": 16777216
+      },
+      {
+        "id": 13,
+        "name": "meta",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 2,
+        "bundle": "output_mem",
+        "port": "M_AXI_OUTPUT_MEM",
+        "payload_bytes": 16
+      },
+      {
+        "id": 14,
+        "name": "result",
+        "pointer": true,
+        "element_bytes": 8,
+        "const": false,
+        "depth": 81,
+        "bundle": "output_mem",
+        "port": "M_AXI_OUTPUT_MEM",
+        "payload_bytes": 648
+      }
+    ],
+    "search_node_occupancy_top": [
+      {
+        "id": 0,
+        "name": "config",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      },
+      {
+        "id": 1,
+        "name": "meta",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "meta_mem",
+        "depth": 4,
+        "payload_bytes": 32
+      },
+      {
+        "id": 2,
+        "name": "counts",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 4,
+        "bundle": "count_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 3,
+        "name": "history",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "history_mem",
+        "depth": 1048576,
+        "payload_bytes": 8388608
+      },
+      {
+        "id": 4,
+        "name": "keys",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "table_mem",
+        "depth": 2097152,
+        "payload_bytes": 16777216
+      },
+      {
+        "id": 5,
+        "name": "flags",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 4,
+        "bundle": "table_mem",
+        "depth": 2097152,
+        "payload_bytes": 8388608
+      },
+      {
+        "id": 6,
+        "name": "old_nodes",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "input_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 7,
+        "name": "new_nodes",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "input_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 8,
+        "name": "output",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 2097152,
+        "payload_bytes": 16777216
+      },
+      {
+        "id": 9,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 4,
+        "payload_bytes": 32
+      }
+    ],
+    "search_site_occupancy_top": [
+      {
+        "id": 0,
+        "name": "config",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      },
+      {
+        "id": 1,
+        "name": "meta",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "meta_mem",
+        "depth": 6,
+        "payload_bytes": 48
+      },
+      {
+        "id": 2,
+        "name": "owners",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "owner_mem",
+        "depth": 524288,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 3,
+        "name": "history",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "history_mem",
+        "depth": 262144,
+        "payload_bytes": 2097152
+      },
+      {
+        "id": 4,
+        "name": "request",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 196608,
+        "payload_bytes": 1572864
+      },
+      {
+        "id": 5,
+        "name": "flags",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 4,
+        "bundle": "scratch_mem",
+        "depth": 65536,
+        "payload_bytes": 262144
+      },
+      {
+        "id": 6,
+        "name": "summaries",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "scratch_mem",
+        "depth": 131072,
+        "payload_bytes": 1048576
+      },
+      {
+        "id": 7,
+        "name": "out_owners",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 262144,
+        "payload_bytes": 2097152
+      },
+      {
+        "id": 8,
+        "name": "out_history",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 131072,
+        "payload_bytes": 1048576
+      },
+      {
+        "id": 9,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 6,
+        "payload_bytes": 48
+      }
+    ],
+    "search_resident_snapshot_top": [
+      {
+        "id": 0,
+        "name": "control",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "control_mem",
+        "depth": 16,
+        "payload_bytes": 128
+      },
+      {
+        "id": 1,
+        "name": "stat",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "static_mem",
+        "depth": 4194304,
+        "payload_bytes": 33554432
+      },
+      {
+        "id": 2,
+        "name": "initial",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "control_mem",
+        "depth": 65,
+        "payload_bytes": 520
+      },
+      {
+        "id": 3,
+        "name": "node_meta",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "meta_mem",
+        "depth": 4,
+        "payload_bytes": 32
+      },
+      {
+        "id": 4,
+        "name": "node_counts",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "count_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 5,
+        "name": "node_history",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "node_history_mem",
+        "depth": 1048576,
+        "payload_bytes": 8388608
+      },
+      {
+        "id": 6,
+        "name": "node_keys",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "node_table_mem",
+        "depth": 2097152,
+        "payload_bytes": 16777216
+      },
+      {
+        "id": 7,
+        "name": "node_flags",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "node_table_mem",
+        "depth": 2097152,
+        "payload_bytes": 8388608
+      },
+      {
+        "id": 8,
+        "name": "site_meta",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "meta_mem",
+        "depth": 6,
+        "payload_bytes": 48
+      },
+      {
+        "id": 9,
+        "name": "site_owners",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "site_table_mem",
+        "depth": 524288,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 10,
+        "name": "site_history",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "site_history_mem",
+        "depth": 262144,
+        "payload_bytes": 2097152
+      },
+      {
+        "id": 11,
+        "name": "packet",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "packet_mem",
+        "depth": 4194304,
+        "payload_bytes": 33554432
+      },
+      {
+        "id": 12,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "result_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      }
+    ],
+    "search_route_tree_top": [
+      {
+        "id": 0,
+        "name": "config",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      },
+      {
+        "id": 1,
+        "name": "meta",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "meta_mem",
+        "depth": 5,
+        "payload_bytes": 40
+      },
+      {
+        "id": 2,
+        "name": "bits",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "tree_mem",
+        "depth": 16384,
+        "payload_bytes": 131072
+      },
+      {
+        "id": 3,
+        "name": "demands",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "state_mem",
+        "depth": 65,
+        "payload_bytes": 520
+      },
+      {
+        "id": 4,
+        "name": "search_result",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 81,
+        "payload_bytes": 648
+      },
+      {
+        "id": 5,
+        "name": "path",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "path_mem",
+        "depth": 4194304,
+        "payload_bytes": 16777216
+      },
+      {
+        "id": 6,
+        "name": "sinks",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "input_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 7,
+        "name": "roots",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 4,
+        "bundle": "output_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 8,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 6,
+        "payload_bytes": 48
+      }
+    ],
+    "search_site_request_top": [
+      {
+        "id": 0,
+        "name": "state",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 65,
+        "payload_bytes": 520
+      },
+      {
+        "id": 1,
+        "name": "request",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 196608,
+        "payload_bytes": 1572864
+      },
+      {
+        "id": 2,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 2,
+        "payload_bytes": 16
+      }
+    ],
+    "search_retained_nodes_top": [
+      {
+        "id": 0,
+        "name": "config",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      },
+      {
+        "id": 1,
+        "name": "meta",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "meta_mem",
+        "depth": 6,
+        "payload_bytes": 48
+      },
+      {
+        "id": 2,
+        "name": "rows",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "store_mem",
+        "depth": 4194304,
+        "payload_bytes": 33554432
+      },
+      {
+        "id": 3,
+        "name": "nodes",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "input_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 4,
+        "name": "output",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 4,
+        "bundle": "output_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 5,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 5,
+        "payload_bytes": 40
+      }
+    ],
+    "search_round_control_top": [
+      {
+        "id": 0,
+        "name": "control",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 8,
+        "bundle": "input_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      },
+      {
+        "id": 1,
+        "name": "counts",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "count_mem",
+        "depth": 1048576,
+        "payload_bytes": 4194304
+      },
+      {
+        "id": 2,
+        "name": "complete",
+        "pointer": true,
+        "const": true,
+        "element_bytes": 4,
+        "bundle": "input_mem",
+        "depth": 65536,
+        "payload_bytes": 262144
+      },
+      {
+        "id": 3,
+        "name": "result",
+        "pointer": true,
+        "const": false,
+        "element_bytes": 8,
+        "bundle": "output_mem",
+        "depth": 8,
+        "payload_bytes": 64
+      }
+    ]
+  },
+  "aliases": [
+    [
+      "search_kernel_top.roots",
+      "search_route_tree_top.roots",
+      "search_node_occupancy_top.new_nodes"
+    ],
+    [
+      "search_kernel_top.packet",
+      "search_resident_snapshot_top.packet"
+    ],
+    [
+      "search_kernel_top.result",
+      "search_route_tree_top.search_result"
+    ],
+    [
+      "search_kernel_top.path",
+      "search_route_tree_top.path"
+    ],
+    [
+      "search_route_tree_top.demands",
+      "search_resident_snapshot_top.initial"
+    ],
+    [
+      "search_node_occupancy_top.meta",
+      "search_resident_snapshot_top.node_meta"
+    ],
+    [
+      "search_node_occupancy_top.counts",
+      "search_resident_snapshot_top.node_counts"
+    ],
+    [
+      "search_node_occupancy_top.history",
+      "search_resident_snapshot_top.node_history"
+    ],
+    [
+      "search_node_occupancy_top.keys",
+      "search_resident_snapshot_top.node_keys"
+    ],
+    [
+      "search_node_occupancy_top.flags",
+      "search_resident_snapshot_top.node_flags"
+    ],
+    [
+      "search_site_occupancy_top.meta",
+      "search_resident_snapshot_top.site_meta"
+    ],
+    [
+      "search_site_occupancy_top.owners",
+      "search_resident_snapshot_top.site_owners"
+    ],
+    [
+      "search_site_occupancy_top.history",
+      "search_resident_snapshot_top.site_history"
+    ],
+    [
+      "search_route_tree_top.demands",
+      "search_site_request_top.state"
+    ],
+    [
+      "search_site_occupancy_top.request",
+      "search_site_request_top.request"
+    ],
+    [
+      "search_route_tree_top.roots",
+      "search_retained_nodes_top.nodes"
+    ],
+    [
+      "search_node_occupancy_top.old_nodes",
+      "search_retained_nodes_top.output"
+    ],
+    [
+      "search_node_occupancy_top.counts",
+      "search_round_control_top.counts"
+    ]
+  ],
+  "allocations": {
+    "search_kernel_top.image": {
+      "endpoints": [
+        "search_kernel_top.image"
+      ],
+      "payload_bytes": 134217728,
+      "requested_bytes": 134217728,
+      "hbm_group": "HBM[0]"
+    },
+    "search_kernel_top.config": {
+      "endpoints": [
+        "search_kernel_top.config"
+      ],
+      "payload_bytes": 128,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[1]"
+    },
+    "search_kernel_top.roots": {
+      "endpoints": [
+        "search_kernel_top.roots",
+        "search_node_occupancy_top.new_nodes",
+        "search_route_tree_top.roots",
+        "search_retained_nodes_top.nodes"
+      ],
+      "payload_bytes": 4194304,
+      "requested_bytes": 4194304,
+      "hbm_group": "HBM[1]"
+    },
+    "search_kernel_top.packet": {
+      "endpoints": [
+        "search_kernel_top.packet",
+        "search_resident_snapshot_top.packet"
+      ],
+      "payload_bytes": 33554432,
+      "requested_bytes": 33554432,
+      "hbm_group": "HBM[1]"
+    },
+    "search_kernel_top.heap": {
+      "endpoints": [
+        "search_kernel_top.heap"
+      ],
+      "payload_bytes": 3145728,
+      "requested_bytes": 3145728,
+      "hbm_group": "HBM[2]"
+    },
+    "search_kernel_top.slots": {
+      "endpoints": [
+        "search_kernel_top.slots"
+      ],
+      "payload_bytes": 8388608,
+      "requested_bytes": 8388608,
+      "hbm_group": "HBM[3]"
+    },
+    "search_kernel_top.records": {
+      "endpoints": [
+        "search_kernel_top.records"
+      ],
+      "payload_bytes": 41943040,
+      "requested_bytes": 41943040,
+      "hbm_group": "HBM[4]"
+    },
+    "search_kernel_top.keys": {
+      "endpoints": [
+        "search_kernel_top.keys"
+      ],
+      "payload_bytes": 272629760,
+      "requested_bytes": 272629760,
+      "hbm_group": "HBM[5:6]"
+    },
+    "search_kernel_top.unknown_nodes": {
+      "endpoints": [
+        "search_kernel_top.unknown_nodes"
+      ],
+      "payload_bytes": 131072,
+      "requested_bytes": 131072,
+      "hbm_group": "HBM[7]"
+    },
+    "search_kernel_top.unknown_pips": {
+      "endpoints": [
+        "search_kernel_top.unknown_pips"
+      ],
+      "payload_bytes": 8806032,
+      "requested_bytes": 8806400,
+      "hbm_group": "HBM[7]"
+    },
+    "search_kernel_top.path": {
+      "endpoints": [
+        "search_kernel_top.path",
+        "search_route_tree_top.path"
+      ],
+      "payload_bytes": 16777216,
+      "requested_bytes": 16777216,
+      "hbm_group": "HBM[7]"
+    },
+    "search_kernel_top.meta": {
+      "endpoints": [
+        "search_kernel_top.meta"
+      ],
+      "payload_bytes": 16,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[7]"
+    },
+    "search_kernel_top.result": {
+      "endpoints": [
+        "search_kernel_top.result",
+        "search_route_tree_top.search_result"
+      ],
+      "payload_bytes": 648,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[7]"
+    },
+    "search_node_occupancy_top.config": {
+      "endpoints": [
+        "search_node_occupancy_top.config"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[1]"
+    },
+    "search_node_occupancy_top.meta": {
+      "endpoints": [
+        "search_node_occupancy_top.meta",
+        "search_resident_snapshot_top.node_meta"
+      ],
+      "payload_bytes": 32,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[8]"
+    },
+    "search_node_occupancy_top.counts": {
+      "endpoints": [
+        "search_node_occupancy_top.counts",
+        "search_resident_snapshot_top.node_counts",
+        "search_round_control_top.counts"
+      ],
+      "payload_bytes": 4194304,
+      "requested_bytes": 4194304,
+      "hbm_group": "HBM[9]"
+    },
+    "search_node_occupancy_top.history": {
+      "endpoints": [
+        "search_node_occupancy_top.history",
+        "search_resident_snapshot_top.node_history"
+      ],
+      "payload_bytes": 8388608,
+      "requested_bytes": 8388608,
+      "hbm_group": "HBM[10]"
+    },
+    "search_node_occupancy_top.keys": {
+      "endpoints": [
+        "search_node_occupancy_top.keys",
+        "search_resident_snapshot_top.node_keys"
+      ],
+      "payload_bytes": 16777216,
+      "requested_bytes": 16777216,
+      "hbm_group": "HBM[11]"
+    },
+    "search_node_occupancy_top.flags": {
+      "endpoints": [
+        "search_node_occupancy_top.flags",
+        "search_resident_snapshot_top.node_flags"
+      ],
+      "payload_bytes": 8388608,
+      "requested_bytes": 8388608,
+      "hbm_group": "HBM[11]"
+    },
+    "search_node_occupancy_top.old_nodes": {
+      "endpoints": [
+        "search_node_occupancy_top.old_nodes",
+        "search_retained_nodes_top.output"
+      ],
+      "payload_bytes": 4194304,
+      "requested_bytes": 4194304,
+      "hbm_group": "HBM[1]"
+    },
+    "search_node_occupancy_top.output": {
+      "endpoints": [
+        "search_node_occupancy_top.output"
+      ],
+      "payload_bytes": 16777216,
+      "requested_bytes": 16777216,
+      "hbm_group": "HBM[12]"
+    },
+    "search_node_occupancy_top.result": {
+      "endpoints": [
+        "search_node_occupancy_top.result"
+      ],
+      "payload_bytes": 32,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[12]"
+    },
+    "search_site_occupancy_top.config": {
+      "endpoints": [
+        "search_site_occupancy_top.config"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[13]"
+    },
+    "search_site_occupancy_top.meta": {
+      "endpoints": [
+        "search_site_occupancy_top.meta",
+        "search_resident_snapshot_top.site_meta"
+      ],
+      "payload_bytes": 48,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[8]"
+    },
+    "search_site_occupancy_top.owners": {
+      "endpoints": [
+        "search_site_occupancy_top.owners",
+        "search_resident_snapshot_top.site_owners"
+      ],
+      "payload_bytes": 4194304,
+      "requested_bytes": 4194304,
+      "hbm_group": "HBM[14]"
+    },
+    "search_site_occupancy_top.history": {
+      "endpoints": [
+        "search_site_occupancy_top.history",
+        "search_resident_snapshot_top.site_history"
+      ],
+      "payload_bytes": 2097152,
+      "requested_bytes": 2097152,
+      "hbm_group": "HBM[15]"
+    },
+    "search_site_occupancy_top.request": {
+      "endpoints": [
+        "search_site_occupancy_top.request",
+        "search_site_request_top.request"
+      ],
+      "payload_bytes": 1572864,
+      "requested_bytes": 1572864,
+      "hbm_group": "HBM[13]"
+    },
+    "search_site_occupancy_top.flags": {
+      "endpoints": [
+        "search_site_occupancy_top.flags"
+      ],
+      "payload_bytes": 262144,
+      "requested_bytes": 262144,
+      "hbm_group": "HBM[16]"
+    },
+    "search_site_occupancy_top.summaries": {
+      "endpoints": [
+        "search_site_occupancy_top.summaries"
+      ],
+      "payload_bytes": 1048576,
+      "requested_bytes": 1048576,
+      "hbm_group": "HBM[16]"
+    },
+    "search_site_occupancy_top.out_owners": {
+      "endpoints": [
+        "search_site_occupancy_top.out_owners"
+      ],
+      "payload_bytes": 2097152,
+      "requested_bytes": 2097152,
+      "hbm_group": "HBM[17]"
+    },
+    "search_site_occupancy_top.out_history": {
+      "endpoints": [
+        "search_site_occupancy_top.out_history"
+      ],
+      "payload_bytes": 1048576,
+      "requested_bytes": 1048576,
+      "hbm_group": "HBM[17]"
+    },
+    "search_site_occupancy_top.result": {
+      "endpoints": [
+        "search_site_occupancy_top.result"
+      ],
+      "payload_bytes": 48,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[17]"
+    },
+    "search_resident_snapshot_top.control": {
+      "endpoints": [
+        "search_resident_snapshot_top.control"
+      ],
+      "payload_bytes": 128,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[18]"
+    },
+    "search_resident_snapshot_top.stat": {
+      "endpoints": [
+        "search_resident_snapshot_top.stat"
+      ],
+      "payload_bytes": 33554432,
+      "requested_bytes": 33554432,
+      "hbm_group": "HBM[19]"
+    },
+    "search_route_tree_top.demands": {
+      "endpoints": [
+        "search_resident_snapshot_top.initial",
+        "search_route_tree_top.demands",
+        "search_site_request_top.state"
+      ],
+      "payload_bytes": 520,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[18]"
+    },
+    "search_resident_snapshot_top.result": {
+      "endpoints": [
+        "search_resident_snapshot_top.result"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[20]"
+    },
+    "search_route_tree_top.config": {
+      "endpoints": [
+        "search_route_tree_top.config"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[7]"
+    },
+    "search_route_tree_top.meta": {
+      "endpoints": [
+        "search_route_tree_top.meta"
+      ],
+      "payload_bytes": 40,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[21]"
+    },
+    "search_route_tree_top.bits": {
+      "endpoints": [
+        "search_route_tree_top.bits"
+      ],
+      "payload_bytes": 131072,
+      "requested_bytes": 131072,
+      "hbm_group": "HBM[22]"
+    },
+    "search_route_tree_top.sinks": {
+      "endpoints": [
+        "search_route_tree_top.sinks"
+      ],
+      "payload_bytes": 4194304,
+      "requested_bytes": 4194304,
+      "hbm_group": "HBM[7]"
+    },
+    "search_route_tree_top.result": {
+      "endpoints": [
+        "search_route_tree_top.result"
+      ],
+      "payload_bytes": 48,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[1]"
+    },
+    "search_site_request_top.result": {
+      "endpoints": [
+        "search_site_request_top.result"
+      ],
+      "payload_bytes": 16,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[13]"
+    },
+    "search_retained_nodes_top.config": {
+      "endpoints": [
+        "search_retained_nodes_top.config"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[1]"
+    },
+    "search_retained_nodes_top.meta": {
+      "endpoints": [
+        "search_retained_nodes_top.meta"
+      ],
+      "payload_bytes": 48,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[23]"
+    },
+    "search_retained_nodes_top.rows": {
+      "endpoints": [
+        "search_retained_nodes_top.rows"
+      ],
+      "payload_bytes": 33554432,
+      "requested_bytes": 33554432,
+      "hbm_group": "HBM[24]"
+    },
+    "search_retained_nodes_top.result": {
+      "endpoints": [
+        "search_retained_nodes_top.result"
+      ],
+      "payload_bytes": 40,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[1]"
+    },
+    "search_round_control_top.control": {
+      "endpoints": [
+        "search_round_control_top.control"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[25]"
+    },
+    "search_round_control_top.complete": {
+      "endpoints": [
+        "search_round_control_top.complete"
+      ],
+      "payload_bytes": 262144,
+      "requested_bytes": 262144,
+      "hbm_group": "HBM[25]"
+    },
+    "search_round_control_top.result": {
+      "endpoints": [
+        "search_round_control_top.result"
+      ],
+      "payload_bytes": 64,
+      "requested_bytes": 4096,
+      "hbm_group": "HBM[26]"
+    }
+  },
+  "hbm_groups": [
+    {
+      "memory": "HBM[0]",
+      "buffers": [
+        "search_kernel_top.image"
+      ],
+      "requested_bytes": 134217728,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[1]",
+      "buffers": [
+        "search_kernel_top.config",
+        "search_kernel_top.roots",
+        "search_kernel_top.packet",
+        "search_node_occupancy_top.config",
+        "search_node_occupancy_top.old_nodes",
+        "search_route_tree_top.result",
+        "search_retained_nodes_top.config",
+        "search_retained_nodes_top.result"
+      ],
+      "requested_bytes": 41963520,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[2]",
+      "buffers": [
+        "search_kernel_top.heap"
+      ],
+      "requested_bytes": 3145728,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[3]",
+      "buffers": [
+        "search_kernel_top.slots"
+      ],
+      "requested_bytes": 8388608,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[4]",
+      "buffers": [
+        "search_kernel_top.records"
+      ],
+      "requested_bytes": 41943040,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[5:6]",
+      "buffers": [
+        "search_kernel_top.keys"
+      ],
+      "requested_bytes": 272629760,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 536870912
+    },
+    {
+      "memory": "HBM[7]",
+      "buffers": [
+        "search_kernel_top.unknown_nodes",
+        "search_kernel_top.unknown_pips",
+        "search_kernel_top.path",
+        "search_kernel_top.meta",
+        "search_kernel_top.result",
+        "search_route_tree_top.config",
+        "search_route_tree_top.sinks"
+      ],
+      "requested_bytes": 29921280,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[8]",
+      "buffers": [
+        "search_node_occupancy_top.meta",
+        "search_site_occupancy_top.meta"
+      ],
+      "requested_bytes": 8192,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[9]",
+      "buffers": [
+        "search_node_occupancy_top.counts"
+      ],
+      "requested_bytes": 4194304,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[10]",
+      "buffers": [
+        "search_node_occupancy_top.history"
+      ],
+      "requested_bytes": 8388608,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[11]",
+      "buffers": [
+        "search_node_occupancy_top.keys",
+        "search_node_occupancy_top.flags"
+      ],
+      "requested_bytes": 25165824,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[12]",
+      "buffers": [
+        "search_node_occupancy_top.output",
+        "search_node_occupancy_top.result"
+      ],
+      "requested_bytes": 16781312,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[13]",
+      "buffers": [
+        "search_site_occupancy_top.config",
+        "search_site_occupancy_top.request",
+        "search_site_request_top.result"
+      ],
+      "requested_bytes": 1581056,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[14]",
+      "buffers": [
+        "search_site_occupancy_top.owners"
+      ],
+      "requested_bytes": 4194304,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[15]",
+      "buffers": [
+        "search_site_occupancy_top.history"
+      ],
+      "requested_bytes": 2097152,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[16]",
+      "buffers": [
+        "search_site_occupancy_top.flags",
+        "search_site_occupancy_top.summaries"
+      ],
+      "requested_bytes": 1310720,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[17]",
+      "buffers": [
+        "search_site_occupancy_top.out_owners",
+        "search_site_occupancy_top.out_history",
+        "search_site_occupancy_top.result"
+      ],
+      "requested_bytes": 3149824,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[18]",
+      "buffers": [
+        "search_resident_snapshot_top.control",
+        "search_route_tree_top.demands"
+      ],
+      "requested_bytes": 8192,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[19]",
+      "buffers": [
+        "search_resident_snapshot_top.stat"
+      ],
+      "requested_bytes": 33554432,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[20]",
+      "buffers": [
+        "search_resident_snapshot_top.result"
+      ],
+      "requested_bytes": 4096,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[21]",
+      "buffers": [
+        "search_route_tree_top.meta"
+      ],
+      "requested_bytes": 4096,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[22]",
+      "buffers": [
+        "search_route_tree_top.bits"
+      ],
+      "requested_bytes": 131072,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[23]",
+      "buffers": [
+        "search_retained_nodes_top.meta"
+      ],
+      "requested_bytes": 4096,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[24]",
+      "buffers": [
+        "search_retained_nodes_top.rows"
+      ],
+      "requested_bytes": 33554432,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[25]",
+      "buffers": [
+        "search_round_control_top.control",
+        "search_round_control_top.complete"
+      ],
+      "requested_bytes": 266240,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    },
+    {
+      "memory": "HBM[26]",
+      "buffers": [
+        "search_round_control_top.result"
+      ],
+      "requested_bytes": 4096,
+      "reserve_bytes": 16777216,
+      "capacity_bytes": 268435456
+    }
+  ],
+  "hbm_channels_used": 27,
+  "layouts": {
+    "hbm_shared_buffers": {
+      "search_kernel_top.image": "HBM[0]",
+      "search_kernel_top.config": "HBM[1]",
+      "search_kernel_top.roots": "HBM[1]",
+      "search_node_occupancy_top.new_nodes": "HBM[1]",
+      "search_route_tree_top.roots": "HBM[1]",
+      "search_retained_nodes_top.nodes": "HBM[1]",
+      "search_kernel_top.packet": "HBM[1]",
+      "search_resident_snapshot_top.packet": "HBM[1]",
+      "search_node_occupancy_top.config": "HBM[1]",
+      "search_node_occupancy_top.old_nodes": "HBM[1]",
+      "search_retained_nodes_top.output": "HBM[1]",
+      "search_route_tree_top.result": "HBM[1]",
+      "search_retained_nodes_top.config": "HBM[1]",
+      "search_retained_nodes_top.result": "HBM[1]",
+      "search_kernel_top.heap": "HBM[2]",
+      "search_kernel_top.slots": "HBM[3]",
+      "search_kernel_top.records": "HBM[4]",
+      "search_kernel_top.keys": "HBM[5:6]",
+      "search_kernel_top.unknown_nodes": "HBM[7]",
+      "search_kernel_top.unknown_pips": "HBM[7]",
+      "search_kernel_top.path": "HBM[7]",
+      "search_route_tree_top.path": "HBM[7]",
+      "search_kernel_top.meta": "HBM[7]",
+      "search_kernel_top.result": "HBM[7]",
+      "search_route_tree_top.search_result": "HBM[7]",
+      "search_route_tree_top.config": "HBM[7]",
+      "search_route_tree_top.sinks": "HBM[7]",
+      "search_node_occupancy_top.meta": "HBM[8]",
+      "search_resident_snapshot_top.node_meta": "HBM[8]",
+      "search_site_occupancy_top.meta": "HBM[8]",
+      "search_resident_snapshot_top.site_meta": "HBM[8]",
+      "search_node_occupancy_top.counts": "HBM[9]",
+      "search_resident_snapshot_top.node_counts": "HBM[9]",
+      "search_round_control_top.counts": "HBM[9]",
+      "search_node_occupancy_top.history": "HBM[10]",
+      "search_resident_snapshot_top.node_history": "HBM[10]",
+      "search_node_occupancy_top.keys": "HBM[11]",
+      "search_resident_snapshot_top.node_keys": "HBM[11]",
+      "search_node_occupancy_top.flags": "HBM[11]",
+      "search_resident_snapshot_top.node_flags": "HBM[11]",
+      "search_node_occupancy_top.output": "HBM[12]",
+      "search_node_occupancy_top.result": "HBM[12]",
+      "search_site_occupancy_top.config": "HBM[13]",
+      "search_site_occupancy_top.request": "HBM[13]",
+      "search_site_request_top.request": "HBM[13]",
+      "search_site_request_top.result": "HBM[13]",
+      "search_site_occupancy_top.owners": "HBM[14]",
+      "search_resident_snapshot_top.site_owners": "HBM[14]",
+      "search_site_occupancy_top.history": "HBM[15]",
+      "search_resident_snapshot_top.site_history": "HBM[15]",
+      "search_site_occupancy_top.flags": "HBM[16]",
+      "search_site_occupancy_top.summaries": "HBM[16]",
+      "search_site_occupancy_top.out_owners": "HBM[17]",
+      "search_site_occupancy_top.out_history": "HBM[17]",
+      "search_site_occupancy_top.result": "HBM[17]",
+      "search_resident_snapshot_top.control": "HBM[18]",
+      "search_resident_snapshot_top.initial": "HBM[18]",
+      "search_route_tree_top.demands": "HBM[18]",
+      "search_site_request_top.state": "HBM[18]",
+      "search_resident_snapshot_top.stat": "HBM[19]",
+      "search_resident_snapshot_top.result": "HBM[20]",
+      "search_route_tree_top.meta": "HBM[21]",
+      "search_route_tree_top.bits": "HBM[22]",
+      "search_retained_nodes_top.meta": "HBM[23]",
+      "search_retained_nodes_top.rows": "HBM[24]",
+      "search_round_control_top.control": "HBM[25]",
+      "search_round_control_top.complete": "HBM[25]",
+      "search_round_control_top.result": "HBM[26]"
+    },
+    "ddr_shared_buffers": {
+      "search_kernel_top.image": "DDR[0]",
+      "search_kernel_top.config": "DDR[0]",
+      "search_kernel_top.roots": "DDR[0]",
+      "search_kernel_top.packet": "DDR[0]",
+      "search_kernel_top.heap": "DDR[0]",
+      "search_kernel_top.slots": "DDR[0]",
+      "search_kernel_top.records": "DDR[0]",
+      "search_kernel_top.keys": "DDR[0]",
+      "search_kernel_top.unknown_nodes": "DDR[0]",
+      "search_kernel_top.unknown_pips": "DDR[0]",
+      "search_kernel_top.path": "DDR[0]",
+      "search_kernel_top.meta": "DDR[0]",
+      "search_kernel_top.result": "DDR[0]",
+      "search_node_occupancy_top.config": "DDR[0]",
+      "search_node_occupancy_top.meta": "DDR[0]",
+      "search_node_occupancy_top.counts": "DDR[0]",
+      "search_node_occupancy_top.history": "DDR[0]",
+      "search_node_occupancy_top.keys": "DDR[0]",
+      "search_node_occupancy_top.flags": "DDR[0]",
+      "search_node_occupancy_top.old_nodes": "DDR[0]",
+      "search_node_occupancy_top.new_nodes": "DDR[0]",
+      "search_node_occupancy_top.output": "DDR[0]",
+      "search_node_occupancy_top.result": "DDR[0]",
+      "search_site_occupancy_top.config": "DDR[0]",
+      "search_site_occupancy_top.meta": "DDR[0]",
+      "search_site_occupancy_top.owners": "DDR[0]",
+      "search_site_occupancy_top.history": "DDR[0]",
+      "search_site_occupancy_top.request": "DDR[0]",
+      "search_site_occupancy_top.flags": "DDR[0]",
+      "search_site_occupancy_top.summaries": "DDR[0]",
+      "search_site_occupancy_top.out_owners": "DDR[0]",
+      "search_site_occupancy_top.out_history": "DDR[0]",
+      "search_site_occupancy_top.result": "DDR[0]",
+      "search_resident_snapshot_top.control": "DDR[0]",
+      "search_resident_snapshot_top.stat": "DDR[0]",
+      "search_resident_snapshot_top.initial": "DDR[0]",
+      "search_resident_snapshot_top.node_meta": "DDR[0]",
+      "search_resident_snapshot_top.node_counts": "DDR[0]",
+      "search_resident_snapshot_top.node_history": "DDR[0]",
+      "search_resident_snapshot_top.node_keys": "DDR[0]",
+      "search_resident_snapshot_top.node_flags": "DDR[0]",
+      "search_resident_snapshot_top.site_meta": "DDR[0]",
+      "search_resident_snapshot_top.site_owners": "DDR[0]",
+      "search_resident_snapshot_top.site_history": "DDR[0]",
+      "search_resident_snapshot_top.packet": "DDR[0]",
+      "search_resident_snapshot_top.result": "DDR[0]",
+      "search_route_tree_top.config": "DDR[0]",
+      "search_route_tree_top.meta": "DDR[0]",
+      "search_route_tree_top.bits": "DDR[0]",
+      "search_route_tree_top.demands": "DDR[0]",
+      "search_route_tree_top.search_result": "DDR[0]",
+      "search_route_tree_top.path": "DDR[0]",
+      "search_route_tree_top.sinks": "DDR[0]",
+      "search_route_tree_top.roots": "DDR[0]",
+      "search_route_tree_top.result": "DDR[0]",
+      "search_site_request_top.state": "DDR[0]",
+      "search_site_request_top.request": "DDR[0]",
+      "search_site_request_top.result": "DDR[0]",
+      "search_retained_nodes_top.config": "DDR[0]",
+      "search_retained_nodes_top.meta": "DDR[0]",
+      "search_retained_nodes_top.rows": "DDR[0]",
+      "search_retained_nodes_top.nodes": "DDR[0]",
+      "search_retained_nodes_top.output": "DDR[0]",
+      "search_retained_nodes_top.result": "DDR[0]",
+      "search_round_control_top.control": "DDR[0]",
+      "search_round_control_top.counts": "DDR[0]",
+      "search_round_control_top.complete": "DDR[0]",
+      "search_round_control_top.result": "DDR[0]"
+    }
+  },
+  "pointer_arguments": 68,
+  "unique_buffers": 49,
+  "total_payload_bytes": 666527568,
+  "total_requested_bytes": 666611712,
+  "search_xml_abi": {
+    "csr": [
+      {
+        "id": 0,
+        "name": "image",
+        "port": "M_AXI_GRAPH_MEM",
+        "control_offset": 16,
+        "host_size": 8,
+        "axi_width": 32
+      },
+      {
+        "id": 1,
+        "name": "config",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 28,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 2,
+        "name": "image_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 40,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 3,
+        "name": "roots",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 48,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 4,
+        "name": "packet",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 60,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 5,
+        "name": "packet_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 72,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 6,
+        "name": "heap",
+        "port": "M_AXI_HEAP_MEM",
+        "control_offset": 80,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 7,
+        "name": "slots",
+        "port": "M_AXI_INDEX_MEM",
+        "control_offset": 92,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 8,
+        "name": "records",
+        "port": "M_AXI_RECORD_MEM",
+        "control_offset": 104,
+        "host_size": 8,
+        "axi_width": 128
+      },
+      {
+        "id": 9,
+        "name": "keys",
+        "port": "M_AXI_KEY_MEM",
+        "control_offset": 116,
+        "host_size": 8,
+        "axi_width": 64
+      },
+      {
+        "id": 10,
+        "name": "unknown_nodes",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 128,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 11,
+        "name": "unknown_pips",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 140,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 12,
+        "name": "path",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 152,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 13,
+        "name": "meta",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 164,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 14,
+        "name": "result",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 176,
+        "host_size": 8,
+        "axi_width": 256
+      }
+    ],
+    "compact": [
+      {
+        "id": 0,
+        "name": "image",
+        "port": "M_AXI_GRAPH_MEM",
+        "control_offset": 16,
+        "host_size": 8,
+        "axi_width": 32
+      },
+      {
+        "id": 1,
+        "name": "config",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 28,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 2,
+        "name": "image_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 40,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 3,
+        "name": "roots",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 48,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 4,
+        "name": "packet",
+        "port": "M_AXI_INPUT_MEM",
+        "control_offset": 60,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 5,
+        "name": "packet_words",
+        "port": "S_AXI_CONTROL",
+        "control_offset": 72,
+        "host_size": 4,
+        "axi_width": 32
+      },
+      {
+        "id": 6,
+        "name": "heap",
+        "port": "M_AXI_HEAP_MEM",
+        "control_offset": 80,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 7,
+        "name": "slots",
+        "port": "M_AXI_INDEX_MEM",
+        "control_offset": 92,
+        "host_size": 8,
+        "axi_width": 512
+      },
+      {
+        "id": 8,
+        "name": "records",
+        "port": "M_AXI_RECORD_MEM",
+        "control_offset": 104,
+        "host_size": 8,
+        "axi_width": 128
+      },
+      {
+        "id": 9,
+        "name": "keys",
+        "port": "M_AXI_KEY_MEM",
+        "control_offset": 116,
+        "host_size": 8,
+        "axi_width": 64
+      },
+      {
+        "id": 10,
+        "name": "unknown_nodes",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 128,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 11,
+        "name": "unknown_pips",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 140,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 12,
+        "name": "path",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 152,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 13,
+        "name": "meta",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 164,
+        "host_size": 8,
+        "axi_width": 256
+      },
+      {
+        "id": 14,
+        "name": "result",
+        "port": "M_AXI_OUTPUT_MEM",
+        "control_offset": 176,
+        "host_size": 8,
+        "axi_width": 256
+      }
+    ]
+  },
+  "component_synth_read_widths": {
+    "search_node_occupancy_top": {
+      "m_axi_input_mem_RDATA": 64,
+      "m_axi_meta_mem_RDATA": 256,
+      "m_axi_count_mem_RDATA": 32,
+      "m_axi_history_mem_RDATA": 64,
+      "m_axi_table_mem_RDATA": 512,
+      "m_axi_output_mem_RDATA": 256
+    },
+    "search_site_occupancy_top": {
+      "m_axi_input_mem_RDATA": 64,
+      "m_axi_meta_mem_RDATA": 512,
+      "m_axi_owner_mem_RDATA": 256,
+      "m_axi_history_mem_RDATA": 128,
+      "m_axi_scratch_mem_RDATA": 128,
+      "m_axi_output_mem_RDATA": 512
+    },
+    "search_resident_snapshot_top": {
+      "m_axi_control_mem_RDATA": 64,
+      "m_axi_static_mem_RDATA": 64,
+      "m_axi_meta_mem_RDATA": 64,
+      "m_axi_count_mem_RDATA": 32,
+      "m_axi_node_history_mem_RDATA": 64,
+      "m_axi_node_table_mem_RDATA": 64,
+      "m_axi_site_table_mem_RDATA": 256,
+      "m_axi_site_history_mem_RDATA": 128,
+      "m_axi_packet_mem_RDATA": 512,
+      "m_axi_result_mem_RDATA": 512
+    },
+    "search_route_tree_top": {
+      "m_axi_input_mem_RDATA": 64,
+      "m_axi_meta_mem_RDATA": 512,
+      "m_axi_tree_mem_RDATA": 64,
+      "m_axi_state_mem_RDATA": 64,
+      "m_axi_path_mem_RDATA": 256,
+      "m_axi_output_mem_RDATA": 512
+    },
+    "search_site_request_top": {
+      "m_axi_input_mem_RDATA": 64,
+      "m_axi_output_mem_RDATA": 128
+    },
+    "search_retained_nodes_top": {
+      "m_axi_input_mem_RDATA": 64,
+      "m_axi_meta_mem_RDATA": 512,
+      "m_axi_store_mem_RDATA": 64,
+      "m_axi_output_mem_RDATA": 512
+    },
+    "search_round_control_top": {
+      "m_axi_input_mem_RDATA": 64,
+      "m_axi_count_mem_RDATA": 32,
+      "m_axi_output_mem_RDATA": 512
+    }
+  },
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_kernel_offsets_v3/search_kernel_top.cpp": "aad9e8ccdad1e5dfe4fc0386d472e096d34d35e4215ed794cad55ec8016fa040",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/resident_router_memory_plan.py": "f8db70ffbd7d25fba1d2722639642ddcbaeaa12957e1ec0dccf923610f6edf48",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/search_kernel_memory_plan.py": "96ce20c151ef15d3cc250b0e314ba1dafccc8d0bc3c23df590fd04ccde05943a",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/search_kernel_hls_20261024_v3/csr/kernel.xml": "bd289eeb17b558642be2c1fe683af121780ef6a15ded36dca8781b69a9de5ae4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/search_kernel_hls_20261024_v3/compact/kernel.xml": "bd289eeb17b558642be2c1fe683af121780ef6a15ded36dca8781b69a9de5ae4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_node_occupancy_top.cpp": "ba8ae2f4eb66de322faa1417f3a33b9f9807afd5424968afebdac8f6b512331f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/node_occupancy_synthesis_review_20261024_v1.json": "ae651dfc362d5ce28ff512b37d5c5a095fd0bb44497363dbffc0de9b84e3bc9f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_site_occupancy_top.cpp": "3f0cc8033ddc3ef2f4440b63b83f07a5390235ff546194dd4ba41389d18b22bd",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/site_occupancy_synthesis_review_20261024_v1.json": "a796e82da0cb583feebc54194dde95be1152b10e09bf3b3f67d0532233992a30",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_resident_snapshot_top.cpp": "fd679b4cc929915d9c92e2e1b9f6bfbd646f89794ae16381d71d9486fcf7473e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/resident_snapshot_synthesis_review_20261024_v1.json": "e4cc3a44bd8d665641d34d759fb4c453ab8b6bddd1f15a0fc76fa4de0799b55d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_route_tree_top.cpp": "2fbe64a6c7fe682e0325cc43b6f829278c66fe83d3d1148ca6f698a3aeaf2e28",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/route_tree_synthesis_review_20261024_v1.json": "73ae18b126b38f5c13e3159c13afac24fb57153dc03e3ff114cf16d6d44241a6",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_retained_nodes_top.cpp": "32cf801257e2a817b188c2d96ea902269515212a6b18ac0d9e53fe006e07315e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/retained_nodes_synthesis_review_20261024_v1.json": "0bff12393d169df022a1ef4678c925afa5cbe52ffe52898c13162bb3e6ddfca0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_round_control_top.cpp": "c61d798d2e55c8c59522d39d8403ec9bdb42ab69a7d3aac93b8113a1457e226d",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/round_control_synthesis_review_20261024_v1.json": "2b8bbfdb27c9b42fb71812da6d4c79666d63afee6a31b277b6b036b04c9fafb8",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_site_request_top.cpp": "a87fb1fd62a5cf369870e1e974ac22e637be0536ce6d7c9b8ae4c5bd42c048e0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/site_request_synthesis_review_20261024_v1.json": "852e68a6535bb61e0ae94267dede14c7a27b6d921b1fa9d7aa8dfa433dd6af90",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/resident_router_memory_plan_v4.py": "6fec4e25d02972238f670429721daee4211c25a369ca2d381fb22887d218203e"
+  },
+  "scheduling": "Single owner; no concurrent accesses to shared mutable buffers. All producer events must complete before consumers.",
+  "evidence": {
+    "platform_linked": false,
+    "device_allocated": false,
+    "hardware_executed": false
+  },
+  "limitations": [
+    "Nominal U280 capacities inherited from the frozen search-only plan; installed platform topology remains unverified.",
+    "New component exported XO argument/control ABI and memory group intersections are not yet checked.",
+    "XRT BO sharing must use compatible kernel.group_id values and exported memory topology; numerical group IDs alone do not establish compatibility.",
+    "All buffers are counted at full declared depths; retained routes, host state and future hardware outer scheduler are outside this inventory.",
+    "Connectivity is prospective until v++ link and simultaneous BO allocation pass; no bandwidth, timing, power or throughput claim.",
+    "Round control reads the existing node-count BO; completion flags and commands still require outer control. Retained edges and an autonomous hardware scheduler remain outside this inventory."
+  ],
+  "configs": {
+    "hbm_shared_buffers.cfg": "9044ed267b1b7629611e1e884f03aba5c2f5bbed9dd69e6133af0708cb960220",
+    "ddr_shared_buffers.cfg": "78c21f361d905a1faade359c46daebd002958dc4bec04769ba6a39afd2077e63"
+  }
+}

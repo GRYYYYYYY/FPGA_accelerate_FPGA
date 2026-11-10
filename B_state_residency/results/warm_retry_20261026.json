@@ -1,0 +1,502 @@
+{
+  "status": "passed",
+  "audits": {
+    "warm_retry_unit_v1": {
+      "status": "passed",
+      "manifest_sha256": "1268f3beb091d8ec743379ea347669db96e5ef357a6edf78ae595ddc04e5de52",
+      "auditor_sha256": "c0a1503d1a7b5c393aa8415c4fcb54b72d3dabb6c5fa470ff91c962613403b3c",
+      "checks": 35,
+      "scope": "Behavioral RTL unit of warm receipt join; fence/restore/completion inputs are modeled. No real DDR/coordinator retry proof."
+    },
+    "warm_retry_system_v2": {
+      "status": "passed",
+      "manifest_sha256": "f93f4228e4fe1d8f58fad1b32af5257118497e7773f67109e8984ce3a11d03f9",
+      "auditor_sha256": "32aeab8a108f8d8d9b8d508fa555bd2a6cc9b0b13c5b983d55d47fa1e76319d7",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "full_5": {
+          "cancel_status": 2,
+          "rejected_attempt": 5,
+          "retry_attempt": 6,
+          "retry_cookie": "c0020001",
+          "retry_corrected": 0,
+          "retained_journal": 6,
+          "fault_node": 263946,
+          "journal_entries": 6,
+          "repaired_nodes": [
+            1231788,
+            726313,
+            1279818,
+            1431195,
+            554512,
+            263946
+          ],
+          "wanted_refs": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "old_g1_shared_refs": [
+            0,
+            0
+          ],
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1622,
+              "read_beats": 1622,
+              "write_beats": 38,
+              "write_replies": 38,
+              "read_burst_lengths": {
+                "1": 1622
+              },
+              "write_burst_lengths": {
+                "1": 38
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1098,
+              "read_beats": 3171,
+              "write_beats": 2250,
+              "write_replies": 778,
+              "read_burst_lengths": {
+                "3": 1016,
+                "1": 41,
+                "2": 41
+              },
+              "write_burst_lengths": {
+                "3": 722,
+                "1": 28,
+                "2": 28
+              },
+              "logical_192B_reads": 1057,
+              "logical_192B_writes": 750,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 66,
+              "read_beats": 66,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 66
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Both q2 shared nodes,5/6-entry journals, one-net capacity-zero fixture. Other faults/overflow/arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "AXI-inflight/label-inflight cancellation, late success abort, durable floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    },
+    "warm_retry_pressure_v1": {
+      "status": "passed",
+      "manifest_sha256": "7ac1fea7b1b517396960f6634e9551eab89e1307fe034aa1de83b10fdebddca5",
+      "auditor_sha256": "32aeab8a108f8d8d9b8d508fa555bd2a6cc9b0b13c5b983d55d47fa1e76319d7",
+      "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+      "oracle_hashes": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/events.txt": "32d94113061c0816138a2d84c186b33917d7fc7653e8618c368a21be33984e03",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_v1/search_final_nodes.u32": "08d7868e99fd570113b7264743bd4a357a5b615323954268fa6cb899cc94c9f3",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_q2_cost_v1/cost_vectors.txt": "bcaf973c2f5726d04324ae00f91f6a48e521be415125fd8340099e8ad9547973"
+      },
+      "cases": {
+        "pressure_5": {
+          "cancel_status": 2,
+          "rejected_attempt": 5,
+          "retry_attempt": 6,
+          "retry_cookie": "c0020001",
+          "retry_corrected": 0,
+          "retained_journal": 6,
+          "fault_node": 263946,
+          "journal_entries": 6,
+          "repaired_nodes": [
+            1231788,
+            726313,
+            1279818,
+            1431195,
+            554512,
+            263946
+          ],
+          "wanted_refs": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "old_g1_shared_refs": [
+            0,
+            0
+          ],
+          "warm_checkpoint": 18,
+          "labels_verified": 328,
+          "path_words": 78,
+          "query_words": 10,
+          "q2_polls": 43,
+          "q2_expands": 42,
+          "q2_candidates": 176,
+          "q2_costs": 122,
+          "shared_nodes": [
+            263946,
+            554512
+          ],
+          "post_retry_owner_probes": 36,
+          "memory": {
+            "graph": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 12920,
+              "read_beats": 12920,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 12920
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 489082472
+            },
+            "design": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1925,
+              "read_beats": 1925,
+              "write_beats": 326,
+              "write_replies": 326,
+              "read_burst_lengths": {
+                "1": 1925
+              },
+              "write_burst_lengths": {
+                "1": 326
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424192
+            },
+            "cost": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 1758,
+              "read_beats": 1758,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 1758
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 36804480
+            },
+            "owner": {
+              "error_read_beats": 0,
+              "error_write_replies": 2,
+              "read_transactions": 1622,
+              "read_beats": 1622,
+              "write_beats": 38,
+              "write_replies": 38,
+              "read_burst_lengths": {
+                "1": 1622
+              },
+              "write_burst_lengths": {
+                "1": 38
+              },
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 145424256
+            },
+            "label": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 2824,
+              "read_beats": 8028,
+              "write_beats": 4236,
+              "write_replies": 1482,
+              "read_burst_lengths": {
+                "3": 2528,
+                "2": 148,
+                "1": 148
+              },
+              "write_burst_lengths": {
+                "3": 1342,
+                "1": 70,
+                "2": 70
+              },
+              "logical_192B_reads": 2676,
+              "logical_192B_writes": 1412,
+              "bytes_checked": 3145728
+            },
+            "qstate": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 228,
+              "read_beats": 228,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 228
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 11540864
+            },
+            "table": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 0,
+              "read_beats": 0,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {},
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 1344
+            },
+            "snapshot": {
+              "error_read_beats": 0,
+              "error_write_replies": 0,
+              "read_transactions": 66,
+              "read_beats": 66,
+              "write_beats": 0,
+              "write_replies": 0,
+              "read_burst_lengths": {
+                "1": 66
+              },
+              "write_burst_lengths": {},
+              "logical_192B_reads": null,
+              "logical_192B_writes": null,
+              "bytes_checked": 290848512
+            }
+          }
+        }
+      },
+      "limits": [
+        "Both q2 shared nodes,5/6-entry journals, one-net capacity-zero fixture. Other faults/overflow/arbitrary workloads pending.",
+        "Price/history DDR contents identical before/after; only attempt tags changed. Not arbitrary changed-price distance-label reuse.",
+        "AXI-inflight/label-inflight cancellation, late success abort, durable floors, runtime snapshot writer, synthesis/timing and board remain pending."
+      ]
+    },
+    "warm_retry_normal_v1": {
+      "status": "passed",
+      "manifest_sha256": "780759ef57831c8d9d71c57d76c8a77eee82c8490c6d90b9fbdc0e1832f85cf7",
+      "auditor_sha256": "82088986ac8ff6d4bdde98f05ee60922c28acd4d6c7855e2a8e6b7c0e666e61f",
+      "cases": {
+        "full_5": {
+          "exact_files": {
+            "graph_axi.txt": "d45359efa6a101c63545153e3e133bfc0f54bd2796b59833fa0adfaaecacf5d6",
+            "cost_axi.txt": "3e0ada9fd94364119c8862685619fdf74664df006128c81a882b7baf2c17e6f1",
+            "design_axi.txt": "086fd87bff0ae5aad75b8034915c0bfcf4403c9892ec10c69a91e163baf7ed6c",
+            "owner_axi.txt": "e21c0ec855be7dab5806099220ffb248a9f332ef016ebfaf460dd3319e5b8479",
+            "label_axi.txt": "000baa89cdafa8571d071cfcbb97bb21d6b5cb3ec8837e331fe03afa1e21e93d",
+            "qstate_axi.txt": "91166a4692befdf7ac9b0981003e253648158ad704abe4bc124ed610e2085659",
+            "table_axi.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "snapshot_axi.txt": "25cf8c89115d2e2b3de4612dd2ded9a4e9b9ab0935d23cd830e85321028bd6fa",
+            "owners.bin": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+            "labels.bin": "614a2c28297996f5334c53e1e153defb38753bc1a372f07b68afc1be4776bfcd",
+            "cost.bin": "1b8e7a1e9dc945f1e8328d3d2c57c04c043e38feaedef7aff0612e422e6dc682",
+            "design.bin": "7fff9a9a5126a34b6871862245adf3dc8dc6e579598d134c1b6afc69f9e366d9",
+            "natural_trace.txt": "3b77997d08f0fe6a5a536bdc5a936550a3c0511cc4b11b177a73766fad5597c6",
+            "directory.txt": "d515d925144fe50d945c241e8f882fcab04dc24488fc8f606a53e19883c02abe"
+          },
+          "result": "QUERY_FAULT_OBSERVED case=5 outcome=recovered_retry cycles=1354736 repairs=6"
+        },
+        "pressure_5": {
+          "exact_files": {
+            "graph_axi.txt": "d45359efa6a101c63545153e3e133bfc0f54bd2796b59833fa0adfaaecacf5d6",
+            "cost_axi.txt": "3e0ada9fd94364119c8862685619fdf74664df006128c81a882b7baf2c17e6f1",
+            "design_axi.txt": "086fd87bff0ae5aad75b8034915c0bfcf4403c9892ec10c69a91e163baf7ed6c",
+            "owner_axi.txt": "e21c0ec855be7dab5806099220ffb248a9f332ef016ebfaf460dd3319e5b8479",
+            "label_axi.txt": "a0df1234bb4316d559a60be15ad1fa0b8c482c98e7f1bd4e5353f5c14978cab5",
+            "qstate_axi.txt": "91166a4692befdf7ac9b0981003e253648158ad704abe4bc124ed610e2085659",
+            "table_axi.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "snapshot_axi.txt": "25cf8c89115d2e2b3de4612dd2ded9a4e9b9ab0935d23cd830e85321028bd6fa",
+            "owners.bin": "0155da223647bd763b9d90016f2a032a8f43204c775b675de4368765f0f55fa5",
+            "labels.bin": "07993479c3ba470ec47c55398e387ca1deee3b06233ef9114b0b750e8e83310f",
+            "cost.bin": "1b8e7a1e9dc945f1e8328d3d2c57c04c043e38feaedef7aff0612e422e6dc682",
+            "design.bin": "7fff9a9a5126a34b6871862245adf3dc8dc6e579598d134c1b6afc69f9e366d9",
+            "natural_trace.txt": "0d31d9167adce18080680d389ead46de9521d0d2dd6cfc9816481434ee5974d6",
+            "directory.txt": "f2d6dd695aaea82a52b0a23203760fec65a291c893262d8902e7296312062cd5"
+          },
+          "result": "QUERY_FAULT_OBSERVED case=5 outcome=recovered_retry cycles=1451611 repairs=6"
+        }
+      }
+    }
+  },
+  "restores": {
+    "warm_retry_unit_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_retry_unit_v1.json",
+      "archive_sha256": "a89777be47852752ef49189c7b918df5f6a7ee30e87400153aef7a5724088a4f",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_retry_unit_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_retry_unit_v1",
+      "files": 34,
+      "audit_byte_identical": true,
+      "audit_sha256": "45b7cfeb5d50ef5719bd7d8d4067e061d5788d5586871c1d1e8a95a40392dfaa",
+      "auditor": "audit_warm_retry_unit.py",
+      "note": "Restore succeeded; corrected auditor basename after initial wrapper path invocation error, then reran audit on restored root."
+    },
+    "warm_retry_system_v2": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_retry_system_v2.json",
+      "archive_sha256": "12b2e878046b19af1fa89b72fbe8d632e75498bcc31cfc07bfe617e75bcf606a",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_retry_system_v2",
+      "files": 325,
+      "audit_byte_identical": true,
+      "audit_sha256": "c848b16c16b35835f5ab088625d9163c7853eea160616732dff081310da28abe",
+      "auditor": "audit_warm_retry.py"
+    },
+    "warm_retry_pressure_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_retry_pressure_v1.json",
+      "archive_sha256": "ecc9d5e9737e549e1b0046dc0d0d52c09d627b8a0aafbb6eb79ff8fe6ff5581f",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_retry_pressure_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_retry_pressure_v1",
+      "files": 325,
+      "audit_byte_identical": true,
+      "audit_sha256": "5ff88b5795e223c4948cc6ece9df87df8b14ff1e4863b205881d0af7e45c3544",
+      "auditor": "audit_warm_retry.py"
+    },
+    "warm_retry_normal_v1": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/warm_retry_normal_v1.json",
+      "archive_sha256": "4d25b5e3cb93a494603e181241dc4588b6263b79a8e1c1751f7aed9f53fa6b2a",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/warm_retry_normal_v1",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/warm_retry_normal_v1",
+      "files": 509,
+      "audit_byte_identical": true,
+      "audit_sha256": "7a80d4d837f0460aee7f7e3571001ab817180bd5d3e6193a28c5989e213df099",
+      "auditor": "audit_warm_retry_normal.py"
+    }
+  },
+  "sources": {
+    "hardware/variants/warm_retry_v1/build.py": "7013afa68bbb62ec689f6533623721ea73345a0bb6221b9a503d5a117aedc7b9",
+    "hardware/variants/warm_retry_v1/build_tb.py": "abc77f6cc4d5824a695a97105b7e6963c59e31439ca6fa737c9ff9973d5775ef",
+    "hardware/variants/warm_retry_v1/tb_retry.sv": "ead4d3294934efcf1d68c5cb255ed79932b0e9fd119fb3b3237873d448c184a7",
+    "hardware/variants/warm_retry_v1/tb_warm_retry.sv": "987ac53cc0d2170406399ae64b904586974a218f014fa6afde5d2f084714a96a",
+    "hardware/variants/warm_retry_v1/warm_restore_receipt_join.sv": "062a21fa1836d8486d8bdf1ec46ffb16b8ac8e230f57b2a849af2c4814e6883f",
+    "hardware/variants/warm_retry_v1/query_residency_system.sv": "1b14059a7f83b931f2946202ce159e48b50d37b941e41416ed7359fcbbb43208",
+    "hardware/variants/warm_retry_v1/CONTRACT.md": "2e300d632be0dab9f1becb6c14b3a009606d6fe9c84f296f24984971d4c75da4",
+    "scripts/run_warm_retry_unit.py": "567788bd7546a90db90cfdd94980e34b5459aa97a529d27ab9d6b057a37de178",
+    "scripts/audit_warm_retry_unit.py": "c0a1503d1a7b5c393aa8415c4fcb54b72d3dabb6c5fa470ff91c962613403b3c",
+    "scripts/run_warm_retry.py": "14bb934e95742e033018f9b61c282b1d3bd09f41dedbd069294751d9497348bd",
+    "scripts/audit_warm_retry.py": "32aeab8a108f8d8d9b8d508fa555bd2a6cc9b0b13c5b983d55d47fa1e76319d7",
+    "scripts/run_warm_retry_normal.py": "0f14fb6218a2cbda7ea07c810d53b1e40448276c66f4f30afb39e5cbe9faced8",
+    "scripts/audit_warm_retry_normal.py": "82088986ac8ff6d4bdde98f05ee60922c28acd4d6c7855e2a8e6b7c0e666e61f",
+    "scripts/report_warm_retry.py": "27921832f1c3a13f25ea1b6899d62f0a3fed7151e02b0bf23b964cd97062fa33"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "bound": {
+    "/tmp/B_state_residency_offer_20261025/config_native_publication_synth_v1/synth.v": "b3ff5d0ff1d7e82411ee42d5d4e3d948ec8c25a9f8debf5687a131e157531cc0",
+    "/tmp/B_state_residency_offer_20261025/native_stage_ce_connectivity_v1/connectivity.tcllist": "3613f751dd8d85b94ea1f740d67880f7b79afb829cd8680ab1d00e2bf1739172",
+    "/tmp/B_state_residency_offer_20261025/native_stage_ce_connectivity_v1/source_bound_audit.json": "f1e30cd1bbed8e1f8cad943b18dd338cf235f44e1cfc214a50a5d7d61846a605"
+  },
+  "candidate_decision": "No new RTL yet. Avoid assuming static per-word source processes force per-word physical CE; synthesis can extract common bank enable and leave hold muxes in D.",
+  "limitations": [
+    "Synthesized feedback snippet is from preplacement synth.v; routed CE connectivity independently proven but routed D cone not yet queried",
+    "Truth tables are two-state netlist facts, not RTL four-state equivalence or timing benefit"
+  ],
+  "lut_truth_tables": [
+    {
+      "cell": "inner/backend/route_join/controller/cp_stage[154][31]_i_1",
+      "init": "8'h02",
+      "input_bit_order": "index=sum(Ik*2**k)",
+      "lut": "LUT3",
+      "output_one_indices": [
+        1
+      ]
+    },
+    {
+      "cell": "inner/backend/route_join/controller/cp_stage[154][31]_i_3",
+      "init": "32'h10000000",
+      "input_bit_order": "index=sum(Ik*2**k)",
+      "lut": "LUT5",
+      "output_one_indices": [
+        28
+      ]
+    },
+    {
+      "cell": "inner/backend/route_join/controller/cp_stage[154][31]_i_4",
+      "init": "8'hBE",
+      "input_bit_order": "index=sum(Ik*2**k)",
+      "lut": "LUT3",
+      "output_one_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "cell": "inner/backend/route_join/controller/cp_status[1]_i_7",
+      "init": "64'hFFFFFFFFEFFFFFFF",
+      "input_bit_order": "index=sum(Ik*2**k)",
+      "lut": "LUT6",
+      "output_one_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ]
+    }
+  ],
+  "next_query": "Read mapped state encoding attributes and export/import port sensitivity or tagged synthesis witness before assigning event names to LUT branches. Test any new factoring on CP alone, preserving X/Z nested guards.",
+  "observations": [
+    "Shared CE driver is LUT3 with only input pattern I2:I1:I0=001 producing one",
+    "Mapped state bits cannot be interpreted as original RTL state constants without encoding evidence",
+    "Representative word D cone reads its own Q while shared CE drives all stage bits",
+    "A bank CE pulse does not establish an actual logical write to every word"
+  ],
+  "representative_synthesized_data_mux": "    \\cp_stage[139][10]_i_1 \n       (.I0(\\cp_state_reg_n_9_[1] ),\n        .I1(\\cp_pos_reg[6]_rep__2_n_9 ),\n        .I2(\\cp_stage[139][10]_i_2_n_9 ),\n        .I3(\\cp_pos_reg[7]_rep__13_n_9 ),\n        .I4(\\cp_stage_reg_n_9_[139][10] ),\n        .I5(\\cp_stage[139][10]_i_3_n_9 ),\n        .O(\\cp_stage[139][10]_i_1_n_9 ));\n",
+  "representative_synthesized_register": "  FDRE \\cp_stage_reg[139][10] \n       (.C(clk),\n        .CE(\\cp_stage[154][31]_i_1_n_9 ),\n        .D(\\cp_stage[139][10]_i_1_n_9 ),\n        .Q(\\cp_stage_reg_n_9_[139][10] ),\n        .R(\\<const0> ));\n",
+  "status": "source_bound_lut_truth_tables_and_feedback_observed",
+  "timing_qualified": false
+}

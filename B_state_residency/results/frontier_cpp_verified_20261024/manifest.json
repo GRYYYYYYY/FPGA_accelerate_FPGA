@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "runner_sha256": "b7718a64751b22035da02b39d5d1fbcf720c25db7b7c61312aff6237cb81df2f",
+  "reference_generator_sha256": "07baecad52411f4cd74ec6594ea3389abc7749b7ca2f048f4afcf7f584fa7435",
+  "sources": {
+    "frame_based/frontier_api.hpp": "b15521e064c8dd331112c19df22d30efd70cb2993b29a0140d5a789ceaa4c049",
+    "frame_based/frontier_reference.hpp": "69b7f8fa9216a066b0e7842c340b7e14df9b0174b753cbd3b9b95b49fe77766e",
+    "frame_based/testbench.cpp": "61511f4548fa2c3ce67b2f854b58d02f96b85fb43066c7d2017d84372aec2f29",
+    "frame_based/frontier_bounded.hpp": "365443608f1ae70f221079843a29cb661d0c42c6e0d76a9ccf54d2d286c07f37",
+    "frame_based/kernel.cpp": "ee5712f30aec1d4e23f425bdde6340b41780dad8ce5d24de66818dcfb8d6498e",
+    "rearchitect/v1/hls_config.cfg": "7f0ce144fb7ce8dade41347daf65c4de05bcc8cd25bfe9f86286670337953abd",
+    "rearchitect/v1/vitis-comp.json": "b41d4d661f08da6abeab5f22663dfa2f7581de71b8f0dbb5979f1e8baa3015a0",
+    "rearchitect/v1/tb/frontier_api.hpp": "b15521e064c8dd331112c19df22d30efd70cb2993b29a0140d5a789ceaa4c049",
+    "rearchitect/v1/tb/frontier_reference.hpp": "69b7f8fa9216a066b0e7842c340b7e14df9b0174b753cbd3b9b95b49fe77766e",
+    "rearchitect/v1/tb/testbench.cpp": "61511f4548fa2c3ce67b2f854b58d02f96b85fb43066c7d2017d84372aec2f29",
+    "rearchitect/v1/tb/frontier_bounded.hpp": "365443608f1ae70f221079843a29cb661d0c42c6e0d76a9ccf54d2d286c07f37",
+    "rearchitect/v1/src/kernel_hls.cpp": "d3eb1956f3ccc5b0e5e31cd72029f709bfeb6ace4c6ae02fd1c71e8f6c2381ba",
+    "rearchitect/v1/src/frontier_api.hpp": "b15521e064c8dd331112c19df22d30efd70cb2993b29a0140d5a789ceaa4c049",
+    "rearchitect/v1/src/frontier_bounded.hpp": "365443608f1ae70f221079843a29cb661d0c42c6e0d76a9ccf54d2d286c07f37"
+  },
+  "cases": {
+    "reference": {
+      "commands": [
+        {
+          "stage": "build",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-O2",
+            "-fno-fast-math",
+            "-Wno-unknown-pragmas",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/frame_based",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/frame_based/kernel.cpp",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/frame_based/testbench.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/reference_test"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "verify",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/reference_test"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "status": "passed",
+      "binary_sha256": "0a128b09edbbe807773a0300cf9bfdb57ef62a777b891666c559e5397ffb9fa5",
+      "log_sha256": "af7271f10bc3eee91ec5f15f7b1c3484300f9a5d8feab32484507d1aec288c08"
+    },
+    "candidate": {
+      "commands": [
+        {
+          "stage": "build",
+          "argv": [
+            "g++",
+            "-std=c++14",
+            "-O2",
+            "-fno-fast-math",
+            "-Wno-unknown-pragmas",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/include",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/rearchitect/v1/src",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/rearchitect/v1/tb",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/rearchitect/v1/src/kernel_hls.cpp",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/rearchitect/v1/tb/testbench.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/candidate_test"
+          ],
+          "exit_code": 0
+        },
+        {
+          "stage": "verify",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_cpp_verified_20261024/candidate_test"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "status": "passed",
+      "binary_sha256": "5c21e18104f9c9e782e299c91d592ca1726917df4a3b20229ba726b3668f6138",
+      "log_sha256": "94aaec998f7c0686b38d4e8b907ab45a7951f1c13b78b564cc985c8b9b72008a"
+    }
+  },
+  "scope": "C++ only; no RTL/clock/resource performance conclusion."
+}

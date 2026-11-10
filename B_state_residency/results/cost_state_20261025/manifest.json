@@ -1,0 +1,173 @@
+{
+  "status": "passed",
+  "input_manifest_sha256": "56068cd7215ed55c2e6d60ee6d904e8f39aae0a195fde9feea13be8e1f4f8cd3",
+  "sources": {
+    "cost_state_store.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/cost_state_v1/cost_state_store.sv",
+      "sha256": "2a66bad196192e306a7fa54a627fa0dd67cc228e92279a8694a2950e444ac300"
+    },
+    "tb_cost_state.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/cost_state_v1/tb_cost_state.sv",
+      "sha256": "0f307a0a5ea6be1839437d283c533dcf76b39a41da2077a9ee20e25a75957dc6"
+    },
+    "axi_file_memory.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_owner_v3_20261024/sources/coordinate/axi_file_memory.sv",
+      "sha256": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5"
+    }
+  },
+  "cases": {
+    "synthetic": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/sources/cost_state_store.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/sources/tb_cost_state.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/sources/axi_file_memory.sv"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 2.2083603981882334
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_cost_state",
+            "-s",
+            "state",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 3.9799881763756275
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "state",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "state0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/synthetic/state.bin",
+            "--testplusarg",
+            "statelog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/synthetic/axi.txt",
+            "--testplusarg",
+            "commands=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/synthetic/commands.txt",
+            "--testplusarg",
+            "observed=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/synthetic/observed.txt",
+            "--testplusarg",
+            "nodes=32",
+            "--testplusarg",
+            "nets=16",
+            "--testplusarg",
+            "bytes=4096",
+            "--testplusarg",
+            "prices_offset=1024",
+            "--testplusarg",
+            "nets_offset=2048"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 5.5442148223519325
+        }
+      ],
+      "result": "COST_STATE_PASS commands=977 queries=8 version=18 reads=642 writes=288 bs=288 cycles=16157",
+      "artifacts": {
+        "simulate.log": "5bcb3aa77b9a6f88212484dfabb2f1af48ccaa24866767dc04a0568242153fc2",
+        "axi.txt": "c02f800f1d6f07847b32a19719eba4c50803c743cd8ef4cf53b339d64636d67c",
+        "run.tcl": "cc182fe1cfbfe1010c70e696d70bdcfa59bb5c0caf5ebb979ed9145801574eef",
+        "observed.txt": "2b2b8a295e74baf2b8bdf53ac8ac2dc16af33d6e2a6dd5bc656ea986c3e55e8a",
+        "compile.stdout.log": "a831e7d8f10fc2736db1b97dd2b0e297ec88e3c51d5ec087c978bd37081ebb08",
+        "xvlog.log": "a831e7d8f10fc2736db1b97dd2b0e297ec88e3c51d5ec087c978bd37081ebb08",
+        "simulate.stdout.log": "3be3c23c88729247289e821788c3ba7a87e2d1d26df9ea6ca29126b76d851e85",
+        "xelab.log": "2e71dafbc17048ef46f549f48c8aeaca3ed4800fddc9cd265518064e15b991b2",
+        "elaborate.stdout.log": "2e71dafbc17048ef46f549f48c8aeaca3ed4800fddc9cd265518064e15b991b2",
+        "state.bin": "f615a57ad3250206d5a5b3c3ba2dbca8d9efe1db90b148f1812d986190f64fcd"
+      }
+    },
+    "real": {
+      "status": "passed",
+      "commands": [
+        {
+          "stage": "compile",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/sources/cost_state_store.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/sources/tb_cost_state.sv",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/sources/axi_file_memory.sv"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 1.6560375094413757
+        },
+        {
+          "stage": "elaborate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_cost_state",
+            "-s",
+            "state",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 3.4678959231823683
+        },
+        {
+          "stage": "simulate",
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "state",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "state0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/real/state.bin",
+            "--testplusarg",
+            "statelog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/real/axi.txt",
+            "--testplusarg",
+            "commands=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/real/commands.txt",
+            "--testplusarg",
+            "observed=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_20261025/real/observed.txt",
+            "--testplusarg",
+            "nodes=9089009",
+            "--testplusarg",
+            "nets=27960",
+            "--testplusarg",
+            "bytes=36812672",
+            "--testplusarg",
+            "prices_offset=36360192",
+            "--testplusarg",
+            "nets_offset=36365312"
+          ],
+          "exit_code": 0,
+          "elapsed_s": 5.381211554631591
+        }
+      ],
+      "result": "COST_STATE_PASS commands=1207 queries=8 version=18 reads=839 writes=321 bs=321 cycles=20101",
+      "artifacts": {
+        "simulate.log": "c254d562b8e56996d7c04402ba856c49ab5c79774f7cdd225676af48a983e168",
+        "axi.txt": "b1dac8cf5626e0224f45188b2efd8ae346616428f2149036d4a181887310fe8b",
+        "run.tcl": "cc182fe1cfbfe1010c70e696d70bdcfa59bb5c0caf5ebb979ed9145801574eef",
+        "observed.txt": "908c6f144ecd3c209467ca8c7a291241ad2fb9bae4a5c8610bf217ee12190d08",
+        "compile.stdout.log": "a831e7d8f10fc2736db1b97dd2b0e297ec88e3c51d5ec087c978bd37081ebb08",
+        "xvlog.log": "a831e7d8f10fc2736db1b97dd2b0e297ec88e3c51d5ec087c978bd37081ebb08",
+        "simulate.stdout.log": "0a9371c5fc3c6962581b8b2168c4d16d47be1430106c2d298c2405207a9ce529",
+        "xelab.log": "2e71dafbc17048ef46f549f48c8aeaca3ed4800fddc9cd265518064e15b991b2",
+        "elaborate.stdout.log": "2e71dafbc17048ef46f549f48c8aeaca3ed4800fddc9cd265518064e15b991b2",
+        "state.bin": "ace0415ada5c71f5526e463c393e8c06b3603b7a3fd7789cac24244d8d29801d"
+      }
+    }
+  },
+  "scope": "Actual AXI design history, price and net state with host edit/publish fence; CPU initial import and scripted edits; not yet joined candidate/cost or full route"
+}

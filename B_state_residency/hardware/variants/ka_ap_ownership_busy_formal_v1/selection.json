@@ -1,0 +1,45 @@
+{
+  "source_json": "/tmp/B_state_residency_offer_20261025/ka_full_rtl_lowering_v1/full.json",
+  "source_json_sha256": "43cb23638b3a2a93e8ab48bb617f336959a90fc924aab378ee539423ed837885",
+  "source_bindings": {
+    "query_residency_system.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/query_residency_system.sv",
+      "sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5"
+    },
+    "checkpoint_authority_rotator.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_rotator.sv",
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032"
+    },
+    "checkpoint_authority_reader.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+    }
+  },
+  "module": "query_residency_system",
+  "clock": "clk",
+  "state_names": [
+    "ap_owned",
+    "authority.bank0.state",
+    "authority.bank1.state",
+    "authority.state",
+    "authority.target",
+    "authority.active_bank"
+  ],
+  "roots": [
+    "as_busy",
+    "k_a_valid"
+  ],
+  "observations": {
+    "f_ap_owned": "ap_owned",
+    "f_authority_bank0_state": "authority.bank0.state",
+    "f_authority_bank1_state": "authority.bank1.state",
+    "f_authority_state": "authority.state",
+    "f_authority_target": "authority.target",
+    "f_authority_active_bank": "authority.active_bank",
+    "f_ap_offer": "ap_offer",
+    "f_ap_native_valid": "ap_native_valid",
+    "f_ap_rsp_valid": "ap_rsp_valid",
+    "f_ap_rsp_ready": "ap_rsp_ready",
+    "f_k_cold_rst": "k_cold_rst"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "scope": "Actual eager CPU loader history/net and initial CPU price table; scripted edits and query lifetimes, not full route histories",
+  "sources": {
+    "export.cpp": "93263ca264fdf8531167042ee1353ed73e888ce892ec676f05bdd247c82b8220",
+    "runner.py": "15c267efa73d9166095c1f0ff0e4ced75d28c943cbfbc625d7b44fabbccc1a45",
+    "reference/trace.cpp": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+    "reference/real_trace.hpp": "d76ace3cdc74ebe93d25249c5065cda3948bd1f737488e9912d1798997f9f46e",
+    "reference/real_router_hooks.inc": "aa44a7cca13856af257e0c1fae47dedc872f29ddff910d72733624c14781cc56",
+    "reference/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "reference/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "reference/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "reference/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "reference/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "reference/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  },
+  "graph_manifest_sha256": "78a531decd3f39c5f2c74a97c0d33ab946cbcfdeab70463e35c493bfeecaf7b0",
+  "input_rrt_sha256": "d03de37af1a4a0b10f8bb29812b0048c4d2dd57ba6dadb70f61853225e39b6f4",
+  "cases": {
+    "synthetic": {
+      "commands": 977,
+      "final_version": 18,
+      "queries": 8,
+      "read_transactions": 642,
+      "write_transactions": 288,
+      "layout": {
+        "nodes": 32,
+        "net_count": 16,
+        "prices_offset": 1024,
+        "nets_offset": 2048,
+        "total_bytes": 4096
+      },
+      "artifacts": {
+        "layout.json": "6ee26a586d460b1b2f51cc5eee248f1a0c023af672b7bd6b9605516012d744cb",
+        "commands.txt": "2c5471d3cdbd0ecb5a24c76a53b881525865a9c21dbf833233ba4cb614e79dc7",
+        "expected.bin": "f615a57ad3250206d5a5b3c3ba2dbca8d9efe1db90b148f1812d986190f64fcd",
+        "initial.bin": "ce07c93e357d63c7cf27e49fd9a7b954665457237597cefa7c531b1d98187d99",
+        "expected.txt": "2b2b8a295e74baf2b8bdf53ac8ac2dc16af33d6e2a6dd5bc656ea986c3e55e8a",
+        "transactions.json": "1a515e30093b2badf6faa1ea8d38b6a7672356fa5e0adc2a64bdbc7041c30204"
+      }
+    },
+    "real": {
+      "commands": 1207,
+      "final_version": 18,
+      "queries": 8,
+      "read_transactions": 839,
+      "write_transactions": 321,
+      "layout": {
+        "nodes": 9089009,
+        "net_count": 27960,
+        "prices_offset": 36360192,
+        "nets_offset": 36365312,
+        "total_bytes": 36812672,
+        "initial_factor_bits": 1056964608
+      },
+      "artifacts": {
+        "layout.json": "f2f3ad74c5cedfabb915f115f9e57ece922f739f184586aa27ae48be46427590",
+        "commands.txt": "0f7b58cd6c258ed7dab5829c93a61a6ba4eea814be17183502b988061ed945c9",
+        "expected.bin": "ace0415ada5c71f5526e463c393e8c06b3603b7a3fd7789cac24244d8d29801d",
+        "initial.bin": "0bb4f61e427e6c90a75478ea7d5c23005f4d32526d1908c82cb321b5aad79043",
+        "expected.txt": "908c6f144ecd3c209467ca8c7a291241ad2fb9bae4a5c8610bf217ee12190d08",
+        "transactions.json": "c58e63dc4d50086bfc22df93c73b85607e5991384a369f540af31954abd1ee16"
+      }
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fno-fast-math",
+        "-pthread",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/sources/reference",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/sources/reference/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/sources/export.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/export"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "export",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/export",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_state_inputs_20261025/real"
+      ],
+      "exit_code": 0
+    }
+  ]
+}

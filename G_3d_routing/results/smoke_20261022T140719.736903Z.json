@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "project_id": "G",
+  "execution_kind": "synthetic_smoke",
+  "backend": "python_cpu",
+  "variant": "reference",
+  "timestamp_utc": "2026-10-22T14:07:19.736903+00:00",
+  "status": "passed",
+  "input_sha256": "d2ea0b5b4b5112a405bc8f19c3ca085dc06e3dc5805c3f3e113ee627fc6e86cd",
+  "config_sha256": "ba9688db5c8dac31b84cbd751ba2468f32e77ccf4ae832460f36045a8c13b32a",
+  "reference_sha256": "4c6df7b40b582072b19b52be4f34a81259f57cab4a810345df6d2c1911f9a6c6",
+  "framework_sha256": "b9201ee2097574b1f2e581d3da1f982430b40cc71fe74a28ba463e96c891eb16",
+  "common_sha256": "183c90724153bfb77a7772abbe166bf7094d2a2736f2a06e6aab9102a3d742de",
+  "python_version": "3.10.12",
+  "measurements": {
+    "kernel_ms": null,
+    "end_to_end_ms": null,
+    "power_w": null,
+    "energy_j": null,
+    "achieved_clock_mhz": null,
+    "speedup": null
+  },
+  "checks": {
+    "path_p13": true,
+    "only_requested_portal_p13": true,
+    "path_p24": true,
+    "only_requested_portal_p24": true,
+    "expected_portal": true,
+    "expected_cost": true
+  },
+  "observations": {
+    "portal_candidates": 2,
+    "scope": "existing directed portals, one crossing per candidate; no H3D DP/negotiation or physical 3D implementation"
+  },
+  "outputs": {
+    "candidates": [
+      {
+        "portal": "p13",
+        "route": {
+          "status": "found",
+          "nodes": [
+            0,
+            1,
+            3,
+            5
+          ],
+          "edges": [
+            "h01",
+            "p13",
+            "h35"
+          ],
+          "cost": 5.0,
+          "logical_counts": {
+            "expanded_nodes": 5,
+            "examined_edges": 4,
+            "successful_relaxations": 4,
+            "stale_pops": 0,
+            "peak_queue_entries": 2
+          }
+        }
+      },
+      {
+        "portal": "p24",
+        "route": {
+          "status": "found",
+          "nodes": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "edges": [
+            "h02",
+            "p24",
+            "h45"
+          ],
+          "cost": 4.0,
+          "logical_counts": {
+            "expanded_nodes": 5,
+            "examined_edges": 4,
+            "successful_relaxations": 4,
+            "stale_pops": 0,
+            "peak_queue_entries": 2
+          }
+        }
+      }
+    ],
+    "best": {
+      "portal": "p24",
+      "route": {
+        "status": "found",
+        "nodes": [
+          0,
+          2,
+          4,
+          5
+        ],
+        "edges": [
+          "h02",
+          "p24",
+          "h45"
+        ],
+        "cost": 4.0,
+        "logical_counts": {
+          "expanded_nodes": 5,
+          "examined_edges": 4,
+          "successful_relaxations": 4,
+          "stale_pops": 0,
+          "peak_queue_entries": 2
+        }
+      }
+    },
+    "unrestricted_reference": {
+      "status": "found",
+      "nodes": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "edges": [
+        "h02",
+        "p24",
+        "h45"
+      ],
+      "cost": 4.0,
+      "logical_counts": {
+        "expanded_nodes": 6,
+        "examined_edges": 6,
+        "successful_relaxations": 5,
+        "stale_pops": 0,
+        "peak_queue_entries": 2
+      }
+    }
+  }
+}

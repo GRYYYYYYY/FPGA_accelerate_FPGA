@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "simulation": {
+    "record_adapter": {
+      "records": 4288,
+      "lookup_checks": 195,
+      "bad_inputs": 3,
+      "malformed_reads": 3
+    },
+    "record_backing_service": {
+      "checks": 1144,
+      "write_pages": 79,
+      "read_pages": 67,
+      "error_cases": 8,
+      "aw_bursts": 106,
+      "ar_bursts": 95,
+      "b_responses": 106,
+      "r_beats": 1554
+    }
+  },
+  "synthesis": {
+    "top": "record_backing_service",
+    "frames": 23405,
+    "ram_cells": [
+      "codec/words_reg RAMB18E2",
+      "memory_service/directory/owners_reg_bram_0 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_1 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_10 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_11 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_12 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_13 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_14 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_15 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_16 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_17 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_2 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_3 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_4 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_5 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_6 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_7 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_8 RAMB36E2",
+      "memory_service/directory/owners_reg_bram_9 RAMB36E2"
+    ],
+    "utilization": {
+      "luts": 2078,
+      "registers": 3035,
+      "bram_tiles": 18.5,
+      "latches": 0
+    }
+  },
+  "scope": "Synthesizable record codec + nonallocating lookup directory + AXI service. Internal memory-success-to-commit and error-to-cancel sequencing; upstream page COMPLETE, RETIRE and fence coordination remain unconnected. Linear lookup and serial codec; no full routing replay, post-route timing, board throughput or acceleration claim.",
+  "manifest_sha256": "95603ad1496c22a604b79ce1dd35cdd5b31b136935a6e31c15e9e432aedb57f0"
+}

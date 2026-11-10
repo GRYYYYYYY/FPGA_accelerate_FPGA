@@ -1,0 +1,125 @@
+{
+  "cases": {
+    "functional": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "NETLIST",
+            "design.v",
+            "tb.sv",
+            "glbl.v"
+          ],
+          "exit_code": 0,
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "-L",
+            "unisims_ver",
+            "tb_stage_export_after_reset",
+            "glbl",
+            "-s",
+            "probe",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "probe",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate"
+        }
+      ],
+      "inputs": {
+        "design.v": "c2ee51d22a7cc092764fdf94fec90ac78c515ea095406d7ced97cef110a33c25",
+        "glbl.v": "6270251cf35e1fce3119fc79f8fb968912f7983027e43cf030409ba68f048936",
+        "run.tcl": "6218ffa4f2392f3c61113605d4ab2cd023186e11f1da826b920e510a9a797efb",
+        "tb.sv": "13c0f4b1fd23a03928b57208cdedf0f19dffab1ed84993c21529b7bda5c83895"
+      }
+    },
+    "rtl": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "design.v",
+            "tb.sv",
+            "glbl.v"
+          ],
+          "exit_code": 0,
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "-L",
+            "unisims_ver",
+            "tb_stage_export_after_reset",
+            "glbl",
+            "-s",
+            "probe",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "probe",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate"
+        }
+      ],
+      "inputs": {
+        "design.v": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+        "glbl.v": "6270251cf35e1fce3119fc79f8fb968912f7983027e43cf030409ba68f048936",
+        "run.tcl": "6218ffa4f2392f3c61113605d4ab2cd023186e11f1da826b920e510a9a797efb",
+        "tb.sv": "13c0f4b1fd23a03928b57208cdedf0f19dffab1ed84993c21529b7bda5c83895"
+      },
+      "status": "observed"
+    }
+  },
+  "error": "AssertionError()",
+  "glbl_sha256": "6270251cf35e1fce3119fc79f8fb968912f7983027e43cf030409ba68f048936",
+  "memory_admission": {
+    "current_bytes": 183232249856,
+    "limit_bytes": 322122547200,
+    "stable_seconds": 60.0612821392715
+  },
+  "reference_sources": {
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/functional.v": "c2ee51d22a7cc092764fdf94fec90ac78c515ea095406d7ced97cef110a33c25",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/stdout.log": "66424148e78e72008e2b8b5404e492def2e50b2adf579864abbbb3edcdc8b275",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/synth.dcp": "230c996f4e9fbeedafb8640bcf96494690f12f2c0066879a89274ba64484aaab",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/synth.tcl": "d6786e78344971428ea74b570ab295c4fea72fe750e7ac2f0c3279a80e698831",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/tb.sv": "4805147abc35f692388c8a1d1171666928de2a148ee030fb5735d58021b33fb1",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/utilization.rpt": "4c2c7e55837edef2bc1d0fb03cff58da63360c85cad2f7f8694157d945742730",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/vivado.jou": "0ff6d110ccd62da951451231810359403485ebbf92a664ab2a60869325ad5e2b",
+    "/tmp/B_state_residency_offer_20261025/stage_export_reset_synth_v1/vivado.log": "3277874f231e19bec4acc41ef3a87a97f20f85ee349b9e3b87ebc15db665bb44"
+  },
+  "runner_pid": 3452284,
+  "runner_sha256": "46fa0ed719aa0491b7c83025a35c39efb6a33eaf88164dfac87d60b54169efd4",
+  "runner_start_ticks": "1649980235",
+  "scope": "2-slot/MAX_PATH8 standalone original controller, RTL versus post-synthesis functional, identical v3 port stimulus and vendor glbl; not full-system netlist or timing simulation.",
+  "stage": "functional_simulate",
+  "status": "failed",
+  "synthesis_manifest_sha256": "49fffb02f4dffe3d5e9d489d673228e3996522642139348727b2feeeed263176",
+  "tb_sha256": "13c0f4b1fd23a03928b57208cdedf0f19dffab1ed84993c21529b7bda5c83895"
+}

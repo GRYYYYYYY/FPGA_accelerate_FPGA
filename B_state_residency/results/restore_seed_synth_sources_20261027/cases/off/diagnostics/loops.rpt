@@ -1,0 +1,57 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date         : Tue Oct 27 20:45:53 2026
+| Host         : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_drc -no_waivers -checks LUTLP-1 -file /tmp/B_state_residency_offer_20261025/restore_seed_synth_off_v1/results/methodology_v1/loops.rpt
+| Design       : query_residency_system
+| Device       : xcu280-fsvh2892-2L-e
+| Speed File   : -2L
+| Design State : ignored
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_synth
+      Design limits: <entire design considered>
+
+            Checks: LUTLP-1
+             Max violations: <unlimited>
+             Violations found: 1
++---------+------------------+--------------------------+------------+
+| Rule    | Severity         | Description              | Violations |
++---------+------------------+--------------------------+------------+
+| LUTLP-1 | Critical Warning | Combinatorial Loop Alert | 1          |
++---------+------------------+--------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+LUTLP-1#1 Critical Warning
+Combinatorial Loop Alert  
+103 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is authority/k_cold_rst_0. Please evaluate your design. The cells in the loop are: authority/bank0/store/ap_ready_INST_0_i_3,
+authority/bank1/store/ap_ready_INST_0_i_1,
+inner/backend/recovery_ctl/FSM_onehot_state[12]_i_5,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_12,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_14,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_2__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_3__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_4__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_5__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_6__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_7,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_8,
+inner/backend/recovery_ctl/FSM_onehot_state[5]_i_14,
+inner/backend/recovery_ctl/FSM_onehot_state[5]_i_47,
+inner/backend/recovery_ctl/FSM_onehot_state[5]_i_5
+ (the first 15 of 103 listed).
+Related violations: <none>
+
+

@@ -1,0 +1,9 @@
+范围：冻结OOC网表比较，非平台收敛。
+[x] 约束来源为 hardware/rtl/scratch_frame_store.xdc 第2行，只有10ns core_clk。
+[x] TIMING-18 对应模块边界输入/输出无时延模型；没有平台shell与实际外部时序来源。
+[x] HD.CLK_SRC 未设置，Vivado明确报告无法估计OOC时钟延迟/偏斜。
+[x] 本阶段保留这些限制，不增加任意IO延迟/时钟位置，不创建waiver、不放宽检查。
+[x] 技能版本要求2026.1+；本机2022.2 help证明report_methodology支持-file但不支持-json，因此使用文本报告。
+[x] 初次帮助输出保存尝试使用redirect，2022.2会话拒绝此命令；改用Tcl open/puts [help ...]。未修改网表或约束。
+[x] MCP source等候连接超时，Vivado继续；按状态与日志等待，不重投。
+下一阶段需真实平台clock/reset/接口模型，再做完整建立/保持检查；当前结果不能用来给Fmax或实卡加速比。

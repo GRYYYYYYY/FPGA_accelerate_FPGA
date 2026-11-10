@@ -1,0 +1,65 @@
+{
+  "status": "failed",
+  "sources": {
+    "cost_inputs_prefetch.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/candidate_prefetch_v1/cost_inputs_prefetch.sv",
+      "sha256": "561535b5e5a76f4cd19465a2dbec1203684f09f79852d7528d04e329fd86978b"
+    },
+    "tb_cost_inputs_prefetch.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/candidate_prefetch_v1/tb_cost_inputs_prefetch.sv",
+      "sha256": "a42bc01da690d5725c00938a54baea126b77891c285052cf86e9b716f0dbb9d1"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_inputs_prefetch_boundaries_20261025/sources/cost_inputs_prefetch.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_inputs_prefetch_boundaries_20261025/sources/tb_cost_inputs_prefetch.sv"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 3.3534423485398293
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_cost_inputs_prefetch",
+        "-s",
+        "prefetch",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.7251594718545675
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "prefetch",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 6.325884411111474
+    }
+  ],
+  "runner_sha256": "e14febefd573af9ce8713292fa2939a30168548d8db802f4d15c321711176c21",
+  "error": "AssertionError()",
+  "artifacts": {
+    "simulate.log": "268a5802e8809cc713a1f7048a61165230fd03e920f70a4b1e5a7852ede5a0e5",
+    "run.tcl": "33bdc2455d72c40ecbc79388e2b5e331d1f4756597328b84a565a2ae1f445227",
+    "compile.stdout.log": "b85b3b146be6b8c0e187219d95ab8aa1f5b30c3ad8b81139533f5acc06d8e806",
+    "xvlog.log": "b85b3b146be6b8c0e187219d95ab8aa1f5b30c3ad8b81139533f5acc06d8e806",
+    "simulate.stdout.log": "1eea9996f0bf930c8b3f82a057bad328fa35ec13a1e2b3286418725fa568dd99",
+    "xelab.log": "3ecb94e58a9e40da87b6b7b94b80ef7507a9f736f25c897cef4c798135fa2f17",
+    "elaborate.stdout.log": "3ecb94e58a9e40da87b6b7b94b80ef7507a9f736f25c897cef4c798135fa2f17"
+  }
+}

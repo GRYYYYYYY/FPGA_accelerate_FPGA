@@ -1,0 +1,30 @@
+
+****** xsim v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/test/xsim_script.tcl
+# xsim {test} -testplusarg graph0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic/offsets.u32le -testplusarg graph1=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic/edges.u32le -testplusarg graph2=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/attrs.bin -testplusarg graphlog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/graph_axi.txt -testplusarg design0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/design.bin -testplusarg designlog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/design_axi.txt -testplusarg expected=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/numeric_expected.txt -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run 5ms
+METADATA_CONFIG_FAULT fixture=2
+METADATA_CONFIG_FAULT fixture=4
+METADATA_CONFIG_FAULT fixture=6
+METADATA_FAULT fixture=9 status=4 drained=1
+METADATA_FAULT fixture=11 status=2 drained=1
+METADATA_FAULT fixture=13 status=2 drained=1
+METADATA_FAULT fixture=15 status=2 drained=1
+METADATA_FAULT fixture=17 status=5 drained=1
+METADATA_FAULT fixture=19 status=5 drained=1
+METADATA_FAULT fixture=21 status=5 drained=1
+METADATA_FAULT fixture=23 status=5 drained=1
+METADATA_FAULT fixture=25 status=5 drained=1
+METADATA_FAULT fixture=27 status=0 drained=1
+METADATA_FAULT fixture=29 status=6 drained=1
+METADATA_HOST_B_FAULT fixture=31
+METADATA_BOUNDARIES_PASS errors=15 recoveries=15 normal_checks=18 cycles=5771
+$finish called at time : 57710 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/boundary_body.inc" Line 91
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 24 23:18:14 2026...

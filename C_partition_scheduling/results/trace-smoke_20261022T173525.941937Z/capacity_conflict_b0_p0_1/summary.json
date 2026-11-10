@@ -1,0 +1,175 @@
+{
+  "input_sha256": "05455a39cfae5e4827ba39f12c534ebc161f7a5677bba5f6aab6968e61e88720",
+  "budget_pops": 0,
+  "budget_policy": {
+    "mode": "diagnostic",
+    "requested_budget": 0,
+    "effective_budget": 0,
+    "optimization_enabled": false,
+    "diagnostics_available": true,
+    "reason": "explicit_diagnostic_only"
+  },
+  "scheduler": "serial",
+  "runs": {
+    "traced": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_trace",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/capacity_conflict.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/capacity_conflict_b0_p0_1/traced.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.120639,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0",
+        "C_TRACE_PATH": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/capacity_conflict_b0_p0_1/trace.jsonl",
+        "C_CPU_BUDGET": "0",
+        "C_TRACE_LIMIT": "2000",
+        "C_TRACE_CAP": "200000"
+      }
+    },
+    "original_cpu_compat": {
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/build/cpu_trace/router_original",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/capacity_conflict.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/C_partition_scheduling/results/trace-smoke_20261022T173525.941937Z/capacity_conflict_b0_p0_1/original_cpu_compat.result"
+      ],
+      "returncode": 0,
+      "process_wall_ms": 9.244559,
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_MIN": "0",
+        "RW_BBOX": "0",
+        "RW_CORRIDOR": "-1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_REPORT": "1",
+        "RW_PAR_OVERLAP": "1",
+        "RW_PAR_MIDLAST": "1",
+        "RW_PF_RAMP1": "0",
+        "RW_ENDGAME": "0",
+        "RW_GPU_FLOOD": "0"
+      }
+    }
+  },
+  "analysis": {
+    "scope": "Observed label accesses/writes and paths; serial execution mapped to original DAG. Potential concurrency hazards, not an observed parallel race or proof of physical legality.",
+    "coverage": {
+      "all_attempts_and_instrumented_sets_recorded": true,
+      "unobserved_attempts": 0,
+      "truncated_attempts": 0,
+      "full_memory_access_coverage": false
+    },
+    "verification": {
+      "record": "verification",
+      "connections": 8,
+      "unrouted": 0,
+      "bad_paths": 0,
+      "final_overused_nodes": 1,
+      "attempts_total": 20,
+      "attempts_recorded": 20,
+      "budget_aborts_total": 0
+    },
+    "search": {
+      "attempts": 20,
+      "pops": 143,
+      "budget_aborts_recorded": 0,
+      "successful_budget_retries_recorded": 0,
+      "attempt_p50_ms_instrumented": 0.009846,
+      "attempt_p95_ms_instrumented": 0.028524,
+      "attempt_max_ms_instrumented": 0.04994,
+      "attempt_sum_ms_instrumented": 0.277715
+    },
+    "partition_tasks": 2,
+    "partition_edges": 0,
+    "unordered_label_access": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "unordered_label_read_write": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "unordered_path_sharing": {
+      "iteration_task_pairs": 0,
+      "bbox_disjoint_pairs": 0,
+      "examples": []
+    },
+    "dense_label_page_counts": [
+      {
+        "iteration": 1,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 1,
+        "task": 1,
+        "pages": 1
+      },
+      {
+        "iteration": 2,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 3,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 4,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 5,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 6,
+        "task": 0,
+        "pages": 1
+      },
+      {
+        "iteration": 7,
+        "task": 0,
+        "pages": 1
+      }
+    ]
+  },
+  "checks": {
+    "all_connections_routed": true,
+    "paths_valid_in_exported_graph": true,
+    "final_path_capacity_legal": false,
+    "output_equal_to_cpu_compat_baseline": true
+  },
+  "status": "failed",
+  "artifacts_sha256": {
+    "traced.stderr.log": "2ca6e4a9df0af75ac6c6030ad8f68900f704d5e5abb12ab986088c9826bc1aec",
+    "original_cpu_compat.stdout.log": "c63633313fcad9902aedf570e63e880e3daec8bf11ee47aca52aa954fc7d4a5d",
+    "trace.jsonl": "a9b53e214047b59bc9db6fa0f557b8bedc0f0ac0a1f84b873bfb97bdee5a2466",
+    "traced.stdout.log": "350547942896ec98d6938fb480dd1d7afed606199c616cb0f3b37883ba2bd619",
+    "traced.result": "23a39505f9179e29e62815bd21063e2565e3a08eb158e6437ca1d886bf347b5a",
+    "original_cpu_compat.stderr.log": "8929a4233f1e5dfbf3a33bb73e3268cd28beadd5517d5a0e047591e157cfb14b",
+    "original_cpu_compat.result": "23a39505f9179e29e62815bd21063e2565e3a08eb158e6437ca1d886bf347b5a"
+  }
+}

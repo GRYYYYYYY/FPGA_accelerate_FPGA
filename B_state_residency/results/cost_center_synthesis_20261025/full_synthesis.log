@@ -1,0 +1,388 @@
+COST_CENTER_SYNTH_BEGIN version=2022.2
+# set_param general.maxThreads 2
+# create_project -in_memory -part xcu280-fsvh2892-2L-e
+# foreach center_file [glob [file join $center_out sources *.v]] {read_verilog $center_file}
+# set center_f [open [file join $center_out research_clock.xdc] w]
+# puts $center_f {create_clock -name research_clock -period 10.000 [get_ports ap_clk]}
+# close $center_f
+# read_xdc [file join $center_out research_clock.xdc]
+# synth_design -top cost_center_step -part xcu280-fsvh2892-2L-e -mode out_of_context
+Command: synth_design -top cost_center_step -part xcu280-fsvh2892-2L-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 589895 ; free virtual = 1307272
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5743.019; parent = 5545.544; children = 197.475
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cost_center_step' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step.v:10]
+INFO: [Synth 8-6157] synthesizing module 'cost_center_step_from_int' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_from_int.v:10]
+INFO: [Synth 8-6157] synthesizing module 'cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1.v:10]
+INFO: [Synth 8-6157] synthesizing module 'cost_center_step_flow_control_loop_pipe_sequential_init' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_flow_control_loop_pipe_sequential_init.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'cost_center_step_flow_control_loop_pipe_sequential_init' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_flow_control_loop_pipe_sequential_init.v:9]
+INFO: [Synth 8-6155] done synthesizing module 'cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'cost_center_step_from_int' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_from_int.v:10]
+INFO: [Synth 8-6157] synthesizing module 'cost_center_step_add' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_add.v:10]
+INFO: [Synth 8-6157] synthesizing module 'cost_center_step_add_Pipeline_VITIS_LOOP_30_1' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_add_Pipeline_VITIS_LOOP_30_1.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'cost_center_step_add_Pipeline_VITIS_LOOP_30_1' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_add_Pipeline_VITIS_LOOP_30_1.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'cost_center_step_add' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step_add.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'cost_center_step' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/sources/cost_center_step.v:10]
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_address0[0] driven by constant 1
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_address1[0] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[31] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[30] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[29] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[28] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[27] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[26] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[25] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[24] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[23] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[22] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[21] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[20] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[19] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[18] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[17] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[16] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[15] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[14] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[13] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[12] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[11] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[10] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[9] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[8] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[7] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[6] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[5] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[4] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[3] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[2] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[1] driven by constant 0
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 585590 ; free virtual = 1302967
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5743.019; parent = 5545.544; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 585027 ; free virtual = 1302403
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5743.019; parent = 5545.544; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 584730 ; free virtual = 1302107
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5743.019; parent = 5545.544; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.02 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 584140 ; free virtual = 1301517
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/research_clock.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/research_clock.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 572653 ; free virtual = 1290030
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.03 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 572584 ; free virtual = 1289961
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 563597 ; free virtual = 1280974
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu280-fsvh2892-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:19 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 563272 ; free virtual = 1280648
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 562948 ; free virtual = 1280325
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+INFO: [Synth 8-4490] FSM extraction disabled for register 'ap_CS_fsm_reg' through user attribute
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 9218.727 ; gain = 0.000 ; free physical = 560694 ; free virtual = 1278071
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   64 Bit       Adders := 3     
+	   3 Input   64 Bit       Adders := 1     
+	   2 Input   62 Bit       Adders := 2     
+	   2 Input   32 Bit       Adders := 9     
+	   2 Input   31 Bit       Adders := 1     
+	   2 Input   28 Bit       Adders := 1     
+	   2 Input   27 Bit       Adders := 1     
+	   3 Input    9 Bit       Adders := 1     
+	   2 Input    9 Bit       Adders := 1     
+	   2 Input    6 Bit       Adders := 1     
+	   2 Input    5 Bit       Adders := 1     
++---XORs : 
+	   2 Input     32 Bit         XORs := 3     
+	   2 Input      1 Bit         XORs := 5     
++---Registers : 
+	               64 Bit    Registers := 6     
+	               32 Bit    Registers := 16    
+	               31 Bit    Registers := 8     
+	               11 Bit    Registers := 1     
+	                8 Bit    Registers := 3     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                1 Bit    Registers := 38    
++---Muxes : 
+	   2 Input   64 Bit        Muxes := 11    
+	   2 Input   61 Bit        Muxes := 2     
+	   5 Input   32 Bit        Muxes := 1     
+	   2 Input   32 Bit        Muxes := 31    
+	   2 Input   31 Bit        Muxes := 2     
+	   2 Input   24 Bit        Muxes := 2     
+	   2 Input   11 Bit        Muxes := 2     
+	   2 Input   10 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 5     
+	   8 Input    8 Bit        Muxes := 1     
+	   9 Input    8 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   5 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 2     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 26    
+	   8 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 9024 (col length:94)
+BRAMs: 4032 (col length: RAMB18 288 RAMB36 144)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_address0[0] driven by constant 1
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_address1[0] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[31] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[30] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[29] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[28] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[27] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[26] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[25] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[24] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[23] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[22] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[21] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[20] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[19] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[18] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[17] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[16] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[15] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[14] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[13] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[12] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[11] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[10] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[9] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[8] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[7] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[6] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[5] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[4] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[3] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[2] driven by constant 0
+WARNING: [Synth 8-3917] design cost_center_step has port output_r_d1[1] driven by constant 0
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 556846 ; free virtual = 1274223
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:35 ; elapsed = 00:00:39 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 556797 ; free virtual = 1274174
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:45 ; elapsed = 00:00:50 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631678 ; free virtual = 1349055
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:00:51 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631683 ; free virtual = 1349060
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:50 ; elapsed = 00:00:55 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631681 ; free virtual = 1349058
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631681 ; free virtual = 1349058
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631699 ; free virtual = 1349077
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:50 ; elapsed = 00:00:56 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631690 ; free virtual = 1349067
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:51 ; elapsed = 00:00:56 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631700 ; free virtual = 1349077
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631694 ; free virtual = 1349071
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY8 |    89|
+|2     |LUT1   |    63|
+|3     |LUT2   |   246|
+|4     |LUT3   |   404|
+|5     |LUT4   |   479|
+|6     |LUT5   |   427|
+|7     |LUT6   |   797|
+|8     |FDRE   |  1019|
+|9     |FDSE   |     9|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631706 ; free virtual = 1349083
+Synthesis current peak Physical Memory [PSS] (MB): peak = 5777.044; parent = 5579.428; children = 197.616
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 10199.312; parent = 9106.738; children = 1092.574
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 34 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:44 ; elapsed = 00:00:50 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631703 ; free virtual = 1349080
+Synthesis Optimization Complete : Time (s): cpu = 00:00:51 ; elapsed = 00:00:57 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631698 ; free virtual = 1349075
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 9234.734 ; gain = 0.000 ; free physical = 631814 ; free virtual = 1349191
+INFO: [Netlist 29-17] Analyzing 89 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/research_clock.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/research_clock.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 9234.734 ; gain = 0.000 ; free physical = 631697 ; free virtual = 1349074
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 842d260d
+INFO: [Common 17-83] Releasing license: Synthesis
+31 Infos, 67 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:02 ; elapsed = 00:01:06 . Memory (MB): peak = 9234.734 ; gain = 16.008 ; free physical = 631817 ; free virtual = 1349194
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# report_utilization -file [file join $center_out utilization.rpt]
+# report_drc -checks [get_drc_checks LUTLP-1] -file [file join $center_out combinational_loops.rpt]
+Command: report_drc -checks LUTLP-1 -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/combinational_loops.rpt
+INFO: [DRC 23-27] Running DRC with 2 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/combinational_loops.rpt.
+report_drc completed successfully
+# check_timing -verbose -file [file join $center_out check_timing.rpt]
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+WARNING: [Timing 38-242] The property HD.CLK_SRC of clock port "ap_clk" is not set. In out-of-context mode, this prevents timing estimation for clock delay/skew
+Resolution: Set the HD.CLK_SRC property of the out-of-context port to the location of the clock buffer instance in the top-level design
+# report_timing_summary -delay_type max -max_paths 10 -file [file join $center_out timing_summary.rpt]
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -2L, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+# write_checkpoint [file join $center_out cost_center_step.dcp]
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_center_synthesis_20261025/cost_center_step.dcp' has been generated.
+# close_project
+# puts "COST_CENTER_SYNTH_DONE"
+COST_CENTER_SYNTH_DONE

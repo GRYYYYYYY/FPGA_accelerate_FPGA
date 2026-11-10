@@ -1,0 +1,8 @@
+# 全节点标签基线与原生只读reader组件通过（2026-10-27）
+
+详见results/label_baseline_20261027.json与hardware/variants/label_baseline_v1/CONTRACT.md。以原CPU已审计prepared初始状态的全部9089009节点构造不可变32B标签记录，不接受未来访问列表。五个标签字段逐位保留，独立审计全部记录与原44B CPU布局一致；总290848320B，SHA256 09e54c07e4c1d5cebfb89b18384c8f0bbb01adb0f87f1cd91b0dcc56f371d63a。
+
+新label_baseline_reader以受外部许可的base/epoch/count配置，实际64B AXI读，按node奇偶取160b并检查padding/flags。锁存请求和配置，背压期间不接受重配；越界/未配置/旧epoch不发AR，错误配置保留原绑定。选定unit_v1对894个真实节点测试（其中72个在旧822闭包外），897个真实R含一次SLVERR和一次注入格式破坏；15010项检查、4528保持周期。独立重放全部AXI字节和业务响应。基线与组件两个归档均实际恢复后重审，audit字节一致；源冻结results/label_baseline_sources_20261027。
+
+**这只是必要reader组件，完整查询尚未去除初始CPU未来读闭包。** 下一步必须接入resident_page_manager的io读/写与CLIENT读缺失：首次字段写前先探测，absent时完整seed五字段后重放原始请求；只读seed也须置dirty_slots，避免clean驱逐丢失记录。要求关闭所有imports预加载并保持原CPU oracle，不能用空值代替真实历史标签；详见该variant的NEXT.md。当前没有manager miss接入、取消、任意变价有效性、认证、综合时序或板卡收益证明。研究继续，goal active。
+

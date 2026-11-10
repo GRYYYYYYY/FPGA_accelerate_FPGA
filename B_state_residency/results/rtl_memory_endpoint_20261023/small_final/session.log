@@ -1,0 +1,120 @@
+B_MEMORY_SMALL_FINAL_BEGIN} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+B_MEMORY_SMALL_FINAL_BEGIN
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:riz4fcgm8l5b:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:riz4fcgm8l5b:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:vna2wtlhcjt9===}
+INFO: [MCP 00-100] ===MCP_CMD_START:vna2wtlhcjt9===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_memory_endpoint_small'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/project/b_memory_endpoint.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_memory_endpoint_small' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/project/b_memory_endpoint.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_memory_endpoint_small_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_lookup.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module backing_frame_directory_lookup
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_page_service_lookup.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module backing_page_service_lookup
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/bounded_sync_fifo.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bounded_sync_fifo
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/memory_scratch_endpoint.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module memory_scratch_endpoint
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/queued_scratch_endpoint.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module queued_scratch_endpoint
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/record_backing_service.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module record_backing_service
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_frame_store_bram.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_frame_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_page_axi
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_page_codec
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_controller.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_page_controller
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_memory_endpoint.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module memory_endpoint_test
+INFO: [VRFC 10-311] analyzing module tb_memory_endpoint_small
+INFO: [VRFC 10-311] analyzing module tb_memory_endpoint_actual
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/project/b_memory_endpoint.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_memory_endpoint_small_behav xil_defaultlib.tb_memory_endpoint_small xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_memory_endpoint_small_behav xil_defaultlib.tb_memory_endpoint_small xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=239)
+Compiling module xil_defaultlib.bounded_sync_fifo(WIDTH=168)
+Compiling module xil_defaultlib.bounded_sync_fifo(DEPTH=2)
+Compiling module xil_defaultlib.scratch_frame_store(GENERATION_B...
+Compiling module xil_defaultlib.scratch_page_controller(TX_BITS=...
+Compiling module xil_defaultlib.queued_scratch_endpoint(TX_BITS=...
+Compiling module xil_defaultlib.scratch_page_codec
+Compiling module xil_defaultlib.backing_frame_directory_lookup(F...
+Compiling module xil_defaultlib.scratch_page_axi
+Compiling module xil_defaultlib.backing_page_service_lookup(FRAM...
+Compiling module xil_defaultlib.record_backing_service(FRAMES=4,...
+Compiling module xil_defaultlib.memory_scratch_endpoint(TX_BITS=...
+Compiling module xil_defaultlib.memory_endpoint_test(SMALL=1)
+Compiling module xil_defaultlib.tb_memory_endpoint_small
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_memory_endpoint_small_behav
+execute_script: Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 1836.113 ; gain = 0.000 ; free physical = 641413 ; free virtual = 1358082
+INFO: [USF-XSim-69] 'elaborate' step finished in '6' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_memory_endpoint_20261023/project/b_memory_endpoint.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_memory_endpoint_small_behav -key {Behavioral:sim_1:Functional:tb_memory_endpoint_small} -tclbatch {tb_memory_endpoint_small.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_memory_endpoint_small.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Simtcl 6-168] No object found for the given pattern.
+WARNING: [Add_Wave-1] No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console.
+# run 2s
+TEST_PASS memory_endpoint small=1 checks=370 transfers=46 fences=25 tag_wraps=12 errors=9 gap_cycles=200 host_stalls=1480 aw=40 ar=19 b=40 r=378
+$finish called at time : 820130 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_memory_endpoint.sv" Line 299
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_memory_endpoint_small_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 2s
+launch_simulation: Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1836.113 ; gain = 0.000 ; free physical = 641373 ; free virtual = 1358041
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:vna2wtlhcjt9:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:vna2wtlhcjt9:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:eccbqnds5nel===}
+INFO: [MCP 00-100] ===MCP_CMD_START:eccbqnds5nel===
+puts "VSCSTART" ; set exitCode [catch {close_sim} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:eccbqnds5nel:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:eccbqnds5nel:0===

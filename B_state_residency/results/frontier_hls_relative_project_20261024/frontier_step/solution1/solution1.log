@@ -1,0 +1,205 @@
+==============================================================
+Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+Tool Version Limit: 2019.12
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+==============================================================
+INFO: [HLS 200-1505] Using flow_target 'vivado'
+INFO: [HLS 200-435] Setting 'open_solution -flow_target vivado' configuration: config_interface -m_axi_latency=0
+INFO: [HLS 200-1510] Running: set_part xcu280-fsvh2892-2L-e 
+INFO: [HLS 200-1611] Setting target device to 'xcu280-fsvh2892-2L-e'
+INFO: [HLS 200-1510] Running: create_clock -period 10.000 -name default 
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-1510] Running: csim_design -clean 
+INFO: [SIM 211-2] *************** CSIM start ***************
+INFO: [SIM 211-4] CSIM will launch GCC as the compiler.
+INFO: [SIM 211-1] CSim done with 0 errors.
+INFO: [SIM 211-3] *************** CSIM finish ***************
+INFO: [HLS 200-111] Finished Command csim_design CPU user time: 1.95 seconds. CPU system time: 0.95 seconds. Elapsed time: 3.61 seconds; current allocated memory: 16.000 MB.
+INFO: [HLS 200-1510] Running: csynth_design 
+INFO: [HLS 200-111] Finished File checks and directory preparation: CPU user time: 0.01 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.01 seconds; current allocated memory: 765.340 MB.
+INFO: [HLS 200-10] Analyzing design file '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/kernel_hls.cpp' ... 
+INFO: [HLS 200-111] Finished Source Code Analysis and Preprocessing: CPU user time: 0.54 seconds. CPU system time: 1.22 seconds. Elapsed time: 2.22 seconds; current allocated memory: 767.543 MB.
+INFO: [HLS 200-777] Using interface defaults for 'Vivado' flow target.
+INFO: [HLS 214-178] Inlining function 'frontier::is_nan(unsigned int)' into 'frontier::less(unsigned int, unsigned int)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:9:0)
+INFO: [HLS 214-178] Inlining function 'frontier::is_nan(unsigned int)' into 'frontier::less_equal(unsigned int, unsigned int)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:16:0)
+INFO: [HLS 214-178] Inlining function 'frontier::less(unsigned int, unsigned int)' into 'frontier::less_equal(unsigned int, unsigned int)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:16:0)
+INFO: [HLS 214-178] Inlining function 'frontier::less_equal(unsigned int, unsigned int)' into 'frontier::offer(frontier::Entry*, unsigned int&, frontier::Entry)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:21:0)
+INFO: [HLS 214-178] Inlining function 'frontier::less(unsigned int, unsigned int)' into 'frontier::poll(frontier::Entry*, unsigned int&, frontier::Entry&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:33:0)
+INFO: [HLS 214-178] Inlining function 'frontier::less_equal(unsigned int, unsigned int)' into 'frontier::poll(frontier::Entry*, unsigned int&, frontier::Entry&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:33:0)
+INFO: [HLS 214-178] Inlining function 'frontier::offer(frontier::Entry*, unsigned int&, frontier::Entry)' into '(anonymous namespace)::compute(hls::stream<(anonymous namespace)::Command, 0>&, hls::stream<(anonymous namespace)::Response, 0>&)' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/kernel_hls.cpp:11:0)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 'responses' with compact=bit mode in 128-bits (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/kernel_hls.cpp:37:27)
+INFO: [HLS 214-241] Aggregating fifo (hls::stream) variable 'commands' with compact=bit mode in 96-bits (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/kernel_hls.cpp:36:23)
+INFO: [HLS 200-111] Finished Compiling Optimization and Transform: CPU user time: 2.88 seconds. CPU system time: 1.12 seconds. Elapsed time: 4.2 seconds; current allocated memory: 768.074 MB.
+INFO: [HLS 200-111] Finished Checking Pragmas: CPU user time: 0 seconds. CPU system time: 0 seconds. Elapsed time: 0 seconds; current allocated memory: 768.074 MB.
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms: CPU user time: 0.05 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 768.852 MB.
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability: CPU user time: 0.04 seconds. CPU system time: 0 seconds. Elapsed time: 0.04 seconds; current allocated memory: 769.027 MB.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_38_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:38) in function 'frontier::poll' automatically.
+INFO: [XFORM 203-510] Pipelining loop 'VITIS_LOOP_25_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:23) in function '(anonymous namespace)::compute' automatically.
+INFO: [XFORM 203-502] Unrolling all sub-loops inside loop 'VITIS_LOOP_38_1' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:38) in function 'frontier::poll' for pipelining.
+INFO: [HLS 200-489] Unrolling loop 'VITIS_LOOP_42_2' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:41) in function 'frontier::poll' completely with a factor of 7.
+INFO: [XFORM 203-712] Applying dataflow to function 'frontier_step' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/kernel_hls.cpp:31), detected/extracted 3 process function(s): 
+	 '(anonymous namespace)::load_input'
+	 '(anonymous namespace)::compute'
+	 '(anonymous namespace)::store_output'.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:41:27) to (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:17:17) in function 'frontier::poll'... converting 64 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'frontier::poll' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:7:16)...63 expression(s) balanced.
+INFO: [HLS 200-111] Finished Loop, function and other optimizations: CPU user time: 0.19 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.2 seconds; current allocated memory: 776.766 MB.
+INFO: [HLS 200-472] Inferring partial write operation for 'heap.key_bits' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:49:20)
+INFO: [HLS 200-472] Inferring partial write operation for 'heap.key_bits' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:51:16)
+INFO: [HLS 200-472] Inferring partial write operation for 'heap.key_bits' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:29:16)
+INFO: [HLS 200-472] Inferring partial write operation for 'heap.key_bits' (/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:31:12)
+INFO: [HLS 200-111] Finished Architecture Synthesis: CPU user time: 0.12 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.16 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'frontier_step' ...
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)load_input' to 'p_anonymous_namespace_load_input'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)compute_Pipeline_VITIS_LOOP_25_1' to 'p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)compute' to 'p_anonymous_namespace_compute'.
+WARNING: [SYN 201-103] Legalizing function name '(anonymous namespace)store_output' to 'p_anonymous_namespace_store_output'.
+WARNING: [SYN 201-107] Renaming port name 'frontier_step/size' to 'frontier_step/size_r' to avoid the conflict with HDL keywords or other object names.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_load_input' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.07 seconds. CPU system time: 0.08 seconds. Elapsed time: 0.17 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.03 seconds. CPU system time: 0 seconds. Elapsed time: 0.04 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'poll_Pipeline_VITIS_LOOP_38_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_38_1'.
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 1 cycles).
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 2 cycles).
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 3 cycles).
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 4 cycles).
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 7 cycles).
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 8 cycles).
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 9, Depth = 17, loop 'VITIS_LOOP_38_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.51 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.52 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.42 seconds. CPU system time: 0 seconds. Elapsed time: 0.43 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'poll' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.72 seconds. CPU system time: 0 seconds. Elapsed time: 0.73 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.21 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.22 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-61] Pipelining loop 'VITIS_LOOP_25_1'.
+WARNING: [HLS 200-878] Unable to schedule the loop exit test ('icmp' operation ('icmp_ln18', /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/frontier_hls_relative_project_20261024/rearchitect/v1/src/frontier_bounded.hpp:18)) in the first pipeline iteration (II = 1 cycles).
+INFO: [HLS 200-1470] Pipelining result : Target II = NA, Final II = 2, Depth = 3, loop 'VITIS_LOOP_25_1'
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.59 seconds. CPU system time: 0 seconds. Elapsed time: 0.6 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.09 seconds. CPU system time: 0 seconds. Elapsed time: 0.1 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_compute' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.12 seconds. CPU system time: 0 seconds. Elapsed time: 0.13 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.22 seconds. CPU system time: 0 seconds. Elapsed time: 0.22 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'p_anonymous_namespace_store_output' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.58 seconds. CPU system time: 0 seconds. Elapsed time: 0.57 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.01 seconds. CPU system time: 0 seconds. Elapsed time: 0.01 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'frontier_step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111] Finished Scheduling: CPU user time: 0.03 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.05 seconds; current allocated memory: 842.555 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111] Finished Binding: CPU user time: 0.3 seconds. CPU system time: 0 seconds. Elapsed time: 0.3 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_load_input' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_load_input'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.57 seconds. CPU system time: 0 seconds. Elapsed time: 0.57 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'poll_Pipeline_VITIS_LOOP_38_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'poll_Pipeline_VITIS_LOOP_38_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.14 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.16 seconds; current allocated memory: 842.555 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'poll' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'poll'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 1.64 seconds. CPU system time: 0.03 seconds. Elapsed time: 1.68 seconds; current allocated memory: 846.684 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.63 seconds. CPU system time: 0.01 seconds. Elapsed time: 0.67 seconds; current allocated memory: 847.109 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_compute' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+WARNING: [RTGEN 206-101] Register 'size' is power-on initialization.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_compute'.
+INFO: [RTMG 210-278] Implementing memory 'frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [RTMG 210-278] Implementing memory 'frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W' using auto RAMs.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.3 seconds. CPU system time: 0.02 seconds. Elapsed time: 0.32 seconds; current allocated memory: 862.617 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'p_anonymous_namespace_store_output' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-100] Finished creating RTL model for 'p_anonymous_namespace_store_output'.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.8 seconds. CPU system time: 0 seconds. Elapsed time: 1.06 seconds; current allocated memory: 863.832 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'frontier_step' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/op' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/key_bits' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/id' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/status' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/result_bits' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/result_id' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'frontier_step/size' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'frontier_step' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Finished creating RTL model for 'frontier_step'.
+INFO: [RTMG 210-285] Implementing FIFO 'commands_U(frontier_step_fifo_w96_d2_S)' using Shift Registers.
+INFO: [RTMG 210-285] Implementing FIFO 'responses_U(frontier_step_fifo_w128_d2_S)' using Shift Registers.
+INFO: [RTMG 210-285] Implementing FIFO 'start_for_p_anonymous_namespace_compute_U0_U(frontier_step_start_for_p_anonymous_namespace_compute_U0)' using Shift Registers.
+INFO: [RTMG 210-285] Implementing FIFO 'start_for_p_anonymous_namespace_store_output_U0_U(frontier_step_start_for_p_anonymous_namespace_store_output_U0)' using Shift Registers.
+INFO: [HLS 200-111] Finished Creating RTL model: CPU user time: 0.11 seconds. CPU system time: 0.03 seconds. Elapsed time: 0.2 seconds; current allocated memory: 881.191 MB.

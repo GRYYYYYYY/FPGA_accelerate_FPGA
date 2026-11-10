@@ -1,0 +1,7 @@
+# 完整38查询checkpoint回放输入
+
+冻结真实轨迹全部38查询、14047736字段访问完成生成；21662794公开命令、2743929次完整页传输、31checkpoint。写回577471、读回2166458，逐查询的全部字段访问、读写、绑定/释放和checkpoint次数与独立retained planner一致。全部输入/生成源码及输出文件SHA256通过终态审计。manifest SHA256 `31578e48cf9df928a2905364a1b118413ccd3b979ddc285f1bedd85b7677bbf8`；query_audit.json保存38条逐查询累计收据。
+
+小查询先导生成文件与原始逐字节一致，流式小查询RTL已通过。完整生成没有截断、丢查询或放宽16位事务/代次和23405帧预算；回收前先预留事务预算、写回并释放所有驻留槽，保留后备内容。
+
+全量RTL已由checkpoint_replay_workflow_v2_20261023自动提交，results/rtl_checkpoint_stream_full_20261023当前编译/展开exit0、仿真运行中。它与此前7-query无checkpoint回放是不同批次；不能拼接局部结果宣称全量通过。完整RTL终态后自动逐query/31checkpoint审计。无实卡或完整路由性能结论。

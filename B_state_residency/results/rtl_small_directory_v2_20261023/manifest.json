@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "pid": 3944010,
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_small_directory.sv": "888c242699fc464a51fde2235032ad13295e77006c29f948c05e72be1f78be14",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_small_directory_v2.py": "6bef36b0792a021b5cdb471f76b400b3ff66767648b3d12ebc7a59e94cd575c3"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_directory_v2_20261023/sources/backing_frame_directory_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_directory_v2_20261023/sources/tb_small_directory.sv"
+      ],
+      "pid": 3944013,
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_small_directory",
+        "-s",
+        "small_codec",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "pid": 3944047,
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "small_codec",
+        "--tclbatch",
+        "simulate.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "pid": 3945363,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Small-page directory 32 leases, 27-bit owners, 72-bit cookies, forced hash fallback and epoch wrap; no memory service integration",
+  "results": [
+    "SMALL_DIRECTORY_PASS checks=328 slots=32 owners=40 full_recycles=8"
+  ],
+  "artifacts": {
+    "simulate.log": "543fceee271ee8e2f207696e930c3659dca2458715a64453e03ad5c3ee45c417",
+    "compile.stdout.log": "9c320830b7ec4ff925ec6ee2483a543de4a43af09f54add40dcce5c05ed01f7a",
+    "xvlog.log": "9c320830b7ec4ff925ec6ee2483a543de4a43af09f54add40dcce5c05ed01f7a",
+    "simulate.stdout.log": "de1da83c560db3615b147412db64a93a8ee1beabb4a1ebf4e167ca36318aaa68",
+    "xelab.log": "f3ecc64e8e28157e7f2d826788e03ae7699a5896657ee2cd7625e54e2b2f632e",
+    "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "elaborate.stdout.log": "f3ecc64e8e28157e7f2d826788e03ae7699a5896657ee2cd7625e54e2b2f632e"
+  }
+}

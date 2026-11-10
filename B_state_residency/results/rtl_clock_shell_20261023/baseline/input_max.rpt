@@ -1,0 +1,382 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2022.2 (lin64) Build 3671981 Fri Oct 14 04:59:54 MDT 2022
+| Date              : Fri Oct 23 14:12:21 2026
+| Host              : fpgaacc1--cfc8cd109508-jnnrja5s7q running 64-bit Ubuntu 22.04.4 LTS
+| Command           : report_timing -from [get_ports -filter {DIRECTION == IN && NAME != clk}] -to [all_registers] -delay_type max -max_paths 5 -path_type full_clock_expanded -file /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_clock_shell_20261023/baseline/input_max.rpt
+| Design            : clock_shell_baseline
+| Device            : xcu280-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.628ns  (required time - arrival time)
+  Source:                 execute_enable
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA/WE
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        10.705ns  (logic 0.675ns (6.305%)  route 10.030ns (93.695%))
+  Logic Levels:           6  (LUT2=1 LUT4=2 LUT6=3)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.364ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.364ns = ( 12.364 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.304ns (routing 1.354ns, distribution 0.950ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 r  execute_enable (IN)
+                         net (fo=0)                   0.000     2.071    endpoint/pages/work/execute_enable
+    SLICE_X50Y112        LUT6 (Prop_F6LUT_SLICEM_I0_O)
+                                                      0.148     2.219 r  endpoint/pages/work/read_ptr[1]_i_3/O
+                         net (fo=2, routed)           1.225     3.444    endpoint/pages/endpoint/read_ptr_reg[1]_0
+    SLICE_X51Y118        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.123     3.567 r  endpoint/pages/endpoint/read_ptr[1]_i_1__0/O
+                         net (fo=16, routed)          1.131     4.699    endpoint/pages/work/p_9_in
+    SLICE_X51Y112        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.149     4.848 f  endpoint/pages/work/count[1]_i_10/O
+                         net (fo=2, routed)           0.517     5.365    endpoint/pages/fence_acks/count[1]_i_3_0
+    SLICE_X51Y112        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.035     5.400 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_16/O
+                         net (fo=25, routed)          0.951     6.351    endpoint/pages/fence_acks/duplicate_ack__3
+    SLICE_X51Y112        LUT4 (Prop_C6LUT_SLICEL_I3_O)
+                                                      0.123     6.474 r  endpoint/pages/fence_acks/count[1]_i_3/O
+                         net (fo=4, routed)           3.189     9.663    endpoint/pages/fence_acks/p_0_in[1]
+    SLICE_X51Y114        LUT2 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.097     9.760 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_1/O
+                         net (fo=32, routed)          3.016    12.776    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WE
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.304    12.364    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WCLK
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA/CLK
+                         clock pessimism              0.000    12.364    
+                         clock uncertainty           -0.035    12.329    
+    SLICE_X52Y114        RAMD32 (Setup_A5LUT_SLICEM_CLK_WE)
+                                                     -0.180    12.149    endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA
+  -------------------------------------------------------------------
+                         required time                         12.149    
+                         arrival time                         -12.776    
+  -------------------------------------------------------------------
+                         slack                                 -0.628    
+
+Slack (VIOLATED) :        -0.628ns  (required time - arrival time)
+  Source:                 execute_enable
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        10.705ns  (logic 0.675ns (6.305%)  route 10.030ns (93.695%))
+  Logic Levels:           6  (LUT2=1 LUT4=2 LUT6=3)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.364ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.364ns = ( 12.364 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.304ns (routing 1.354ns, distribution 0.950ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 r  execute_enable (IN)
+                         net (fo=0)                   0.000     2.071    endpoint/pages/work/execute_enable
+    SLICE_X50Y112        LUT6 (Prop_F6LUT_SLICEM_I0_O)
+                                                      0.148     2.219 r  endpoint/pages/work/read_ptr[1]_i_3/O
+                         net (fo=2, routed)           1.225     3.444    endpoint/pages/endpoint/read_ptr_reg[1]_0
+    SLICE_X51Y118        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.123     3.567 r  endpoint/pages/endpoint/read_ptr[1]_i_1__0/O
+                         net (fo=16, routed)          1.131     4.699    endpoint/pages/work/p_9_in
+    SLICE_X51Y112        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.149     4.848 f  endpoint/pages/work/count[1]_i_10/O
+                         net (fo=2, routed)           0.517     5.365    endpoint/pages/fence_acks/count[1]_i_3_0
+    SLICE_X51Y112        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.035     5.400 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_16/O
+                         net (fo=25, routed)          0.951     6.351    endpoint/pages/fence_acks/duplicate_ack__3
+    SLICE_X51Y112        LUT4 (Prop_C6LUT_SLICEL_I3_O)
+                                                      0.123     6.474 r  endpoint/pages/fence_acks/count[1]_i_3/O
+                         net (fo=4, routed)           3.189     9.663    endpoint/pages/fence_acks/p_0_in[1]
+    SLICE_X51Y114        LUT2 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.097     9.760 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_1/O
+                         net (fo=32, routed)          3.016    12.776    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WE
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.304    12.364    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WCLK
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA_D1/CLK
+                         clock pessimism              0.000    12.364    
+                         clock uncertainty           -0.035    12.329    
+    SLICE_X52Y114        RAMD32 (Setup_A6LUT_SLICEM_CLK_WE)
+                                                     -0.180    12.149    endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                         12.149    
+                         arrival time                         -12.776    
+  -------------------------------------------------------------------
+                         slack                                 -0.628    
+
+Slack (VIOLATED) :        -0.628ns  (required time - arrival time)
+  Source:                 execute_enable
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB/WE
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        10.705ns  (logic 0.675ns (6.305%)  route 10.030ns (93.695%))
+  Logic Levels:           6  (LUT2=1 LUT4=2 LUT6=3)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.364ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.364ns = ( 12.364 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.304ns (routing 1.354ns, distribution 0.950ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 r  execute_enable (IN)
+                         net (fo=0)                   0.000     2.071    endpoint/pages/work/execute_enable
+    SLICE_X50Y112        LUT6 (Prop_F6LUT_SLICEM_I0_O)
+                                                      0.148     2.219 r  endpoint/pages/work/read_ptr[1]_i_3/O
+                         net (fo=2, routed)           1.225     3.444    endpoint/pages/endpoint/read_ptr_reg[1]_0
+    SLICE_X51Y118        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.123     3.567 r  endpoint/pages/endpoint/read_ptr[1]_i_1__0/O
+                         net (fo=16, routed)          1.131     4.699    endpoint/pages/work/p_9_in
+    SLICE_X51Y112        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.149     4.848 f  endpoint/pages/work/count[1]_i_10/O
+                         net (fo=2, routed)           0.517     5.365    endpoint/pages/fence_acks/count[1]_i_3_0
+    SLICE_X51Y112        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.035     5.400 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_16/O
+                         net (fo=25, routed)          0.951     6.351    endpoint/pages/fence_acks/duplicate_ack__3
+    SLICE_X51Y112        LUT4 (Prop_C6LUT_SLICEL_I3_O)
+                                                      0.123     6.474 r  endpoint/pages/fence_acks/count[1]_i_3/O
+                         net (fo=4, routed)           3.189     9.663    endpoint/pages/fence_acks/p_0_in[1]
+    SLICE_X51Y114        LUT2 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.097     9.760 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_1/O
+                         net (fo=32, routed)          3.016    12.776    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WE
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.304    12.364    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WCLK
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB/CLK
+                         clock pessimism              0.000    12.364    
+                         clock uncertainty           -0.035    12.329    
+    SLICE_X52Y114        RAMD32 (Setup_B5LUT_SLICEM_CLK_WE)
+                                                     -0.180    12.149    endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB
+  -------------------------------------------------------------------
+                         required time                         12.149    
+                         arrival time                         -12.776    
+  -------------------------------------------------------------------
+                         slack                                 -0.628    
+
+Slack (VIOLATED) :        -0.628ns  (required time - arrival time)
+  Source:                 execute_enable
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB_D1/WE
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        10.705ns  (logic 0.675ns (6.305%)  route 10.030ns (93.695%))
+  Logic Levels:           6  (LUT2=1 LUT4=2 LUT6=3)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.364ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.364ns = ( 12.364 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.304ns (routing 1.354ns, distribution 0.950ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 r  execute_enable (IN)
+                         net (fo=0)                   0.000     2.071    endpoint/pages/work/execute_enable
+    SLICE_X50Y112        LUT6 (Prop_F6LUT_SLICEM_I0_O)
+                                                      0.148     2.219 r  endpoint/pages/work/read_ptr[1]_i_3/O
+                         net (fo=2, routed)           1.225     3.444    endpoint/pages/endpoint/read_ptr_reg[1]_0
+    SLICE_X51Y118        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.123     3.567 r  endpoint/pages/endpoint/read_ptr[1]_i_1__0/O
+                         net (fo=16, routed)          1.131     4.699    endpoint/pages/work/p_9_in
+    SLICE_X51Y112        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.149     4.848 f  endpoint/pages/work/count[1]_i_10/O
+                         net (fo=2, routed)           0.517     5.365    endpoint/pages/fence_acks/count[1]_i_3_0
+    SLICE_X51Y112        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.035     5.400 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_16/O
+                         net (fo=25, routed)          0.951     6.351    endpoint/pages/fence_acks/duplicate_ack__3
+    SLICE_X51Y112        LUT4 (Prop_C6LUT_SLICEL_I3_O)
+                                                      0.123     6.474 r  endpoint/pages/fence_acks/count[1]_i_3/O
+                         net (fo=4, routed)           3.189     9.663    endpoint/pages/fence_acks/p_0_in[1]
+    SLICE_X51Y114        LUT2 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.097     9.760 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_1/O
+                         net (fo=32, routed)          3.016    12.776    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WE
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB_D1/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.304    12.364    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WCLK
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB_D1/CLK
+                         clock pessimism              0.000    12.364    
+                         clock uncertainty           -0.035    12.329    
+    SLICE_X52Y114        RAMD32 (Setup_B6LUT_SLICEM_CLK_WE)
+                                                     -0.180    12.149    endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                         12.149    
+                         arrival time                         -12.776    
+  -------------------------------------------------------------------
+                         slack                                 -0.628    
+
+Slack (VIOLATED) :        -0.628ns  (required time - arrival time)
+  Source:                 execute_enable
+                            (input port clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMC/WE
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        10.705ns  (logic 0.675ns (6.305%)  route 10.030ns (93.695%))
+  Logic Levels:           6  (LUT2=1 LUT4=2 LUT6=3)
+  Input Delay:            2.000ns
+  Clock Path Skew:        2.364ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.364ns = ( 12.364 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.000ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Destination): 2.304ns (routing 1.354ns, distribution 0.950ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.043     0.043    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     0.071 r  b_clock/O
+  -------------------------------------------------------------------    -------------------
+                         input delay                  2.000     2.071    
+                                                      0.000     2.071 r  execute_enable (IN)
+                         net (fo=0)                   0.000     2.071    endpoint/pages/work/execute_enable
+    SLICE_X50Y112        LUT6 (Prop_F6LUT_SLICEM_I0_O)
+                                                      0.148     2.219 r  endpoint/pages/work/read_ptr[1]_i_3/O
+                         net (fo=2, routed)           1.225     3.444    endpoint/pages/endpoint/read_ptr_reg[1]_0
+    SLICE_X51Y118        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.123     3.567 r  endpoint/pages/endpoint/read_ptr[1]_i_1__0/O
+                         net (fo=16, routed)          1.131     4.699    endpoint/pages/work/p_9_in
+    SLICE_X51Y112        LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.149     4.848 f  endpoint/pages/work/count[1]_i_10/O
+                         net (fo=2, routed)           0.517     5.365    endpoint/pages/fence_acks/count[1]_i_3_0
+    SLICE_X51Y112        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.035     5.400 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_16/O
+                         net (fo=25, routed)          0.951     6.351    endpoint/pages/fence_acks/duplicate_ack__3
+    SLICE_X51Y112        LUT4 (Prop_C6LUT_SLICEL_I3_O)
+                                                      0.123     6.474 r  endpoint/pages/fence_acks/count[1]_i_3/O
+                         net (fo=4, routed)           3.189     9.663    endpoint/pages/fence_acks/p_0_in[1]
+    SLICE_X51Y114        LUT2 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.097     9.760 r  endpoint/pages/fence_acks/memory_reg_0_1_0_13_i_1/O
+                         net (fo=32, routed)          3.016    12.776    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WE
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMC/WE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.036    10.036    clk
+    BUFGCE_X0Y0          BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024    10.060 r  b_clock/O
+    X1Y2 (CLOCK_ROOT)    net (fo=6011, routed)        2.304    12.364    endpoint/pages/fence_acks/memory_reg_0_1_0_13/WCLK
+    SLICE_X52Y114        RAMD32                                       r  endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMC/CLK
+                         clock pessimism              0.000    12.364    
+                         clock uncertainty           -0.035    12.329    
+    SLICE_X52Y114        RAMD32 (Setup_C5LUT_SLICEM_CLK_WE)
+                                                     -0.180    12.149    endpoint/pages/fence_acks/memory_reg_0_1_0_13/RAMC
+  -------------------------------------------------------------------
+                         required time                         12.149    
+                         arrival time                         -12.776    
+  -------------------------------------------------------------------
+                         slack                                 -0.628    
+
+
+
+

@@ -1,0 +1,81 @@
+{
+  "dataset_kind": "synthetic_smoke",
+  "fixture_id": "toy_A",
+  "graph": {
+    "nodes": [
+      {
+        "id": 0
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "edges": [
+      {
+        "id": "tile0:e",
+        "src": 0,
+        "dst": 1,
+        "switch": "S",
+        "cost": 1
+      },
+      {
+        "id": "tile1:e",
+        "src": 1,
+        "dst": 2,
+        "switch": "S",
+        "cost": 1
+      },
+      {
+        "id": "exception",
+        "src": 0,
+        "dst": 2,
+        "switch": "LONG",
+        "cost": 3
+      }
+    ]
+  },
+  "compact": {
+    "templates": {
+      "wire_pair": [
+        {
+          "id": "e",
+          "src": 0,
+          "dst": 1,
+          "switch": "S",
+          "cost": 1
+        }
+      ]
+    },
+    "instances": [
+      {
+        "id": "tile0",
+        "template": "wire_pair",
+        "node_map": {
+          "0": 0,
+          "1": 1
+        }
+      },
+      {
+        "id": "tile1",
+        "template": "wire_pair",
+        "node_map": {
+          "0": 1,
+          "1": 2
+        }
+      }
+    ],
+    "remove_edges": [],
+    "add_edges": [
+      {
+        "id": "exception",
+        "src": 0,
+        "dst": 2,
+        "switch": "LONG",
+        "cost": 3
+      }
+    ]
+  }
+}

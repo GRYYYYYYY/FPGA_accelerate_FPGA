@@ -1,0 +1,84 @@
+{
+  "counts_per_stage": {
+    "bel": 8,
+    "bel_pin": 33,
+    "config": 21,
+    "net_link": 4,
+    "node_link": 13,
+    "site": 2,
+    "site_pin": 13,
+    "site_pip": 4
+  },
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/adapters/capture_clock_semantics_20261023_v3.tcl": "dcbecc2883de7767da923939a583de1d94da454e33a3c207661f7a1eedb8b2ce",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/clock_row_route_probe_full_20261023_v2/verification.json": "abfb5af500ab2467889e806bf882129bbcd7c0519e41dcd34d259dcf2744a0ae",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/clock_semantics_capture_20261023_v1/baseline.timesim.v": "cbf41b73eb4cdad81e7b2c6e05bb9fc277f1be3c12328b83b5b015680b393a13",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/clock_semantics_capture_20261023_v1/probe.timesim.v": "9291db9303e01c0d5f46866aef4d889204112f8d4f37dad62da01959f334ce1c",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/clock_semantics_capture_20261023_v3/baseline.tsv": "482103f76912269d33ef8d1e0f6277377b798f5a9f01e099d7b97de6e9a5a1f9",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/clock_semantics_capture_20261023_v3/probe.tsv": "c95d683530ba71f9b55ee85eb2afbcd38256ba2d4ae40982ece03e3af245ae06",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/clock_row_probe_input_20261023_v1.json": "64d55340a047f278f9a2661a795df4a266cb4c1d9902fcf1defa6405eb826c69",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/check_clock_semantics_capture.py": "608e178ff53f2783cbe0356c8f906ff2fea6b1c9fad8c837d0e02b5f82be2132"
+  },
+  "findings": {
+    "configuration_changes": {
+      "BUFCE_LEAF_X110Y26/LCLK_TEST_DELAY/CONFIG.DELAY": {
+        "baseline": "NOT CONFIGURED",
+        "probe": "VAL0"
+      },
+      "BUFCE_ROW_FSR_X21Y6/BUFCE/CONFIG.CE_TYPE": {
+        "baseline": "NOT CONFIGURED",
+        "probe": "ASYNC"
+      }
+    },
+    "connected_pins_reporting_is_used_zero": [
+      "BUFCE_LEAF_X110Y26/CLK_IN",
+      "BUFCE_LEAF_X110Y26/CLK_LEAF",
+      "BUFCE_ROW_FSR_X21Y6/CE_PRE_OPTINV",
+      "BUFCE_ROW_FSR_X21Y6/CLK_OUT"
+    ],
+    "constant_net_links": [],
+    "explicit_bufce_instances_in_timesim": {
+      "baseline": 0,
+      "probe": 0
+    },
+    "internal_bel_net_links": 0,
+    "physical_signal_owners": [
+      [
+        "site_pin",
+        "BUFCE_ROW_FSR_X21Y6/CE_PRE_OPTINV",
+        "original_cost/genblk1[3].h_val_y_reg[55]_i_2_n_0",
+        "SIGNAL"
+      ],
+      [
+        "site_pin",
+        "BUFCE_ROW_FSR_X21Y6/CLK_OUT",
+        "original_cost/genblk1[3].h_val_y_reg[55]_i_2_n_0",
+        "SIGNAL"
+      ],
+      [
+        "site_pin",
+        "BUFCE_LEAF_X110Y26/CLK_IN",
+        "original_cost/genblk1[3].h_val_y_reg[55]_i_2_n_0",
+        "SIGNAL"
+      ],
+      [
+        "site_pin",
+        "BUFCE_LEAF_X110Y26/CLK_LEAF",
+        "original_cost/genblk1[3].h_val_y_reg[55]_i_2_n_0",
+        "SIGNAL"
+      ]
+    ],
+    "used_site_pips": [
+      "BUFCE_LEAF_X110Y26/IINV:I_PREINV",
+      "BUFCE_ROW_FSR_X21Y6/CEINV:CE_PREINV"
+    ]
+  },
+  "limitations": [
+    "IS_USED=0 is not an availability oracle: four physically connected pins report zero.",
+    "No explicit BUFCE cells or internal constant bindings were exported; empty links do not prove an input constant.",
+    "Site PIP names describe selected arcs, not verified Boolean inversion values.",
+    "No additional pseudo instances are authorized by this observational capture.",
+    "v1 omitted routing BEL pins; v2 was mislabelled by MCP duplicate suppression and is explicitly invalid. v3 is authoritative."
+  ],
+  "status": "physical_clock_connectivity_audited_internal_constant_gap_retained"
+}

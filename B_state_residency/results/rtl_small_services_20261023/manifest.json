@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "pid": 4079822,
+  "sources": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi_small.sv": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory_small.sv": "703b256b063eb9d1ccfba75de555f0841de6b2891509624ceab2c3cbecee147f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_page_service_small.sv": "039f6d0ec2117c1587b5f0b8be01ebbe51d4a51786926ec68927f1d649896a98",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/record_backing_service_small.sv": "7f8d2ddb60e1c93eb2b2dcb577e6b68b7065c7e4f382fd977087dab9b4954028",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_record_backing_service_small.sv": "f34488ef3c47a454d48b6eb542aacef4b57b78874be82d577674aef2fef43ee7",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/verify_small_services.py": "590f9c5ea37b1aa341ce77374aaca000c407140aa9ce2b46d6a71131f185aedf",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_small_services.py": "cfe81c74f7edd120a68bf32aaf1634d245f4e04407de5c804a526176269c4f89",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/make_small_service_tb.py": "980234076c328191e6b43431312b08401856cf04310cb8b5318537e3a1a2006e"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/sources/scratch_page_codec_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/sources/scratch_page_axi_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/sources/backing_frame_directory_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/sources/backing_page_service_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/sources/record_backing_service_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/sources/tb_record_backing_service_small.sv"
+      ],
+      "pid": 4079849,
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_record_backing_service_small",
+        "-s",
+        "small_codec",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "pid": 4079886,
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "small_codec",
+        "--tclbatch",
+        "simulate.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/pages.hex",
+        "--testplusarg",
+        "RECORDS=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_services_20261023/records.hex"
+      ],
+      "pid": 4079935,
+      "exit_code": 0
+    }
+  ],
+  "scope": "Small-page record/directory/AXI service with 32 leases and retained ID recycle; no closed endpoint drain or full default-capacity proof",
+  "inputs": {
+    "pages.hex": "8755c74eaf08c12fd95ae845ba11036912d8c24aa24649a728b8e36487f76198",
+    "records.hex": "39c42e8fc3ab1a926522398068abe1c9c4e03cc2c4f318a34e922f940785213e"
+  },
+  "results": [
+    "RETAINED_SERVICE_CONTENT_PASS pages=64 records=512",
+    "TEST_PASS record_adapter records=1048 lookup_checks=259 bad_inputs=3 malformed_reads=3",
+    "TEST_PASS record_backing_service checks=1511 write_pages=107 read_pages=131 error_cases=8 aw_bursts=116 ar_bursts=143 b_responses=116 r_beats=414"
+  ],
+  "artifacts": {
+    "simulate.log": "cf064741ea700bff91a50df922c4328cffbcc3faedf10513963f822587f64110",
+    "compile.stdout.log": "916476c070171efd1fed0d7bf22ce816a522664156a5a5abcb339aeb0b4cd514",
+    "xvlog.log": "916476c070171efd1fed0d7bf22ce816a522664156a5a5abcb339aeb0b4cd514",
+    "simulate.stdout.log": "6d80456cbbaf7b7e1bc05f8ff226aaf7436d806271d1ff64e58cffc4aac0f9c7",
+    "xelab.log": "74faff47ef1f42402be9e38cb878f1a990829cb7c8587f24c2baf25f2f4ddf09",
+    "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+    "elaborate.stdout.log": "74faff47ef1f42402be9e38cb878f1a990829cb7c8587f24c2baf25f2f4ddf09"
+  }
+}

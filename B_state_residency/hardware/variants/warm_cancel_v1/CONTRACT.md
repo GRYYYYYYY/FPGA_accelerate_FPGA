@@ -1,0 +1,13 @@
+# Warm 查询恢复取消与失败回复退休
+
+本变体验证实际共享节点故障后的恢复，在原生query镜像9/10字后assert全局abort，保持原生错误回复8周期。不是AXI在途中断：标签DDR恢复与路径导入已完成，查询流只有本地控制器事务。所有生产改动从 warm_system_v2 生成并保持在本目录。
+
+发现两个不同问题：原coordinator LABELS仅在labels_done成功回调出现时才检查错误，warm join取消后永远不产生joined，因此查询错误回复已消费后仍等待直到看门狗；仅修复该错误出口，则coordinator在原生query错误回复仍被保持时提前报告失败。两个实际失败实例均保留。
+
+最终改动：LABELS优先检查stopped/fail_now，进入FAILWAIT不依赖成功回调；原生coordinator的normal_retired在warm模式额外要求wm_services_retired。该信号来自实际恢复控制器、已受理回复与后端退休，并新增CF busy/回复观察，排除正等待自身回调的coordinator busy。回复VALID/READY仍由原生控制器处理，没有伪造完成或因管理员资格关闭而截断旧回复。
+
+warm_cancel_fixed_v2 的32槽/单槽：query9字对应选定G2原始镜像前缀，未送last；取消后原生query返回status2/CRC0。保持其回复8周期时，coordinator完成VALID必须0；真正消费后才出现status6失败回复，journal仍6、checkpoint仍18，所有服务退休。消费失败回复并撤销abort后，warm join继续HALT/owned/fault，业务和普通lease仍关闭。最终工作owner图像逐字节等于G2快照，完整8路AXI/DDR重放通过。没有冷复位或重装工作DDR。
+
+warm_cancel_normal_v2 复用已审计warm_shared_last_v1的完整健康六项journal/G2修复、328标签、路径/查询恢复和q2重试/拆线，两种容量共28文件及最终周期逐字节一致。不是形式等价或板卡性能结论。
+
+本轮不实现HALT再arm、失败后无冷复位重试、晚到成功回复上的abort、标签/AXI在途取消或其他错误点。下一步见HALT_REARM_NOTES.md；运行中快照、通用多net/overflow、持久化授权、综合时序及板卡收益仍未完成。

@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "simulation": {
+    "small_final": {
+      "small": 1,
+      "checks": 370,
+      "transfers": 46,
+      "fences": 25,
+      "tag_wraps": 12,
+      "errors": 9,
+      "gap_cycles": 200,
+      "host_stalls": 1480,
+      "aw": 40,
+      "ar": 19,
+      "b": 40,
+      "r": 378
+    },
+    "actual_final": {
+      "small": 0,
+      "checks": 77099,
+      "transfers": 6086,
+      "fences": 19,
+      "tag_wraps": 4,
+      "errors": 0,
+      "gap_cycles": 152,
+      "host_stalls": 308396,
+      "aw": 3521,
+      "ar": 4454,
+      "b": 3521,
+      "r": 71064
+    }
+  },
+  "actual_projection": {
+    "public_commands": 77099,
+    "field_accesses": 56588,
+    "queries": 19,
+    "transfers": 6086,
+    "peak_reserved_owners": 390,
+    "alignment_offsets": 64
+  },
+  "synthesis": {
+    "top": "memory_scratch_endpoint",
+    "frames": 23405,
+    "tx_bits": 16,
+    "generation_bits": 16,
+    "tag_bits": 2,
+    "ram_cells": [
+      "memory/codec/words_reg RAMB18E2",
+      "memory/memory_service/directory/owners_reg_bram_0 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_1 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_10 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_11 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_12 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_13 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_14 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_15 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_16 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_17 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_2 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_3 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_4 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_5 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_6 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_7 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_8 RAMB36E2",
+      "memory/memory_service/directory/owners_reg_bram_9 RAMB36E2",
+      "pages/endpoint/storage/data_reg_0 RAMB36E2",
+      "pages/endpoint/storage/data_reg_1 RAMB36E2"
+    ],
+    "utilization": {
+      "luts": 5301,
+      "registers": 5105,
+      "bram_tiles": 20.5,
+      "latches": 0
+    }
+  },
+  "scope": "Closed single-clock serial command state endpoint, including internal page COMPLETE, address RETIRE and two-domain fence recycle. Real 19 small-query field traces replay through independent AXI slave memory. No full FPGA search/router, CDC, hidden producers, arbitrary fault recovery, post-route clock closure or measured board acceleration.",
+  "manifest_sha256": "6c22b2762a8e22dbfeb940ac41727c65aa2caf2e5f68e1c0a0061380535ecccb"
+}

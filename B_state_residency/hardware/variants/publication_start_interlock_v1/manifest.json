@@ -1,0 +1,70 @@
+{
+  "accepted_repair": false,
+  "arbitration": "Raw publication start offer has priority over lease release; release_ready does not depend on start_ready.",
+  "candidate_sha256": "008acf04cee1ce51f1e049f7962febe4c025d15f23f762cdf0367834033e594c",
+  "evidence_sha256": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_publication_release_contract_lineage_review_20261102.json": "e48608f19a56173fb82f99e8a080cdac9501fd835992638a1b9a1c222afe6fee",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/ka_publication_release_full_rtl_v5_counterexample_review_20261102.json": "db7bb5e11c9583541dc8f4683debbc55eaf2b60067eff5d9b9bedef8d2a38e4e",
+    "/tmp/B_state_residency_recovery_20261102/stage_static_cp_synth_v1/sources/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "/tmp/B_state_residency_recovery_20261102/stage_static_cp_synth_v1/sources/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "/tmp/B_state_residency_recovery_20261102/stage_static_cp_synth_v1/sources/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5"
+  },
+  "exact_reversible_replacement": {
+    "after": ".command_valid(jp_start||ap_valid||cp_valid||qc_cp_valid)",
+    "before": ".command_valid(ap_valid||cp_valid||qc_cp_valid)"
+  },
+  "physical_v6_input_unchanged": true,
+  "planned_cases": [
+    {
+      "case": "same_cycle_start_release",
+      "expected": "Eligible start accepted; release ready low and lease retained."
+    },
+    {
+      "case": "release_only",
+      "expected": "Unchanged release acceptance when all original conditions permit."
+    },
+    {
+      "case": "held_start_valid_not_ready",
+      "expected": "Release remains blocked even when start_ready=0. Potential liveness effect requires caller contract analysis."
+    },
+    {
+      "case": "held_release_valid",
+      "expected": "No release during start or ownership; acceptance after transaction retires and start is withdrawn."
+    },
+    {
+      "case": "done_response_backpressure",
+      "expected": "jp_owned prevents release until DONE response consumed."
+    },
+    {
+      "case": "cancel",
+      "expected": "Retain lease through cancellation/discard and DONE response consumption."
+    },
+    {
+      "case": "release_on_done_consumption_edge",
+      "expected": "Pre-edge jp_owned still prevents release; later cycle may accept."
+    },
+    {
+      "case": "release_after_done_consumption",
+      "expected": "Release can proceed once publication is idle and no start/other blocking offers remain."
+    },
+    {
+      "case": "invalid_start_payload",
+      "expected": "Existing rejection response retains lease until consumed; do not bypass original monitor."
+    },
+    {
+      "case": "unknown_start_control",
+      "expected": "Four-state behavior requires explicit simulation and unknown-value assertions; no two-state inference accepted."
+    }
+  ],
+  "prior_shadow_v7_applies_to_candidate": false,
+  "production_rtl_modified": false,
+  "reasoning": "For known asserted jp_start, command_valid is true and release_ready is false. This local Boolean observation prevents concurrent acceptance at that guard; it does not establish integrated timing, liveness, four-state behavior or caller legality.",
+  "rtl_simulation_run": false,
+  "scope": "Candidate source only; preserve original counterexample and monitors. Full probe and directed protocol cases, then new synthesis/functional evidence are required for any production change.",
+  "source_sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+  "status": "isolated_candidate_prepared_not_simulated",
+  "synthesized": false,
+  "time_utc": "2026-11-04T03:37:43.683658+00:00",
+  "tool_sha256": "31945f68a55927b206c27d44f56d55e2af8ebeee9d65b8aae8c06de0a293558d",
+  "unresolved": "Holding jp_start while it cannot be accepted also blocks release. Caller arbitration and forward progress remain to be established before selecting a repair."
+}

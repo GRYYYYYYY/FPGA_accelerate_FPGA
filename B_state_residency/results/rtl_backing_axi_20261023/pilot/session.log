@@ -1,0 +1,94 @@
+
+B_BACKING_SIM_BEGIN
+2022.2 tb_backing_page_service xcu280-fsvh2892-2L-e
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:x1c0itncbgns:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:x1c0itncbgns:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:tlw3qjzf8v5a===}
+INFO: [MCP 00-100] ===MCP_CMD_START:tlw3qjzf8v5a===
+puts "VSCSTART" ; set exitCode [catch {launch_simulation -simset sim_1 -mode behavioral} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'tb_backing_page_service'
+WARNING: [Vivado 12-13277] Compiled library path does not exist: ''
+INFO: [Vivado 12-5682] Launching behavioral simulation in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/project/b_backing_axi.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_backing_page_service' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/project/b_backing_axi.sim/sim_1/behav/xsim'
+xvlog --incr --relax -L uvm -prj tb_backing_page_service_vlog.prj
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_frame_directory.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module backing_frame_directory
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/backing_page_service.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module backing_page_service
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module scratch_page_axi
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_backing_page_service.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_backing_page_service
+INFO: [VRFC 10-2263] Analyzing Verilog file "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/project/b_backing_axi.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+Waiting for jobs to finish...
+No pending jobs, compilation finished.
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/project/b_backing_axi.sim/sim_1/behav/xsim'
+xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_backing_page_service_behav xil_defaultlib.tb_backing_page_service xil_defaultlib.glbl -log elaborate.log
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_backing_page_service_behav xil_defaultlib.tb_backing_page_service xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.backing_frame_directory(FRAMES=6...
+Compiling module xil_defaultlib.scratch_page_axi
+Compiling module xil_defaultlib.backing_page_service(FRAMES=64,I...
+Compiling module xil_defaultlib.tb_backing_page_service
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_backing_page_service_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/project/b_backing_axi.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_backing_page_service_behav -key {Behavioral:sim_1:Functional:tb_backing_page_service} -tclbatch {tb_backing_page_service.tcl} -log {simulate.log} -testplusarg PAGES=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_backing_axi_20261023/fixtures/pages.hex"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source tb_backing_page_service.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+WARNING: [Wavedata 42-489] Can't add object "/tb_backing_page_service/fixtures" to the wave window because it has 688128 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+WARNING: [Wavedata 42-489] Can't add object "/tb_backing_page_service/memory" to the wave window because it has 1048576 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+# run 101ms
+TEST_PASS backing_page_service checks=876 write_pages=68 read_pages=64 error_cases=5 aw_bursts=90 ar_bursts=87 b_responses=90 r_beats=1347
+$finish called at time : 327140 ns : File "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_backing_page_service.sv" Line 211
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_backing_page_service_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 101ms
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 1828.109 ; gain = 16.008 ; free physical = 617966 ; free virtual = 1334514
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:tlw3qjzf8v5a:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:tlw3qjzf8v5a:0===
+set_param -quiet messaging.defaultLimit 10000000
+send_msg_id {MCP 00-100} INFO {===MCP_CMD_START:gtpvy8yfjygr===}
+INFO: [MCP 00-100] ===MCP_CMD_START:gtpvy8yfjygr===
+puts "VSCSTART" ; set exitCode [catch {close_sim} result] ; catch {flush stdout} ; catch {flush stderr} ; puts $result ; puts "VSCEND:$exitCode"
+VSCSTART
+INFO: [Simtcl 6-16] Simulation closed
+
+VSCEND:0
+send_msg_id {MCP 00-101} INFO "===MCP_CMD_END:gtpvy8yfjygr:$exitCode==="
+INFO: [MCP 00-101] ===MCP_CMD_END:gtpvy8yfjygr:0===

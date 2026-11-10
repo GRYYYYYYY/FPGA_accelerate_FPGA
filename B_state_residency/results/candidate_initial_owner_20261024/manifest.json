@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "scope": "Actual CPU loader initial owner state exported to AXI record format; no hardware load or routing claimed",
+  "sources": {
+    "export.cpp": "da7b4f1f4094a94222abe03b6e2d3d4fdbfbafe8848788219c20997c976a8854",
+    "runner.py": "b8cb1fbfe215f8c3a6f97d568e311033892cd300ca0a7269ec59d17fc893b29a",
+    "reference/trace.cpp": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+    "reference/real_trace.hpp": "d76ace3cdc74ebe93d25249c5065cda3948bd1f737488e9912d1798997f9f46e",
+    "reference/real_router_hooks.inc": "aa44a7cca13856af257e0c1fae47dedc872f29ddff910d72733624c14781cc56",
+    "reference/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "reference/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "reference/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "reference/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "reference/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "reference/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  },
+  "gates": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/manifest.json": "78a531decd3f39c5f2c74a97c0d33ab946cbcfdeab70463e35c493bfeecaf7b0",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/source_bound_audit.json": "3ee5b9e8d5cf99511fd723ecc45d2b8686fa741c2a588a22a0fc133e6a8f97e3",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v4_20261024/manifest.json": "061b8352a190992a471072e87ff872954875a16085b2176255d9ae3da2d1e56e",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v4_20261024/source_bound_audit.json": "e7654544224cd8b4a03da6357e98a759fc22dc657250d151ff36573173f53515"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fno-fast-math",
+        "-pthread",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_initial_owner_20261024/sources/reference",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_initial_owner_20261024/sources/reference/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_initial_owner_20261024/sources/export.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_initial_owner_20261024/export"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 8.76133536733687
+    },
+    {
+      "stage": "execute",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_initial_owner_20261024/export",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_initial_owner_20261024"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 3.3414523731917143
+    }
+  ],
+  "input_rrt_sha256": "d03de37af1a4a0b10f8bb29812b0048c4d2dd57ba6dadb70f61853225e39b6f4",
+  "layout": {
+    "nodes": 9089009,
+    "nets": 27960,
+    "connections": 180326,
+    "occupied": 180326,
+    "references": 180326,
+    "primary_bytes": 145424192,
+    "pool_offset": 145428288,
+    "pool_capacity": 64,
+    "allocator_offset": 145433408,
+    "total_bytes": 145433472
+  },
+  "independent_load_events": 180326,
+  "all_node_records_checked": 9089009,
+  "artifacts": {
+    "layout.json": "72f85c0c3bc2c899e4f5cf2ba01c20426c8a09f9885479f2dc940c0d7af9b961",
+    "owners.tsv": "598611b833a4d557355064c2d6bd57ab3ed31fd99cf3073b9af21de85a254190",
+    "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "owners.bin": "da578231f612306d5399c5b8bba75d8a3ba931a5df7502628b9de39bac9c6c0a",
+    "export": "34e6979b5ad34364607416c64f7e7bec4199b8d5bcb2a619969c0ae7afeb96c2",
+    "execute.log": "2b418c15059afe17558142f39bea8d9e11297d86d01073ef80de7009bc4d6e02"
+  }
+}

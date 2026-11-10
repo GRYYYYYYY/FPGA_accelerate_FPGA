@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "scope": "Actual CSR/CPU getChildren and candidate decisions with actual initial owners; scripted query labels/targets; original decision body cost call replaced by recording, no cost/push/route execution or RTL proof",
+  "input_manifest_sha256": "66b108b1e126f42ede074531f88f995c6480c74fec76a95db2882c28b2406347",
+  "input_rrt_sha256": "d03de37af1a4a0b10f8bb29812b0048c4d2dd57ba6dadb70f61853225e39b6f4",
+  "sources": {
+    "access_machine.hpp": "f4ac51c6d1fe26effaecde2577c3db5e37be35de404f1ac501e6c4f8f18e812a",
+    "decision_fixture.inc": "ea0fd4dc5934d2fbe3352dabd1ec60bd1f81fdfadfefc4687e2d58058dcd5dfd",
+    "make_inputs.cpp": "8f9fdf8962d7785e2552d002a2971cd6a24c7de572c7873917f5ab79609a9720",
+    "runner.py": "2b546ae270e38e8a07e56757c66bdef0b460a034b52e3d3cdca1e4573a584214",
+    "reference/trace.cpp": "5091a81fb5be3f7774a416fd2c5e04e8f9bc9384e570f47b3e600662cf850416",
+    "reference/real_trace.hpp": "d76ace3cdc74ebe93d25249c5065cda3948bd1f737488e9912d1798997f9f46e",
+    "reference/real_router_hooks.inc": "aa44a7cca13856af257e0c1fae47dedc872f29ddff910d72733624c14781cc56",
+    "reference/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "reference/oracle_trace.cpp": "b5c510176a9a36d0d503411de20b54caea7b7f601d5d256ada840b0615268663",
+    "reference/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "reference/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "reference/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "reference/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "reference/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O2",
+        "-fno-fast-math",
+        "-pthread",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024/sources",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024/sources/reference",
+        "-I/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024/sources/reference/include",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024/sources/make_inputs.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024/make_inputs"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 10.193743582814932
+    },
+    {
+      "stage": "execute",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024/make_inputs",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/candidate_decisions_20261024"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 2.771240893751383
+    }
+  ],
+  "coverage": {
+    "decisions": 3022,
+    "allowed": 785,
+    "early": 60,
+    "pruned": 12
+  },
+  "artifacts": {
+    "vectors.txt": "06eb5e5b530545e9c663bec2335450bc6988039ecf76459ddd06a9ea2d2202df",
+    "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "make_inputs": "3634491a40f6e3bb9161ad911b4ddf59f7f03b74ca0cdad71e53207cb5618138",
+    "initial_design.bin": "5596b9da4a4e9385dfbd0708e97a721627398aeb967158616d981648590692f6",
+    "sink_nodes.txt": "f98e2f35484305cc4a43e5c9be1b74ec6f9d3adafcda54da098037aa9b327b62",
+    "decision_coverage.json": "a6cb18a765417f43bc19abcd2084303c6323cbc1f145d654e96d133fafcc8699",
+    "expected_design.bin": "af7feabcab281d6ed54a6185f38a8bfa23c88a21dce8653da7dfe4a6ece3bebd",
+    "coverage.json": "daf2379f5219bee95bbd7867ff464709c7380a2056f54c40e4180a8bd23fc6dc",
+    "execute.log": "ff2d9afedd34cc9107742d6f94635dacf9ecd0f5535122f7a30b7aa01f8bbe63"
+  }
+}

@@ -1,0 +1,31 @@
+#include <fstream>
+#include <array>
+static int16_t s16(const unsigned char*b){return int16_t(uint16_t(b[0])|(uint16_t(b[1])<<8));}
+static int32_t s32(const unsigned char*b){return int32_t(uint32_t(b[0])|(uint32_t(b[1])<<8)|(uint32_t(b[2])<<16)|(uint32_t(b[3])<<24));}
+int main(int argc,char**argv){
+ if(argc!=6)return 2;std::ifstream graph(argv[1],std::ios::binary),rows(argv[2],std::ios::binary);unsigned N=std::stoul(argv[3]),R=std::stoul(argv[4]);bool real=std::stoi(argv[5]);
+ std::vector<int>slr(R);for(unsigned y=0;y<R;y++){unsigned char b[8];rows.read((char*)b,8);if(!rows)return 3;slr[y]=s32(b);}
+ FILE*ctx=std::fopen("contexts.txt","w");vec=std::fopen("vectors.txt","w");unsigned count=real?512:11664;
+ unsigned allowed=0,lookahead=0,early=0,pruned=0;
+ for(unsigned k=0;k<count;k++){
+  unsigned rep=k%2,ct=(k/2)/(18*18),pt=((k/2)/18)%18,st=(k/2)%18;
+  ids[1]=real?(k*65537ull+3)%N:ct;ids[0]=real?(ids[1]+8191)%N:18+pt;ids[2]=real?(ids[1]+16381)%N:36+st;ids[3]=rep?54:0;
+  Golden a;auto&c=a.connections[0];a.useHotExpand=rep;a.pruneDeadEnd=rnd()%4==0;a.cfg.useBoundingBox=rnd()&1;c.crossSLRnorth=rnd()&1;c.crossSLRsouth=rnd()&1;
+  for(unsigned n=0;n<4;n++){
+   unsigned char b[32];graph.seekg(uint64_t(ids[n])*32);graph.read((char*)b,32);if(!graph)return 4;auto&t=a.ns[n];
+   t.tileAddr=s32(b);t.type=b[8];t.isLaguna=b[9]&2;t.isPinbounce=b[9]&128;t.beginX=s16(b+10);t.beginY=s16(b+12);t.endX=s16(b+14);t.endY=s16(b+16);
+   a.type[n]=RouteNodeType(t.type);a.hot[n]=t;a.dyn[n].prev=3;
+  }
+  for(unsigned y=0;y<R;y++)a.slrTable[y]=slr[y];
+  a.dyn[0].prev=rep?3:-1;a.dyn[1].visited=rnd()%17==0?17:0;a.dyn[1].target=rnd()%11==0?1:0;
+  a.deadEnd[1]=rnd()%7==0;int occ=rnd()%4;a.uses[1]=(occ&&(rnd()&1))?1+rnd()%3:0;a.over[1]=occ>1||(occ==1&&a.uses[1]==0);
+  c.xMinBB=a.ns[1].endX-(k%7==0?0:2);c.xMaxBB=a.ns[1].endX+2;c.yMinBB=a.ns[1].endY-3;c.yMaxBB=a.ns[1].endY+3;
+  std::fprintf(ctx,"%u %u %u %u %u %08x %08x %08x %08x %d %d\n",k,ids[0],ids[1],ids[2],ids[3],mapped(uint32_t(a.dyn[0].prev)),mapped(uint32_t(a.dyn[1].prev)),uint32_t(a.dyn[1].visited),uint32_t(a.dyn[1].target),occ,a.uses[1]);
+  Candidate b;static_cast<Base&>(b)=static_cast<Base&>(a);a.queue.owner=&a;b.queue.owner=&b;a.tl_dyn=a.dyn;b.tl_dyn=b.dyn;
+  Base::State sa{0,17,&a.queue,false},sb{0,17,&b.queue,false};a.exploreAndExpand(sa,0);b.exploreAndExpand(sb,0);
+  if(a.events!=b.events||a.pushes!=b.pushes||a.look!=b.look||sa.earlyTermination!=sb.earlyTermination||a.prunedPushes!=b.prunedPushes){std::fprintf(stderr,"FABRIC_ORACLE_FAIL case=%u\n",k);return 5;}
+  allowed+=a.pushes;lookahead+=a.pushes&&a.look;early+=sa.earlyTermination;pruned+=a.prunedPushes;case_id++;
+ }
+ std::fclose(ctx);std::fclose(vec);for(int r=1;r<=11;r++)std::printf("REQUEST %d %u\n",r,requests[r]);
+ std::printf("FABRIC_ORACLE_PASS cases=%u steps=%u allowed=%u lookahead=%u early=%u pruned=%u\n",case_id,steps,allowed,lookahead,early,pruned);return 0;
+}

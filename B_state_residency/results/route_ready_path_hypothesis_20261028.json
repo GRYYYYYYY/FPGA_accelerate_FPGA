@@ -1,0 +1,25 @@
+{
+  "status": "route_unexpected_ready_dependency_hypothesis_not_proved",
+  "reference_audit_sha256": "8966eb1a8a82578bd0d16b19ba6aa81b2e1987c6b99c1819d9fecfb8cf3b3369",
+  "timing_analysis_sha256": "0a5ad6ebb641955c74fce867dfe689ce824e15f3afaaaf05d5992c2154491c0a",
+  "source_sha256": {
+    "route_commit_controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+    "route_commit_host_adapter.sv": "793d2b899f3a5c85797fb420c8672d51337d4e4e4dedc4606dea661385f03569",
+    "residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+    "priced/candidate_recursive_engine.sv": "6b130cc66c38a236189a33ba41f6119bcf32c2e7b6407aa06d81830ed127ffe8",
+    "priced/candidate_recursive_query_core.sv": "7fd54ca8e4858c50f43b0e46a5d5c43b46bce453930ab679251122f7955a4355"
+  },
+  "findings": [
+    "Worst cone traverses route fault and checkpoint safety before 13 controller LUT levels ending at path register CE.",
+    "Route unexpected permits same-cycle label LS/ready or owner OS/ready responses; deleting READY guards without a contract changes generic behavior.",
+    "Adapter label readiness and response are held-qualified direct recursive-engine host IO signals, not the outer host transaction fence outputs. Prior fence proof is insufficient here.",
+    "Adapter owner readiness uses !owner_pending and journal readiness; response comes directly from held-qualified backend response. Sequential ownership and backend exclusion need independent proof."
+  ],
+  "next_steps": [
+    "Trace h_io readiness/reply state qualifications inside actual label backend.",
+    "Prove adapter owner_pending invariant including response retirement and reset.",
+    "Retain generic overlap counterexamples and default-off specialization if justified.",
+    "Only then generate isolated candidate and native legal/default/counterexample tests."
+  ],
+  "scope": "Read-only investigation. No new RTL candidate, functional equivalence proof or timing result."
+}

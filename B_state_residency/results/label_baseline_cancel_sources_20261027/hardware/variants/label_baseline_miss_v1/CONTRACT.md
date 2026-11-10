@@ -1,0 +1,17 @@
+# 真实基线缺失填充接入驻留管理器
+
+默认关闭ENABLE_BASELINE。build.py由已冻结frame-export manager确定派生新候选，不修改原基线。新增baseline请求/回复通道；OPEN受baseline_permit和非零epoch限制，OPEN受理时锁存epoch，后续更改外部epoch引脚不改变已建立绑定。外部负责将该身份和真实基线、价格内容、生命周期对应；这不是认证。
+
+启用后，io读和io写均先原生READ；CLIENT实际READ也走同一缺失处理。present记录直接使用当前值，写请求再发原字段WRITE；absent时实际请求只读baseline reader，核验状态/node/epoch/flags。用真实原生WRITE依次填入五字段，每次等实际native回复，随后重放原始READ或WRITE。第一次seed写成功即置dirty_slots，读触发seed也必须写回；客户端租约在真实最终回复消费前保持。没有TB伪造业务回复。
+
+BASE_SEND/BASE_WAIT期间发生native fault则记录poison，仍保留已暴露baseline请求与回复的退休责任，实际响应消费后fail_request(10)。基线R错误同样封锁业务，不把零载荷当有效标签。该规则不是所有原生阶段、复位、任意取消或畸形从设备的通用证明。
+
+选定full_v3与single_v3：基线为完整9089009节点的真实prepared镜像；原生memory_scratch_endpoint、实际BRAM标签store、目录、queued fence、codec和两路文件AXI agent均真实执行。先纯读node0并独立刷回/释放/重载、首次写同页node1仅改sequence字段，三次原生seed共15字段写，原业务写1次；全部字段与CPU原字节模型一致。先checkpoint刷回释放，再重读0/1，无新baseline访问；CLIENT读node8触发seed，再刷回/释放重载仍无需baseline。每例83检查、4baseline读（最后node16注入R错误）、3页WB和3页RF，最终3072B backing与独立字节重放一致。
+
+drain_v2为单槽，在node16实际baseline AR受理、R未返回时连续置入native fault；reader真实R成功返回并消费后才失败，未进行node16 seed。84检查；其余成功路径相同。native fault来自TB外部故障输入，实际endpoint此前无故障；不是AXI回复掩码。
+
+范围仍为manager/endpoint组件；未将baseline通道贯穿query/search/residency整个层级，完整查询仍依赖初始CPU822条未来闭包，也未验证新miss路径下G2发布、warm822恢复、任意变价或board收益。后续见NEXT.md。
+
+复现：`python3 scripts/run_label_baseline_miss.py NEW_ROOT`，单槽加`--single`，单槽fault排空加`--single --drain`。正式审计使用`audit_label_baseline_miss_isolated.py ROOT`；保留的旧audit_label_baseline_miss.py仅用于v2/v1历史归档，不能修改。
+
+默认关闭完整32槽回归19文件及周期精确等于runtime_label_snapshot_full_v3；新runner显式绑定未用侧带，不修改共享wrapper。四个选定归档均恢复重审audit字节一致。

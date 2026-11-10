@@ -1,0 +1,19 @@
+# 第九路基线AXI的真实退休联锁
+
+baseline_retirement_guard仅观察真实req/rsp与AR/R握手，不屏蔽VALID/READY或修改载荷。独立保留一项baseline服务归属直到实际回复消费；复用已审计axi_drain_watch跟踪实际AR/R。reader idle、物理drained、无归属/新offer/配置offer/held回复且无协议fault才retired。reset仅接cold初始化，不能接target_reset或abort。
+
+query/search/residency三层新增baseline_retired；ENABLE_BASELINE开启时，residency的f_all_drained及f_backend_idle均要求它。已有PC、publication、recovery coordinator和warm retired通过这两个真实信号获得覆盖，不改原fence/coordinator状态机。关闭参数时忽略该输入。正常provider仍由外部配置身份；这是在途退休，不是认证。
+
+完整系统取消测试full_v3/pressure_v3：零预加载，真实query180327的SOURCE_CHECK首次读取node66893，真实baseline AR受理/R前拉qc_abort并提供checkpoint acquire争用。独立agent实际延迟R48+随机周期，32槽58/单槽61个检查周期中baseline物理drained、retired、f_all_drained、f_backend_idle、PC ready、target reset均关闭。真实R消费、实际五字段baseline seed及READ回复退休后，query原生status7/prepare_acked0/committed0，保持8周期，仍无PC放行/target reset。源标签已填入BRAM，不是回滚；该测试不执行恢复命令，也没有消费最后query失败回复或无复位重试，不能称G2 warm已通过。
+
+negative_v3仅移除两个新门控。实际AR已受理、R未返回，guard retired0/physical0，而原f_all_drained=1而f_backend_idle仍0；这只证明旧physical指标漏计第九路，不证明旧版会实际提前reset。33003周期触发premature baseline retirement。独立审计核对一个实际AR、无R、无seed/owner突变和移除门控的源差异，保留真实反例。XSim有预期Fatal，negative的audit passed表示反例成立，绝不是正常成功。
+
+24项guard单元检查覆盖配置offer、未受理req/AR、R背压、物理R完成但逻辑回复仍保持、真实回复消费、非法重复回复和无AR的R错误。正常normal_full_v1回归两条自然查询的9AXI+7DDR+native trace共17文件/周期逐字节等于label_baseline_pair_full_v2。保留777+4原生按需加载、所有CPU oracle、最终781标签/owner结论。
+
+开发失败：abort_full_v1把取消误期望为status2/acked1，实际SOURCE_CHECK取消定义是status7/acked0；v2未真正传入延迟宏，只有10/13等待周期，未达到要求；v3显式BASE_ABORT_DELAY参数后满足58/61。negative_v2在同一AR受理边沿先执行TB Fatal，AXI agent尚未记录A；negative_v3在实际受理后的边沿检查，获得明确A记录。没有修改DUT回复凑数。
+
+复现run_label_baseline_fence.py NEW --abort --full-only（或--pressure-only）、--abort --negative --full-only，以及无--abort的正常两query；分别audit_label_baseline_fence.py或audit_label_baseline_fence_normal.py。单元run_baseline_guard_unit.py/audit_baseline_guard_unit.py。当前runner不支持--disabled，本轮无默认关闭新变体回归；前轮七层/manager默认关闭结果保留，不冒充本轮新端口的回归。
+
+部分当次runner的scope继承两query通用描述；实际模式以abort_case/negative、命令、trace及独立audit为准。当前模板已改为按模式描述，归档原始metadata未改。
+
+五个选定归档实际恢复重审audit字节一致；源冻结results/label_baseline_fence_sources_20261027，实际编译输入以各归档sources为准。

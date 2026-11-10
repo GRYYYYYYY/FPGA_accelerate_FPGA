@@ -1,0 +1,134 @@
+{
+  "time_utc": "2026-11-02T15:39:16.373410+00:00",
+  "hostname": "fpgaacc1--cfc8cd109508-jnnrja5s7q",
+  "archives": [
+    {
+      "archive": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/recovery_archives_20261102/shadow_authority_core_provenance_v1.tar",
+      "archive_sha256": "7ed01d7bc3e0c9ef44904dd9f34b332a103c0965a7a4825588823803f6f93302",
+      "file_sha256": {
+        "ka_active_configured_formal_v1/core.json": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+        "ka_active_configured_formal_v1/manifest.json": "73e96d4e79864abfb2b0883919b4c57cc635f4259d1e76f6eb80af066868b94a",
+        "ka_active_configured_formal_v1/prepare.ys": "d6fb364866ea90ec50f007bde1d8b7b359178c8d0c5be596cb0c8500ffcd403f",
+        "ka_active_configured_formal_v1/prepare.log": "8d278e8237bdd972730abf1c60880a0fb78c9caacb70f2d9bdd1aee8a6501af2",
+        "ka_active_configured_formal_v1/core.ys": "bccd5dd4b9fd84ebc57c410a32ed46427caf906525915357fdb7479392267d5e",
+        "ka_active_configured_formal_v1/core.log": "c2d9b105c7895f66212da5f9ba0082a1e26d9932b1379ff9eeb3be06797cc60d",
+        "bound/checkpoint_authority_rotator.sv": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+        "bound/checkpoint_authority_reader.sv": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+        "bound/owner_state_store.sv": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c"
+      }
+    }
+  ],
+  "old_experiment_files_modified": false,
+  "core_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+  "manifest": {
+    "status": "running",
+    "scope": "Actual rotator/readers/codecs unit only; no top-level reachability",
+    "sources": {
+      "checkpoint_authority_rotator.sv": {
+        "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_rotator.sv",
+        "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032"
+      },
+      "checkpoint_authority_reader.sv": {
+        "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+        "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+      },
+      "owner_state_store.sv": {
+        "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/access_owner_v3_20261024/owners/owner_state_store.sv",
+        "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c"
+      }
+    },
+    "commands": [
+      {
+        "stage": "core",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+          "-s",
+          "core.ys"
+        ],
+        "exit_code": 0,
+        "elapsed_s": 29.508971294388175,
+        "log_sha256": "c2d9b105c7895f66212da5f9ba0082a1e26d9932b1379ff9eeb3be06797cc60d"
+      },
+      {
+        "stage": "prepare",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+          "-s",
+          "prepare.ys"
+        ],
+        "exit_code": 0,
+        "elapsed_s": 8.90767533518374,
+        "log_sha256": "8d278e8237bdd972730abf1c60880a0fb78c9caacb70f2d9bdd1aee8a6501af2"
+      },
+      {
+        "stage": "bmc",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-t",
+          "12",
+          "--dump-vcd",
+          "bmc_failure.vcd",
+          "design.smt2"
+        ],
+        "exit_code": 0,
+        "elapsed_s": 13.540995307266712,
+        "log_sha256": "06da78436b0c53c3724eda4849ae25037ecee4f268e80d7f6c8d1f81d9cb9e6a"
+      },
+      {
+        "stage": "induction",
+        "argv": [
+          "python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-i",
+          "-t",
+          "12",
+          "--dump-vcd",
+          "induction_failure.vcd",
+          "design.smt2"
+        ],
+        "exit_code": 0,
+        "elapsed_s": 324.3208105713129,
+        "log_sha256": "1c7ef8025f9f1f308e8dbea783ed690c2c33da36f992fed2ce4a53dc20b65b90"
+      }
+    ],
+    "core_json_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+    "exposed_json_sha256": "6dd9d0b66a7e2d05c269c12774264c656e16eec507d8a9085c975b172044ad63",
+    "observation_ports": {
+      "f_bank0_configured": "bank0.configured",
+      "f_bank1_configured": "bank1.configured",
+      "f_bank0_bound_valid": "bank0.bound_valid",
+      "f_bank1_bound_valid": "bank1.bound_valid",
+      "f_rotator_state": "state",
+      "f_target": "target",
+      "f_active_bank": "active_bank"
+    },
+    "harness_sha256": "c3ce331f6b4ca9dae5320cf3aafc3e7496ca2bd38877304c4b72e2725d9d8f67",
+    "active_process": {
+      "stage": "cover",
+      "pid": 2565237,
+      "start_ticks": "1663666178",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+        "-s",
+        "z3",
+        "-c",
+        "-t",
+        "35",
+        "--dump-vcd",
+        "cover%.vcd",
+        "design.smt2"
+      ]
+    }
+  },
+  "notebook_id": "24b4a633-9ad2-4133-9174-cfc8cd109508",
+  "temporary_inspection_terminal_closed": true,
+  "transport": "authenticated Jupyter terminal; direct verified TLS; credentials not recorded"
+}

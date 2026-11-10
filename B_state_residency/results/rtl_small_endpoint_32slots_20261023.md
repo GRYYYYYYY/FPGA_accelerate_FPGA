@@ -1,0 +1,14 @@
+# 小页32槽驻留与阻塞回收验证
+
+32个槽位同时绑定，两个边界节点、五字段全部写入；完成所有槽位加载后反序读回，重复8轮checkpoint与回填。1778检查、288传输、8checkpoint、4tag回绕全部通过。仍有绑定时的9次checkpoint均拒绝，数据/绑定不受影响。
+
+第二组在8次合法checkpoint中分别关闭dispatch、execute、fence_service、ack_receive，每类2次，各100周期，共800周期。检查相应请求/工作/控制/ACK队列确实待处理，期间没有host成功、tag变化、提前FINISH或事务ID重置；释放阻塞后全部1778检查继续通过。DUT源码未改，无force/deposit。
+
+runner3955与25758均exit0，所有编译/展开/仿真exit0；final_audit核对hash/收据。阻塞组结束694830ns。
+
+这是32个同时绑定的驻留槽，公开命令仍串行，不是32个并发AXI事务。真实38轨迹、默认容量综合、时序及实卡性能仍未完成。下一步针对完整小页端点做目标变异及真实轨迹向量生成，保留原64节点回放。
+
+rtl_small_endpoint_32slots_20261023 manifest SHA74836a41d1b7d472a29ed66992992e893a63c14bd4977b6bf659c1a6c89bdac9
+
+rtl_small_endpoint_stalls_20261023 manifest SHA59ee3b85fb3d1e5d4e0d3dae203ef7caba38c0657aeb987f5d55d91259adf35e
+

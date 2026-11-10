@@ -1,0 +1,14 @@
+{
+  "classification": "testbench assumes immediate FINISH success; legal FENCE_WAIT after schedule changes",
+  "run_status": "failed",
+  "failed_check": 8266,
+  "opcode": 11,
+  "actual_status": 7,
+  "expected_status": 0,
+  "log_sha256": "ba0b9a7497f302e0dee95e42d480ada6b9a0e32ac2fcab70c61365c6c911e772",
+  "evidence": [
+    "controller FINISH_FENCE returns FENCE_WAIT unless all domains are quiescent",
+    "queue queues_drained includes peer seal, ACK, leases and all queue counts"
+  ],
+  "recovery": "Independent paired retry TB; existing failed files and active full sources preserved. Retry success not presumed."
+}

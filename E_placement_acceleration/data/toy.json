@@ -1,0 +1,137 @@
+{
+  "dataset_kind": "synthetic_smoke",
+  "fixture_id": "toy_E",
+  "sites": [
+    {
+      "id": "l0",
+      "type": "LUT",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "l1",
+      "type": "LUT",
+      "x": 1,
+      "y": 0
+    },
+    {
+      "id": "l2",
+      "type": "LUT",
+      "x": 2,
+      "y": 0
+    },
+    {
+      "id": "l3",
+      "type": "LUT",
+      "x": 3,
+      "y": 0
+    },
+    {
+      "id": "d0",
+      "type": "DSP",
+      "x": 2,
+      "y": 1
+    },
+    {
+      "id": "d1",
+      "type": "DSP",
+      "x": 2,
+      "y": 2
+    }
+  ],
+  "cells": [
+    {
+      "id": "a",
+      "type": "LUT",
+      "site": "l0",
+      "region": [
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "id": "b",
+      "type": "LUT",
+      "site": "l3",
+      "fixed": true
+    },
+    {
+      "id": "d",
+      "type": "DSP",
+      "site": "d0"
+    },
+    {
+      "id": "e",
+      "type": "DSP",
+      "site": "d1"
+    }
+  ],
+  "nets": [
+    {
+      "id": "n",
+      "cells": [
+        "a",
+        "b"
+      ],
+      "weight": 1
+    }
+  ],
+  "cascades": [
+    {
+      "first": "d",
+      "second": "e",
+      "dx": 0,
+      "dy": 1
+    }
+  ],
+  "candidates": [
+    {
+      "id": "baseline",
+      "moves": {}
+    },
+    {
+      "id": "near",
+      "moves": {
+        "a": "l2"
+      }
+    },
+    {
+      "id": "wrong_type",
+      "moves": {
+        "a": "d0"
+      }
+    },
+    {
+      "id": "collision",
+      "moves": {
+        "a": "l3"
+      }
+    },
+    {
+      "id": "fixed_move",
+      "moves": {
+        "b": "l1"
+      }
+    },
+    {
+      "id": "break_cascade",
+      "moves": {
+        "d": "d1",
+        "e": "d0"
+      }
+    }
+  ],
+  "expected": {
+    "best_candidate": "near",
+    "legal": {
+      "baseline": true,
+      "near": true,
+      "wrong_type": false,
+      "collision": false,
+      "fixed_move": false,
+      "break_cascade": false
+    }
+  }
+}

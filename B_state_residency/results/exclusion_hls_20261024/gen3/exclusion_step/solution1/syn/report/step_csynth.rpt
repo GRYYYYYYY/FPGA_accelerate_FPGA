@@ -1,0 +1,224 @@
+
+
+================================================================
+== Vitis HLS Report for 'step'
+================================================================
+* Date:           Sat Oct 24 16:14:18 2026
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        exclusion_step
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: virtexuplus
+* Target device:  xcu280-fsvh2892-2L-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  1.523 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        1|        2|  10.000 ns|  20.000 ns|    1|    2|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        +-------------------------+--------+---------+---------+----------+----------+-----+-----+---------+
+        |                         |        |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+        |         Instance        | Module |   min   |   max   |    min   |    max   | min | max |   Type  |
+        +-------------------------+--------+---------+---------+----------+----------+-----+-----+---------+
+        |call_ln27_accept_fu_223  |accept  |        0|        0|      0 ns|      0 ns|    0|    0|       no|
+        +-------------------------+--------+---------+---------+----------+----------+-----+-----+---------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++---------------------+---------+------+---------+---------+-----+
+|         Name        | BRAM_18K|  DSP |    FF   |   LUT   | URAM|
++---------------------+---------+------+---------+---------+-----+
+|DSP                  |        -|     -|        -|        -|    -|
+|Expression           |        -|     -|        0|      428|    -|
+|FIFO                 |        -|     -|        -|        -|    -|
+|Instance             |        -|     -|        0|      248|    -|
+|Memory               |        -|     -|        -|        -|    -|
+|Multiplexer          |        -|     -|        -|      218|    -|
+|Register             |        -|     -|      328|        -|    -|
++---------------------+---------+------+---------+---------+-----+
+|Total                |        0|     0|      328|      894|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available SLR        |     1344|  3008|   869120|   434560|  320|
++---------------------+---------+------+---------+---------+-----+
+|Utilization SLR (%)  |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+|Available            |     4032|  9024|  2607360|  1303680|  960|
++---------------------+---------+------+---------+---------+-----+
+|Utilization (%)      |        0|     0|       ~0|       ~0|    0|
++---------------------+---------+------+---------+---------+-----+
+
++ Detail: 
+    * Instance: 
+    +-------------------------+--------+---------+----+---+-----+-----+
+    |         Instance        | Module | BRAM_18K| DSP| FF| LUT | URAM|
+    +-------------------------+--------+---------+----+---+-----+-----+
+    |call_ln27_accept_fu_223  |accept  |        0|   0|  0|  248|    0|
+    +-------------------------+--------+---------+----+---+-----+-----+
+    |Total                    |        |        0|   0|  0|  248|    0|
+    +-------------------------+--------+---------+----+---+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |          Variable Name          | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |add_ln22_fu_511_p2               |         +|   0|  0|  39|          32|           1|
+    |and_ln18_1_fu_445_p2             |       and|   0|  0|   2|           1|           1|
+    |and_ln18_fu_407_p2               |       and|   0|  0|   2|           1|           1|
+    |and_ln19_fu_427_p2               |       and|   0|  0|   2|           1|           1|
+    |and_ln22_fu_469_p2               |       and|   0|  0|   2|           1|           1|
+    |and_ln29_1_fu_610_p2             |       and|   0|  0|   2|           1|           1|
+    |and_ln29_fu_604_p2               |       and|   0|  0|   2|           1|           1|
+    |c_fu_371_p2                      |      icmp|   0|  0|  20|          32|           1|
+    |done_fu_554_p2                   |      icmp|   0|  0|   8|           3|           1|
+    |grp_fu_249_p2                    |      icmp|   0|  0|   8|           3|           1|
+    |icmp_ln20_1_fu_343_p2            |      icmp|   0|  0|  20|          32|           1|
+    |icmp_ln20_fu_307_p2              |      icmp|   0|  0|  16|          24|           1|
+    |icmp_ln21_fu_355_p2              |      icmp|   0|  0|  20|          32|           3|
+    |icmp_ln25_fu_259_p2              |      icmp|   0|  0|  20|          32|          32|
+    |icmp_ln26_fu_269_p2              |      icmp|   0|  0|  20|          32|          32|
+    |icmp_ln28_fu_505_p2              |      icmp|   0|  0|  20|          32|           2|
+    |icmp_ln30_1_fu_574_p2            |      icmp|   0|  0|   8|           3|           2|
+    |icmp_ln30_fu_568_p2              |      icmp|   0|  0|  20|          32|           1|
+    |lag_fu_377_p2                    |      icmp|   0|  0|  20|          32|           1|
+    |or_ln18_1_fu_463_p2              |        or|   0|  0|   2|           1|           1|
+    |or_ln18_2_fu_457_p2              |        or|   0|  0|   2|           1|           1|
+    |or_ln18_fu_451_p2                |        or|   0|  0|   2|           1|           1|
+    |or_ln20_1_fu_313_p2              |        or|   0|  0|  32|          32|          32|
+    |or_ln20_2_fu_337_p2              |        or|   0|  0|  32|          32|          32|
+    |or_ln20_3_fu_349_p2              |        or|   0|  0|   2|           1|           1|
+    |or_ln20_fu_275_p2                |        or|   0|  0|  32|          32|          32|
+    |select_ln17_cast_cast_fu_543_p3  |    select|   0|  0|   3|           1|           3|
+    |select_ln29_fu_596_p3            |    select|   0|  0|  32|           1|           1|
+    |select_ln30_fu_588_p3            |    select|   0|  0|  32|           1|          32|
+    |xor_ln18_1_fu_439_p2             |       xor|   0|  0|   2|           2|           1|
+    |xor_ln19_fu_413_p2               |       xor|   0|  0|   2|           1|           2|
+    |xor_ln22_fu_433_p2               |       xor|   0|  0|   2|           1|           2|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |Total                            |          |   0|  0| 428|         434|         226|
+    +---------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +------------------------------------------------------+----+-----------+-----+-----------+
+    |                         Name                         | LUT| Input Size| Bits| Total Bits|
+    +------------------------------------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                                             |  31|          6|    1|          6|
+    |ap_phi_mux_controller_generation_loc_0_phi_fu_178_p8  |   9|          2|   32|         64|
+    |ap_phi_mux_empty_phi_fu_192_p8                        |   9|          2|    3|          6|
+    |ap_phi_mux_status_phi_fu_209_p8                       |   9|          2|    3|          6|
+    |ap_return_0                                           |   9|          2|    3|          6|
+    |ap_return_1                                           |   9|          2|   32|         64|
+    |ap_return_2                                           |   9|          2|    3|          6|
+    |ap_return_3                                           |   9|          2|   32|         64|
+    |ap_return_4                                           |   9|          2|    1|          2|
+    |controller_generation_loc_0_reg_175                   |  14|          3|   32|         96|
+    |controller_machine_child_sequence                     |   9|          2|   32|         64|
+    |controller_machine_excluded                           |   9|          2|    1|          2|
+    |controller_machine_previous                           |   9|          2|   32|         64|
+    |controller_machine_request                            |   9|          2|    3|          6|
+    |empty_reg_188                                         |  14|          3|    3|          9|
+    |status_8_ph_reg_148                                   |  31|          6|    3|         18|
+    |status_reg_203                                        |  20|          4|    3|         12|
+    +------------------------------------------------------+----+-----------+-----+-----------+
+    |Total                                                 | 218|         46|  219|        495|
+    +------------------------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------------------+----+----+-----+-----------+
+    |                 Name                | FF | LUT| Bits| Const Bits|
+    +-------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                            |   5|   0|    5|          0|
+    |ap_return_0_preg                     |   3|   0|   32|         29|
+    |ap_return_1_preg                     |  32|   0|   32|          0|
+    |ap_return_2_preg                     |   3|   0|   32|         29|
+    |ap_return_3_preg                     |  32|   0|   32|          0|
+    |ap_return_4_preg                     |   1|   0|   32|         31|
+    |c_reg_693                            |   1|   0|    1|          0|
+    |controller_child                     |  32|   0|   32|          0|
+    |controller_generation                |  32|   0|   32|          0|
+    |controller_generation_load_reg_659   |  32|   0|   32|          0|
+    |controller_generation_loc_0_reg_175  |  32|   0|   32|          0|
+    |controller_machine_child_sequence    |  32|   0|   32|          0|
+    |controller_machine_created           |   1|   0|    1|          0|
+    |controller_machine_excluded          |   1|   0|    1|          0|
+    |controller_machine_flags             |   7|   0|    7|          0|
+    |controller_machine_has_laguna        |   1|   0|    1|          0|
+    |controller_machine_parent            |  32|   0|   32|          0|
+    |controller_machine_previous          |  32|   0|   32|          0|
+    |controller_machine_request           |   3|   0|    3|          0|
+    |empty_reg_188                        |   3|   0|    3|          0|
+    |icmp_ln19_reg_681                    |   1|   0|    1|          0|
+    |icmp_ln21_reg_689                    |   1|   0|    1|          0|
+    |icmp_ln24_reg_666                    |   1|   0|    1|          0|
+    |icmp_ln28_reg_698                    |   1|   0|    1|          0|
+    |or_ln20_3_reg_685                    |   1|   0|    1|          0|
+    |status_8_ph_reg_148                  |   3|   0|    3|          0|
+    |status_reg_203                       |   3|   0|    3|          0|
+    +-------------------------------------+----+----+-----+-----------+
+    |Total                                | 328|   0|  417|         89|
+    +-------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------+-----+-----+------------+--------------+--------------+
+|  RTL Ports  | Dir | Bits|  Protocol  | Source Object|    C Type    |
++-------------+-----+-----+------------+--------------+--------------+
+|ap_clk       |   in|    1|  ap_ctrl_hs|          step|  return value|
+|ap_rst       |   in|    1|  ap_ctrl_hs|          step|  return value|
+|ap_start     |   in|    1|  ap_ctrl_hs|          step|  return value|
+|ap_done      |  out|    1|  ap_ctrl_hs|          step|  return value|
+|ap_idle      |  out|    1|  ap_ctrl_hs|          step|  return value|
+|ap_ready     |  out|    1|  ap_ctrl_hs|          step|  return value|
+|ap_return_0  |  out|   32|  ap_ctrl_hs|          step|  return value|
+|ap_return_1  |  out|   32|  ap_ctrl_hs|          step|  return value|
+|ap_return_2  |  out|   32|  ap_ctrl_hs|          step|  return value|
+|ap_return_3  |  out|   32|  ap_ctrl_hs|          step|  return value|
+|ap_return_4  |  out|   32|  ap_ctrl_hs|          step|  return value|
+|p_read5      |   in|   32|     ap_none|       p_read5|        scalar|
+|p_read14     |   in|   32|     ap_none|      p_read14|        scalar|
+|p_read15     |   in|   32|     ap_none|      p_read15|        scalar|
+|p_read16     |   in|   32|     ap_none|      p_read16|        scalar|
+|p_read17     |   in|   32|     ap_none|      p_read17|        scalar|
+|p_read18     |   in|   32|     ap_none|      p_read18|        scalar|
+|p_read19     |   in|   32|     ap_none|      p_read19|        scalar|
+|p_read20     |   in|   32|     ap_none|      p_read20|        scalar|
+|p_read21     |   in|   32|     ap_none|      p_read21|        scalar|
++-------------+-----+-----+------------+--------------+--------------+
+

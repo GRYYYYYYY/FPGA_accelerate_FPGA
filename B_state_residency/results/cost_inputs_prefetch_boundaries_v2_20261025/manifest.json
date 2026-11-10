@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "sources": {
+    "cost_inputs_prefetch.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/candidate_prefetch_v1/cost_inputs_prefetch.sv",
+      "sha256": "561535b5e5a76f4cd19465a2dbec1203684f09f79852d7528d04e329fd86978b"
+    },
+    "tb_cost_inputs_prefetch.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/candidate_prefetch_v1/tb_cost_inputs_prefetch.sv",
+      "sha256": "6ea8596b4a1f25a756065203d19060a386cbd6204792ed74f6a4a3cd9239154e"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_inputs_prefetch_boundaries_v2_20261025/sources/cost_inputs_prefetch.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/cost_inputs_prefetch_boundaries_v2_20261025/sources/tb_cost_inputs_prefetch.sv"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 3.0924608688801527
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_cost_inputs_prefetch",
+        "-s",
+        "prefetch",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.074397310614586
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "prefetch",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.423827392980456
+    }
+  ],
+  "runner_sha256": "e14febefd573af9ce8713292fa2939a30168548d8db802f4d15c321711176c21",
+  "artifacts": {
+    "simulate.log": "79d89e28e3b2f27cbb4d9f71d6d127ca2cc4116fda08c5343260cdf2d7335cb1",
+    "run.tcl": "33bdc2455d72c40ecbc79388e2b5e331d1f4756597328b84a565a2ae1f445227",
+    "compile.stdout.log": "8104bf6405a78e086e355f1e6eb7a0819fcc1d39a199b4c443bf9c7179bd7a81",
+    "xvlog.log": "8104bf6405a78e086e355f1e6eb7a0819fcc1d39a199b4c443bf9c7179bd7a81",
+    "simulate.stdout.log": "202ce19a945d934cb27eb2b012f7fe545fabcafdc0e0e12fda932f16b7e818bd",
+    "xelab.log": "3ecb94e58a9e40da87b6b7b94b80ef7507a9f736f25c897cef4c798135fa2f17",
+    "elaborate.stdout.log": "3ecb94e58a9e40da87b6b7b94b80ef7507a9f736f25c897cef4c798135fa2f17"
+  }
+}

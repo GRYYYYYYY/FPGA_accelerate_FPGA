@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "test": "wrap",
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/backing_frame_directory_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/backing_page_service_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/bounded_sync_fifo.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/memory_scratch_endpoint_small_staticcodec.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/queued_scratch_endpoint_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/record_backing_service_small_staticcodec.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/response_fallthrough_fifo.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/scratch_frame_store_bram.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/scratch_page_axi_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/scratch_page_codec_small_static.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/RTL/scratch_page_controller_small.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/candidates/native_epoch6_record/Sources/Simulation/tb_record_epoch6_wrap.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_record_epoch6_wrap",
+        "-s",
+        "candidate",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "candidate",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "package_sha256": "0a58e07195ec1747632c9437c60a2a07de10952c7e614fb4a5ff45a3b3f593e5",
+  "log_sha256": "26f431490bec7dd6e3d1d944ad732fc57eb88569229671da483d9bd9bfee8f61"
+}

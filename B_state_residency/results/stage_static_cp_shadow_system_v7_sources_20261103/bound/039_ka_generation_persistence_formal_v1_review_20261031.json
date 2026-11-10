@@ -1,0 +1,439 @@
+{
+  "status": "actual_generation_transition_overapprox_nonzero_persistence_inductively_proved_nonvacuous_mutations_checked_restored",
+  "scope": "271 actual state bits, arbitrary other stored/read outputs, initial reset and single-clock two-state semantics. Nonzero persistence only; not numeric generation monotonicity, full-system AS entry or original closed-unit coverage acceptance.",
+  "proof": "After a nonzero active bound_generation, it remains nonzero across cycles without reset.",
+  "retained_state_cells": 13,
+  "retained_state_bits": 271,
+  "selected_cells": 697,
+  "cut_outputs": 46,
+  "smt_constraints": {
+    "assert": 8,
+    "assume": 1,
+    "cover": 2
+  },
+  "bmc_steps": 10,
+  "temporal_induction_successful": true,
+  "cover_tool_report_steps": [
+    8,
+    18
+  ],
+  "final_cover_vcd_nonzero_steps": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "final_cover_vcd_bank_switch_steps": [
+    17
+  ],
+  "trace_storage_note": "Runner used one cover.vcd filename for both covers, so the second trace replaced the first. Independently verified final complete trace contains witnesses for both cover predicates; no missing first trace claimed archived.",
+  "negative_controls": {
+    "ka_generation_persistence_clear_on_rearm_v2": {
+      "mutation": {
+        "kind": "clear_on_actual_bank0_rearm_handshake",
+        "target_cell": "$flatten\\bank0.$procdff$29190",
+        "old_D": [
+          3385,
+          3386,
+          3387,
+          3388,
+          3389,
+          3390,
+          3391,
+          3392,
+          3393,
+          3394,
+          3395,
+          3396,
+          3397,
+          3398,
+          3399,
+          3400,
+          3401,
+          3402,
+          3403,
+          3404,
+          3405,
+          3406,
+          3407,
+          3408,
+          3409,
+          3410,
+          3411,
+          3412,
+          3413,
+          3414,
+          3415,
+          3416,
+          3417,
+          3418,
+          3419,
+          3420,
+          3421,
+          3422,
+          3423,
+          3424,
+          3425,
+          3426,
+          3427,
+          3428,
+          3429,
+          3430,
+          3431,
+          3432,
+          3433,
+          3434,
+          3435,
+          3436,
+          3437,
+          3438,
+          3439,
+          3440,
+          3441,
+          3442,
+          3443,
+          3444,
+          3445,
+          3446,
+          3447,
+          3448
+        ],
+        "new_D": [
+          497022,
+          497023,
+          497024,
+          497025,
+          497026,
+          497027,
+          497028,
+          497029,
+          497030,
+          497031,
+          497032,
+          497033,
+          497034,
+          497035,
+          497036,
+          497037,
+          497038,
+          497039,
+          497040,
+          497041,
+          497042,
+          497043,
+          497044,
+          497045,
+          497046,
+          497047,
+          497048,
+          497049,
+          497050,
+          497051,
+          497052,
+          497053,
+          497054,
+          497055,
+          497056,
+          497057,
+          497058,
+          497059,
+          497060,
+          497061,
+          497062,
+          497063,
+          497064,
+          497065,
+          497066,
+          497067,
+          497068,
+          497069,
+          497070,
+          497071,
+          497072,
+          497073,
+          497074,
+          497075,
+          497076,
+          497077,
+          497078,
+          497079,
+          497080,
+          497081,
+          497082,
+          497083,
+          497084,
+          497085
+        ],
+        "added_cells": [
+          "$mutation_rearm_handshake",
+          "$mutation_rearm_generation"
+        ],
+        "added_nets": [
+          "$mutation_rearm_handshake_wire",
+          "$mutation_rearm_generation_wire"
+        ],
+        "handshake_inputs": [
+          [
+            3100
+          ],
+          [
+            3063
+          ]
+        ],
+        "preparation_fix": "Temporary wire names separated from cell names; bit connections unchanged"
+      },
+      "generation_drop_vcd_steps": [
+        9
+      ],
+      "vcd_sha256": "9c5fabbde992a0352557e382d06cd9de13f4e37e70f0ddf5db50bc80690946fc",
+      "log_sha256": "0f4d52695bb9b54fce0650819ed313ab829dbefd79be5a8d9e0efe247da78a5a"
+    },
+    "ka_generation_persistence_unsafe_publication_v1": {
+      "mutation": {
+        "kind": "force_inactive_configured_predicate_true",
+        "target_cell": "$ternary$checkpoint_authority_rotator.sv:118$9",
+        "old_cell": {
+          "hide_name": 1,
+          "type": "$mux",
+          "parameters": {
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+            "src": "checkpoint_authority_rotator.sv:118.27-118.66"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "S": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [
+              249165
+            ],
+            "B": [
+              3072
+            ],
+            "S": [
+              8
+            ],
+            "Y": [
+              494867
+            ]
+          }
+        },
+        "new_cell": {
+          "hide_name": 1,
+          "type": "$logic_not",
+          "parameters": {
+            "A_SIGNED": "00000000000000000000000000000000",
+            "A_WIDTH": "00000000000000000000000000000001",
+            "Y_WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {},
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [
+              "0"
+            ],
+            "Y": [
+              494867
+            ]
+          }
+        }
+      },
+      "generation_drop_vcd_steps": [
+        9
+      ],
+      "vcd_sha256": "66f1f5348f1e582d08dae34947e9889c13cfb6a78901aa83f852c73169635ece",
+      "log_sha256": "0f4d52695bb9b54fce0650819ed313ab829dbefd79be5a8d9e0efe247da78a5a"
+    }
+  },
+  "failed_preparation": "First rearm-mutant import failed due temporary wire/cell name collision; preserved, v2 changes names only before actual semantic test. Historical running manifest is stale, not a live solver.",
+  "source_model_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+  "extraction_review": "Retained transitions, clocks, aliases, primary inputs, netnames and source hashes checked against original; other outputs arbitrary.",
+  "evidence_inventory": {
+    "ka_generation_persistence_formal_v1/kernel.json": {
+      "sha256": "cbd2d0204c7dee055c344923ffa39e295ddeda22e7395d29032bb0c9b844f4e7",
+      "bytes": 4899916
+    },
+    "ka_generation_persistence_formal_v1/preparation.json": {
+      "sha256": "c7ebdca769aa679aec897d33fc01e206c54f04013690517d697d0745f8e26220",
+      "bytes": 18795
+    },
+    "ka_generation_persistence_formal_v1/harness.sv": {
+      "sha256": "0a0d8ec722db10feae8420f78716deba6ab59bffdd7125c189a794841afe3554",
+      "bytes": 4274
+    },
+    "ka_generation_persistence_formal_v1/manifest.json": {
+      "sha256": "4ca577f977f5fa835e84927bf9a048ab7b71916ea80b63a7c7dd08371770bb7b",
+      "bytes": 3674
+    },
+    "ka_generation_persistence_formal_v1/prepare.ys": {
+      "sha256": "dd2518ff92cfb39dc070326b5a2bc55f5c56591df8ccdf04fcb44122357c6807",
+      "bytes": 167
+    },
+    "ka_generation_persistence_formal_v1/prepare.log": {
+      "sha256": "b6c8ec046397f30002552d39aa7b273a82700969476cf1ccb1fb510fc1e0a267",
+      "bytes": 17834
+    },
+    "ka_generation_persistence_formal_v1/design.smt2": {
+      "sha256": "82e55fad92cb57141b0a1cfc494e9f100dfd91a64d83e8208f5c6968247b1259",
+      "bytes": 318579
+    },
+    "ka_generation_persistence_formal_v1/bmc.log": {
+      "sha256": "489c872444ca579615cc4dd9c009831bb99b9a84a4fbf11aa30de086408d3bd0",
+      "bytes": 514
+    },
+    "ka_generation_persistence_formal_v1/induction.log": {
+      "sha256": "ce792594b30627c28ad6bbf735070d79648815f5681c4df9685eb3bc2c7187c2",
+      "bytes": 272
+    },
+    "ka_generation_persistence_formal_v1/cover.log": {
+      "sha256": "4587f3730c407e77459dbe40d1ca567568c8b4a6efe2e0dfcf38e8f8fd6f525d",
+      "bytes": 1519
+    },
+    "ka_generation_persistence_formal_v1/cover.vcd": {
+      "sha256": "0a05f42965e49d164e9142a28b8f245126563bbac6780d1e7be68d518ded73d9",
+      "bytes": 226462
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/mutant.json": {
+      "sha256": "31d13c58abf19915a8b630d805e4eda584b417e4c75d1eb90cda6819a3e50b2c",
+      "bytes": 4902351
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/harness.sv": {
+      "sha256": "0a0d8ec722db10feae8420f78716deba6ab59bffdd7125c189a794841afe3554",
+      "bytes": 4274
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/prepare.ys": {
+      "sha256": "f3424bdbe9e4215afd5c634922431190e8e6b1c18d4bff910d1866fa450d3a27",
+      "bytes": 167
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/manifest.json": {
+      "sha256": "6d70493a54a56fefe3ffaa7b2f492eced3242bd7fd4fa0fbdbc49b1da863d4f1",
+      "bytes": 3682
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/prepare.log": {
+      "sha256": "8c8ba065e9f5d1208c078caf41ea78acdb489e2bdef28626380d867b23b6b7e7",
+      "bytes": 17833
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/design.smt2": {
+      "sha256": "4e6f738ff337387aa3e6ddf1fbcf8958af3e0d258e24f2cf404d09a41f7093fc",
+      "bytes": 318877
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/bmc.log": {
+      "sha256": "0f4d52695bb9b54fce0650819ed313ab829dbefd79be5a8d9e0efe247da78a5a",
+      "bytes": 765
+    },
+    "ka_generation_persistence_clear_on_rearm_v2/counterexample.vcd": {
+      "sha256": "9c5fabbde992a0352557e382d06cd9de13f4e37e70f0ddf5db50bc80690946fc",
+      "bytes": 137118
+    },
+    "ka_generation_persistence_unsafe_publication_v1/mutant.json": {
+      "sha256": "5a58784cc10dbf76824143c02fbd67c8eec7558fc6a2e8b9a9a2732bfe19bed1",
+      "bytes": 4899916
+    },
+    "ka_generation_persistence_unsafe_publication_v1/harness.sv": {
+      "sha256": "0a0d8ec722db10feae8420f78716deba6ab59bffdd7125c189a794841afe3554",
+      "bytes": 4274
+    },
+    "ka_generation_persistence_unsafe_publication_v1/prepare.ys": {
+      "sha256": "f3424bdbe9e4215afd5c634922431190e8e6b1c18d4bff910d1866fa450d3a27",
+      "bytes": 167
+    },
+    "ka_generation_persistence_unsafe_publication_v1/manifest.json": {
+      "sha256": "d7974af04f1e83e6a9c094d3463acdfb30d406634f69b644f157a3828ce9a1f4",
+      "bytes": 2402
+    },
+    "ka_generation_persistence_unsafe_publication_v1/prepare.log": {
+      "sha256": "3f00a18659704aa4a53788587667c77577167172521a36be4c6c00454d6b5936",
+      "bytes": 17865
+    },
+    "ka_generation_persistence_unsafe_publication_v1/design.smt2": {
+      "sha256": "e3fef5bcccfd38f5272d896612e3c999da84259bf8b15168a3cb8ab478d6207d",
+      "bytes": 317937
+    },
+    "ka_generation_persistence_unsafe_publication_v1/bmc.log": {
+      "sha256": "0f4d52695bb9b54fce0650819ed313ab829dbefd79be5a8d9e0efe247da78a5a",
+      "bytes": 765
+    },
+    "ka_generation_persistence_unsafe_publication_v1/counterexample.vcd": {
+      "sha256": "66f1f5348f1e582d08dae34947e9889c13cfb6a78901aa83f852c73169635ece",
+      "bytes": 137118
+    },
+    "ka_generation_persistence_clear_on_rearm_v1/mutant.json": {
+      "sha256": "86c7330e790963d20d8326b2df45254de63d318c5c0cc41231931dfb802b8260",
+      "bytes": 4902341
+    },
+    "ka_generation_persistence_clear_on_rearm_v1/harness.sv": {
+      "sha256": "0a0d8ec722db10feae8420f78716deba6ab59bffdd7125c189a794841afe3554",
+      "bytes": 4274
+    },
+    "ka_generation_persistence_clear_on_rearm_v1/prepare.ys": {
+      "sha256": "f3424bdbe9e4215afd5c634922431190e8e6b1c18d4bff910d1866fa450d3a27",
+      "bytes": 167
+    },
+    "ka_generation_persistence_clear_on_rearm_v1/manifest.json": {
+      "sha256": "13aeb333021a37eba5ab6779e22554f2f3658690b792aae51123df2690a78a3d",
+      "bytes": 2878
+    },
+    "ka_generation_persistence_clear_on_rearm_v1/prepare.log": {
+      "sha256": "fa4f2002bcaf020b155de7e69854021f0d12cd3fbe17bcacd65e7c796b089430",
+      "bytes": 780
+    },
+    "review/prepare_selected_state_cone_v2.py": {
+      "sha256": "81cf8ef9752535719fd4f9bd7d651066ce01ee5a6a5a82de476ef0405d190a7c",
+      "bytes": 4492
+    },
+    "review/run_generation_persistence_formal_v1.py": {
+      "sha256": "ecf674aa84681f75012035d93653749d9e4880e159d9de32c046a8a68b2d1670",
+      "bytes": 4119
+    },
+    "review/shadow_terminal_receipt_v1.py": {
+      "sha256": "68f0d42ad371343e18bd6ec902cba7638b8cc3cb046d072ea929b4100879e357",
+      "bytes": 1704
+    },
+    "review/selection.json": {
+      "sha256": "605404890f4eab02096b7e5537fe45e2747920682b4a71918dbddee478a1d9f6",
+      "bytes": 2050
+    },
+    "review/harness.sv": {
+      "sha256": "0a0d8ec722db10feae8420f78716deba6ab59bffdd7125c189a794841afe3554",
+      "bytes": 4274
+    },
+    "review/ka_generation_mutation_preparation_failure_20261031.json": {
+      "sha256": "b2b1e35cdccadc55ae7f4772fe09a699ae5cc261baba42e892a10db45f50bacf",
+      "bytes": 623
+    },
+    "review/sources/checkpoint_authority_rotator.sv": {
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+      "bytes": 13893
+    },
+    "review/sources/checkpoint_authority_reader.sv": {
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822",
+      "bytes": 7591
+    },
+    "review/sources/owner_state_store.sv": {
+      "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c",
+      "bytes": 12904
+    }
+  },
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_generation_persistence_evidence_v1/evidence.tar",
+  "archive_sha256": "372b63cb5abb873d8fb0ed0dc00abba96d73685e84b60b2ba1459cfce6330db4",
+  "actual_restore": "/tmp/B_state_residency_offer_20261025/ka_generation_persistence_evidence_v1/restored",
+  "actual_restore_files": 41,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

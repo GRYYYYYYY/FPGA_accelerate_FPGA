@@ -1,0 +1,85 @@
+{
+  "status": "failed",
+  "pid": 3067594,
+  "baseline_manifest_sha256": "2a3af39dedadf53cdffa329af47c0c6aaea15f0b69ba54df1d04ad45df5ef632",
+  "baseline_audit_sha256": "1b72da647732306a26248b8c3361c1a153d32270f2b7340367d38c42ca46b0d9",
+  "runner_sha256": "1b5f0fe7d06bd875ff52365b5847b91ae039f31349e1b4757f659cddcb3e3ccd",
+  "sources": {
+    "sources/search_cost_exact.hpp": "62414b33b29aaf84e597ba2857d3b97d52b1374c67e9ae4d326f976fa7159519",
+    "sources/search_geometry_checked.hpp": "04f375f0d050657820d00f54fd54b1a1b5271ddc4fb4a76e73da7f9634fe7b3d",
+    "sources/search_cost.hpp": "d277ad8207433a6520bff50971d86e7d7317ef64dc2017959c6804ae4e85deff",
+    "sources/children_machine.hpp": "2c81dcc34cf7ca50eca31354806a3e943517c3a271857590d4b62a4e19782ed3",
+    "sources/softfloat32.hpp": "fdbeea3d7f4ac79ff6be8907f22ab44250dc53f405161fc95016b601835ae8cd",
+    "sources/trace.cpp": "1418da34afe6bb7280be6e9a400975691ea9c438a89fd19c48b35c1bbc49dc00",
+    "sources/frontier_api.hpp": "b15521e064c8dd331112c19df22d30efd70cb2993b29a0140d5a789ceaa4c049",
+    "sources/real_trace.hpp": "697aec3a0ef354fa59716909f32070bdafe2795891264d618c259ac5dfcf5e67",
+    "sources/owner_profile.hpp": "773f8868b4b3634744a49f352835574d02e9489b4467a2b7ecd247877666605d",
+    "sources/real_router_hooks.inc": "f7e426e72845cdde2ec76ae2762b1005eae6eec1c6c283fc9eb03a34db55d358",
+    "sources/access_machine.hpp": "f4ac51c6d1fe26effaecde2577c3db5e37be35de404f1ac501e6c4f8f18e812a",
+    "sources/real_profile.hpp": "4ec5854cda886eb93cbd23f823261e1d07a2d1dc61406c7b789060bd07a4f7ea",
+    "sources/frontier_bounded.hpp": "365443608f1ae70f221079843a29cb661d0c42c6e0d76a9ccf54d2d286c07f37",
+    "sources/exclusion_machine.hpp": "73a77287774192a36412bfa31164a4e5d9441cb62a86ba76b13887c105eef00d",
+    "sources/geometry.hpp": "54a9a729c85eb48a922d6da3a2f6b1655dcea0db6d93995c867becef1dfd8a29",
+    "include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+    "include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+    "include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+    "include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+    "include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+  },
+  "commands": [
+    {
+      "stage": "build",
+      "argv": [
+        "g++",
+        "-std=c++17",
+        "-O3",
+        "-g",
+        "-fno-fast-math",
+        "-fno-omit-frame-pointer",
+        "-no-pie",
+        "-pthread",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/include",
+        "-I",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/sources",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/sources/trace.cpp",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/router_owner_profile"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "route",
+      "argv": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/trace.time",
+        "taskset",
+        "-c",
+        "0",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/router_owner_profile",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/logicnets_jscl.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/trace.result"
+      ],
+      "pid": 3076311,
+      "exit_code": 134
+    }
+  ],
+  "scope": "Original owner-slot mutations observed on complete serial CPU route, with every mutation recorded. Domain guards forbid uint16 reference/occupancy wrap. Not a hardware implementation or performance comparison.",
+  "generator_sha256": "2fdb1d3d85ad281c43ead9e8079a3c350de2a23857e46d21b509bf71befe113c",
+  "binary_sha256": "7f20ce258673c4e617fc71a93cc6509973487ed9beb9bbccbba7b32a96ab4366",
+  "environment": {
+    "RW_MAX_THREADS": "1",
+    "RW_PAR_PART": "0",
+    "RW_PAR_ITER1": "0",
+    "RW_OVERLAP": "0",
+    "RW_BATCH_T": "0",
+    "RW_GPU_FLOOD": "0",
+    "B_TRACE_PREFIX": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/trace",
+    "B_TRACE_STRIDE": "512",
+    "B_PROFILE_PREFIX": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/trace",
+    "B_OWNER_PREFIX": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/owner_profile_real_v2_20261024/owner"
+  },
+  "error": "AssertionError()"
+}

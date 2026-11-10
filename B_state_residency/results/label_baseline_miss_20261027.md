@@ -1,0 +1,12 @@
+# 原生manager按需标签填充与dirty写回通过（2026-10-27）
+
+详见results/label_baseline_miss_20261027.json与hardware/variants/label_baseline_miss_v1/CONTRACT.md。新增默认关闭ENABLE_BASELINE，io读/首次字段写及CLIENT读缺失均通过真实只读baseline AXI取得原prepared记录，实际原生五字段WRITE后重放原请求；已有实时记录不被初始基线覆盖。读seed第一次成功写即置dirty_slots，OPEN受外部许可并锁存baseline epoch，事后改引脚不改变绑定。
+
+选定full_v3/single_v3：纯读node0后即独立刷回/释放/重载；首次写同页node1仅改sequence字段，其余历史字节保留；CLIENT读node8后再次刷回/释放/重载。各83检查、4baseline实际R、3个完整seed/15字段写与1次业务字段写、3页WB/3页RF，后续重读不增加baseline请求。全部原生回复、基线AXI、页AXI与3072B最终backing由独立CPU/字节模型重放。最终node16基线SLVERR返回manager status10，业务封锁，无该记录seed。
+
+drain_v2单槽84检查：node16真实baseline AR受理/R前持续置入外部native fault，已暴露baseline事务仍实际退休，R成功消费后才失败；不是掩码回复或伪造退休。仅覆盖此确定边沿，不是任意取消或所有native阶段故障证明。
+
+默认关闭完整32槽回归19文件（10AXI、7DDR、native trace、标签流）及周期逐字节等于旧runtime_label_snapshot_full_v3。首例默认回归在elaboration遇wrapper .* 无新增输出名，v2仅在独立runner中显式空接输出、零绑定未用输入修正接线。四个选定归档实际恢复重审audit字节一致；源码冻结results/label_baseline_miss_sources_20261027。
+
+**完整自然query尚未启用新miss路径，初始CPU822条未来读闭包仍在。** 当前证明是实际manager/endpoint/reader组件与默认关闭的全系统兼容。下一优先把通道贯穿query/search/residency，并关闭所有imports预加载，保持原自然q180327/q180328 CPU oracle，重新审计实际记录/目录数量及G2 warm恢复容量。baseline身份仍由外部授权；任意变价、owner epoch轮转、真实overflow新增/回收、认证、综合时序和板卡收益仍缺。研究继续，goal active。
+

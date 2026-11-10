@@ -1,0 +1,13 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../../../hardware/rtl/bounded_sync_fifo.sv" \
+"../../../../../../../hardware/rtl/queued_scratch_endpoint.sv" \
+"../../../../../../../hardware/rtl/scratch_frame_store_bram.sv" \
+"../../../../../../../hardware/rtl/scratch_page_controller.sv" \
+"../../../../../../../hardware/tb/tb_queued_scratch_endpoint.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

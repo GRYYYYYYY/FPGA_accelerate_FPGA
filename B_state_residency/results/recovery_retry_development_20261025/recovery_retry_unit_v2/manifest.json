@@ -1,0 +1,67 @@
+{
+  "status": "failed",
+  "sources": {
+    "recovery_coordinator.sv": "b76daea8a982c1bb095f4fd255f7bcb9896c0499d19564b6f9d935d715604d68",
+    "tb_recovery_coordinator.sv": "e1733de219a0f619f71d973da77f5f3a57733b77f3c66bf88cd3baf9afcb5a2f",
+    "run_recovery_retry_unit.py": "6998eacae3ca180c0020a4db2aa97fcbb2aca022c868809410ea21c2f31672af"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/tmp/B_state_residency_offer_20261025/recovery_retry_unit_v2/sources/recovery_coordinator.sv",
+        "/tmp/B_state_residency_offer_20261025/recovery_retry_unit_v2/sources/tb_recovery_coordinator.sv"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.7173667643219233
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_recovery_coordinator",
+        "-s",
+        "recover",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 2.4190496169030666
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "recover",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "events=/tmp/B_state_residency_offer_20261025/recovery_retry_unit_v2/events.txt"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.274316793307662
+    }
+  ],
+  "scope": "Synthesizable journal/reset/owner-repair coordinator unit with registered authority/owner and reconfiguration/label mock callbacks, no real AXI integration.",
+  "error": "AssertionError()",
+  "artifacts": {
+    "run.tcl": "1745567fec852c4696897340e8f9967eba962f9894cddee3564638c920b66c3c",
+    "compile.stdout.log": "552798835b1a5cc9657152bf33aa241288339deda3d25dd888a3280384fdffdc",
+    "xvlog.pb": "48ba7c2d5394b533e3ff95186820dff38875d56f1368720d365d28ba080f540e",
+    "xvlog.log": "552798835b1a5cc9657152bf33aa241288339deda3d25dd888a3280384fdffdc",
+    "elaborate.stdout.log": "9beb1154a750dda415b11e956d8c2e9956baca58513a432b81b8537fe2c19307",
+    "xelab.pb": "b06476e0f1172e404ef4c1448ae0b6b327f5aac2376e3e07804565f57165ecdc",
+    "xelab.log": "9beb1154a750dda415b11e956d8c2e9956baca58513a432b81b8537fe2c19307",
+    "simulate.stdout.log": "083dca35647c6e27c277950dcfd93b88dbb784e6bb2aef0299b8361cca897ff0",
+    "xsim.jou": "653d9a1ab4b0d650e4f6bd85e9de818b61e11d66aa6627cef17961d6bfa978e1",
+    "simulate.log": "deaa3cbf270e8580e2652e0c6b19fc890c82f59b57a93fa721c0b9c9a049c96c",
+    "recover.wdb": "66c61862ad36e4dcfd7e31525825815a2c5898f29963f4cc245435e8297baa5c",
+    "events.txt": "fc3383825f9dce7f3c70a912f3d5d1b6043ec777bf074d86c00654faba36536f"
+  }
+}

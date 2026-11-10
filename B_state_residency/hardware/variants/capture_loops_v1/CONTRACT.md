@@ -1,0 +1,9 @@
+# 原生查询展开组件消环候选
+
+从已审计且明确design rejected的restore_seed_synth_on_v1复制controller/capture/frames三源。baseline原字节；fixed只修改controller的root offer/ready和capture的pop intent，frames保持原字节。两种修改分别断开ready→valid和frame_done→pop_valid的直接依赖；保留实际pop所需frame_done与pop_ready，保留递归、fault、abort、结果保持及原生生产者退休路径。invalid root在本地返回status1，不要求下游ready。
+
+原生三组件组成的OOC切片DEPTH16/CAPACITY4，全部外部物理expander、metadata/access及runtime输入为真实端口，无合成TB/model。基线须实际重现LUTLP-1/check_timing环，候选须两类检查无环且无latch/blackbox；不以退出码代替结构验收。
+
+两版相同原生controller七场景（嵌套、共享、early、深度9、空图、cookie回绕拒绝、版本漂移）与capture正常嵌套及九类失败/abort/overflow/错误身份/背压退休，外部graph/metadata/access为明确模型。逐事件独立CPU遍历验证，并对两版事件及终止时刻比较。另用只在VALID后允许READY的接收端：基线16周期无进展，候选提供稳定offer、接受一次、空结果保持及退休；invalid请求在ready为0时本地拒绝且无下游副作用。
+
+本轮尚无运行结果。全部20环的完整query root、恢复REARM、authority/owner/fault其他反馈仍待验证；不把组件无环等同完整系统无环。无需改XDC例外或降低实验时钟。本候选尚未迁入完整系统。

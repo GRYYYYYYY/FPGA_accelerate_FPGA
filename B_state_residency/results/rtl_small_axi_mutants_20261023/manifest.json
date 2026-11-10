@@ -1,0 +1,119 @@
+{
+  "status": "passed",
+  "pid": 3874022,
+  "source_hashes": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_axi_small.sv": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/tb/tb_small_codec_axi.sv": "5ada891e45d9a419c80e1bbea0852f5a180312b18d8f348bf864ce9fd1955966",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/rtl/scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/scripts/check_small_axi_mutants.py": "a4fde5fcf8cef187f4400cb7d4cddddac43489a9bfcfe62f4d001268d6485374",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/pages.hex": "8755c74eaf08c12fd95ae845ba11036912d8c24aa24649a728b8e36487f76198",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_small_codec_axi_20261023/records.hex": "39c42e8fc3ab1a926522398068abe1c9c4e03cc2c4f318a34e922f940785213e"
+  },
+  "mutants": [
+    {
+      "name": "truncate_cookie",
+      "replacement": [
+        "done_cookie<=req_cookie",
+        "done_cookie<={8'b0,req_cookie[63:0]}"
+      ],
+      "commands": [
+        {
+          "stage": "compile",
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "exit_code": 0
+        }
+      ],
+      "status": "detected",
+      "fatal": "Fatal: AXI done/cookie hold mismatch",
+      "artifacts": {
+        "tb_small_codec_axi.sv": "5ada891e45d9a419c80e1bbea0852f5a180312b18d8f348bf864ce9fd1955966",
+        "simulate.log": "6b576677db909a4f13d62ceec4e16e620397226455118bbb33819a9837ddf0a5",
+        "compile.stdout.log": "2ef877cac1a946651e199aed8ac3afb80bb8c54f48cb3f4c4c607004870cd064",
+        "xvlog.log": "2ef877cac1a946651e199aed8ac3afb80bb8c54f48cb3f4c4c607004870cd064",
+        "simulate.stdout.log": "880fd8a52f519dc0ef91133a7566af8d630656dc0b9ee3148b857f2696b4c242",
+        "scratch_page_axi_small.sv": "9a345cb1c6e2a5bb4f690bd4ec7e8fcd0886ddbded401fc1d775309f21600627",
+        "xelab.log": "77a1a968472407ee381b3ba64c8a89052624246ab77746dfcc267590980045a7",
+        "scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92",
+        "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+        "elaborate.stdout.log": "77a1a968472407ee381b3ba64c8a89052624246ab77746dfcc267590980045a7"
+      }
+    },
+    {
+      "name": "cross_4KiB",
+      "replacement": [
+        "(room<remaining)?room[5:0]:remaining",
+        "remaining"
+      ],
+      "commands": [
+        {
+          "stage": "compile",
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "exit_code": 0
+        }
+      ],
+      "status": "detected",
+      "fatal": "Fatal: bad AW burst address=00000fc0 expected=00000fc0 len=2",
+      "artifacts": {
+        "tb_small_codec_axi.sv": "5ada891e45d9a419c80e1bbea0852f5a180312b18d8f348bf864ce9fd1955966",
+        "simulate.log": "1db984b21e60a9b3977695f0a8e510295c7ba6573254cdaca04a12c689b1228f",
+        "compile.stdout.log": "162ebe0ca14af88ad7a3a208e9a353b001a74f8e7c6f9f842a6f1fb38890774b",
+        "xvlog.log": "162ebe0ca14af88ad7a3a208e9a353b001a74f8e7c6f9f842a6f1fb38890774b",
+        "simulate.stdout.log": "24bfbf36d80d6a6c7b88f3475f82b753f206f233e0cebef2e6b45b0cfbee9ed0",
+        "scratch_page_axi_small.sv": "0f290cda851e8bf3ba22f7770470959f74317cef6a0a3ff951db8114211ce15b",
+        "xelab.log": "77a1a968472407ee381b3ba64c8a89052624246ab77746dfcc267590980045a7",
+        "scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92",
+        "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+        "elaborate.stdout.log": "77a1a968472407ee381b3ba64c8a89052624246ab77746dfcc267590980045a7"
+      }
+    },
+    {
+      "name": "skip_error_drain",
+      "replacement": [
+        "else begin position<=position+1'b1;state<=READ_DRAIN;end",
+        "else begin state<=IDLE;done_valid<=1;end"
+      ],
+      "commands": [
+        {
+          "stage": "compile",
+          "exit_code": 0
+        },
+        {
+          "stage": "elaborate",
+          "exit_code": 0
+        },
+        {
+          "stage": "simulate",
+          "exit_code": 0
+        }
+      ],
+      "status": "detected",
+      "fatal": "Fatal: undrained error",
+      "artifacts": {
+        "tb_small_codec_axi.sv": "5ada891e45d9a419c80e1bbea0852f5a180312b18d8f348bf864ce9fd1955966",
+        "simulate.log": "0991d05a2796aa3bb86b16542bff9bfbd8dcae74a5f46f79d7e03a6d55352f47",
+        "compile.stdout.log": "3f0a8c6662534a67664f1701684c239af33eb54683c2b4f5282afad197d45a81",
+        "xvlog.log": "3f0a8c6662534a67664f1701684c239af33eb54683c2b4f5282afad197d45a81",
+        "simulate.stdout.log": "e279007782adc8e297735fe358240128cc65976f5b8681a1520c33c8502031c6",
+        "scratch_page_axi_small.sv": "6327c4e4d1899ac538b7fd0c3c720ebb187dda648649eb43fd5ad39279752214",
+        "xelab.log": "77a1a968472407ee381b3ba64c8a89052624246ab77746dfcc267590980045a7",
+        "scratch_page_codec_small.sv": "76514e4c2f151bed371360905872b489a709d7249dd611adf21b15bb7b186b92",
+        "simulate.tcl": "cee86b94a0c1df730788a4fd6167deb96669907a3b514b49115195e7b4273100",
+        "elaborate.stdout.log": "77a1a968472407ee381b3ba64c8a89052624246ab77746dfcc267590980045a7"
+      }
+    }
+  ]
+}

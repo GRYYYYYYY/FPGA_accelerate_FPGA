@@ -1,0 +1,375 @@
+
+****** Vivado v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source adapters/export_netlist_domain.tcl
+# set domain_root [file normalize [file join [file dirname [info script]] ..]]
+# source -notrace [file join $domain_root adapters export_traversal.tcl]
+# namespace eval netlist_domain {
+#     proc begin {path purpose} {
+#         foreach name {seen_nodes seen_tiles seen_pips roots} {set ::graph_export::$name [dict create]}
+#         set ::graph_export::out [open $path {WRONLY CREAT EXCL}]
+#         graph_export::row meta schema vivado_graph_tsv_v1
+#         graph_export::row meta part [get_property PART [current_design]]
+#         graph_export::row meta vivado_version [version -short]
+#         graph_export::row meta vivado_build [string map {\n { | } \r {}} [version]]
+#         graph_export::row meta timestamp_utc [clock format [clock seconds] -gmt 1 -format {%Y-%m-%dT%H:%M:%SZ}]
+#         graph_export::row meta scope complete_downhill_pips_and_nodes_for_selected_roots
+#         graph_export::row meta design routed_routeracc_cost_ooc_netlist
+#         graph_export::row meta purpose $purpose
+#     }
+#     proc reference {path source_file} {
+#         set input [open $source_file r]; set roots [split [string trim [read $input]] \n]; close $input
+#         begin $path reference_route_conditioned_integration_domain
+#         set code [catch {
+#             graph_export::row meta reference_source_count [llength $roots]
+#             set count 0
+#             foreach root $roots {
+#                 set n [get_nodes [list $root]]
+#                 if {[llength $n] != 1 || [get_property NAME $n] ne $root} {error "Missing canonical route node $root"}
+#                 graph_export::select_root $n [lindex [split $root /] 0] reference_route_node
+#                 graph_regions::expand $root
+#                 incr count
+#                 if {$count % 250 == 0} {puts "DOMAIN_PROGRESS $count/[llength $roots] nodes=[dict size $::graph_export::seen_nodes]"; flush $::graph_export::out}
+#             }
+#             graph_regions::finish
+#         } result options]
+#         close $::graph_export::out
+#         if {$code} {return -options $options $result}
+#     }
+# }
+# rename graph_regions::begin graph_regions::static_begin
+# proc graph_regions::begin {path purpose} {netlist_domain::begin $path $purpose}
+# open_checkpoint [file join $domain_root data netlist routeracc_cost_u280_20261022_v1 routed.dcp]
+Command: open_checkpoint /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/netlist/routeracc_cost_u280_20261022_v1/routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.05 . Memory (MB): peak = 1688.730 ; gain = 0.000 ; free physical = 731803 ; free virtual = 1403673
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3047.410 ; gain = 0.000 ; free physical = 730396 ; free virtual = 1402267
+INFO: [Netlist 29-17] Analyzing 120 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+WARNING: [Netlist 29-101] Netlist 'routeracc_cost_registered' is not ideal for floorplanning, since the cellview 'cost_calculator' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
+INFO: [Project 1-479] Netlist was created with Vivado 2022.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Constraints 18-5170] The checkpoint was created with non-default parameter values which do not match the current Vivado settings.  Mismatching parameters are:
+  general.maxThreads
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF Files: Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.17 . Memory (MB): peak = 3594.035 ; gain = 11.906 ; free physical = 729955 ; free virtual = 1401826
+Restored from archive | CPU: 0.170000 secs | Memory: 2.938591 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.17 . Memory (MB): peak = 3594.035 ; gain = 11.906 ; free physical = 729955 ; free virtual = 1401826
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3842.863 ; gain = 0.000 ; free physical = 729740 ; free virtual = 1401611
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2022.2 (64-bit) build 3671981
+OpenCheckpoint Checksum | Checksum: 27d9cfd9b
+----- Checksum: PlaceDB: f9ca2dc0 ShapeSum: 90fc7e35 RouteDB: f2d651a6 
+open_checkpoint: Time (s): cpu = 00:00:27 ; elapsed = 00:00:30 . Memory (MB): peak = 3842.863 ; gain = 2154.133 ; free physical = 729740 ; free virtual = 1401611
+# if {[get_property PART [current_design]] ne "xcu280-fsvh2892-2L-e"} {error "Wrong device"}
+# set directory [file join $domain_root data raw netlist_u280_20261022_v1]
+# traversal::export [file join $directory training.tsv] {INT_X2Y90/EE2_E_BEG0 INT_X3Y120/EE2_E_BEG0 INT_X2Y90/EE12_BEG0 INT_X3Y120/EE12_BEG0} 5 20000
+training.tsv sources=250 discovered=1098
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X3Y89/INT_NODE_IMUX_8_INT_OUT1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X8Y89/INT_NODE_IMUX_8_INT_OUT1]'
+training.tsv sources=500 discovered=2298
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X8Y89/INT_NODE_IMUX_5_INT_OUT0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X8Y89/INT_NODE_IMUX_7_INT_OUT0]'
+training.tsv sources=750 discovered=3493
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_E6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_E7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_W6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_W7]'
+training.tsv sources=1000 discovered=4142
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_E4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_E5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_W4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_W5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_W8]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X5Y90/CTRL_W9]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X3Y89/INT_RCLK_TO_CLK_RIGHT_1_0]'
+training.tsv sources=1250 discovered=4954
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_E6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_E7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_W6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_W7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_E4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_E5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_W4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_W5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_W8]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y120/CTRL_W9]'
+training.tsv sources=1500 discovered=5548
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X14Y89/INT_NODE_IMUX_20_INT_OUT1]'
+training.tsv sources=1750 discovered=6659
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X14Y89/INT_NODE_IMUX_17_INT_OUT0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X14Y89/INT_NODE_IMUX_19_INT_OUT0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_E6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_E7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_W6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_W7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_E4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_E5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_W4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y89/CTRL_W5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_E3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_W2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_W3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_W8]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_W9]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y89/CTRL_W0]'
+training.tsv sources=2000 discovered=7565
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X8Y89/INT_RCLK_TO_CLK_RIGHT_1_0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_E3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_W2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_W3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_W0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X6Y90/CTRL_W1]'
+training.tsv sources=2250 discovered=8440
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X14Y89/INT_NODE_IMUX_8_INT_OUT1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X14Y89/INT_NODE_IMUX_5_INT_OUT0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes RCLK_INT_L_X14Y89/INT_NODE_IMUX_7_INT_OUT0]'
+training.tsv sources=2500 discovered=9539
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_E3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_W2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_W3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_W8]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_W9]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_W0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X8Y89/CTRL_W1]'
+training.tsv sources=2750 discovered=10580
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_E6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_E7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_W6]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_W7]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_E4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_E5]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_W4]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X11Y119/CTRL_W5]'
+training.tsv sources=3000 discovered=11617
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_E3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_W2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_W3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_W8]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_W9]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_E1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_W0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y119/CTRL_W1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y120/IMUX_W0]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y120/IMUX_W1]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y120/IMUX_W16]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y120/IMUX_W18]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y120/IMUX_W2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y119/IMUX_W13]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y119/IMUX_W40]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y119/IMUX_W42]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X10Y119/IMUX_W44]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y120/CTRL_E2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y120/CTRL_E3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y120/CTRL_W2]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y120/CTRL_W3]'
+WARNING: [Common 17-346] No pips matched '*'
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y120/CTRL_E0]'
+WARNING: [Common 17-346] No pips matched '*'
+INFO: [Common 17-14] Message 'Common 17-346' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+WARNING: [Vivado 12-2683] No nodes matched 'get_nodes -downhill -of_objects [get_nodes INT_X7Y120/CTRL_E1]'
+INFO: [Common 17-14] Message 'Vivado 12-2683' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+training.tsv sources=3250 discovered=12417
+training.tsv sources=3500 discovered=13509
+training.tsv sources=3750 discovered=14543
+COMPLETE sources=3761 nodes=14559 pips=18041
+# netlist_domain::reference [file join $directory reference_domain.tsv] [file join $directory reference_sources.txt]
+DOMAIN_PROGRESS 250/18243 nodes=1339
+DOMAIN_PROGRESS 500/18243 nodes=2716
+DOMAIN_PROGRESS 750/18243 nodes=4015
+DOMAIN_PROGRESS 1000/18243 nodes=5358
+DOMAIN_PROGRESS 1250/18243 nodes=6453
+DOMAIN_PROGRESS 1500/18243 nodes=7274
+DOMAIN_PROGRESS 1750/18243 nodes=8023
+DOMAIN_PROGRESS 2000/18243 nodes=8810
+DOMAIN_PROGRESS 2250/18243 nodes=9680
+DOMAIN_PROGRESS 2500/18243 nodes=10592
+DOMAIN_PROGRESS 2750/18243 nodes=11289
+DOMAIN_PROGRESS 3000/18243 nodes=11889
+DOMAIN_PROGRESS 3250/18243 nodes=12701
+DOMAIN_PROGRESS 3500/18243 nodes=13387
+DOMAIN_PROGRESS 3750/18243 nodes=14031
+DOMAIN_PROGRESS 4000/18243 nodes=14807
+DOMAIN_PROGRESS 4250/18243 nodes=15693
+DOMAIN_PROGRESS 4500/18243 nodes=16419
+DOMAIN_PROGRESS 4750/18243 nodes=17070
+DOMAIN_PROGRESS 5000/18243 nodes=17691
+DOMAIN_PROGRESS 5250/18243 nodes=18248
+DOMAIN_PROGRESS 5500/18243 nodes=18964
+DOMAIN_PROGRESS 5750/18243 nodes=19617
+DOMAIN_PROGRESS 6000/18243 nodes=20188
+DOMAIN_PROGRESS 6250/18243 nodes=20761
+DOMAIN_PROGRESS 6500/18243 nodes=21401
+DOMAIN_PROGRESS 6750/18243 nodes=22017
+DOMAIN_PROGRESS 7000/18243 nodes=22622
+DOMAIN_PROGRESS 7250/18243 nodes=23455
+DOMAIN_PROGRESS 7500/18243 nodes=23975
+DOMAIN_PROGRESS 7750/18243 nodes=24580
+DOMAIN_PROGRESS 8000/18243 nodes=25206
+DOMAIN_PROGRESS 8250/18243 nodes=25849
+DOMAIN_PROGRESS 8500/18243 nodes=26343
+DOMAIN_PROGRESS 8750/18243 nodes=27084
+DOMAIN_PROGRESS 9000/18243 nodes=27768
+DOMAIN_PROGRESS 9250/18243 nodes=28367
+DOMAIN_PROGRESS 9500/18243 nodes=29117
+DOMAIN_PROGRESS 9750/18243 nodes=29847
+DOMAIN_PROGRESS 10000/18243 nodes=30577
+DOMAIN_PROGRESS 10250/18243 nodes=31270
+DOMAIN_PROGRESS 10500/18243 nodes=31866
+DOMAIN_PROGRESS 10750/18243 nodes=32517
+DOMAIN_PROGRESS 11000/18243 nodes=33233
+DOMAIN_PROGRESS 11250/18243 nodes=33887
+DOMAIN_PROGRESS 11500/18243 nodes=34518
+DOMAIN_PROGRESS 11750/18243 nodes=35394
+DOMAIN_PROGRESS 12000/18243 nodes=36052
+DOMAIN_PROGRESS 12250/18243 nodes=36664
+DOMAIN_PROGRESS 12500/18243 nodes=37217
+DOMAIN_PROGRESS 12750/18243 nodes=37840
+DOMAIN_PROGRESS 13000/18243 nodes=38458
+DOMAIN_PROGRESS 13250/18243 nodes=39018
+DOMAIN_PROGRESS 13500/18243 nodes=39663
+DOMAIN_PROGRESS 13750/18243 nodes=40275
+DOMAIN_PROGRESS 14000/18243 nodes=40977
+DOMAIN_PROGRESS 14250/18243 nodes=41559
+DOMAIN_PROGRESS 14500/18243 nodes=42170
+DOMAIN_PROGRESS 14750/18243 nodes=42858
+DOMAIN_PROGRESS 15000/18243 nodes=43371
+DOMAIN_PROGRESS 15250/18243 nodes=43983
+DOMAIN_PROGRESS 15500/18243 nodes=44632
+DOMAIN_PROGRESS 15750/18243 nodes=45240
+DOMAIN_PROGRESS 16000/18243 nodes=45833
+DOMAIN_PROGRESS 16250/18243 nodes=46467
+DOMAIN_PROGRESS 16500/18243 nodes=47059
+DOMAIN_PROGRESS 16750/18243 nodes=47637
+DOMAIN_PROGRESS 17000/18243 nodes=48325
+DOMAIN_PROGRESS 17250/18243 nodes=48879
+DOMAIN_PROGRESS 17500/18243 nodes=49496
+DOMAIN_PROGRESS 17750/18243 nodes=50112
+DOMAIN_PROGRESS 18000/18243 nodes=50854
+COMPLETE sources=18243 nodes=51596 pips=83931
+# puts "NETLIST_DOMAIN_COMPLETE"
+NETLIST_DOMAIN_COMPLETE
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 22 18:42:52 2026...

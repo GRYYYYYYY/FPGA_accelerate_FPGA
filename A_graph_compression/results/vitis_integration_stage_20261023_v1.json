@@ -1,0 +1,157 @@
+{
+  "created_utc": "2026-10-23T11:43:16.444750+00:00",
+  "status": "host_offline_verified_csr_exported_compact_rtl_running",
+  "artifacts": {
+    "results/vitis_host_preparation_20261023_v1.json": "6e6bb1f72856ffcd0edc55ee8f3becfd002208aa446ff8d895771c6b3809ff7e",
+    "results/vitis_board_environment_20261023_v1.json": "e7abc15d5112f965d46a98c7c364c6bfe9cf934d90ec2ed3e3aea02903db7af7",
+    "results/vitis_board_environment_20261023_v1.log": "93cadf95816e73ac67cce8afc5a66b920da8dcfdbac9d853428cb4015721f5ca",
+    "results/project_check_after_vitis_20261023_v1.log": "fdc02178a2f82def16690d3e532ea0d90ffbdaa1b47628f8456a1baa2a0252bb"
+  },
+  "hls_state_snapshot": {
+    "csr": {
+      "owner_pid": 253757,
+      "mode": "csr",
+      "cpu": 122,
+      "status": "complete",
+      "steps": [
+        {
+          "stage": "synth",
+          "exit_code": 0,
+          "completion_marker": true,
+          "log_sha256": "63694a667a0b3cc86f1d7577110b8c96ecca72e7f1b7ef8cd86ae9caa4cda5e8",
+          "command": [
+            "taskset",
+            "-c",
+            "122",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run.tcl"
+          ]
+        },
+        {
+          "stage": "cosim",
+          "exit_code": 0,
+          "completion_marker": true,
+          "log_sha256": "b02bfeebccca9b1c11b4f359f3eca7253800e8defb45a994e5449be052198e07",
+          "command": [
+            "taskset",
+            "-c",
+            "122",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run.tcl"
+          ]
+        },
+        {
+          "stage": "export",
+          "exit_code": 0,
+          "completion_marker": true,
+          "log_sha256": "b11f99ea656ad405afd4fa95eb5ad57654c2975cb86e3e6eba2772973c5aa158",
+          "command": [
+            "taskset",
+            "-c",
+            "122",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run.tcl"
+          ]
+        }
+      ],
+      "stage": "exported",
+      "command": [
+        "taskset",
+        "-c",
+        "122",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+        "-f",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run.tcl"
+      ]
+    },
+    "compact": {
+      "owner_pid": 253757,
+      "mode": "compact",
+      "cpu": 123,
+      "status": "running",
+      "steps": [
+        {
+          "stage": "synth",
+          "exit_code": 0,
+          "completion_marker": true,
+          "log_sha256": "8a0b1977db30ad3ff57bf6bc400cf0058ba93377a8a56f89b0ee55e5bcb3dc32",
+          "command": [
+            "taskset",
+            "-c",
+            "123",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+            "-f",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run.tcl"
+          ]
+        }
+      ],
+      "stage": "cosim",
+      "command": [
+        "taskset",
+        "-c",
+        "123",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/vitis_hls",
+        "-f",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/run.tcl"
+      ],
+      "child_pid": 276909
+    }
+  },
+  "process_snapshot": {
+    "253757": {
+      "state": "S",
+      "start_ticks": "1591009616",
+      "command": "python3 -u scripts/vitis_graph_pipeline_v2.py "
+    },
+    "303134": {
+      "state": "S",
+      "start_ticks": "1591020724",
+      "command": "xsim.dir/graph_accel/xsimk -simmode gui -wdb graph_accel.wdb -simrunnum 0 -socket 33967 "
+    },
+    "505544": {
+      "state": "S",
+      "start_ticks": "1591067444",
+      "command": "python3 -u scripts/vitis_graph_audit_pipeline.py --bundle data/derived/vitis_graph_kernel_20261023_v2 --owner 253757 --state results/vitis_graph_audit_pipeline_20261023_v2.json --output results/vitis_graph_kernel_audit_20261023_v2.json "
+    },
+    "3749868": {
+      "state": "S",
+      "start_ticks": "1590840320",
+      "command": "python3 -u scripts/site_capacity_experiment.py --output data/derived/site_capacity_region_20261023_v1 --cpu 124 "
+    },
+    "247066": {
+      "state": "R",
+      "start_ticks": "1591008024",
+      "command": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/build/native_site_runtime_20261023_v1 /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/region_all_nets_cap8_20261022_v1/compact.agr /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_region_compact_inputs_20261023_v2/routing.txt /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_compact_inputs_20261023_v1/sites.txt 4096 80 200000 8 direct "
+    },
+    "4146936": {
+      "state": "S",
+      "start_ticks": "1589909824",
+      "command": "/usr/bin/python3 /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/native_runtime_benchmark.py --output /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_runtime_statistics_20261023_v1 --capacities 0 64 4096 --repeats 7 --seed 20261023 --cpu 0 "
+    },
+    "3457381": {
+      "state": "R",
+      "start_ticks": "1590772366",
+      "command": "/usr/bin/python3 -u /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/native_site_runtime_benchmark.py --output /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/native_site_runtime_statistics_20261023_v1 --capacities 0 64 4096 --repeats 7 --seed 20261023 --cpu 127 "
+    },
+    "2703565": {
+      "state": "S",
+      "start_ticks": "1590594556",
+      "command": "/usr/bin/python3 -u /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/template_scope_runtime.py --output /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/template_scope_runtime_validation_20261023_v1 --repeats 1 --cpu 126 "
+    },
+    "3986466": {
+      "state": "S",
+      "start_ticks": "1590895922",
+      "command": "/usr/bin/python3 -u /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/scripts/source_to_route_statistics.py --output /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/source_to_route_statistics_20261023_v1 --cpu 125 "
+    }
+  },
+  "audit_state_path": "results/vitis_graph_audit_pipeline_20261023_v2.json",
+  "expected_audit_report": "results/vitis_graph_kernel_audit_20261023_v2.json",
+  "limitations": [
+    "Snapshot only; live states may advance.",
+    "No platform-linked xclbin or real board timing/power.",
+    "No complete router FPGA execution or complete special-resource model."
+  ]
+}

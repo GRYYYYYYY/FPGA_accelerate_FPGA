@@ -1,0 +1,3589 @@
+{
+  "status": "passed",
+  "config": {
+    "dataset_kind": "real_placed_netlist",
+    "datasets": [
+      {
+        "id": "vtr_mcml",
+        "input": "data/derived/vtr_mcml.rrt",
+        "input_sha256": "68431e9730197f0b89c4b287822a5d7360f4df0478955eb0556212121dab6577",
+        "provenance": "data/derived/vtr_mcml_provenance.json"
+      }
+    ],
+    "builds": [
+      "build/paged_real_v2/build.json",
+      "build/compact_real_v1/build.json"
+    ],
+    "semantic_tests": [
+      "build/paged_real_v2/semantic_tests.json",
+      "build/compact_real_v1/semantic_tests.json"
+    ],
+    "serial_cpu": "8",
+    "batch_cpus": "8-12",
+    "repetitions": 1,
+    "seed": 291,
+    "timeout_seconds": 900,
+    "purpose": "pilot_gate_not_formal_statistics",
+    "cases": [
+      {
+        "mode": "serial",
+        "variant": "original",
+        "page_bits": null
+      },
+      {
+        "mode": "serial",
+        "variant": "paged",
+        "page_bits": 9
+      },
+      {
+        "mode": "serial",
+        "variant": "node_epoch",
+        "page_bits": 9
+      },
+      {
+        "mode": "serial",
+        "variant": "compact",
+        "page_bits": 9
+      },
+      {
+        "mode": "batch",
+        "variant": "paged",
+        "page_bits": 9
+      },
+      {
+        "mode": "batch",
+        "variant": "node_epoch",
+        "page_bits": 9
+      },
+      {
+        "mode": "batch",
+        "variant": "compact",
+        "page_bits": 9
+      }
+    ],
+    "batch_environment": {
+      "RW_MAX_THREADS": "5",
+      "RW_PAR_PART": "1",
+      "RW_PAR_PIN": "0",
+      "RW_PAR_NUMA": "0",
+      "RW_PAR_ITER1": "0",
+      "RW_OVERLAP": "0",
+      "RW_GPU_FLOOD": "0",
+      "RW_BATCH_MIN": "1000",
+      "RW_BATCH_T": "4",
+      "RW_BATCH_B": "8",
+      "RW_BATCH_ITER_MIN": "3",
+      "RW_BATCH_ITER_MAX": "8",
+      "RW_BATCH_OVER_MIN": "128",
+      "RW_BATCH_SPARSE": "1",
+      "RW_BATCH_PAGED": "1",
+      "RW_BATCH_ROLLBACK": "1",
+      "RW_BATCH_BOUNCE": "0",
+      "RW_BATCH_BUDGET": "1048576",
+      "RW_PF_RAMP1": "0"
+    }
+  },
+  "config_sha256": "cc16cb34b4df714fd93b44ebcbf5c6a116dbfcfae594dfb4e25c4a0371f08157",
+  "builds": [
+    {
+      "diagnostic": false,
+      "variants": {
+        "paged": {
+          "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+          "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+          "command": [
+            "g++",
+            "-std=c++17",
+            "-O3",
+            "-g",
+            "-fno-fast-math",
+            "-fno-omit-frame-pointer",
+            "-no-pie",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router"
+          ],
+          "source_sha256": "906bf3b4b0d6f96be4cb0c0e723cb24305f8ea766a57c3e9bd3a1c05bc736ae4",
+          "binary_sha256": "997a5b47435878b8874ec0a46f7c7b769f75fb3ab253e9bccb8fe9c1931d1bad"
+        },
+        "node_epoch": {
+          "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+          "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+          "command": [
+            "g++",
+            "-std=c++17",
+            "-O3",
+            "-g",
+            "-fno-fast-math",
+            "-fno-omit-frame-pointer",
+            "-no-pie",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router"
+          ],
+          "source_sha256": "b5d92849fa26b47cff085348ad3d0568d1d58d2c94a677dd614fc13cc846388c",
+          "binary_sha256": "e5f52d360e7d655f5eaef1e44bfab964126e8928d5e8d072f6a4a30b663922cd"
+        }
+      },
+      "inputs": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+      }
+    },
+    {
+      "layout": "compact",
+      "variants": {
+        "compact": {
+          "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/compact_real_v1/router.cpp",
+          "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/compact_real_v1/router",
+          "command": [
+            "g++",
+            "-std=c++17",
+            "-O3",
+            "-g",
+            "-fno-fast-math",
+            "-fno-omit-frame-pointer",
+            "-no-pie",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/compact_real_v1/router.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/compact_real_v1/router"
+          ],
+          "source_sha256": "7462d50e3f2b793f48e26c63b86e513d97b54651c7a8d6aadd059e5393f9ba45",
+          "binary_sha256": "c333cff496f5baabbc8f0bd43290c37f1f50889bcab5b9e3e4e99b972dab9e22"
+        }
+      },
+      "inputs": {
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_compact_router.py": "983c01b4a41b71bdbfeaf82049bc3cd2195de589caf054281137eaeb78e84d06",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+      }
+    }
+  ],
+  "semantic_tests": [
+    {
+      "status": "passed",
+      "build": {
+        "diagnostic": false,
+        "variants": {
+          "paged": {
+            "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+            "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+            "command": [
+              "g++",
+              "-std=c++17",
+              "-O3",
+              "-g",
+              "-fno-fast-math",
+              "-fno-omit-frame-pointer",
+              "-no-pie",
+              "-pthread",
+              "-I",
+              "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+              "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router.cpp",
+              "-o",
+              "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router"
+            ],
+            "source_sha256": "906bf3b4b0d6f96be4cb0c0e723cb24305f8ea766a57c3e9bd3a1c05bc736ae4",
+            "binary_sha256": "997a5b47435878b8874ec0a46f7c7b769f75fb3ab253e9bccb8fe9c1931d1bad"
+          },
+          "node_epoch": {
+            "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+            "binary": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+            "command": [
+              "g++",
+              "-std=c++17",
+              "-O3",
+              "-g",
+              "-fno-fast-math",
+              "-fno-omit-frame-pointer",
+              "-no-pie",
+              "-pthread",
+              "-I",
+              "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+              "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router.cpp",
+              "-o",
+              "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router"
+            ],
+            "source_sha256": "b5d92849fa26b47cff085348ad3d0568d1d58d2c94a677dd614fc13cc846388c",
+            "binary_sha256": "e5f52d360e7d655f5eaef1e44bfab964126e8928d5e8d072f6a4a30b663922cd"
+          }
+        },
+        "inputs": {
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_paged_router.py": "08dba94dd98b96980379ec485e6077039ddd371cf629b07f31f0bbf0b16eed09",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/adapters/build_real_router.py": "c182f1463efa70af73a828482c99b789028ee026af01d60a78a6df6a4e048fec",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/src/main.cpp": "cbd6e0b810a46ca06b0058ee7f2318a1862f66c64178bf27f0d6b574e5bf6826",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/BinIO.hpp": "a2212c89c5d1e27456cddce7890d31eec96fe91bbc68c828974dd2a9a0c02c01",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/DeviceModel.hpp": "4a0529ffa934b0c124d5441d811c752a5f11e366007eb45c86687bc930208a90",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/RouteNodeType.hpp": "485d06704bab9db9301f0313239bd5f9d3c4dac6815f8e3f8a331494f3f7cf7d",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_bbox.hpp": "3a88eb893ffc1cbcd5d26b221e0584ac12cba07add16e0b9f719f92f8b9a3c79",
+          "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include/gpu_route.hpp": "21c377554718d6cff2fd3c8697b06c46173fb390d3a3589125f967832204be56"
+        }
+      },
+      "source_sha256": "2cceae6078f9543789cf03a8aa406f42712e108f97cb5a14ba49dba444362034",
+      "checks": {
+        "paged": {
+          "build_command": [
+            "g++",
+            "-std=c++17",
+            "-O1",
+            "-g",
+            "-fsanitize=address,undefined",
+            "-fno-omit-frame-pointer",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/tests/paged_semantics.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/test_labels"
+          ],
+          "binary_sha256": "d6902f596d215148df02489bc5ca8a1692025026c3f1d7240c075f6b0a5e19ac",
+          "result": {
+            "status": "passed",
+            "node_epoch": 0
+          }
+        },
+        "node_epoch": {
+          "build_command": [
+            "g++",
+            "-std=c++17",
+            "-O1",
+            "-g",
+            "-fsanitize=address,undefined",
+            "-fno-omit-frame-pointer",
+            "-pthread",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch",
+            "-I",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/_shared/assets/gpu_router_original/rewrite/cpp_router/include",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/tests/paged_semantics.cpp",
+            "-o",
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/test_labels"
+          ],
+          "binary_sha256": "31f19b3b679b2cceba45ff4c43efe46fdc5e456cded9883fbec7057b32025f55",
+          "result": {
+            "status": "passed",
+            "node_epoch": 1
+          }
+        }
+      }
+    },
+    {
+      "status": "passed",
+      "result": {
+        "status": "passed",
+        "page_bits": [
+          6,
+          9,
+          12
+        ]
+      },
+      "router_source_sha256": "7462d50e3f2b793f48e26c63b86e513d97b54651c7a8d6aadd059e5393f9ba45",
+      "test_source_sha256": "341510f53c23d2a52300e62ede67504458d8881255611b8d9a8266ac9ad70619",
+      "binary_sha256": "1ba58f422e518e0c40c1c6f9ad27665ef14c7621c61c249c0ad1691aec65eee3",
+      "sanitizers": [
+        "address",
+        "undefined"
+      ],
+      "compile_flags": [
+        "-std=c++17",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-pthread"
+      ],
+      "runtime_environment": {
+        "ASAN_OPTIONS": "detect_leaks=1"
+      },
+      "page_bits": [
+        6,
+        9,
+        12
+      ]
+    }
+  ],
+  "host": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35",
+  "tool_sha256": "4a18ef178a95525405772fd640ece62a4c16a2cbbfac073cb4e53166751c3664",
+  "runner_pid": 199726,
+  "started_utc": "2026-10-22T18:30:16.625277+00:00",
+  "runs": [
+    {
+      "name": "vtr_mcml_batch_compact_p9_r0",
+      "dataset": "vtr_mcml",
+      "mode": "batch",
+      "variant": "compact",
+      "page_bits": 9,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_compact_p9_r0.time",
+        "taskset",
+        "-c",
+        "8-12",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/compact_real_v1/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_compact_p9_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "5",
+        "RW_PAR_PART": "1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_MIN": "1000",
+        "RW_BATCH_T": "4",
+        "RW_BATCH_B": "8",
+        "RW_BATCH_ITER_MIN": "3",
+        "RW_BATCH_ITER_MAX": "8",
+        "RW_BATCH_OVER_MIN": "128",
+        "RW_BATCH_SPARSE": "1",
+        "RW_BATCH_PAGED": "1",
+        "RW_BATCH_ROLLBACK": "1",
+        "RW_BATCH_BOUNCE": "0",
+        "RW_BATCH_BUDGET": "1048576",
+        "RW_PF_RAMP1": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_compact_p9_r0.labels.json"
+      },
+      "process_pid": 199732,
+      "exit_code": 0,
+      "process_wall_seconds": 147.30262158811092,
+      "metrics": {
+        "load_ms": 3227,
+        "route_ms": 143172,
+        "write_ms": 677,
+        "total_ms": 147078,
+        "iterations": 55,
+        "overused": 0,
+        "pushes": 213097198,
+        "used_nodes": 1451166,
+        "wire_length": 791146,
+        "convergence": [
+          [
+            1,
+            122755,
+            136747,
+            0,
+            224819
+          ],
+          [
+            2,
+            80928,
+            83466,
+            0,
+            174332
+          ],
+          [
+            3,
+            44150,
+            44481,
+            0,
+            150011
+          ],
+          [
+            4,
+            19329,
+            19378,
+            0,
+            105320
+          ],
+          [
+            5,
+            6379,
+            6387,
+            0,
+            57663
+          ],
+          [
+            6,
+            1874,
+            1877,
+            0,
+            24806
+          ],
+          [
+            7,
+            845,
+            846,
+            0,
+            10357
+          ],
+          [
+            8,
+            496,
+            496,
+            0,
+            5905
+          ],
+          [
+            9,
+            277,
+            277,
+            0,
+            3401
+          ],
+          [
+            10,
+            187,
+            187,
+            0,
+            1247
+          ],
+          [
+            11,
+            130,
+            130,
+            0,
+            445
+          ],
+          [
+            12,
+            97,
+            97,
+            0,
+            292
+          ],
+          [
+            13,
+            76,
+            76,
+            0,
+            205
+          ],
+          [
+            14,
+            63,
+            63,
+            0,
+            195
+          ],
+          [
+            15,
+            50,
+            50,
+            0,
+            135
+          ],
+          [
+            16,
+            39,
+            39,
+            0,
+            104
+          ],
+          [
+            17,
+            32,
+            32,
+            0,
+            83
+          ],
+          [
+            18,
+            33,
+            33,
+            0,
+            79
+          ],
+          [
+            19,
+            22,
+            22,
+            0,
+            58
+          ],
+          [
+            20,
+            17,
+            17,
+            0,
+            48
+          ],
+          [
+            21,
+            13,
+            13,
+            0,
+            50
+          ],
+          [
+            22,
+            16,
+            16,
+            0,
+            25
+          ],
+          [
+            23,
+            12,
+            12,
+            0,
+            34
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            30
+          ],
+          [
+            25,
+            8,
+            8,
+            0,
+            24
+          ],
+          [
+            26,
+            6,
+            6,
+            0,
+            15
+          ],
+          [
+            27,
+            5,
+            5,
+            0,
+            12
+          ],
+          [
+            28,
+            4,
+            4,
+            0,
+            13
+          ],
+          [
+            29,
+            2,
+            2,
+            0,
+            7
+          ],
+          [
+            30,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            31,
+            2,
+            2,
+            0,
+            6
+          ],
+          [
+            32,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            33,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            34,
+            2,
+            2,
+            0,
+            7
+          ],
+          [
+            35,
+            1,
+            1,
+            0,
+            6
+          ],
+          [
+            36,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            37,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            38,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            39,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            4
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            44,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            45,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            48,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            49,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            50,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            51,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            52,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            53,
+            2,
+            2,
+            0,
+            1
+          ],
+          [
+            54,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            55,
+            0,
+            0,
+            0,
+            3
+          ]
+        ],
+        "bbox_ms": 850.0000000000001
+      },
+      "result_sha256": "bb09db3700187be0e0149b85993b3481168ff6434bdc94a64b767b22bfdb2da7",
+      "max_rss_kib": 4132732,
+      "labels": {
+        "node_epoch": true,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "layout": "compact",
+            "pool_slot_bytes": 4,
+            "compact_payload_bytes": 1572864,
+            "compact_live_nodes": 239,
+            "peak_compact_nodes": 131072,
+            "compact_growth_events": 17,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 8388608,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 76,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "layout": "compact",
+            "pool_slot_bytes": 4,
+            "compact_payload_bytes": 1572864,
+            "compact_live_nodes": 267,
+            "peak_compact_nodes": 131072,
+            "compact_growth_events": 23,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 8388608,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 75,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "layout": "compact",
+            "pool_slot_bytes": 4,
+            "compact_payload_bytes": 1572864,
+            "compact_live_nodes": 487,
+            "peak_compact_nodes": 131072,
+            "compact_growth_events": 17,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 8388608,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 71,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "layout": "compact",
+            "pool_slot_bytes": 4,
+            "compact_payload_bytes": 1572864,
+            "compact_live_nodes": 249,
+            "peak_compact_nodes": 131072,
+            "compact_growth_events": 17,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 8388608,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 69,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    },
+    {
+      "name": "vtr_mcml_serial_node_epoch_p9_r0",
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "node_epoch",
+      "page_bits": 9,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_node_epoch_p9_r0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_node_epoch_p9_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_node_epoch_p9_r0.labels.json"
+      },
+      "process_pid": 260689,
+      "exit_code": 0,
+      "process_wall_seconds": 131.92056650668383,
+      "metrics": {
+        "load_ms": 3165,
+        "route_ms": 127965,
+        "write_ms": 652,
+        "total_ms": 131784,
+        "iterations": 48,
+        "overused": 0,
+        "pushes": 390136023,
+        "used_nodes": 1441009,
+        "wire_length": 778649,
+        "convergence": [
+          [
+            1,
+            122499,
+            136621,
+            0,
+            224819
+          ],
+          [
+            2,
+            81024,
+            83469,
+            0,
+            174672
+          ],
+          [
+            3,
+            42961,
+            43300,
+            0,
+            141707
+          ],
+          [
+            4,
+            18002,
+            18046,
+            0,
+            92385
+          ],
+          [
+            5,
+            5683,
+            5686,
+            0,
+            46007
+          ],
+          [
+            6,
+            1488,
+            1489,
+            0,
+            19316
+          ],
+          [
+            7,
+            583,
+            584,
+            0,
+            9018
+          ],
+          [
+            8,
+            341,
+            341,
+            0,
+            5742
+          ],
+          [
+            9,
+            211,
+            211,
+            0,
+            2618
+          ],
+          [
+            10,
+            138,
+            138,
+            0,
+            910
+          ],
+          [
+            11,
+            86,
+            86,
+            0,
+            580
+          ],
+          [
+            12,
+            75,
+            75,
+            0,
+            176
+          ],
+          [
+            13,
+            59,
+            59,
+            0,
+            140
+          ],
+          [
+            14,
+            50,
+            50,
+            0,
+            128
+          ],
+          [
+            15,
+            37,
+            37,
+            0,
+            99
+          ],
+          [
+            16,
+            29,
+            29,
+            0,
+            68
+          ],
+          [
+            17,
+            24,
+            24,
+            0,
+            58
+          ],
+          [
+            18,
+            23,
+            23,
+            0,
+            48
+          ],
+          [
+            19,
+            20,
+            20,
+            0,
+            48
+          ],
+          [
+            20,
+            19,
+            19,
+            0,
+            50
+          ],
+          [
+            21,
+            15,
+            15,
+            0,
+            37
+          ],
+          [
+            22,
+            15,
+            15,
+            0,
+            26
+          ],
+          [
+            23,
+            14,
+            14,
+            0,
+            26
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            26
+          ],
+          [
+            25,
+            10,
+            10,
+            0,
+            24
+          ],
+          [
+            26,
+            7,
+            7,
+            0,
+            17
+          ],
+          [
+            27,
+            8,
+            8,
+            0,
+            15
+          ],
+          [
+            28,
+            7,
+            7,
+            0,
+            16
+          ],
+          [
+            29,
+            6,
+            6,
+            0,
+            40
+          ],
+          [
+            30,
+            4,
+            4,
+            0,
+            14
+          ],
+          [
+            31,
+            8,
+            8,
+            0,
+            10
+          ],
+          [
+            32,
+            5,
+            5,
+            0,
+            11
+          ],
+          [
+            33,
+            4,
+            4,
+            0,
+            10
+          ],
+          [
+            34,
+            5,
+            5,
+            0,
+            6
+          ],
+          [
+            35,
+            3,
+            3,
+            0,
+            10
+          ],
+          [
+            36,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            37,
+            2,
+            2,
+            0,
+            4
+          ],
+          [
+            38,
+            2,
+            2,
+            0,
+            5
+          ],
+          [
+            39,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            8
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            44,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            45,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            48,
+            0,
+            0,
+            0,
+            2
+          ]
+        ],
+        "bbox_ms": 2940.0
+      },
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "max_rss_kib": 4132612,
+      "labels": {
+        "node_epoch": true,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 4194304,
+            "pool_capacity_bytes": 100663296,
+            "node_epoch_bytes": 16777216,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 2,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    },
+    {
+      "name": "vtr_mcml_serial_paged_p9_r0",
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "paged",
+      "page_bits": 9,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_paged_p9_r0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_paged_p9_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_paged_p9_r0.labels.json"
+      },
+      "process_pid": 314309,
+      "exit_code": 0,
+      "process_wall_seconds": 194.10382463037968,
+      "metrics": {
+        "load_ms": 3144,
+        "route_ms": 190141,
+        "write_ms": 648,
+        "total_ms": 193934,
+        "iterations": 48,
+        "overused": 0,
+        "pushes": 390136023,
+        "used_nodes": 1441009,
+        "wire_length": 778649,
+        "convergence": [
+          [
+            1,
+            122499,
+            136621,
+            0,
+            224819
+          ],
+          [
+            2,
+            81024,
+            83469,
+            0,
+            174672
+          ],
+          [
+            3,
+            42961,
+            43300,
+            0,
+            141707
+          ],
+          [
+            4,
+            18002,
+            18046,
+            0,
+            92385
+          ],
+          [
+            5,
+            5683,
+            5686,
+            0,
+            46007
+          ],
+          [
+            6,
+            1488,
+            1489,
+            0,
+            19316
+          ],
+          [
+            7,
+            583,
+            584,
+            0,
+            9018
+          ],
+          [
+            8,
+            341,
+            341,
+            0,
+            5742
+          ],
+          [
+            9,
+            211,
+            211,
+            0,
+            2618
+          ],
+          [
+            10,
+            138,
+            138,
+            0,
+            910
+          ],
+          [
+            11,
+            86,
+            86,
+            0,
+            580
+          ],
+          [
+            12,
+            75,
+            75,
+            0,
+            176
+          ],
+          [
+            13,
+            59,
+            59,
+            0,
+            140
+          ],
+          [
+            14,
+            50,
+            50,
+            0,
+            128
+          ],
+          [
+            15,
+            37,
+            37,
+            0,
+            99
+          ],
+          [
+            16,
+            29,
+            29,
+            0,
+            68
+          ],
+          [
+            17,
+            24,
+            24,
+            0,
+            58
+          ],
+          [
+            18,
+            23,
+            23,
+            0,
+            48
+          ],
+          [
+            19,
+            20,
+            20,
+            0,
+            48
+          ],
+          [
+            20,
+            19,
+            19,
+            0,
+            50
+          ],
+          [
+            21,
+            15,
+            15,
+            0,
+            37
+          ],
+          [
+            22,
+            15,
+            15,
+            0,
+            26
+          ],
+          [
+            23,
+            14,
+            14,
+            0,
+            26
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            26
+          ],
+          [
+            25,
+            10,
+            10,
+            0,
+            24
+          ],
+          [
+            26,
+            7,
+            7,
+            0,
+            17
+          ],
+          [
+            27,
+            8,
+            8,
+            0,
+            15
+          ],
+          [
+            28,
+            7,
+            7,
+            0,
+            16
+          ],
+          [
+            29,
+            6,
+            6,
+            0,
+            40
+          ],
+          [
+            30,
+            4,
+            4,
+            0,
+            14
+          ],
+          [
+            31,
+            8,
+            8,
+            0,
+            10
+          ],
+          [
+            32,
+            5,
+            5,
+            0,
+            11
+          ],
+          [
+            33,
+            4,
+            4,
+            0,
+            10
+          ],
+          [
+            34,
+            5,
+            5,
+            0,
+            6
+          ],
+          [
+            35,
+            3,
+            3,
+            0,
+            10
+          ],
+          [
+            36,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            37,
+            2,
+            2,
+            0,
+            4
+          ],
+          [
+            38,
+            2,
+            2,
+            0,
+            5
+          ],
+          [
+            39,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            8
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            44,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            45,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            48,
+            0,
+            0,
+            0,
+            2
+          ]
+        ],
+        "bbox_ms": 3000.0
+      },
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "max_rss_kib": 4132552,
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 4194304,
+            "pool_capacity_bytes": 100663296,
+            "node_epoch_bytes": 0,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 2,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    },
+    {
+      "name": "vtr_mcml_serial_original_p0_r0",
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "original",
+      "page_bits": null,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_original_p0_r0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/real_trace/router_original",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_original_p0_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0"
+      },
+      "process_pid": 391416,
+      "exit_code": 0,
+      "process_wall_seconds": 97.08003153093159,
+      "metrics": {
+        "load_ms": 3300,
+        "route_ms": 92989,
+        "write_ms": 645,
+        "total_ms": 96935,
+        "iterations": 48,
+        "overused": 0,
+        "pushes": 390136023,
+        "used_nodes": 1441009,
+        "wire_length": 778649,
+        "convergence": [
+          [
+            1,
+            122499,
+            136621,
+            0,
+            224819
+          ],
+          [
+            2,
+            81024,
+            83469,
+            0,
+            174672
+          ],
+          [
+            3,
+            42961,
+            43300,
+            0,
+            141707
+          ],
+          [
+            4,
+            18002,
+            18046,
+            0,
+            92385
+          ],
+          [
+            5,
+            5683,
+            5686,
+            0,
+            46007
+          ],
+          [
+            6,
+            1488,
+            1489,
+            0,
+            19316
+          ],
+          [
+            7,
+            583,
+            584,
+            0,
+            9018
+          ],
+          [
+            8,
+            341,
+            341,
+            0,
+            5742
+          ],
+          [
+            9,
+            211,
+            211,
+            0,
+            2618
+          ],
+          [
+            10,
+            138,
+            138,
+            0,
+            910
+          ],
+          [
+            11,
+            86,
+            86,
+            0,
+            580
+          ],
+          [
+            12,
+            75,
+            75,
+            0,
+            176
+          ],
+          [
+            13,
+            59,
+            59,
+            0,
+            140
+          ],
+          [
+            14,
+            50,
+            50,
+            0,
+            128
+          ],
+          [
+            15,
+            37,
+            37,
+            0,
+            99
+          ],
+          [
+            16,
+            29,
+            29,
+            0,
+            68
+          ],
+          [
+            17,
+            24,
+            24,
+            0,
+            58
+          ],
+          [
+            18,
+            23,
+            23,
+            0,
+            48
+          ],
+          [
+            19,
+            20,
+            20,
+            0,
+            48
+          ],
+          [
+            20,
+            19,
+            19,
+            0,
+            50
+          ],
+          [
+            21,
+            15,
+            15,
+            0,
+            37
+          ],
+          [
+            22,
+            15,
+            15,
+            0,
+            26
+          ],
+          [
+            23,
+            14,
+            14,
+            0,
+            26
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            26
+          ],
+          [
+            25,
+            10,
+            10,
+            0,
+            24
+          ],
+          [
+            26,
+            7,
+            7,
+            0,
+            17
+          ],
+          [
+            27,
+            8,
+            8,
+            0,
+            15
+          ],
+          [
+            28,
+            7,
+            7,
+            0,
+            16
+          ],
+          [
+            29,
+            6,
+            6,
+            0,
+            40
+          ],
+          [
+            30,
+            4,
+            4,
+            0,
+            14
+          ],
+          [
+            31,
+            8,
+            8,
+            0,
+            10
+          ],
+          [
+            32,
+            5,
+            5,
+            0,
+            11
+          ],
+          [
+            33,
+            4,
+            4,
+            0,
+            10
+          ],
+          [
+            34,
+            5,
+            5,
+            0,
+            6
+          ],
+          [
+            35,
+            3,
+            3,
+            0,
+            10
+          ],
+          [
+            36,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            37,
+            2,
+            2,
+            0,
+            4
+          ],
+          [
+            38,
+            2,
+            2,
+            0,
+            5
+          ],
+          [
+            39,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            8
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            44,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            45,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            48,
+            0,
+            0,
+            0,
+            2
+          ]
+        ],
+        "bbox_ms": 3010.0
+      },
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "max_rss_kib": 4132500,
+      "verified": true
+    },
+    {
+      "name": "vtr_mcml_batch_paged_p9_r0",
+      "dataset": "vtr_mcml",
+      "mode": "batch",
+      "variant": "paged",
+      "page_bits": 9,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_paged_p9_r0.time",
+        "taskset",
+        "-c",
+        "8-12",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/paged/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_paged_p9_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "5",
+        "RW_PAR_PART": "1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_MIN": "1000",
+        "RW_BATCH_T": "4",
+        "RW_BATCH_B": "8",
+        "RW_BATCH_ITER_MIN": "3",
+        "RW_BATCH_ITER_MAX": "8",
+        "RW_BATCH_OVER_MIN": "128",
+        "RW_BATCH_SPARSE": "1",
+        "RW_BATCH_PAGED": "1",
+        "RW_BATCH_ROLLBACK": "1",
+        "RW_BATCH_BOUNCE": "0",
+        "RW_BATCH_BUDGET": "1048576",
+        "RW_PF_RAMP1": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_paged_p9_r0.labels.json"
+      },
+      "process_pid": 429249,
+      "exit_code": 0,
+      "process_wall_seconds": 217.0883846040815,
+      "metrics": {
+        "load_ms": 3190,
+        "route_ms": 213081,
+        "write_ms": 693,
+        "total_ms": 216966,
+        "iterations": 55,
+        "overused": 0,
+        "pushes": 213097198,
+        "used_nodes": 1451166,
+        "wire_length": 791146,
+        "convergence": [
+          [
+            1,
+            122755,
+            136747,
+            0,
+            224819
+          ],
+          [
+            2,
+            80928,
+            83466,
+            0,
+            174332
+          ],
+          [
+            3,
+            44150,
+            44481,
+            0,
+            150011
+          ],
+          [
+            4,
+            19329,
+            19378,
+            0,
+            105320
+          ],
+          [
+            5,
+            6379,
+            6387,
+            0,
+            57663
+          ],
+          [
+            6,
+            1874,
+            1877,
+            0,
+            24806
+          ],
+          [
+            7,
+            845,
+            846,
+            0,
+            10357
+          ],
+          [
+            8,
+            496,
+            496,
+            0,
+            5905
+          ],
+          [
+            9,
+            277,
+            277,
+            0,
+            3401
+          ],
+          [
+            10,
+            187,
+            187,
+            0,
+            1247
+          ],
+          [
+            11,
+            130,
+            130,
+            0,
+            445
+          ],
+          [
+            12,
+            97,
+            97,
+            0,
+            292
+          ],
+          [
+            13,
+            76,
+            76,
+            0,
+            205
+          ],
+          [
+            14,
+            63,
+            63,
+            0,
+            195
+          ],
+          [
+            15,
+            50,
+            50,
+            0,
+            135
+          ],
+          [
+            16,
+            39,
+            39,
+            0,
+            104
+          ],
+          [
+            17,
+            32,
+            32,
+            0,
+            83
+          ],
+          [
+            18,
+            33,
+            33,
+            0,
+            79
+          ],
+          [
+            19,
+            22,
+            22,
+            0,
+            58
+          ],
+          [
+            20,
+            17,
+            17,
+            0,
+            48
+          ],
+          [
+            21,
+            13,
+            13,
+            0,
+            50
+          ],
+          [
+            22,
+            16,
+            16,
+            0,
+            25
+          ],
+          [
+            23,
+            12,
+            12,
+            0,
+            34
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            30
+          ],
+          [
+            25,
+            8,
+            8,
+            0,
+            24
+          ],
+          [
+            26,
+            6,
+            6,
+            0,
+            15
+          ],
+          [
+            27,
+            5,
+            5,
+            0,
+            12
+          ],
+          [
+            28,
+            4,
+            4,
+            0,
+            13
+          ],
+          [
+            29,
+            2,
+            2,
+            0,
+            7
+          ],
+          [
+            30,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            31,
+            2,
+            2,
+            0,
+            6
+          ],
+          [
+            32,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            33,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            34,
+            2,
+            2,
+            0,
+            7
+          ],
+          [
+            35,
+            1,
+            1,
+            0,
+            6
+          ],
+          [
+            36,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            37,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            38,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            39,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            4
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            44,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            45,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            48,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            49,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            50,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            51,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            52,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            53,
+            2,
+            2,
+            0,
+            1
+          ],
+          [
+            54,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            55,
+            0,
+            0,
+            0,
+            3
+          ]
+        ],
+        "bbox_ms": 840.0000000000001
+      },
+      "result_sha256": "bb09db3700187be0e0149b85993b3481168ff6434bdc94a64b767b22bfdb2da7",
+      "max_rss_kib": 4132700,
+      "labels": {
+        "node_epoch": false,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 0,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 69,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 0,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 74,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 0,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 71,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 0,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 67,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    },
+    {
+      "name": "vtr_mcml_serial_compact_p9_r0",
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "compact",
+      "page_bits": 9,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_compact_p9_r0.time",
+        "taskset",
+        "-c",
+        "8",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/compact_real_v1/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_compact_p9_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "1",
+        "RW_PAR_PART": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_BATCH_T": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_SERIAL_PAGED": "1",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_compact_p9_r0.labels.json"
+      },
+      "process_pid": 515669,
+      "exit_code": 0,
+      "process_wall_seconds": 133.7271594684571,
+      "metrics": {
+        "load_ms": 3424,
+        "route_ms": 129101,
+        "write_ms": 1029,
+        "total_ms": 133555,
+        "iterations": 48,
+        "overused": 0,
+        "pushes": 390136023,
+        "used_nodes": 1441009,
+        "wire_length": 778649,
+        "convergence": [
+          [
+            1,
+            122499,
+            136621,
+            0,
+            224819
+          ],
+          [
+            2,
+            81024,
+            83469,
+            0,
+            174672
+          ],
+          [
+            3,
+            42961,
+            43300,
+            0,
+            141707
+          ],
+          [
+            4,
+            18002,
+            18046,
+            0,
+            92385
+          ],
+          [
+            5,
+            5683,
+            5686,
+            0,
+            46007
+          ],
+          [
+            6,
+            1488,
+            1489,
+            0,
+            19316
+          ],
+          [
+            7,
+            583,
+            584,
+            0,
+            9018
+          ],
+          [
+            8,
+            341,
+            341,
+            0,
+            5742
+          ],
+          [
+            9,
+            211,
+            211,
+            0,
+            2618
+          ],
+          [
+            10,
+            138,
+            138,
+            0,
+            910
+          ],
+          [
+            11,
+            86,
+            86,
+            0,
+            580
+          ],
+          [
+            12,
+            75,
+            75,
+            0,
+            176
+          ],
+          [
+            13,
+            59,
+            59,
+            0,
+            140
+          ],
+          [
+            14,
+            50,
+            50,
+            0,
+            128
+          ],
+          [
+            15,
+            37,
+            37,
+            0,
+            99
+          ],
+          [
+            16,
+            29,
+            29,
+            0,
+            68
+          ],
+          [
+            17,
+            24,
+            24,
+            0,
+            58
+          ],
+          [
+            18,
+            23,
+            23,
+            0,
+            48
+          ],
+          [
+            19,
+            20,
+            20,
+            0,
+            48
+          ],
+          [
+            20,
+            19,
+            19,
+            0,
+            50
+          ],
+          [
+            21,
+            15,
+            15,
+            0,
+            37
+          ],
+          [
+            22,
+            15,
+            15,
+            0,
+            26
+          ],
+          [
+            23,
+            14,
+            14,
+            0,
+            26
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            26
+          ],
+          [
+            25,
+            10,
+            10,
+            0,
+            24
+          ],
+          [
+            26,
+            7,
+            7,
+            0,
+            17
+          ],
+          [
+            27,
+            8,
+            8,
+            0,
+            15
+          ],
+          [
+            28,
+            7,
+            7,
+            0,
+            16
+          ],
+          [
+            29,
+            6,
+            6,
+            0,
+            40
+          ],
+          [
+            30,
+            4,
+            4,
+            0,
+            14
+          ],
+          [
+            31,
+            8,
+            8,
+            0,
+            10
+          ],
+          [
+            32,
+            5,
+            5,
+            0,
+            11
+          ],
+          [
+            33,
+            4,
+            4,
+            0,
+            10
+          ],
+          [
+            34,
+            5,
+            5,
+            0,
+            6
+          ],
+          [
+            35,
+            3,
+            3,
+            0,
+            10
+          ],
+          [
+            36,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            37,
+            2,
+            2,
+            0,
+            4
+          ],
+          [
+            38,
+            2,
+            2,
+            0,
+            5
+          ],
+          [
+            39,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            8
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            44,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            45,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            48,
+            0,
+            0,
+            0,
+            2
+          ]
+        ],
+        "bbox_ms": 3030.0
+      },
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "max_rss_kib": 4132468,
+      "labels": {
+        "node_epoch": true,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "layout": "compact",
+            "pool_slot_bytes": 4,
+            "compact_payload_bytes": 6291456,
+            "compact_live_nodes": 12417,
+            "peak_compact_nodes": 262144,
+            "compact_growth_events": 6,
+            "page_bits": 9,
+            "pool_nodes": 4194304,
+            "pool_capacity_bytes": 16777216,
+            "node_epoch_bytes": 16777216,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 2,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    },
+    {
+      "name": "vtr_mcml_batch_node_epoch_p9_r0",
+      "dataset": "vtr_mcml",
+      "mode": "batch",
+      "variant": "node_epoch",
+      "page_bits": 9,
+      "repetition": 0,
+      "command": [
+        "/usr/bin/time",
+        "-v",
+        "-o",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_node_epoch_p9_r0.time",
+        "taskset",
+        "-c",
+        "8-12",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/paged_real_v2/node_epoch/router",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_node_epoch_p9_r0.result"
+      ],
+      "environment": {
+        "RW_MAX_THREADS": "5",
+        "RW_PAR_PART": "1",
+        "RW_PAR_PIN": "0",
+        "RW_PAR_NUMA": "0",
+        "RW_PAR_ITER1": "0",
+        "RW_OVERLAP": "0",
+        "RW_GPU_FLOOD": "0",
+        "RW_BATCH_MIN": "1000",
+        "RW_BATCH_T": "4",
+        "RW_BATCH_B": "8",
+        "RW_BATCH_ITER_MIN": "3",
+        "RW_BATCH_ITER_MAX": "8",
+        "RW_BATCH_OVER_MIN": "128",
+        "RW_BATCH_SPARSE": "1",
+        "RW_BATCH_PAGED": "1",
+        "RW_BATCH_ROLLBACK": "1",
+        "RW_BATCH_BOUNCE": "0",
+        "RW_BATCH_BUDGET": "1048576",
+        "RW_PF_RAMP1": "0",
+        "RW_BATCH_PBITS": "9",
+        "B_LABEL_REPORT": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_node_epoch_p9_r0.labels.json"
+      },
+      "process_pid": 572622,
+      "exit_code": 0,
+      "process_wall_seconds": 173.75974141061306,
+      "metrics": {
+        "load_ms": 3415,
+        "route_ms": 169484,
+        "write_ms": 676,
+        "total_ms": 173576,
+        "iterations": 55,
+        "overused": 0,
+        "pushes": 213097198,
+        "used_nodes": 1451166,
+        "wire_length": 791146,
+        "convergence": [
+          [
+            1,
+            122755,
+            136747,
+            0,
+            224819
+          ],
+          [
+            2,
+            80928,
+            83466,
+            0,
+            174332
+          ],
+          [
+            3,
+            44150,
+            44481,
+            0,
+            150011
+          ],
+          [
+            4,
+            19329,
+            19378,
+            0,
+            105320
+          ],
+          [
+            5,
+            6379,
+            6387,
+            0,
+            57663
+          ],
+          [
+            6,
+            1874,
+            1877,
+            0,
+            24806
+          ],
+          [
+            7,
+            845,
+            846,
+            0,
+            10357
+          ],
+          [
+            8,
+            496,
+            496,
+            0,
+            5905
+          ],
+          [
+            9,
+            277,
+            277,
+            0,
+            3401
+          ],
+          [
+            10,
+            187,
+            187,
+            0,
+            1247
+          ],
+          [
+            11,
+            130,
+            130,
+            0,
+            445
+          ],
+          [
+            12,
+            97,
+            97,
+            0,
+            292
+          ],
+          [
+            13,
+            76,
+            76,
+            0,
+            205
+          ],
+          [
+            14,
+            63,
+            63,
+            0,
+            195
+          ],
+          [
+            15,
+            50,
+            50,
+            0,
+            135
+          ],
+          [
+            16,
+            39,
+            39,
+            0,
+            104
+          ],
+          [
+            17,
+            32,
+            32,
+            0,
+            83
+          ],
+          [
+            18,
+            33,
+            33,
+            0,
+            79
+          ],
+          [
+            19,
+            22,
+            22,
+            0,
+            58
+          ],
+          [
+            20,
+            17,
+            17,
+            0,
+            48
+          ],
+          [
+            21,
+            13,
+            13,
+            0,
+            50
+          ],
+          [
+            22,
+            16,
+            16,
+            0,
+            25
+          ],
+          [
+            23,
+            12,
+            12,
+            0,
+            34
+          ],
+          [
+            24,
+            12,
+            12,
+            0,
+            30
+          ],
+          [
+            25,
+            8,
+            8,
+            0,
+            24
+          ],
+          [
+            26,
+            6,
+            6,
+            0,
+            15
+          ],
+          [
+            27,
+            5,
+            5,
+            0,
+            12
+          ],
+          [
+            28,
+            4,
+            4,
+            0,
+            13
+          ],
+          [
+            29,
+            2,
+            2,
+            0,
+            7
+          ],
+          [
+            30,
+            2,
+            2,
+            0,
+            8
+          ],
+          [
+            31,
+            2,
+            2,
+            0,
+            6
+          ],
+          [
+            32,
+            2,
+            2,
+            0,
+            3
+          ],
+          [
+            33,
+            2,
+            2,
+            0,
+            2
+          ],
+          [
+            34,
+            2,
+            2,
+            0,
+            7
+          ],
+          [
+            35,
+            1,
+            1,
+            0,
+            6
+          ],
+          [
+            36,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            37,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            38,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            39,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            40,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            41,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            42,
+            1,
+            1,
+            0,
+            4
+          ],
+          [
+            43,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            44,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            45,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            46,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            47,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            48,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            49,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            50,
+            1,
+            1,
+            0,
+            1
+          ],
+          [
+            51,
+            1,
+            1,
+            0,
+            3
+          ],
+          [
+            52,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            53,
+            2,
+            2,
+            0,
+            1
+          ],
+          [
+            54,
+            1,
+            1,
+            0,
+            2
+          ],
+          [
+            55,
+            0,
+            0,
+            0,
+            3
+          ]
+        ],
+        "bbox_ms": 919.9999999999999
+      },
+      "result_sha256": "bb09db3700187be0e0149b85993b3481168ff6434bdc94a64b767b22bfdb2da7",
+      "max_rss_kib": 4132720,
+      "labels": {
+        "node_epoch": true,
+        "diagnostic": false,
+        "global_dyn_bytes": 359793840,
+        "node_size": 24,
+        "contexts": [
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 68,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 69,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 76,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          },
+          {
+            "paged": true,
+            "page_bits": 9,
+            "pool_nodes": 2097152,
+            "pool_capacity_bytes": 50331648,
+            "node_epoch_bytes": 8388608,
+            "page_table_bytes": 234256,
+            "peak_pool_nodes": 4194304,
+            "growth_events": 74,
+            "resets": 0,
+            "page_claims": 0,
+            "cleared_nodes": 0
+          }
+        ]
+      },
+      "verified": true
+    }
+  ],
+  "original_binary_sha256": "32fbd77db83f94bb9f95070f44bd91ee9bb47b7166a650654aaadc487313cf22",
+  "verifier_sha256": "56bdbdfb0ca1946237e0f9ea6bbde8568031fc287d120921df90fa1f2b6fd9f5",
+  "observer_pid": 199731,
+  "schedule": [
+    {
+      "dataset": "vtr_mcml",
+      "mode": "batch",
+      "variant": "compact",
+      "page_bits": 9,
+      "repetition": 0
+    },
+    {
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "node_epoch",
+      "page_bits": 9,
+      "repetition": 0
+    },
+    {
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "paged",
+      "page_bits": 9,
+      "repetition": 0
+    },
+    {
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "original",
+      "page_bits": null,
+      "repetition": 0
+    },
+    {
+      "dataset": "vtr_mcml",
+      "mode": "batch",
+      "variant": "paged",
+      "page_bits": 9,
+      "repetition": 0
+    },
+    {
+      "dataset": "vtr_mcml",
+      "mode": "serial",
+      "variant": "compact",
+      "page_bits": 9,
+      "repetition": 0
+    },
+    {
+      "dataset": "vtr_mcml",
+      "mode": "batch",
+      "variant": "node_epoch",
+      "page_bits": 9,
+      "repetition": 0
+    }
+  ],
+  "verification": [
+    {
+      "dataset": "vtr_mcml",
+      "result_sha256": "bb09db3700187be0e0149b85993b3481168ff6434bdc94a64b767b22bfdb2da7",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/real_trace/verify_real",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_batch_compact_p9_r0.result"
+      ],
+      "result": {
+        "connections": 224819,
+        "segments": 3080021,
+        "bad_edges": 0,
+        "bad_endpoints": 0,
+        "cycles": 0,
+        "cross_net_resource_conflicts": 0,
+        "unrouted": 0
+      }
+    },
+    {
+      "dataset": "vtr_mcml",
+      "result_sha256": "a74c8a1b190c70559adf0dbb686ca4d55e786fda2d55c7928e2dbb534faa30ec",
+      "command": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/build/real_trace/verify_real",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/data/derived/vtr_mcml.rrt",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/research_matrix_20261022T183016Z/vtr_mcml_serial_node_epoch_p9_r0.result"
+      ],
+      "result": {
+        "connections": 224819,
+        "segments": 3082495,
+        "bad_edges": 0,
+        "bad_endpoints": 0,
+        "cycles": 0,
+        "cross_net_resource_conflicts": 0,
+        "unrouted": 0
+      }
+    }
+  ],
+  "finished_utc": "2026-10-22T18:48:41.890001+00:00"
+}

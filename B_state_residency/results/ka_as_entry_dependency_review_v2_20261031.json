@@ -1,0 +1,60 @@
+{
+  "status": "source_and_proved_component_contract_derivation_at_publication_start_only",
+  "previous_dependency_review_sha256": "6241ca66e95f84028dc1026b3b9afb56bd4834917d33906cb00f7635ee4753bb",
+  "metadata_proof_review_sha256": "f87c316113ef80bd7d02cc539e46c3ad02f669abaf38cd3b523b657b20b3db1c",
+  "query_source_sha256": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+  "publication_source_sha256": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+  "port_binding_evidence": {
+    "checkpoint_authority_rotator authority(": [
+      {
+        "line": 542,
+        "text": "checkpoint_authority_rotator authority(.cfg_stage(jp_authority_stage),.publish_valid(jp_pv[0]),.publish_permit(pc_owned&&jp_owned),.discard_valid(jp_dv[0]),.publish_ready(jp_apr),.discard_ready(jp_adr),.active_slot(),.staged_valid(jp_ap),.staged_design(jp_ad),.staged_generation(jp_ag),.staged_checkpoint(jp_ac),.clk(clk),.rst(k_cold_rst),.abort(1'b0),.cfg_permit(as_initial_safe||as_cfg_lease||as_attempt_reset||(pc_owned&&jp_owned)),"
+      }
+    ],
+    ".bound_design(as_bound_design),.bound_generation(as_bound_generation)": [
+      {
+        "line": 544,
+        "text": ".rearm_valid(as_attempt_reset),.rearm_ready(as_rearm_ready),.cfg_rsp_valid(as_core_cfg_valid),.cfg_rsp_ready(as_core_cfg_rearmed||as_cfg_rsp_ready),.cfg_status(as_core_cfg_status),.cfg_rearmed(as_core_cfg_rearmed),.configured(as_configured),.bound_design(as_bound_design),.bound_generation(as_bound_generation),.bound_checkpoint(as_bound_checkpoint),"
+      },
+      {
+        "line": 648,
+        "text": ".arm_valid(wm_on&&wm_rec_accept),.arm_ready(wm_arm_ready),.arm_design(wm_old_command?wm_rdesign:recover_design),.arm_generation(as_bound_generation),.bound_design(as_bound_design),.bound_generation(as_bound_generation),.arm_checkpoint(wm_old_command?wm_rcp:recover_checkpoint),.bound_checkpoint(as_bound_checkpoint),.arm_version(wm_old_command?wm_rversion:recover_version),.active_version(query_version),.arm_query(wm_old_command?wm_rquery:recover_query),.active_query(p_active_query),.arm_price(wm_old_command?wm_rprice:recover_price),.active_price(p_active_price),.arm_cookie(wm_old_command?wm_snapshot_cookie:snapshot_cookie),.arm_labels(wm_old_command?wm_snapshot_count:snapshot_count),.arm_path_crc(wm_old_command?wm_pcrc:wm_path_crc),.arm_query_crc(wm_old_command?wm_qcrc:wm_query_crc),"
+      }
+    ],
+    ".a_design(as_bound_design),.a_generation(as_bound_generation)": [
+      {
+        "line": 643,
+        "text": ".a_design(as_bound_design),.a_generation(as_bound_generation),.a_checkpoint(as_bound_checkpoint),.k_design(jp_kdesign),.c_design(jp_cdesign),.k_checkpoint(jp_kcp),.c_checkpoint(jp_ccp),.k_version(jp_kver),.c_version(jp_cver),.k_query(jp_kquery),.k_price(jp_kprice),.journal_count(k_count),"
+      }
+    ],
+    ".clk(clk),.rst(k_cold_rst),.abort(1'b0)": [
+      {
+        "line": 542,
+        "text": "checkpoint_authority_rotator authority(.cfg_stage(jp_authority_stage),.publish_valid(jp_pv[0]),.publish_permit(pc_owned&&jp_owned),.discard_valid(jp_dv[0]),.publish_ready(jp_apr),.discard_ready(jp_adr),.active_slot(),.staged_valid(jp_ap),.staged_design(jp_ad),.staged_generation(jp_ag),.staged_checkpoint(jp_ac),.clk(clk),.rst(k_cold_rst),.abort(1'b0),.cfg_permit(as_initial_safe||as_cfg_lease||as_attempt_reset||(pc_owned&&jp_owned)),"
+      }
+    ]
+  },
+  "start_ok_source": " wire start_ok=start_design!=0&&start_design==a_design&&k_design==a_design&&c_design==a_design&&a_checkpoint==k_checkpoint&&a_checkpoint==c_checkpoint&&start_generation>a_generation&&start_checkpoint>a_checkpoint&&start_version==k_version&&c_version==k_version&&start_query==k_query&&start_price==k_price&&start_price==start_version[3:0];",
+  "derived_fact": "After initial cold reset, while !k_cold_rst, publication.start_ok implies as_bound_generation != 0.",
+  "derivation": [
+    "Actual start_ok requires start_design != 0 and start_design == a_design, hence a_design != 0.",
+    "Actual publication a_design/a_generation are authority as_bound_design/as_bound_generation.",
+    "Reviewed actual-metadata transition overapproximation proves bound_design != 0 implies bound_generation != 0, with matching actual module/default MAX_CYCLES and clock/cold-reset binding."
+  ],
+  "assumptions": [
+    "Initial authority cold reset, matching the component proof; active operation with !k_cold_rst."
+  ],
+  "not_proved": [
+    "publication OPEN/load always retains nonzero matching descriptor",
+    "active generation persists after coordinator installation",
+    "full AS-entry configured invariant",
+    "full-system KA-stall coverage or unreachability"
+  ],
+  "remaining_actions": [
+    "prove active descriptor persistence through bank switching/rearm",
+    "connect publication state/load qualification to accepted start snapshot",
+    "finish original retirement and publication/rearm cover jobs before accepting their full evidence"
+  ],
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

@@ -1,0 +1,13 @@
+# G3发布的两个实际反例与组件验证
+
+此目录保留旧writer接入G3的负例和第一版不完整修复，不是最终发布实现；最终候选见../owner_g3_publish_v2。
+
+owner_g3_negative_full_v3：完整真实两query/恢复/累计G3 owner候选之后，原生导出781标签/393页、两path78字和G3 generation的query10字/floor180328。三类原生回执齐全，但旧owner writer遇导出/准备自身busy后永久清receipt。三方prepare均成功后观测64周期commit_ready仍0，保持G2/CP18/J3；未提供commit_valid，不声称消费了拒绝回复。独立审计通过表示该反例成立，不是G3发布成功。
+
+owner_g3_fixed_full_v2/pressure_v2：第一版KEEP_RECEIPT_ON_BUSY保住实际owner receipt，G3_BUNDLE实际1/1/1，held authority时receipt1/manifest0。native两项metadata准备回复成功消费后，立即的prepared检查失败。根因不仅是临时忙：recovery_coordinator.permit_work含!prepared，pc_safe依赖k_permit；旧manifest继续依赖copy/rearm的source_healthy，会形成prepare后许可等待自身publish的循环。两例manifest.status为failed，独立counterexample auditor只接受这个指定Fatal和完整已验证前缀/导出/保留G2图像；不能将其当作正常通过。
+
+export_manifest观察真实native export接受、逐字数据、成功回复消费。校验路径78字索引/last、slot位图、length/design和CRC；query10字索引/last、magic/version/design、目标generation、源version/query/price、sequence floor、CRC。label记录数/CRC来自原生reader成功回执；工作context/lease/source AXI写改变会fail closed。selected JP描述符和owner/label真实许可都匹配才提供manifest；arm与目标描述符仍由TB提供，不是持久化bundle writer或认证。
+
+组件export_manifest_unit_v1共114检查/14场景；owner_receipt_busy_unit_v2共288检查，默认owner_receipt_default_unit_v1为278检查且事件逐字节等于原组件。组件源AW/B、native export和lease输入均为合成，完整系统另证。三归档均实际恢复重审audit字节一致。
+
+开发记录：conditional packed-string被$fdisplay打印为数字，负例v2仅提供初始功能观察；v3改显式分支取得可审计trace。早期fixed_v1主动终止以修正这一记录问题，不是超时重启或生产故障证据。所有旧已审计源/审计器保持不变。

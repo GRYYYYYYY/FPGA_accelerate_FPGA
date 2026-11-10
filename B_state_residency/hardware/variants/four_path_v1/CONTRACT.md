@@ -1,0 +1,15 @@
+# 四路径与第四查询接入
+
+完整fourth_system_full_v2与fourth_system_pressure_v2已终态并独立审计通过：真实G4/CP20发布、连续q180330、83poll/82expand/402candidate/231cost、全部12AXI、31个owner物理record写和146284032B最终owner核对通过。节点990178原生ripup写全零primary，重提交流程恢复net26422/ref1/occ1；另外两个节点refs4/5与其他net保留。最终781标签/393页/全部3MB物理标签DDR一致，新baseline miss0。
+
+G4源156字前三路径加空第四槽CRC f00b72b4、query CRC327d3916/floor180329；full标签CRC083ee4ad、pressure ae573141，集合相同、流顺序不同。最终四路径CRC eec36b70、query bcf23ef5/floor180330/slots15/journal3。行为仿真结束4165462/4482678周期，不是板卡速度。归档恢复凭据及源码冻结以results/fourth_system_20261027.json为准。
+
+已完成组件与输入证据见results/four_path_inputs_20261027.json/.md；冻结组件脚本与源不再修改。四槽控制器使用已有path_capacity_v1生产RTL，槽号2位、位图4位、MAX_PATH32、完整156字镜像。export组件仅合成握手，path组件使用mock owner/label后端，分别报告范围。
+
+完整系统候选由build_system.py从已审计third_warm_full_v2生成，fourth_tasks.sv补充自然q4准备/查询；run_fourth_system.py复制冻结生产源码，只有TB参数/激励变化，不重装工作DDR。先保留q1/q2和G3 warm实际故障/恢复，再用四条累计dirty行复制到已退役A bank，实际导出当前781标签、前三路径加空第四槽156字及query floor180329，三方发布G4/CP20后才登记q4旧路径。
+
+q4历史路径6954→990178→558358→265324→66893。原生ripup应释放990178最后owner至refs0/occ0，另两项降至3/4；实际query180330提交后回1/4/5，其他net23916与前三路径保留。CPU83poll/82expand/402candidate/231cost、完整物理事务及最终DDR均需独立复审。
+
+G4轮换覆盖旧A bank，审计必须使用实际退休边界区分此前G2 A读与此后G4 A读；不得用最终A图像解释此前G2物理读。G3恢复源从本次156字真实导出取得CRC，不能沿用117字旧CRC。G4正常发布/查询不代表G4故障恢复。
+
+首个full_v1候选的生成器把检查checkpoint的字符串替换误作用于180328，形成190328的TB期望值；其运行源保留。后继full_v2限定替换范围，不能把这个激励/断言错误当作生产RTL缺陷。

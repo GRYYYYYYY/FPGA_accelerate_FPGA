@@ -1,0 +1,7 @@
+# Query接口互斥候选原生12例通过
+
+baseline/default/exclusive各覆盖正常完整单元回归与service/search/route三种请求受理同拍回复。正常例每例28项生命周期结果检查；默认模式四例的完整事件和结束时间均与基线一致，exclusive正常例也一致。exclusive三种重叠输入返回status7，route已完成时保留committed1。正常例逐周期检查三对READY/reply VALID互斥，没有force/deposit。
+
+独立审计12例通过，378文件归档已实际恢复且audit字节一致。候选两源及源码绑定二态分析、builder、runner、auditor和结果冻结。
+
+这里只验证原生query_lifecycle和模拟后端；未把该候选接入完整四查询系统，未证明完整系统三接口的所有实际轨迹，也没有新综合网表或时序改善结论。后续先做实际三接口监视及27输出/周期精确回归，再匹配OOC测量。旧十源八项矩阵结论不自动适用于本候选。

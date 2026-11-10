@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "functional_gate_sha256": "f1b719e0499150fc8ad31edbb4faa62e550cb2ee5358a92a5ddd6284b42c470b",
+  "sources": {
+    "graph_static_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_v2_20261024/sources/graph_static_reader.sv",
+      "sha256": "a55dc78260404a07f29b91715b05c2461019c7a997446b4372a067120e6120ee"
+    },
+    "design_state_store.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_v2_20261024/sources/design_state_store.sv",
+      "sha256": "f2c067617f641fe539d3854f161fe573edb91fc7edbd112d3d71f4d67026f130"
+    },
+    "metadata/metadata_service.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_v2_20261024/sources/metadata/metadata_service.sv",
+      "sha256": "cfad2ffb35f13b8d80529dc93f4868a5634a404ae71892a57d50e4558ab717fe"
+    },
+    "metadata/metadata_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_v2_20261024/sources/metadata/metadata_controller.sv",
+      "sha256": "81a5856ce608ef4b6c5086a836b804c91f568f762fff63b7d6b96b702f86afe5"
+    },
+    "axi_file_memory.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_v2_20261024/sources/axi_file_memory.sv",
+      "sha256": "68ce3567cdd27a783af9ef2f64783cba083b506a6416a7d9dc00011bbbac7ca5"
+    },
+    "tb_metadata_boundaries.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/metadata_boundaries_v1/tb_metadata_boundaries.sv",
+      "sha256": "38cb52e3c31f23808ad5a0fec830ce6e43c1652a46a396274f958be6402ac3a8"
+    },
+    "boundary_body.inc": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/metadata_boundaries_v1/boundary_body.inc",
+      "sha256": "66990ec16eecb119a17827ffd1fb9e3c3a346b4cbbe4b737681333407dcafd83"
+    },
+    "run_metadata_boundaries.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_metadata_boundaries.py",
+      "sha256": "f92e0746b9e8d8fb2d899a40d385c382a19c49d6735261204db4dd6503a5155d"
+    }
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/graph_static_reader.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/design_state_store.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/metadata/metadata_service.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/metadata/metadata_controller.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/axi_file_memory.sv",
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/sources/tb_metadata_boundaries.sv"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 1.8545835316181183
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_metadata",
+        "-s",
+        "test",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.130439763888717
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "test",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log",
+        "--testplusarg",
+        "graph0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic/offsets.u32le",
+        "--testplusarg",
+        "graph1=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/access_fabric_inputs_20261024/synthetic/edges.u32le",
+        "--testplusarg",
+        "graph2=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/attrs.bin",
+        "--testplusarg",
+        "graphlog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/graph_axi.txt",
+        "--testplusarg",
+        "design0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/design.bin",
+        "--testplusarg",
+        "designlog=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/design_axi.txt",
+        "--testplusarg",
+        "expected=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/metadata_boundaries_20261024/numeric_expected.txt"
+      ],
+      "exit_code": 0,
+      "elapsed_s": 5.455700846388936
+    }
+  ],
+  "result": "METADATA_BOUNDARIES_PASS errors=15 recoveries=15 normal_checks=18 cycles=5771"
+}

@@ -1,0 +1,26 @@
+OBJECT LUTLP-1#1
+PROPERTY CHECK LUTLP-1
+PROPERTY CLASS drc_violation
+PROPERTY DESCRIPTION {100 LUT cells form a combinatorial loop. This can create a race condition. Timing analysis may not be accurate. The preferred resolution is to modify the design to remove combinatorial logic loops. If the loop is known and understood, this DRC can be bypassed by acknowledging the condition and setting the following XDC constraint on any one of the nets in the loop: 'set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets <myHier/myNet>]'. One net in the loop is authority/FSM_sequential_state_reg[0]_2. Please evaluate your design. The cells in the loop are: authority/ap_ready_INST_0_i_3, authority/bank0/store/ap_ready_INST_0_i_5,
+authority/bank1/store/ap_ready_INST_0_i_1,
+authority/bank1/store/ap_ready_INST_0_i_4,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_2__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_3__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_4__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_5__0,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_6,
+inner/backend/recovery_ctl/FSM_onehot_state[4]_i_7,
+inner/backend/recovery_ctl/FSM_onehot_state[5]_i_15,
+inner/backend/recovery_ctl/FSM_onehot_state[5]_i_49,
+inner/backend/recovery_ctl/FSM_onehot_state[5]_i_5,
+inner/backend/recovery_ctl/FSM_sequential_state[2]_i_11__1,
+inner/backend/recovery_ctl/ap_ready_INST_0_i_6
+ (the first 15 of 100 listed).}
+PROPERTY FULLNAME {Combinatorial Loop Alert}
+PROPERTY ID 1
+PROPERTY IS_READ_ONLY 0
+PROPERTY IS_WAIVED 0
+PROPERTY NAME LUTLP-1#1
+PROPERTY OBJECT_TYPES {cell net}
+PROPERTY SEVERITY {Critical Warning}
+PROPERTY WAIVER {}

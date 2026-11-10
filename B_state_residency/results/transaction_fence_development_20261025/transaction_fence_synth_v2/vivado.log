@@ -1,0 +1,66 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Sun Oct 25 14:21:34 2026
+# Process ID: 425978
+# Current directory: /tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2
+# Command line: vivado -mode batch -nojournal -source /tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/synth.tcl -log /tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/vivado.log
+# Log file: /tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/vivado.log
+# Journal file: 
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2100.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source /tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/synth.tcl
+# set_param general.maxThreads 2
+# read_verilog -sv {/tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/sources/transaction_fence.sv}
+read_verilog: Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1791.340 ; gain = 83.023 ; free physical = 481368 ; free virtual = 1349161
+# read_verilog -sv {/tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/sources/transaction_fence_bound.sv}
+# synth_design -mode out_of_context -top transaction_fence_bound -part xcu280-fsvh2892-2L-e
+Command: synth_design -mode out_of_context -top transaction_fence_bound -part xcu280-fsvh2892-2L-e
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 441228
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2313.922 ; gain = 499.766 ; free physical = 481583 ; free virtual = 1349378
+Synthesis current peak Physical Memory [PSS] (MB): peak = 1468.225; parent = 1299.367; children = 168.857
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3345.473; parent = 2252.895; children = 1092.578
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'transaction_fence_bound' [/tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/sources/transaction_fence_bound.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'transaction_fence' [/tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/sources/transaction_fence.sv:3]
+	Parameter LANES bound to: 16 - type: integer 
+	Parameter REQ_BITS bound to: 2432 - type: integer 
+	Parameter RSP_BITS bound to: 256 - type: integer 
+	Parameter ADMIN_FIRST bound to: 14 - type: integer 
+	Parameter CALLBACK_MASK bound to: 16'b0000001101111111 
+INFO: [Synth 8-6155] done synthesizing module 'transaction_fence' (0#1) [/tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/sources/transaction_fence.sv:3]
+INFO: [Synth 8-6155] done synthesizing module 'transaction_fence_bound' (0#1) [/tmp/B_state_residency_offer_20261025/transaction_fence_synth_v2/sources/transaction_fence_bound.sv:3]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 2439.812 ; gain = 625.656 ; free physical = 481630 ; free virtual = 1349426
+Synthesis current peak Physical Memory [PSS] (MB): peak = 1573.812; parent = 1404.937; children = 168.876
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3532.395; parent = 2439.816; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 2451.688 ; gain = 637.531 ; free physical = 481623 ; free virtual = 1349420
+Synthesis current peak Physical Memory [PSS] (MB): peak = 1578.935; parent = 1410.065; children = 168.876
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3544.270; parent = 2451.691; children = 1092.578
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu280-fsvh2892-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 2471.613 ; gain = 657.457 ; free physical = 481620 ; free virtual = 1349417
+Synthesis current peak Physical Memory [PSS] (MB): peak = 1583.462; parent = 1413.598; children = 169.864
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 3586.879; parent = 2471.617; children = 1115.262
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:13:24 ; elapsed = 00:16:59 . Memory (MB): peak = 46236.082 ; gain = 44421.926 ; free physical = 423906 ; free virtual = 1297808
+Synthesis current peak Physical Memory [PSS] (MB): peak = 50154.984; parent = 44992.434; children = 5205.896
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 54479.520; parent = 46236.086; children = 8243.434
+---------------------------------------------------------------------------------

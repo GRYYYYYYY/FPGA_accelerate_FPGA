@@ -1,0 +1,21 @@
+{
+  "status": "exact_net_snapshot_writer_and_independent_reader_verified_batch_protocol_pending",
+  "scope": "CPU synthetic fixture only; no integrated top, HLS, RTL or device proof",
+  "complete_batch": false,
+  "checks": {
+    "cpp": "C++14 -Wall -Wextra -Werror ASAN/UBSAN; literal snapshot, capacity rejection leaves payload unchanged, tail guard",
+    "reader": "2 tests; 41 isolated word corruptions plus truncation and extra payload rejected",
+    "development": "Initial corruption offsets included legal metadata/bank/edge changes; corrected literal mutation expectations before final passing run."
+  },
+  "files": {
+    "hardware/vitis/search_trace_records.hpp": "7110a986b5ad9ff683eedfa77f0c1fc4553d3b7fa17e41a9827d3aa6cdde8359",
+    "tests/dump_net_trace.cpp": "31ac28f356542b26493a47488cea6252e93337a36f156fb9d08df5f52de36af4",
+    "scripts/read_net_trace.py": "9a5f97173bb4d77b72bda04ad3cec2be2c6561adf914943980ff081c174e8b95",
+    "scripts/read_search_trace.py": "9edf6b49f55997d2773b8704a9658f02da6322020da939e1ac20d805e1956ef9",
+    "tests/test_read_net_trace.py": "83881d610502bacfc90953dbccf14ff038c21d9c2b8cc29ab156a0cd893512bd",
+    "build/net_trace_cpu_20261025_v1/dump": "deb745abea68d5e1b301c081a0d8807ad952fcf8e82874c1bfa4eba48851dfbf",
+    "build/net_trace_cpu_20261025_v1/fixture.bin": "f6d0e3492b0d3c9c2bd058763feaee64f61ca63eda4751ce5deae58bcee624fc",
+    "build/net_trace_cpu_20261025_v1/decoded.json": "19eae138226784d10941a8bf5e168905a5ac122702c2a73ae6d61a95735fc9fc",
+    "build/net_trace_cpu_20261025_v1/reader_test.log": "6f283ee6225d2cef4c0127d95456a6f954c45141c92b97dd89016cb1c630e8f4"
+  }
+}

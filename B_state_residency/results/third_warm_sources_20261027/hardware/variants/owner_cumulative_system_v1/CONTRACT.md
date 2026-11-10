@@ -1,0 +1,17 @@
+# 实际两查询之后的累计owner重arm与G3候选：验证范围
+
+本变体保留既有G2 writer/联合发布路径，同时让新cumulative_owner_snapshot从首个工作owner写之前持续观察全部真实AW/B。新writer在原生PC lease下绑定G1 baseline、工作146284032B窗口及A/C两个初始G1 clone bank；不使用CPU构造G3答案，不在恢复时重装工作DDR。
+
+沿用真实两查询、G2 CP18发布、q2第二owner-B SLVERR/两键原生修复、777流第21条baseline AR/R取消和更高attempt5恢复重试。G3候选阶段再取得真实PC lease，source_healthy、owner_drained及全局退休均来自DUT。仅清已覆盖写的data_error，保留累计4条dirty（339192/558356/265324/990176）与G1身份；随后复制工作DDR四条64B到另一份启动G1 clone 0xc000000000并逐条实际回读。
+
+G3候选回执须匹配实际design/G1 baseline/generation0x100000003/CP19/C bank，held回复期间manifest与lease释放封锁；实际消费后才检查选定描述符许可。G2 authority仍为0x100000002/CP18，旧A bank逐字节不变。G3候选完整146284032B须逐字节等于真实工作owner，而非仅四个资源refs；990179即使回到G1 ref2也仍保留并复制其累计脏行。
+
+本轮目标是新writer的实际覆盖/错误分类/重arm/全图候选证明，并非新writer已经取代G2 writer，也不是G3三方发布或G3 warm恢复。新manifest尚未接JP；下一步必须原生导出781标签、两path、query floor180328并验证CP19共同发布。G3_NEXT.md已记录pc_safe/as_retired自身busy引起旧候选回执撤销的静态接线问题，不能忽略。
+
+RTL为行为仿真，固定price/history，baseline/G1 clone/描述符仍外部可信，MAX_DIRTY有界、自然路径不新增overflow槽。无全图baseline reseed、认证/持久化floor、任意变价或板卡性能结论。最终通过状态、归档恢复与独立审计以results/cumulative_owner_system_20261027.json为准。
+
+开发v1/v2为验证接线编译问题；v3在最后检查把两槽有效位图rc_slots=3误作数量2，未执行G3复制。v4仅修复该TB检查并增加前置状态日志，所有候选生产RTL保持与278检查组件相同SHA。不要将上述开发失败作为生产RTL缺陷或完整G3失败证明。
+
+## 已通过的选定实验（2026-10-27）
+
+cumulative_owner_system_full_v4/pressure_v4均完成实际两查询和四行G3候选。baseline1583 R、native字段写16015及全部旧11AXI日志与label_baseline_cancel_full_v2/pressure_v2逐字节一致；新第12路8 R/4 W/4 B逐项独立重放。最终G3与working owner完整146284032字节相等，SHA256均0db2f745ebfb0fcd71f932278fac2d4f58ad3ae4e87303bcc3ac0c0a002e1595；旧G2完整图像SHA256仍82b2185a16ee91455844f6d2a5e386268e0efd078bdc5d27b48ba06a1f205a95。结束周期2312490/2488944仅行为仿真。

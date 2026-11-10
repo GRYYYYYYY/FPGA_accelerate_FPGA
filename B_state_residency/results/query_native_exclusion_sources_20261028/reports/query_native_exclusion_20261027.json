@@ -1,0 +1,84 @@
+{
+  "analyzer_sha256": "1ac2523ef7522fdd1575677c86da183fb150ab9ce774734a3b8af2b49ba2f0cc",
+  "checked_expressions": {
+    "query_lifecycle.sv": [
+      "localparam IDLE=0,SS=1,SW=2,QS=3,QW=4,RS=5,RW=6,DRAIN=7,DONE=8;",
+      "wire unexpected=(service_rsp_valid&&state!=SW&&!(state==SS&&service_ready))||(search_rsp_valid&&state!=QW&&!(state==QS&&search_ready))||(route_rsp_valid&&state!=RW&&!(state==RS&&route_ready));"
+    ],
+    "query_residency_system.sv": [
+      "assign c_route_ready=qc_busy&&b_rc_req_ready;assign c_route_rsp_valid=qc_busy&&b_rc_rsp_valid;",
+      "assign c_service_ready=qc_busy&&(c_service_lane==8?b_f_sr[8]:b_f_sr[6]);assign c_service_rsp_valid=qc_busy&&(c_service_lane==8?b_f_srv[8]:b_f_srv[6]);",
+      ".service_ready(c_service_ready)",
+      ".service_rsp_valid(c_service_rsp_valid)",
+      ".search_ready(ss_start_ready)",
+      ".search_rsp_valid(ss_rsp_valid)",
+      ".route_ready(c_route_ready)",
+      ".route_rsp_valid(c_route_rsp_valid)"
+    ],
+    "residency_system.sv": [
+      ".s_ready(f_sr)",
+      ".s_rsp_valid(f_srv)",
+      ".route_ready(rc_req_ready)",
+      ".route_rsp_valid(rc_rsp_valid)"
+    ],
+    "search_host_fence.sv": [
+      "assign h_ready=host_open?s_ready:16'd0;assign h_rsp_valid=host_open?s_rsp_valid:16'd0;",
+      "assign h_route_ready=host_open&&s_route_ready;"
+    ],
+    "search_residency_system.sv": [
+      ".f_sr(b_f_sr)",
+      ".f_srv(b_f_srv)",
+      ".rc_req_ready(b_rc_req_ready)",
+      ".rc_rsp_valid(rc_rsp_valid)",
+      ".h_ready(f_sr)",
+      ".h_rsp_valid(f_srv)",
+      ".s_ready(b_f_sr)",
+      ".s_rsp_valid(b_f_srv)",
+      ".h_route_ready(rc_req_ready)",
+      ".s_route_ready(b_rc_req_ready)",
+      ".start_ready(ss_start_ready)",
+      ".rsp_valid(ss_rsp_valid)"
+    ],
+    "search_scheduler.sv": [
+      "assign start_ready=!rst&&state==IDLE&&!stopped&&!abort&&!backend_fault&&admit&&active;",
+      "assign rsp_valid=!rst&&state==DONE;"
+    ],
+    "transaction_fence.sv": [
+      "localparam IDLE=0,LREQ=1,LRSP=2,LDRAIN=3,ROUTE=4,RDRAIN=5,BLOCKED=6,RECWAIT=7,RECSEND=8,RECRUN=9,RECDRAIN=10;",
+      "s_ready=0;s_rsp_valid=0;",
+      "if(choice>=0)s_ready[choice]=1;",
+      "s_rsp_valid[selected]=!primary_front_done&&d_rsp_valid[selected];",
+      "if(DEPENDENT_MASK[i]&&i!=selected&&!dep_owned[i]&&s_valid[i]&&(i!=HOST_FLAG_LANE||!s_payload[i*REQ_BITS]))begin s_ready[i]=1;dep_accept[i]=1;end",
+      "if(state==LRSP||state==LDRAIN)begin",
+      "if(dep_owned[i])begin",
+      "s_rsp_valid[i]=dep_sent[i]&&d_rsp_valid[i];",
+      "assign route_ready=!rst&&state==IDLE&&!recover_valid&&!fault&&!normal_fault&&work_permit&&clean;",
+      "assign route_rsp_valid=!rst&&state==ROUTE&&route_started&&backend_route_rsp_valid;"
+    ]
+  },
+  "next_steps": [
+    "Independent default-off query lifecycle variant",
+    "Native legal/overlap negative tests",
+    "Full-system three-interface monitoring and exact regression",
+    "Matched synthesis before claiming path improvement"
+  ],
+  "reference": "/tmp/B_state_residency_offer_20261025/native_retirement_synth_v1",
+  "reference_audit_sha256": "dfc2bd37136062ad3f83196b0e0c14511894c3c49d979b4d39fbd287aae58890",
+  "scope": "State-qualified native outputs and same-lane mux preserve exclusion, including arbitrary dependent ownership and residual readiness gates. Source-bound compositional model, not an RTL formal tool, X/Z proof or full-system simulation. Generic request/reply overlap remains legal and specialization must default off. No timing or implementation result.",
+  "source_sha256": {
+    "query_lifecycle.sv": "00cc25d44eb43bcac08c22c1e41cf8f0856f9a315b493407f4d04131630d9792",
+    "query_residency_system.sv": "4013db12b0220dc5c469942ca535214e946bf1114610fa6a8e3d2244b0d1c053",
+    "residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+    "search_host_fence.sv": "71e7ece610e84fa8cde6f1492608cf2d663241b4ad19008a280d66dcd6b8aae4",
+    "search_residency_system.sv": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63",
+    "search_scheduler.sv": "8e4def6d1ebda52d4dd4b1996f6910a354281c476cdff869c66da8b72fe0bbbf",
+    "transaction_fence.sv": "9ba4f1cbc642ddcc1c5d83c0b28a7eb6d4411c6ecfe0a86cbdb5f7e876804a47"
+  },
+  "status": "source_bound_two_state_exclusion_not_rtl_validation",
+  "valuations": {
+    "fence_per_lane": 4096,
+    "query_predicate": 432,
+    "route_and_search": 256,
+    "service_mux": 72
+  }
+}

@@ -1,0 +1,11 @@
+# Checkpoint主动阻塞验证与综合
+
+冻结RTL未改。测试仅通过公开的dispatch_enable、execute_enable、fence_service_enable和ack_receive_enable四个调度信号注入停顿，每种5组、每组100周期，共20组/2000周期。阻塞期间禁止成功响应、host入口开放、tag提前变化及目录tx_used清除；分别检查真实请求、工作、fence请求或ACK队列存在待处理项，避免空跑。解除后原21checkpoint、21传输、134检查及11次tag回绕通过。
+
+首版测试台将TB_TAG用于其声明之前，Vivado2022.2报VRFC10-3380，未进入仿真。失败目录rtl_retained_stalls_20261023保留；v2只将blocked_tag声明移到localparam之后，改变模块名用于隔离，未修改DUT或检查。v2三阶段exit0，manifest49138830f9d23baae6b522f6d9337d22326ef71ebdd74e53fd01ae9c2458dc79。仍非形式证明或域外迟到包测试。
+
+默认23405-frame整体OOC综合完成，固定U280、10ns研究时钟、2线程，与原索引端点配置相同。新端点6532 LUT、5296 FF、43 RAMB36、3 DSP、0 latch；旧6015/5288/43/3，因此增加517 LUT、8 FF，无BRAM/DSP增量。仅综合，未布局布线，不推断Fmax或平台速度。默认16位配置的零次复制提示（cookie零扩展）和未采用并行综合提示保留，无critical warning/error。综合MCP source退出0、101.037秒，DCP/层次资源/完整日志/终态收据与源哈希审计通过，manifest01929c3ca6270dbf33cca1f01520bb163960c6ed796471a0c707539b971e037a。
+
+全量流式回放工具准备完成。新增向量生成器由冻结oracle精确变换得到，预留最多四脏槽写回和一次WB/RF预算，显式op12回收后复用ID；后备数据和owner映射保留。先导19小查询的actual.txt和pages.hex与原始逐字节一致。新版checkpoint流式TB保留原字节、AXI及生命周期检查，增加页fence→目录回收→query恢复顺序断言。小查询RTL77099命令/6086传输全部通过，结束72898860ns与原一致，manifest e0dfbb61ba09a778fd27101fbda63ec38c2234c290f678348e596d7c0a15b5ce。
+
+完整38查询输入生成仍在运行（checkpoint_vectors_full_20261023），将与独立软件planner计数比较。预期21662794命令、2743929传输、31checkpoint；尚未完成或执行全量RTL。生成完成后先核验终态，再提交run_checkpoint_stream.py --full。无实卡或完整路由加速结论。

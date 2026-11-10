@@ -1,0 +1,674 @@
+[
+  {
+    "id": "A",
+    "folder": "A_graph_compression",
+    "title": "资源图压缩与直接执行",
+    "question": "压缩资源图能否在保持规范节点、边和资源属性一致的前提下，降低真实搜索的访问成本或扩大可处理规模？",
+    "migration": "AccDRC 的延迟展开与局部封装；同学已有的 tile/wire 模板、例外表与节点归一化；压缩数据直接执行。",
+    "fixture": "两个相邻 tile 共享一个规范节点；同一个局部连接模板展开后加一条例外边，与显式图逐项比较。",
+    "contract": "输入显式规范节点/边和模板实例映射、增加/删除例外；输出展开邻接与等价性结果。真实接口另需 PIP/开关身份、方向、资源类型、属性例外和受保护资源。",
+    "invariants": [
+      "不同物理资源即使模板相同，也必须拥有独立的动态占用。",
+      "跨 tile 的同一物理导线必须映射到同一规范节点；不要只按坐标合并节点。",
+      "保持并行边、开关方向、属性和特殊资源语义；不能只比较边数。"
+    ],
+    "entry": "优先阅读 DeviceModel.hpp 的模板重建与 getChildrenPacked，再跟踪 main.cpp 的 flatGraphBuilt/CSR 构建路径。",
+    "anchors": [
+      "cpp_router/include/DeviceModel.hpp",
+      "cpp_router/src/main.cpp",
+      "RapidWright/src/com/xilinx/rapidwright/rwroute/RWDeviceTemplateCheck.java"
+    ],
+    "variants": [
+      [
+        "cpu_explicit_graph",
+        "现有显式图/CSR 软件基线"
+      ],
+      [
+        "cpu_existing_templates",
+        "已有模板展开后搜索"
+      ],
+      [
+        "cpu_direct_decode",
+        "新表示直接译码的软件原型"
+      ],
+      [
+        "fpga_csr_ddr",
+        "FPGA 显式图 + DDR"
+      ],
+      [
+        "fpga_compact_ddr",
+        "FPGA 压缩表示 + DDR"
+      ],
+      [
+        "fpga_csr_hbm",
+        "FPGA 显式图 + HBM"
+      ],
+      [
+        "fpga_compact_hbm",
+        "FPGA 压缩表示 + HBM"
+      ]
+    ],
+    "factors": [
+      "图表示：显式 / 已有模板 / 新直接执行表示",
+      "内存后端：同卡 DDR / HBM",
+      "译码缓存容量与模板粒度"
+    ],
+    "metrics": [
+      [
+        "graph_bytes",
+        "byte"
+      ],
+      [
+        "bytes_per_relaxation",
+        "byte/relaxation"
+      ],
+      [
+        "decode_cycles",
+        "cycle"
+      ],
+      [
+        "cache_hit_rate",
+        "ratio"
+      ],
+      [
+        "routing_ms",
+        "ms"
+      ]
+    ],
+    "datasets": [
+      "同学 xcvu13p 器件图与真实查询轨迹",
+      "FPGA24 公共器件图及兼容输入；需单独完成格式适配"
+    ],
+    "first": "导出一组真实规范节点及其邻接，建立包含例外资源的邻接等价检查器。",
+    "integration": "仅替换邻接/属性读取接口，先保持搜索器与代价函数不变。",
+    "hardware": "模板表、实例映射、例外查找、邻接流与译码缓存；先测真实访问轨迹，再接搜索。",
+    "limitation": "样例不是器件数据库压缩器；不报告 JSON 文件大小为硬件压缩率。",
+    "refs": [
+      [
+        "Simple FPGA routing graph compression",
+        "https://arxiv.org/abs/1811.04749"
+      ]
+    ]
+  },
+  {
+    "id": "B",
+    "folder": "B_state_residency",
+    "title": "驻留状态与稀疏初始化",
+    "question": "按器件、设计、net 和 connection 生命周期组织状态，能否减少初始化、重复准备和主机—设备同步？",
+    "migration": "FlightLLM 的中间状态复用；KV-Direct 的依赖跟踪与更新转发；已有 SparseLabels 分页与代次标记。",
+    "fixture": "稠密清零与有限位宽 epoch 标签执行同一组读写；覆盖搜索切换和 epoch 回绕。只统计逻辑操作。",
+    "contract": "样例输入容量、epoch 位宽和 begin/read/write 序列，输出读值与清零操作数。真实接口需 task/net/resource ID、状态版本、页生命周期、同网引用关系与溢出策略。",
+    "invariants": [
+      "设计级占用/历史拥塞不能随 connection 标签一起清零。",
+      "同网多分支共享资源需引用关系，资源占用按不同 net 计数。",
+      "跨价格版本复用距离标签需要明确失效或修复条件；存储复用不等于距离有效。",
+      "epoch 回绕、并发上下文和页回收不能暴露旧状态。"
+    ],
+    "entry": "优先阅读 main.cpp 的 NodeDyn、SparseLabels、gatherShareSet、flushDirtyToGpu 与资源提交函数。",
+    "anchors": [
+      "cpp_router/src/main.cpp",
+      "cpp_router/src/gpu_route.cu",
+      "cpp_router/include/gpu_route.hpp"
+    ],
+    "variants": [
+      [
+        "cpu_dense_init",
+        "同算法全量初始化"
+      ],
+      [
+        "cpu_existing_paged",
+        "已有分页/epoch 基线"
+      ],
+      [
+        "cpu_lifetime_residency",
+        "按生命周期驻留的软件模型"
+      ],
+      [
+        "fpga_per_query",
+        "每查询准备状态的 FPGA 基线"
+      ],
+      [
+        "fpga_resident",
+        "驻留图与活跃状态"
+      ],
+      [
+        "fpga_resident_sparse_init",
+        "驻留 + 稀疏初始化"
+      ],
+      [
+        "fpga_net_tree_reuse",
+        "同网路由树/工作集复用"
+      ]
+    ],
+    "factors": [
+      "状态驻留开/关",
+      "初始化：稠密 / epoch / 按需页",
+      "页大小、上下文数、同网任务分组"
+    ],
+    "metrics": [
+      [
+        "init_ms",
+        "ms"
+      ],
+      [
+        "state_bytes",
+        "byte"
+      ],
+      [
+        "state_page_hit_rate",
+        "ratio"
+      ],
+      [
+        "sync_bytes",
+        "byte"
+      ],
+      [
+        "reroute_iterations",
+        "count"
+      ],
+      [
+        "routing_ms",
+        "ms"
+      ]
+    ],
+    "datasets": [
+      "真实短/中/长连接的重复搜索轨迹",
+      "包含高扇出 net 与拥塞迭代的完整布线设计"
+    ],
+    "first": "从现有 CPU 路径拆出初始化、标签访问、同网共享准备和提交时间。",
+    "integration": "先由 CPU 持有权威占用，设备接收版本化增量；设备侧提交作为后续独立扩展。",
+    "hardware": "BRAM/URAM 活跃状态页、页表、epoch 标记、更新合并/转发及 DDR/HBM 后备存储。",
+    "limitation": "样例只处理单上下文标签；没有页替换、并发原子性或 PathFinder 状态机。",
+    "refs": [
+      [
+        "FlightLLM",
+        "https://arxiv.org/abs/2401.03868"
+      ],
+      [
+        "KV-Direct",
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2017/12/kv-direct.pdf"
+      ]
+    ]
+  },
+  {
+    "id": "C",
+    "folder": "C_partition_scheduling",
+    "title": "自适应分区与异构调度",
+    "question": "联合搜索工作量、驻留复用和共享资源依赖安排任务，能否提高利用率并降低完整布线时间？",
+    "migration": "DFMAcc 的复杂度驱动分区；AccDRC 的多级任务封装；现有三叉树/DAG 调度和 CPU/GPU 卸载。",
+    "fixture": "在两个抽象 worker 上调度带依赖、资源集合和容量约束的任务；输出抽象工作单位的排程。",
+    "contract": "任务描述包含前驱、规范共享资源 ID、状态字节估计与工作量估计。真实接口增加图页集合、代价版本、CPU/GPU/FPGA 耗时预测、边界端口和回退状态。",
+    "invariants": [
+      "包围盒不交不必然意味着长线物理资源不共享，按规范资源 ID 核验。",
+      "固定 halo 不能证明覆盖全部可行绕行；允许扩大区域或完整搜索回退。",
+      "中间资源超额与最终非法需要区分，不预设所有共享都必须拒绝。",
+      "样例的资源串行化只是保守调度基线，不宣称复刻现有路由器并行语义。"
+    ],
+    "entry": "优先阅读 main.cpp 的分区 DAG、RW_BATCH_*、GPU 卸载预算与回退；对照 DFMAcc 第 4 节。",
+    "anchors": [
+      "cpp_router/src/main.cpp",
+      "cpp_router/src/gpu_bbox.cu",
+      "run.sh",
+      "run2.sh"
+    ],
+    "variants": [
+      [
+        "existing_partition",
+        "现有分区/DAG 调度"
+      ],
+      [
+        "fixed_tiles",
+        "固定图分区"
+      ],
+      [
+        "workload_adaptive",
+        "按工作量自适应划分"
+      ],
+      [
+        "residency_aware",
+        "工作量 + 图页驻留复用"
+      ],
+      [
+        "cpu_fpga",
+        "CPU/FPGA 调度"
+      ],
+      [
+        "cpu_gpu_fpga",
+        "三类设备调度；设备齐备后研究"
+      ]
+    ],
+    "factors": [
+      "任务划分策略",
+      "复用感知开/关",
+      "设备分配与预算阈值",
+      "工作集容量和跨区比例"
+    ],
+    "metrics": [
+      [
+        "pe_idle_ratio",
+        "ratio"
+      ],
+      [
+        "transfer_bytes",
+        "byte"
+      ],
+      [
+        "tail_task_ms",
+        "ms"
+      ],
+      [
+        "fallback_count",
+        "count"
+      ],
+      [
+        "reroute_iterations",
+        "count"
+      ],
+      [
+        "routing_ms",
+        "ms"
+      ]
+    ],
+    "datasets": [
+      "包含节点/边/页访问足迹的连接轨迹",
+      "不同拥塞和规模的完整商业 FPGA 布线设计"
+    ],
+    "first": "记录真实连接的耗时、访问足迹和预算回退，检查现有几何分区对应的共享资源。",
+    "integration": "调度策略先在 CPU 执行；使用同一个搜索后端隔离调度贡献，再增加 FPGA 后端。",
+    "hardware": "任务队列、上下文分配、图页预取和资源/版本检查；初版不需要硬件实现复杂分区器。",
+    "limitation": "排程中的 work_units 是输入估计，不能转换为 ms 或作为实测加速比。",
+    "refs": [
+      [
+        "Potter",
+        "https://github.com/diriLin/Potter"
+      ],
+      [
+        "Sextans",
+        "https://arxiv.org/abs/2109.11081"
+      ]
+    ]
+  },
+  {
+    "id": "D",
+    "folder": "D_search_dataflow",
+    "title": "事件驱动搜索数据流",
+    "question": "可变出度搜索的队列、访存和更新依赖如何组织，才能提高有效搜索吞吐而不显著增加无效扩展？",
+    "migration": "RouterAcc 的分层存储；FlowGNN/ThunderGP 的图数据流；Sextans 的稀疏任务调度与片上更新。",
+    "fixture": "在含并行边、不同出度的有向非负图上运行 Dijkstra，保留边 ID 回溯并验证已知最短代价。",
+    "contract": "输入规范节点/边、冻结边权、source 与 target 集合；输出路径边 ID、代价和逻辑搜索计数。真实接口还需 resource/node 代价、同网共享、上下文、版本及在途终止状态。",
+    "invariants": [
+      "目标首次入队不能作为一般最短路终止条件。",
+      "同一节点的在途更新、失效队列项和必要的重新打开需要处理。",
+      "单算子 II=1 不等于全搜索每拍推进；实测反馈环与多上下文行为。",
+      "当前 RTL 快照不等于论文最终实现，原型缺陷修复不自动等于研究新贡献。"
+    ],
+    "entry": "优先阅读 f_min_search.v、cen_node_ctrl.v、cost_ctrl.v，并对照 main.cpp 的优先队列和 gpu_route.cu 搜索。",
+    "anchors": [
+      "cpp_router/src/main.cpp",
+      "cpp_router/src/gpu_route.cu"
+    ],
+    "variants": [
+      [
+        "cpu_existing_search",
+        "现有优化 CPU 搜索"
+      ],
+      [
+        "gpu_existing_search",
+        "现有 GPU 搜索"
+      ],
+      [
+        "fpga_exact_queue",
+        "硬件精确队列"
+      ],
+      [
+        "fpga_bucket_queue",
+        "硬件分桶队列"
+      ],
+      [
+        "fpga_batched_frontier",
+        "有限批量扩展"
+      ],
+      [
+        "fpga_multicontext",
+        "多连接上下文"
+      ]
+    ],
+    "factors": [
+      "队列组织",
+      "并行扩展宽度与上下文数",
+      "更新合并开/关",
+      "内存通道映射"
+    ],
+    "metrics": [
+      [
+        "expanded_nodes",
+        "count"
+      ],
+      [
+        "successful_relaxations",
+        "count"
+      ],
+      [
+        "queue_operations",
+        "count"
+      ],
+      [
+        "update_conflicts",
+        "count"
+      ],
+      [
+        "search_ms",
+        "ms"
+      ],
+      [
+        "routing_ms",
+        "ms"
+      ]
+    ],
+    "datasets": [
+      "冻结价格的真实 RRG 连接查询",
+      "完整迭代布线，用于检查收敛和最终质量"
+    ],
+    "first": "导出真实图查询，建立路径回溯、代价和合法性参考；区分一般 Dijkstra 与现有启发式搜索语义。",
+    "integration": "沿用 gpuFloodConnection 层次卸载完整连接；先返回完整路径，由 CPU 提交。",
+    "hardware": "候选选择 → 邻接流 → 代价计算 → 松弛/依赖处理 → 再入队；回溯单独输出。",
+    "limitation": "样例不是现有 CPU A* 的等价实现，不包含时序驱动成本或外层拥塞协商。",
+    "refs": [
+      [
+        "FlowGNN",
+        "https://arxiv.org/abs/2204.13103"
+      ],
+      [
+        "ThunderGP",
+        "https://www.comp.nus.edu.sg/~wongwf/papers/FPGA2021.pdf"
+      ],
+      [
+        "FPGA-Assisted Deterministic Routing",
+        "https://graphsearch.epfl.ch/en/publication/271583"
+      ]
+    ]
+  },
+  {
+    "id": "E",
+    "folder": "E_placement_acceleration",
+    "title": "异构约束布局加速",
+    "question": "批量候选评估或解析布局热点能否通过数据复用和流式执行降低完整布局时间，并保持布后质量？",
+    "migration": "FBLAS 的算子组合；Sextans 的稀疏归约；硬件 page placement；异构资源与级联宏约束。",
+    "fixture": "对多个位置移动候选检查资源类型、位置占用、区域、固定单元和简单级联关系，并计算加权 HPWL。",
+    "contract": "输入 sites/cells/nets、位置快照与候选 moves；输出约束违规、加权 HPWL 和最优合法候选。真实接口增加 pin offset、BEL/site 内约束、时钟、宏形状、时序模型和接受策略。",
+    "invariants": [
+      "HPWL 不是布线线长或时序；候选代价降低不自动证明布后质量提高。",
+      "共享位置或网络的多个移动不能未经检查同时提交。",
+      "样例只覆盖显式建模的约束，不证明商业器件放置合法。",
+      "解析布局的全局密度求解不能统一当作局部 stencil。"
+    ],
+    "entry": "先选择一个现有布局器及数据适配器，定位候选评估热点；不要直接从零实现完整布局器。",
+    "anchors": [
+      "RapidWright/src/com/xilinx/rapidwright/rwroute/RWRouteCppProblemExport.java"
+    ],
+    "variants": [
+      [
+        "cpu_candidate_eval",
+        "相同候选集合的 CPU 评估"
+      ],
+      [
+        "fpga_candidate_eval",
+        "相同算法 FPGA 批量评估"
+      ],
+      [
+        "cpu_existing_placer",
+        "原布局器完整流程"
+      ],
+      [
+        "placer_with_fpga",
+        "替换热点后的布局器"
+      ],
+      [
+        "analytic_kernel_optional",
+        "解析布局数值内核：可选独立分支"
+      ]
+    ],
+    "factors": [
+      "候选批量大小",
+      "网表/位置驻留开/关",
+      "约束类型与宏规模",
+      "数值精度与算子融合"
+    ],
+    "metrics": [
+      [
+        "candidate_eval_ms",
+        "ms"
+      ],
+      [
+        "placement_ms",
+        "ms"
+      ],
+      [
+        "place_route_ms",
+        "ms"
+      ],
+      [
+        "weighted_hpwl",
+        "model_unit"
+      ],
+      [
+        "routed_wirelength",
+        "tool_unit"
+      ],
+      [
+        "critical_path_delay",
+        "ns"
+      ],
+      [
+        "legal_placement",
+        "boolean"
+      ]
+    ],
+    "datasets": [
+      "资源与区域约束齐备的布局器输入",
+      "相同网表和约束的完整布后评价用例"
+    ],
+    "first": "选择 VPR 或匹配目标器件的开源布局器，导出候选评估输入和可重复的 CPU 基线。",
+    "integration": "CPU 保留接受决策/复杂合法化；FPGA 先加速一个连续批量计算阶段。",
+    "hardware": "pin/net 聚合、候选代价归约、资源约束检查与位置快照读取；解析内核另建实验组。",
+    "limitation": "没有完整优化循环、时序引擎、商业 site-pin 检查或 GPU 布局器接入。",
+    "refs": [
+      [
+        "FBLAS",
+        "https://arxiv.org/abs/1907.07929"
+      ],
+      [
+        "DREAMPlaceFPGA-MP",
+        "https://arxiv.org/abs/2311.08582"
+      ],
+      [
+        "Hardware Page Placement",
+        "https://github.com/icgrp/systolic_page_placer"
+      ]
+    ]
+  },
+  {
+    "id": "F",
+    "folder": "F_routability_feedback",
+    "title": "硬件局部布线评估驱动布局反馈",
+    "question": "降低真实局部布线评估成本，能否让布局器在相同总时间预算内做出更好的决策，减少后期返工？",
+    "migration": "DFMAcc 的粗筛—精确验证；局部重布线；多个布局候选的共享图和差量/影子状态。",
+    "fixture": "同一局部图上的多个候选查询，共享冻结的外部硬保留节点；区分找到路径、局部无路径和预算耗尽。",
+    "contract": "输入局部 RRG、外部固定资源、候选端点、搜索预算；输出带条件的局部结果和路径。真实接口需移动后 pin 映射、受影响 nets、外部路径接口、占用快照、候选差量和反馈接受策略。",
+    "invariants": [
+      "局部失败不证明全局不可布；预算耗尽必须返回未知。",
+      "局部成功也不证明全设计可布，输出不能将 global_routable 置为 true。",
+      "未接受候选不能修改权威占用；各候选试探状态隔离。",
+      "样例固定外部硬保留只是一个模型；真实协商中的可超额资源须另行处理。"
+    ],
+    "entry": "以 D 的完整连接接口为起点，增加局部边界、候选上下文和预算；布局入口由 E 或现有布局器提供。",
+    "anchors": [
+      "cpp_router/src/main.cpp",
+      "cpp_router/include/gpu_route.hpp"
+    ],
+    "variants": [
+      [
+        "placement_without_feedback",
+        "原布局流程"
+      ],
+      [
+        "cheap_congestion_feedback",
+        "廉价拥塞反馈"
+      ],
+      [
+        "cpu_local_route_feedback",
+        "CPU 真实局部搜索"
+      ],
+      [
+        "fpga_local_route_feedback",
+        "相同算法 FPGA 局部搜索"
+      ],
+      [
+        "fpga_shared_candidate_state",
+        "共享快照 + 候选差量"
+      ]
+    ],
+    "factors": [
+      "固定候选数 / 相同总时间预算",
+      "局部范围和扩展预算",
+      "候选状态复用开/关",
+      "反馈频率与调用选择"
+    ],
+    "metrics": [
+      [
+        "oracle_ms",
+        "ms"
+      ],
+      [
+        "candidates_evaluated",
+        "count"
+      ],
+      [
+        "budget_exhausted_rate",
+        "ratio"
+      ],
+      [
+        "place_route_ms",
+        "ms"
+      ],
+      [
+        "routing_success",
+        "boolean"
+      ],
+      [
+        "critical_path_delay",
+        "ns"
+      ]
+    ],
+    "datasets": [
+      "有完整原始路径和外部边界状态的局部布局修改",
+      "完整布局布线设计及固定总运行时间预算"
+    ],
+    "first": "实现 CPU 局部评估器和条件化结果，先确认反馈能影响布局结果，再迁移硬件。",
+    "integration": "候选初筛 → 批量局部布线 → 反馈排序/接受 → 权威状态提交 → 最终完整布线。",
+    "hardware": "复用 D 的搜索引擎，增加共享快照、候选差量页、预算计数和结果归约。",
+    "limitation": "没有全芯片布线、布局反馈循环、同网多连接协商或全局可布线性证明。",
+    "refs": [
+      [
+        "DREAMPlaceFPGA-MP",
+        "https://arxiv.org/abs/2311.08582"
+      ]
+    ]
+  },
+  {
+    "id": "G",
+    "folder": "G_3d_routing",
+    "title": "三维跨层资源选择与分层搜索",
+    "question": "针对离散固定的跨层资源，候选端口选择和局部搜索能否改善三维布线的求解时间与质量？",
+    "migration": "H3D 的异构资源建模与树优化；LaZagna/VTR 三维图；层次分区与批量候选搜索。",
+    "fixture": "两层有向图含两个固定垂直端口，逐个限制端口求局部路径，并与不限制端口的参考路径一起输出。",
+    "contract": "节点包含 layer；垂直边有明确 ID；输入 source/target 和候选端口。真实接口需架构参数、边容量、开关/延迟、net 树分支、价格版本和合法的跨层连接集合。",
+    "invariants": [
+      "只选择架构已有的垂直连接，不能自由移动或新增 HBT。",
+      "普通多金属层 ASIC 图、商业多 SLR 器件和堆叠 3D FPGA 模型应区分。",
+      "跨层次数更少不必然时序更好，需要联合延迟与拥塞评价。",
+      "模型化 RRG 验证不等于真实三维工艺签核。"
+    ],
+    "entry": "先检查上级已有 3D_FPGA_routing 目录及 LaZagna/VTR 版本，不自动修改该独立项目。",
+    "anchors": [
+      "cpp_router/include/DeviceModel.hpp",
+      "cpp_router/src/main.cpp"
+    ],
+    "variants": [
+      [
+        "original_vpr",
+        "对应版本的原路由器"
+      ],
+      [
+        "simple_vertical_penalty",
+        "简单跨层代价基线"
+      ],
+      [
+        "cpu_portal_selection",
+        "CPU 离散端口选择"
+      ],
+      [
+        "cpu_tree_dp",
+        "树上选择/共享：后续实现"
+      ],
+      [
+        "fpga_portal_eval",
+        "同一算法 FPGA 候选评估"
+      ]
+    ],
+    "factors": [
+      "垂直资源密度与分布",
+      "跨层延迟与容量",
+      "层数和 net 扇出",
+      "端口候选数及分层搜索策略"
+    ],
+    "metrics": [
+      [
+        "routing_ms",
+        "ms"
+      ],
+      [
+        "critical_path_delay",
+        "ns"
+      ],
+      [
+        "routed_wirelength",
+        "tool_unit"
+      ],
+      [
+        "vertical_resources_used",
+        "count"
+      ],
+      [
+        "overflow_resources",
+        "count"
+      ],
+      [
+        "routing_success",
+        "boolean"
+      ]
+    ],
+    "datasets": [
+      "固定版本 LaZagna/VTR 导出的三维 RRG 与网表",
+      "多个垂直资源密度/延迟的同源架构配置"
+    ],
+    "first": "固定三维工具链版本，导出含垂直边身份和容量/延迟的 RRG，复现原始路由结果。",
+    "integration": "先比较原算法、简单跨层代价与 CPU 候选选择，再卸载同一个候选算法到普通 FPGA 加速卡。",
+    "hardware": "固定端口候选生成、局部搜索与代价归约；全局协商与树更新初版保留在 CPU。",
+    "limitation": "只演示两层单次跨层候选，不实现 H3D 动态规划、多终端树或三维拥塞协商。",
+    "refs": [
+      [
+        "H3D",
+        "https://www.cse.cuhk.edu.hk/~byu/papers/C297-ICCAD2025-3DRoute.pdf"
+      ],
+      [
+        "LaZagna",
+        "https://github.com/sharc-lab/LaZagna"
+      ],
+      [
+        "Escaping Flatland",
+        "https://arxiv.org/abs/2604.01078"
+      ]
+    ]
+  }
+]

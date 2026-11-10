@@ -1,0 +1,15 @@
+# 有界字节后备地址与查询租约：CPU事件模型
+
+新增src/bounded_backing.py。BackingPool预分配固定bytearray，以64B对齐stride提供有限地址，不再只依赖QueryKey逻辑字典。预算不足明确WouldBlock，不能增大数组、覆盖别的页或丢弃脏值。地址归属(query,page)在整个传输排空前保留；单个ACK只解除传输引用，不释放地址。重复完成仍排队时控制fence不能finish，因此不能提前把该地址分给新query。
+
+IntegerPageCodec用于合成signed int64值，每页包含presence bitmap、固定8B/节点及64B对齐零填充；absent与0可区分，越界offset/value拒绝。64节点页stride576B（bitmap8+数据512再对齐），不是实际NodeDyn的24B布局。预算只约束后备raw bytearray，可用页数=floor(budget/stride)，不足整页的尾部不分配；检查地址位宽上限。实际DDR/HBM对齐、突发和控制器尚未实现。
+
+BoundedPageValues保持既有有限事务/页槽/控制fence。dirty写回提交前预查容量与请求队列/ID，阻塞不消耗ID或分配地址；peer publish按预约地址写完整stride，refill直接从bytearray解码，host有效确认后才向resident发布。旧query迟到写回只能写旧归属地址，新query容量不足时背压，不偷用旧地址。旧字节未清零也不能暴露：新归属只有完整页发布后才可读取。
+
+9项新检查、全套92项Python检查通过，证据bounded_backing_20261023T021459Z，保存tests.log和源/测试快照。覆盖容量耗尽、队列满的原子背压、取消后地址隔离、单ACK不释放命名空间、重复完成阻止回收、物理字节优先于诊断shadow、snapshot超容量原子拒绝、地址位宽/对齐、30轮共1200次随机访问与全逻辑值映射oracle。
+
+必须保留的限制：合成payload只支持int64，未接真实距离/NodeDyn。backing诊断字典、resident/传输快照、Python对象、元数据和导出checkpoint未计入raw byte预算，不能当成系统总内存上限或完整硬件容量证明。restore先校验编码与剩余页数，超过预算拒绝；若当前逻辑查询所需页数大于后备预算，不能靠fence透明消除容量需求，可能需要更大存储或显式失败/外部溢出方案，当前不会静默丢数据。
+
+地址回收仍依赖封闭单owner、无隐藏旧包/旧生产者、peer状态不丢失的fence契约；绕过封装直接调用pool.reset不受保护。没有真实DMA/物理地址映射、cache一致性、丢包/复位恢复或RTL验证。performance为空，旧CPU路由及前期回放全部保留。
+
+下一步从完整真实地址查询统计每查询唯一页与严格后备容量需求，区分int64合成页与真实NodeDyn布局字节数，再选择有证据的足够预算进行受控回放，并用不足预算的对抗查询验证明确背压。容量测量不能算成硬件加速或创新证明。

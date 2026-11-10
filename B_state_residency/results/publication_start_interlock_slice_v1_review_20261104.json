@@ -1,0 +1,186 @@
+{
+  "actual_restore": "/tmp/B_state_residency_recovery_20261102/publication_start_interlock_slice_v1_actual_restore",
+  "all_restored_files_sha_identical": true,
+  "archive": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/recovery_archives_20261102/publication_start_interlock_slice_v1_terminal.tar.gz",
+  "archive_sha256": "a396250c309d4e66f3eca54167c961731fcc48ce99a5e0ae3468b85326d31ab0",
+  "audit": {
+    "audit_kind": "bounded_actual_lease_barrier_slice_original_negative_and_candidate_positive",
+    "auditor_sha256": "92cb948d57352cae5825b0eaa3fca60fad6da25f92fb00c4e5827ab18387ac72",
+    "candidate_cases": [
+      [
+        1,
+        "release_only"
+      ],
+      [
+        2,
+        "simultaneous_start_held_release"
+      ],
+      [
+        3,
+        "response_backpressure"
+      ],
+      [
+        4,
+        "release_on_consumption_edge"
+      ],
+      [
+        5,
+        "release_after_consumption"
+      ],
+      [
+        6,
+        "held_start_not_ready"
+      ],
+      [
+        7,
+        "cancel"
+      ],
+      [
+        8,
+        "invalid_start_payload"
+      ],
+      [
+        9,
+        "normal_commit"
+      ],
+      [
+        10,
+        "unknown_start_observation"
+      ]
+    ],
+    "candidate_full_system_validated": false,
+    "candidate_synthesized": false,
+    "checks": 99,
+    "cycles": 77,
+    "edge_trace": {
+      "done_consumptions": 4,
+      "held_start_not_ready_cycles": 3,
+      "release_transfers": 6,
+      "rows": 77,
+      "sha256": "090a1bcebe1ec51e1b8be6d2a96313d7a656b1bc7c4d1e2ef01e48802457304e",
+      "simultaneous_offers_accepted_start_only": 2,
+      "start_transfers": 4,
+      "unknown_start_samples": 1
+    },
+    "finish_time_ps": 766000,
+    "limitations": [
+      "Only two real production modules; full-query surrounding arbitration/retirement/metadata agents are modeled.",
+      "Held raw start blocks release even when start_open=0. This test observes that behavior; it does not prove caller forward progress or endorse a caller contract.",
+      "Unknown-start propagation is a four-state RTL observation, not hardware/metastability safety.",
+      "No arbitrary-input formal proof, complete-query candidate run, new synthesis, post-route simulation or board proof. Original full RTL counterexample retained."
+    ],
+    "manifest_sha256": "fdf0e9fa0ff90b0a9ccb4b70b5d23d608041beb1117d525d0ff6bfddb0f7126d",
+    "original_expected_failure": "INTERLOCK_CHECK SIMULTANEOUS_RELEASE_NOT_BLOCKED",
+    "owned_checks": 27,
+    "production_repair_accepted": false,
+    "production_rtl_modified": false,
+    "status": "passed",
+    "warnings": {
+      "candidate/compile": [],
+      "candidate/elaborate": [],
+      "original/compile": [],
+      "original/elaborate": []
+    }
+  },
+  "audit_sha256": "8264a9ff52c1079cdd6af12023486fcdf59fd628d7a23c56d36f52d83968d876",
+  "candidate_full_system_validated": false,
+  "current_runner_start_ticks": null,
+  "file_sha256": {
+    "candidate/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "candidate/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "candidate/compile.stdout.log": "a7b728fb92af5247c54d07207ff43c18e03ab0778c42fdb0ba603dd252d977d4",
+    "candidate/edges.csv": "090a1bcebe1ec51e1b8be6d2a96313d7a656b1bc7c4d1e2ef01e48802457304e",
+    "candidate/elaborate.stdout.log": "4cfea644446f24de479fe84143090fb8cbb57406c947709d075065dede4be489",
+    "candidate/interlock.wdb": "fba8ce5649dcf060b8b336d35984b197c575412d4f349e1915c150285a18a86c",
+    "candidate/run.tcl": "fc1ff2a1d52d650512e216286815337550a3ca66a4dd2fea3aa7c4f115699985",
+    "candidate/simulate.log": "314a49294741ccece5309db6ef04c782de1e6addafae3de1fd641617147e3ba8",
+    "candidate/simulate.stdout.log": "13d7e2095245ca5f8d5f653c8c9ded2ecec68d223d77233dd68e2fb27ba290ad",
+    "candidate/tb_interlock.sv": "2d3a499b86c9302f28f784cfd3bff3fbf4115f875b8073a5c3d5dd4a2ead8046",
+    "candidate/xelab.log": "4cfea644446f24de479fe84143090fb8cbb57406c947709d075065dede4be489",
+    "candidate/xelab.pb": "4e5f0618cca065aa3eb1579124c10d374fe10e1f620f707833fdbfd1b9fb66b7",
+    "candidate/xsim.dir/interlock/Compile_Options.txt": "a49872046ef5bfb76c6fa42d175b0a57c88b8af09433aae7ba57a488edfc348b",
+    "candidate/xsim.dir/interlock/TempBreakPointFile.txt": "b4cb40d28ae548744312392beffad452d7b3cc0d8a3c187635a7e3925f3c3aa7",
+    "candidate/xsim.dir/interlock/xsim.dbg": "5cea63f045e7b1b21d93df2dae5ee09eba3cab1525b4e6c380c65dec8e71b668",
+    "candidate/xsim.dir/interlock/xsim.mem": "c0ed1bbbde1f85969e68cc3ce75017ec6fe5c51d1ea50684349243118474bfe0",
+    "candidate/xsim.dir/interlock/xsim.reloc": "8bc163f866265745942048e3a1edfe20ca21d3a3b4b1994e6eac4178d86af459",
+    "candidate/xsim.dir/interlock/xsim.rtti": "50dd1e11011daae19a9a11806d4e376009cdb355fe0d669dc679e93f3184edb0",
+    "candidate/xsim.dir/interlock/xsim.svtype": "b28c628f15d5657e0146ad0f7ad037ea57bde7309da054dd9129135fab60069c",
+    "candidate/xsim.dir/interlock/xsim.type": "cf1c5a4aa3dd8007f3756f2f3d607d67751cd98e99c8f5038c3f8b9fd06aa8c8",
+    "candidate/xsim.dir/interlock/xsim.xdbg": "b4d13ec332d4d3cc8fb992bb0668a67a6eb3f3bee8f63b079ce3c91d923afa11",
+    "candidate/xsim.dir/interlock/xsimSettings.ini": "3c6403ed7bdc72d65bb1a620761579e42b0925ec3a9f13df9d0bb3ed6166b9ab",
+    "candidate/xsim.dir/interlock/xsim_script.tcl": "7c963263a138455b2d99b508e7cbbadcc3539bc84d636f77484bfc3dea15a058",
+    "candidate/xsim.dir/interlock/xsimcrash.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate/xsim.dir/interlock/xsimk": "c0f2b5e0e64bb797769e8fe7e2f2a775c4238d13d450a64c8265cd11efcc27cb",
+    "candidate/xsim.dir/interlock/xsimkernel.log": "2949365a02d01fa1754c4cae6625b1ff79dffd3f934994353a2a443992ee1e9f",
+    "candidate/xsim.dir/work/checkpoint_lease_guard.sdb": "a1b3b3aaf3a9aafad1a52a33aa99bf0b950aad7a5799cd1d529fb0fd798529cf",
+    "candidate/xsim.dir/work/checkpoint_publish_barrier.sdb": "5b332f3020009fd43571d2b63fd0ccc44ddf81da63975cb860d731d33e38437e",
+    "candidate/xsim.dir/work/tb_interlock.sdb": "6a9f88ff97333668eb92c5348d0514eeed9ddd659094e5f5fc70062a30d39ae5",
+    "candidate/xsim.dir/work/work.rlx": "dfdb734d0c8b77876fdfab1d6e9a719ab4bc8946a8cd26980fccc90d0c06f56a",
+    "candidate/xsim.jou": "fd1eede38f847eedeffa5fbb1c12c715ce7ea1beebd6529ba87d8d4b3d1a9cad",
+    "candidate/xvlog.log": "a7b728fb92af5247c54d07207ff43c18e03ab0778c42fdb0ba603dd252d977d4",
+    "candidate/xvlog.pb": "44f5afc5111b361eadd386d25e21fe70e67f4161cb305a721ea73159455b810b",
+    "candidate_source/baseline/query_residency_system.sv": "cfa01c14684b1049e6f9139b06407d33ad4b3f8dadfb016256642554141aebd5",
+    "candidate_source/candidate/query_residency_system.sv": "008acf04cee1ce51f1e049f7962febe4c025d15f23f762cdf0367834033e594c",
+    "candidate_source/manifest.json": "ee4ca40a79912e6ddd99f1bbb0e78eba1456a832a193f27e2c4322db04dc8e97",
+    "manifest.json": "fdf0e9fa0ff90b0a9ccb4b70b5d23d608041beb1117d525d0ff6bfddb0f7126d",
+    "original/checkpoint_lease_guard.sv": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3",
+    "original/checkpoint_publish_barrier.sv": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0",
+    "original/compile.stdout.log": "3a36b75164fba231a5e6c52e4db048c25bc66854232fb64ab65a6cd3cb9cab17",
+    "original/edges.csv": "51058ffc2c79767ac75c54849332896a39376ee29bf510e7ab1aec1220c45adc",
+    "original/elaborate.stdout.log": "4cfea644446f24de479fe84143090fb8cbb57406c947709d075065dede4be489",
+    "original/interlock.wdb": "bb4d0f99d8e2494f324edadd19a4fb29ca3bfc18cc8959a1aa5b0717c4e5d244",
+    "original/run.tcl": "fc1ff2a1d52d650512e216286815337550a3ca66a4dd2fea3aa7c4f115699985",
+    "original/simulate.log": "c585f7c84d44aa74774ba867a22d11cff8b4aa56527334a3bc9ef25839dac404",
+    "original/simulate.stdout.log": "f2385dbfdf1a1d8c3e09de3cae5ead7bd83c7574050fabde30094fd3105ceda2",
+    "original/tb_interlock.sv": "2d3a499b86c9302f28f784cfd3bff3fbf4115f875b8073a5c3d5dd4a2ead8046",
+    "original/xelab.log": "4cfea644446f24de479fe84143090fb8cbb57406c947709d075065dede4be489",
+    "original/xelab.pb": "4e5f0618cca065aa3eb1579124c10d374fe10e1f620f707833fdbfd1b9fb66b7",
+    "original/xsim.dir/interlock/Compile_Options.txt": "a49872046ef5bfb76c6fa42d175b0a57c88b8af09433aae7ba57a488edfc348b",
+    "original/xsim.dir/interlock/TempBreakPointFile.txt": "b4cb40d28ae548744312392beffad452d7b3cc0d8a3c187635a7e3925f3c3aa7",
+    "original/xsim.dir/interlock/xsim.dbg": "beecfcecc8da3587ac9e307b09bd96e6e67b57e92bf3a88d649c614eaec8691b",
+    "original/xsim.dir/interlock/xsim.mem": "58ddec3cd938fa8c09f5e0e8e4f29e575dea217970430e897a77b2a2ad95813c",
+    "original/xsim.dir/interlock/xsim.reloc": "17393f8fd7e4a936746ec00b984dc962dc51ae78437e7479acde61cae0605e83",
+    "original/xsim.dir/interlock/xsim.rtti": "82b48a38b0b192a93239b458bf05086cf2dc890a7fea9cbe30bccaa6c9bc7c78",
+    "original/xsim.dir/interlock/xsim.svtype": "b28c628f15d5657e0146ad0f7ad037ea57bde7309da054dd9129135fab60069c",
+    "original/xsim.dir/interlock/xsim.type": "cf1c5a4aa3dd8007f3756f2f3d607d67751cd98e99c8f5038c3f8b9fd06aa8c8",
+    "original/xsim.dir/interlock/xsim.xdbg": "aa77b47d5b6ebaaffe6918fb53ac1e8894f46f95f485bf00327e7715b53350ba",
+    "original/xsim.dir/interlock/xsimSettings.ini": "3c6403ed7bdc72d65bb1a620761579e42b0925ec3a9f13df9d0bb3ed6166b9ab",
+    "original/xsim.dir/interlock/xsim_script.tcl": "7c963263a138455b2d99b508e7cbbadcc3539bc84d636f77484bfc3dea15a058",
+    "original/xsim.dir/interlock/xsimcrash.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original/xsim.dir/interlock/xsimk": "b46bf40681192d87d7dc11ef29ccd0bb2601e00728d3d48e336cffc5ca2c2ff0",
+    "original/xsim.dir/interlock/xsimkernel.log": "e01774651828704948047fe89779656d8cbdad9d30c513ad1242d7560cd2b8e5",
+    "original/xsim.dir/work/checkpoint_lease_guard.sdb": "81e897d6a1f983719c45910d54434d176b5ec95f0aa8bb07c5d66d7847781a7a",
+    "original/xsim.dir/work/checkpoint_publish_barrier.sdb": "edd1b8edf3c0bb9296ee972f5b6a9e6a6d9dd7d74c6c0df8ddb33a6ac3d48c9c",
+    "original/xsim.dir/work/tb_interlock.sdb": "0cd03f19c9365f561938a4e1e5b54e1ce2066c03db89b04615f0e772c48c14e0",
+    "original/xsim.dir/work/work.rlx": "e2d06dc663b851f384ce30da8dbfcf90c0fc21069e21ea8838ce875fecc0fe87",
+    "original/xsim.jou": "e1e17959ae69979cf7cf8ceed4a72708711b31ca5917f0ec3be6a205588750e8",
+    "original/xvlog.log": "3a36b75164fba231a5e6c52e4db048c25bc66854232fb64ab65a6cd3cb9cab17",
+    "original/xvlog.pb": "d6a45d9693fc531b2526d30c35949f3c60aafb79a6170e67875796837dcb9ac1",
+    "review_tools/audit_publication_interlock_slice_v1.py": "92cb948d57352cae5825b0eaa3fca60fad6da25f92fb00c4e5827ab18387ac72",
+    "review_tools/prepare_publication_start_interlock_v1.py": "31945f68a55927b206c27d44f56d55e2af8ebeee9d65b8aae8c06de0a293558d",
+    "review_tools/preserve_publication_interlock_slice_v1.py": "2674a51bf7792f0a9717cda39ad7ddc464636b593d6d874d4aca2bbf1eddb757",
+    "review_tools/run_publication_interlock_slice_v1.py": "2f21285809a4baabe2f3e16de372195afa33173a01d752f030526f44e5e1949f",
+    "review_tools/stage_static_cp_physical_common_v6.py": "ad8c25f707bc3043818eec266ec95c0399d030513d0f1d9277d1b3ffcf2df0c1",
+    "source_bound_audit.json": "8264a9ff52c1079cdd6af12023486fcdf59fd628d7a23c56d36f52d83968d876"
+  },
+  "manifest_sha256": "fdf0e9fa0ff90b0a9ccb4b70b5d23d608041beb1117d525d0ff6bfddb0f7126d",
+  "next_work": "Keep original failing full probe. Build separate full-query candidate probe with original monitors intact, fresh inputs and exact one-source delta, and classify caller arbitration/liveness. Do not inherit original v7 or physical v6 acceptance for changed source.",
+  "original_full_rtl_counterexample_preserved": true,
+  "preserver_sha256": "2674a51bf7792f0a9717cda39ad7ddc464636b593d6d874d4aca2bbf1eddb757",
+  "production_repair_accepted": false,
+  "production_rtl_modified": false,
+  "restore_reaudit_command": [
+    "/usr/bin/python3",
+    "-B",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/research_checks/audit_publication_interlock_slice_v1.py",
+    "/tmp/B_state_residency_recovery_20261102/publication_start_interlock_slice_v1_actual_restore"
+  ],
+  "restore_reaudit_exit_code": 0,
+  "restore_reaudit_log_sha256": "3706eb14712269e7976f35ec7ccb9b2e3ff7c4c1e54a6a1b03bd513f6fa8b7e5",
+  "restored_audit_byte_identical": true,
+  "runner_pid": 1771740,
+  "runner_start_ticks": "69705678",
+  "scope": "Actual lease guard and publication barrier RTL slice, modeled surrounding conditions and fixed metadata. Not full query integration, arbitrary-input proof, caller contract proof, synthesis or production repair.",
+  "status": "bounded_real_module_interlock_slice_audited_actual_restored",
+  "time_utc": "2026-11-04T10:54:15.966815+00:00"
+}

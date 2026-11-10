@@ -1,0 +1,462 @@
+set_input_delay
+
+Description: 
+Set input delay on ports
+
+Syntax: 
+set_input_delay  [-clock <args>] [-reference_pin <args>] [-clock_fall] [-rise]
+                 [-fall] [-max] [-min] [-add_delay] [-network_latency_included]
+                 [-source_latency_included] [-quiet] [-verbose] <delay>
+                 <objects>
+
+Usage: 
+  Name                         Description
+  ----------------------------------------
+  [-clock]                     Relative clock
+  [-reference_pin]             Relative pin or port
+  [-clock_fall]                Delay is relative to falling edge of clock
+  [-rise]                      Specifies rising delay
+  [-fall]                      Specifies falling delay
+  [-max]                       Specifies maximum delay
+  [-min]                       Specifies minimum delay
+  [-add_delay]                 Don't remove existing input delay
+  [-network_latency_included]  Specifies network latency of clock already 
+                               included
+  [-source_latency_included]   Specifies source latency of clock already 
+                               included
+  [-quiet]                     Ignore command errors
+  [-verbose]                   Suspend message limits during command 
+                               execution
+  <delay>                      Delay value
+  <objects>                    List of ports
+
+Categories: 
+SDC, XDC
+
+Description:
+
+  Note: The XDC > Timing Constraints language templates and the Timing
+  Constraints Wizard in the Vivado IDE offer timing diagrams and additional
+  details around defining specific timing constraints. You can refer to these
+  sources for additional information.
+
+  Specifies the external system-level path delay on a primary input port
+  relative to a clock edge at the interface of the design. The input delay
+  value is specified in nanoseconds (ns), and can be positive or negative,
+  depending on the clock and data relative phase at the interface of the
+  device.
+
+  To accurately model the system-level timing of your Xilinx FPGA design, you
+  must assign timing delays for objects external to the FPGA onto the primary
+  input or output ports in your design. These delays are defined by the
+  set_input_delay and set_output_delay commands.
+
+  Note: If the input port also has a set_max_delay constraint assigned, the
+  specified input delay value is considered part of the max_delay
+  computation. That is, the input delay consumes a portion of the max delay
+  on the timing path that includes the input port.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -clock <arg> - (Optional) Indicates that the input delay is relative to the
+  specified clock. By default the rising edge is used. However the
+  -clock_fall argument can be used to indicate that the falling edge should
+  be used instead.
+
+  -reference_pin <arg> - (Optional) Specifies that the delay is relative to
+  the active edge of a clock appearing on the specified pin or port rather
+  than a clock.
+
+  -clock_fall - (Optional) Specifies that the delay is relative to a falling
+  edge of the clock rather than rising edge.
+
+  -rise - (Optional) Specifies the input delay applies to rising transitions
+  on the specified ports. The default is to apply the delay for both rising
+  and falling transitions.
+
+  -fall - (Optional) Specifies the input delay applied to falling transitions
+  on the specified ports. The default is to apply the delay for both rising
+  and falling transitions.
+
+  -max - (Optional) Indicates the input delay specified is only used when
+  calculating the maximum (longest) path delays.
+
+  -min - (Optional) Indicates the input delay specified is only used when
+  calculating the minimum (shortest) path delays.
+
+  -add_delay - (Optional) Add the specified delay constraint to the port, to
+  coexist with any other set_input_delay constraints already defined on the
+  port. The default behavior is to replace the existing delays.
+
+  -network_latency_included - (Optional) Indicates that the clock network
+  latency of the reference clock is included in the delay value. The Vivado
+  timing engine considers the clock edge reaching the capture flop after the
+  clock latencies unless the specified input or output delay value includes
+  the source latency or network latency.
+
+  -source_latency_included - (Optional) Indicates that the source latency of
+  the relative clock is included in the specified delay value.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <delay> - (Required) The input delay specified as nanoseconds (ns) to apply
+  to the specified ports. Valid values are floating point numbers, with a
+  default value of 0.
+
+  <objects> - (Required) The list of ports to which the delay value will be
+  assigned.
+
+Examples:
+
+  The following example specifies the input delay on port DIN. The input
+  delay is 3 and is relative to the rising edge of clock clk1:
+
+    set_input_delay -clock clk1 3 DIN  
+    
+
+  The following example specifies the input delay on port DIN. The input
+  delay is 2 and is relative to the falling edge of the clock clk1:
+
+    set_input_delay -clock_fall -clock clk1 2 DIN 
+    
+
+  The following example specifies the input delay on port reset. The input
+  delay is 2 and is relative to the rising edge of the clock that appears on
+  the pin wbClk_IBUF_BUFG_inst/O, originating from the clock wbClk:
+
+    set_input_delay -clock wbClk 2 -reference_pin \  
+       [get_pin wbClk_IBUF_BUFG_inst/O] reset  
+    
+
+  This example creates a clock named clk_ddr, and defines input delay
+  constraints from data launched by both rising and falling edges of the
+  clock outside the device to the data input of the internal flip-flop that
+  is sensitive to both rising and falling clock edges:
+
+    create_clock -name clk_ddr -period 6 [get_ports DDR_CLK_IN]  
+    set_input_delay -clock clk_ddr -max 2.1 [get_ports DDR_IN]  
+    set_input_delay -clock clk_ddr -max 1.9 [get_ports DDR_IN] -clock_fall -add_delay  
+    set_input_delay -clock clk_ddr -min 0.9 [get_ports DDR_IN]  
+    set_input_delay -clock clk_ddr -min 1.1 [get_ports DDR_IN] -clock_fall -add_delay 
+    
+
+  Note: The use of the -add_delay option allows the new min and max delay
+  constraints to exist alongside the first delays on the same port.
+
+  The following example specifies the input delay on all non clock input
+  ports of the design. Although all_inputs returns all ports of the design,
+  including clock ports, set_input_delay will skip setting input delays on
+  the clock ports. The input delay is 1 relative to the rising edge of the
+  clock wbClk:
+
+    set_input_delay -clock wbClk 1 [all_inputs] 
+    
+
+  The following example sets an input delay of 4 relative to the rising edge
+  of the clock wbClk on the ports reset and wbDataForInput:
+
+    set_input_delay -clock wbClk 4 [list reset wbDataForInput] 
+    
+
+See Also:
+
+   *  all_clocks
+   *  all_inputs
+   *  check_timing
+   *  create_clock
+   *  get_ports
+   *  report_timing
+   *  set_max_delay
+   *  set_output_delay
+
+set_output_delay
+
+Description: 
+Set output delay on ports
+
+Syntax: 
+set_output_delay  [-clock <args>] [-reference_pin <args>] [-clock_fall] [-rise]
+                  [-fall] [-max] [-min] [-add_delay]
+                  [-network_latency_included] [-source_latency_included]
+                  [-quiet] [-verbose] <delay> <objects>
+
+Usage: 
+  Name                         Description
+  ----------------------------------------
+  [-clock]                     Relative clock
+  [-reference_pin]             Relative pin or port
+  [-clock_fall]                Delay is relative to falling edge of clock
+  [-rise]                      Specifies rising delay
+  [-fall]                      Specifies falling delay
+  [-max]                       Specifies maximum delay
+  [-min]                       Specifies minimum delay
+  [-add_delay]                 Don't remove existing input delay
+  [-network_latency_included]  Specifies network latency of clock already 
+                               included
+  [-source_latency_included]   Specifies source latency of clock already 
+                               included
+  [-quiet]                     Ignore command errors
+  [-verbose]                   Suspend message limits during command 
+                               execution
+  <delay>                      Delay value
+  <objects>                    List of ports
+
+Categories: 
+SDC, XDC
+
+Description:
+
+  Note: The XDC > Timing Constraints language templates and the Timing
+  Constraints Wizard in the Vivado IDE offer timing diagrams and additional
+  details around defining specific timing constraints. You can refer to these
+  sources for additional information.
+
+  Specifies the external system-level path delay on a primary output port
+  relative to a clock edge at the interface of the design. The output delay
+  value is specified in nanoseconds (ns), and can be positive or negative,
+  depending on the clock and data relative phase outside the FPGA device.
+
+  To accurately model the system-level timing of your Xilinx FPGA design, you
+  must assign timing delays for objects external to the FPGA onto the primary
+  input or output ports in your design. These delays are defined by the
+  set_input_delay and set_output_delay commands.
+
+  Note: If the output port also has a set_max_delay constraint assigned, the
+  specified output delay value is considered part of the max_delay
+  computation. That is, the output delay consumes a portion of the max delay
+  on the timing path that includes the output port.
+
+  This command returns nothing if successful, or returns an error if it fails.
+
+Arguments:
+
+  -clock <arg> - (Optional) Indicates that the delay is relative to the
+  rising edge of the specified clock.
+
+  -reference_pin <arg> - (Optional) Specifies that the delay is relative to
+  the specified pin rather than a clock.
+
+  -clock_fall - (Optional) Specifies that the delay is relative to a falling
+  edge of the clock rather than rising edge.
+
+  -rise - (Optional) Specifies that the delay is for a rising edge.
+
+  -fall - (Optional) Specifies that the delay is for a falling edge
+
+  -max - (Optional) Specifies that the delay specified should be treated as a
+  maximum threshold.
+
+  -min - (Optional) Specifies that the delay specified should be treated as a
+  minimum threshold.
+
+  -add_delay - (Optional) Add the specified delay constraint to the port, to
+  coexist with any other set_output_delay constraints already defined on the
+  port. The default behavior is to replace the existing delays.
+
+  -network_latency_included - (Optional) Indicates that the clock network
+  latency of the reference clock is included in the delay value. The Vivado
+  timing engine considers the clock edge reaching the capture flop after the
+  clock latencies unless the specified input or output delay value includes
+  the source latency or network latency.
+
+  -source_latency_included - (Optional) Specifies that the source latency of
+  the reference clock is included in the specified delay value.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+  <delay> - (Optional) The delay specified in nanoseconds (ns) to apply to
+  the listed ports. Valid values are floating point numbers, with a default
+  value of 0.
+
+  <objects> - (Required) A list of ports to which the delay applies.
+
+Examples:
+
+  The following example sets an output delay on ports relative to the
+  specified clock:
+
+    set_output_delay 5.0 -clock [get_clocks cpuClk] [get_ports]  
+    
+
+  The next example is the same as the prior example except that network
+  latency is now included:
+
+    set_output_delay 5.0 -clock [get_clocks cpuClk] \  
+       -network_latency_included [get_ports]  
+    
+
+  This example creates a clock named clk_ddr, and defines output delay
+  constraints from data launched by both rising and falling edges of the
+  clock outside the device to the data output of the internal flip-flop that
+  is sensitive to both rising and falling clock edges:
+
+    create_clock -name clk_ddr -period 6 [get_ports DDR_CLK_IN]  
+    set_output_delay -clock clk_ddr -max 2.1 [get_ports DDR_OUT]  
+    set_output_delay -clock clk_ddr -max 1.9 [get_ports DDR_OUT] -clock_fall -add_delay  
+    set_output_delay -clock clk_ddr -min 0.9 [get_ports DDR_OUT]  
+    set_output_delay -clock clk_ddr -min 1.1 [get_ports DDR_OUT] -clock_fall -add_delay 
+    
+
+  Note: The use of the -add_delay option allows the new min and max delay
+  constraints to exist alongside the first delays on the same port.
+
+See Also:
+
+   *  all_clocks
+   *  create_clock
+   *  get_ports
+   *  set_max_delay
+   *  set_input_delay
+
+report_clock_utilization
+
+Description: 
+Report information about clock nets in design
+
+Syntax: 
+report_clock_utilization  [-file <arg>] [-append] [-write_xdc <arg>]
+                          [-cells <args>] [-clock_roots_only] [-return_string]
+                          [-name <arg>] [-quiet] [-verbose]
+
+Returns: 
+Report
+
+Usage: 
+  Name                 Description
+  --------------------------------
+  [-file]              Filename to output results to. (send output to console
+                       if -file is not used)
+  [-append]            Append to existing file
+  [-write_xdc]         File to output clock constraint. File name must be 
+                       given.
+  [-cells]             Cells/bel_instances for which to report clock 
+                       utilization
+  [-clock_roots_only]  Report only the Clock Root Assignments
+  [-return_string]     Return report as string
+  [-name]              Output the results to GUI panel with this name
+  [-quiet]             Ignore command errors
+  [-verbose]           Suspend message limits during command execution
+
+Categories: 
+Report, Timing
+
+Description:
+
+  Returns information related to clock nets in the design and clock resource
+  usage on the target device.
+
+  The generated clock utilization report can generate placement constraints
+  for the currently placed clock resources. You can use these constraints to
+  preserve the placement of clock resources for future iterations of the
+  design, by using the -write_xdc option.
+
+  Note: For Ultrascale devices, if the intent is to recreate the current
+  clock placement then use the BUFGCE LOC properties from the written XDC
+  file. However, if the intent is to use the constraints as a starting point
+  for the clocking architecture, while allowing the Vivado Design Suite some
+  flexibility in placing clock resources, use the equivalent CLOCK_REGION
+  properties instead of the BUFGCE LOC properties.
+
+  By default the report is written to the Tcl console or STD output. However,
+  the results can also be written to a file or returned as a string if
+  desired.
+
+Arguments:
+
+  -file <arg> - (Optional) Write the report into the specified file. The
+  specified file will be overwritten if one already exists.
+
+  Note: If the path is not specified as part of the file name, the file will
+  be written into the current working directory, or the directory from which
+  the tool was launched.
+
+  -append - (Optional) Append the output of the command to the specified file
+  rather than overwriting it.
+
+  Note: The -append option can only be used with the -file option.
+
+  -write_xdc <filename> - (Optional) Output XDC location constraints for the
+  various clock resources to the specified filename. If the path is not
+  specified as part of the file name the file will be created in the current
+  working directory, or the directory from which the tool was launched.
+
+  -cells <arg> - (Option) The details of the report will be based on the
+  specified cells rather than the whole design.
+
+  -clock_roots_only - (Optional) For UltraScale, and device architectures
+  with clock roots, limit the report output to cover just the clock root
+  assignments for each clock net.
+
+  Note: This option is not supported for Xilinx 7 series devices.
+
+  -return_string - (Optional) Direct the output to a Tcl string rather than
+  to the standard output. The Tcl string can be captured by a variable
+  definition and parsed or otherwise processed.
+
+  -name <arg> - (Optional) The name of the Clock Utilization report view to
+  display in the Vivado IDE when run in GUI mode. If the name has already
+  been used in an open Report view, that view will be closed and a new report
+  opened.
+
+  -quiet - (Optional) Execute the command quietly, returning no messages from
+  the command. The command also returns TCL_OK regardless of any errors
+  encountered during execution.
+
+  Note: Any errors encountered on the command-line, while launching the
+  command, will be returned. Only errors occurring inside the command will be
+  trapped.
+
+  -verbose - (Optional) Temporarily override any message limits and return
+  all messages from this command.
+
+  Note: Message limits can be defined with the set_msg_config command.
+
+Examples:
+
+  The following example returns information about the clock nets in the
+  design and the clock resources utilized on the target device, and writes it
+  to the specified file:
+
+    report_clock_utilization -file C:/Data/FPGA_Design/clock_util.txt  
+    
+
+  The following example reports the clock nets and clock resource utilization
+  to the standard output, but writes the XDC location constraints to the
+  specified file:
+
+    report_clock_utilization -write_xdc clock_util_xdc.txt 
+    
+
+  Note: Because the path is not specified as part of the XDC file name, the
+  file will be created in the current working directory, or the directory
+  from which the tool was launched.
+
+See Also:
+
+   *  create_clock
+   *  create_generated_clock
+

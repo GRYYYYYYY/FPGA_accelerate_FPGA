@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "selected": "/tmp/B_state_residency_offer_20261025/authority_rotate_v6",
+  "audit": {
+    "status": "passed",
+    "manifest_sha256": "25a92d0b6d09dc0e9b2e60cc584d397e7d489f5b48515fb690fe1add69821149",
+    "auditor_sha256": "dac7f52b9bd0de59582bccc62beabc502f478fc4e7b0becfca7c9e612705c0e0",
+    "replay_sha256": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3",
+    "bundle_verifier_sha256": "5c9242da7b8b20749ec5a7cee3d3b8c5869c2c8383e58e09ca1c2f5d280214aa",
+    "checks": 224,
+    "native_gets": 28,
+    "native_configurations": 7,
+    "native_config_replies": 9,
+    "publications": [
+      [
+        4294967297,
+        4294967298
+      ],
+      [
+        4294967298,
+        4294967300
+      ]
+    ],
+    "covered_warm_keys": [
+      [
+        263946,
+        2717
+      ],
+      [
+        554512,
+        2717
+      ],
+      [
+        1411724,
+        2717
+      ],
+      [
+        1431200,
+        2717
+      ],
+      [
+        2988027,
+        2717
+      ],
+      [
+        3919432,
+        2717
+      ]
+    ],
+    "preexisting_owner_preserved": [
+      0,
+      4754
+    ],
+    "physical": {
+      "error_read_beats": 1,
+      "error_write_replies": 0,
+      "read_transactions": 45,
+      "read_beats": 45,
+      "write_beats": 0,
+      "write_replies": 0,
+      "read_burst_lengths": {
+        "1": 45
+      },
+      "write_burst_lengths": {},
+      "logical_192B_reads": null,
+      "logical_192B_writes": null,
+      "bytes_checked": 290848512
+    },
+    "limits": [
+      "Component only: two native codec banks sharing a serialized read-only AXI service. GET blocked during config handling; prepared-but-unpublished old bank remains usable.",
+      "No coordinator journal/config/path/query/label joint commit or restore, no runtime working-DDR snapshot writer or full-system rotation recovery yet; saved paths must be restored after target reset before work resumes.",
+      "G4 reuses the immutable warm image to test namespace selection; not a newly captured G4 full-state bundle. No synthesis/timing/board or durable anti-replay proof."
+    ]
+  },
+  "negative": {
+    "status": "passed",
+    "meaning": "Expected pre-fix namespace rollback after canceled rearm; not a successful run.",
+    "manifest_sha256": "8342002ca89c9aaef0da2532d19a168ad78f481719dc403d73ce6e1b66af7bfc",
+    "auditor_sha256": "6f74774844844f9c2f0d53eb3c527f8a617ca7fe5c42d6d29c8d5a2661d05cfe",
+    "fixed_manifest_sha256": "25a92d0b6d09dc0e9b2e60cc584d397e7d489f5b48515fb690fe1add69821149",
+    "sole_change": "initial-bind guard uses retained nonzero bound_generation rather than service configured flag",
+    "physical": {
+      "error_read_beats": 1,
+      "error_write_replies": 0,
+      "read_transactions": 37,
+      "read_beats": 37,
+      "write_beats": 0,
+      "write_replies": 0,
+      "read_burst_lengths": {
+        "1": 37
+      },
+      "write_burst_lengths": {},
+      "logical_192B_reads": null,
+      "logical_192B_writes": null,
+      "bytes_checked": 290848512
+    },
+    "observed_rollback": [
+      "0x100000002",
+      "0x100000001"
+    ]
+  },
+  "archives": {
+    "authority_rotate_v5_unfixed": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/authority_rotate_v5_unfixed.json",
+      "archive_sha256": "315b480a393283f9157f7fe10fd6d7882df06b29489dc29e5657cc0c6da3417d",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/authority_rotate_v5_unfixed",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/authority_rotate_v5_unfixed",
+      "files": 47,
+      "audit_byte_identical": true,
+      "audit_sha256": "ea72f402c72d732057c9109be115d773787fa7c4b22cb2a9136e0a5d6eb92460",
+      "auditor": "audit_authority_rotate_negative.py"
+    },
+    "authority_rotate_v6": {
+      "status": "passed",
+      "archive_index": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/offer_archives_20261025/authority_rotate_v6.json",
+      "archive_sha256": "713b43f2dbd144a75c5d3d6f47bd4bb974553d9b6c0f6f2a4eff3b7f24ce393c",
+      "restored_root": "/tmp/B_state_residency_offer_20261025/authority_rotate_v6",
+      "preserved_original": "/tmp/B_state_residency_offer_20261025/.preserved/authority_rotate_v6",
+      "files": 49,
+      "audit_byte_identical": true,
+      "audit_sha256": "e4c7993c153b5dc65ae2283a52537e6ba6153120cc5d7483cb6ae54f09984285",
+      "auditor": "audit_authority_rotate.py"
+    }
+  },
+  "sources": {
+    "hardware/variants/authority_rotate_v1/checkpoint_authority_rotator.sv": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032",
+    "hardware/variants/authority_rotate_v1/tb_rotate.sv": "68b52f7c1c1db093b3eacaab92c8ae5c99698d9c23edf952f49b6b0f1cd0d5d5",
+    "hardware/variants/authority_rotate_v1/build.py": "cb4122f51c973b1c1eb91c157b23428341eb202a536f37a395beea28f0d8f61f",
+    "hardware/variants/authority_rotate_v1/build_tb.py": "285a8ea17782f666051cdfd07f6a1b3256dd1bf915dd07237be9ae5ab7ab64e9",
+    "hardware/variants/authority_rotate_v1/CONTRACT.md": "7fa791ba1a934f1f44a7b612509088958eab030388f222e2630df3acfcff8667",
+    "scripts/run_authority_rotate.py": "035e6ca61391a9ec049ae9db122e727b20b62f91d2eb037c53aafb16d9fd2db8",
+    "scripts/audit_authority_rotate.py": "dac7f52b9bd0de59582bccc62beabc502f478fc4e7b0becfca7c9e612705c0e0",
+    "scripts/audit_authority_rotate_negative.py": "6f74774844844f9c2f0d53eb3c527f8a617ca7fe5c42d6d29c8d5a2661d05cfe",
+    "scripts/report_authority_rotate.py": "854163e897843ad8d7f82d702136c03cb2d28255f4d80f2dbb89c419dbdf658a",
+    "scripts/verify_rtl_bundle.py": "5c9242da7b8b20749ec5a7cee3d3b8c5869c2c8383e58e09ca1c2f5d280214aa",
+    "scripts/audit_route_fault_axi.py": "7f7a7bf88576e2ec3e5b0ff9599cc74189c07b29c7b9ade2869b05e0d1b278e3"
+  },
+  "remaining": [
+    "Joint staged publication of coordinator journal/checkpoint and saved effective config with authority under real lease.",
+    "Preserve/restore path/query/label state and floors after target reset before allowing work; full-system post-rotation recovery.",
+    "Runtime working-state snapshot writer/general multi-net-overflow bundles, synthesis/timing and durable/board evaluation."
+  ]
+}

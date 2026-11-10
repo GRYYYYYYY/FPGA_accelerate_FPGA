@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "runs": {
+    "normal": {
+      "root": "results/residency_system_normal_v1",
+      "audit_sha256": "84f083e06e40ae66d9fef3b7be78c7af5315d7e177336126b5b6551d65315d22",
+      "manifest_sha256": "40116ea0a8fca31b5db45379bf8376729f76f336a153696e83618f5dba783345",
+      "unchanged_source_files": 116,
+      "reference_audit_sha256": "fa05f25422eada2a2e3065961df8a655595335ad00a6c372a29dc79cae9b8678",
+      "cases": {
+        "full": "NATURAL_QUERY_PASS outputs=447 commits=293 offers=293 expands=114 polls=116 visited=447 host_blocks=475289 labels_R=605 labels_W=260 State_R=114 cycles=683640",
+        "pressure": "NATURAL_QUERY_PASS outputs=447 commits=293 offers=293 expands=114 polls=116 visited=447 host_blocks=572871 labels_R=1535 labels_W=615 State_R=114 cycles=747471"
+      },
+      "all_trace_axi_images_byte_identical": true
+    },
+    "dependent": {
+      "root": "results/residency_system_dependent_v1",
+      "audit_sha256": "9968d206598da80b4049f9c0fd9e89c634e4f1750791ba02c5519aafb348a594",
+      "manifest_sha256": "39a4e367f65386f1b464d472b1c51da287978c9e647d55932dd86d472786b5fb",
+      "unchanged_source_files": 116,
+      "reference_audit_sha256": "086a6a8214fa2decd6b55a9c0ad84f021d134fe23a8688f5ba84199217e3979b",
+      "cases": {
+        "full": "NATURAL_QUERY_PASS outputs=447 commits=293 offers=293 expands=114 polls=116 visited=447 host_blocks=475287 labels_R=605 labels_W=260 State_R=114 cycles=683640",
+        "pressure": "NATURAL_QUERY_PASS outputs=447 commits=293 offers=293 expands=114 polls=116 visited=447 host_blocks=572925 labels_R=1535 labels_W=615 State_R=114 cycles=747471"
+      },
+      "all_trace_axi_images_byte_identical": true
+    },
+    "fault": {
+      "root": "results/residency_system_fault_v1",
+      "audit_sha256": "f4f0dcc61f6467bf7df07e0b56076b33e0974b906b556bb7721f7fa2f34083f5",
+      "manifest_sha256": "01c8c210dba5ea67680de5c885d86b8a9511fdbdc76e5cc396298c4072cc0cf2",
+      "unchanged_source_files": 116,
+      "reference_audit_sha256": "802106b8873ccb040024477e73145f7a662cfceb5ef940958bf9af8950dcef67",
+      "cases": {
+        "full_1": "TRANSACTION_FENCE_JOIN_PASS case=1 journal=0 repairs=1 epoch=2 version=4 cycles=236645 contend=129075",
+        "full_2": "TRANSACTION_FENCE_JOIN_PASS case=2 journal=0 repairs=0 epoch=2 version=4 cycles=235520 contend=129186",
+        "full_3": "TRANSACTION_FENCE_JOIN_PASS case=3 journal=0 repairs=1 epoch=2 version=4 cycles=236645 contend=129075",
+        "full_4": "TRANSACTION_FENCE_JOIN_PASS case=4 journal=0 repairs=1 epoch=2 version=4 cycles=236645 contend=129075",
+        "full_5": "TRANSACTION_FENCE_JOIN_PASS case=5 journal=0 repairs=0 epoch=2 version=4 cycles=236517 contend=128940",
+        "pressure_1": "TRANSACTION_FENCE_JOIN_PASS case=1 journal=0 repairs=1 epoch=2 version=4 cycles=173175 contend=94100",
+        "pressure_2": "TRANSACTION_FENCE_JOIN_PASS case=2 journal=0 repairs=0 epoch=2 version=4 cycles=172085 contend=94081",
+        "pressure_3": "TRANSACTION_FENCE_JOIN_PASS case=3 journal=0 repairs=1 epoch=2 version=4 cycles=173175 contend=94100",
+        "pressure_4": "TRANSACTION_FENCE_JOIN_PASS case=4 journal=0 repairs=1 epoch=2 version=4 cycles=173175 contend=94100",
+        "pressure_5": "TRANSACTION_FENCE_JOIN_PASS case=5 journal=0 repairs=0 epoch=2 version=4 cycles=173175 contend=94129"
+      },
+      "all_trace_axi_images_byte_identical": true
+    }
+  },
+  "synthesis": {
+    "root": "results/residency_system_synth_v1",
+    "audit_sha256": "1d6e51b83ee6c6b3e0b1140e89c2fa9d293adf8651dd95384705e6595394b208",
+    "utilization": {
+      "LUT": 79811.0,
+      "FF": 60324.0,
+      "latches": 0.0,
+      "BRAM": 160.5,
+      "DSP": 23.0,
+      "URAM": 0.0
+    },
+    "netlist_facts": {
+      "blackboxes": 0,
+      "latches": 0,
+      "file_agents": 0,
+      "ports": 55702
+    },
+    "warnings": {
+      "Synth 8-11014": 5,
+      "Synth 8-693": 2,
+      "Synth 8-6014": 10,
+      "Synth 8-4767": 2,
+      "Synth 8-7129": 2040,
+      "Synth 8-3936": 4,
+      "Synth 8-3917": 2963
+    },
+    "mcp_source_elapsed_s": 535.115,
+    "mcp_source_exit_code": 0
+  },
+  "source_freeze": "results/residency_system_sources_20261025/sha256.json",
+  "source_freeze_sha256": "436e9244158875505f64bac854d716fec86fdcd05c0fe5fcfd05c04d653019d2",
+  "limitations": [
+    "Existing service composition only: outer search/prepare still TB",
+    "Snapshot and authority production remain external, only route owner journal coverage",
+    "CPU-known328 union and16K physical frames; no unknown-page generality claim",
+    "Table AXI idle in these fixtures; no active table drain coverage",
+    "No actual recovery-stage AXI faults, price/epoch wrap, persistent power loss recovery",
+    "No constraints/place/route/Fmax or board speed measurement"
+  ],
+  "restore_receipt": "results/residency_system_restore_20261025.json",
+  "restore_sha256": "1360981135201387114141f6ee67ef11d3be902f86d04738c01f69a69da90096"
+}

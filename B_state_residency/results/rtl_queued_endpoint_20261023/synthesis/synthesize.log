@@ -1,0 +1,423 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Fri Oct 23 10:18:18 2026
+# Process ID: 2671706
+# Current directory: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/synthesis
+# Command line: vivado -mode batch -source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/synthesis/synthesize.tcl -log synthesize.log -journal synthesize.jou
+# Log file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/synthesis/synthesize.log
+# Journal file: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/synthesis/synthesize.jou
+# Running On: fpgaacc1--cfc8cd109508-jnnrja5s7q, OS: Linux, CPU Frequency: 2700.000 MHz, CPU Physical cores: 32, Host memory: 1622674 MB
+#-----------------------------------------------------------
+source /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/synthesis/synthesize.tcl
+# set_param general.maxThreads 2
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store_bram.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_page_controller.sv}
+# read_verilog -sv {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/queued_scratch_endpoint.sv}
+# read_xdc {/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store.xdc}
+# synth_design -top queued_scratch_endpoint -part xcu280-fsvh2892-2L-e -mode out_of_context
+Command: synth_design -top queued_scratch_endpoint -part xcu280-fsvh2892-2L-e -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xcu280'
+INFO: [Device 21-403] Loading part xcu280-fsvh2892-2L-e
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2683121
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 3406.473 ; gain = 361.801 ; free physical = 659568 ; free virtual = 1376098
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2652.499; parent = 2504.042; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4374.977; parent = 3409.445; children = 965.531
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'queued_scratch_endpoint' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/queued_scratch_endpoint.sv:5]
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 265 - type: integer 
+	Parameter DEPTH bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo__parameterized0' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 181 - type: integer 
+	Parameter DEPTH bound to: 4 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo__parameterized0' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'bounded_sync_fifo__parameterized1' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+	Parameter WIDTH bound to: 24 - type: integer 
+	Parameter DEPTH bound to: 2 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'bounded_sync_fifo__parameterized1' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/bounded_sync_fifo.sv:3]
+INFO: [Synth 8-6157] synthesizing module 'scratch_page_controller' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_page_controller.sv:4]
+	Parameter TX_BITS bound to: 16 - type: integer 
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'scratch_frame_store' [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store_bram.sv:5]
+	Parameter GENERATION_BITS bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'scratch_frame_store' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store_bram.sv:5]
+INFO: [Synth 8-6155] done synthesizing module 'scratch_page_controller' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_page_controller.sv:4]
+INFO: [Synth 8-6155] done synthesizing module 'queued_scratch_endpoint' (0#1) [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/queued_scratch_endpoint.sv:5]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 3506.410 ; gain = 461.738 ; free physical = 659501 ; free virtual = 1376032
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2652.499; parent = 2504.042; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4471.945; parent = 3506.414; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 3524.223 ; gain = 479.551 ; free physical = 659493 ; free virtual = 1376023
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2652.499; parent = 2504.042; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4489.758; parent = 3524.227; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 3524.223 ; gain = 479.551 ; free physical = 659488 ; free virtual = 1376019
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2652.499; parent = 2504.042; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4489.758; parent = 3524.227; children = 965.531
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3524.223 ; gain = 0.000 ; free physical = 659550 ; free virtual = 1376080
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3653.793 ; gain = 0.000 ; free physical = 659309 ; free virtual = 1375839
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.16 ; elapsed = 00:00:00.1 . Memory (MB): peak = 3653.793 ; gain = 0.000 ; free physical = 659329 ; free virtual = 1375859
+INFO: [Synth 8-11241] undeclared symbol 'REGCCE', assumed default net type 'wire' [/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/data/verilog/src/unimacro/BRAM_SINGLE_MACRO.v:2170]
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3653.793 ; gain = 609.121 ; free physical = 659218 ; free virtual = 1375749
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2735.562; parent = 2587.116; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4619.328; parent = 3653.797; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xcu280-fsvh2892-2L-e
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3653.793 ; gain = 609.121 ; free physical = 659216 ; free virtual = 1375746
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2735.562; parent = 2587.116; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4619.328; parent = 3653.797; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 3653.793 ; gain = 609.121 ; free physical = 659211 ; free virtual = 1375741
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2735.562; parent = 2587.116; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4619.328; parent = 3653.797; children = 965.531
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo:/memory_reg" of size (depth=4 x width=265) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo__parameterized0:/memory_reg" of size (depth=4 x width=181) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "bounded_sync_fifo__parameterized1:/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 3653.793 ; gain = 609.121 ; free physical = 659267 ; free virtual = 1375797
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2735.562; parent = 2587.116; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4619.328; parent = 3653.797; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   17 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 6     
+	   2 Input    2 Bit       Adders := 11    
+	   2 Input    1 Bit       Adders := 4     
++---Registers : 
+	              160 Bit    Registers := 3     
+	              136 Bit    Registers := 1     
+	               64 Bit    Registers := 8     
+	               32 Bit    Registers := 2     
+	               18 Bit    Registers := 9     
+	               17 Bit    Registers := 1     
+	               16 Bit    Registers := 14    
+	                6 Bit    Registers := 2     
+	                4 Bit    Registers := 19    
+	                3 Bit    Registers := 9     
+	                2 Bit    Registers := 20    
+	                1 Bit    Registers := 18    
++---RAMs : 
+	              34K Bit	(256 X 136 bit)          RAMs := 1     
+	               1K Bit	(4 X 265 bit)          RAMs := 2     
+	              724 Bit	(4 X 181 bit)          RAMs := 1     
+	               48 Bit	(2 X 24 bit)          RAMs := 2     
++---Muxes : 
+	   2 Input  181 Bit        Muxes := 1     
+	   2 Input  160 Bit        Muxes := 2     
+	   2 Input  136 Bit        Muxes := 3     
+	   2 Input   64 Bit        Muxes := 152   
+	   4 Input   64 Bit        Muxes := 10    
+	   6 Input   64 Bit        Muxes := 4     
+	   3 Input   64 Bit        Muxes := 4     
+	  10 Input   64 Bit        Muxes := 4     
+	   5 Input   64 Bit        Muxes := 4     
+	   2 Input   24 Bit        Muxes := 1     
+	   4 Input   18 Bit        Muxes := 2     
+	  10 Input   17 Bit        Muxes := 1     
+	   4 Input   16 Bit        Muxes := 3     
+	  10 Input   16 Bit        Muxes := 1     
+	   6 Input   16 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 51    
+	   3 Input    4 Bit        Muxes := 2     
+	   4 Input    4 Bit        Muxes := 2     
+	   6 Input    4 Bit        Muxes := 4     
+	  11 Input    4 Bit        Muxes := 1     
+	  10 Input    4 Bit        Muxes := 5     
+	   3 Input    3 Bit        Muxes := 8     
+	   4 Input    3 Bit        Muxes := 1     
+	   2 Input    3 Bit        Muxes := 11    
+	   5 Input    3 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 1     
+	  12 Input    3 Bit        Muxes := 1     
+	   7 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 56    
+	   3 Input    2 Bit        Muxes := 6     
+	   4 Input    2 Bit        Muxes := 3     
+	   5 Input    2 Bit        Muxes := 1     
+	  10 Input    2 Bit        Muxes := 12    
+	   6 Input    2 Bit        Muxes := 3     
+	   3 Input    1 Bit        Muxes := 10    
+	   2 Input    1 Bit        Muxes := 114   
+	   4 Input    1 Bit        Muxes := 3     
+	   6 Input    1 Bit        Muxes := 12    
+	  10 Input    1 Bit        Muxes := 13    
+	   5 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 9024 (col length:94)
+BRAMs: 4032 (col length: RAMB18 288 RAMB36 144)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+INFO: [Synth 8-6904] The RAM "queued_scratch_endpoint/requests/memory_reg" of size (depth=4 x width=265) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "queued_scratch_endpoint/work/memory_reg" of size (depth=4 x width=265) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "queued_scratch_endpoint/responses/memory_reg" of size (depth=4 x width=181) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "queued_scratch_endpoint/fence_requests/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+INFO: [Synth 8-6904] The RAM "queued_scratch_endpoint/fence_acks/memory_reg" of size (depth=2 x width=24) is automatically implemented using LUTRAM. BRAM implementation would be inefficient 
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:34 ; elapsed = 00:00:37 . Memory (MB): peak = 3653.793 ; gain = 609.121 ; free physical = 659010 ; free virtual = 1375541
+Synthesis current peak Physical Memory [PSS] (MB): peak = 2735.562; parent = 2587.116; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4619.328; parent = 3653.797; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping Report (see note below)
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name      | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|endpoint/storage | data_reg   | 256 x 136(READ_FIRST)  | W |   | 256 x 136(WRITE_FIRST) |   | R | Port A and B     | 0      | 2      |                 | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++------------------------+---------------------------+-----------+----------------------+----------------+
+|Module Name             | RTL Object                | Inference | Size (Depth x Width) | Primitives     | 
++------------------------+---------------------------+-----------+----------------------+----------------+
+|queued_scratch_endpoint | requests/memory_reg       | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|queued_scratch_endpoint | work/memory_reg           | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|queued_scratch_endpoint | responses/memory_reg      | Implied   | 4 x 181              | RAM32M16 x 13  | 
+|queued_scratch_endpoint | fence_requests/memory_reg | Implied   | 2 x 24               | RAM32M16 x 2   | 
+|queued_scratch_endpoint | fence_acks/memory_reg     | Implied   | 2 x 24               | RAM32M16 x 2   | 
++------------------------+---------------------------+-----------+----------------------+----------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:46 ; elapsed = 00:00:51 . Memory (MB): peak = 3920.926 ; gain = 876.254 ; free physical = 658282 ; free virtual = 1374813
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3154.750; parent = 3006.308; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 4886.461; parent = 3920.930; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:00:59 . Memory (MB): peak = 4046.449 ; gain = 1001.777 ; free physical = 657997 ; free virtual = 1374528
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3237.447; parent = 3089.011; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5011.984; parent = 4046.453; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping Report
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|Module Name      | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | Cascade Heights | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+|endpoint/storage | data_reg   | 256 x 136(READ_FIRST)  | W |   | 256 x 136(WRITE_FIRST) |   | R | Port A and B     | 0      | 2      |                 | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+-----------------+
+
+
+Distributed RAM: Final Mapping Report
++------------------------+---------------------------+-----------+----------------------+----------------+
+|Module Name             | RTL Object                | Inference | Size (Depth x Width) | Primitives     | 
++------------------------+---------------------------+-----------+----------------------+----------------+
+|queued_scratch_endpoint | requests/memory_reg       | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|queued_scratch_endpoint | work/memory_reg           | Implied   | 4 x 265              | RAM32M16 x 19  | 
+|queued_scratch_endpoint | responses/memory_reg      | Implied   | 4 x 181              | RAM32M16 x 13  | 
+|queued_scratch_endpoint | fence_requests/memory_reg | Implied   | 2 x 24               | RAM32M16 x 2   | 
+|queued_scratch_endpoint | fence_acks/memory_reg     | Implied   | 2 x 24               | RAM32M16 x 2   | 
++------------------------+---------------------------+-----------+----------------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+INFO: [Synth 8-7052] The timing for the instance endpoint/storage/data_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+INFO: [Synth 8-7052] The timing for the instance endpoint/storage/data_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:55 ; elapsed = 00:01:01 . Memory (MB): peak = 4070.473 ; gain = 1025.801 ; free physical = 658018 ; free virtual = 1374549
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5036.008; parent = 4070.477; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:59 ; elapsed = 00:01:05 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657948 ; free virtual = 1374479
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:59 ; elapsed = 00:01:05 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657943 ; free virtual = 1374474
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:59 ; elapsed = 00:01:05 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657949 ; free virtual = 1374481
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:59 ; elapsed = 00:01:05 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657944 ; free virtual = 1374475
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:00 ; elapsed = 00:01:06 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657938 ; free virtual = 1374469
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:00 ; elapsed = 00:01:06 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657933 ; free virtual = 1374464
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |CARRY8   |    13|
+|2     |LUT1     |    19|
+|3     |LUT2     |   315|
+|4     |LUT3     |   160|
+|5     |LUT4     |   267|
+|6     |LUT5     |   357|
+|7     |LUT6     |  1522|
+|8     |MUXF7    |    26|
+|9     |MUXF8    |     4|
+|10    |RAM32M16 |    54|
+|11    |RAMB36E2 |     2|
+|12    |FDRE     |  1653|
++------+---------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:00 ; elapsed = 00:01:06 . Memory (MB): peak = 4082.348 ; gain = 1037.676 ; free physical = 657946 ; free virtual = 1374478
+Synthesis current peak Physical Memory [PSS] (MB): peak = 3283.345; parent = 3134.911; children = 148.457
+Synthesis current peak Virtual Memory [VSS] (MB): peak = 5047.883; parent = 4082.352; children = 965.531
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:52 ; elapsed = 00:00:58 . Memory (MB): peak = 4082.348 ; gain = 908.105 ; free physical = 658007 ; free virtual = 1374538
+Synthesis Optimization Complete : Time (s): cpu = 00:01:00 ; elapsed = 00:01:06 . Memory (MB): peak = 4082.355 ; gain = 1037.676 ; free physical = 658003 ; free virtual = 1374534
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.04 . Memory (MB): peak = 4093.316 ; gain = 0.000 ; free physical = 658097 ; free virtual = 1374629
+INFO: [Netlist 29-17] Analyzing 97 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store.xdc]
+Finished Parsing XDC File [/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/sources/hardware/rtl/scratch_frame_store.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 4118.098 ; gain = 0.000 ; free physical = 657555 ; free virtual = 1374086
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 54 instances were transformed.
+  RAM32M16 => RAM32M16 (RAMD32(x14), RAMS32(x2)): 54 instances
+
+Synth Design complete, checksum: 35f0e69e
+INFO: [Common 17-83] Releasing license: Synthesis
+39 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:19 ; elapsed = 00:01:25 . Memory (MB): peak = 4118.098 ; gain = 2415.020 ; free physical = 657811 ; free virtual = 1374342
+INFO: [Common 17-600] The following parameters have non-default value.
+general.maxThreads
+# report_utilization -file utilization.rpt
+# write_checkpoint queued_scratch_endpoint.dcp
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-480] Writing timing data to binary archive.
+INFO: [Common 17-1381] The checkpoint '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/rtl_queued_endpoint_20261023/synthesis/queued_scratch_endpoint.dcp' has been generated.
+# set b_rams [get_cells -hier -filter {REF_NAME =~ RAMB*}]
+# set b_file [open ram_cells.txt w]
+# foreach b_cell $b_rams {puts $b_file "$b_cell [get_property REF_NAME $b_cell]"}
+# close $b_file
+# if {[llength $b_rams] != 2} {error "Expected two page block RAMs"}
+# puts "B_QUEUED_SYNTH_PASS ram_cells=[llength $b_rams]"
+B_QUEUED_SYNTH_PASS ram_cells=2
+# exit
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 23 10:19:54 2026...

@@ -1,0 +1,32 @@
+{
+  "status": "auditor_assumption_corrected",
+  "case": "restore_seed_retry_cancel_full_v1",
+  "failed_assertion": "len(by('RESET',q4))==2 and not by('AS_REARM',q4)",
+  "observed": {
+    "target_resets": [
+      3782501,
+      3815385
+    ],
+    "native_authority_rearm": [
+      3815378
+    ],
+    "rearm_generation": "0000000100000004",
+    "retry_start": 3815375
+  },
+  "reason": "Inherited successful single-attempt audit forbade authority rearm. Native noncold retry intentionally rearms the retained G4 reader before its second target reset. Require exactly one G4 rearm in this order instead; no production or simulation change.",
+  "original_auditor_sha256": "fa1e5f41c0bcb9f75fa9f5f34d9e51d08498a97d6cf233d686e9d9bb13dd37c2",
+  "additional_corrections": [
+    {
+      "failed_assertion": "12 authority cookies globally distinct across both attempts",
+      "reason": "Native coordinator derives authority cookie as recover_cookie XOR index XOR verify-pass bit. Cookies are unique within each six-request attempt but adjacent recover cookies can collide across retired attempts. Assert exact per-attempt values and no pending authority reply across REARM, not unsupported global uniqueness.",
+      "original_auditor_sha256": "0da1f658ba58f5b7c6312b4e311daa98edf47e1650efaa871c3cd350a67adaae",
+      "observed_distinct_cookies": 8
+    },
+    {
+      "failed_assertion": "readbeats==109",
+      "reason": "A fixed two-beat/GET estimate omitted full-chain authority reads: each GET reads allocator and primary; node558358 additionally reads its foreign-owner overflow record. Derive every expected request address from the actual G4 primary/pool image, including allocator, instead of using an assumed beat count.",
+      "observed_read_beats": 113,
+      "original_auditor_sha256": "dcacae90dd40140b5e8d74ef30302089d41de8d137814581913738467478158b"
+    }
+  ]
+}

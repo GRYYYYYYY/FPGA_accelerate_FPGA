@@ -1,0 +1,9 @@
+# 合并完整层级残余环：待终态网表定位
+
+运行中日志前缀及进程证据保存在results/combined_loops_synth_observation_20261027。Synth 8-326出现route_join的b_l_valid/b_o_valid/h_o_ready/h_o_rsp_valid、core can_start及authority rearm/req_ready相关警告；11次是前缀发生次数，可能重复，不能称11个最终环。保留原进程和最终DCP，不修改约束或源。
+
+source-bound局部恒等式见results/route_block_identity_20261027.json与scripts/analyze_route_block_identity.py。route_commit_host_adapter中的block_external=held||c_busy||c_fault可在实际响应资格接线下等价化为held||c_busy||(!controller_rst&&(controller_stopped||controller_abort))。controller_rst必须包括cp_reset_held，不能只用外部rst。若held或c_busy为真，两式均封锁；否则非复位controller为IDLE/unowned/无待消费回复/无CP操作，且送给controller的l_rsp_valid/o_rsp_valid均因held0为零。因此drift/timeout/bad_l/bad_o/unexpected均不贡献fault。262144组二态赋值包括全部8个state编码和未限制的数据错误谓词，结果相等。
+
+此结果不是对任意外部输入的独立controller恒等式：它依赖adapter的响应资格。没有X/Z、时序或可达性证明，没有修改生产RTL。可能的候选必须由controller提供显式idle fault接口，不能在生产代码中层次引用私有stopped；完整fault输出仍应保留所有错误检测，并验证held期间、撤销/错误、旧回复退休、checkpoint以及host passthrough语义。候选是否实际切断完整网表反馈须等待终态DCP定位和结构对照。
+
+下一顺序：先完成当前CRC pressure运行和字节审计/归档恢复；综合终态后重开DCP、检查全部环与实际对象；若反馈确经该block路径，再做隔离候选与原生生命周期验证。其余八项矩阵的参考/五源预检保存在results/combined_loops_matrix_preflight_20261027.json，只有CRC pressure已提交，其余七项未提交，不能把预检当回归通过。

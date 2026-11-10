@@ -1,0 +1,40 @@
+{
+  "status": "isolated_record_validity_staging_candidate_cpu_differential_asan_ubsan_passed_hls_pending",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_label_records.hpp": "5ba43cb2013a7103dc43b83cfa200c74a9df8435f5267128c5efacfb5e051248",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_control_staging_v1/search_label_records.hpp": "713d90c2a678c59b562c855af926fdef64fcd2b56371054d8fe54b7784e8f076",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/hardware/vitis/search_control_staging_v1/test_read_control.cpp": "0b6cc4fba19a0fb4ba90ae28b68358c2dcd25ca01f750c5aba5e343bc8114fba",
+    "/tmp/A_graph_compression_recovery_20261025_v1/control_staging_cpu_v1/test_read_control": "20907b9c1e8f1984dd61d76ae727e5170de52fee4dcb556f7ae7c553f468b474",
+    "/tmp/A_graph_compression_recovery_20261025_v1/control_staging_cpu_v1/run.log": "ddccf12bd246a02fa121e514dea6ec9bc1795f9dbebb4a6d9919ef0570a89b2f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/search_packet64_physopt_path_diagnosis_20261025_v1.json": "7a050e9bbf0ca34a26f22ef2e72f84193702073cd7a6b4f9ba7ecca5c799e02d"
+  },
+  "read_cases": 100000,
+  "parent_chain_cases": 100000,
+  "valid_reads": 46106,
+  "invalid_reads": 53894,
+  "capacity_in_test": 64,
+  "compiler_command": [
+    "g++",
+    "-std=c++14",
+    "-O1",
+    "-g",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "hardware/vitis/search_control_staging_v1/test_read_control.cpp",
+    "-o",
+    "/tmp/A_graph_compression_recovery_20261025_v1/control_staging_cpu_v1/test_read_control"
+  ],
+  "requested_helper_pragmas": [
+    "INLINE off",
+    "PIPELINE II=1",
+    "LATENCY min=2"
+  ],
+  "hls_verified": false,
+  "rtl_verified": false,
+  "physical_timing_verified": false,
+  "limits": [
+    "Only isolated CPU record/path semantics at capacity64; no full-workspace/kernel verification yet",
+    "Actual HLS staging/II/latency and postroute timing improvement remain unmeasured",
+    "Canonical header, active DUTs and original ABI unchanged; candidate resides in a separate directory"
+  ]
+}

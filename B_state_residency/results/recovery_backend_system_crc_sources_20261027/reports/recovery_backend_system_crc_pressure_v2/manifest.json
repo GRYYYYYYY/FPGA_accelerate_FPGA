@@ -1,0 +1,1199 @@
+{
+  "base": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2",
+  "baseline_image": "/tmp/B_state_residency_offer_20261025/label_baseline_image_v1",
+  "baseline_manifest_sha256": "d80a545fa3d22ef849cd4b6cf1a3e110e512e424cae979021bf981147d8b715e",
+  "binding": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/followup_iter2_inputs_20261025.json",
+  "binding_sha256": "0938237edd0c411078a2e40bfbb12178a94ffc00727cb88bcf85022f9ecc8125",
+  "cases": {
+    "pressure": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--define",
+            "SEED_CRC_FAILURE",
+            "--define",
+            "RESTORE_SEED_BYPASS",
+            "--define",
+            "PRESSURE",
+            "--sv",
+            "--define",
+            "QC_NO_LOSS",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/export_manifest.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/cumulative_owner_snapshot.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/label_baseline_reader.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/baseline_retirement_guard.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/incremental_owner_snapshot.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/owner_snapshot_checkpoint_adapter.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/label_snapshot_reader.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/label_snapshot_checkpoint_adapter.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/backing_frame_directory_small.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/backing_page_service_small.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/bounded_sync_fifo.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/memory_scratch_endpoint_small_staticcodec.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/queued_scratch_endpoint_small.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/record_backing_service_small_staticcodec.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/response_fallthrough_fifo.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/scratch_frame_store_bram.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/scratch_page_axi_small.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/scratch_page_codec_small_static.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/backend/scratch_page_controller_small.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/adapter/exclusion_label_adapter.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_compute.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_accept.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_load_input.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_fifo_w160_d2_S.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_store_output.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_fifo_w288_d2_S.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/engine/exclusion_edge_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/engine/exclusion_edge_engine.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/engine/exclusion_hls_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/pager/pager/resident_page_manager.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/children/hls32/children_step_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/children/hls32/children_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/children/engine/children_build_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/children/engine/children_build_engine.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/children/engine/children_hls_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/graph/graph_static_reader.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/design/design_state_store.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/expansion_20261024/expansion/expansion_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/coordinate/coordinate/coordinate_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/coordinate/coordinate/coordinate_service.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/coordinate/coordinate/geometry_table_reader.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_step_graph.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_step_accept.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_memory_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/access/access_service.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/fabric/access_dispatch.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/owners/owner_bridge.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/access_owner_v3_20261024/owners/owner_state_store.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/metadata/metadata_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/candidate/service_arbiter.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/priced/candidate_recursive_query_core.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/priced/candidate_recursive_engine.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/priced/cost_state_store.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/axi_file_memory.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_step_from_int.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_step_add_Pipeline_VITIS_LOOP_30_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_step_flow_control_loop_pipe_sequential_init.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_step_add.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_memory_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/center/cost_center_service.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/priced/cost_inputs_prefetch.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/params/connection_state_reader.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/commit/cost_label_commit.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/cost23/cost23_inputs.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/geometry/geometry_step_evaluate.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/geometry/geometry_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_from_int.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_div.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_mul_64s_64s_64_1_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_mul_Pipeline_VITIS_LOOP_42_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_from_int_Pipeline_VITIS_LOOP_63_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_add.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_udiv_64ns_64ns_64_68_seq_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_add_Pipeline_VITIS_LOOP_30_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_div_Pipeline_VITIS_LOOP_56_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_cost_step_Pipeline_VITIS_LOOP_18_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_urem_64ns_64ns_64_68_seq_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_mul.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/exact/cost_step_flow_control_loop_pipe_sequential_init.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/geometry_service_v1/geometry_service.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/geometry_service_v1/geometry_memory_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/cost_service_v2/cost_service.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/cost_service_v2/cost_memory_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/postprev/postprev_inputs.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/offer/query_frontier_offer.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/offer/cost_offer.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_fifo_w96_d2_S.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_p_anonymous_namespace_store_output.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_start_for_p_anonymous_namespace_store_output_U0.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_poll.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_p_anonymous_namespace_load_input.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_start_for_p_anonymous_namespace_compute_U0.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_fifo_w128_d2_S.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_poll_Pipeline_VITIS_LOOP_38_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1.v",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_service.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/frontier/frontier_hls_call.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/capture/children_frames.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/capture/expansion_capture.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/recursive/recursive_candidate_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/route_commit_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/route_commit_host_adapter.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/axi_drain_watch.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/recovery_coordinator.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/config_restore_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/label_restore_controller.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/transaction_fence.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/residency_system.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/search_scheduler.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/search_host_fence.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/search_residency_system.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/query_lifecycle.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/query_residency_system.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/checkpoint_lease_guard.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/checkpoint_authority_reader.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/tb_directory_observer.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/tb_query_fault.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/boot_restore_gate.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/checkpoint_authority_rotator.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/checkpoint_publish_barrier.sv",
+            "/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/sources/warm_restore_receipt_join.sv"
+          ],
+          "elapsed_s": 2.0674162711948156,
+          "exit_code": 0,
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "-s",
+            "iter2",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "elapsed_s": 37.88162493892014,
+          "exit_code": 0,
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "iter2",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "graph0=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/offsets.u32le",
+            "--testplusarg",
+            "graph1=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/edges.u32le",
+            "--testplusarg",
+            "graph2=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/graph_image_20261024/nodes.rrt32",
+            "--testplusarg",
+            "graphlog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/graph_axi.txt",
+            "--testplusarg",
+            "design0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/design.bin",
+            "--testplusarg",
+            "designlog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/design_axi.txt",
+            "--testplusarg",
+            "tables0=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/rows.bin",
+            "--testplusarg",
+            "tables1=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/columns.bin",
+            "--testplusarg",
+            "tableslog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/table_axi.txt",
+            "--testplusarg",
+            "labels0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/labels.bin",
+            "--testplusarg",
+            "labelslog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/label_axi.txt",
+            "--testplusarg",
+            "owners0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/owners.bin",
+            "--testplusarg",
+            "ownerslog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/owner_axi.txt",
+            "--testplusarg",
+            "cost0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/cost.bin",
+            "--testplusarg",
+            "costlog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/cost_axi.txt",
+            "--testplusarg",
+            "qstate0=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/connections.bin",
+            "--testplusarg",
+            "qstatelog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/qstate_axi.txt",
+            "--testplusarg",
+            "costvectors=/tmp/B_state_residency_offer_20261025/followup_iter2_cost_v1/cost_vectors.txt",
+            "--testplusarg",
+            "finallabels=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/finals.txt",
+            "--testplusarg",
+            "candidates=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/candidates.txt",
+            "--testplusarg",
+            "polls=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/polls.txt",
+            "--testplusarg",
+            "snapshot0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/snapshot.bin",
+            "--testplusarg",
+            "snapshot1=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/pool.bin",
+            "--testplusarg",
+            "snapshot2=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/g3.bin",
+            "--testplusarg",
+            "snapshotlog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/snapshot_axi.txt",
+            "--testplusarg",
+            "authority=/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/transaction_fence_static_join_rtl_v1/authority.txt",
+            "--testplusarg",
+            "badcrc=0",
+            "--testplusarg",
+            "g3negative=0",
+            "--testplusarg",
+            "g3imports=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/runtime_g3_labels.txt",
+            "--testplusarg",
+            "g3copy0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/owners.bin",
+            "--testplusarg",
+            "g3copy1=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/pool.bin",
+            "--testplusarg",
+            "g3copy2=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/g3.bin",
+            "--testplusarg",
+            "g3copylog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/g3copy_axi.txt",
+            "--testplusarg",
+            "baseline0=/tmp/B_state_residency_offer_20261025/label_baseline_image_v1/baseline.bin",
+            "--testplusarg",
+            "baselinelog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/baseline_axi.txt",
+            "--testplusarg",
+            "copy0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/owners.bin",
+            "--testplusarg",
+            "copy1=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/pool.bin",
+            "--testplusarg",
+            "copylog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/copy_axi.txt",
+            "--testplusarg",
+            "warmimports=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/runtime_labels.txt",
+            "--testplusarg",
+            "labelsnap0=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/labels.bin",
+            "--testplusarg",
+            "labelsnaplog=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/labelsnap_axi.txt",
+            "--testplusarg",
+            "cost2=/tmp/B_state_residency_offer_20261025/followup_iter2_next_cost_v1/cost_vectors.txt",
+            "--testplusarg",
+            "candidates2=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/candidates2.txt",
+            "--testplusarg",
+            "polls2=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/polls2.txt",
+            "--testplusarg",
+            "finals2=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/finals2.txt",
+            "--testplusarg",
+            "cost3=/tmp/B_state_residency_offer_20261025/followup_iter2_third_cost_v1/cost_vectors.txt",
+            "--testplusarg",
+            "candidates3=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/candidates3.txt",
+            "--testplusarg",
+            "polls3=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/polls3.txt",
+            "--testplusarg",
+            "finals3=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/finals3.txt",
+            "--testplusarg",
+            "cost4=/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_cost_v1/cost_vectors.txt",
+            "--testplusarg",
+            "polls4=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/polls4.txt",
+            "--testplusarg",
+            "candidates4=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/candidates4.txt",
+            "--testplusarg",
+            "finals4=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/finals4.txt",
+            "--testplusarg",
+            "g4imports=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/runtime_g4_labels.txt",
+            "--testplusarg",
+            "cost4=/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_cost_v1/cost_vectors.txt",
+            "--testplusarg",
+            "polls4=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/polls4.txt",
+            "--testplusarg",
+            "candidates4=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/candidates4.txt",
+            "--testplusarg",
+            "finals4=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/finals4.txt",
+            "--testplusarg",
+            "g4imports=/tmp/B_state_residency_offer_20261025/recovery_backend_system_crc_pressure_v2/pressure/runtime_g4_labels.txt"
+          ],
+          "elapsed_s": 861.3337666466832,
+          "exit_code": 0,
+          "stage": "simulate"
+        }
+      ],
+      "status": "observed"
+    }
+  },
+  "combined_loop_components": {
+    "capture_loops_component_v1": {
+      "audit_sha256": "6b26719a232bf724fd377e45e6efbb09867a65cfc2bcbb5056250832c86a3fdf",
+      "changed": [
+        "recursive/recursive_candidate_controller.sv",
+        "capture/expansion_capture.sv"
+      ],
+      "restore_sha256": "93b77096515cebbe9e2d6d32870cfcbbedb499a5c864a2bf55bc0eeb14dae4b5",
+      "root": "/tmp/B_state_residency_offer_20261025/capture_loops_component_v1"
+    },
+    "rearm_loops_component_v2": {
+      "audit_sha256": "39e68c8982a53bfee0931baaccab8e51e9aa01dad500ae183eed9def6a27727e",
+      "changed": [
+        "recovery_coordinator.sv",
+        "label_restore_controller.sv",
+        "residency_system.sv"
+      ],
+      "restore_sha256": "76ccc036eb6a3a1b5a855993b79ba34b4efe82b10b7594b3d18fb10375380674",
+      "root": "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v2"
+    }
+  },
+  "combined_loop_reference": "/tmp/B_state_residency_offer_20261025/restore_seed_retry_crc_pressure_v1",
+  "combined_loop_reference_audit_sha256": "a401423c2b47972b5ce322615d655a936440c458060cf3499c6f0fd9af1ed561",
+  "fixed": true,
+  "fourth_inputs": {
+    "/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_cost_v1": "e97f09a2a0f66af1b157e6061b4d846a371eba990acfadab7cc37f6eac46923e",
+    "/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_oracle_v1": "45d687156a4b66cb9025e2dbff57484c8ad3907a7acd9bc38c4b7aa40df7cd01",
+    "/tmp/B_state_residency_offer_20261025/followup_iter2_fourth_plain_v1": "af5dd5fd0d5728098ac861281e13d71ec2a1d3b36adf48627f3564f7d1d95c72"
+  },
+  "fourth_scoreboards": {
+    "candidates4.txt": "2073301864c71c912ebe73c8ecd148bcda6fcf1575a5577570c063adacdc0590",
+    "finals4.txt": "2c1023a68c62b5c23a1204007032a734c15ed477b80e39597971fddb0fb9dcf5",
+    "polls4.txt": "13e1b74ccaab29d70dedf8aad8e4edb208234789b37c1bd3e110782ab1a39001"
+  },
+  "negative": false,
+  "next_scoreboards": {
+    "candidates2.txt": "abe215b3962977a778d2332c792e711b46de297a0937c0a992a8f6179e44a14b",
+    "finals2.txt": "723fd726646e89c3e209860b02c8a51ce7f258f9070ca36f4cb12dfe44318986",
+    "polls2.txt": "2210bf9fd69ce8d857c4c89f8f1155ab8e75b99dd6d17e8fcdcb872cbf984d3a"
+  },
+  "parent_audit_sha256": "3538787f9a98dd9668521fe70a9d8b9f6072fa2578435f8c341b2e3e1462df64",
+  "parent_run": "/tmp/B_state_residency_offer_20261025/fourth_warm_full_v2",
+  "recovery_backend_evidence": {
+    "builder_sha256": "9e2cdef0f70732a8a9e836555d082c3c8397c4172ec174cb584bf00574df8e66",
+    "candidate_sha256": {
+      "query_residency_system.sv": "4013db12b0220dc5c469942ca535214e946bf1114610fa6a8e3d2244b0d1c053",
+      "recovery_coordinator.sv": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+      "residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+      "search_residency_system.sv": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63"
+    },
+    "identity_sha256": "077c27a09d099ff20b14d7332d5ecd1a49c016de0b92c590dda9072746a2c581",
+    "reference_restore_sha256": "6cb16df327e619f60da181a9d97a62eb856a9ad982536fce6e96dd65e08f5241"
+  },
+  "recovery_backend_reference": "/tmp/B_state_residency_offer_20261025/route_block_system_crc_pressure_v1",
+  "recovery_backend_reference_audit_sha256": "57ac7014644f7a42eeb961db5a71924b66c5009e0522d607594f753257b7820b",
+  "restore_seed_bypass": 1,
+  "restore_seed_failure": "crc",
+  "route_block_evidence": {
+    "builder_sha256": "e70c5f309606cad31ac57254a36fc9a9c0143e9d7cf8a27ce70799e44892812b",
+    "candidate_sha256": {
+      "route_commit_controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+      "route_commit_host_adapter.sv": "793d2b899f3a5c85797fb420c8672d51337d4e4e4dedc4606dea661385f03569"
+    },
+    "identity_sha256": "8cbb1c795d1b23f69db4b8a80d06c67e6e32476d0fd137c308f4b88caab651cc",
+    "reference_restore_sha256": "47db703c43f503bc6da199dc3f82247400c04406eae25dc7393075e8787f637b"
+  },
+  "route_block_reference": "/tmp/B_state_residency_offer_20261025/combined_loops_system_crc_pressure_v1",
+  "route_block_reference_audit_sha256": "92bc9cb6a7cb3ea7e3a0ec88044251235eaa235852794f00ebae2445662a464e",
+  "rtl": [
+    "export_manifest.sv",
+    "cumulative_owner_snapshot.sv",
+    "label_baseline_reader.sv",
+    "baseline_retirement_guard.sv",
+    "incremental_owner_snapshot.sv",
+    "owner_snapshot_checkpoint_adapter.sv",
+    "label_snapshot_reader.sv",
+    "label_snapshot_checkpoint_adapter.sv",
+    "expansion_20261024/pager/backend/backing_frame_directory_small.sv",
+    "expansion_20261024/pager/backend/backing_page_service_small.sv",
+    "expansion_20261024/pager/backend/bounded_sync_fifo.sv",
+    "expansion_20261024/pager/backend/memory_scratch_endpoint_small_staticcodec.sv",
+    "expansion_20261024/pager/backend/queued_scratch_endpoint_small.sv",
+    "expansion_20261024/pager/backend/record_backing_service_small_staticcodec.sv",
+    "expansion_20261024/pager/backend/response_fallthrough_fifo.sv",
+    "expansion_20261024/pager/backend/scratch_frame_store_bram.sv",
+    "expansion_20261024/pager/backend/scratch_page_axi_small.sv",
+    "expansion_20261024/pager/backend/scratch_page_codec_small_static.sv",
+    "expansion_20261024/pager/backend/scratch_page_controller_small.sv",
+    "expansion_20261024/pager/adapter/exclusion_label_adapter.sv",
+    "expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v",
+    "expansion_20261024/pager/hls32/exclusion_step.v",
+    "expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_compute.v",
+    "expansion_20261024/pager/hls32/exclusion_step_step.v",
+    "expansion_20261024/pager/hls32/exclusion_step_accept.v",
+    "expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_load_input.v",
+    "expansion_20261024/pager/hls32/exclusion_step_fifo_w160_d2_S.v",
+    "expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_store_output.v",
+    "expansion_20261024/pager/hls32/exclusion_step_fifo_w288_d2_S.v",
+    "expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v",
+    "expansion_20261024/pager/engine/exclusion_edge_controller.sv",
+    "expansion_20261024/pager/engine/exclusion_edge_engine.sv",
+    "expansion_20261024/pager/engine/exclusion_hls_call.sv",
+    "expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+    "expansion_20261024/pager/pager/resident_page_manager.sv",
+    "expansion_20261024/children/hls32/children_step_step.v",
+    "expansion_20261024/children/hls32/children_step.v",
+    "expansion_20261024/children/engine/children_build_controller.sv",
+    "expansion_20261024/children/engine/children_build_engine.sv",
+    "expansion_20261024/children/engine/children_hls_call.sv",
+    "expansion_20261024/graph/graph_static_reader.sv",
+    "expansion_20261024/design/design_state_store.sv",
+    "expansion_20261024/expansion/expansion_controller.sv",
+    "access_owner_v3_20261024/coordinate/coordinate/coordinate_controller.sv",
+    "access_owner_v3_20261024/coordinate/coordinate/coordinate_service.sv",
+    "access_owner_v3_20261024/coordinate/coordinate/geometry_table_reader.sv",
+    "access_owner_v3_20261024/access/access_step_graph.v",
+    "access_owner_v3_20261024/access/access_step.v",
+    "access_owner_v3_20261024/access/access_step_accept.v",
+    "access_owner_v3_20261024/access/access_call.sv",
+    "access_owner_v3_20261024/access/access_controller.sv",
+    "access_owner_v3_20261024/access/access_memory_call.sv",
+    "access_owner_v3_20261024/access/access_service.sv",
+    "access_owner_v3_20261024/fabric/access_dispatch.sv",
+    "access_owner_v3_20261024/owners/owner_bridge.sv",
+    "access_owner_v3_20261024/owners/owner_state_store.sv",
+    "metadata/metadata_controller.sv",
+    "candidate/service_arbiter.sv",
+    "priced/candidate_recursive_query_core.sv",
+    "priced/candidate_recursive_engine.sv",
+    "priced/cost_state_store.sv",
+    "axi_file_memory.sv",
+    "center/cost_center_step_from_int.v",
+    "center/cost_center_step_add_Pipeline_VITIS_LOOP_30_1.v",
+    "center/cost_center_step.v",
+    "center/cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1.v",
+    "center/cost_center_step_flow_control_loop_pipe_sequential_init.v",
+    "center/cost_center_step_add.v",
+    "center/cost_center_memory_call.sv",
+    "center/cost_center_service.sv",
+    "priced/cost_inputs_prefetch.sv",
+    "params/connection_state_reader.sv",
+    "commit/cost_label_commit.sv",
+    "cost23/cost23_inputs.sv",
+    "geometry/geometry_step_evaluate.v",
+    "geometry/geometry_step.v",
+    "exact/cost_step_from_int.v",
+    "exact/cost_step_div.v",
+    "exact/cost_step_mul_64s_64s_64_1_1.v",
+    "exact/cost_step_mul_Pipeline_VITIS_LOOP_42_1.v",
+    "exact/cost_step_from_int_Pipeline_VITIS_LOOP_63_1.v",
+    "exact/cost_step_add.v",
+    "exact/cost_step.v",
+    "exact/cost_step_udiv_64ns_64ns_64_68_seq_1.v",
+    "exact/cost_step_add_Pipeline_VITIS_LOOP_30_1.v",
+    "exact/cost_step_div_Pipeline_VITIS_LOOP_56_1.v",
+    "exact/cost_step_cost_step_Pipeline_VITIS_LOOP_18_1.v",
+    "exact/cost_step_urem_64ns_64ns_64_68_seq_1.v",
+    "exact/cost_step_mul.v",
+    "exact/cost_step_flow_control_loop_pipe_sequential_init.v",
+    "geometry_service_v1/geometry_service.sv",
+    "geometry_service_v1/geometry_memory_call.sv",
+    "cost_service_v2/cost_service.sv",
+    "cost_service_v2/cost_memory_call.sv",
+    "postprev/postprev_inputs.sv",
+    "offer/query_frontier_offer.sv",
+    "offer/cost_offer.sv",
+    "frontier/frontier_step.v",
+    "frontier/frontier_step_p_anonymous_namespace_compute.v",
+    "frontier/frontier_step_fifo_w96_d2_S.v",
+    "frontier/frontier_step_p_anonymous_namespace_store_output.v",
+    "frontier/frontier_step_start_for_p_anonymous_namespace_store_output_U0.v",
+    "frontier/frontier_step_poll.v",
+    "frontier/frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W.v",
+    "frontier/frontier_step_p_anonymous_namespace_load_input.v",
+    "frontier/frontier_step_start_for_p_anonymous_namespace_compute_U0.v",
+    "frontier/frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W.v",
+    "frontier/frontier_step_fifo_w128_d2_S.v",
+    "frontier/frontier_step_poll_Pipeline_VITIS_LOOP_38_1.v",
+    "frontier/frontier_step_p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1.v",
+    "frontier/frontier_service.sv",
+    "frontier/frontier_hls_call.sv",
+    "capture/children_frames.sv",
+    "capture/expansion_capture.sv",
+    "recursive/recursive_candidate_controller.sv",
+    "route_commit_controller.sv",
+    "route_commit_host_adapter.sv",
+    "axi_drain_watch.sv",
+    "recovery_coordinator.sv",
+    "config_restore_controller.sv",
+    "label_restore_controller.sv",
+    "transaction_fence.sv",
+    "residency_system.sv",
+    "search_scheduler.sv",
+    "search_host_fence.sv",
+    "search_residency_system.sv",
+    "query_lifecycle.sv",
+    "query_residency_system.sv",
+    "checkpoint_lease_guard.sv",
+    "checkpoint_authority_reader.sv",
+    "tb_directory_observer.sv",
+    "tb_query_fault.sv",
+    "boot_restore_gate.sv",
+    "checkpoint_authority_rotator.sv",
+    "checkpoint_publish_barrier.sv",
+    "warm_restore_receipt_join.sv"
+  ],
+  "scope": "Full-system replay of an audited real four-query case with four native backend exclusion changes and an observation-only TB monitor on the restored route blocking baseline. Exact native/AXI/final-memory comparison required. Does not prove full-root absence of other loops or timing closure.",
+  "scoreboards": {
+    "candidates.txt": "aecf2a935b0d575bdcd0c027eba2c68bd342004ce2f80e43a3525ef4cc5cc98e",
+    "finals.txt": "a0dff44ed8fdc679f4970227b46c3629f3883930a5750a826513623182b150f3",
+    "imports.txt": "c31bbdfa825c67c2ea0dc6e3dc60c880cb31082d0717877ba06ff1e79c308add",
+    "polls.txt": "03c5a8f8059c498b838b35da3dad65178e924b468f5eb82a2c257294310d1de2"
+  },
+  "sources": {
+    "access_owner_v3_20261024/access/access_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_call.sv",
+      "sha256": "271949b3ca3745b76a0d909b07207c56a0895d2bb9e63b8923be1dde9c4f9bd3"
+    },
+    "access_owner_v3_20261024/access/access_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_controller.sv",
+      "sha256": "0f4b3ca3af47e0ddf25fd2b38da44975073ad6a75a84aa05954e4acdda3af698"
+    },
+    "access_owner_v3_20261024/access/access_memory_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_memory_call.sv",
+      "sha256": "33cd1e4f813ce95f8185d3c63075d4b1eb614fef72f086cefad43aaad84357a8"
+    },
+    "access_owner_v3_20261024/access/access_service.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_service.sv",
+      "sha256": "7461ec190608645e004a16dd1bd2e5472341e428772e0fe13670ed191ad4557f"
+    },
+    "access_owner_v3_20261024/access/access_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_step.v",
+      "sha256": "8a8f0a3691aa904a6733cee042bdf93de5ea5131bdcea8ec08b18e4df8752d41"
+    },
+    "access_owner_v3_20261024/access/access_step_accept.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_step_accept.v",
+      "sha256": "a2bbe41eefdad23ba29f1ef554a7eb07f3477e30a67708e61840040513654a42"
+    },
+    "access_owner_v3_20261024/access/access_step_graph.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/access/access_step_graph.v",
+      "sha256": "c4a9b57ed7847837113dc708d743eef85cb7fd0f6431a0007047099543e63ee1"
+    },
+    "access_owner_v3_20261024/coordinate/coordinate/coordinate_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/coordinate/coordinate/coordinate_controller.sv",
+      "sha256": "6d938928f29bbff313120a2774b7c6580b681921b7d23cf8a665a91d188f7941"
+    },
+    "access_owner_v3_20261024/coordinate/coordinate/coordinate_service.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/coordinate/coordinate/coordinate_service.sv",
+      "sha256": "4de4ea23a2ab5d005bf31097562f8a4760258f070eb48a20b4b9cecef5108c39"
+    },
+    "access_owner_v3_20261024/coordinate/coordinate/geometry_table_reader.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/coordinate/coordinate/geometry_table_reader.sv",
+      "sha256": "d31672b7b43eb27091075480158180df408d500b728014a8ac82bb3c0dbaf43d"
+    },
+    "access_owner_v3_20261024/fabric/access_dispatch.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/fabric/access_dispatch.sv",
+      "sha256": "02deb893f26a92585a35772a0a0ccb8fd951f865823be7947e87bd4eaeb2d6dc"
+    },
+    "access_owner_v3_20261024/owners/owner_bridge.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/owners/owner_bridge.sv",
+      "sha256": "8bc285d65770085a258cf12d71c9ec5bf9b186a5d7f67e4fa404e0f0a2baa7e0"
+    },
+    "access_owner_v3_20261024/owners/owner_state_store.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/access_owner_v3_20261024/owners/owner_state_store.sv",
+      "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c"
+    },
+    "axi_drain_watch.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/axi_drain_watch.sv",
+      "sha256": "c8a778928e6907808d598fdeb85391a7ffe6d8cf167d547d97dc93aaa3fe6d67"
+    },
+    "axi_file_memory.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_cumulative_system_v1/axi_file_memory.sv",
+      "sha256": "64e518308ff72068779c0e6a2874c7038d17eeea5c660562513bc971c9d6d33a"
+    },
+    "base_tb.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/base_tb.py",
+      "sha256": "97676f585e9f17aa69dec703209fdb3707db6dd2afe10aba5812dc631e253bf9"
+    },
+    "baseline_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_baseline_system_v1/build.py",
+      "sha256": "00c21911f3f14a7a977b5d64de4c1ca51c2af12c31cceb57bd2b0be2d3f664be"
+    },
+    "baseline_retirement_guard.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_baseline_fence_v1/baseline_retirement_guard.sv",
+      "sha256": "a0b6287537d5c5f0294079e718848f5747887d5efb6794f85988d63d8ec6bbd5"
+    },
+    "boot_restore_gate.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/path_capacity_v1/boot_restore_gate.sv",
+      "sha256": "a0b465b3fb583aef434a93b35562168a31e27e534d28b603ad18c2a320fd0d09"
+    },
+    "build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/build.py",
+      "sha256": "6d577ac2d876bc8cc43b3b2c6bb25678fbfd3d7287e3b28e696606298f556304"
+    },
+    "build_tb.py": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/build_tb.py",
+      "sha256": "a901d10babeea4d7d4c32d885c9472cb7f6e61190432d32ec38bd9b95416dc9f"
+    },
+    "cancel_build.py": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/cancel_build.py",
+      "sha256": "7013afa68bbb62ec689f6533623721ea73345a0bb6221b9a503d5a117aedc7b9"
+    },
+    "cancel_build_tb.py": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/cancel_build_tb.py",
+      "sha256": "abc77f6cc4d5824a695a97105b7e6963c59e31439ca6fa737c9ff9973d5775ef"
+    },
+    "candidate/service_arbiter.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/candidate/service_arbiter.sv",
+      "sha256": "767c317bd6a9fe12c594820c470958a53961f9170b9b0a87b205e9299c9b7b15"
+    },
+    "capture/children_frames.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/capture/children_frames.sv",
+      "sha256": "c4779c39a8877b0b6b9d1b72e6eadb995568aa2742a54377d3df6ce10e954a43"
+    },
+    "capture/expansion_capture.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/fixed/expansion_capture.sv",
+      "sha256": "eb9e4eb559989470eb574bc56b6df7480740b8329922e677ef209e8dfbf7f0cf"
+    },
+    "center/cost_center_memory_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_memory_call.sv",
+      "sha256": "06a50cbc60e8cad804d84ff5d246b4853c2fe5b77758ec2c619273002372deab"
+    },
+    "center/cost_center_service.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_service.sv",
+      "sha256": "2361ac3bec1e120fb4b55658d1551e7c378284f0847652a845940a9f6ca67bba"
+    },
+    "center/cost_center_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_step.v",
+      "sha256": "5bd0ec6f0ca275d63dade03cb013f24cee57a52fbd1b529b214f80d4e0e51f4b"
+    },
+    "center/cost_center_step_add.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_step_add.v",
+      "sha256": "9efcfb340614fda11a8af2c0a881eb939228668f00c3559678d9d3a526e6bab8"
+    },
+    "center/cost_center_step_add_Pipeline_VITIS_LOOP_30_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_step_add_Pipeline_VITIS_LOOP_30_1.v",
+      "sha256": "d12c9069c5bde3c05449a482e5878f9199df0a59158a97400d80392bab23f95c"
+    },
+    "center/cost_center_step_flow_control_loop_pipe_sequential_init.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_step_flow_control_loop_pipe_sequential_init.v",
+      "sha256": "6d3d6eeb43009f80fc3049c832e5be739e65ebeb3c8e6e7891dcab8c2bbc7dfa"
+    },
+    "center/cost_center_step_from_int.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_step_from_int.v",
+      "sha256": "c60da4fa8d861c2852fb920764a72c2cf8a3b6cafaae58b1d8c2027b2d81322b"
+    },
+    "center/cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/center/cost_center_step_from_int_Pipeline_VITIS_LOOP_63_1.v",
+      "sha256": "e7eeba85dbb1b070265ac9f5f12dea73d86b6b8a0fef70c5edd4b7fd48bbc3f4"
+    },
+    "checkpoint_authority_reader.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+    },
+    "checkpoint_authority_rotator.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/checkpoint_authority_rotator.sv",
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032"
+    },
+    "checkpoint_lease_guard.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/checkpoint_lease_guard.sv",
+      "sha256": "6ed65ad081060217561f01b55b0b3cb2d85eb1591fd25b14a121e5f0c1aae7b3"
+    },
+    "checkpoint_publish_barrier.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/checkpoint_publish_barrier.sv",
+      "sha256": "d283619bb57fce0a32afc5d6b9f06e59788ad5a17c68d44c4abe371ff9e839c0"
+    },
+    "commit/cost_label_commit.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/commit/cost_label_commit.sv",
+      "sha256": "c79e3f38c659a19136e443a1f249b567d066fd7e5dba77fbfd5d3640960c1da5"
+    },
+    "config_restore_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/config_restore_controller.sv",
+      "sha256": "7f2407faf05bcacfac10173033e2c1c6347d3d360825bf406c594bfe4f55b3f1"
+    },
+    "cost23/cost23_inputs.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/cost23/cost23_inputs.sv",
+      "sha256": "50908f64f139c6d941ee3359b1f78727b0ea2c04312049fdfddf48d06c3c84bf"
+    },
+    "cost_service_v2/cost_memory_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/cost_service_v2/cost_memory_call.sv",
+      "sha256": "8903eb191b5c7b29830ae0104981d7cbf303cbad13ea5747c711b38dbf774b68"
+    },
+    "cost_service_v2/cost_service.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/cost_service_v2/cost_service.sv",
+      "sha256": "275f005aa4db864147c29312a340a9b693ac800fc8e8a5ef598209d11b43a44e"
+    },
+    "crc_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_source_crc_v1/build.py",
+      "sha256": "129e905c990aa10e6005f0863bcd180b576267d996bdc4dc31e3ab7dce7e62be"
+    },
+    "cumulative_owner_snapshot.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_g3_publish_v2/cumulative_owner_snapshot.sv",
+      "sha256": "607024789c633f3278cde2e8a4754cda50c161441c637fce0a8d6e39ec1f6d01"
+    },
+    "exact/cost_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step.v",
+      "sha256": "6342bd1cf8b306471ec5c6a51fd4b26a2a75a35d6f0dd5f28f2b840fe02fef2c"
+    },
+    "exact/cost_step_add.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_add.v",
+      "sha256": "38902f191c5e248f9ed7fe14ec0202556fe17f6befcd1f5fec8ba413d07f4b0c"
+    },
+    "exact/cost_step_add_Pipeline_VITIS_LOOP_30_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_add_Pipeline_VITIS_LOOP_30_1.v",
+      "sha256": "10c0e5b64d649138180397a512bae4d233108dbc7b91798e2bba180c4aa46e45"
+    },
+    "exact/cost_step_cost_step_Pipeline_VITIS_LOOP_18_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_cost_step_Pipeline_VITIS_LOOP_18_1.v",
+      "sha256": "7e593dca3369dee0b3a4fa25ed9ec096dddfaf7050a0df5d9485e7c4948881ed"
+    },
+    "exact/cost_step_div.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_div.v",
+      "sha256": "0b9af0638d3eb472badce8899c156852af5d0e1c1a0673a0cf2081badad3c084"
+    },
+    "exact/cost_step_div_Pipeline_VITIS_LOOP_56_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_div_Pipeline_VITIS_LOOP_56_1.v",
+      "sha256": "9f851fce320f077a53e8ca7d78ada62707cd3a7bde3857465239ecc2505dd598"
+    },
+    "exact/cost_step_flow_control_loop_pipe_sequential_init.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_flow_control_loop_pipe_sequential_init.v",
+      "sha256": "f79df7384c3eb8bf0032dd57e5c54473291563f930dba2d53090e0fe66511299"
+    },
+    "exact/cost_step_from_int.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_from_int.v",
+      "sha256": "e96f9dc84c794b4e98cf58249c4f1269016d9f30157d1b16efc74c41c5551676"
+    },
+    "exact/cost_step_from_int_Pipeline_VITIS_LOOP_63_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_from_int_Pipeline_VITIS_LOOP_63_1.v",
+      "sha256": "a081636523f3bbd8d8826823c9cf8888c89456595e28b77295f991ff643cb337"
+    },
+    "exact/cost_step_mul.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_mul.v",
+      "sha256": "0d520e56670e272b72a0186637ff744183b6ce399ecd46e0db9542990d8c44fb"
+    },
+    "exact/cost_step_mul_64s_64s_64_1_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_mul_64s_64s_64_1_1.v",
+      "sha256": "ef493b2d5ee383faa39e6256da263e501875a5676b52e6eaa7cf358ef473aee4"
+    },
+    "exact/cost_step_mul_Pipeline_VITIS_LOOP_42_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_mul_Pipeline_VITIS_LOOP_42_1.v",
+      "sha256": "c67df1393ed4f2224ee3e4894a1d5cdab3a536a0dde65f5dbd8afd3db2e5abaa"
+    },
+    "exact/cost_step_udiv_64ns_64ns_64_68_seq_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_udiv_64ns_64ns_64_68_seq_1.v",
+      "sha256": "b85997455fd0925ce3c4164b61bf78b3dce44d9b45d07ae747275031ecaf1320"
+    },
+    "exact/cost_step_urem_64ns_64ns_64_68_seq_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/exact/cost_step_urem_64ns_64ns_64_68_seq_1.v",
+      "sha256": "f1050777f4ce2fb676afe7f813d2ffb77b33ed077128e2aeec40a842744cb5c2"
+    },
+    "expansion_20261024/children/engine/children_build_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/children/engine/children_build_controller.sv",
+      "sha256": "86d7924bd402aa12a0e127bc8b3e2e58355c52ff93d74da27c41db3c045a22c6"
+    },
+    "expansion_20261024/children/engine/children_build_engine.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/children/engine/children_build_engine.sv",
+      "sha256": "8bade953d85eb5dd63175b8fd62ea210d25a6d33bcb06d82a9c1b496f8195973"
+    },
+    "expansion_20261024/children/engine/children_hls_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/children/engine/children_hls_call.sv",
+      "sha256": "77389da05a91b89c152d73a48d309894a259b8662dc8e1672998e6da464aff23"
+    },
+    "expansion_20261024/children/hls32/children_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/children/hls32/children_step.v",
+      "sha256": "e85a2c2ed7957fcf223ab101202257bad095d89f53dd625676f8dd42f42f8e97"
+    },
+    "expansion_20261024/children/hls32/children_step_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/children/hls32/children_step_step.v",
+      "sha256": "b51b033ceaa81f738a1da1a7dc06b5bc24729e6abd60abef198c66f2e8eb7720"
+    },
+    "expansion_20261024/design/design_state_store.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/design/design_state_store.sv",
+      "sha256": "f2c067617f641fe539d3854f161fe573edb91fc7edbd112d3d71f4d67026f130"
+    },
+    "expansion_20261024/expansion/expansion_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/expansion/expansion_controller.sv",
+      "sha256": "65376c72626073376367eba5a947c71fd0edb39ebc46974ab6bbcc3cb4a60819"
+    },
+    "expansion_20261024/graph/graph_static_reader.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/graph/graph_static_reader.sv",
+      "sha256": "a55dc78260404a07f29b91715b05c2461019c7a997446b4372a067120e6120ee"
+    },
+    "expansion_20261024/pager/adapter/exclusion_label_adapter.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/adapter/exclusion_label_adapter.sv",
+      "sha256": "a62c79574de249d88a182e819a391bd7236d761ec51f8316055854a45a1bcc5b"
+    },
+    "expansion_20261024/pager/backend/backing_frame_directory_small.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/expansion_20261024/pager/backend/backing_frame_directory_small.sv",
+      "sha256": "a2ee701b49b9ff937082a7e4c469979233926197610cf5d71e20b01ae99588f9"
+    },
+    "expansion_20261024/pager/backend/backing_page_service_small.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/expansion_20261024/pager/backend/backing_page_service_small.sv",
+      "sha256": "d3151a2baef9798f3b5450979faae7f1f83ee09c6a150548548662afade5ab97"
+    },
+    "expansion_20261024/pager/backend/bounded_sync_fifo.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/bounded_sync_fifo.sv",
+      "sha256": "db0ae12bc80a2b08296b7daa267425e2bfe32df18443b97f6dda2b5ba6ce9c99"
+    },
+    "expansion_20261024/pager/backend/memory_scratch_endpoint_small_staticcodec.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/expansion_20261024/pager/backend/memory_scratch_endpoint_small_staticcodec.sv",
+      "sha256": "231dcbceecda92e8d66c277da093ae096b355a754dc783b7722e4f932d27f1ea"
+    },
+    "expansion_20261024/pager/backend/queued_scratch_endpoint_small.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/queued_scratch_endpoint_small.sv",
+      "sha256": "93e3fa8f7254a5b5070e4029974897245c25218e1102b99ae04fe59921c0ecd3"
+    },
+    "expansion_20261024/pager/backend/record_backing_service_small_staticcodec.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/expansion_20261024/pager/backend/record_backing_service_small_staticcodec.sv",
+      "sha256": "f29756ba7c168d8ab6e8f46f6fd595248edc0123b36524b35386f3f82a4bef7f"
+    },
+    "expansion_20261024/pager/backend/response_fallthrough_fifo.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/response_fallthrough_fifo.sv",
+      "sha256": "5cde4e2303eb5d10636ffb1a53edcff44da0f4a7e87880b26e5db551c1dc4ebe"
+    },
+    "expansion_20261024/pager/backend/scratch_frame_store_bram.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/scratch_frame_store_bram.sv",
+      "sha256": "601a4eb4f3437562ce39e21f819f93129b2fc72097ee6e4796dbd2b4dfad25df"
+    },
+    "expansion_20261024/pager/backend/scratch_page_axi_small.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/scratch_page_axi_small.sv",
+      "sha256": "86f1560f74760decdc0f031339cbd28f20e49eeb4120ed4c50669353f08d6af4"
+    },
+    "expansion_20261024/pager/backend/scratch_page_codec_small_static.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/scratch_page_codec_small_static.sv",
+      "sha256": "fe66bd6bf2ee4d3d058b0de1f23568f87d86f0ef9c4af44e8badd09b00a09eaa"
+    },
+    "expansion_20261024/pager/backend/scratch_page_controller_small.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/backend/scratch_page_controller_small.sv",
+      "sha256": "1a845e403c84755cab9b25018fd2e2c61f486b68404a4e043d346548a9f4cc84"
+    },
+    "expansion_20261024/pager/engine/exclusion_edge_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/engine/exclusion_edge_controller.sv",
+      "sha256": "42a2ed96a7d32264f6b7656d4c986e97f051c837d21cdcc90539a4c6815381f5"
+    },
+    "expansion_20261024/pager/engine/exclusion_edge_engine.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/engine/exclusion_edge_engine.sv",
+      "sha256": "2e73fe57c6280eeb8c9bd86d328054ef8377a8c016e08ce3d2499ba9e8da4af6"
+    },
+    "expansion_20261024/pager/engine/exclusion_hls_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/engine/exclusion_hls_call.sv",
+      "sha256": "897683eed0cd063ee80fb1c50e3f4a07bf421a43b38fc0b671d2d4edf5a72bd6"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step.v",
+      "sha256": "b36acadad120fc65ed4875b817275a642c9fa46948f3058d08d2019fdb4ea824"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_accept.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_accept.v",
+      "sha256": "28bc97cd9a43bb7f09b23e7a3cf6a0450cfbe3a0d78ae6aa704073106934cbe8"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_fifo_w160_d2_S.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_fifo_w160_d2_S.v",
+      "sha256": "33768d949eb8274b071910f91a6f56c5f8e7bb3cf6b2c31228c029aaabb98cf5"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_fifo_w288_d2_S.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_fifo_w288_d2_S.v",
+      "sha256": "67e6c6c48ae7f8d24953132abd7aabaf70a4f14bcb4f807bbf440e1e4c348c88"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_compute.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_compute.v",
+      "sha256": "f1b5998509ed059864a680253fa5fa25f4be49cefd99c74f44553bbda29e5538"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_load_input.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_load_input.v",
+      "sha256": "5df159277475426fc943de1c5d33752fbb8de47cbadd10907a8bc87a05c73e22"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_store_output.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_p_anonymous_namespace_store_output.v",
+      "sha256": "cdb632c9fe5426a6f414c636ec53a1469de5c57af1cb16287b56c2116ff9b0cc"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_compute_U0.v",
+      "sha256": "475e5964baef86aecf9294caa134790298a5988781c97a2e7ff3c758caa471e5"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_start_for_p_anonymous_namespace_store_output_U0.v",
+      "sha256": "ae29914bc05de27d0569b7a5a46b5b243f37d9ffa870d81fa00fa4a705da9b36"
+    },
+    "expansion_20261024/pager/hls32/exclusion_step_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/expansion_20261024/pager/hls32/exclusion_step_step.v",
+      "sha256": "cc51f928ed347315b13a756f3663ab043ecf0d22aaa520fa7ec9dd39b128cb95"
+    },
+    "expansion_20261024/pager/pager/paged_exclusion_engine.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/sources/expansion_20261024/pager/pager/paged_exclusion_engine.sv",
+      "sha256": "81db8a23512d179af72df9c5892cbe5e02e3c6a8be94f02b2ae2bb26bdf01bd4"
+    },
+    "expansion_20261024/pager/pager/resident_page_manager.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/sources/expansion_20261024/pager/pager/resident_page_manager.sv",
+      "sha256": "f1cd20c5baa96f2e0eeb6d972f05e7cb74f6507e56adf3bdf6e3e5535ddb6545"
+    },
+    "export_manifest.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/path_capacity_v1/export_manifest.sv",
+      "sha256": "0e4c7ffefd405aab8fb7e18bd6f7b9f0c14230574b43f4eb76d4697a9ed4442b"
+    },
+    "failure_task.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/failure_task.sv",
+      "sha256": "b9a241e2928d37b7c143111b0e4f2a5af19bf29b61c266e7aa6fc2645b6c273c"
+    },
+    "fence_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_baseline_fence_v1/build.py",
+      "sha256": "ba92eccc18a5d333b132f2704ab911ca8d8796b43253bef7a9790e03ecc978f4"
+    },
+    "floor_probe.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/fourth_warm_v1/floor_probe.sv",
+      "sha256": "9353efc6df07013d25ccea30dcd398ea6b85881d9f09b50370442fed99905577"
+    },
+    "fourth_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/four_path_v1/build_system.py",
+      "sha256": "55081700cde6496e573d59e1a8b154c15bfd2a2b65c3c81dd9b48470043a3a5e"
+    },
+    "fourth_tasks.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/four_path_v1/fourth_tasks.sv",
+      "sha256": "c109604b1a0bc3e9b4ebba70b1d437bdc85a6fb25c24043054dc0453c08f4960"
+    },
+    "fourth_warm_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/fourth_warm_v1/build_system.py",
+      "sha256": "f706a65b0452856c3eba4b7f5ac3427ed03537200c543df15325de0826a3a746"
+    },
+    "frontier/frontier_hls_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_hls_call.sv",
+      "sha256": "805a89db0761d51fa76654a4d2cf291c3a1387f81d20cffca72480a976efcd14"
+    },
+    "frontier/frontier_service.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_service.sv",
+      "sha256": "50c22c1bb5ae5482199321536132243a1041fba910c41f7cd34f87c6efb70588"
+    },
+    "frontier/frontier_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step.v",
+      "sha256": "8d8242cb9d5799f7f04c0ac102012c1e47f861acf08a5e9250503009bb90062b"
+    },
+    "frontier/frontier_step_fifo_w128_d2_S.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_fifo_w128_d2_S.v",
+      "sha256": "76cab3a0d57eb10bb21e189baca0b605d55eebdd6eba2ece9b1aa73272fd28cd"
+    },
+    "frontier/frontier_step_fifo_w96_d2_S.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_fifo_w96_d2_S.v",
+      "sha256": "8fc26d5a3a4b0215817d968e9820dac09148701d8be19b7485f20f438896717a"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_compute.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute.v",
+      "sha256": "cc15ea0582c1db95ac9dfb80a8ff8ccbed86d2c07ce319e35bf5c72c537550a3"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_Pipeline_VITIS_LOOP_25_1.v",
+      "sha256": "fa4e45a2ec19d3ecb6d4e3268a85ef5c8254da422b053627fc91c142c2d9a03d"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W.dat": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W.dat",
+      "sha256": "9523c7cd8ed7e976aa70583a67c699b8b8676d80c15eedde1912d6b1dd8c4799"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_heap_id_RAM_AUTO_1R1W.v",
+      "sha256": "f9c8b1fc850c196f8920df24b5f7d8461d63a139eaded12f3966f65ef37dd5d9"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W.dat": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W.dat",
+      "sha256": "9523c7cd8ed7e976aa70583a67c699b8b8676d80c15eedde1912d6b1dd8c4799"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_compute_heap_key_bits_RAM_AUTO_1R1W.v",
+      "sha256": "56cf0ce3311c1a2c0642f0b9e31cb61c50c64a7ee896954e3f877f2abc78b2ba"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_load_input.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_load_input.v",
+      "sha256": "8c9e295bd3da42c10643e61d50b9e215ce90547f4638fac50966dd00da91b200"
+    },
+    "frontier/frontier_step_p_anonymous_namespace_store_output.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_p_anonymous_namespace_store_output.v",
+      "sha256": "a6e1e6ddef4bb2aaf5d488c581b5e23f972eb2b66032d56ccfaa773b9ca38cff"
+    },
+    "frontier/frontier_step_poll.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_poll.v",
+      "sha256": "3042979bc4e7a5b8670494c4645dbb61ec4f1f07dcbc2b4df2d8f0232174982b"
+    },
+    "frontier/frontier_step_poll_Pipeline_VITIS_LOOP_38_1.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_poll_Pipeline_VITIS_LOOP_38_1.v",
+      "sha256": "48cd3f2d4ab8072a2515dea8f219a0709f18c57892216880adf2b236e73779e3"
+    },
+    "frontier/frontier_step_start_for_p_anonymous_namespace_compute_U0.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_start_for_p_anonymous_namespace_compute_U0.v",
+      "sha256": "e6f716c5b73955ac8d72f20cbbbb3dcfc51354803b8c850eac0485fc7d987dbb"
+    },
+    "frontier/frontier_step_start_for_p_anonymous_namespace_store_output_U0.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/frontier/frontier_step_start_for_p_anonymous_namespace_store_output_U0.v",
+      "sha256": "88a2c2a29abb807dd7008cec86d0229cb74731710531d8cfa28be666c1da1027"
+    },
+    "g3_warm_build_tb.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/third_warm_v2/build_tb.py",
+      "sha256": "8abd8a938f54ac91ca6188c5934aeedfb5de373f27a32b5aa7ff51bb1c082809"
+    },
+    "geometry/geometry_step.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/geometry/geometry_step.v",
+      "sha256": "19a46ec6f622236dda0d70b438f95ea879d0142ba8c2765878d475240cd3a0c8"
+    },
+    "geometry/geometry_step_evaluate.v": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/geometry/geometry_step_evaluate.v",
+      "sha256": "9c8fbc576a96359595a6b290f210029e30ca0359a49bd66b832f9ea0cd8db7af"
+    },
+    "geometry_service_v1/geometry_memory_call.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/geometry_service_v1/geometry_memory_call.sv",
+      "sha256": "2a621f8000be8c6a8e6fb120c55eccb9c97d164831ed4223ddb55d1ced3e7d5e"
+    },
+    "geometry_service_v1/geometry_service.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/geometry_service_v1/geometry_service.sv",
+      "sha256": "47a040c8a8002c42dea67bc3f0530ad2b9c59e681373357085c7eaac22115243"
+    },
+    "incremental_owner_snapshot.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_snapshot_writer_v1/incremental_owner_snapshot.sv",
+      "sha256": "b96274e40571434fa85a9cd713896568fe9ee907af410614cd8757cc656d7496"
+    },
+    "iter2_build_tb.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_g3_publish_v2/build_tb.py",
+      "sha256": "046d5f0d14cf4923404736239b1961334e9da862249340fb6c03eb6057acfbc4"
+    },
+    "label_baseline_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_baseline_v1/label_baseline_reader.sv",
+      "sha256": "14a147cf2c32853108424f6c9f88fe8c52365eb79d071824dbe293eb1caccab5"
+    },
+    "label_restore_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/rearm_loops_component_v2/sources/fixed/label_restore_controller.sv",
+      "sha256": "2bd4c0c92e5fbf9fefe34ecad2b62e2abaeeef0b1fdd78023cc71039992fd097"
+    },
+    "label_snapshot_checkpoint_adapter.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/label_snapshot_checkpoint_adapter.sv",
+      "sha256": "a0cab6961afbe20c311848349abe511f0e43239e58db2870057dc074cad5a6ca"
+    },
+    "label_snapshot_reader.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/label_snapshot_reader.sv",
+      "sha256": "483f421420d919c53a632c99a44f7b682c106fc36a3abea32a6c207f45156f45"
+    },
+    "metadata/metadata_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/metadata/metadata_controller.sv",
+      "sha256": "81a5856ce608ef4b6c5086a836b804c91f568f762fff63b7d6b96b702f86afe5"
+    },
+    "offer/cost_offer.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/offer/cost_offer.sv",
+      "sha256": "1baef69259cc031ee4ee45a7485ff167b77e59f40f667bc4f68166510348b3f1"
+    },
+    "offer/query_frontier_offer.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/offer/query_frontier_offer.sv",
+      "sha256": "0d851389bf916a4488799351c690512a17b716694e10d58dfdb7ebdb5f22ade4"
+    },
+    "owner_snapshot_checkpoint_adapter.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_snapshot_writer_v1/owner_snapshot_checkpoint_adapter.sv",
+      "sha256": "0ddcc5739487f458a682e8e08a450302746b9b313679249e4f2efdccdcb8db74"
+    },
+    "params/connection_state_reader.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/params/connection_state_reader.sv",
+      "sha256": "998de908c0f9113cbeee349f88ad33f76092263a3e9774ec0ad27928c0c9456c"
+    },
+    "path_capacity_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/path_capacity_v1/build.py",
+      "sha256": "6c451660845f040218542db9129114ad439d3a5b7f42b5be1fe28e838052afa3"
+    },
+    "postprev/postprev_inputs.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/postprev/postprev_inputs.sv",
+      "sha256": "e640f08387a2dc6961b3be532f3a2711daa6eb211cf2cc201ff8b3dd5f4a0308"
+    },
+    "priced/candidate_recursive_engine.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/sources/priced/candidate_recursive_engine.sv",
+      "sha256": "6b130cc66c38a236189a33ba41f6119bcf32c2e7b6407aa06d81830ed127ffe8"
+    },
+    "priced/candidate_recursive_query_core.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/sources/priced/candidate_recursive_query_core.sv",
+      "sha256": "e69429733b981049e8958ad43f22d8cba22ba293c719aae02278f914206be93d"
+    },
+    "priced/cost_inputs_prefetch.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/priced/cost_inputs_prefetch.sv",
+      "sha256": "b19e13479705b959d022e9a9d36c80de364d9a444e5c463d8edaa294f2e2cd9f"
+    },
+    "priced/cost_state_store.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/priced/cost_state_store.sv",
+      "sha256": "2a66bad196192e306a7fa54a627fa0dd67cc228e92279a8694a2950e444ac300"
+    },
+    "publish_build_tb.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/owner_g3_publish_v1/build_tb.py",
+      "sha256": "ccd92823f795f415aa27532f6b006c3f3f649db1edadf2ea11c9d315edf75860"
+    },
+    "query_lifecycle.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/path_capacity_v1/query_lifecycle.sv",
+      "sha256": "00cc25d44eb43bcac08c22c1e41cf8f0856f9a315b493407f4d04131630d9792"
+    },
+    "query_residency_system.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/recovery_backend_loops_v2/fixed/query_residency_system.sv",
+      "sha256": "4013db12b0220dc5c469942ca535214e946bf1114610fa6a8e3d2244b0d1c053"
+    },
+    "raw_probe_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_baseline_warm_v1/build.py",
+      "sha256": "81fad54a0ece43345207c51aa8b8a11f303e0e4dbbeff36b22d817433c898d70"
+    },
+    "recovery_coordinator.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/recovery_backend_loops_v2/fixed/recovery_coordinator.sv",
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194"
+    },
+    "recursive/recursive_candidate_controller.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/capture_loops_component_v1/sources/fixed/recursive_candidate_controller.sv",
+      "sha256": "e586f7b5e501e7f4554611f0933df3cdf91b43c891ca47cbf63f2031839783ec"
+    },
+    "regression_runner.py": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/regression_runner.py",
+      "sha256": "2d16132fe6898a79fb61a86114b845c793ecf670853197a6630028ce48a5ab41"
+    },
+    "residency_system.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/recovery_backend_loops_v2/fixed/residency_system.sv",
+      "sha256": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9"
+    },
+    "restore_seed_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/build.py",
+      "sha256": "6d577ac2d876bc8cc43b3b2c6bb25678fbfd3d7287e3b28e696606298f556304"
+    },
+    "restore_seed_tb_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/restore_seed_retry_v1/build_tb.py",
+      "sha256": "da151df6727743641fb70139c06f8b87d8945ed29151b7d1a8f382b461a9c169"
+    },
+    "route_commit_controller.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_block_loops_v1/fixed/route_commit_controller.sv",
+      "sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79"
+    },
+    "route_commit_host_adapter.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_block_loops_v1/fixed/route_commit_host_adapter.sv",
+      "sha256": "793d2b899f3a5c85797fb420c8672d51337d4e4e4dedc4606dea661385f03569"
+    },
+    "runner.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_recovery_backend_system_v2.py",
+      "sha256": "555ce475a03de22c9334cca7d91a0fecabfb50cd5c735fdb9d3e1f1c64f0156c"
+    },
+    "scan_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/label_frame_export_v1/build.py",
+      "sha256": "ea136b1460250d469e2323851421ae9ddd8a7785646931039ddddd76cbe8f2ec"
+    },
+    "search_host_fence.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/search_host_fence.sv",
+      "sha256": "71e7ece610e84fa8cde6f1492608cf2d663241b4ad19008a280d66dcd6b8aae4"
+    },
+    "search_residency_system.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/recovery_backend_loops_v2/fixed/search_residency_system.sv",
+      "sha256": "99acb053d2d068b96cbe3964ada2f52a2782cc82315c0baac982cf16c59cda63"
+    },
+    "search_scheduler.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/search_scheduler.sv",
+      "sha256": "8e4def6d1ebda52d4dd4b1996f6910a354281c476cdff869c66da8b72fe0bbbf"
+    },
+    "shared_build_tb.py": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/shared_build_tb.py",
+      "sha256": "9bbbcfabe9063d74fb779d943b6f8651bef8b0a85a25f9b4cbd52de42d554203"
+    },
+    "tb_directory_observer.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/tb_directory_observer.sv",
+      "sha256": "55a51a93d49ca198c4e2acc1c57b32032cc2eb861cfa56b794b8ba78715ae8f8"
+    },
+    "tb_query_fault.sv": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/recovery_backend_loops_v2/tb_query_fault.sv",
+      "sha256": "13cd620354d3f1123a02e9e690d2eace2b0284b9e77225c365d4f322ccac68bc"
+    },
+    "third_build_tb.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/path_capacity_v1/build_third_tb.py",
+      "sha256": "2d9da58f90d5cb7f125a3aac54f7226ad70f101b21d956a344ad6151f93f0a43"
+    },
+    "transaction_fence.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/transaction_fence.sv",
+      "sha256": "9ba4f1cbc642ddcc1c5d83c0b28a7eb6d4411c6ecfe0a86cbdb5f7e876804a47"
+    },
+    "warm_build.py": {
+      "path": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/iter2_warm_v1/build.py",
+      "sha256": "d67e7db182c7c8fde62a25b9a681f158d6c4710f5558a2745b20382845b18e24"
+    },
+    "warm_build_tb.py": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/warm_build_tb.py",
+      "sha256": "18582d025e3fc3cedfe692f88ae89a83a25b78e5e820696726614a56dda82b8f"
+    },
+    "warm_restore_receipt_join.sv": {
+      "path": "/tmp/B_state_residency_offer_20261025/warm_retry_system_v2/sources/warm_restore_receipt_join.sv",
+      "sha256": "062a21fa1836d8486d8bdf1ec46ffb16b8ac8e230f57b2a849af2c4814e6883f"
+    }
+  },
+  "status": "observed",
+  "third_inputs": {
+    "/tmp/B_state_residency_offer_20261025/followup_iter2_third_cost_v1": "47e04de961d2595dd955dc18bd9634ac15423cb627083056fb943579812f7506",
+    "/tmp/B_state_residency_offer_20261025/followup_iter2_third_oracle_v1": "1ea89b1552b53d8a841d84395114501505885c5acb5e807205fcb8ee471fb029",
+    "/tmp/B_state_residency_offer_20261025/followup_iter2_third_plain_v1": "87b2cd9eab1c72a2cc6ffca1ec3c3ca5cbd9022c5c81ea915daa276bac36892a"
+  },
+  "third_scoreboards": {
+    "candidates3.txt": "67bb885378c498a534192b77e4daf734870b5dfa6c7a5ad74dc1e3ca69e64186",
+    "finals3.txt": "d74f872d57788837a13b2228aec56f39017dfea1a0d13a7566626cbcc1bc05dc",
+    "polls3.txt": "cad5e9935c365d0120e9394643837d90fd0228731c2764139edebfa4d84aa102"
+  }
+}

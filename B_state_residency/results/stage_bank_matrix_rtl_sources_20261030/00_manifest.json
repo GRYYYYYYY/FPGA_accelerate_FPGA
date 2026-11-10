@@ -1,0 +1,154 @@
+{
+  "cases": {
+    "default": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_stage_bank_matrix",
+            "-s",
+            "probe",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "probe",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate"
+        }
+      ],
+      "events_sha256": "006d53145a664ff0b7bb8b5fefc4b9b9f54db92bc965ba169ae4060f3bd044a8",
+      "inputs": {
+        "controller.sv": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+        "run.tcl": "6218ffa4f2392f3c61113605d4ab2cd023186e11f1da826b920e510a9a797efb",
+        "tb.sv": "0e7187bc3edc21cf4436b7b7a6a2ac487a339363d1049007a1794310ea7069c1"
+      },
+      "status": "observed"
+    },
+    "original": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "ORIGINAL",
+            "controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_stage_bank_matrix",
+            "-s",
+            "probe",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "probe",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate"
+        }
+      ],
+      "events_sha256": "006d53145a664ff0b7bb8b5fefc4b9b9f54db92bc965ba169ae4060f3bd044a8",
+      "inputs": {
+        "controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+        "run.tcl": "6218ffa4f2392f3c61113605d4ab2cd023186e11f1da826b920e510a9a797efb",
+        "tb.sv": "0e7187bc3edc21cf4436b7b7a6a2ac487a339363d1049007a1794310ea7069c1"
+      },
+      "status": "observed"
+    },
+    "static": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "STAGE_ON",
+            "controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_stage_bank_matrix",
+            "-s",
+            "probe",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "probe",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate"
+        }
+      ],
+      "events_sha256": "006d53145a664ff0b7bb8b5fefc4b9b9f54db92bc965ba169ae4060f3bd044a8",
+      "inputs": {
+        "controller.sv": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+        "run.tcl": "6218ffa4f2392f3c61113605d4ab2cd023186e11f1da826b920e510a9a797efb",
+        "tb.sv": "0e7187bc3edc21cf4436b7b7a6a2ac487a339363d1049007a1794310ea7069c1"
+      },
+      "status": "observed"
+    }
+  },
+  "exit_code": 0,
+  "memory_admission": {
+    "current_bytes": 185163440128,
+    "limit_bytes": 322122547200,
+    "stable_seconds": 60.062269100919366
+  },
+  "runner_pid": 3842566,
+  "runner_sha256": "d4e9780deb563d63f460acd2c3882086e93ed1cae0cb63346d17dae3fc2fee1a",
+  "runner_start_ticks": "1650109453",
+  "scope": "Original/default/static RTL,4 slots/MAX_PATH32; full image exports, CRC/duplicate/index failure, partial safe-withdraw cancellation, reset and atomic retention. Not functional netlist or full system.",
+  "stage": "complete",
+  "status": "observed",
+  "tb_sha256": "0e7187bc3edc21cf4436b7b7a6a2ac487a339363d1049007a1794310ea7069c1",
+  "variant_manifest_sha256": "24ac3c33542ca386d016191732dc221cb2f4eba6ed88b683d7bbb911104420e5"
+}

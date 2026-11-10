@@ -1,0 +1,13 @@
+# G3清单资格与copy/rearm开工资格分离
+
+本目录在第一版候选上新增publication_retired。KEEP_RECEIPT_ON_BUSY默认0时保持原资格/回执失效规则（新增真正完整性fault仍明确拒绝）；默认组件278检查和原事件逐字节一致。完整实例显式KEEP=1。
+
+copy/rearm受理及运行中仍使用原unsafe_source：lease、source_drained、source_healthy、source_protocol_ok、无源AW/B和真实source_integrity_fault均检查。新特性不允许在prepared关闭普通工作permit时重新copy/rearm，也不忽略工作源写或覆盖损失。
+
+成功copy的回执在临时admin busy下保留，但源AW/B、lease丢失、协议/覆盖错误和真实完整性fault会撤销；清busy不能复活已失效回执。发布资格使用独立publication_retired、实际lease、源protocol无fault、无pending AW/脏行扫描/源事件、本服务及回复退休、所有身份/CRC清单匹配。publication_retired接真实owner/全局物理与逻辑退休、无query/search/route/authority/config/路径查询导出在途、无held metadata回复；不包含因prepared主动关闭的普通业务k_permit。根JP屏障仍执行自身retired/stage_busy/fault与三方prepared/publish_ready检查。任何健康/退休输入都未固定1。
+
+G3清单来自原生目录/DDR label export、两槽path controller export及query lifecycle export，硬件export_manifest观察实际接受/数据/回复消费并检查CRC/身份/floor。native path/query/labels的文件副本由TB/独立auditor捕获，不是硬件持久化文件写入。G3 candidate仍来自累计G1四行复制，两份G1 clone与全节点baseline初始外部可信。G2仍由旧writer路径生成，新writer从工作前持续观察并承担G3；不宣称已替换全部旧路径。
+
+owner_receipt_retire_unit_v1共288检查，明确source_healthy=0（prepared普通工作关闭）而publication_retired=1时保留并提供已完成回执；真实完整性fault仍永久失效。default_v1的278检查/事件与原组件一致。最终完整系统通过状态以results/owner_g3_publish_20261027.json为准；不从组件或源代码推断完整发布成功。
+
+范围：固定价格/history、有界dirty目录和两path槽、自然路径不新增overflow项。无G3 warm/自然q3、运行中full baseline reseed、bundle持久化/认证/floor、任意重定价有效性、综合时序或板卡收益证明。

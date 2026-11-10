@@ -1,0 +1,76 @@
+{
+  "source_json": "/tmp/B_state_residency_offer_20261025/ka_active_configured_formal_v1/core.json",
+  "source_json_sha256": "8abc283b78c12846b498fda668ce6f1835f47c05d339145796f2733d00182fac",
+  "source_bindings": {
+    "checkpoint_authority_rotator.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_rotator.sv",
+      "sha256": "4c1de01e381522b85a4ceb7cf0cf592a68f6a1bf3858618c81fb4fce1b65a032"
+    },
+    "checkpoint_authority_reader.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/checkpoint_authority_reader.sv",
+      "sha256": "8a19a7b11748f6f799d4b4977b8c685ed736066f23de3f59ddc444332f02b822"
+    },
+    "owner_state_store.sv": {
+      "source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/access_owner_v3_20261024/owners/owner_state_store.sv",
+      "sha256": "b4b6a04edec1e14cd865d4622036985cd4b299c851d49dcecea1c67cb230ec0c"
+    }
+  },
+  "module": "checkpoint_authority_rotator",
+  "clock": "clk",
+  "state_names": [
+    "state",
+    "target",
+    "active_bank",
+    "bank0.read_pending",
+    "bank1.read_pending",
+    "bank0.state",
+    "bank1.state",
+    "bank0.cfg_rsp_valid",
+    "bank1.cfg_rsp_valid",
+    "bank0.store.state",
+    "bank1.store.state",
+    "bank0.store.continuation",
+    "bank0.store.op",
+    "bank0.store.inflight",
+    "bank0.store.rsp_valid",
+    "bank1.store.continuation",
+    "bank1.store.op",
+    "bank1.store.inflight",
+    "bank1.store.rsp_valid"
+  ],
+  "roots": [
+    "drained",
+    "m_arvalid",
+    "m_arlen",
+    "m_rready",
+    "m_awvalid",
+    "m_wvalid",
+    "rsp_valid",
+    "busy"
+  ],
+  "observations": {
+    "f_state": "state",
+    "f_target": "target",
+    "f_active_bank": "active_bank",
+    "f_axi_bank": "axi_bank",
+    "f_all_quiet": "all_quiet",
+    "f_bank0_pending": "bank0.read_pending",
+    "f_bank1_pending": "bank1.read_pending",
+    "f_bank0_rst": "bank0.rst",
+    "f_bank1_rst": "bank1.rst",
+    "f_reader0_state": "bank0.state",
+    "f_reader1_state": "bank1.state",
+    "f_store0_state": "bank0.store.state",
+    "f_store1_state": "bank1.store.state",
+    "f_store0_continuation": "bank0.store.continuation",
+    "f_store0_op": "bank0.store.op",
+    "f_store0_inflight": "bank0.store.inflight",
+    "f_store0_rsp_valid": "bank0.store.rsp_valid",
+    "f_store0_busy": "bank0.store.busy",
+    "f_store1_continuation": "bank1.store.continuation",
+    "f_store1_op": "bank1.store.op",
+    "f_store1_inflight": "bank1.store.inflight",
+    "f_store1_rsp_valid": "bank1.store.rsp_valid",
+    "f_store1_busy": "bank1.store.busy"
+  }
+}

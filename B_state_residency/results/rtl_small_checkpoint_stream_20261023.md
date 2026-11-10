@@ -1,0 +1,7 @@
+# 小页真实轨迹RTL先导
+
+19查询、56588字段访问、75194公开命令、5183页传输完整通过，4次tag回绕、零错误，结束20885360ns。runner53094 exit0；final_audit逐查询比对独立planner累计命令/传输、输入源hash和终态收据。manifest f1c08741a5bdd2cbefbe6cba99c3cd14185ae4976112764551e9f94847003368。
+
+v1等待上限仍按旧15位哈希清表而提前超时；v2完整数据查询已结束但最终清表计数仍写死32768；两次失败原日志保留。v3以TB_HASH统一驱动18位目录、等待上限和262144周期检查，DUT及数据断言不变，完整重跑通过。冷初始化计入模拟时长，不能直接称实卡或端到端加速。
+
+完整38小页向量生成PID97333继续。自动衔接results/small_checkpoint_workflow_20261023，PID196907/工具76553：等待原生成器终态收据→audit_small_checkpoint_vectors→run_small_checkpoint_stream_v3 --full→audit_small_stream --full。冻结依赖、核对退出码、拒绝重复输出目录；不得重启或手动重复提交。完整小页RTL当前尚未完成。

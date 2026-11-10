@@ -1,0 +1,17 @@
+# 可综合恢复协调器组件
+
+新增独立recovery_coordinator.sv，把TB协议中的请求日志、恢复准入、排空/退休等待、target reset时序、owner修复及验证状态迁移为可综合FSM。两个复位域分离，target reset不能抹掉coordinator journal。权威design/checkpoint/cookie完整绑定，不将旧实验“节点初态为空”硬编码到恢复算法。
+
+恢复第一遍按权威refs执行INC/DEC，第二遍再核对refs与distinct-net occupancy。测试的2资源×2net从非零基线2/1出发，包含同一资源两个net同时变脏；第一键修复后暂时occupancy2是合法中间态，五次修改后才整体回到authority。独立事件重建确认这点，避免单遍早判错。
+
+28次操作响应及额外journal/配置断言通过：成功修复、同实例可信checkpoint17→18后第二次恢复、去重及满容量重复键、错误快照身份/引用/owner状态/cookie、最大差值、取消/超时晚到排空、空日志、响应背压、recover/cfg与最后在途日志交接。已记录但未实际执行的DEC不被盲目反向INC；未记录的额外其他net占用使第二遍拒绝放行。失败保留日志且不自动重试。
+
+unit用ENTRIES4/MAX_CORRECTIONS4/RESET_HOLD3；U280 xcu280-fsvh2892-2L-e默认32项OOC综合2187 LUT、2568 FF，零latch/BRAM/DSP。3条原始warning保留：冗余旧current_price寄存器移除、新price合法性仍直接校验；并行综合门槛；扁平netlist floorplanning提示。未时钟/IO约束、place/route或Fmax验证，资源不能代表完整恢复系统。
+
+重要接入前提：上游先日志握手再放行owner修改，并按最坏路径预留日志容量；permit_work关新工作，已在途日志优先排空。cfg_authoritative是外部已安装权威checkpoint的信任契约，非法/旧ID不清日志，不能把配置当任意清空。authority必须为同ID不可变快照。reconfigure_done/labels_done须由实际配置/标签核验驱动，尚未实现硬件snapshot流/absent探测/导入器。日志非耐掉电存储，协调器cold_rst会丢日志，不提供协调器自身失效后的自动恢复。
+
+当前是注册mock服务组件验证与OOC，新协调器尚未接真实pager/owner AXI恢复链；上一轮同实例10故障恢复依然是TB协调器，不能混为新模块的集成证据。完整warm checkpoint/外层search/未知工作集/价格变化/回绕及板卡仍未完成。下一步将journal准入和reset域、owner修复实际接入上一轮链路，再迁移labels/config回调与统一生产围栏。
+
+主审计audit_recovery_coordinator.py，代码冻结recovery_coordinator_sources_20261025，接口细则hardware/variants/recovery_coordinator_v1/CONTRACT.md。独立审计重建前两次成功episode的实际mock owner操作，验证五次及一次修复与中间双net占用，不以PASS标记单独证明结果。
+
+归档：34文件组件及9文件综合归档均逐成员核验，原scratch实际移至.preserved后恢复，两主审计重算逐字节一致；收据recovery_coordinator_restore_20261025.json。run.py check与脚本语法检查通过。

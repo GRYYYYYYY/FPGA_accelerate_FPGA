@@ -1,0 +1,64 @@
+{
+  "analyzer_sha256": "0d3a891fd91592673ebc500c7dcd8b0b1d4d9f0c392f7d13ebe952327bde4b7d",
+  "checked_expressions": {
+    "candidate/service_arbiter.sv": [
+      "localparam IDLE=0,SEND=1,WAIT_REPLY=2;",
+      "selected=-1;c_req_ready=0;",
+      "if(!rst&&!fault&&state==IDLE&&selected>=0)c_req_ready[selected]=1;",
+      "assign c_rsp_valid[g]=!rst&&state==WAIT_REPLY&&owner==g&&b_rsp_valid;"
+    ],
+    "priced/candidate_recursive_engine.sv": [
+      "assign host_io_ready=core_host_io_ready&&!state_lease&&!fault;",
+      ".host_io_ready(core_host_io_ready)",
+      ".host_io_rsp_valid(host_io_rsp_valid)"
+    ],
+    "priced/candidate_recursive_query_core.sv": [
+      "service_arbiter #(.CLIENTS(5),.REQUEST_BITS(68),.RESPONSE_BITS(165))io_arb(",
+      "assign h_io_ready=arb_io_c_req_ready[2];",
+      "assign h_io_rsp_valid=arb_io_c_rsp_valid[2];",
+      "assign host_io_ready=h_io_ready&&permit_label&&!host_ctrl_valid;",
+      "assign host_io_rsp_valid=h_io_rsp_valid;",
+      ".c_req_ready(arb_io_c_req_ready)",
+      ".c_rsp_valid(arb_io_c_rsp_valid)"
+    ],
+    "residency_system.sv": [
+      ".host_io_ready(b_l_ready)",
+      ".host_io_rsp_valid(b_l_rsp_valid)",
+      ".b_l_ready(b_l_ready)",
+      ".b_l_rsp_valid(b_l_rsp_valid)"
+    ],
+    "route_commit_controller.sv": [
+      "localparam IDLE=0,LS=1,LW=2,OS=3,OW=4;",
+      "wire unexpected=(l_rsp_valid&&state!=LW&&!(state==LS&&l_ready))||(o_rsp_valid&&state!=OW&&!(state==OS&&o_ready));"
+    ],
+    "route_commit_host_adapter.sv": [
+      "assign l_ready=held&&b_l_ready;assign l_rsp_valid=held&&b_l_rsp_valid;",
+      ".l_ready(l_ready)",
+      ".l_rsp_valid(l_rsp_valid)"
+    ]
+  },
+  "generic_overlap_counterexample": {
+    "l_ready": true,
+    "l_rsp_valid": true,
+    "o_rsp_valid": false,
+    "original_unexpected": false,
+    "specialized_unexpected": true,
+    "state": "LS"
+  },
+  "reference_audit_sha256": "8966eb1a8a82578bd0d16b19ba6aa81b2e1987c6b99c1819d9fecfb8cf3b3369",
+  "restore_receipt_sha256": "0c67bf4cd5eb6919fec6fe98e53b4086a7d6cc9ffaacb464b56f81a08adf2f1e",
+  "scope": "Only label READY/reply exclusion through the real five-client arbiter chain. Owner predicate is unchanged and arbitrarily valued. Not X/Z, RTL formal, simulation or timing proof. Any specialization must default off and be enabled only for the verified native chain.",
+  "source_sha256": {
+    "candidate/service_arbiter.sv": "767c317bd6a9fe12c594820c470958a53961f9170b9b0a87b205e9299c9b7b15",
+    "priced/candidate_recursive_engine.sv": "6b130cc66c38a236189a33ba41f6119bcf32c2e7b6407aa06d81830ed127ffe8",
+    "priced/candidate_recursive_query_core.sv": "7fd54ca8e4858c50f43b0e46a5d5c43b46bce453930ab679251122f7955a4355",
+    "residency_system.sv": "4cb17bb024cb4f346212a2d3ee4acd704e6265ff85c55626d3b39a7aaa9ee2e9",
+    "route_commit_controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+    "route_commit_host_adapter.sv": "793d2b899f3a5c85797fb420c8672d51337d4e4e4dedc4606dea661385f03569"
+  },
+  "status": "native_route_label_two_state_exclusion_not_rtl_validation",
+  "valuations": {
+    "label_chain": 4096,
+    "route_predicate": 96
+  }
+}

@@ -1,0 +1,16 @@
+# 下一阶段：真实G2连续query
+
+现有G1 warm完整验证已闭合。选定生产3层参数化源为iter2_warm_v1，coordinator仍取multi_owner_capacity_fixed_v1，其余源沿iter2_lifecycle_full_v5/warm_retry_system_v2冻结树。默认512与显式1024都已有真实恢复回归。
+
+为下一自然query已运行run_followup_query.py，采集followup_iter2_next_v1，B_QUERY_SEQUENCE=180328。原CPU全路由结果哈希与参考相同，独立prepared-state/事件/8叉heap/全节点审计通过。实际connection170996/connId38251/net26422/source66893/sink67922，iteration2/sequence180328；CPU观察113expand、114poll、564candidate、302标签更新。这不是新query的独立cost重算、CPS1绑定、标签闭包或RTL回放结论；这些仍需现有prepare_followup_cost、oracle/replay/codec与各审计链生成。
+
+关键连续性证据：当前query180327提交后，原生SO/RB观察558358/net26422 refs4/occ2、265324 refs5/occ1；下一CPU prepared-state中分别为3/2、4/1，339193则为新路径ref1。不能把下一prepared图像直接装载，假装它就是上一成功提交后的连续G2状态。需要从原始CPU代码/事件明确下一connection准备阶段的旧路径操作，并通过真实path/owner接口执行、审计这些delta。应补导出旧connection路径或等价可验证事件，不能凭几何/最终计数猜路径。
+
+建议顺序：
+
+1. 为180328生成cost/CPS1/oracle/label闭包；比较历史/价格/静态区域和source字段。flags仍0x104，geometry中的64不能代替flags。分析两个工作集的union与容量，822/1024仅是当前query规模，不能假定对union足够。
+2. 接入与CPU准备阶段一致的真实旧路径metadata/ripup，使owner/labels与下一prepared-state逐字节或完整语义一致，保留其他net和所有未管理路径的引用。若需初始历史路径，应有真实CPU路径证据与原生CP import/lease，不能手填owner回复或journal。
+3. 在实际PC租约中捕获新payload（labels/path/query），复制实际工作owner/池/allocator并绑定候选G2窗口，然后完成真实三方prepare/publish。来源context须是当前已提交上下文，不能继续写source3/1/3或旧seq0。当前180327已经消费，G2后正常query必须180328。
+4. 对新query的真实owner-B错误测试G2两轮authority修复、全部保存状态回执与更高attempt重试，再独立核对180328 CPU数值oracle。不要复用180327的171/170/849/421或三节点路径断言。
+
+CP17 owner源为完整146MB外部准备态，822 labels是CPU未来闭包，不是全图实时快照。当前TB仍以外部文件内存agent保存/提供数据；硬件运行时快照writer与持久化/认证并未完成。未来增加overflow容量必须绑定zero spare entries/字节范围/allocator地址；不要只改cfg_capacity。

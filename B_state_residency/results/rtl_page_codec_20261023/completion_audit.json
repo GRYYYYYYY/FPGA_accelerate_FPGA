@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "simulation": {
+    "scratch_page_codec": {
+      "checks": 5645,
+      "encoded": 64,
+      "decoded": 65,
+      "rejected": 7,
+      "aborted": 5,
+      "stalls": 13024
+    },
+    "codec_axi": {
+      "records": 4096,
+      "raw_beats": 2942
+    },
+    "codec_axi_service": {
+      "checks": 910,
+      "write_pages": 73,
+      "read_pages": 64,
+      "error_cases": 8,
+      "aw_bursts": 100,
+      "ar_bursts": 89,
+      "b_responses": 100,
+      "r_beats": 1428
+    }
+  },
+  "synthesis": {
+    "top": "scratch_page_codec",
+    "ram_cells": [
+      "words_reg RAMB18E2"
+    ],
+    "utilization": {
+      "luts": 965,
+      "registers": 1469,
+      "bram_tiles": 0.5,
+      "latches": 0
+    }
+  },
+  "scope": "Standalone codec plus AXI-service composition driven by testbench tasks. Commit/abort sequencing is not yet a synthesizable adapter, queued page COMPLETE/RETIRE/fence remain unconnected. Serial word conversion; no post-route timing, board measurement or acceleration claim.",
+  "manifest_sha256": "ff8d055be3acaa280e834a2027034377dafce8a4bdaf0c3c8062e945693de003"
+}

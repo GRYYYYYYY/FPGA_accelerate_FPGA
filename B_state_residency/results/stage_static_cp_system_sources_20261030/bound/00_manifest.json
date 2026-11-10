@@ -1,0 +1,809 @@
+{
+  "bound": {
+    "tools/00_build_tb.py": {
+      "sha256": "052ee75278608f32cfb747c37db6663c27b57640bb4704a87f113d2e8d6247d8",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_checkpoint_v1/build_tb.py"
+    },
+    "tools/01_tb_route_commit.sv": {
+      "sha256": "46f61389ee9aa47cc7576229458a6aad54511f71f9e3af3c158846a68fb7c9ac",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_checkpoint_v1/tb_route_commit.sv"
+    },
+    "tools/02_tb_route_commit.sv": {
+      "sha256": "7c2063cce9572534858c6036c4598612affc63d1f1f2f17b78b83e83c67ae726",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_commit_v1/tb_route_commit.sv"
+    },
+    "tools/03_build_tb.py": {
+      "sha256": "d0945dba1b51204dec83be57070b3d33e5d705ced04cab24966f90527b2658ca",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_label_exclusion_v2/build_tb.py"
+    },
+    "tools/04_build_tb.py": {
+      "sha256": "faf30f128f4487ce1e1768621b89700c0120fb8506db50eacfbc44bba36b6dd2",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_path_write_v1/build_tb.py"
+    },
+    "tools/05_build_tb.py": {
+      "sha256": "88ed29d457d66268e4e817bb7956eb3b2c998b51c9bb42b6a3f87534ca5d13fb",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_stage_write_v1/build_tb.py"
+    },
+    "tools/06_build_tb.py": {
+      "sha256": "5e46c5d74d7b53f8596436a0e44b1ae2cda0a6c4d705f108adbaaabc2543ebfa",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_units_v1/build_tb.py"
+    },
+    "tools/07_CONTRACT.md": {
+      "sha256": "a8274f87b250beb46fde42dd9b681e04ad66b9d7dd5618a29dc5137aa5298f98",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_v1/CONTRACT.md"
+    },
+    "tools/08_baseline.sv": {
+      "sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_v1/baseline.sv"
+    },
+    "tools/09_fixed.sv": {
+      "sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_v1/fixed.sv"
+    },
+    "tools/10_manifest.json": {
+      "sha256": "24ac3c33542ca386d016191732dc221cb2f4eba6ed88b683d7bbb911104420e5",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/stage_static_cp_v1/manifest.json"
+    },
+    "tools/11_stage_bank_functional_matrix_20261030.json": {
+      "sha256": "d401af21787ff27dc2a37d0bb41e862f0a6250e2fc6339dcb9941749301861ba",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/stage_bank_functional_matrix_20261030.json"
+    },
+    "tools/12_stage_static_cp_units_preflight_rejection_20261030.json": {
+      "sha256": "86be84d0fb811ed1e16e009fa1e32a0049001120c02857e9abb886781e2dcc44",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/stage_static_cp_units_preflight_rejection_20261030.json"
+    },
+    "tools/13_run_stage_static_cp_units_v2.py": {
+      "sha256": "b70faa5b8adf538fd7b99e4e9a1614ccf85a7b71486b5e746040cb3fe9881d4b",
+      "source": "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/scripts/run_stage_static_cp_units_v2.py"
+    }
+  },
+  "cases": [
+    {
+      "bank_trace_sha256": "0aaa14ba7e543bcce4dfabe867e2822edcc1662c13e1962a387dbb1674d62082",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "0e933705b827740f2fccc1e44915c077f255b12f5908acdef615dda1b1765efd",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "228be68bd0fb363028b2ea1e027d8eb7591738d3ed76bfa3865ddd17f551a9a9",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_route/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_route/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_route/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "832ce5450d1ccb6ce7a9549fbfb141886d98529352b66ece9e9733c0080dbc29",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "baseline",
+      "rtl_sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+      "simulate_log_sha256": "c1bc31c93a2989dded90e67c59c36eb1ce4d77b2684c500fd232b7255e12d158",
+      "stage_trace_sha256": "3dbed39492b31ba88218724b815826dfb0b047045365ae5267bca8bd0790ffdc",
+      "status": "passed",
+      "suite": "route",
+      "tb_sha256": "56a7c0a95e5bce5b67ed63edae5976e4a2b66acdeeaace1e21bbfb388c0c304e",
+      "trace_sha256": "a6ef74f9b23affb60e9e0c048c4c8176523ce4611988cf2999e4377013084307"
+    },
+    {
+      "bank_trace_sha256": "c732aee4051430680836646c800c0205b6ed4ff4321a33f53cd1f6e0a07f9d8d",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "91052f029ea3f6223dbfad81d8003a35b85b76cd399216357310bbf4a44e934e",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "228be68bd0fb363028b2ea1e027d8eb7591738d3ed76bfa3865ddd17f551a9a9",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_checkpoint/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_checkpoint/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_checkpoint/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "09c2bd53c91cbd7d61d61ab384dcc4b4233eb80ca95ab2a75d9905cd3b0156ef",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "baseline",
+      "rtl_sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+      "simulate_log_sha256": "696a043769bd6018e2583e8f0668ca42d56ce32b657810f977e092b3dda1781a",
+      "stage_trace_sha256": "b42420454f9f9000c6846f19965bb06ca185ec8e2cff1ad4d150407a77b067a6",
+      "status": "passed",
+      "suite": "checkpoint",
+      "tb_sha256": "e4a57510a26a0cdb8ddee5167dee93ec0b66f69839b21c9ba54d234710cdeb0e",
+      "trace_sha256": "93159ab8b7e601eb2165507870b321c6fbc3fd891f462585fc146dccdd70d91f"
+    },
+    {
+      "bank_trace_sha256": "2da66694d3db429d3e01118481cd7ed6f55c7c829ecf7b078a105729259ed1f0",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "4ce1dc56a9512ab73c7dc3ac432c5e7384e1aa8585a5bf5b8792cc084c97189a",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "b48af2702efe57615a81dc370b898eb3bfcb3e6bd72951eb3b72bb6903e64c83",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_checkpoint32/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_checkpoint32/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_checkpoint32/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "1b4fc1d1e5858e8b65418736aca6593806cfd9a5cc56c742410eadae5a0e0657",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "baseline",
+      "rtl_sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+      "simulate_log_sha256": "517f16e2750c80fd6de9cbdd573ec61922fdc3645e93b5665d4e9ddb64be8c76",
+      "stage_trace_sha256": "5703a64bb7024ef4c6408306e902fcabeda4b642d7fdf67ebe61953dfe164ebb",
+      "status": "passed",
+      "suite": "checkpoint32",
+      "tb_sha256": "7014304c1a8a5433b11cca06c0c86578d264e7ab6dc2858e221b1db2e96171ae",
+      "trace_sha256": "42ec87bd09b022fa0a7fd5694e040e233ec58af52fc11547956f41a81ab3472a"
+    },
+    {
+      "bank_trace_sha256": "114da0bbbffb894a5bc3c252dd06fb3264ca8badb9f47dae497d9fba44184844",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "cecf918c2b70b1caf943f63fd037aeadc80652ad33f5b5fe4832d667cd8c01f0",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "228be68bd0fb363028b2ea1e027d8eb7591738d3ed76bfa3865ddd17f551a9a9",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_generic_overlap/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_generic_overlap/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/baseline_generic_overlap/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "ef17fed9784a0fab63642d1ee83eaf5db2365f6301cb471b92829d047d3cca93",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "baseline",
+      "rtl_sha256": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+      "simulate_log_sha256": "119a0631ddc154d91e2e797612ef65214a8efe197cb5bfaa2d0cf1eff174a67f",
+      "stage_trace_sha256": "3dbed39492b31ba88218724b815826dfb0b047045365ae5267bca8bd0790ffdc",
+      "status": "passed",
+      "suite": "generic_overlap",
+      "tb_sha256": "7a7f5c54f42c1f0fc668c70f96ed56cb5bd71320507575de364253dbecbb28ac",
+      "trace_sha256": "fb854cd9dfc7f56f100b572fd2facc085b27c8818cfdaecc1f3b4e3f17474ab1"
+    },
+    {
+      "bank_trace_sha256": "0aaa14ba7e543bcce4dfabe867e2822edcc1662c13e1962a387dbb1674d62082",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "b5272010c9bb9d033143a8521222ec2ecdc2706c683e681d46c3b8af135aff35",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "228be68bd0fb363028b2ea1e027d8eb7591738d3ed76bfa3865ddd17f551a9a9",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_route/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_route/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_route/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "a8b96ec1f706439609e3f519a5190d2ea3e0fb262e5fb25e30d21ebf1a630485",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "default",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "92f56617d3da392f3917411d35126da7b5182e99c2c56e5bfa12b8e68fa7d25f",
+      "stage_trace_sha256": "3dbed39492b31ba88218724b815826dfb0b047045365ae5267bca8bd0790ffdc",
+      "status": "passed",
+      "suite": "route",
+      "tb_sha256": "56a7c0a95e5bce5b67ed63edae5976e4a2b66acdeeaace1e21bbfb388c0c304e",
+      "trace_sha256": "a6ef74f9b23affb60e9e0c048c4c8176523ce4611988cf2999e4377013084307"
+    },
+    {
+      "bank_trace_sha256": "c732aee4051430680836646c800c0205b6ed4ff4321a33f53cd1f6e0a07f9d8d",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "83ba85f9b63f00098d5aba753058146163552d76c437f56c0200015e14e01e78",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "228be68bd0fb363028b2ea1e027d8eb7591738d3ed76bfa3865ddd17f551a9a9",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_checkpoint/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_checkpoint/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_checkpoint/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "41ba65a18d677d58f85f42b3b1fad8b99bc5771403a97156f516d59f30d25540",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "default",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "b14df3e00f9711fabf8e95a898c3cb983ace81e6a2508c85b990da71788335e1",
+      "stage_trace_sha256": "b42420454f9f9000c6846f19965bb06ca185ec8e2cff1ad4d150407a77b067a6",
+      "status": "passed",
+      "suite": "checkpoint",
+      "tb_sha256": "e4a57510a26a0cdb8ddee5167dee93ec0b66f69839b21c9ba54d234710cdeb0e",
+      "trace_sha256": "93159ab8b7e601eb2165507870b321c6fbc3fd891f462585fc146dccdd70d91f"
+    },
+    {
+      "bank_trace_sha256": "2da66694d3db429d3e01118481cd7ed6f55c7c829ecf7b078a105729259ed1f0",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "2d12d495fbdd1bcf80cfa02987120b6886446ad4d91532de35d4d0aefb58fe8a",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "b48af2702efe57615a81dc370b898eb3bfcb3e6bd72951eb3b72bb6903e64c83",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_checkpoint32/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_checkpoint32/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_checkpoint32/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "b3657068b7521b1487d8f9beb143bec9a7ca0b6d90f7d5b1db30f6c6985c924a",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "default",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "90189cb357612302de02504e1e5d1ed3ec919f25365a04cb91b423d6ea9ee384",
+      "stage_trace_sha256": "5703a64bb7024ef4c6408306e902fcabeda4b642d7fdf67ebe61953dfe164ebb",
+      "status": "passed",
+      "suite": "checkpoint32",
+      "tb_sha256": "7014304c1a8a5433b11cca06c0c86578d264e7ab6dc2858e221b1db2e96171ae",
+      "trace_sha256": "42ec87bd09b022fa0a7fd5694e040e233ec58af52fc11547956f41a81ab3472a"
+    },
+    {
+      "bank_trace_sha256": "114da0bbbffb894a5bc3c252dd06fb3264ca8badb9f47dae497d9fba44184844",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "c9ddda83f29add7104cd322fb7726ae8d07c5c133504457ed576e870e02c0230",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "228be68bd0fb363028b2ea1e027d8eb7591738d3ed76bfa3865ddd17f551a9a9",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_generic_overlap/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_generic_overlap/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/default_generic_overlap/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "3bb3c81a3bb165acc657b9afc212679b13d7b02cc89678681b314d7c7678688a",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "default",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "7b1c522eec7596d8f3f8083afeec86c183def4011efec54f065deedc1b99102d",
+      "stage_trace_sha256": "3dbed39492b31ba88218724b815826dfb0b047045365ae5267bca8bd0790ffdc",
+      "status": "passed",
+      "suite": "generic_overlap",
+      "tb_sha256": "7a7f5c54f42c1f0fc668c70f96ed56cb5bd71320507575de364253dbecbb28ac",
+      "trace_sha256": "fb854cd9dfc7f56f100b572fd2facc085b27c8818cfdaecc1f3b4e3f17474ab1"
+    },
+    {
+      "bank_trace_sha256": "0aaa14ba7e543bcce4dfabe867e2822edcc1662c13e1962a387dbb1674d62082",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "48ee4fde663e20856ed2104b747a47dd6980d6ca27a9bb4833fa752e6e9a84cd",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "1d867d0178b111be1a00db0e3ef3595f2c22862326f909f9a79225a92d9c206d",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_route/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_route/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_route/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "151b4d2300e72fe8a88fa8a0bced5b168c843eb840ef138523a943dc5cf77afe",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "factored",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "0ab4ffadeda83f87709a079b2e0c6207e2ff9bf2fca20e6f59cd28784409b73e",
+      "stage_trace_sha256": "3dbed39492b31ba88218724b815826dfb0b047045365ae5267bca8bd0790ffdc",
+      "status": "passed",
+      "suite": "route",
+      "tb_sha256": "4444403d89cd2c2014161bc51b40f40ba52118770c5f0946363f9889e4590183",
+      "trace_sha256": "a6ef74f9b23affb60e9e0c048c4c8176523ce4611988cf2999e4377013084307"
+    },
+    {
+      "bank_trace_sha256": "c732aee4051430680836646c800c0205b6ed4ff4321a33f53cd1f6e0a07f9d8d",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "8619e8f02c2d47be8d5c32555b6f453ef7268430e6d491788083aaacec773ae9",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "1d867d0178b111be1a00db0e3ef3595f2c22862326f909f9a79225a92d9c206d",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_checkpoint/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_checkpoint/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_checkpoint/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "fe7e7d7d90233dd433ce833d1cc26ff15b2135313cf2fa7d0131ee08ea461ec5",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "factored",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "1ffc18fc3ca11730b6408136f4d420b34f4bc062e78e241639df8f19a0dc9377",
+      "stage_trace_sha256": "b42420454f9f9000c6846f19965bb06ca185ec8e2cff1ad4d150407a77b067a6",
+      "status": "passed",
+      "suite": "checkpoint",
+      "tb_sha256": "32c3621c51cece9abd5553836b09a09c52a766abd211f8b3cfd76fa9354dd4b0",
+      "trace_sha256": "93159ab8b7e601eb2165507870b321c6fbc3fd891f462585fc146dccdd70d91f"
+    },
+    {
+      "bank_trace_sha256": "2da66694d3db429d3e01118481cd7ed6f55c7c829ecf7b078a105729259ed1f0",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "06509a089de88ff16712c4d1c3b582e201fa8735fea5a3716cbbfb7ca26f1a88",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "1d867d0178b111be1a00db0e3ef3595f2c22862326f909f9a79225a92d9c206d",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_checkpoint32/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_checkpoint32/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_checkpoint32/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "c27f87bcf2ec804029f5ccc3042cb384eb53dc65d9bdb449799f0a4823eeacfe",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "factored",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "ad99df4dfffee35b8e57e43cb1500365859a58974c9bb293fa29db283b32debb",
+      "stage_trace_sha256": "5703a64bb7024ef4c6408306e902fcabeda4b642d7fdf67ebe61953dfe164ebb",
+      "status": "passed",
+      "suite": "checkpoint32",
+      "tb_sha256": "4a086ec4f7aca44d09a5bee46b8a94ea34b1a4c790fe1f5c004f536a16f6a4c6",
+      "trace_sha256": "42ec87bd09b022fa0a7fd5694e040e233ec58af52fc11547956f41a81ab3472a"
+    },
+    {
+      "bank_trace_sha256": "114da0bbbffb894a5bc3c252dd06fb3264ca8badb9f47dae497d9fba44184844",
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "route_commit_controller.sv",
+            "tb.sv"
+          ],
+          "exit_code": 0,
+          "log_sha256": "6396fa8b4d4cf35f6242311bf843bfacc2c5e0d46c9f1c8cf8ed2babd2d64fc2",
+          "stage": "compile"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "--O0",
+            "tb_route_commit",
+            "-s",
+            "route",
+            "--debug",
+            "typical",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "log_sha256": "1d867d0178b111be1a00db0e3ef3595f2c22862326f909f9a79225a92d9c206d",
+          "stage": "elaborate"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "route",
+            "--tclbatch",
+            "run.tcl",
+            "--log",
+            "simulate.log",
+            "--testplusarg",
+            "labels=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/labels.txt",
+            "--testplusarg",
+            "events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_generic_overlap/events.txt",
+            "--testplusarg",
+            "bank_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_generic_overlap/bank_events.txt",
+            "--testplusarg",
+            "stage_events=/tmp/B_state_residency_offer_20261025/stage_static_cp_units_v2/factored_generic_overlap/stage_events.txt"
+          ],
+          "exit_code": 0,
+          "log_sha256": "7acdc8e242eebdede86cf4ab230d2e993499905a19c7b41ef7702cbf2c1d26fe",
+          "stage": "simulate"
+        }
+      ],
+      "mode": "factored",
+      "rtl_sha256": "3ab985a6f448cabe759331985cc2d9957586db31499dbc9c6e8d147f3888d2be",
+      "simulate_log_sha256": "6a763a2c3160e629f44bbf395421ccf3af4876e85bb810e3a6c5b4582e3b47a4",
+      "stage_trace_sha256": "3dbed39492b31ba88218724b815826dfb0b047045365ae5267bca8bd0790ffdc",
+      "status": "passed",
+      "suite": "generic_overlap",
+      "tb_sha256": "857a899ca1781fec74310e484164e8d67729375739170ace55f4b8f268167f6b",
+      "trace_sha256": "fb854cd9dfc7f56f100b572fd2facc085b27c8818cfdaecc1f3b4e3f17474ab1"
+    }
+  ],
+  "exit_code": 0,
+  "labels_sha256": "66d10d00c01a589db7b19bc7811a41188789162062c6fe2854ef69772f3af379",
+  "memory_admission": {
+    "current_bytes": 181781929984,
+    "limit_bytes": 322122547200,
+    "stable_seconds": 60.058088440448046
+  },
+  "preparation_sha256": "ef45abd19ab412531e5d800dd304cdf1c715d5f9b22d83b6c720d7e5eb732568",
+  "reference_audit_sha256": "24ff765196333fc32679a5eee4bb953d8d0d26cd7c67e8699bc3975a59c070a9",
+  "runner_pid": 182374,
+  "runner_sha256": "b70faa5b8adf538fd7b99e4e9a1614ccf85a7b71486b5e746040cb3fe9881d4b",
+  "runner_start_ticks": "1650281149",
+  "scope": "Original CP/default/static-stage only: route,CP8,CP32,generic same-cycle reply; original stimuli, path word changes and old-tree stage bank observer retained. No path factoring, native publication or full system.",
+  "stage": "complete",
+  "status": "observed"
+}

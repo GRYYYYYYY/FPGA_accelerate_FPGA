@@ -1,0 +1,51 @@
+{
+  "owner_pid": 3431763,
+  "capture_pid": 2173511,
+  "started_utc": "2026-10-22T17:55:39.963822+00:00",
+  "status": "software_stages_complete",
+  "stage": "await_vivado_candidate_validation",
+  "steps": [
+    {
+      "stage": "finalize",
+      "command": [
+        "/usr/bin/python3",
+        "scripts/finalize_netlist_capture.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 3.2772340644150972,
+      "log": "results/netlist_pipeline_finalize_20261022_v1.log"
+    },
+    {
+      "stage": "integration16",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "scripts/run.py",
+        "netlist-check",
+        "--max-nets",
+        "16",
+        "--output-dir",
+        "data/derived/netlist_integration16_20261022_v1"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 32.72174131311476,
+      "log": "results/netlist_pipeline_integration16_20261022_v1.log"
+    },
+    {
+      "stage": "all_nets",
+      "command": [
+        "/usr/bin/python3",
+        "-u",
+        "scripts/run.py",
+        "netlist-check",
+        "--max-nets",
+        "0",
+        "--output-dir",
+        "data/derived/netlist_all_nets_20261022_v1"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 112.99915510416031,
+      "log": "results/netlist_pipeline_all_nets_20261022_v1.log"
+    }
+  ]
+}

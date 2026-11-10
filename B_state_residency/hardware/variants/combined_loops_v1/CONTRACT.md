@@ -1,0 +1,21 @@
+# 五源合并验证契约
+
+合并来源必须是capture_loops_component_v1和rearm_loops_component_v2实际归档恢复并审计通过的fixed源；原始baseline必须逐字节匹配各实验参考。五个生产文件为recursive/recursive_candidate_controller.sv、capture/expansion_capture.sv、label_restore_controller.sv、recovery_coordinator.sv、residency_system.sv。不修改已冻结源、参考、测试台或审计标准。
+
+## 结构
+
+combined_loops_synth_v1与restore_seed_synth_on_v1使用相同133 RTL列表、U280器件、runtime端口、全部参数及10ns实验时钟。Tcl只替换实验根路径，XDC字节相同。仅新增prepare_combined.py及五个生产源变化。没有添加waiver、false-path、ALLOW_COMBINATORIAL_LOOPS或IO约束。
+
+先验证实际综合进程与终态manifest。只有observed/exit0后，才运行inspect_restore_seed_synth.py重新打开DCP，运行原生LUTLP-1、check_timing、methodology并保存对象和实际cells/nets/pins；再运行analyze_restore_seed_loops.py与audit_combined_loops_synth.py。新审计器从匹配基线审计器派生，额外核对五源、组件恢复凭据、完全相同的参数/列表/Tcl/XDC。审计通过表示来源和观察结果完整；有环时设计仍拒绝，没有环也不能自动认定物理时序通过。新审计器在本契约创建时尚未终态执行。
+
+## 行为
+
+优先combined_loops_system_crc_pressure_v1：参考restore_seed_retry_crc_pressure_v1，包含真实四查询/G4故障、末标签CRC失败、旧attempt拒绝及更高attempt非冷重试。只替换五源和运行器；其余生产源、TB、输入绑定、scoreboard、编译/展开/仿真参数保持参考。工作DDR由原始输入绑定重新构造，不能使用参考的最终DDR作为起始状态。
+
+compile/elaborate/模拟退出码不足以证明行为正确。终态必须有原生完成标记且无Fatal，audit_combined_loop_system.py要求所有27个txt/bin/dat文件逐字节匹配参考，包括12路AXI、native实际周期、完整最终owner/labels及恢复流，结束时刻一致；继承CPU数值与AXI独立重放结论仅限这些字节相同的实际观察，不重写或归一化日志。若不一致，保留失败根并先定位差异，不放宽比较。
+
+本契约创建时只有一项合并行为回归运行；正常优化off/on双容量与cancel/CRC双容量完整八项矩阵仍未完成。两项capture-only系统回归不能充当新增REARM三源的完整验证。成功之后仍须归档、实际恢复重审audit字节一致、冻结源码与报告，最后定向释放已完成根缓存；不清理运行中的根。
+
+## 继续
+
+实际运行根位于/tmp/B_state_residency_offer_20261025。先检查现有进程，禁止因观察超时、上下文切换或未见输出而重启。只有一项完整综合与一项行为仿真，无需扩展并发。当前仍无完整无环或物理时序/板卡结论，原固定价格、可信初始快照、持久化floor/认证与自然overflow分配回收缺口保留。

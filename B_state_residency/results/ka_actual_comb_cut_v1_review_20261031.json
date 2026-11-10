@@ -1,0 +1,258 @@
+{
+  "status": "actual_combinational_ka_conditional_safety_queries_and_arbitrary_state_witnesses_reviewed_evidence_restored",
+  "scope": "Two-state actual combinational logic with arbitrary register/memory-read outputs. Not sequential reachability, full-system functional acceptance, RTL equivalence or physical result.",
+  "retained_comb_cells": 4485,
+  "cut_register_outputs": 580,
+  "cut_memory_read_outputs": 97,
+  "proofs_under_ka_valid_1": {
+    "k_busy": 1,
+    "ap_offer": 0,
+    "as_initial_safe": 0,
+    "as_attempt_reset": 0
+  },
+  "all_queries_nonvacuous": true,
+  "arbitrary_state_witnesses": {
+    "arbitrary_state_stall": {
+      "k_busy": "1",
+      "k_a_valid": "1",
+      "k_a_ready": "0",
+      "authority.state": "000",
+      "authority.bank1.state": "000",
+      "authority.bank1.configured": "1",
+      "authority.bank0.state": "000",
+      "authority.bank0.configured": "0",
+      "authority.active_bank": "0",
+      "as_initial_safe": "0",
+      "as_attempt_reset": "0",
+      "ap_owned": "0",
+      "ap_offer": "0"
+    },
+    "arbitrary_state_accept": {
+      "k_busy": "1",
+      "k_a_valid": "1",
+      "k_a_ready": "1",
+      "authority.state": "000",
+      "authority.bank1.state": "000",
+      "authority.bank1.configured": "1",
+      "authority.bank0.state": "000",
+      "authority.bank0.configured": "1",
+      "authority.active_bank": "0",
+      "as_initial_safe": "0",
+      "as_attempt_reset": "0",
+      "ap_owned": "0",
+      "ap_offer": "0"
+    },
+    "ap_offer_without_ka": {
+      "k_busy": "0",
+      "k_a_valid": "0",
+      "k_a_ready": "0",
+      "authority.state": "000",
+      "authority.bank1.state": "000",
+      "authority.bank1.configured": "0",
+      "authority.bank0.state": "000",
+      "authority.bank0.configured": "1",
+      "authority.active_bank": "1",
+      "as_initial_safe": "0",
+      "as_attempt_reset": "0",
+      "ap_owned": "0",
+      "ap_offer": "1"
+    }
+  },
+  "next_obligation": "Establish from reset and legal admissions that active authority bank remains configured at KA AS entry; stall witness active bank0 configured0 is not a demonstrated reachable RTL bug. Further state/fault/drain obligations remain.",
+  "independent_extraction_review": "Every retained combinational cell exact original JSON; every cut preserves original output bits/aliases; input ports preserved; only init attributes removed; source hashes checked. Removing state/memory correlations intentionally overapproximates behavior.",
+  "source_model_sha256": "43cb23638b3a2a93e8ab48bb617f336959a90fc924aab378ee539423ed837885",
+  "preparation_sha256": "fbd8b65ea06da0e4c1bc867d2d417d1f8c2245541777a028ef2ca07b463a41dc",
+  "manifest_sha256": "a351f15974642fd35231bf072e52d152c8c42f3375b6955695b6fef794bf9aaf",
+  "queries": [
+    {
+      "name": "valid_implies_busy",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "valid_implies_busy.ys"
+      ],
+      "script_sha256": "c19bc766def50660027bd8be2097820f8a1bd537d33c099929eaf967edfb13cf",
+      "log_sha256": "8d7045d6945fd7dc0501961e0e30e7879b0b5565424927d3c876616b6b64778a",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 8.783648278564215
+    },
+    {
+      "name": "valid_excludes_ap_offer",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "valid_excludes_ap_offer.ys"
+      ],
+      "script_sha256": "188c137632ed364ec64d0f5b1a60a454fb4ca881983ca3a0f347803752b9f40e",
+      "log_sha256": "17d2120d0e3edcb6a9ec6322da6a04e4766fc87611237c565d58e2a04b06a4d4",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 8.282935561612248
+    },
+    {
+      "name": "valid_excludes_initial_config",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "valid_excludes_initial_config.ys"
+      ],
+      "script_sha256": "4fb8674c65f04c6bfb4e0c758505e862675556a03c693dd768d56ce6636f2dce",
+      "log_sha256": "42b8e22c25af740696785b27aa65e23a925001ed8e017852f7ba78af0101c637",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 106.10110666975379
+    },
+    {
+      "name": "valid_excludes_rearm",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "valid_excludes_rearm.ys"
+      ],
+      "script_sha256": "4ea7b960a36b68f8fe1cd69ea68f9548fc7a4cebf132360dca94f4ff6a5834ad",
+      "log_sha256": "84b728e0da9a14652ce746b483c06c2211f1fdb42416bc02a9d4dfdb9c6de00e",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 105.89665949717164
+    },
+    {
+      "name": "arbitrary_state_stall",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "arbitrary_state_stall.ys"
+      ],
+      "script_sha256": "87a7b0a77735f889d2e3b5944fccbdc8a5ac238d8f472ad1260066ddf5449fe9",
+      "log_sha256": "1559ae637841d5f92bee20849350df15a492c922e19e7e21fdc032eb2524885c",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 8.681563273072243
+    },
+    {
+      "name": "arbitrary_state_accept",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "arbitrary_state_accept.ys"
+      ],
+      "script_sha256": "c4b3918a204a18ef41bfa0c216b5c1e08f8e5d7b226e01301c5480748956d56b",
+      "log_sha256": "031eb568fe8ab448aa4a231f1b24dc7a22cba652012c6590e561a8f7bef8ad18",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 9.167062321677804
+    },
+    {
+      "name": "ap_offer_without_ka",
+      "argv": [
+        "python3",
+        "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys",
+        "-s",
+        "ap_offer_without_ka.ys"
+      ],
+      "script_sha256": "f20a6d61f91fdd0b4ff622b30e7eb17a2c9803519f941202f396dcc8ca989083",
+      "log_sha256": "7328847af5c3abdb53cc909d9656c394d47affd3d8eb006984e4268534675436",
+      "exit_code": 0,
+      "expected_result_observed": true,
+      "elapsed_s": 8.796825777739286
+    }
+  ],
+  "evidence_inventory": {
+    "ka_actual_comb_cut_v1/cut.json": {
+      "sha256": "9453663ed4ab1816fc27cd127426d9d12c99b662a25f63e9dddb53a77c7fce11",
+      "bytes": 48969462
+    },
+    "ka_actual_comb_cut_v1/preparation.json": {
+      "sha256": "fbd8b65ea06da0e4c1bc867d2d417d1f8c2245541777a028ef2ca07b463a41dc",
+      "bytes": 1023049
+    },
+    "ka_actual_comb_cut_v1/manifest.json": {
+      "sha256": "a351f15974642fd35231bf072e52d152c8c42f3375b6955695b6fef794bf9aaf",
+      "bytes": 3839
+    },
+    "ka_actual_comb_cut_v1/valid_implies_busy.ys": {
+      "sha256": "c19bc766def50660027bd8be2097820f8a1bd537d33c099929eaf967edfb13cf",
+      "bytes": 125
+    },
+    "ka_actual_comb_cut_v1/valid_implies_busy.log": {
+      "sha256": "8d7045d6945fd7dc0501961e0e30e7879b0b5565424927d3c876616b6b64778a",
+      "bytes": 2473
+    },
+    "ka_actual_comb_cut_v1/valid_excludes_ap_offer.ys": {
+      "sha256": "188c137632ed364ec64d0f5b1a60a454fb4ca881983ca3a0f347803752b9f40e",
+      "bytes": 127
+    },
+    "ka_actual_comb_cut_v1/valid_excludes_ap_offer.log": {
+      "sha256": "17d2120d0e3edcb6a9ec6322da6a04e4766fc87611237c565d58e2a04b06a4d4",
+      "bytes": 2482
+    },
+    "ka_actual_comb_cut_v1/valid_excludes_initial_config.ys": {
+      "sha256": "4fb8674c65f04c6bfb4e0c758505e862675556a03c693dd768d56ce6636f2dce",
+      "bytes": 134
+    },
+    "ka_actual_comb_cut_v1/valid_excludes_initial_config.log": {
+      "sha256": "42b8e22c25af740696785b27aa65e23a925001ed8e017852f7ba78af0101c637",
+      "bytes": 2500
+    },
+    "ka_actual_comb_cut_v1/valid_excludes_rearm.ys": {
+      "sha256": "4ea7b960a36b68f8fe1cd69ea68f9548fc7a4cebf132360dca94f4ff6a5834ad",
+      "bytes": 135
+    },
+    "ka_actual_comb_cut_v1/valid_excludes_rearm.log": {
+      "sha256": "84b728e0da9a14652ce746b483c06c2211f1fdb42416bc02a9d4dfdb9c6de00e",
+      "bytes": 2493
+    },
+    "ka_actual_comb_cut_v1/arbitrary_state_stall.ys": {
+      "sha256": "87a7b0a77735f889d2e3b5944fccbdc8a5ac238d8f472ad1260066ddf5449fe9",
+      "bytes": 448
+    },
+    "ka_actual_comb_cut_v1/arbitrary_state_stall.log": {
+      "sha256": "1559ae637841d5f92bee20849350df15a492c922e19e7e21fdc032eb2524885c",
+      "bytes": 3594
+    },
+    "ka_actual_comb_cut_v1/arbitrary_state_stall.json": {
+      "sha256": "f038432462f77b204f30645cd824a3079fa5f3a6cee2d76b94c62ae7b277847c",
+      "bytes": 763
+    },
+    "ka_actual_comb_cut_v1/arbitrary_state_accept.ys": {
+      "sha256": "c4b3918a204a18ef41bfa0c216b5c1e08f8e5d7b226e01301c5480748956d56b",
+      "bytes": 449
+    },
+    "ka_actual_comb_cut_v1/arbitrary_state_accept.log": {
+      "sha256": "031eb568fe8ab448aa4a231f1b24dc7a22cba652012c6590e561a8f7bef8ad18",
+      "bytes": 3596
+    },
+    "ka_actual_comb_cut_v1/arbitrary_state_accept.json": {
+      "sha256": "2230ef4297f60116443cbbfc5e5a0a75f71cf8b440a5a59faac1d01b16c82fb2",
+      "bytes": 763
+    },
+    "ka_actual_comb_cut_v1/ap_offer_without_ka.ys": {
+      "sha256": "f20a6d61f91fdd0b4ff622b30e7eb17a2c9803519f941202f396dcc8ca989083",
+      "bytes": 445
+    },
+    "ka_actual_comb_cut_v1/ap_offer_without_ka.log": {
+      "sha256": "7328847af5c3abdb53cc909d9656c394d47affd3d8eb006984e4268534675436",
+      "bytes": 3588
+    },
+    "ka_actual_comb_cut_v1/ap_offer_without_ka.json": {
+      "sha256": "1cb7e13f728595993fc662bc70f323c4c22c5b033044be22e6b807b0c17745bb",
+      "bytes": 763
+    },
+    "review/prepare_ka_comb_cut_v1.py": {
+      "sha256": "dbea37aca6ad26a3746161554b7ff4a18e4631e666d35cdf56e0df7fd132e5e4",
+      "bytes": 3937
+    }
+  },
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_actual_comb_cut_evidence_v1/evidence.tar",
+  "archive_sha256": "86db2b96273069e138fec537d0975e823735fae297099f626a9ca9813051a03f",
+  "actual_restore": "/tmp/B_state_residency_offer_20261025/ka_actual_comb_cut_evidence_v1/restored",
+  "actual_restore_files": 21,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

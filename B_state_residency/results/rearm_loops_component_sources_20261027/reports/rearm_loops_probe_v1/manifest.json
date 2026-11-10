@@ -1,0 +1,52 @@
+{
+  "status": "diagnostic_observed",
+  "sources": {
+    "recovery_coordinator.sv": "d2a960311af7a64bb8476809371a5e39ff89920154ad28b098d0a117b7d11e8e",
+    "label_restore_controller.sv": "08a50cd7dd82ef6dad7c5f0f9b1969334e46b4133cdb3d93a23e40d1ef7b1a38",
+    "rearm_loop_slice.sv": "a2622655cb4d516322ee52fbed8b5d2e92b5fdcff7beec66048e3cdd3d84186a",
+    "tb_rearm_loop.sv": "b05471e99601c9adcac8c81ec40a672c37b0b0568551f8a58c0d0b4a83fc5849",
+    "tb_rearm_probe.sv": "4d4b9e9335c1656b659d31f41affcc6556a6d416f1898e99545b0ae9ae047232"
+  },
+  "commands": [
+    {
+      "stage": "compile",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+        "--sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_probe_v1/sources/recovery_coordinator.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_probe_v1/sources/label_restore_controller.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_probe_v1/sources/rearm_loop_slice.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_probe_v1/sources/tb_rearm_loop.sv",
+        "/tmp/B_state_residency_offer_20261025/rearm_loops_probe_v1/sources/tb_rearm_probe.sv"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "elaborate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+        "tb_rearm_probe",
+        "-s",
+        "probe",
+        "--debug",
+        "typical",
+        "--mt",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    {
+      "stage": "simulate",
+      "argv": [
+        "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+        "probe",
+        "--tclbatch",
+        "run.tcl",
+        "--log",
+        "simulate.log"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "scope": "Read-only hierarchical monitor of original failed TB and original production sources; no force or source fix"
+}

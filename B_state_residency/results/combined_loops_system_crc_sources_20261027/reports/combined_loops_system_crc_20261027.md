@@ -1,0 +1,7 @@
+# 五源合并的完整CRC失败与非冷重试回归通过
+
+combined_loops_system_crc_pressure_v1使用capture两源与REARM三源的实际已恢复审计候选；其余生产RTL、测试台、输入及参数与restore_seed_retry_crc_pressure_v1相同。residency_system新增退休信号在本例经过真实完整层级编译和仿真，组件测试没有覆盖的父层接线在此获得一项完整行为证据。
+
+27文件逐字节匹配参考，包括全部12路AXI、native事件及实际周期、最终DDR、781标签/路径/query恢复流及数据文件；结束48288200ns一致。由相同观察继承已恢复审计参考的CRC末记录失败、回复保持/真实退休、旧attempt拒绝、更高attempt非冷重试、781标签回读、156path/10query字节、三回执与最终消费后放行、CPU q4 83poll/82expand/402candidate/231cost以及owner/foreign net保留结论。没有修改或归一化日志，也不把原单组件J0用例当本系统的journal证据。
+
+新归档已实际恢复并重审，audit逐字节相同；源和工具另行冻结。本报告只覆盖优化开启、单槽、CRC故障配置。其余七项正常off/on双容量及cancel/CRC配置未因此通过。五源合并的完整综合、残余组合环与物理时序结论须另查结构报告；行为一致不证明结构无环或板卡加速。固定价格、外部初始快照、持久化floor/认证和自然overflow分配回收缺口保持。

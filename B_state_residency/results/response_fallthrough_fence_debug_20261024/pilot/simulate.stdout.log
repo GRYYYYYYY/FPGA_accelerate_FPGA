@@ -1,0 +1,23 @@
+
+****** xsim v2022.2 (64-bit)
+  **** SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/ablation/xsim_script.tcl
+# xsim {ablation} -autoloadwcfg -tclbatch {run.tcl}
+Time resolution is 1 ps
+source run.tcl
+## run all
+FINISH_DEBUG state=2 status=7 active=0 ack=0 sealed=0 req=0 work=0 rsp=0 fence_req=0 fence_ack=0 leases=00000000
+FINISH_DEBUG state=2 status=0 active=1 ack=1 sealed=1 req=0 work=0 rsp=0 fence_req=0 fence_ack=0 leases=00000000
+FINISH_DEBUG state=2 status=0 active=1 ack=1 sealed=1 req=0 work=0 rsp=0 fence_req=0 fence_ack=0 leases=00000000
+FINISH_DEBUG state=2 status=0 active=1 ack=1 sealed=1 req=0 work=0 rsp=0 fence_req=0 fence_ack=0 leases=00000000
+FINISH_DEBUG state=2 status=0 active=1 ack=1 sealed=1 req=0 work=0 rsp=0 fence_req=0 fence_ack=0 leases=00000000
+FINISH_DEBUG state=2 status=0 active=1 ack=1 sealed=1 req=0 work=0 rsp=0 fence_req=0 fence_ack=0 leases=00000000
+FINISH_DEBUG state=2 status=7 active=1 ack=0 sealed=1 req=0 work=0 rsp=0 fence_req=0 fence_ack=1 leases=00000000
+Fatal: fence never reached address recycle
+Time: 62530 ns  Iteration: 0  Process: /tb_response_fallthrough_fence_debug/test/fence_and_next_query  Scope: tb_response_fallthrough_fence_debug.test.fence_and_next_query  File: /inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/response_fallthrough_fence_debug_20261024/pilot/sources/tb_small_endpoint_checkpoint_stream_v3.sv Line: 240
+$finish called at time : 62530 ns
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Oct 24 07:31:26 2026...

@@ -1,0 +1,11 @@
+# 小页后备目录先导验证
+
+新增backing_frame_directory_small.sv，由make_small_directory.py从冻结retained目录导出：27位完整owner、32个独立租约、72位cookie、192B帧步长。默认163840帧、18位索引，30MiB数据池，不含目录资源。
+
+40帧/8哈希桶/单次探测/2位epoch的先导仿真通过328个公开命令检查，32槽同时在途并反序退还；40个不同owner含高位差异，强制哈希溢出回退；8次全回收覆盖epoch回绕。checkpoint仅清事务域，保留allocated及published，32页复用事务ID后可再次PIN读回。高位owner错配、旧事务、保留cookie位、满目录、未退休租约、无fence与第31槽失败均检查。
+
+编译/展开/仿真及runner37869 exit0，final_audit passed，manifest SHAcdb009e4bf2645cc77cc4ed797f58d5ea8518275deb5748367907ca705e4f332。首轮只有runner测试文件路径错误，未运行仿真，原launch_failure保留；v2修正路径后完整执行，RTL/TB不改。
+
+只证明小容量目录控制先导；默认163840帧容量、18位高索引、综合资源、服务层和完整端点尚未验证。fence_retired仍由测试作为可信输入提供，端到端排空条件需要后续端点验证。
+
+变异runner6345 exit0：3种均有Fatal，raw manifest 83607381b9c9f16c6c4de23f6fc5d9cbbcdcde1d6c6b65bca45d0668870c3810。owner截断和槽位混淆在对应检查失败；drop_checkpoint_backing却在check97首次MEMORY_DONE提前报STALE，早于成功checkpoint，目标覆盖暂不确认。classification.json记录partial_target_coverage，下一轮先复核该异常，不将raw passed当三项语义均证实。

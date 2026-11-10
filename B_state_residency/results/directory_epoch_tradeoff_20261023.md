@@ -1,0 +1,11 @@
+目录epoch位宽权衡
+
+在默认163840帧与262144哈希槽不变时，8→6bit epoch减少65536B元数据。完整向量有38次查询回收、28次仅TX回收；后者不改变目录epoch。6bit在本向量中不会额外清表，长期每63次完整回收清表一次，8bit为255次。每次清表占262144个CLEAR_INDEX周期。该模型只计算清表，不等于总延迟或实卡性能。
+
+6bit小容量RTL定向回归通过1060检查、130次回收，跨两次回绕，包含owner匹配、32租约、保留checkpoint及旧状态不可见检查。结果位于rtl_small_directory_epoch6_20261023/final_audit.json。尚未证明默认容量集成行为或综合BRAM收益；现有默认配置和全量运行均未改变。
+
+集成补充：epoch6真实19query回放通过，全部逐查询时间、命令、传输与epoch8一致，总20885360ns。独立32槽阻塞测试通过1778checks/8CP/800blockedcycles，每次checkpoint明确检查epoch仍为1。默认容量epoch6综合输入已准备但未启动。
+
+默认容量验证已完成：163840帧全部分配/查询、高帧发布与checkpoint读回、130次完整回收通过，共328219checks。实际观察3次清表（含启动）786432周期，与6bit模型一致；旧owner查询在回收后均UNREADY。终止时间50032850ns。证据：rtl_small_directory_capacity_epoch6_20261023/final_audit.json。此测试验证目录元数据，不包含全部30MiB原始后备数据。
+
+默认整端点综合完成：BRAM319→303，但LUT11688→12256，见rtl_epoch6_endpoint_synthesis_20261023.md。仍需全量回放及物理时序证据。

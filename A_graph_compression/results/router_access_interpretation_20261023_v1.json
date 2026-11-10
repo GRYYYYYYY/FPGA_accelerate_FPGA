@@ -1,0 +1,59 @@
+{
+  "status": "audited_full_router_access_distribution_interpreted",
+  "files": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/results/router_access_profile_audit_20261023_v1.json": "7e655f37d265d5bfe718bb8fcc139e12a1b615fe2a6b3219aa7581bc93100d3f",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_run_20261023_v1/audit_receipt.json": "bfd71655f0ab4cbd6ee52646fa4211e0bda71b5889d0a893d150d21593172149",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/A_graph_compression/data/derived/router_access_profile_run_20261023_v1/plan.json": "6ba16bc5eabe769bad198ff2c69ac67ca8ffc2d477645c3b6d845ea1210d4b20"
+  },
+  "results": [
+    {
+      "batch": 0,
+      "visits": 165847423,
+      "hits": 5780146,
+      "misses": 136095859,
+      "unknown": 23971418,
+      "visited_nodes": 221484,
+      "edges_returned": 625463486,
+      "edges_decoded_on_misses": 600731936,
+      "known_visits": 141876005,
+      "known_cache_hit_fraction": 0.04074082858479135,
+      "unknown_fraction_all_visits": 0.1445389838827945,
+      "degree_1_to8_fraction_known_misses": 0.9201653887206076,
+      "empty_fraction_known_misses": 0.07783807735105298,
+      "degree9_to63_fraction_known_misses": 0.001996533928339436,
+      "degree64_or_higher_visits": 0
+    },
+    {
+      "batch": 1,
+      "visits": 165847423,
+      "hits": 5780172,
+      "misses": 136095833,
+      "unknown": 23971418,
+      "visited_nodes": 221484,
+      "edges_returned": 625463486,
+      "edges_decoded_on_misses": 600731812,
+      "known_visits": 141876005,
+      "known_cache_hit_fraction": 0.04074101184340509,
+      "unknown_fraction_all_visits": 0.1445389838827945,
+      "degree_1_to8_fraction_known_misses": 0.9201654028599098,
+      "empty_fraction_known_misses": 0.07783806283032928,
+      "degree9_to63_fraction_known_misses": 0.0019965343097609754,
+      "degree64_or_higher_visits": 0
+    }
+  ],
+  "decision": [
+    "Retain merge-sort negative/mixed ablation; no high-degree-row benefit is evidenced for this particular routed workload because those rows were never visited.",
+    "Use reproducible samples weighted by actual known-node cache misses for the next matched CSR/baseline/tile-cache RTL experiment; preserve existing strata as diagnostics.",
+    "Evaluate per-row invocation overhead separately:136million misses per batch makes call count material. Do not infer board time from CPU timing or simulated kernel cycles."
+  ],
+  "limitations": [
+    "Diagnostic counting overhead is present; timings are not performance comparisons.",
+    "Per-node counts do not preserve temporal ordering.",
+    "One fixed workload, cache capacity and partial14-instance site model, not population estimates.",
+    "Native CPU access observations are not board memory traffic or measured RTL cycles.",
+    "Only this fixed1062-net partial14-instance model, direct/cache4096 and two batches.",
+    "Per-node counters have no temporal order; weighted random samples cannot reproduce bursts, locality or full-router latency.",
+    "The native known-node cache miss count has not yet been cross-checked against the separate Vitis C-model integration audit.",
+    "No board, PCIe, DDR/HBM or power measurement is inferred."
+  ]
+}

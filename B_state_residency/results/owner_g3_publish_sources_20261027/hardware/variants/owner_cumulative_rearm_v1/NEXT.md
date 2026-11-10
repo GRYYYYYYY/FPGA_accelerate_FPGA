@@ -1,0 +1,1 @@
+先完成owner_cumulative_system_v1的实际owner流/原生PC lease/完整146MB G3候选审计。再导出实际781标签、两path槽、query floor180328，绑定G3/CP19描述符，经原生authority/coordinator/config共同发布并检查G3 GET与旧G2不变。不能用新候选复制完成替代共同发布，也不能复用已消费query180328冒充q3。继续保留累计G1脏集合，真正baseline reseed仍未实现。

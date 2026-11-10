@@ -1,0 +1,23 @@
+# 静态codec、epoch6与记录响应直通组合先导
+
+组合只替换已冻结静态codec/epoch6路径中的响应FIFO，默认源码与各单因素结果不变。三组独立XSim检查通过：
+
+- 19查询75194命令/5183传输，结束20603280ns；每条含时间查询/checkpoint收据、终态计数与动态codec/epoch8记录直通先导完全相同。相对静态codec/epoch6无直通基线20885360ns减少1.350611%，不是额外收益。
+- 原epoch6端点TB：1778检查、288传输、8checkpoint、4次tag回绕，8类阻塞累计800周期。原检查保持启用；这不是epoch6目录63次回收后的回绕覆盖。
+- 九类AXI/格式故障：267检查、68次成功传输，错误封锁/租约隔离/读排空保持。
+
+`audit_record_epoch6_pilot.py`核对冻结源码及先导语义；`audit_record_epoch6_gates.py`核对伴随测试与原epoch6检查器、故障TB仅两处适配、实际编译输入和日志哈希。独立目录默认容量epoch6回绕实验仍是此前结果，未宣称组合版已重放130次回收或完整38查询。
+
+默认163840帧/hash18/EPOCH_BITS6整端点综合已启动：`record_epoch6_synthesis_20261024`，MCP147904/source synthesize_record_epoch6.tcl，functions cell3268；终态保存completion_receipt.json后运行audit_record_epoch6_synthesis.py。尚无组合版综合/物理/全量结果。原记录直通动态epoch8全量任务保持运行，不因组合试验而重启或替换。
+
+组合默认容量综合已终态并审计：record_epoch6_synthesis_20261024/final_audit.json，219.537s/exit0，12434LUT11115FF303BRAM3DSP0latch；对epoch6基线+178LUT，其他资源不变。FRAMES163840/INDEX18/HASH18/EPOCH6已从实际综合日志核对，未缩容量。原cell3268完成，不重投。
+
+组合物理已启动：MCP147904/source implement_record_epoch6.tcl，functions cell3276，record_epoch6_timing_20261024；配对基线为已审计epoch6物理v2，保留相同10ns/Default/OOC范围。终态保存completion_receipt.json后audit_record_epoch6_timing.py。尚未通过物理或组合全量，不声称可直接采用。
+
+组合物理已完成并独立审计：record_epoch6_timing_20261024/final_audit.json，374.374s/exit0，12396LUT/11111FF/303BRAM/3DSP，对epoch6物理基线+180LUT、其余不变；WNS1.265/WHS0.039/WPWS4.458ns，内部失败端点0，route errors0。最差cookie寄存器→目录owners BRAM使能；缺627输入847输出delay及上游时钟模型，非平台闭合。MCP已idle，旧cell3276只返回running交接，终态已由正式报告/receipt证明，勿重复source或wait。
+
+新增组合回绕集成验证record_epoch6_wrap_20261024已passed且source_bound_audit通过：32帧/hash6/epoch6的合成值定向测试，70次完整查询回收、140次页传输、17次fence tag回绕、1次目录epoch回绕，911检查；启动+回绕共128清表周期。每次旧页查询必须miss且不发AR，再写新值/回填逐字节核对。该用例FINISH未发生FENCE_WAIT重试，不能声称覆盖了重试分支；独立故障与阻塞检查仍保留。
+
+自动衔接已运行：continue_record_epoch6_full.py、record_epoch6_full_workflow_20261024，PID295795/工具41327。仅在原record_response_full终态审计通过且组合物理内部约束满足后，才以冻结脚本提交一次record_epoch6_full_20261024并自动审计/逐查询比较。无自动重投或上游变更；当前等待原全量，未启动组合全量。
+
+衔接状态更新：原记录直通动态epoch8全38已passed且独立审计，时间减少1.70670973%。workflow295795已自动启动组合全38，record_epoch6_full_20261024/子runner560047，使用已冻结的runner/auditor/comparer，不要手动重投。已核前13查询含时间收据与原直通全量完全一致；组合尚未完整结束。

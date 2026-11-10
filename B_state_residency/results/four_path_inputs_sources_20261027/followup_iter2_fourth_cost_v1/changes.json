@@ -1,0 +1,30 @@
+[
+  [
+    "namespace rw =",
+    "#include \"natural_query.hpp\"\nnamespace rw ="
+  ],
+  [
+    "        tl_pushes++;",
+    "        nqs::pushed(*this,st,child,lookahead);\n        tl_pushes++;"
+  ],
+  [
+    "        int nk = (int) kids.size();",
+    "        nqs::expand(*this,st,rnode,kids);\n        int nk = (int) kids.size();"
+  ],
+  [
+    "            int childRNode = kids[ki];",
+    "            int childRNode = kids[ki];\n            nqs::candidate(*this,st,rnode,childRNode,ki);"
+  ],
+  [
+    "        prepareRouteConnection(st);",
+    "        prepareRouteConnection(st);\n        nqs::begin(*this,st);"
+  ],
+  [
+    "        while (!queue.empty()) {\n            rnode = queue.poll();\n            pops++;",
+    "        while (!queue.empty()) {\n            rnode = queue.poll();\n            nqs::poll(*this,st,rnode);\n            pops++;"
+  ],
+  [
+    "        lastPops = pops; lastFoundLb = foundLb;",
+    "        nqs::end(*this,st,pops,found,aborted);\n        lastPops = pops; lastFoundLb = foundLb;"
+  ]
+]

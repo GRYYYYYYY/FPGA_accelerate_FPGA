@@ -1,0 +1,94 @@
+{
+  "status": "actual_v6_coordinator_external_backend_stall_positive_and_cookie_negative_verified_evidence_actual_restored",
+  "scope": "Real coordinator unit RTL only; external behavioral backend. Not full-system RTL/gate KA stall closure, functional shadow acceptance or formal proof.",
+  "rtl_source": "/tmp/B_state_residency_offer_20261025/stage_static_cp_shadow_system_v6/sources/recovery_coordinator.sv",
+  "rtl_sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+  "cases": {
+    "ka_real_producer_stall_v1": {
+      "status": "observed",
+      "simulate_log_sha256": "c4712507552ea6179db22799374fe2b4366c58ca5656ed0db81cec5225eab97b"
+    },
+    "ka_real_producer_stall_bad_cookie_v1": {
+      "status": "expected_rejection_observed",
+      "simulate_log_sha256": "75536aa855ed6cd5f683d22ba119a2680da54d73068baeffdbbcb3e5e034672c"
+    }
+  },
+  "positive": {
+    "stall_edges": 6,
+    "authority_transfers": 2,
+    "owner_transfers": 2,
+    "finish_ns": 350,
+    "payload_hold_and_known_checks": true,
+    "recovery_status": 0
+  },
+  "negative": {
+    "mutation": "backend echoes cookie XOR 1",
+    "first_fatal": "KA_UNIT_DUT_FAULT",
+    "finish_ns": 265,
+    "positive_marker_absent": true
+  },
+  "evidence_inventory": {
+    "ka_real_producer_stall_v1/manifest.json": {
+      "sha256": "a6a537747161bf8d498234e6fe1207edcb860583e79653e59de7d4b8c79717bc",
+      "bytes": 1479
+    },
+    "ka_real_producer_stall_v1/recovery_coordinator.sv": {
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+      "bytes": 12673
+    },
+    "ka_real_producer_stall_v1/tb_ka_real_producer_stall.sv": {
+      "sha256": "d90f8a7842ead1f11d56fcc33ee8856808d564f9cced14b687dd50a33851a890",
+      "bytes": 4093
+    },
+    "ka_real_producer_stall_v1/compile.stdout.log": {
+      "sha256": "14cd31acc4dad1debab1b09d2a32c7f8977551039482a22cb5200cdacd353dfe",
+      "bytes": 442
+    },
+    "ka_real_producer_stall_v1/elaborate.stdout.log": {
+      "sha256": "c111878ab538dcd6b02f29440905e12c2d3872354ccd6ac2b401254cf49d6926",
+      "bytes": 853
+    },
+    "ka_real_producer_stall_v1/simulate.stdout.log": {
+      "sha256": "75c9c92810252694ca267b081460bc359b943caf6a78ec9591d5f636e962b0f2",
+      "bytes": 617
+    },
+    "ka_real_producer_stall_v1/simulate.log": {
+      "sha256": "c4712507552ea6179db22799374fe2b4366c58ca5656ed0db81cec5225eab97b",
+      "bytes": 1238
+    },
+    "ka_real_producer_stall_bad_cookie_v1/manifest.json": {
+      "sha256": "5f7909e49a2ce7b782c8d156628209cb7790c12d41c3e16b848bcac7f71a5511",
+      "bytes": 1301
+    },
+    "ka_real_producer_stall_bad_cookie_v1/recovery_coordinator.sv": {
+      "sha256": "2c5e56c962baae5e0b5d7915c0a0b8db64ad2e68fedeb664bc78cdc75f915194",
+      "bytes": 12673
+    },
+    "ka_real_producer_stall_bad_cookie_v1/tb_ka_real_producer_stall.sv": {
+      "sha256": "89234c81dd0d63a01df66a359aa74f6a9b79cc1e4f974d695d3582781cb8eac8",
+      "bytes": 4099
+    },
+    "ka_real_producer_stall_bad_cookie_v1/compile.stdout.log": {
+      "sha256": "4593a09b05503342b53e3ed7c5ecdc2c2704b1e64369e18c13870a612d0871fb",
+      "bytes": 464
+    },
+    "ka_real_producer_stall_bad_cookie_v1/elaborate.stdout.log": {
+      "sha256": "11b5748a423dc2f71cd7aae14127ee391807dbdaf545f88efc719d87fbbdca3d",
+      "bytes": 864
+    },
+    "ka_real_producer_stall_bad_cookie_v1/simulate.stdout.log": {
+      "sha256": "cb6fac2b9b55bddd3ebd7e972fe93db72817a8e75e5b562aaca6b6847d77d281",
+      "bytes": 703
+    },
+    "ka_real_producer_stall_bad_cookie_v1/simulate.log": {
+      "sha256": "75536aa855ed6cd5f683d22ba119a2680da54d73068baeffdbbcb3e5e034672c",
+      "bytes": 1357
+    }
+  },
+  "archive": "/tmp/B_state_residency_offer_20261025/ka_real_producer_stall_evidence_v1/evidence.tar",
+  "archive_sha256": "b8e5ede61b0e89c6821ed94fd633b4d111bc72658224673eab41a26c25961651",
+  "actual_restore": "/tmp/B_state_residency_offer_20261025/ka_real_producer_stall_evidence_v1/restored",
+  "restored_evidence_file_count": 14,
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

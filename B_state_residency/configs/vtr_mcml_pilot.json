@@ -1,0 +1,83 @@
+{
+  "dataset_kind": "real_placed_netlist",
+  "datasets": [
+    {
+      "id": "vtr_mcml",
+      "input": "data/derived/vtr_mcml.rrt",
+      "input_sha256": "68431e9730197f0b89c4b287822a5d7360f4df0478955eb0556212121dab6577",
+      "provenance": "data/derived/vtr_mcml_provenance.json"
+    }
+  ],
+  "builds": [
+    "build/paged_real_v2/build.json",
+    "build/compact_real_v1/build.json"
+  ],
+  "semantic_tests": [
+    "build/paged_real_v2/semantic_tests.json",
+    "build/compact_real_v1/semantic_tests.json"
+  ],
+  "serial_cpu": "8",
+  "batch_cpus": "8-12",
+  "repetitions": 1,
+  "seed": 291,
+  "timeout_seconds": 900,
+  "purpose": "pilot_gate_not_formal_statistics",
+  "cases": [
+    {
+      "mode": "serial",
+      "variant": "original",
+      "page_bits": null
+    },
+    {
+      "mode": "serial",
+      "variant": "paged",
+      "page_bits": 9
+    },
+    {
+      "mode": "serial",
+      "variant": "node_epoch",
+      "page_bits": 9
+    },
+    {
+      "mode": "serial",
+      "variant": "compact",
+      "page_bits": 9
+    },
+    {
+      "mode": "batch",
+      "variant": "paged",
+      "page_bits": 9
+    },
+    {
+      "mode": "batch",
+      "variant": "node_epoch",
+      "page_bits": 9
+    },
+    {
+      "mode": "batch",
+      "variant": "compact",
+      "page_bits": 9
+    }
+  ],
+  "batch_environment": {
+    "RW_MAX_THREADS": "5",
+    "RW_PAR_PART": "1",
+    "RW_PAR_PIN": "0",
+    "RW_PAR_NUMA": "0",
+    "RW_PAR_ITER1": "0",
+    "RW_OVERLAP": "0",
+    "RW_GPU_FLOOD": "0",
+    "RW_BATCH_MIN": "1000",
+    "RW_BATCH_T": "4",
+    "RW_BATCH_B": "8",
+    "RW_BATCH_ITER_MIN": "3",
+    "RW_BATCH_ITER_MAX": "8",
+    "RW_BATCH_OVER_MIN": "128",
+    "RW_BATCH_SPARSE": "1",
+    "RW_BATCH_PAGED": "1",
+    "RW_BATCH_ROLLBACK": "1",
+    "RW_BATCH_BOUNCE": "0",
+    "RW_BATCH_BUDGET": "1048576",
+    "RW_PF_RAMP1": "0"
+  }
+}

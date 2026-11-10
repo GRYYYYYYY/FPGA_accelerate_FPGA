@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "project_id": "F",
+  "title": "硬件局部布线评估驱动布局反馈",
+  "research_question": "降低真实局部布线评估成本，能否让布局器在相同总时间预算内做出更好的决策，减少后期返工？",
+  "variants": [
+    {
+      "id": "reference",
+      "status": "implemented_smoke",
+      "description": "同一局部图上的多个候选查询，共享冻结的外部硬保留节点；区分找到路径、局部无路径和预算耗尽。"
+    },
+    {
+      "id": "placement_without_feedback",
+      "status": "planned",
+      "description": "原布局流程"
+    },
+    {
+      "id": "cheap_congestion_feedback",
+      "status": "planned",
+      "description": "廉价拥塞反馈"
+    },
+    {
+      "id": "cpu_local_route_feedback",
+      "status": "planned",
+      "description": "CPU 真实局部搜索"
+    },
+    {
+      "id": "fpga_local_route_feedback",
+      "status": "planned",
+      "description": "相同算法 FPGA 局部搜索"
+    },
+    {
+      "id": "fpga_shared_candidate_state",
+      "status": "planned",
+      "description": "共享快照 + 候选差量"
+    }
+  ],
+  "controlled_factors": [
+    "固定候选数 / 相同总时间预算",
+    "局部范围和扩展预算",
+    "候选状态复用开/关",
+    "反馈频率与调用选择"
+  ],
+  "metrics": [
+    {
+      "name": "oracle_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "candidates_evaluated",
+      "unit": "count"
+    },
+    {
+      "name": "budget_exhausted_rate",
+      "unit": "ratio"
+    },
+    {
+      "name": "place_route_ms",
+      "unit": "ms"
+    },
+    {
+      "name": "routing_success",
+      "unit": "boolean"
+    },
+    {
+      "name": "critical_path_delay",
+      "unit": "ns"
+    }
+  ],
+  "real_run_settings": {
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "repetitions": 3,
+    "timeout_seconds": null,
+    "baseline_revision": null,
+    "timing_mode": null,
+    "quality_tolerance": null
+  },
+  "notes": "Only the synthetic reference is executable. Real variants need implementation and validation; null settings are unset, not measured zeros."
+}

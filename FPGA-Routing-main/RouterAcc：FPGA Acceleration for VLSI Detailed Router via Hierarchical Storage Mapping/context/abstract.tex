@@ -1,0 +1,36 @@
+
+The semiconductor industry keeps seeking for reducing the design time and efforts in modern integrated circuit implementation, 
+while detailed routing is a dead-or-alive critical element in design automation tooling for advanced node enablement, 
+which is known as the most time-consuming step in the back-end design flow due to its high complexity and enormous solution space for the very large-scale integration (VLSI) routing problem.
+
+In this paper, we propose a FPGA-based implementation to accelerate the detailed routers, uses efficient memory access management and parallelism to achieve better performance.
+Experimental results demonstrate that detailed routers obtain stable and effective acceleration on FPGA. 
+Our design gets 2.1$\times$-2.3$\times$, 2.1$\times$-2.5$\times$, 1.3$\times$ speedup compared to TritonRoute, Dr.CU,and current optimum routing kernel acceleration work, 
+also obtains 20\% speedup for  detailed routing flow, and 1.0$\times$-1.2$\times$ resource utilization compared to TritonRoute.
+% \textbf{(1) Incompatibility between element-wise operations and Tensor Core.} 
+% Linear operations (matrix multiplications) and element-wise operations are the two dominating operations in Mamba.
+% The time proportion of element-wise operations escalates significantly (\textit{e.g.}, $>$60\% with 2048 input length). 
+% These operations do not need reduction, which is not compatible with the existing Tensor Core-based architectures (\textit{e.g.}, 1/16 normalized speed). 
+% \textbf{(2) Large area overhead for nonlinear function unit.} The optimized nonlinear function unit like exponential unit still occupies $>$30\% of the processing element (PE) area.
+% % , which introduces large area and power overheads.
+% \textbf{(3) Large memory access but limited data sharing for element-wise operations.} 
+% % Linear and element-wise operations also show different characteristics of data sharing.
+% Linear and element-wise operations in Mamba exhibit large compute intensity variance (\textit{e.g.}, $\sim$3 orders of magnitude) and large read/write ratio variance (\textit{e.g.}, $>$3 orders). 
+% Due to the limited data sharing in element-wise operations, it is useless to apply the existed methods like tiling to element-wise operations.
+
+% In response to these challenges, we propose a Mamba accelerator with reconfigurable architecture, \we.
+% % , controlled by instruction with reconfigurable computing units (CUs) and processing elements (PEs).
+% Then, we propose three novel approaches in this paper.
+% \textbf{(1) Reduction alternative PE array architecture} for both linear and element-wise operations. 
+% For linear operations, the reduction tree connected to PE arrays is enabled and executes the reduction operation.
+% For element-wise operations, the reduction tree is disabled and the output bypasses.
+% \textbf{(2) Reusable nonlinear function unit} based on the reconfigurable PE. 
+% We decompose the exponential function into element-wise operations and a shift operation by a fast biased exponential algorithm,
+% and the activation function (SiLU) into a range detection and element-wise operations by a piecewise approximation algorithm.
+% Thus, the reconfigurable PEs are reused to execute nonlinear functions with negligible accuracy loss.
+% \textbf{(3) Intra-operation and inter-operation buffer management strategy}.
+% We propose intra-operation buffer management strategy to maximize input data sharing for linear operations within operations, and inter-operation strategy for element-wise operations between operations.
+% % We conduct extensive experiments on Mamba model families with different model sizes.
+% We conduct extensive experiments on Mamba model families with different sizes.
+% \we achieves up to 463.22$\times$/11.66$\times$ speedup and up to 9761.42$\times$/242.52$\times$ energy efficiency compared to Intel Xeon 8358P CPU and NVIDIA Tesla A100 GPU implementations, respectively. 
+

@@ -1,0 +1,758 @@
+{
+  "goal": "实现完整实验",
+  "status": "active",
+  "requirements": [
+    {
+      "id": "semantics",
+      "requirement": "Canonical nodes, aliases, pip identity/direction/attributes and independent oracle validation",
+      "status": "implemented_sampled",
+      "evidence": "results/region_check_20261022_v2.json"
+    },
+    {
+      "id": "coverage",
+      "requirement": "Independent traversal-based training and new held-out data",
+      "status": "implemented_bounded_microbenchmark",
+      "evidence": "results/packed_check_20261022_v2.json"
+    },
+    {
+      "id": "packed",
+      "requirement": "Executable binary CSR/templates with full capacity accounting and strict equivalence",
+      "status": "implemented_bounded_microbenchmark",
+      "evidence": "results/packed_check_20261022_v2.json"
+    },
+    {
+      "id": "native",
+      "requirement": "Same native search, initialization/first/resident/end-to-end timings, cache/granularity ablations",
+      "status": "complete_query_partial_site_model_native_equivalence_verified_runtime_statistics_running",
+      "evidence": [
+        "results/native_site_routing_check_20261023_v1.json",
+        "results/native_site_runtime_pipeline_20261023_v1.json"
+      ],
+      "remaining": "Repeated statistics, template granularity/scaling and full resource semantics remain."
+    },
+    {
+      "id": "netlist",
+      "requirement": "Placed real design queries, resource occupancy/protection, complete router and quality validation",
+      "status": "independent_domain_partial_site_model_full_query_physical_validation_passed",
+      "evidence": [
+        "results/netlist_stage_20261022_v1.json",
+        "data/netlist/all_nets_cap8_applied_20261022_v1/readback_check.json",
+        "data/netlist/all_nets_cap8_applied_20261022_v1/quality_check.json",
+        "results/site_full_stage_20261023_v1.json"
+      ],
+      "remaining": "Full special-resource ownership/configuration semantics beyond14 proven instances, controlled complete-runtime comparisons and external IO remain; full1062 queries already physically passed under partial model."
+    },
+    {
+      "id": "hardware",
+      "requirement": "Matching FPGA CSR/compact implementation, self-checking simulation, synthesis and routed timing/resources",
+      "status": "vitis_baseline_xo_internal_ooc_and_stratified_rtl_verified_isolated_tile_cache_rtl_running",
+      "evidence": [
+        "results/hls_u280_check_20261022_v1.json",
+        "results/hls_fixed_check_20261022_v1.json",
+        "results/netlist_stage_20261022_v1.json",
+        "results/vitis_graph_kernel_audit_20261023_v2.json",
+        "results/vitis_ooc_audit_20261023_v1.json",
+        "results/vitis_stratified_audit_20261023_v1.json",
+        "results/vitis_merge_comparison_20261023_v1.json",
+        "results/vitis_tile_cache_stage_20261023_v1.json"
+      ],
+      "remaining": "Real board/runtime/platform integration, calibrated DDR/HBM, external IO timing, power and end-to-end measurements; independent domain and improved architecture remain",
+      "fixed_mode_comparison": {
+        "status": "csim_csynth_matched_cosim_impl_complete",
+        "report": "results/hls_fixed_check_20261022_v1.json",
+        "source_manifest": "data/derived/hls_fixed_modes_20261022_v1/manifest.json"
+      },
+      "actual_u280_data_validation": {
+        "status": "complete_reference_decoder_stage",
+        "report": "results/hls_u280_check_20261022_v1.json",
+        "input_capacity_bytes": 67108864,
+        "known_rows": 18243,
+        "c_simulation_edges": 83995,
+        "rtl_scope": "9 matched requests /37 output records plus capacity/mode probes"
+      },
+      "c_model_search_integration": {
+        "status": "all_1062_routes_equivalent",
+        "report": "data/derived/netlist_cmodel_cap8_20261022_v1/report.json",
+        "scope": "CPU C-model, not FPGA/XRT runtime"
+      }
+    },
+    {
+      "id": "ddr_hbm",
+      "requirement": "Same-board DDR/HBM memory-backend measurements with actual platform/clock",
+      "status": "pending_external_resource",
+      "evidence": "XRT examine: 0 devices found; no U280 xpfm in installed base platforms"
+    },
+    {
+      "id": "end_to_end",
+      "requirement": "Full placement/routing comparison, legality/success/iterations/quality and end-to-end accounting",
+      "status": "partial_site_model_full_query_physical_passed_software_chain_running_board_pending",
+      "evidence": [
+        "results/site_full_stage_20261023_v1.json",
+        "results/packed_conversion_statistics_audit_20261023_v1.json",
+        "results/source_to_route_statistics_pipeline_20261023_v1.json"
+      ],
+      "remaining": "Await whole-chain repetitions; full model, acquisition/training accounting, external IO and actual board measurement remain."
+    },
+    {
+      "id": "reproducibility",
+      "requirement": "One entrypoint, immutable manifests, hashes, versions, commands, regressions and research report",
+      "status": "bounded_stages_audited_full_experiment_partial",
+      "evidence": "python3 scripts/run.py netlist-report --output results/NEW.json"
+    }
+  ],
+  "goal_turn_classification": "progress: newly terminal full Cmodel, actual access profile and tile-cache RTL evidence rehashed and cross-checked; previous turn verified wait.",
+  "completion_rule": "No pending requirement is silently reclassified as complete or replaced by toy/microbenchmark evidence.",
+  "independent_region_capture": {
+    "status": "complete",
+    "config": "configs/region_u280_v1.json",
+    "sources": 220973,
+    "workers": 8,
+    "owner_pid": 1959703,
+    "state": "results/region_u280_capture_20261022_v1.json",
+    "pilot_equal": true,
+    "merge_tests_passed": 4,
+    "scope": "Endpoint-defined regional domain, unknown exterior; not full-device or untouched holdout",
+    "nodes": 274732,
+    "directed_edges": 1100754,
+    "capture": "data/raw/region_u280_20261022_v1/capture.json"
+  },
+  "independent_region_routing_queue": {
+    "status": "complete_software_equivalence_physical_validation_failed",
+    "owner_pid": 2113276,
+    "state": "results/region_routing_pipeline_20261022_v1.json",
+    "plan": "results/region_routing_pipeline_20261022_v1.plan.json",
+    "selected_nets": 1062,
+    "max_iterations": 80,
+    "present_cap": 8,
+    "shared_cache_rows": 4096,
+    "report": "data/derived/region_all_nets_cap8_20261022_v1/report.json",
+    "actual_iterations": 4
+  },
+  "runtime_measurement_validation": {
+    "status": "complete_small_workflow_validation",
+    "report": "data/derived/netlist_runtime_validation_20261022_v1/report.json",
+    "fresh_processes": 4,
+    "repeats_per_condition": 2,
+    "limitations": "16-net reference domain, Python, concurrent capture; final statistical comparison still pending"
+  },
+  "generalized_c_model_validation": {
+    "status": "verified_reference_domain_16_nets",
+    "report": "data/derived/netlist_cmodel_generalized16_20261022_v1/report.json",
+    "independent_domain_validation": "pending_new_capacity_fixtures_and_site_legal_router",
+    "capacity_policy": "Reject complete images exceeding frozen kernel bound; no truncation"
+  },
+  "independent_region_physical_validation": {
+    "status": "failed",
+    "diagnostic": "data/netlist/region_all_diagnostic_20261023_v3/diagnostic_summary.json",
+    "drc": "data/netlist/region_all_diagnostic_20261023_v3/site_conflicts.json",
+    "selected_nets": 1062,
+    "selected_not_routed": 755,
+    "invalid_sites": 84,
+    "placements_unchanged": true,
+    "protected_groups_status_changed": 908,
+    "root_cause": "Missing intra-site ownership and configuration constraints; LUT and clock-leaf pseudo PIPs are retained, not blanket removed.",
+    "tool_limitation": "Multithreaded CheckNetlistWorker segfault reproduced twice; single-thread diagnostic completed."
+  },
+  "site_resource_model": {
+    "status": "python_and_native_integrated_fourteen_verified_instances",
+    "sources": [
+      "src/site_resources.py",
+      "src/lut_equation.py"
+    ],
+    "regression": "results/regression_20261023_site_resources_v1.log",
+    "tests_passed": 81,
+    "remaining": "Clock and other special resource constant/inversion/fixed ownership semantics beyond14 proven instances remain.",
+    "integration_evidence": "results/native_site_routing_check_20261023_v1.json"
+  },
+  "site_aware_region_integration": {
+    "status": "full_query_physical_validation_passed_under_partial_site_model",
+    "owner_pid": 1396247,
+    "exec_session": 69275,
+    "log": "results/site_routing_all_known_instances_20261023_v1.log",
+    "output": "data/derived/site_routing_all_known_instances_20261023_v1",
+    "queries": 1062,
+    "site_model_scope": "Fourteen tested LUT instances only; remaining pseudo semantics explicit unknown. Not final full-model experiment.",
+    "smoke": "data/derived/site_routing_probe_g37_20261023_v1/report.json",
+    "latest_complete_regression": "results/regression_20261023_site_router_v1.log",
+    "tests_passed": 99,
+    "latest_completed_round": {
+      "round": 3,
+      "queries": 1062,
+      "canonical_node_conflicts": 0,
+      "site_conflicts": 0,
+      "incomplete": 0
+    },
+    "candidate_preparation": {
+      "script": "scripts/prepare_site_routes.py",
+      "verified_probe_candidate": "data/derived/site_routing_probe_g37_20261023_v1/candidate_routes.tsv",
+      "probe_pips": 14,
+      "incomplete_batch_rejection": "passed_no_output",
+      "physical_readback": "single_probe_passed",
+      "readback_report": "data/netlist/site_g37_applied_20261023_v1/readback_check.json",
+      "quality_report": "data/netlist/site_g37_applied_20261023_v1/quality_check.json",
+      "physical_probe_scope": "No site demands exercised: interface validation only.",
+      "physical_probe_scope_evidence": "results/site_g37_physical_scope_20261023_v1.json",
+      "altered_edge_rejection": "results/site_candidate_rejection_20261023_v1.json"
+    },
+    "full_model_pips": 17682,
+    "nets_exercising_site_demands": 3,
+    "report": "data/derived/site_routing_all_known_instances_20261023_v1/report.json",
+    "candidate": "data/derived/site_routing_all_known_instances_20261023_v1/candidate_routes.tsv",
+    "preparation_log": "results/site_full_candidate_preparation_20261023_v1.log",
+    "physical_output": "data/netlist/site_full_applied_20261023_v1",
+    "vivado_session": "vivado-20261023-072116-f6c0019b",
+    "vivado_pid": 2607458,
+    "stage_report": "results/site_full_stage_20261023_v1.json",
+    "physical_readback": "data/netlist/site_full_applied_20261023_v1/readback_check.json",
+    "physical_quality": "data/netlist/site_full_applied_20261023_v1/quality_check.json"
+  },
+  "regional_hls_capacity_validation": {
+    "status": "both_modes_complete_independently_verified",
+    "fixture_owner_pid": 1478184,
+    "pipeline_owner_pid": 1525674,
+    "pipeline_state": "results/hls_region_pipeline_20261023_v1.json",
+    "fixture_output": "data/derived/hls_region_fixtures_20261023_v1",
+    "capacity_bytes": 134217728,
+    "old_capacity_overflow_rejection": "results/hls_region_capacity64_rejection_20261023_v1.json",
+    "remaining": "Board DDR/HBM, external IO/platform constraints, power and complete-router hardware remain unverified.",
+    "fixture_status": "complete",
+    "csr_evidence": "results/hls_region_csr_check_20261023_v1.json",
+    "compact_cosim": "passed_3_cases_sampled_rtl",
+    "simulation_check": "results/hls_region_csim_cosim_check_20261023_v1.json",
+    "sampled_cycle_check": "results/hls_region_rtl_cycles_20261023_v1.json",
+    "sampled_compact_over_csr_cycles": 224.89265129682997,
+    "report": "results/hls_region_check_20261023_v1.json"
+  },
+  "native_router_development": {
+    "status": "both_modes_full_query_partial_site_model_verified",
+    "decoder": "src/native/packed_graph.hpp",
+    "regression": "results/regression_native_graph_extraction_20261023_v1.log",
+    "tests_passed": 9,
+    "remaining": "Complete remaining site/configuration semantics; repeated fair runtime, source-to-route and granularity/scale experiments remain.",
+    "search": "src/native/netlist_connect.hpp",
+    "search_regression": "results/regression_native_connect_20261023_v2.log",
+    "search_tests_passed": 5,
+    "batch_router": "src/native/netlist_routes.hpp",
+    "batch_regression": "results/regression_native_routes_20261023_v2.log",
+    "batch_tests_passed": 5,
+    "real_inputs_status": "both_mode_specific_fixtures_prepared_same_canonical_order_and_queries",
+    "real_input_dirs": [
+      "data/derived/native_region_csr_inputs_20261023_v2",
+      "data/derived/native_region_compact_inputs_20261023_v2"
+    ],
+    "owner_pid": 3164210,
+    "exec_session": 67277,
+    "output": "data/derived/native_region_routing_20261023_v1",
+    "log": "results/native_region_routing_20261023_v1.log",
+    "csr_report": "results/native_region_csr_check_20261023_v1.json",
+    "compact_child_pid": 3234729,
+    "verifier": "scripts/check_native_routing.py",
+    "measurement_limits": [
+      "Integration runs retain full native connection paths and unknown-ID lists; Python reference uses full_trace=False.",
+      "Native child VmHWM excludes Python orchestration/audit parent and pre-generated fixture work.",
+      "Both native modes have the same trace policy; cross-language memory or end-to-end acceleration is not established."
+    ],
+    "report": "results/native_region_check_20261023_v1.json",
+    "verifier_negative_check": "results/native_verifier_rejection_20261023_v1.json",
+    "single_run_compact_over_csr": 2.2291096805256507
+  },
+  "native_runtime_development": {
+    "status": "full_validation_independently_audited_statistics_running",
+    "source": "src/native/netlist_runtime.cpp",
+    "binary": "build/native_runtime_20261023_v1",
+    "protocol_report": "results/native_runtime_protocol_20261023_v1.json",
+    "verified_source_archive": "results/source_snapshots/native_region_verified_20261023_v1/manifest.json",
+    "remaining": "Finish seeded repeat/cache/materialization statistics and final independent audit; old canonical model failed physical validation and is not the tested site-model result.",
+    "validation_owner_pid": 3563530,
+    "validation_session": 27491,
+    "validation_output": "data/derived/native_runtime_validation_20261023_v1",
+    "statistics_queue_owner_pid": 3591840,
+    "statistics_queue_session": 44414,
+    "statistics_queue_state": "results/native_runtime_pipeline_20261023_v1.json",
+    "execution_binding": "results/native_runtime_execution_binding_20261023_v1.json",
+    "formal_workers": 63,
+    "independent_auditor": "scripts/check_native_runtime.py",
+    "csr_first_resident_full_audit": "results/native_runtime_csr_partial_audit_20261023_v1.json",
+    "completed_validation_conditions": 3,
+    "current_validation_condition": "compact/direct",
+    "current_validation_child_pid": 3828645,
+    "two_conditions_independent_audit": "results/native_runtime_two_conditions_audit_20261023_v1.json",
+    "full_validation_audit": "results/native_runtime_validation_audit_20261023_v1.json",
+    "statistics_owner_pid": 4146936,
+    "statistics_first_child_pid": 4146940,
+    "statistics_completed_workers_independently_audited": 1,
+    "statistics_partial_audit": "results/native_runtime_statistics_partial_001_20261023_v1.json",
+    "statistics_current_child_pid": 225659,
+    "statistics_completed_workers_executor_verified": 22
+  },
+  "site_requirement_footprints": {
+    "status": "inferred_partial_footprints_completed_not_promoted",
+    "gap_report": "results/site_requirement_footprint_gap_20261023_v1.json",
+    "updated_table": "data/derived/region_all_nets_cap8_20261022_v1/site_requirements_v3.json",
+    "updated_mux_records": 20832,
+    "physical_probe_payloads_matched": 14,
+    "running_model_unchanged": true
+  },
+  "native_site_state": {
+    "status": "component_verified_and_integrated_in_full_query_partial_site_model",
+    "source": "src/native/site_state.hpp",
+    "regression": "results/regression_native_site_state_20261023_v1.log",
+    "transaction_actions": 18,
+    "configuration_bits_width": 64,
+    "remaining": "Complete physical semantics beyond14 tested instances, final repeated runtime/capacity results and real board validation remain.",
+    "integration_report": "results/native_site_routing_check_20261023_v1.json",
+    "integration_report_sha256": "3124d01e9c4c95135984a391b0aafded719d0174e8e83ddc12c333fadd1f60e6"
+  },
+  "native_site_search": {
+    "status": "component_verified_and_integrated_in_full_query_partial_site_model",
+    "source": "src/native/site_search.hpp",
+    "regression": "results/regression_native_site_search_20261023_v1.log",
+    "differential_scenarios": 12,
+    "cost_scope": "Positive integer hop/congestion costs only.",
+    "remaining": "Complete physical semantics beyond14 tested instances, final repeated runtime/capacity results and real board validation remain.",
+    "integration_report": "results/native_site_routing_check_20261023_v1.json",
+    "integration_report_sha256": "3124d01e9c4c95135984a391b0aafded719d0174e8e83ddc12c333fadd1f60e6"
+  },
+  "native_site_ledger": {
+    "status": "component_verified_and_integrated_in_full_query_partial_site_model",
+    "source": "src/native/site_ledger.hpp",
+    "regression": "results/regression_native_site_ledger_20261023_v1.log",
+    "differential_steps": 8,
+    "remaining": "Complete physical semantics beyond14 tested instances, final repeated runtime/capacity results and real board validation remain.",
+    "integration_report": "results/native_site_routing_check_20261023_v1.json",
+    "integration_report_sha256": "3124d01e9c4c95135984a391b0aafded719d0174e8e83ddc12c333fadd1f60e6"
+  },
+  "native_site_router": {
+    "status": "component_verified_and_integrated_in_full_query_partial_site_model",
+    "source": "src/native/site_routes.hpp",
+    "regression": "results/regression_native_site_routes_20261023_v2.log",
+    "binding": "results/native_site_routes_binding_20261023_v1.json",
+    "scenarios": 12,
+    "remaining": "Complete physical semantics beyond14 tested instances, final repeated runtime/capacity results and real board validation remain.",
+    "real_inputs_status": "csr_and_compact_prepared_and_payloads_matched",
+    "real_input_report": "results/native_site_inputs_check_20261023_v1.json",
+    "integration_report": "results/native_site_routing_check_20261023_v1.json",
+    "integration_report_sha256": "3124d01e9c4c95135984a391b0aafded719d0174e8e83ddc12c333fadd1f60e6"
+  },
+  "native_site_execution": {
+    "status": "completed_and_independently_verified",
+    "output": "data/derived/native_site_routing_20261023_v2",
+    "binding": "results/native_site_execution_binding_20261023_v1.json",
+    "owner_pid": 983662,
+    "initial_child_pid": 987785,
+    "queries": 1062,
+    "verified_instances": 14,
+    "current_mode": "compact",
+    "current_child_pid": 1200236,
+    "report": "results/native_site_routing_check_20261023_v1.json"
+  },
+  "native_site_audit": {
+    "status": "complete",
+    "owner_pid": 1111940,
+    "state": "results/native_site_audit_pipeline_20261023_v1.json",
+    "expected_report": "results/native_site_routing_check_20261023_v1.json",
+    "regression": "results/regression_native_site_verifier_20261023_v1.log"
+  },
+  "clock_row_mapping": {
+    "status": "endpoint_mapping_verified_legality_pending",
+    "evidence": "results/clock_row_mapping_20261023_v1.json",
+    "pips": 26,
+    "sites": 13
+  },
+  "clock_row_probe": {
+    "status": "locked_pin_retest_passed_strict_invariants",
+    "evidence": "data/netlist/clock_row_route_probe_full_20261023_v2/verification.json",
+    "locked_lut_cells": 1099,
+    "site_pin_changed_nets": 0,
+    "routable_nets_complete": 1277,
+    "scope": "Two-instance joint path, not complete clock semantics",
+    "previous_failure": "data/netlist/clock_row_route_probe_full_20261023_v1/verification.json"
+  },
+  "native_site_runtime": {
+    "status": "three_condition_validation_independently_audited_63_worker_statistics_running",
+    "validation_owner_pid": 1716135,
+    "pipeline_owner_pid": 1739121,
+    "state": "results/native_site_runtime_pipeline_20261023_v1.json",
+    "execution_binding": "results/native_site_runtime_execution_binding_20261023_v1.json",
+    "protocol": "results/native_site_runtime_protocol_20261023_v1.json",
+    "audit_child_pid": 3328897,
+    "validation_audit": "results/native_site_runtime_validation_audit_20261023_v1.json",
+    "validation_audit_sha256": "3591fd8ecd96715a08df7b5cd685889c093f01143983f983e3129f1afe5e7455",
+    "statistics_owner_pid": 3457381,
+    "independently_audited_validation_workers": 3
+  },
+  "source_conversion_runtime": {
+    "status": "complete_conversion_matrix_independently_audited",
+    "owner_pid": 1876655,
+    "audit_owner_pid": 1900286,
+    "state": "results/packed_conversion_audit_pipeline_20261023_v1.json",
+    "binding": "results/packed_conversion_execution_binding_20261023_v1.json",
+    "scope": "Captured TSV to identical AGR only, not full end-to-end",
+    "report": "results/packed_conversion_statistics_audit_20261023_v1.json",
+    "completed_workers": 14,
+    "summary_medians": {
+      "compact": {
+        "bank_load_ms": 9.694136679172516,
+        "conversion_ms": 56338.303066790104,
+        "n": 7,
+        "peak_child_kib": 7015116,
+        "process_wall_ms": 59064.87609259784,
+        "read_export_ms": 15395.585024729371,
+        "serialize_ms": 40866.857094690204,
+        "validation_ms": 1524.368055164814
+      },
+      "csr": {
+        "bank_load_ms": 0.0017937272787094116,
+        "conversion_ms": 38224.05661828816,
+        "n": 7,
+        "peak_child_kib": 6205536,
+        "process_wall_ms": 40834.855226799846,
+        "read_export_ms": 15325.392261147499,
+        "serialize_ms": 22858.87834057212,
+        "validation_ms": 1560.045450925827
+      }
+    }
+  },
+  "runtime_fixture_rebuild": {
+    "status": "complete_artifacts_byte_identical_in_both_modes",
+    "report": "data/derived/runtime_fixture_rebuild_20261023_v1/report.json",
+    "scope": "Complete1062-query preparation bridge; regenerated inputs consumed and all three two-batch source-to-route validation conditions independently audited. Repeated timing still running."
+  },
+  "source_to_route_runtime": {
+    "status": "all_three_integration_trials_independently_audited_21_worker_statistics_running",
+    "validation_owner_pid": 2142179,
+    "validation_audit_owner_pid": 2205877,
+    "statistics_pipeline_owner_pid": 2407216,
+    "statistics_pipeline_exec_session": 50824,
+    "validation_output": "data/derived/source_to_route_validation_20261023_v1",
+    "statistics_state": "results/source_to_route_statistics_pipeline_20261023_v1.json",
+    "binding": "results/source_to_route_statistics_execution_binding_20261023_v1.json",
+    "statistics_workers": 21,
+    "repeats_per_condition": 7,
+    "batches_per_worker": 2,
+    "scope": "Actual regenerated captured-TSV to two full routing batches; excludes acquisition, training, physical readback and board transfer; partial14-instance site model.",
+    "partial_audit": "results/source_to_route_partial_001_20261023_v1.json",
+    "independently_audited_validation_workers": 3,
+    "memory_scope_annotation": "results/source_to_route_memory_scope_20261023_v1.json",
+    "executor_verified_validation_workers": 3,
+    "validation_audit": "results/source_to_route_validation_audit_20261023_v1.json",
+    "validation_audit_sha256": "ec9eb3a2da3e04bc8c7d9c684af738c5cf3915de1b21160a7bc6e3eece90e146",
+    "statistics_driver_pid": 3986466,
+    "statistics_block_child_pid": 3995518,
+    "statistics_audited_blocks": 1,
+    "statistics_independently_audited_workers": 3,
+    "statistics_executor_completed_workers_at_least": 4,
+    "statistics_first_block_audit": "data/derived/source_to_route_statistics_20261023_v1/block_000/audit.json",
+    "statistics_first_block_audit_sha256": "518d54744fe3479ebd27678534373b8429144350d0b1210adb7131cae57f132e",
+    "statistics_progress_layout": "block_*/worker_*.receipt.json; top-level worker count is not progress"
+  },
+  "template_sharing_granularity": {
+    "status": "all_four_full_region_scopes_verified_runtime_validation_running",
+    "scope": "Dictionary sharing extent; original trained rules and per-instance exceptions unchanged",
+    "static_report": "data/derived/template_scope_region_20261023_v1/report.json",
+    "scopes_tiles": [
+      null,
+      16,
+      4,
+      1
+    ],
+    "image_bytes": [
+      93507968,
+      93946944,
+      96954624,
+      107368384
+    ],
+    "known_rows": 220973,
+    "unknown_rows": 53759,
+    "directed_edges": 1100754,
+    "runtime_pipeline_owner_pid": 2703564,
+    "runtime_driver_pid": 2703565,
+    "runtime_pipeline_exec_session": 62529,
+    "runtime_state": "results/template_scope_runtime_pipeline_20261023_v1.json",
+    "binding": "results/template_scope_execution_binding_20261023_v1.json",
+    "validation_workers": 5,
+    "gated_statistics_workers": 35,
+    "remaining": "Full-query runtime validation and repeated statistics pending; not new family training, scale or board evidence.",
+    "executor_verified_validation_workers": 1,
+    "runtime_validation_audit": "results/template_scope_runtime_validation_audit_20261023_v1.json",
+    "runtime_validation_audit_sha256": "10ab49a44260b82f7c1e7b9b46283f927cfd32bc84ce788303c186667e4dcef0",
+    "statistics_owner_pid": 2458493,
+    "runtime_status": "five_validation_conditions_independently_passed_35_process_statistics_running"
+  },
+  "clock_semantics": {
+    "status": "physical_observation_and_primitive_behavior_audited_not_full_clock_model",
+    "report": "results/clock_semantics_stage_20261023_v1.json",
+    "physical_capture": "results/clock_semantics_capture_20261023_v1.json",
+    "simulation_report": "data/derived/clock_primitive_sim_20261023_v1/report.json",
+    "cases": 16,
+    "behavioral_samples": 192,
+    "remaining": "Physical constant/inversion bindings, leaf delay/test and shared/fixed ownership remain incomplete; existing14-instance model unchanged.",
+    "property_surface_report": "results/clock_property_surface_stage_20261023_v1.json",
+    "property_objects_per_stage": 60,
+    "public_properties_per_stage": 1132,
+    "property_read_errors": 0,
+    "inversion_observation": "Direct getter empty; report_property displays read-only bool0 on ROW IINV. Actual polarity remains uncertified."
+  },
+  "real_domain_scale": {
+    "status": "four_real_domains_and_48_bounded_native_scans_completed_and_audited",
+    "owner_pid": 3361172,
+    "exec_session": 14732,
+    "cpu": 124,
+    "output": "data/derived/scale_domain_region_20261023_v1",
+    "source_tile_denominators": [
+      16,
+      4,
+      2,
+      1
+    ],
+    "regression": "results/regression_scale_domain_20261023_v1.log",
+    "capacity_matrix_status": "all_48_conditions_independently_audited",
+    "remaining": "Complete-router capacity, larger captured domains and board capacity remain unverified; virtual address-space decoder limit is not RSS or full-router memory.",
+    "report": "data/derived/scale_domain_region_20261023_v1/report.json",
+    "stage_report": "results/scale_capacity_stage_20261023_v1.json",
+    "capacity_audit": "results/scale_capacity_region_audit_20261023_v1.json",
+    "capacity_owner_pid": 3549882,
+    "capacity_exec_session": 93312,
+    "summary": [
+      {
+        "denominator": 16,
+        "known_rows": 471,
+        "modes": {
+          "compact": {
+            "failed_tested_limits_mib": [
+              8
+            ],
+            "image_bytes": 3508608,
+            "smallest_successful_tested_limit_mib": 16
+          },
+          "csr": {
+            "failed_tested_limits_mib": [
+              8
+            ],
+            "image_bytes": 3508416,
+            "smallest_successful_tested_limit_mib": 16
+          }
+        },
+        "nodes": 3537
+      },
+      {
+        "denominator": 4,
+        "known_rows": 28640,
+        "modes": {
+          "compact": {
+            "failed_tested_limits_mib": [
+              8,
+              16
+            ],
+            "image_bytes": 18922112,
+            "smallest_successful_tested_limit_mib": 32
+          },
+          "csr": {
+            "failed_tested_limits_mib": [
+              8,
+              16
+            ],
+            "image_bytes": 19547200,
+            "smallest_successful_tested_limit_mib": 32
+          }
+        },
+        "nodes": 54627
+      },
+      {
+        "denominator": 2,
+        "known_rows": 115095,
+        "modes": {
+          "compact": {
+            "failed_tested_limits_mib": [
+              8,
+              16,
+              32
+            ],
+            "image_bytes": 53211136,
+            "smallest_successful_tested_limit_mib": 64
+          },
+          "csr": {
+            "failed_tested_limits_mib": [
+              8,
+              16,
+              32
+            ],
+            "image_bytes": 55321280,
+            "smallest_successful_tested_limit_mib": 64
+          }
+        },
+        "nodes": 156827
+      },
+      {
+        "denominator": 1,
+        "known_rows": 220973,
+        "modes": {
+          "compact": {
+            "failed_tested_limits_mib": [
+              8,
+              16,
+              32,
+              64
+            ],
+            "image_bytes": 93507968,
+            "smallest_successful_tested_limit_mib": 96
+          },
+          "csr": {
+            "failed_tested_limits_mib": [
+              8,
+              16,
+              32,
+              64,
+              96
+            ],
+            "image_bytes": 98255808,
+            "smallest_successful_tested_limit_mib": 128
+          }
+        },
+        "nodes": 274732
+      }
+    ]
+  },
+  "bounded_site_router_capacity": {
+    "status": "all_six_independently_audited_no_feasibility_difference_at_tested_limits",
+    "output": "data/derived/site_capacity_region_20261023_v1",
+    "state": "data/derived/site_capacity_region_20261023_v1/state.json",
+    "owner_pid": null,
+    "exec_session": 42804,
+    "cpu": 124,
+    "planned_workers": 6,
+    "address_space_limits_mib": [
+      3072,
+      4096
+    ],
+    "partial_audit": "results/site_capacity_partial_001_20261023_v1.json",
+    "independently_audited_workers": 6,
+    "binding": "results/site_capacity_execution_binding_20261023_v1.json",
+    "current_worker": 5,
+    "current_child_pid": null,
+    "scope": "Full1062-query first/resident native router with tested14-instance model; virtual address space includes complete routing state and traces, excluding input conversion and Python audit; not board capacity.",
+    "completed_workers": 6,
+    "executor_observation": "Independently confirmed all three modes complete two full batches at4096MiB and fail allocation at3072MiB RLIMIT_AS. Single trials; not exact minimum, RSS, or board capacity.",
+    "independent_audit": "data/derived/site_capacity_region_20261023_v1/independent_audit.json",
+    "audit_sha256": "3a7b8b47da358235a2eb6a6687f12561938da3d4a18167d5927f8e3939ac6334"
+  },
+  "vitis_board_integration": {
+    "status": "xo_internal_ooc_and_stratified_rtl_audited_real_xrt_router_compiled_offline",
+    "evidence": "results/vitis_integration_stage_20261023_v1.json",
+    "host_preparation": "results/vitis_host_preparation_20261023_v1.json",
+    "hls_pipeline": "data/derived/vitis_graph_kernel_20261023_v2/pipeline.json",
+    "hls_owner_pid": null,
+    "audit_owner_pid": null,
+    "audit_pipeline": "results/vitis_graph_audit_pipeline_20261023_v2.json",
+    "expected_audit": "results/vitis_graph_kernel_audit_20261023_v2.json",
+    "board_probe": "results/vitis_board_environment_20261023_v1.json",
+    "remaining": "Degree-stratified RTL completion and architecture experiments; actual platform link, external IO closure, board DDR/HBM, independent repetitions, power and full-router offload.",
+    "kernel_audit": "results/vitis_graph_kernel_audit_20261023_v2.json",
+    "kernel_audit_sha256": "d3e1313bde7b76712ac7aaa2b85e055b615bc0df59adf6b2ac119ded0c22fb84",
+    "ooc_owner_pid": null,
+    "ooc_pipeline": "data/derived/vitis_ooc_20261023_v1/pipeline.json",
+    "operation_diagnosis": "results/vitis_decoder_diagnosis_20261023_v1.json",
+    "ooc_audit_owner_pid": null,
+    "ooc_audit_pipeline": "results/vitis_ooc_audit_pipeline_20261023_v1.json",
+    "expected_ooc_report": "results/vitis_ooc_audit_20261023_v1.json",
+    "ooc_report": "results/vitis_ooc_audit_20261023_v1.json",
+    "ooc_report_sha256": "56fef832a7fb8845ceed4cd7332cea4152b7deb52459637c91e24d9796657cf8",
+    "stratified_pipeline": "data/derived/vitis_stratified_cosim_20261023_v1/pipeline.json",
+    "stratified_owner_pid": null,
+    "stratified_exec_session": 94314,
+    "stratified_fixture_plan": "data/derived/vitis_stratified_fixtures_20261023_v1/plan.json",
+    "stratified_report": "results/vitis_stratified_audit_20261023_v1.json",
+    "stratified_report_sha256": "b87a445ee83f4f8935ff1e9657dcd5b7517edb5c2642083958045d5be865faae",
+    "stratified_interpretation": "results/vitis_stratified_interpretation_20261023_v1.json"
+  },
+  "clock_extended_observation": {
+    "status": "extended_clock_observation_complete_semantics_still_unresolved",
+    "evidence": "results/clock_extended_observation_stage_20261023_v1.json",
+    "model_change": false
+  },
+  "merge_sort_experiment": {
+    "status": "matched_rtl_independently_audited_mixed_results_not_promoted",
+    "source_plan": "data/derived/vitis_merge_kernel_20261023_v1/plan.json",
+    "stress_report": "results/vitis_merge_sort_stress_20261023_v1.json",
+    "synthesis_report": "data/derived/vitis_merge_synthesis_20261023_v1/report.json",
+    "schedule_review": "results/vitis_merge_synthesis_review_20261023_v1.json",
+    "cosim_state": "data/derived/vitis_merge_cosim_20261023_v1/state.json",
+    "owner_pid": null,
+    "exec_session": 39091,
+    "cpu": 121,
+    "expected_candidate_audit": "results/vitis_merge_cosim_audit_20261023_v1.json",
+    "expected_comparison": "results/vitis_merge_comparison_20261023_v1.json",
+    "limitations": "Sampled degree642 improves19.969%,degree120 improves8.614%; degree146 and low-degree/uniform samples regress. BRAM estimate doubles; no candidate postroute or board result. Not promoted to default and not a full-router benefit.",
+    "cosim_audit": "results/vitis_merge_cosim_audit_20261023_v1.json",
+    "comparison": "results/vitis_merge_comparison_20261023_v1.json",
+    "comparison_sha256": "c7f530b9927b54ed42377307918cbb4e06e34a1f3ede1286f517a97de34efbf1",
+    "decision": "results/vitis_merge_decision_20261023_v1.json"
+  },
+  "kernel_router_boundary": {
+    "status": "four_full_router_vitis_abi_cmodel_conditions_independently_verified",
+    "preparation": "data/derived/kernel_router_cmodel_20261023_v1/preparation.json",
+    "preparation_sha256": "cb8b8959025d1665acf73603849cf29c8b27b55e1e9fb949f16690b92f650c33",
+    "state": "data/derived/kernel_router_integration_20261023_v1/state.json",
+    "owner_pid": null,
+    "exec_session": 26410,
+    "cpu_bindings": {
+      "csr": 122,
+      "compact": 124
+    },
+    "planned_conditions": 4,
+    "batches_per_condition": 2,
+    "scope": "CPU baseline Vitis ABI C-model calls via explicit provider; original full site router unchanged. No XRT execution or FPGA/PCIe/DDR/HBM measurement.",
+    "expected_independent_audit": "results/kernel_router_integration_audit_20261023_v1.json",
+    "remaining": "Actual XRT/platform/card execution; physical clock/timing, DDR/HBM/power, full special-resource semantics and full FPGA search remain.",
+    "xrt_status": "compiled_offline_mock_and_shape_checks_passed_no_hardware_execution",
+    "xrt_report": "data/derived/kernel_router_xrt_20261023_v1/report.json",
+    "xrt_stage": "results/kernel_router_xrt_stage_20261023_v1.json",
+    "hardware_launcher": "scripts/kernel_router_board.py",
+    "hardware_auditor": "scripts/check_kernel_router_board.py",
+    "latest_device_probe": "results/xrt_router_environment_20261023_v1.log",
+    "executor_completed_conditions": 4,
+    "audit": "results/kernel_router_integration_audit_20261023_v1.json",
+    "audit_sha256": "5552e5b3b6b590fc95b1da6df3248567b2363d8701fb07c7066c1eaea3c06631"
+  },
+  "tile_cache_experiment": {
+    "status": "matched_rtl_independently_verified_positive_samples_not_promoted",
+    "source_plan": "data/derived/vitis_tile_cache_kernel_20261023_v1/plan.json",
+    "profile": "data/derived/vitis_tile_cache_profile_20261023_v1/report.json",
+    "synthesis": "data/derived/vitis_tile_cache_synthesis_20261023_v1/report.json",
+    "review": "results/vitis_tile_cache_synthesis_review_20261023_v1.json",
+    "stage": "results/vitis_tile_cache_stage_20261023_v1.json",
+    "state": "data/derived/vitis_tile_cache_cosim_20261023_v1/state.json",
+    "owner_pid": null,
+    "exec_session": 69036,
+    "cpu": 121,
+    "expected_comparison": "results/vitis_tile_cache_comparison_20261023_v1.json",
+    "limitations": "Sampled nonempty RTL improves13.9-23.6% versus compact, still slower than CSR. No actual-router latency estimate, candidate postroute, or board measurement.",
+    "comparison": "results/vitis_tile_cache_comparison_20261023_v1.json",
+    "terminal_stage": "results/router_and_tile_cache_terminal_stage_20261023_v1.json"
+  },
+  "router_access_profile": {
+    "status": "two_full_router_batches_and_canonical_access_profiles_independently_verified",
+    "stage": "results/router_access_profile_stage_20261023_v1.json",
+    "preparation": "data/derived/router_access_profile_build_20261023_v1/plan.json",
+    "state": "data/derived/router_access_profile_run_20261023_v1/state.json",
+    "owner_pid": null,
+    "child_pid": null,
+    "exec_session": 58200,
+    "cpu": 123,
+    "expected_audit": "results/router_access_profile_audit_20261023_v1.json",
+    "scope": "Full1062-net compact/direct,cache4096,two batches,percanonical access/hit/miss/unknown observations. Complete semantics must pass original reference comparison. Diagnostic time excluded from performance conclusions.",
+    "audit": "results/router_access_profile_audit_20261023_v1.json",
+    "interpretation": "results/router_access_interpretation_20261023_v1.json",
+    "degree64_or_higher_visits": 0
+  },
+  "canonical_statistics_final_audit": {
+    "status": "waiting_original_statistics",
+    "owner_pid": 270441,
+    "upstream_owner_pid": 3591840,
+    "exec_session": 39921,
+    "state": "data/derived/native_runtime_final_audit_20261023_v1/state.json",
+    "stage": "results/native_runtime_final_audit_stage_20261023_v1.json",
+    "expected_report": "results/native_runtime_statistics_audit_20261023_v1.json",
+    "scope": "Earlier canonical-only63trials; physical site legality failed. Separate from later site-model statistics."
+  }
+}

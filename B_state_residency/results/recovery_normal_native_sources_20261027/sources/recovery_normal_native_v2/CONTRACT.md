@@ -1,0 +1,11 @@
+# NORMAL阶段准入表达式候选
+
+仅在recovery_coordinator的staged_valid、permit_work、j_ready、recover_ready、cfg_ready五个原有NORMAL/!cold_rst门控下，以normal_unexpected=a_rsp_valid||o_rsp_valid和normal_fault=stopped||abort||timeout||normal_unexpected替换相应通用谓词。recover_ready原有stopped/retry_safe/backend_drained/normal_retired覆盖条件保留。完整fault、unexpected、fail_now、attempt_reset及所有时序逻辑字节不变，无端口变化。
+
+source-bound局部二态枚举65536组赋值证明两个准入内核等价、permit_work蕴含原完整fault为假。不证明X/Z、全局可达性、完整硬件无环，也不允许替换任意其他fault消费者。该候选独立于正在运行的route_block两源实验，尚未接入其完整系统或综合网表。
+
+原生切片回归复用已恢复审计rearm_loops_component_v2的fixed标签服务、wrapper和测试台，仅改coordinator。覆盖J0实际CRC失败、回复保持/退休、旧attempt拒绝、safe撤销和迟到authority回复时拒绝清状态、更高attempt非冷重试，以及真实五字段写/回读。要求RESET/WRITE/RESULT事件、179检查和3836ns结束时刻逐字节相同。标签后端RAM、config与外部退休仍为模型，不能声称AXI、多项journal或完整系统通过。
+
+完整结构收益必须等待后续匹配DCP检查，完整行为必须接入最终候选回归矩阵。预备源码不等于验证通过。
+
+版本2只修复初版normal_fault在timeout声明之前使用的问题：先声明wire，保留原timeout定义，随后连续赋值。初版recovery_normal_native_v1编译失败目录保留，未执行仿真。

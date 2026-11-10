@@ -1,0 +1,11 @@
+# 原生后端互斥条件与通用接口兼容性
+
+当前query系统的原生authority reader/rotator/AP mux和transaction fence owner lane9保证请求READY与回复VALID互斥。逐条绑定实际源码与接线，枚举reader32、rotator144、fence512、coordinator144组二态赋值。此结论不是一般AXI性质、X/Z证明或完整形式验证。
+
+coordinator新增默认关闭的EXCLUSIVE_BACKEND_RESPONSES，residency/search两个有外部authority输入的层级保持默认关闭，仅原生query顶层开启。开启时unexpected判断去掉AS/OS的READY资格；默认保留旧式请求周期出现回复。所有时序逻辑、超时、错误锁存、退休和状态转移保持原文。四源基于route_block已审计CRC参考；独立NORMAL准入候选未叠加。
+
+九个实际XSim原生coordinator测试通过。baseline/default各覆盖正常后周期回复、authority请求周期回复、owner请求周期回复；三组逐事件/周期/结束时刻相同。exclusive合法模式同baseline。实际一键journal、两轮authority、两次GET与两次永久CAPACITY拒绝，status3/J1且保持失败回复8周期、消费后业务仍关闭。故意违反互斥条件的authority/owner两例在exclusive模式status6/J1拒绝；这两例不是合法原生后端能产生的行为。backend数据来自模型，非完整owner AXI证明。
+
+首次完整回归因新增观察计数器在使用后声明而VRFC10-3380编译失败，未展开或仿真。V2仅把TB声明移到模块起始位置，四生产源逐字节不变。失败与九项组件测试均已归档实际恢复重审，audit逐字节一致。
+
+完整CRC压力V2正在单独验证：增加只读互斥与非零请求/回复覆盖监视，不改输入/握手/原输出；须27文件与结束时间精确一致后方可接受。当前报告不表示完整系统、全部矩阵、完整消环或时序通过。固定价格、可信快照、持久化floor/认证、自然overflow、物理实现和板卡缺口保留。

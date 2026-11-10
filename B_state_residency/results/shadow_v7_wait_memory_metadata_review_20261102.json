@@ -1,0 +1,28 @@
+{
+  "time_utc": "2026-11-02T16:06:08.066594+00:00",
+  "status": "inherited_wait_metadata_identified_no_admission_bypass",
+  "stage": "compile",
+  "inherited_memory_admission": {
+    "current_bytes": 14962618368,
+    "limit_bytes": 536870912000,
+    "monotonic": 543123.871695094,
+    "stable_seconds": 60.12323163705878,
+    "time_utc": "2026-11-02T16:05:57Z"
+  },
+  "reference_memory_admission": {
+    "current_bytes": 186715455488,
+    "limit_bytes": 322122547200,
+    "stable_seconds": 60.079766903072596
+  },
+  "latest_current_attempt_sample": {
+    "current_bytes": 14962618368,
+    "limit_bytes": 536870912000,
+    "monotonic": 543123.871695094,
+    "stable_seconds": 60.12323163705878,
+    "time_utc": "2026-11-02T16:05:57Z"
+  },
+  "runner_sha256": "6c696edab96894a3aabf7ca3dea8b3adb2f9ac79b58b3a38486fbe68fd692c61",
+  "finding": "Template carries reference memory_admission during wait. It is not used by admission logic: current memory_samples and independent stable timer enforce both bounds, then replace memory_admission before fresh inputs. Terminal audit requires exact last current sample and full60s window. Do not interpret inherited field as this attempt admission while wait_memory. Frozen runner left unchanged.",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

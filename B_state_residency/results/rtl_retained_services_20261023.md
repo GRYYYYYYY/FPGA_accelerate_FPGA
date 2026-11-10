@@ -1,0 +1,11 @@
+# 保留数据的服务链回收：AXI内容验证
+
+新增独立 `backing_page_service_retained` 和 `record_backing_service_retained`。服务opcode5映射到目录RECYCLE_TX=6，页服务对该操作保留fault拒绝，记录服务继续统一封锁故障后的命令。宽codec、AXI和旧服务源码不变。
+
+Vivado 2022.2独立XSim编译、展开、运行均exit0，runner74475 exit0。测试沿用原记录服务自检测试，唯一旧接口期望变动是opcode5不再作为非法命令；6/7仍BAD。在64页写入及原WB/RF检查后，额外验证无fence拒绝、成功回收、allocated保持64、无额外AXI读写，然后从事务号0开始读回64个页面/4096条记录，逐记录及编码AXI原字节核对。每次读传输完成但未RETIRE时回收均被拒绝。
+
+最终1401条服务检查、8384条记录核对、259次lookup、3个坏输入、3个损坏读页、8个总线错误场景；79次成功写页、131次成功读页。原普通RECYCLE后旧raw页隐藏、记录发布时序、输入校验、AXI背压、失败租约保留和读错误排空检查继续通过。相较原1144检查，新增258条并移除1条原opcode5非法检查，得到1401；记录数4288+4096=8384。
+
+服务层仍接收可信fence_retired，尚未实现host checkpoint。独占query、页槽无LIVE绑定、BEGIN/FINISH队列排空、目录回收后内部重建同query、host响应背压和失败封锁需要在新顶层接入并验证。未综合，未证明实卡加速或域外迟到响应隔离。
+
+证据：`results/rtl_retained_services_20261023/manifest.json`，SHA256 `497dce164f4b0e955ed987b2ced6d4045edfdd04e67eecdf79e5160d146df27c`，completion_audit、三阶段日志和冻结源。机械生成器make_retained_services.py记录与旧版的全部差异。目录兼容性与四个负例证据见 `rtl_retained_directory_regression_20261023.md`。

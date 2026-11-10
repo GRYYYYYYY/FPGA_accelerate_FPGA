@@ -1,0 +1,176 @@
+
+
+================================================================
+== Synthesis Summary Report of 'children_step'
+================================================================
++ General Information: 
+    * Date:           Sat Oct 24 18:05:42 2026
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        children_step
+    * Solution:       solution1 (Vivado IP Flow Target)
+    * Product family: virtexuplus
+    * Target device:  xcu280-fsvh2892-2L-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +-----------------+------+------+---------+--------+----------+---------+------+----------+------+----+-----------+------------+-----+
+    |     Modules     | Issue|      | Latency | Latency| Iteration|         | Trip |          |      |    |           |            |     |
+    |     & Loops     | Type | Slack| (cycles)|  (ns)  |  Latency | Interval| Count| Pipelined| BRAM | DSP|     FF    |     LUT    | URAM|
+    +-----------------+------+------+---------+--------+----------+---------+------+----------+------+----+-----------+------------+-----+
+    |+ children_step  |     -|  4.67|        2|  20.000|         -|        3|     -|        no|     -|   -|  882 (~0%)|  1598 (~0%)|    -|
+    | + step          |     -|  4.67|        1|  10.000|         -|        1|     -|        no|     -|   -|  879 (~0%)|  1584 (~0%)|    -|
+    +-----------------+------+------+---------+--------+----------+---------+------+----------+------+----+-----------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* Other Ports
++-------------------+---------+----------+
+| Interface         | Mode    | Bitwidth |
++-------------------+---------+----------+
+| active_r          | ap_vld  | 32       |
+| aux               | ap_none | 32       |
+| count             | ap_none | 32       |
+| emitted           | ap_vld  | 32       |
+| fault             | ap_vld  | 32       |
+| generation        | ap_none | 32       |
+| node              | ap_none | 32       |
+| op                | ap_none | 32       |
+| parent            | ap_none | 32       |
+| phase             | ap_none | 32       |
+| position          | ap_none | 32       |
+| price             | ap_none | 32       |
+| prune             | ap_none | 32       |
+| query             | ap_none | 32       |
+| request           | ap_vld  | 32       |
+| result_generation | ap_vld  | 32       |
+| result_node       | ap_vld  | 32       |
+| result_parent     | ap_vld  | 32       |
+| result_position   | ap_vld  | 32       |
+| result_price      | ap_vld  | 32       |
+| result_query      | ap_vld  | 32       |
+| service_status    | ap_none | 32       |
+| status            | ap_vld  | 32       |
+| value_r           | ap_none | 32       |
++-------------------+---------+----------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------------------------------+
+| Interface | Type       | Ports                             |
++-----------+------------+-----------------------------------+
+| ap_clk    | clock      | ap_clk                            |
+| ap_rst    | reset      | ap_rst                            |
+| ap_ctrl   | ap_ctrl_hs | ap_done ap_idle ap_ready ap_start |
++-----------+------------+-----------------------------------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++-------------------+-----------+---------------+
+| Argument          | Direction | Datatype      |
++-------------------+-----------+---------------+
+| op                | in        | unsigned int  |
+| parent            | in        | unsigned int  |
+| count             | in        | unsigned int  |
+| prune             | in        | unsigned int  |
+| query             | in        | unsigned int  |
+| price             | in        | unsigned int  |
+| generation        | in        | unsigned int  |
+| position          | in        | unsigned int  |
+| phase             | in        | unsigned int  |
+| node              | in        | unsigned int  |
+| value             | in        | unsigned int  |
+| aux               | in        | unsigned int  |
+| service_status    | in        | unsigned int  |
+| status            | out       | unsigned int& |
+| result_generation | out       | unsigned int& |
+| request           | out       | unsigned int& |
+| result_position   | out       | unsigned int& |
+| result_node       | out       | unsigned int& |
+| result_parent     | out       | unsigned int& |
+| result_query      | out       | unsigned int& |
+| result_price      | out       | unsigned int& |
+| emitted           | out       | unsigned int& |
+| active            | out       | unsigned int& |
+| fault             | out       | unsigned int& |
++-------------------+-----------+---------------+
+
+* SW-to-HW Mapping
++-------------------+--------------------------+---------+
+| Argument          | HW Interface             | HW Type |
++-------------------+--------------------------+---------+
+| op                | op                       | port    |
+| parent            | parent                   | port    |
+| count             | count                    | port    |
+| prune             | prune                    | port    |
+| query             | query                    | port    |
+| price             | price                    | port    |
+| generation        | generation               | port    |
+| position          | position                 | port    |
+| phase             | phase                    | port    |
+| node              | node                     | port    |
+| value             | value_r                  | port    |
+| aux               | aux                      | port    |
+| service_status    | service_status           | port    |
+| status            | status                   | port    |
+| status            | status_ap_vld            | port    |
+| result_generation | result_generation        | port    |
+| result_generation | result_generation_ap_vld | port    |
+| request           | request                  | port    |
+| request           | request_ap_vld           | port    |
+| result_position   | result_position          | port    |
+| result_position   | result_position_ap_vld   | port    |
+| result_node       | result_node              | port    |
+| result_node       | result_node_ap_vld       | port    |
+| result_parent     | result_parent            | port    |
+| result_parent     | result_parent_ap_vld     | port    |
+| result_query      | result_query             | port    |
+| result_query      | result_query_ap_vld      | port    |
+| result_price      | result_price             | port    |
+| result_price      | result_price_ap_vld      | port    |
+| emitted           | emitted                  | port    |
+| emitted           | emitted_ap_vld           | port    |
+| active            | active_r                 | port    |
+| active            | active_r_ap_vld          | port    |
+| fault             | fault                    | port    |
+| fault             | fault_ap_vld             | port    |
++-------------------+--------------------------+---------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++------------------------+-----+--------+------------+-----+--------+---------+
+| Name                   | DSP | Pragma | Variable   | Op  | Impl   | Latency |
++------------------------+-----+--------+------------+-----+--------+---------+
+| + children_step        | 0   |        |            |     |        |         |
+|  + step                | 0   |        |            |     |        |         |
+|    grp_fu_899_p2       | -   |        | add_ln17   | add | fabric | 0       |
+|    add_ln44_fu_1240_p2 | -   |        | add_ln44   | add | fabric | 0       |
+|    grp_fu_899_p2       | -   |        | add_ln17_2 | add | fabric | 0       |
+|    grp_fu_899_p2       | -   |        | add_ln17_1 | add | fabric | 0       |
+|    add_ln29_fu_1518_p2 | -   |        | add_ln29   | add | fabric | 0       |
++------------------------+-----+--------+------------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+------------------------+-----------------------------------------------------------------+
+| Type      | Options                | Location                                                        |
++-----------+------------------------+-----------------------------------------------------------------+
+| interface | ap_ctrl_hs port=return | ../rearchitect/v1/src/kernel_hls.cpp:3 in children_step, return |
++-----------+------------------------+-----------------------------------------------------------------+
+
+

@@ -1,0 +1,49 @@
+{
+  "already_attempted": "route_stage_write_v1 statically factors both events but branches from route_path_synth_v1 and enables both path and stage flags; not an isolated stage-only CP experiment",
+  "bank_size_matches_net_fanout_numerically": true,
+  "bound": {
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_stage_write_v1/CONTRACT.md": "818e8d12d62187dccbefed4dfafc1ff422e224252631ec586c3c231e022bedcc",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/hardware/variants/route_stage_write_v1/build.py": "10ab06cb3b2dd417260737e9b4b7048c4213ecd1192de3a59003b9d9a8b58ea3",
+    "/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/config_native_publication_physical_main_review_20261030.json": "6cd15bb7b9ca6ef6a55608487aaa8333f92a1f3ccf92cf3575fd4d1f05a70596",
+    "/tmp/B_state_residency_offer_20261025/checkpoint_edit_synth_v1/sources/route_commit_controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79",
+    "/tmp/B_state_residency_offer_20261025/config_native_publication_physical_v1/sources/route_commit_controller.sv": "d92526d5052012ff609928ec69b9a76f67aa1d730475a677b0f6f3b681cdfd79"
+  },
+  "fixture_stage_bank_bits": 4992,
+  "invariants": [
+    "No reset initialization of cp_stage",
+    "No extra capture/import cycle",
+    "Full CRC, cancellation, drift, metadata and stream ordering guards retained",
+    "Do not remove cp_s_ready from nested import solely from two-state redundancy: an X outer condition follows Verilog else while cp_s_ready can still suppress write"
+  ],
+  "largest_fanout_reported_net": {
+    "arrival_ns": 15.164,
+    "delay_ns": 1.367,
+    "fanout": 4992,
+    "name": "inner/backend/route_join/controller/cp_stage[154][31]_i_1_n_9",
+    "placement": "routed"
+  },
+  "limitations": [
+    "Numerical fanout/bank-size agreement is not a proof that every load is a cp_stage CE pin",
+    "Reported path traverses recovery/pager/fence; a local RTL simplification alone does not prove timing improvement",
+    "No new candidate, formal proof, simulation or synthesis generated"
+  ],
+  "next_evidence_needed": [
+    "Trace actual CE pin connectivity and Boolean cone before attributing the 4992-load net to a specific event",
+    "Compare standalone stage factoring on preferred CP only if actual cone gives a new falsifiable hypothesis",
+    "Retain generic X/Z/partial-import counterexamples and exact bank/event/cycle comparisons before RTL selection"
+  ],
+  "status": "routed_path_and_original_stage_source_review_no_rtl_change",
+  "timing_qualified": false,
+  "worst_setup": {
+    "destination": "inner/backend/route_join/controller/cp_stage_reg[139][10]/CE",
+    "logic_delay_ns": 2.34,
+    "logic_levels": 34,
+    "net_delay_ns": 12.795,
+    "slack_ns": -5.24,
+    "source": "inner/backend/route_join/controller/slot_reg[1]_replica_3/C"
+  },
+  "write_sites": [
+    "Whole-bank export snapshot on accepted CP_IDLE non-restore after design/node/net validation",
+    "One cp_pos import word after cancellation/fault/drift, stream/index/last validation"
+  ]
+}

@@ -1,0 +1,35 @@
+> 后续接入已在 recovery_join_v1 中完成真实10故障验证，见 results/recovery_join_20261025.md。下文保留组件阶段的验证范围；完整配置/标签回调仍待硬件化。
+
+# 可综合请求日志与owner恢复协调器 v1
+
+独立RTL recovery_coordinator：有界去重(node,net)日志、恢复准入、等待物理排空/原响应退休、定长target_reset、重新配置、两遍owner修复验证、标签恢复确认、响应退休后放行。cold_rst是协调器自身的冷复位，不能连接target_reset，否则会清除恢复所需journal。默认ENTRIES32/RESET_HOLD5/MAX_CORRECTIONS1024/MAX_CYCLES1048576；ENTRIES/RESET_HOLD须>=1。当前只是组件与OOC，不是已接真实服务的恢复顶层。
+
+## Journal和正常工作交接
+
+j接口只接INC1/DEC2的可能修改意图，不记录GET，也不据op反向执行。重复node/net合并为一个可能脏键；不依赖ACK确认数决定副作用。上游只有日志握手后才可向owner后端放行修改。permit_work阻止引入新工作，但已在途j_valid可优先握手，再接受recover/cfg请求；否则恢复请求和最后一个日志可能互相等待。测试覆盖这两个交接。
+
+容量满时新键j_ready=0，重复键仍可接受。调用方须在启动不可取消的route操作前，按最坏新增键数预留容量（journal_count可算剩余量），并在可信checkpoint推进后回收；本版没有独立容量预约器。不得先把不可撤销owner VALID发出去再发现日志无容量。没有容量超订时的通用恢复/热重试保证。
+
+cfg是可信authority checkpoint安装，不是普通清日志命令：须cfg_authoritative真、原操作退休且物理排空；同design的checkpoint ID严格增加，version不得回退，price必须等于version低4位；设计改变时旧日志必须为空。接收后才可清旧日志。cfg_authoritative必须在握手时代表外部已验证/安装的对应完整权威状态，模块不验证snapshot内容或耐掉电性。非法配置不清日志。
+
+## 恢复状态与权威接口
+
+recover必须匹配安装的design64/checkpoint32，新version严格增加且新query与旧query不同，price等于新version低4位；不处理回绕。先等待backend_drained和normal_retired，target_reset维持RESET_HOLD周期后请求reconfigure。
+
+authority请求携带node/net、design/checkpoint和cookie，回复必须回显身份。snapshot同一ID的内容应不可变。第一遍GET实际refs，与authority refs比较，经逐次INC/DEC到目标，不要求中间occupancy已等于最终值；每次成功修改的refs±1和distinct-net occupancy变化被核验。每键差值超过MAX_CORRECTIONS则拒绝。第二遍重新查询相同checkpoint并GET核对refs与最终occupancy，未通过不进入标签恢复。此顺序允许同一资源多个待修复net互相影响occupancy，而不是错误地在第一键修好前要求整资源已回到最终状态。
+
+refs/occupancy限制65535；每键快照只提供该net refs和资源总occupancy，前提是所有实际修改均被日志覆盖且没有其他写者。不枚举未知net，不能保证发现同occupancy的未记录净替换；测试中的未记录额外net会在第二遍拒绝。slot/allocator的物理布局可变化，逻辑refs/occupancy才是一般恢复契约。
+
+reconfigure_done和labels_done是外部可信服务完成握手，必须分别等实际配置以及标签重载/核验完成后应答，不能接常1或未经身份绑定的旧done。labels_done还需backend_drained/normal_retired才允许成功；标签checkpoint、fresh epoch absent探测和实际重载引擎尚未在模块内部实现。
+
+## 故障与复用
+
+已暴露authority/owner VALID在取消或超时后仍保持至接受，并等待对应回复；失败完成还需物理排空和原响应退休。target_reset中途不缩短；已启动重新配置/标签callback亦等待完成。失败锁fault/关闭permit_work，保留journal；部分修复可能已改变owner，无自动rollback或再次reset重试。rsp_corrected只统计status/cookie确认的修改，不是副作用上界。
+
+成功后新version/query成为当前身份，清可能脏日志；响应持有期间仍不放行。下一次正常提交成功后，调用方先安装新的可信checkpoint再继续下一事务。测试包含同实例checkpoint17→18以及两次恢复。cold_rst会丢失寄存器journal，不能将其当耐掉电日志；协调器自身故障后的重启需外部权威恢复保证。
+
+## 已验证范围
+
+注册mock authority/owner/reconfigure/labels服务，2资源×2net、非零权威refs2/1，28次操作响应及额外配置/journal断言：去重/容量、成功五次修复、两遍occupancy、可信rebase后第二次恢复、错误身份/引用/回复、最大差值、取消/迟到回复/超时、空日志、在途日志与cfg/recover交接、记录但未执行的意图、未记录其他net拒绝。
+
+unit参数ENTRIES4/MAX_CORRECTIONS4/RESET_HOLD3；默认32项OOC综合2187 LUT/2568 FF、零latch/BRAM/DSP，3条warning保留（旧price寄存器冗余移除、并行综合门槛、扁平netlist提示）。无place/route/Fmax/完整系统资源证明。尚未把该协调器接入真实pager/owner/同实例10故障恢复链，不能拿先前TB协议结果替代新模块集成证据。

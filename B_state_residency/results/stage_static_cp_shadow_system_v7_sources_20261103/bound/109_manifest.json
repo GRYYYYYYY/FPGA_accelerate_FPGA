@@ -1,0 +1,895 @@
+{
+  "cases": {
+    "active_data_flip": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "DATA_FLIP_ACTIVE",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "be6807b5bc4039cd8688cdddde623adf5288dd690c96a46ab0f18c0f9ebcbdcd"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "35fbfd130d955d82e0d22b046b0df52271d67827cd6e69cbff3ce507bb316d9d"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "2dbcde62fe2ce293345d6474e5ff58793ca010dd48d266c3edf2b37bd2d02975"
+        }
+      ],
+      "expected": "CP_DATA_MISMATCH",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "active_unknown_both": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "DATA_X_BOTH",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "034780dc33870e2d8cdc7dffad5db7b158d9d82a7918604b21448514b63922d9"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "d93fe93881d399c4d344a851f3b6f5dc933b53692a6d432151f029e41e6b1dd3"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "af0904ccbd9d09186e92fe9b456b8b33b83ac7d4b83dc68609f7fe4ecf2679c0"
+        }
+      ],
+      "expected": "CP_DATA_UNKNOWN",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "edge_only_data_flip": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "EDGE_ONLY_FLIP",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "6f4440854455c2f660031da5520af517c9f253ec0f7ae3e67cd1a7ce4406c3ef"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "3b62079f3d2cf9a1be2dd2d58152434bb9a8145d23a169fb69988258c0d18601"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "5f9fe8e51a294252e81f8e79177f8763ed559f2266e78578f8cf94e0577597b2"
+        }
+      ],
+      "expected": "CP_DATA_MISMATCH phase=1 ready=1",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "idle_valid_unknown_both": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "IDLE_VALID_X_BOTH",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "aaab801472930bc3a37f6a8dc18dacd392e896c5ba0a85d94dd9780e98ee416d"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "ac548ecf3e8b5014a48c3f72e9d40d3547f58ad6d8710625b722e25fd26aa335"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "5596868084e9a300f03e888a3f17a301c007c018ecb194292d48b7b7be6cb6fc"
+        }
+      ],
+      "expected": "CP_VALID_UNKNOWN",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "matching": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "fa78f03b1982b5954f1c0c5f11476d09dd6655849dde5fa7de770c52f64e4bbe"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "dab11e46d1480b9c4b62aa3de9d94b580ca99b0221f3ed7dc72ec07b71486665"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "dffb6abc905a10d827b634bb6d2563a4d499f2a6e713e66c9d5e3b5302b3efe1"
+        }
+      ],
+      "expected": "FULL_SHADOW_PROTOCOL_PASS",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "metadata_flip": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "META_FLIP",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "5471fd56bcdcec9c416b1eaf6f492520b4a2555129655ceed3cae48b00c23f20"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "4582d2a9477cccae16053b10a5ed74ae8ff288ec13d655e247d29d6be865149f"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "688964e474b9b68991f1ac1bbc24e967a04cd093a419d70e029c4bf8b8aca1f7"
+        }
+      ],
+      "expected": "CP_META_MISMATCH",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "no_stalls": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "NO_STALLS",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "8232b888e9e3df9d2e1a6792abcdaa727492de1e22cb5a239d668eba05d024bf"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "b914021525b36b449f7580e920db45d9a5db29a12286b140185a45cd48c713ef"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "12dee0d027241f94f285d0edca387c82c2bda35f69e862d50155259387e6c46d"
+        }
+      ],
+      "expected": "CP_PROTOCOL_COVERAGE_MISSING",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "no_stream": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "NO_STREAM",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "c93a59812b39fbe3ede79242bcbcfb0a0dcff07e0c73dc61f4e88bf6a18dd7e9"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "9b486a463e5a94fcd6e4214af0107d350c2c4c14064cc91356d4d2b77657134b"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "bb13044e645889226a328fe524d6879390560c5448d67038d8b8c6522a1274cd"
+        }
+      ],
+      "expected": "CP_PROTOCOL_COVERAGE_MISSING",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "no_transfers": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "NO_TRANSFERS",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "84a7697385be20c4dbb9b306081ed93c952862342c11202d331d636b5571e03d"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "3744f9dcbfe28dca431afb3269adf42c8e00cd5044a5e30a871def804c36c6dc"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "a28a84cc091f9af5eaa48d392f058e77c4ccc422a1ada9e3d9f87a5dfc02c7eb"
+        }
+      ],
+      "expected": "CP_PROTOCOL_COVERAGE_MISSING",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "other_control_flip": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "OTHER_FLIP",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "fc4f864fba9b46f8dae9f876bf3648f4764e6d916a3bc04b4fa0be92cc755df6"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "017164bf097d7f6fb55f8acd0847240ef959227e621a996af4b4b47737f87cfd"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "b526e9b88985fc2ea69cc3393d5f02f31736077fecc6a2ddc5688e3b781ad38c"
+        }
+      ],
+      "expected": "FULL_SHADOW_MISMATCH port=boot_pending",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "other_control_x": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "OTHER_X",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "e2d731bf63819021a34e8d31eca4a9b0880aa0170205114705748fec6e9044c3"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "c05b466680049b7a897afbea37afcc0c7d70898ef256c2707fb8b4a3188ba920"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "9d298befc49383b304aee465273a7eb1f1919c3a0054404ac22be02ee36ac05d"
+        }
+      ],
+      "expected": "FULL_SHADOW_MISMATCH port=boot_pending",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "other_control_z": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "OTHER_Z",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "3bfa457f7b0f32590e2487d2ccdf0b7c36e2316a1b28b89f331eef4706a4650b"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "669eaa5c8b0ec7d8a7ef55a6b77480ddbb3e6d272e2e3f4b9b1b96a5f48c14d9"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "e383f4790b71f6af71e59bb991529c0c4a4c61966595f603ad65a3494c2fc51e"
+        }
+      ],
+      "expected": "FULL_SHADOW_MISMATCH port=boot_pending",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "ready_nba": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "READY_NBA",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "4837c1e1307f0ac5c6a8bbe994f32c565ed2d2063b02630812f6f6ec2b14f5d4"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "61220f5c2936a9596a3a631595ba5fe46acf9c9eb8e1abca09507cd346a3ddc0"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "a957fce59fcb69e2ec754df898b9e981c82cc2a12d4d527ae1875259f5515caf"
+        }
+      ],
+      "expected": "FULL_SHADOW_PROTOCOL_PASS",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "short_reset": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "SHORT_RESET",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "038aec9f72c1a6e41238ff25fdaeebf3dddcc677892ce03708da31f6e8269f95"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "b88dde68842abd076ff4494e3551f46717cdd2505e4f815d9d06a16da573a4c8"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "93d0de742c0a86ec952d6f798358914d18b075a6a3f6dec03f775526516c0f84"
+        }
+      ],
+      "expected": "FULL_SHADOW_INCOMPLETE",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "stall_data_flip": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "DATA_FLIP_STALL",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "e722f816d21e6cc73833a94f0e43a45583eac7b0f3f8ec15ccebd008fa6c363d"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "090d40f74437ff04334c7072ed799d28affba45541c215f559b7d11c6836cf04"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "af7aefe890e882353fe5322aa16fb763ce8290eb4a89c6575a8b776566d51810"
+        }
+      ],
+      "expected": "CP_DATA_MISMATCH phase=0 ready=0",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "valid_drop": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "VALID_DROP",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "9200b1d9495b9f7634cce579ffa59525eb4d82d9edabb3d1356f8c5f6a08f484"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "c6c79d4049f5020fd8043c5e01d63c729244048ece77737b49713912523b6db5"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "441836b499f6dc2b27a53efeefc4327b58edbb9b8aa337e59a3969b3018c250b"
+        }
+      ],
+      "expected": "CP_VALID_MISMATCH",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    },
+    "valid_unknown_both": {
+      "commands": [
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xvlog",
+            "--sv",
+            "-d",
+            "SHADOW_NETLIST_TOP=protocol_gate",
+            "-d",
+            "VALID_X_BOTH",
+            "shadow.sv",
+            "control.sv"
+          ],
+          "exit_code": 0,
+          "stage": "compile",
+          "stdout_sha256": "4d2638ed039ba706f41876c3a3c358ab0d78d34e429cb9cabd55c43e36ab5f08"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xelab",
+            "tb_candidate_offer",
+            "stage_static_cp_shadow",
+            "-s",
+            "control",
+            "--O0",
+            "--mt",
+            "2"
+          ],
+          "exit_code": 0,
+          "stage": "elaborate",
+          "stdout_sha256": "12f22c754fc0f2cd867c3ff40619ae9968d99d0d04dae046fb6a33122b47488d"
+        },
+        {
+          "argv": [
+            "/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vivado/2022.2/bin/xsim",
+            "control",
+            "-tclbatch",
+            "run.tcl"
+          ],
+          "exit_code": 0,
+          "stage": "simulate",
+          "stdout_sha256": "2821896be5b209c07a15ecd2faf47c6a56c8205c4fdefdaa1dcaeb0683d2f598"
+        }
+      ],
+      "expected": "CP_VALID_UNKNOWN",
+      "inputs": {
+        "control.sv": "8bd2f54883eda80c931a14bcffac735e8f98f5f267143d8601b271535042e755",
+        "run.tcl": "14e38cdaa9311f4d7f4c5acf81c0a8197e0dcdfc98febe873d9992949dbaeade",
+        "shadow.sv": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1"
+      },
+      "status": "observed"
+    }
+  },
+  "checker_manifest_sha256": "42426bdd84766f1f0df123f35197068626192d772ef2466994fe058fc6924391",
+  "checker_sha256": "8862d8c4b0b4fc7e64ed6eb82d7db7a0913d31f7f068201bedd9973e0c6cd3a1",
+  "full_system_functional_netlist_validated": false,
+  "runner_pid": 3258248,
+  "runner_sha256": "56310d38d365cab0d7752330ec50d78fbde52c2b162cad8103df600707bd2611",
+  "runner_start_ticks": "1651277465",
+  "scope": "17 bounded five-word producer controls only. Idle data deliberately X versus0; valid data/index/last hold under ready0; posedge NBA stimulus/ready exercised. No actual FPGA netlist validation.",
+  "stage": "complete",
+  "status": "observed"
+}

@@ -1,0 +1,60 @@
+
+****** Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2022.2 (64-bit)
+  **** SW Build 3670227 on Oct 13 2022
+  **** IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+
+source /inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/scripts/vitis_hls/hls.tcl -notrace
+INFO: [HLS 200-10] Running '/inspire/hdd/global_user/guoruiyuan-253208540291/Xilinx/Vitis_HLS/2022.2/bin/unwrapped/lnx64.o/vitis_hls'
+INFO: [HLS 200-10] For user 'root' on host 'fpgaacc1--cfc8cd109508-jnnrja5s7q' (Linux_x86_64 version 5.15.0-119-generic) on Sat Oct 24 16:59:01 UTC 2026
+INFO: [HLS 200-10] On os Ubuntu 22.04.4 LTS
+INFO: [HLS 200-10] In directory '/inspire/hdd/global_user/guoruiyuan-253208540291/FPGA_routing_acceleration/FPGA_accelerate_FPGA/B_state_residency/results/exclusion_hls_reset_preflight_20261024'
+Sourcing Tcl script 'help.tcl'
+RESET_PREFLIGHT version=2022.2
+[1mSYNTAX [0m
+  [1mconfig_rtl[0m [OPTIONS]
+
+[1mDESCRIPTION[0m
+  This command configures various attributes of the output RTL
+
+[1mOPTIONS[0m
+  [1m-deadlock_detection[0m <none | hw | [4msim[0m>
+    Enable simulation or synthesis deadlock detection in top level RTL of exported IP/XO file.
+      [1mnone[0m : No deadlock detection enabled
+      [1msim[0m : Deadlock detection enabled only for simulation/emulation (default)
+      [1mhw[0m : Deadlock detection enabled in synthesized RTL/HW
+  [1m-deadlock_diagnosis[0m[=true|[4mfalse[0m]
+    Enable deadlock detection diagnosis
+  [1m-header[0m <string> 
+    Specify a file whose contents will be pre-pended to all generated RTL files
+  [1m-kernel_profile[0m[=true|[4mfalse[0m]
+    Add top level event and stall ports required by kernel profiling
+  [1m-module_auto_prefix[0m[=false|[4mtrue[0m]
+    Use top name as prefix for all internal (non-top) entity/module names
+  [1m-module_prefix[0m <string> 
+    Specify a prefix for all entity/module names
+  [1m-mult_keep_attribute[0m[=true|[4mfalse[0m]
+    Enable keep attribute
+  [1m-register_all_io[0m[=true|[4mfalse[0m]
+    Use a register by default for all I/O signals
+  [1m-register_reset_num[0m <int:[4m0[0m> 
+    Number of registers to add to reset signal
+  [1m-reset[0m <none | state | all | [4mcontrol[0m>
+    Variables initialized in the C code are always initialized to the same value in the RTL and hence in the bit-stream.
+    This initialization however is only performed at power-on and not repeated when a reset is applied to the design.
+    The setting applied with the -reset option determines how registers/memories are reset.
+      [1mnone[0m : no reset is added to the design
+      [1mcontrol[0m : reset control registers, such as those used in state machines and to generate IO protocol signals (default)
+      [1mstate[0m : reset control registers and registers/memories derived from static/global variables in the source code. Any static/global variable initialized in the source code is reset to its initialized value
+      [1mall[0m : reset all registers and memories. Any static/global variable initialized in the source code is reset to its initialized value
+  [1m-reset_async[0m[=true|[4mfalse[0m]
+    This option causes all registers to use an asynchronous reset. If this option is not specified a synchronous reset is
+    used.
+  [1m-reset_level[0m <low | [4mhigh[0m>
+    This option allows the polarity of the reset signal to be either active low or active high
+
+[1mSEE ALSO[0m
+  www.xilinx.com/cgi-bin/docs/rdoc?v=2022.2;t=vitis+doc;d=vyw1583260160301.html
+
+INFO: [HLS 200-112] Total CPU user time: 0.93 seconds. Total CPU system time: 0.19 seconds. Total elapsed time: 0.77 seconds; peak allocated memory: 98.941 MB.
+INFO: [Common 17-206] Exiting vitis_hls at Sat Oct 24 16:59:01 2026...

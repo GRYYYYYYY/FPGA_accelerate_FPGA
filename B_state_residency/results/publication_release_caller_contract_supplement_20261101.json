@@ -1,0 +1,36 @@
+{
+  "time_utc": "2026-11-01T18:50:03.418078+00:00",
+  "scope": "Supplemental caller-contract text review only; not full-system reachability or simulation acceptance",
+  "files": [
+    {
+      "path": "hardware/variants/checkpoint_stage_v1/CONTRACT.md",
+      "sha256": "698f29773c0c75efe24eedb7e95b976b68739523a2f48daf0293455117a8c63f"
+    },
+    {
+      "path": "hardware/variants/checkpoint_host_edit_system_v1/CONTRACT.md",
+      "sha256": "3925ae6ec681a36c9e4fd35988381f55d20a6ab221cea122c0ad3cf00d8aafea"
+    },
+    {
+      "path": "hardware/variants/iter2_lifecycle_v1/CONTRACT.md",
+      "sha256": "b84bd075b23c7fe15538ac5d3e02841afe621ef58dbaf7e316c3deb3f34de874"
+    }
+  ],
+  "findings": [
+    {
+      "source": "hardware/variants/checkpoint_stage_v1/CONTRACT.md",
+      "text": "消费完成之前不能释放 lease",
+      "interpretation": "Explicitly forbids release while an existing publication completion has not been consumed; does not explicitly resolve idle simultaneous start/release."
+    },
+    {
+      "source": "hardware/variants/iter2_lifecycle_v1/CONTRACT.md",
+      "interpretation": "Describes serial native GET response retirement before release; this usage example does not establish a universal start/release exclusion rule."
+    },
+    {
+      "source": "hardware/variants/checkpoint_host_edit_system_v1/CONTRACT.md",
+      "interpretation": "Host-edit extension serializes CP completion before release; provides no publication start/release arbitration contract."
+    }
+  ],
+  "caller_simultaneous_start_release_legality": "unresolved",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

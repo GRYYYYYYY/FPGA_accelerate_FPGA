@@ -1,0 +1,105 @@
+python3 -c '
+from pathlib import Path
+import os,json,datetime
+expected={1293430:'"'"'1664575051'"'"',1309736:'"'"'1664579699'"'"',2565424:'"'"'1663666192'"'"',3013336:'"'"'1663807268'"'"',1719618:'"'"'1664702242'"'"',2456124:'"'"'1663631491'"'"',2938847:'"'"'1663783966'"'"',1288391:'"'"'1664573241'"'"',1304205:'"'"'1664577830'"'"'}
+names=['"'"'ka_active_configured_formal_v1'"'"','"'"'ka_retired_configured_formal_v1'"'"','"'"'ka_as_lease_staging_exclusion_formal_v1'"'"','"'"'ka_as_lease_recover_gate_fault_v1'"'"','"'"'ka_publication_release_full_rtl_v2'"'"']
+host=Path('"'"'/proc/sys/kernel/hostname'"'"').read_text().strip()
+assert host=='"'"'fpgaacc1--cfc8cd109508-jnnrja5s7q'"'"',host
+def process(pid):
+ p=Path('"'"'/proc'"'"')/str(pid)
+ try:
+  s=(p/'"'"'stat'"'"').read_text().rsplit('"'"')'"'"',1)[1].split()
+  return {'"'"'pid'"'"':pid,'"'"'state'"'"':s[0],'"'"'start_ticks'"'"':s[19],'"'"'cpu_ticks'"'"':int(s[11])+int(s[12]),'"'"'rss_pages'"'"':int(s[21])}
+ except FileNotFoundError:return {'"'"'pid'"'"':pid,'"'"'missing'"'"':True}
+original=[]
+for pid,start in expected.items():
+ r=process(pid);r['"'"'expected_start_ticks'"'"']=start;r['"'"'original_identity_present'"'"']=r.get('"'"'start_ticks'"'"')==start;original.append(r)
+base=Path('"'"'/tmp/B_state_residency_offer_20261025'"'"');manifests={}
+for n in names:
+ p=base/n/'"'"'manifest.json'"'"'
+ if p.exists():
+  m=json.loads(p.read_text());manifests[n]={k:m.get(k) for k in ['"'"'status'"'"','"'"'stage'"'"','"'"'runner_pid'"'"','"'"'runner_start_ticks'"'"','"'"'active_process'"'"','"'"'memory_observation'"'"']}
+  a=m.get('"'"'active_process'"'"')
+  if a:manifests[n]['"'"'active_process_now'"'"']=process(a['"'"'pid'"'"'])
+ else:manifests[n]={'"'"'missing'"'"':True}
+skip={os.getpid(),os.getppid()};matches=[]
+for p in Path('"'"'/proc'"'"').iterdir():
+ if not p.name.isdigit() or int(p.name) in skip:continue
+ try:
+  args=(p/'"'"'cmdline'"'"').read_bytes().split(b'"'"'\0'"'"')
+  # Match executable/argument paths, not an ancestor shell'"'"'s echoed probe text.
+  selected=[n for n in names if any(a.startswith(b'"'"'/'"'"') and str(base/n).encode() in a for a in args)]
+  selected+=['"'"'full_probe_runner'"'"'] if any(a.rsplit(b'"'"'/'"'"',1)[-1]==b'"'"'run_publication_release_full_rtl_v2.py'"'"' for a in args) else []
+  if selected:matches.append(dict(process(int(p.name)),matched_runs=selected))
+ except (FileNotFoundError,ProcessLookupError):pass
+cg=Path('"'"'/sys/fs/cgroup'"'"');stats=dict(x.split() for x in (cg/'"'"'memory.stat'"'"').read_text().splitlines())
+report={'"'"'time_utc'"'"':datetime.datetime.now(datetime.timezone.utc).isoformat(),'"'"'hostname'"'"':host,'"'"'boot_id'"'"':Path('"'"'/proc/sys/kernel/random/boot_id'"'"').read_text().strip(),'"'"'pid_namespace'"'"':os.readlink('"'"'/proc/self/ns/pid'"'"'),'"'"'original_processes'"'"':original,'"'"'manifests'"'"':manifests,'"'"'matching_original_run_processes'"'"':matches,'"'"'memory_current_bytes'"'"':int((cg/'"'"'memory.current'"'"').read_text()),'"'"'memory_max'"'"':(cg/'"'"'memory.max'"'"').read_text().strip(),'"'"'memory_anon_bytes'"'"':int(stats['"'"'anon'"'"']),'"'"'memory_file_bytes'"'"':int(stats['"'"'file'"'"']),'"'"'memory_events'"'"':(cg/'"'"'memory.events'"'"').read_text(),'"'"'inspection'"'"':'"'"'Read-only proc and original manifests; original processes not signalled or modified.'"'"'}
+print('"'"'OLD_BACKEND_SNAPSHOT:'"'"'+json.dumps(report))
+'
+[32m══════════════════════════ 欢迎使用 Inspire Studio ══════════════════════════[0m
+
+[36m目录信息[0m
+[90m┌─────────────────────────────────────────────────────────────────────────────[0m
+[90m│[0m [33m项目公共目录:[0m
+[90m│[0m • /inspire/hdd/project/project-public/public
+[90m│[0m • /inspire/ssd/project/project-public/public
+[90m│[0m
+[90m│[0m [33m项目个人目录:[0m
+[90m│[0m • /inspire/ssd/project/project-public/guoruiyuan-253208540291
+[90m│[0m • /inspire/hdd/project/project-public/guoruiyuan-253208540291
+[90m│[0m
+[90m│[0m [33m全局公共目录:[0m
+[90m│[0m • /inspire/hdd/global_public
+[90m│[0m
+[90m│[0m [33m个人全局目录:[0m
+[90m│[0m • /inspire/hdd/global_user/guoruiyuan-253208540291
+[90m│[0m
+[90m│[0m [33m分享文件目录:[0m
+[90m│[0m • /inspire/hdd/project/project-public/inspire_shared/mount/test1
+[90m└─────────────────────────────────────────────────────────────────────────────[0m
+
+[33mTips:[0m
+[33m1. 请仅在上述路径内存放数据或代码,其它路径的文件会在Notebook停止时被清理,无法恢复[0m
+[33m2. 如对环境做了修改(例如新增依赖的包、库等)请及时保存镜像[0m
+[33m3. 请将HuggingFace、Rclone、pip、Conda等软件的缓存路径设为个人全局目录,以避免镜像文件体积过大[0m
+
+[37m----------------------------------------------------------------------------------------------------------------------[0m
+[?2004h[root:guoruiyuan-253208540291]$ python3 -c '
+[?2004l[?2004h> from pathlib import Path
+[?2004l[?2004h> import os,json,datetime
+[?2004l[?2004h> expected={1293430:'"'"'1664575051'"'"',1309736:'"'"'1664579699'"'"',2565424:'"'"'1663666192'"'"',3013336:'"'"'1663807268'"'"',1719618:'"'"'1664702242'"'"',2456124:'"'"'1663631491'"'"',2938847:'"'"'1663783966'"'"',1288391:'"'"'1664573241'"'"',1304205:'"'"'1664577830'"'"'}
+[?2004l[?2004h> names=['"'"'ka_active_configured_formal_v1'"'"','"'"'ka_retired_configured_formal_v1'"'"','"'"'ka_as_lease_staging_exclusion_formal_v1'"'"','"'"'ka_as_lease_recover_gate_fault_v1'"'"','"'"'ka_publication_release_full_rtl_v2'"'"']
+[?2004l[?2004h> host=Path('"'"'/proc/sys/kernel/hostname'"'"').read_text().strip()
+[?2004l[?2004h> assert host=='"'"'fpgaacc1--cfc8cd109508-jnnrja5s7q'"'"',host
+[?2004l[?2004h> def process(pid):
+[?2004l[?2004h>  p=Path('"'"'/proc'"'"')/str(pid)
+[?2004l[?2004h>  try:
+[?2004l[?2004h>   s=(p/'"'"'stat'"'"').read_text().rsplit('"'"')'"'"',1)[1].split()
+[?2004l[?2004h>   return {'"'"'pid'"'"':pid,'"'"'state'"'"':s[0],'"'"'start_ticks'"'"':s[19],'"'"'cpu_ticks'"'"':int(s[11])+int(s[12]),'"'"'rss_pages'"'"':int(s[21])}
+[?2004l[?2004h>  except FileNotFoundError:return {'"'"'pid'"'"':pid,'"'"'missing'"'"':True}
+[?2004l[?2004h> original=[]
+[?2004l[?2004h> for pid,start in expected.items():
+[?2004l[?2004h>  r=process(pid);r['"'"'expected_start_ticks'"'"']=start;r['"'"'original_identity_present'"'"']=r.get('"'"'start_ticks'"'"')==start;original.append(r)
+[?2004l[?2004h> base=Path('"'"'/tmp/B_state_residency_offer_20261025'"'"');manifests={}
+[?2004l[?2004h> for n in names:
+[?2004l[?2004h>  p=base/n/'"'"'manifest.json'"'"'
+[?2004l[?2004h>  if p.exists():
+[?2004l[?2004h>   m=json.loads(p.read_text());manifests[n]={k:m.get(k) for k in ['"'"'status'"'"','"'"'stage'"'"','"'"'runner_pid'"'"','"'"'runner_start_ticks'"'"','"'"'active_process'"'"','"'"'memory_observation'"'"']}
+[?2004l[?2004h>   a=m.get('"'"'active_process'"'"')
+[?2004l[?2004h>   if a:manifests[n]['"'"'active_process_now'"'"']=process(a['"'"'pid'"'"'])
+[?2004l[?2004h>  else:manifests[n]={'"'"'missing'"'"':True}
+[?2004l[?2004h> skip={os.getpid(),os.getppid()};matches=[]
+[?2004l[?2004h> for p in Path('"'"'/proc'"'"').iterdir():
+[?2004l[?2004h>  if not p.name.isdigit() or int(p.name) in skip:continue
+[?2004l[?2004h>  try:
+[?2004l[?2004h>   args=(p/'"'"'cmdline'"'"').read_bytes().split(b'"'"'\0'"'"')
+[?2004l[?2004h>   # Match executable/argument paths, not an ancestor shell'"'"'s echoed probe text.
+[?2004l[?2004h>   selected=[n for n in names if any(a.startswith(b'"'"'/'"'"') and str(base/n).encode() in a for a in args)]
+[?2004l[?2004h>   selected+=['"'"'full_probe_runner'"'"'] if any(a.rsplit(b'"'"'/'"'"',1)[-1]==b'"'"'run_publication_release_full_rtl_v2.py'"'"' for a in args) else []
+[?2004l[?2004h>   if selected:matches.append(dict(process(int(p.name)),matched_runs=selected)) [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K)
+[?2004l[?2004h>  except (FileNotFoundError,ProcessLookupError):pass
+[?2004l[?2004h> cg=Path('"'"'/sys/fs/cgroup'"'"');stats=dict(x.split() for x in (cg/'"'"'memory.stat'"'"').read_text().splitlines())
+[?2004l[?2004h> report={'"'"'time_utc'"'"':datetime.datetime.now(datetime.timezone.utc).isoformat(),'"'"'hostname'"'"':host,'"'"'boot_id'"'"':Path('"'"'/proc/sys/kernel/random/boot_id'"'"').read_text().strip(),'"'"'pid_namespace'"'"':os.readlink('"'"'/proc/self/ns/pid'"'"'),'"'"'original_processes'"'"':original,'"'"'manifests'"'"':manifests,'"'"'matching_original_run_processes'"'"':matches,'"'"'memory_current_bytes'"'"':int((cg/'"'"'memory.current'"'"').read_text()),'"'"'memory_max'"'"':(cg/'"'"'memory.max'"'"').read_text().strip(),'"'"'memory_anon_bytes'"'"':int(stats['"'"'anon'"'"']),'"'"'memory_file_bytes'"'"':int(stats['"'"'file'"'"']),'"'"'memory_events'"'"':(cg/'"'"'memory.events'"'"').read_text(),'"'"'inspection'"'"':'"'"'Read-only proc and original manifests; original processes not signalled or modified.'"'"'}
+[?2004l[?2004h> print('"'"'OLD_BACKEND_SNAPSHOT:'"'"'+json.dumps(report))
+[?2004l[?2004h> '
+[?2004lOLD_BACKEND_SNAPSHOT:{"time_utc": "2026-11-02T12:35:49.909153+00:00", "hostname": "fpgaacc1--cfc8cd109508-jnnrja5s7q", "boot_id": "295fb9f2-65c8-43b1-8dd8-a299db5a9d35", "pid_namespace": "pid:[4026545790]", "original_processes": [{"pid": 1293430, "missing": true, "expected_start_ticks": "1664575051", "original_identity_present": false}, {"pid": 1309736, "missing": true, "expected_start_ticks": "1664579699", "original_identity_present": false}, {"pid": 2565424, "missing": true, "expected_start_ticks": "1663666192", "original_identity_present": false}, {"pid": 3013336, "missing": true, "expected_start_ticks": "1663807268", "original_identity_present": false}, {"pid": 1719618, "missing": true, "expected_start_ticks": "1664702242", "original_identity_present": false}, {"pid": 2456124, "missing": true, "expected_start_ticks": "1663631491", "original_identity_present": false}, {"pid": 2938847, "missing": true, "expected_start_ticks": "1663783966", "original_identity_present": false}, {"pid": 1288391, "missing": true, "expected_start_ticks": "1664573241", "original_identity_present": false}, {"pid": 1304205, "missing": true, "expected_start_ticks": "1664577830", "original_identity_present": false}], "manifests": {"ka_active_configured_formal_v1": {"status": "running", "stage": null, "runner_pid": null, "runner_start_ticks": null, "active_process": {"stage": "cover", "pid": 2565237, "start_ticks": "1663666178", "argv": ["python3", "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc", "-s", "z3", "-c", "-t", "35", "--dump-vcd", "cover%.vcd", "design.smt2"]}, "memory_observation": null, "active_process_now": {"pid": 2565237, "missing": true}}, "ka_retired_configured_formal_v1": {"status": "running", "stage": "induction", "runner_pid": 2938847, "runner_start_ticks": "1663783966", "active_process": {"stage": "induction", "pid": 3013257, "start_ticks": "1663807254", "argv": ["/usr/bin/python3", "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc", "-s", "z3", "-i", "-t", "10", "--dump-vcd", "induction_failure.vcd", "design.smt2"]}, "memory_observation": null, "active_process_now": {"pid": 3013257, "missing": true}}, "ka_as_lease_staging_exclusion_formal_v1": {"status": "running", "stage": "bmc", "runner_pid": 1288391, "runner_start_ticks": "1664573241", "active_process": {"stage": "bmc", "pid": 1293429, "start_ticks": "1664575037", "argv": ["/usr/bin/python3", "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc", "-s", "z3", "-t", "10", "--dump-vcd", "bmc_failure.vcd", "design.smt2"]}, "memory_observation": null, "active_process_now": {"pid": 1293429, "missing": true}}, "ka_as_lease_recover_gate_fault_v1": {"status": "running", "stage": "bmc", "runner_pid": 1304205, "runner_start_ticks": "1664577830", "active_process": {"stage": "bmc", "pid": 1309735, "start_ticks": "1664579687", "argv": ["/usr/bin/python3", "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc", "-s", "z3", "-t", "10", "--dump-vcd", "bmc_failure.vcd", "design.smt2"]}, "memory_observation": null, "active_process_now": {"pid": 1309735, "missing": true}}, "ka_publication_release_full_rtl_v2": {"status": "running", "stage": "wait_memory", "runner_pid": 1719618, "runner_start_ticks": "1664702242", "active_process": null, "memory_observation": {"time_utc": "2026-11-01T18:46:45Z", "current_bytes": 320520675328, "limit_bytes": 322122547200, "stable_seconds": 0}}}, "matching_original_run_processes": [], "memory_current_bytes": 253263675392, "memory_max": "322122547200", "memory_anon_bytes": 28333760512, "memory_file_bytes": 222230528000, "memory_events": "low 0\nhigh 0\nmax 254\noom 0\noom_kill 2\n", "inspection": "Read-only proc and original manifests; original processes not signalled or modified."}

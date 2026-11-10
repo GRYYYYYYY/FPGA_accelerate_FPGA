@@ -1,0 +1,89 @@
+{
+  "status": "source_bound_nine_bit_lease_staging_models_preparation_reviewed_proofs_running",
+  "time_utc": "2026-10-31T23:52:40.803444+00:00",
+  "retained_bits": 9,
+  "retained_dff": 3,
+  "selected_cells": 6772,
+  "harness_sha256": "a4b21e70142962bb168370bbbbee2ecfd3a4c5a5310f8cfb79aaa2bd901b6c58",
+  "kernel_sha256": "e4cf5a9fc1642ca1ba27297ad07f87b04c91416eb13c2caa19d9db6b15b9bf29",
+  "mutation": {
+    "changed_cell": "$logic_and$sources/query_residency_system.sv:604$380",
+    "changed_port": "B",
+    "original_bits": [
+      2577379
+    ],
+    "replacement": [
+      "1"
+    ],
+    "scope": "Recovery admission gate only; retained first-failure trace may hit auxiliary before AS."
+  },
+  "live_models": [
+    {
+      "root": "/tmp/B_state_residency_offer_20261025/ka_as_lease_staging_exclusion_formal_v1",
+      "runner_pid": 1288391,
+      "active_process": {
+        "stage": "bmc",
+        "pid": 1293429,
+        "start_ticks": "1664575037",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "bmc_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "solvers": [
+        {
+          "pid": 1293430,
+          "start_ticks": "1664575051",
+          "state": "R",
+          "cpu_ticks": 18788,
+          "rss_pages": 1893801
+        }
+      ],
+      "stage": "bmc",
+      "sampled_log_bytes": 18085,
+      "sampled_log_sha256": "e1f23e2e6c3e237224538db2a8b949a9ecb08189d36018ab29002edf4b06932e"
+    },
+    {
+      "root": "/tmp/B_state_residency_offer_20261025/ka_as_lease_recover_gate_fault_v1",
+      "runner_pid": 1304205,
+      "active_process": {
+        "stage": "bmc",
+        "pid": 1309735,
+        "start_ticks": "1664579687",
+        "argv": [
+          "/usr/bin/python3",
+          "/tmp/B_state_residency_offer_20261025/ka_formal_packages_v1/bin/yowasp-yosys-smtbmc",
+          "-s",
+          "z3",
+          "-t",
+          "10",
+          "--dump-vcd",
+          "bmc_failure.vcd",
+          "design.smt2"
+        ]
+      },
+      "solvers": [
+        {
+          "pid": 1309736,
+          "start_ticks": "1664579699",
+          "state": "R",
+          "cpu_ticks": 14147,
+          "rss_pages": 1393810
+        }
+      ],
+      "stage": "bmc",
+      "sampled_log_bytes": 12831,
+      "sampled_log_sha256": "f8c51fe5c7a6becf24b9b4087243f9cbdaf41c5bc1081ea32fd00d9339f817cc"
+    }
+  ],
+  "review_scope": "Independent original cell/cut/Q/CLK/input/netname and single gate fault verification. Solver still live at BMC step2; no proof acceptance or active-root archive.",
+  "full_system_functional_netlist_validated": false,
+  "physical_gate_open": false
+}

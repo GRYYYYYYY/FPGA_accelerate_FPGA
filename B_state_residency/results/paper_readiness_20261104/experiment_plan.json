@@ -1,0 +1,194 @@
+{
+  "target": "完整架构/EDA研究论文",
+  "scope": "分析和计划；E1–E7尚未在本轮执行",
+  "preserve": [
+    "58 controls",
+    "full shadow v7",
+    "physical v6",
+    "historical failures"
+  ],
+  "plans": [
+    {
+      "id": "E0",
+      "priority": "complete",
+      "name": "已有证据重算",
+      "status": "completed_this_analysis",
+      "dependencies": [],
+      "outputs": [
+        "metrics.json",
+        "cpu_matrix.csv",
+        "compact_comparisons.csv",
+        "recovery.csv",
+        "capacity_curve.csv",
+        "capacity_queries.csv"
+      ],
+      "acceptance": "78原始CPU日志/time/result SHA和矩阵重算；38查询总数与恢复分段守恒"
+    },
+    {
+      "id": "E1",
+      "priority": "P0",
+      "name": "caller仲裁与完整query互锁",
+      "dependencies": [],
+      "status": "planned_not_run",
+      "versions": "新隔离候选；原反例与生产源不改",
+      "comparators": [
+        "原接线真实反例",
+        "明确仲裁和合法caller环境的新候选"
+      ],
+      "cases": [
+        "simultaneous start/release",
+        "held VALID and start_open=0",
+        "release only",
+        "cancel",
+        "done backpressure and consumption",
+        "reset and generation transition"
+      ],
+      "metrics": [
+        "handshakes",
+        "ownership invariant",
+        "bounded progress under explicit fairness",
+        "first fatal and complete terminal"
+      ],
+      "acceptance": "不通过阻塞所有release伪造安全；保留原监视器；新候选独立源/输入绑定",
+      "decision_if_fail": "分类安全/活性/外部契约并修订候选；不继承v7功能接受"
+    },
+    {
+      "id": "E2",
+      "priority": "P0",
+      "name": "同接口正确基线价值试验",
+      "dependencies": [
+        "明确可接受的功能参考；若使用互锁候选则先E1"
+      ],
+      "status": "planned_not_run",
+      "comparators": [
+        "original CPU system reference",
+        "same kernel/interface full-state or direct external state where feasible",
+        "same-capacity ordinary correct LRU + stop-and-save recovery",
+        "semantic state residency and recovery"
+      ],
+      "controls": [
+        "same search algorithm, ordering and precision",
+        "same input and output requirements",
+        "same capacity and legal protocol",
+        "same clock/memory model for cycle comparisons"
+      ],
+      "metrics": [
+        "no-fault total cycles",
+        "checkpoint total cost",
+        "recovery and replay total cost",
+        "read/write transfers and bytes",
+        "directory/control wait",
+        "payload, metadata, backing, global-state bytes"
+      ],
+      "acceptance": "证明资源/容量或总完成时间的有价值取舍；强基线含等价正确性与全部开销",
+      "decision_if_fail": "暂停扩大昂贵实验；修订机制或收窄主张，不挑弱基线"
+    },
+    {
+      "id": "E3",
+      "priority": "P1",
+      "name": "同一版本消融",
+      "dependencies": [
+        "E1 if integrating candidate",
+        "E2"
+      ],
+      "status": "planned_not_run",
+      "factors": [
+        "restore seed on/off",
+        "static stage on/off"
+      ],
+      "design": "若可组合则2x2；全关仍正确；运行前独立绑定源/刺激/参数",
+      "metrics": [
+        "total cycles",
+        "restore cycles",
+        "release-to-retry cycles",
+        "retry/export cycles",
+        "output and final memory equivalence",
+        "resources"
+      ],
+      "acceptance": "分别估计主效应与交互，不相加历史百分比"
+    },
+    {
+      "id": "E4",
+      "priority": "P1",
+      "name": "代表性与统计",
+      "dependencies": [
+        "E2 value decision"
+      ],
+      "status": "planned_not_run",
+      "selection": "预先按规模/拥塞/工作集与长尾分层；同器件、输入可用的公开设计；现有2设计为先导",
+      "budget_proposal": "初始6–10设计、CPU5次配对随机交错重复；这是可调整预算而非论文录用门槛",
+      "metrics": [
+        "all selected designs including failures",
+        "full-route wall time",
+        "paired speedup and confidence interval",
+        "wire length",
+        "route legality and congestion",
+        "application critical path quality",
+        "query distribution and cumulative weighted totals"
+      ],
+      "acceptance": "不可将查询数当独立设计数；区间与原始每例数据保留；不能只报告成功或最佳容量"
+    },
+    {
+      "id": "E5",
+      "priority": "P1",
+      "name": "容量与故障敏感性",
+      "dependencies": [
+        "E2"
+      ],
+      "status": "planned_not_run",
+      "selection": "需求模型4/32/128/512槽筛点；RTL只报告真实实现并验证的配置",
+      "metrics": [
+        "capacity ledger",
+        "overflow and queue bounds",
+        "traffic under large queries",
+        "normal/checkpoint/recovery costs",
+        "break-even recovery frequency"
+      ],
+      "acceptance": "故障频率明确标为假设；不把地址模型或CPU复制计数叫真实DDR；每种布局单独记账"
+    },
+    {
+      "id": "E6",
+      "priority": "P2",
+      "name": "最终候选物理闭合",
+      "dependencies": [
+        "E1",
+        "E2",
+        "final source functional and synthesis evidence"
+      ],
+      "status": "planned_not_run",
+      "constraints": [
+        "Vivado2022.2/U280/original10ns OOC for comparable internal checks",
+        "continuous60s memory.current <=225GiB and <=75% cgroup",
+        "no silent timing exceptions or waivers",
+        "new source needs new evidence"
+      ],
+      "metrics": [
+        "routed resources",
+        "setup hold pulse width",
+        "DRC and methodology",
+        "source-bound worst control paths",
+        "valid platform IO constraints"
+      ],
+      "acceptance": "current physical v6 evidence retained; timing qualification based on actual checks, not admission flag"
+    },
+    {
+      "id": "E7",
+      "priority": "P2",
+      "name": "系统成本与板卡测量",
+      "dependencies": [
+        "E6",
+        "board and platform interface available"
+      ],
+      "status": "planned_not_run",
+      "metrics": [
+        "host preparation",
+        "data loading and transfers",
+        "kernel",
+        "verification and output",
+        "cold and warm total latency",
+        "energy only when measured"
+      ],
+      "acceptance": "真实板卡端到端主张必须有对应实测；否则使用校准模型并明确限制，不换算失败10ns为实测吞吐"
+    }
+  ]
+}
